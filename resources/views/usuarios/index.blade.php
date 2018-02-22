@@ -3,7 +3,7 @@
 @section('conteudo')
 
 <h1><i class="glyphicon glyphicon-user"></i>Usuarios Cadastrados</h1>
-<div class="panel-heading">Page {{ $users->currentPage() }} of {{ $users->lastPage() }}</div>
+<div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
 		<hr>
 	<div class="table-responsive">
 		<table class="table table-bordered table-striped">
@@ -25,14 +25,14 @@
 						<td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>
 						<td>
 							<a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
-							@can('Administrador')
+							@hasrole('Administrador')
 								<form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
 									{{ csrf_field() }}
 									<input type="hidden" name="_method" value="DELETE">
 									<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'>Excluir
 									</button>
 						        </form>
-							@endcan
+							@endhasrole
 						</td>
 					</tr>
 				@endforeach

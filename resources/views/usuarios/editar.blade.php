@@ -48,5 +48,31 @@
     		    </div>
             @endif
     		<input class="btn btn-primary" type="submit" value="Editar">
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario?' data-button="Resetar Senha">Resetar Senha</button>
 		</form>
+        @include('layouts.excluir_confirm')
+@endsection
+@section('script_delete')
+<!-- Script Msg Resetar Senha -->
+    <script type="text/javascript">
+        $('#confirmDelete').on('show.bs.modal', function (e)
+        {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+            $button = $(e.relatedTarget).attr('data-button');
+            $(this).find('.modal-footer #confirm').text($button);
+             
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
+        });
+         
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
+        {
+            $(this).data('form').submit();
+        });
+    </script>
 @endsection
