@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('ativo', '=', 1)->orderBy('name')->get();
+        $users = User::where('ativo', '=', 1)->orderBy('name')->paginate(10);
         return view('usuarios.index')->with('users', $users);
     }
 
@@ -51,7 +51,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name'=>'required',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed'
+            'password'=>'required|min:6|confirmed',
         ]);
 
         $user = User::create($request->only('email', 'name', 'password'));

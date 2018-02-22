@@ -7,7 +7,7 @@
 		<hr>
 
 		<form method="POST" action="{{ url('/usuarios') }}">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="name">Nome</label>
 				<input class="form-control" type="text" name="name" id="name">

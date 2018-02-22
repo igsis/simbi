@@ -3,6 +3,7 @@
 @section('conteudo')
 
 <h1><i class="glyphicon glyphicon-user"></i>Usuarios Cadastrados</h1>
+<div class="panel-heading">Page {{ $users->currentPage() }} of {{ $users->lastPage() }}</div>
 		<hr>
 	<div class="table-responsive">
 		<table class="table table-bordered table-striped">
@@ -26,8 +27,8 @@
 							<a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
 							@can('Administrador')
 								<form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
-							        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-							        <input type="hidden" name="_method" value="DELETE">
+									{{ csrf_field() }}
+									<input type="hidden" name="_method" value="DELETE">
 									<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'>Excluir
 									</button>
 						        </form>
@@ -39,6 +40,7 @@
 			</tbody>
 		</table>
 	</div>
+	<div class="text-center"> {!! $users->links() !!} </div>
 <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
 @endsection
 
