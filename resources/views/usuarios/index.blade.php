@@ -31,13 +31,36 @@
 									<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'>Excluir
 									</button>
 						        </form>
-								@include('layouts.excluir_confirm')
 							@endcan
 						</td>
 					</tr>
 				@endforeach
+								@include('layouts.excluir_confirm')
 			</tbody>
 		</table>
 	</div>
 <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
+@endsection
+
+@section('script_delete')
+<!-- Script Msg Excluir Usuario -->
+    <script type="text/javascript">
+        $('#confirmDelete').on('show.bs.modal', function (e)
+        {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+             
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
+        });
+         
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
+        {
+            $(this).data('form').submit();
+        });
+    </script>
 @endsection
