@@ -7,7 +7,7 @@
 		<hr>
 
         <form method="POST" action="{{ url('usuarios', [$user->id]) }}" accept-charset="UTF-8">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            {{ csrf_field() }}
             <input type="hidden" name="_method" value="PUT">
 			<div class="form-group">
         		<label for="name">Nome</label>
@@ -24,10 +24,10 @@
     		<div class='form-group'>
                 <input type="radio" value="0" name="roles" checked>
                 <label for="semCargo">Sem Cargo</label><br>
-                
+
                 @hasrole('Administrador')
-                <input type="radio" value="1" name="roles">
-                <label for="Administrador">Administrador</label><br>
+                    <input type="radio" value="1" name="roles">
+                    <label for="Administrador">Administrador</label><br>
                 @endhasrole
                 
                 <input type="radio" value="2" name="roles">
@@ -48,8 +48,10 @@
     		    </div>
             @endif
     		<input class="btn btn-primary" type="submit" value="Editar">
+        @if(!($user->name == Auth::user()->name))
             <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario?' data-button="Resetar Senha">Resetar Senha</button>
-		</form>
+        @endif
+        </form>
         @include('layouts.excluir_confirm')
 @endsection
 @section('script_delete')
@@ -63,16 +65,20 @@
             $(this).find('.modal-title').text($title);
             $button = $(e.relatedTarget).attr('data-button');
             $(this).find('.modal-footer #confirm').text($button);
-             
+
             // Pass form reference to modal for submission on yes/ok
-            var form = $(e.relatedTarget).closest('form');
-            $(this).find('.modal-footer #confirm').data('form', form);
+            var button = $(e.relatedTarget).closest('button');
+            $(this).find('.modal-footer #confirm').data('button', button);
         });
          
         // Form confirm (yes/ok) handler, submits form
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
         {
-            $(this).data('form').submit();
+           window.location.replace("{{route('password.request')}}");
+        });
+
+        $(document).ready(function () {
+            $('input:radio[name="roles"][value={{$user->roles->first()->id}}]').attr('checked', true);
         });
     </script>
 @endsection

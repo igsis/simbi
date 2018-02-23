@@ -133,6 +133,7 @@ class UserController extends Controller
         {
             $user->roles()->detach();
         }
+
         return redirect()->route('usuarios.index')
             ->with('flash_message',
              'Usuario Editado com Sucesso!');

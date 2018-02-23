@@ -22,9 +22,9 @@
                     Usuário
                 </a>
                 <ul class="collapse list-unstyled" id="userSubmenu">
-                    <li><a href="{{ url('/usuarios') }}">Painel de Usuarios</a></li>
+                    <li><a href="{{ route('usuarios.index') }}">Painel de Usuarios</a></li>
                     @hasrole('Administrador')
-                        <li><a href="{{ url('/usuarios/cadastro') }}">Cadastrar Usuario</a></li>
+                        <li><a href="{{ route('usuarios.cadastro') }}">Cadastrar Usuario</a></li>
                     @endhasrole
                 </ul>
             @endhasanyrole
