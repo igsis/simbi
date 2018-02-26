@@ -54,7 +54,7 @@
         </form>
         @include('layouts.excluir_confirm')
 @endsection
-@section('script_delete')
+@section('scripts_adicionais')
 <!-- Script Msg Resetar Senha -->
     <script type="text/javascript">
         $('#confirmDelete').on('show.bs.modal', function (e)
@@ -74,7 +74,7 @@
         // Form confirm (yes/ok) handler, submits form
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
         {
-           window.location.replace("{{route('password.request')}}");
+           window.location.replace("{{route('usuarios.index')}}");
         });
 
         $(document).ready(function () {

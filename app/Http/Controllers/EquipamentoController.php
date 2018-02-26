@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Simbi\Macrorregiao;
 use Simbi\Regiao;
 use Simbi\Regional;
+use Simbi\Equipamento;
 
 class EquipamentoController extends Controller
 {
@@ -17,10 +18,8 @@ class EquipamentoController extends Controller
      */
     public function index()
     {
-        $macrorregioes = Macrorregiao::all();
-        $regioes = Regiao::all();
-        $regionais = Regional::all();
-        return view('equipamentos.cadastro', compact('macrorregioes', 'regioes', 'regionais'));
+        $equipamentos = Equipamento::where('idStatusEquipamento', '=', 1)->orderBy('nome')->paginate(10);
+        return view('equipamentos.index')->with('equipamentos', $equipamentos);
     }
 
     /**
@@ -30,9 +29,9 @@ class EquipamentoController extends Controller
      */
     public function create()
     {
-        $macrorregioes = Macrorregiao::all();
-        $regioes = Regiao::all();
-        $regionais = Regional::all();
+        $macrorregioes = Macrorregiao::orderBy('descricao')->get();
+        $regioes = Regiao::orderBy('descricao')->get();
+        $regionais = Regional::orderBy('descricao')->get();
         return view('equipamentos.cadastro', compact('macrorregioes', 'regioes', 'regionais'));
     }
 

@@ -7,7 +7,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/cadastroequipamento', 'EquipamentoController@index');
+Route::resource('equipamentos', 'EquipamentoController', [
+	'names' => [
+		'edit' => 'equipamentos.editar',
+		'create' => 'equipamentos.cadastro',
+]]);
 
 Route::resource('usuarios', 'UserController', [
 	'names' => [

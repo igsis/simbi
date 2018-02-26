@@ -24,4 +24,4 @@
     });
 </script>
 
-@yield('script_delete')
+@yield('scripts_adicionais')

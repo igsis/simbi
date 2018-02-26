@@ -34,7 +34,7 @@
                 	<i class="glyphicon glyphicon-th-large"></i>
                 	Módulos</a>
                 <ul class="collapse list-unstyled" id="modSubmenu">
-                    <li><a href="{{url('/cadastroequipamento')}}">Cadastrar Equipamento</a></li>
+                    <li><a href="{{route('equipamentos.index')}}">Equipamentos</a></li>
                     <li><a href="#">Módulo 2</a></li>
                     <li><a href="#">Módulo 3</a></li>
                 </ul>
