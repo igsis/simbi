@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'isAdmin' => \Simbi\Http\Middleware\AdminMiddleware::class,
         'isCoord' => \Simbi\Http\Middleware\CoordMiddleware::class,
+        'isFunc' => \Simbi\Http\Middleware\FuncMiddleware::class,
     ];
 }

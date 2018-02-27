@@ -11,6 +11,11 @@ use Simbi\Equipamento;
 
 class EquipamentoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'isFunc']);
+    }
     /**
      * Display a listing of the resource.
      *

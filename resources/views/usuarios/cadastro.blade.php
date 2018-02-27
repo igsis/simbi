@@ -6,7 +6,7 @@
 		<h1><i class="glyphicon glyphicon-user"></i>Cadastrar Usuario</h1>
 		<hr>
 
-		<form method="POST" action="{{ url('/usuarios') }}">
+		<form method="POST" action="{{ route('usuarios.index') }}">
 			{{ csrf_field() }}
 			<div class="form-group">
 				<label for="name">Nome</label>

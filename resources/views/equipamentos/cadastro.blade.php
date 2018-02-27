@@ -3,22 +3,27 @@
 @section ('conteudo')
 <div class="container">
 	<center><h2>Cadastro de Equipamento</h2></center>
-
 	<hr>
-	<form method="POST" action="">
+
+	<form method="POST" action="{{ route('equipamentos.index') }}">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="nome">Nome do Equipamento</label>
-			<input type="text" class="form-control" name="nome" id="nome">
+			<input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome') }}">
 		</div>
 		<div class="form-row">
 			<div class="form-group col-md-3" style="padding-left: 0px">
 				<label for="tipoServico">Tipo de Serviço</label>
-				<input type="text" class="form-control" name="tipoServico" id="tipoServico">
+				<select class="form-control" name="tipoServico" id="tipoServico">
+					<option>Adicionar Tipo de Serviço</option>
+					
+				</select>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="sigla">Sigla do Equipamento</label>
-				<input type="text" class="form-control" name="sigla" id="sigla">
+				<select class="form-control" name="sigla" id="sigla">
+					<option>Adicionar Sigla</option>
+				</select>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="identificacaoSecretaria">Identificação da Secretaria</label>
@@ -76,7 +81,7 @@
 		</div>
 		<div class="form-group col-md-3" style="padding-right: 0px">
 			<label for="bairro">Bairro</label>
-			<input type="text" class="form-control" name="barrio" id="bairro">
+			<input type="text" class="form-control" name="bairro" id="bairro">
 		</div>
 		<div class="form-group col-md-3" style="padding-left: 0px">
 			<label for="telefone">Telefone</label>
