@@ -15,25 +15,43 @@
 			<div class="form-group col-md-3" style="padding-left: 0px">
 				<label for="tipoServico">Tipo de Serviço</label>
 				<select class="form-control" name="tipoServico" id="tipoServico">
-					<option>Adicionar Tipo de Serviço</option>
-					
+					<option>Selecione uma Opção</option>
 				</select>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="sigla">Sigla do Equipamento</label>
 				<select class="form-control" name="sigla" id="sigla">
-					<option>Adicionar Sigla</option>
+					<option>Selecione uma Opção</option>
 				</select>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="identificacaoSecretaria">Identificação da Secretaria</label>
-				<input type="text" class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
+				<select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
+					<option value="">Selecione uma Opção</option>
+				</select>
 			</div>
 			<div class="form-group col-md-3" style="padding-right: 0px">
 				<label for="subordinaçãoAdministrativa">Subordinação Administrativa</label>
-				<input type="text" class="form-control" name="subordinaçãoAdministrativa" id="subordinaçãoAdministrativa">
+				<select class="form-control" name="subordinaçãoAdministrativa" id="subordinaçãoAdministrativa">
+					<option value="">Selecione uma Opção</option>
+				</select>
 			</div>
 		</div>
+		<div class="form-row">
+			<div class="col-md-3" style="padding-left: 0px">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addServico">Adicionar Serviço</button>
+			</div>
+			<div class="col-md-3">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSigla">Adicionar Sigla</button>
+			</div>
+			<div class="col-md-3">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSecretaria">Adicionar Secretaria</button>
+			</div>
+			<div class="col-md-3" style="padding-right: 0px">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSubAdmin">Adicionar Sub. Administrativa</button>
+			</div>
+		</div>
+
 		<div class="form-row">
 			<div class="form-group col-md-3" style="padding-left: 0px">
 				<label>Equipamento Tematico?</label><br>
@@ -49,6 +67,7 @@
 				<input type="text" class="form-control" name="nomeTematica" id="nomeTematica" disabled>
 			</div>
 		</div>
+
 		
 		<center><h3>Endereço</h3></center>
 		<div class="form-group col-md-3" style="padding-left: 0px">
@@ -173,6 +192,7 @@
 			<input type="submit" class="btn btn-primary" name="enviar" value="Enviar">
 		</div>
 	</form>
+	@include('layouts.equipamento_modal')
 </div>
 @endsection
 @section('scripts_adicionais')

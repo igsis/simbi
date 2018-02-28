@@ -4,7 +4,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-
 Auth::routes();
 
 Route::resource('equipamentos', 'EquipamentoController', [

@@ -36,7 +36,7 @@
 					</td>
 				</tr>
 			@endforeach
-							@include('layouts.excluir_confirm')
+			@include('layouts.excluir_confirm')
 		</tbody>
 	</table>
 </div>
