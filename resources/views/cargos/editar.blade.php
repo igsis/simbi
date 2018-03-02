@@ -6,24 +6,24 @@
 	    <h1><i class='glyphicon glyphicon-wrench'></i> Editar Cargo: {{$role->name}}</h1>
 	    <hr>
 
-	    {{ Form::model($role, array('route' => array('roles.update', $role->id), 'method' => 'PUT')) }}
+	    <form method="POST" action="{{route('cargos.update', $role->id)}}">
+	    	{{csrf_field()}}
+	    	<input type="hidden" name="_method" value="PUT">
 
 	    <div class="form-group">
 	    	<label for="name">Nome do Cargo</label>
-	    	<input class="form-control" type="text" name="name" id="name">
+	    	<input class="form-control" type="text" name="name" id="name" value="{{$role->name}}">
 	    </div>
 
 	    <h5><b>Atribuir Permissões</b></h5>
 	    @foreach ($permissions as $permission)
-	    	<input name="permission" type="checkbox" value="{{$permission->id}}">
+	    	<input name="permissions[]" type="checkbox" value="{{$permission->id}}">
 	    	<label for="{{$permission->name}}">{{$permission->name}}</label>
 	    	<br>
 	    @endforeach
 	    <br>
 
 	    <input class="btn btn-primary" type="submit" value="Editar">
-
-	    {{ Form::close() }}    
 	</div>
 
 @endsection
