@@ -10,12 +10,12 @@
           <form method="POST" action="{{route('equipamentos.cadastro')}}">
             {{csrf_field()}}
             <label>Descrição</label>
-            <input class="form-control" type="text" name="descricao">
+            <input class="form-control" type="text" name="descricaoServico">
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirm">Adicionar</button>
+          <button type="button" class="btn btn-success" id="confirm">Adicionar</button>
         </div>
       </div>
     </div>
@@ -32,13 +32,23 @@
         <div class="modal-body">
           <form method="POST" action="{{route('equipamentos.cadastro')}}">
             {{csrf_field()}}
-            <label>Descrição</label>
-            <input class="form-control" type="text" name="descricao">
+            <div class="form-group">
+              <label>Sigla</label>
+              <input class="form-control" type="text" name="sigla">
+            </div>
+            <div class="form-group">
+              <label>Descrição</label>
+              <input class="form-control" type="text" name="descricao">
+            </div>
+            <div class="form-group">
+              <label>Roteiro</label>
+              <input class="form-control" type="text" name="roteiro">
+            </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirm">Adicionar</button>
+          <button type="button" class="btn btn-success" id="confirm">Adicionar</button>
         </div>
       </div>
     </div>
@@ -55,13 +65,19 @@
         <div class="modal-body">
           <form method="POST" action="{{route('equipamentos.cadastro')}}">
             {{csrf_field()}}
-            <label>Descrição</label>
-            <input class="form-control" type="text" name="descricao">
+            <div class="form-group">
+              <label>Sigla</label>
+              <input class="form-control" type="text" name="sigla">
+            </div>
+            <div class="form-group">
+              <label>Descrição</label>
+              <input class="form-control" type="text" name="descricao">
+            </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirm">Adicionar</button>
+          <button type="button" class="btn btn-success" id="confirm">Adicionar</button>
         </div>
       </div>
     </div>
@@ -84,7 +100,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" id="confirm">Adicionar</button>
+          <button type="button" class="btn btn-success" id="confirm">Adicionar</button>
         </div>
       </div>
     </div>

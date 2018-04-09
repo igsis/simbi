@@ -8,6 +8,8 @@ use Simbi\Macrorregiao;
 use Simbi\Regiao;
 use Simbi\Regional;
 use Simbi\Equipamento;
+use Simbi\TipoServico;
+use Simbi\SubordinacaoAdministrativa;
 
 class EquipamentoController extends Controller
 {
@@ -37,7 +39,17 @@ class EquipamentoController extends Controller
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        return view('equipamentos.cadastro', compact('macrorregioes', 'regioes', 'regionais'));
+        $tipoServicos = TipoServico::orderBy('descricao')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        return view('equipamentos.cadastro', 
+            compact(
+                'macrorregioes',
+                'regioes',
+                'regionais',
+                'tipoServicos',
+                'subordinacoesAdministrativas'
+            )
+        );
     }
 
     /**
@@ -49,6 +61,27 @@ class EquipamentoController extends Controller
     public function store(Request $request)
     {
         //
+        if(Input::get('servico')){
+            $this->validade($request, [
+                'descricaoServico']);
+            TipoServico::create()
+        }
+        
+        elseif (Input::get('sigla')){
+            // Metodo para adicinaro uma nova sigla do equipamento
+        }
+
+        elseif (Input::get('secretaria')) {
+            // Metodo para adicionar uma nova Identificação da Secretaria
+        }
+
+        elseif (Input::get('subordinacaoAdministrativa')) {
+            // Metodo para adicionar uma nova Subordinação Administrativa
+        }
+
+        else{
+            // Metodo que grava o novo equipamento
+        }
     }
 
     /**
@@ -59,7 +92,7 @@ class EquipamentoController extends Controller
      */
     public function show($id)
     {
-        //
+        return redirect()->route('equipamentos.index');
     }
 
     /**

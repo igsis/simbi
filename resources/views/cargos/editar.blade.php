@@ -27,3 +27,10 @@
 	</div>
 
 @endsection
+@section('scripts_adicionais')
+		<script type="text/javascript">
+        $(document).ready(function () {
+            $('input:checkbox[name="permissions[]"][value={{$role->permissions}}]').attr('checked', true);
+        });
+    </script>
+@endsection

@@ -16,6 +16,9 @@
 				<label for="tipoServico">Tipo de Serviço</label>
 				<select class="form-control" name="tipoServico" id="tipoServico">
 					<option>Selecione uma Opção</option>
+					@foreach ($tipoServicos as $tipoServico)
+						<option value="{{$tipoServico->idTipoServico}}">{{$tipoServico->descricao}}</option>
+					@endforeach
 				</select>
 			</div>
 			<div class="form-group col-md-3">
@@ -34,6 +37,9 @@
 				<label for="subordinaçãoAdministrativa">Subordinação Administrativa</label>
 				<select class="form-control" name="subordinaçãoAdministrativa" id="subordinaçãoAdministrativa">
 					<option value="">Selecione uma Opção</option>
+					@foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
+						<option value="{{$subordinacaoAdministrativa->idSubordinacaoAdministrativa}}">{{$subordinacaoAdministrativa->descricao}}</option>
+					@endforeach
 				</select>
 			</div>
 		</div>
@@ -72,7 +78,7 @@
 		<center><h3>Endereço</h3></center>
 		<div class="form-group col-md-3" style="padding-left: 0px">
 			<label for="cep">CEP</label>
-			<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000">
+			<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx">
 		</div>
 		<div class="form-group col-md-3">
 			<label for="tipo">Tipo</label>
@@ -104,7 +110,7 @@
 		</div>
 		<div class="form-group col-md-3" style="padding-left: 0px">
 			<label for="telefone">Telefone</label>
-			<input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 00000-0000">
+			<input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx">
 		</div>
 
 		<div class="form-group col-md-9" style="padding-right: 0px">
