@@ -2,6 +2,9 @@
 -- Database: `dbsimbi`
 --
 
+CREATE DATABASE dbsimbi;
+USE `dbsimbi`;
+
 -- --------------------------------------------------------
 
 --

@@ -1,7 +1,7 @@
 --
 -- Database: `dbsimbi`
 --
-
+USE `dbsimbi`;
 --
 -- Extraindo dados da tabela `macrorregiao`
 --
