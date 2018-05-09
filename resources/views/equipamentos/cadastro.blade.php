@@ -23,8 +23,11 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label for="sigla">Sigla do Equipamento</label>
-				<select class="form-control" name="sigla" id="sigla">
+				<select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
 					<option>Selecione uma Opção</option>
+					@foreach ($siglas as $sigla)
+						<option value="{{$sigla->idSigla}}">{{$sigla->sigla}}</option>
+					@endforeach
 				</select>
 			</div>
 			<div class="form-group col-md-3">
@@ -76,46 +79,54 @@
 
 		
 		<center><h3>Endereço</h3></center>
-		<div class="form-group col-md-3" style="padding-left: 0px">
-			<label for="cep">CEP</label>
-			<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx">
+		<div class="form-row">
+			<div class="form-group col-md-3" style="padding-left: 0px">
+				<label for="cep">CEP</label>
+				<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx">
+			</div>
+			<div class="form-group col-md-3">
+				<label for="tipo">Tipo</label>
+				<input type="text" class="form-control" name="tipo" id="tipo" placeholder="Rua, Avenida, etc">
+			</div>
+			<div class="form-group col-md-3">
+				<label for="titulo">Titulo</label>
+				<input type="text" class="form-control" name="titulo" id="titulo" placeholder="Doutor, Coronel, Professor, etc">
+			</div>
+			<div class="form-group col-md-3" style="padding-right: 0px">
+				<label for="preposicao">Preposição</label>
+				<input type="text" class="form-control" name="preposicao" id="preposicao" placeholder="De, Para, etc">
+			</div>
 		</div>
-		<div class="form-group col-md-3">
-			<label for="tipo">Tipo</label>
-			<input type="text" class="form-control" name="tipo" id="tipo" placeholder="Rua, Avenida, etc">
+		<div class="form-row">
+			<div class="form-group col-md-3" style="padding-left: 0px">
+				<label for="nomeEndereco">Nome</label>
+				<input type="text" class="form-control" name="nomeEndereco" id="nomeEndereco" placeholder="São João">
+			</div>
+			<div class="form-group col-md-3">
+				<label for="numero">Numero</label>
+				<input type="text" class="form-control" name="numero" id="numero">				
+			</div>
+			<div class="form-group col-md-3">
+				<label for="complemento">Complemento</label>
+				<input type="text" class="form-control" name="complemento" id="complemento">
+			</div>
+			<div class="form-group col-md-3" style="padding-right: 0px">
+				<label for="bairro">Bairro</label>
+				<input type="text" class="form-control" name="bairro" id="bairro">
+			</div>
 		</div>
-		<div class="form-group col-md-3">
-			<label for="titulo">Titulo</label>
-			<input type="text" class="form-control" name="titulo" id="titulo" placeholder="Doutor, Coronel, Professor, etc">
-		</div>
-		<div class="form-group col-md-3" style="padding-right: 0px">
-			<label for="preposicao">Preposição</label>
-			<input type="text" class="form-control" name="preposicao" id="preposicao" placeholder="De, Para, etc">
-		</div>
-		<div class="form-group col-md-3" style="padding-left: 0px">
-			<label for="nomeEndereco">Nome</label>
-			<input type="text" class="form-control" name="nomeEndereco" id="nomeEndereco" placeholder="São João">
-		</div>
-		<div class="form-group col-md-3">
-			<label for="numero">Numero</label>
-			<input type="text" class="form-control" name="numero" id="numero">				
-		</div>
-		<div class="form-group col-md-3">
-			<label for="complemento">Complemento</label>
-			<input type="text" class="form-control" name="complemento" id="complemento">
-		</div>
-		<div class="form-group col-md-3" style="padding-right: 0px">
-			<label for="bairro">Bairro</label>
-			<input type="text" class="form-control" name="bairro" id="bairro">
-		</div>
-		<div class="form-group col-md-3" style="padding-left: 0px">
-			<label for="telefone">Telefone</label>
-			<input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx">
-		</div>
-
-		<div class="form-group col-md-9" style="padding-right: 0px">
-			<label for="subprefeitura">Subprefeitura</label>
-			<input type="text" class="form-control" name="subprefeitura" id="subprefeitura">
+		<div class="form-row">
+			<div class="form-group col-md-3" style="padding-left: 0px">
+				<label for="telefone">Telefone</label>
+				<input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="subprefeitura">Subprefeitura</label>
+				<input type="text" class="form-control" name="subprefeitura" id="subprefeitura">
+			</div>
+			<div class="col-md-3" style="padding-left: 0px">
+					<button type="button" class="form-control btn btn-info" data-toggle="modal" data-target="#addServico">Adicionar Serviço</button>
+			</div>
 		</div>
 		<div class="form-group col-md-3" style="padding-left: 0px">
 			<label for="distrito">Distrito</label>
@@ -148,8 +159,9 @@
 			@endforeach
 			</select>
 		</div>
-
-		<center><h3>Horario de Funcionamento</h3></center>
+		<div class="form-row">
+			<center><h3>Horario de Funcionamento</h3></center>
+		</div>
 		<div class="form-group">
 			<div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
 				<input type="checkbox" name="domingo" id="diasemana07" value="1" /><label  style="padding:0 10px 0 5px;"> Domingo</label>

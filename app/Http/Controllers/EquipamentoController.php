@@ -8,6 +8,7 @@ use Simbi\Macrorregiao;
 use Simbi\Regiao;
 use Simbi\Regional;
 use Simbi\Equipamento;
+use Simbi\EquipamentoSigla;
 use Simbi\TipoServico;
 use Simbi\SubordinacaoAdministrativa;
 
@@ -40,6 +41,7 @@ class EquipamentoController extends Controller
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
         $tipoServicos = TipoServico::orderBy('descricao')->get();
+        $siglas = EquipamentoSigla::orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         return view('equipamentos.cadastro', 
             compact(
@@ -47,7 +49,8 @@ class EquipamentoController extends Controller
                 'regioes',
                 'regionais',
                 'tipoServicos',
-                'subordinacoesAdministrativas'
+                'subordinacoesAdministrativas',
+                'siglas'
             )
         );
     }
@@ -61,26 +64,66 @@ class EquipamentoController extends Controller
     public function store(Request $request)
     {
         //
-        if(Input::get('servico')){
-            $this->validade($request, [
-                'descricaoServico']);
-            TipoServico::create()
+        if($request->has('novoServico')){
+            $this->validate($request, ['descricao']);
+            
+            $tipoServico = new TipoServico;
+            $tipoServico->descricao = $request->descricao;
+            $tipoServico->save();
+
+            return redirect()->route('equipamentos.cadastro')->with('flash_message',
+             'Tipo de serviço inserido com sucesso!');
         }
         
-        elseif (Input::get('sigla')){
-            // Metodo para adicinaro uma nova sigla do equipamento
+        elseif ($request->has('novaSigla')){
+            $this->validate($request, [
+                'sigla'=>'max:6',
+                'descricao',
+                'roteiro'
+            ]);
+
+            $sigla = new EquipamentoSigla;
+            $sigla->sigla = $request->sigla;
+            $sigla->descricao = $request->descricao;
+            $sigla->roteiro = $request->roteiro;
+            $sigla->save();
+
+            return redirect()->route('equipamentos.cadastro')->with('flash_message',
+             'Sigla do Equipamento inserida com sucesso!');
         }
 
-        elseif (Input::get('secretaria')) {
-            // Metodo para adicionar uma nova Identificação da Secretaria
+        elseif ($request->has('novaSecretaria')) {
+            $this->validate($request, [
+                'sigla'=>'max:6',
+                'descricao'
+            ]);
+
+            $secretaria = new Secretaria;
+            $secretaria->sigla = $request->sigla;
+            $secretaria->descricao = $request->descricao;
+            $secretaria->save();
+
+            return redirect()->route('equipamento.cadastro')->with('flash_message',
+                'Secretaria inserida com sucesso');
         }
 
-        elseif (Input::get('subordinacaoAdministrativa')) {
-            // Metodo para adicionar uma nova Subordinação Administrativa
+        elseif ($request->has('novaSubordinacaoAdministrativa')) {
+            $this->validate($request, ['descricao']);
+
+            $subAdministrativa = new SubordinacaoAdministrativa;
+            $subAdministrativa->descricao = $request->descricao;
+            $subAdministrativa->save();
+
+            return redirect()->route('equipamento.cadastro')->with('flash_message', 
+                'Subordinacao Administrativa inserida com sucesso');
         }
 
         else{
             // Metodo que grava o novo equipamento
+            $this->validate($request, [
+                'nome'=>'required',
+                'equipamentoSigla'=>'required',
+            ]);
         }
     }
 

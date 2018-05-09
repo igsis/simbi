@@ -4,13 +4,15 @@ namespace Simbi;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SubordinacaoAdministrativa extends Model
+class EquipamentoSigla extends Model
 {
-    protected $table = 'subordinacao_administrativa';
+    protected $table = 'equipamento_sigla';
 
     public $timestamps = false;
 
     protected $fillable = [
-    	'descricao'
+    	'sigla',
+    	'descricao',
+    	'roteiro'
     ];
 }
