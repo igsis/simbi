@@ -122,7 +122,23 @@ class EquipamentoController extends Controller
             // Metodo que grava o novo equipamento
             $this->validate($request, [
                 'nome'=>'required',
+                'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
+                'identificacaoSecretaria'=>'required',
+                'subordinaçãoAdministrativa'=>'required',
+                'tematico',
+                'nomeTematica',
+                // 'endereco',
+                'telefone'=>'nullable|max:15',
+                'subprefeitura'=>'required',
+                'distrito'=>'required',
+                'macrorregiao'=>'required',
+                'regiao'=>'required',
+                'regional'=>'required',
+                // 'funcionamento',
+                'telecentro'=>'required',
+                'nucleobraile'=>'required',
+                'acervoespecializado'=>'required'
             ]);
         }
     }

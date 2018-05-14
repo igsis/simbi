@@ -41,7 +41,9 @@
 	</table>
 </div>
 <div class="text-center"> {!! $users->links() !!} </div>
-<a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
+@hasrole('Administrador')
+	<a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
+@endhasrole
 @endsection
 
 @section('scripts_adicionais')
