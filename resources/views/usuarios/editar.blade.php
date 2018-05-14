@@ -19,22 +19,25 @@
         		<input class="form-control" name="email" type="email" value="{{$user->email}}" id="email">
     		</div>
 
-    		<h5><b>Adicionar Cargo</b></h5>
+            
+            <h5><b>Adicionar Cargo</b></h5>
 
-    		<div class='form-group'>
-                <input type="radio" value="0" name="roles" checked>
-                <label for="semCargo">Sem Cargo</label><br>
+            <div class='form-group'>
+                @if(!(Auth::user()->hasrole('Funcionario')))
+                        <input type="radio" value="0" name="roles" checked>
+                        <label for="semCargo">Sem Cargo</label><br>
 
-                @hasrole('Administrador')
-                    <input type="radio" value="1" name="roles">
-                    <label for="Administrador">Administrador</label><br>
-                @endhasrole
-                
-                <input type="radio" value="2" name="roles">
-                <label for="Coordenador">Coordenador</label><br>
-                
-                <input type="radio" value="3" name="roles">
-                <label for="Funcionario">Funcionario</label><br>
+                        @hasrole('Administrador')
+                            <input type="radio" value="1" name="roles">
+                            <label for="Administrador">Administrador</label><br>
+                        @endhasrole
+                        
+                        <input type="radio" value="2" name="roles">
+                        <label for="Coordenador">Coordenador</label><br>
+                        
+                @endif  
+                    <input type="radio" value="3" name="roles">
+                    <label for="Funcionario">Funcionario</label><br>
             </div>
             @if($user->name == Auth::user()->name)
        			<div class="form-group">
@@ -48,10 +51,12 @@
     		    </div>
             @endif
     		<input class="btn btn-primary" type="submit" value="Editar">
-        @if(!($user->name == Auth::user()->name))
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario?' data-button="Resetar Senha">Resetar Senha</button>
-        @endif
         </form>
+        @if($user->name != Auth::user()->name)
+        <form>
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario?' data-button="Resetar Senha">Resetar Senha</button>
+        </form>
+        @endif
         @include('layouts.excluir_confirm')
 @endsection
 @section('scripts_adicionais')

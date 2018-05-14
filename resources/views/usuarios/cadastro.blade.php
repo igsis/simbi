@@ -27,16 +27,6 @@
 				</select>
 			</div>
 
-			<div class="form-group">
-				<label for="password">Senha</label>
-				<input class="form-control" type="password" name="password" id="password">
-			</div>
-
-			<div class="form-group">
-				<label for="password">Confirmar Senha</label>
-				<input class="form-control" type="password" name="password_confirmation">
-			</div>
-
 			<input class="btn btn-primary" type="submit" value="Adicionar">
 		</form>
 

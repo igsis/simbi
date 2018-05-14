@@ -17,11 +17,16 @@ class FuncMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $id = Auth::user()->id;
         $user = User::all()->count();
         if (!($user == 1))
         {
-            if (!Auth::user()->hasPermissionTo('Funcionario'))
+            if ($request->is('usuarios/$id/editar'))
             {
+                if (Auth::user()->hasPermissionTo('Funcionario'))
+                {
+                   return $next($request); 
+                }
                 abort('401');
             }
         }

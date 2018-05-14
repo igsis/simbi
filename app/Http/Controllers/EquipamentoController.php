@@ -26,7 +26,7 @@ class EquipamentoController extends Controller
      */
     public function index()
     {
-        $equipamentos = Equipamento::where('idStatusEquipamento', '=', 1)->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('idStatus', '=', 1)->orderBy('nome')->paginate(10);
         return view('equipamentos.index')->with('equipamentos', $equipamentos);
     }
 

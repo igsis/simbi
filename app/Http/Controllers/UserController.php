@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('ativo', '=', 1)->orderBy('name')->paginate(10);
+        $users = User::where('publicado', '=', 1)->orderBy('name')->paginate(10);
         return view('usuarios.index')->with('users', $users);
     }
 
@@ -51,10 +51,16 @@ class UserController extends Controller
         $this->validate($request, [
             'name'=>'required',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed',
         ]);
 
-        $user = User::create($request->only('email', 'name', 'password'));
+        $user = new User();
+        
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = 'simbi@2018';
+
+        $user->save();
+
         $roles = $request['roles'];
 
         if (isset($roles))
@@ -64,7 +70,7 @@ class UserController extends Controller
         }
 
         return redirect()->route('usuarios.index')->with('flash_message',
-             'Usuario Adicionado com Sucesso!');
+             'Usuario Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 
     /**
@@ -148,7 +154,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->ativo = 0;
+        $user->publicado = 0;
         $user->save();
 
         return redirect()->route('usuarios.index')

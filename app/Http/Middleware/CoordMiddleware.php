@@ -17,13 +17,39 @@ class CoordMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $id = Auth::user()->id;
         $user = User::all()->count();
         if (!($user == 1))
         {
+            if ($request->is("usuarios/$id/editar"))
+            {
+                if (Auth::user()->hasPermissionTo('Funcionario'))
+                {
+                    return $next($request); 
+                }
+                else
+                {
+                    abort('401');
+                }
+            }
+
+             if ($request->is("usuarios/$id"))
+            {
+                if (Auth::user()->hasPermissionTo('Funcionario'))
+                {
+                    return $next($request); 
+                }
+                else
+                {
+                    abort('401');
+                }
+            }
+            
             if (!Auth::user()->hasPermissionTo('Coordenador')) //If user does //not have this permission
             {
                 abort('401');
             }
+
         }
         return $next($request);
     }
