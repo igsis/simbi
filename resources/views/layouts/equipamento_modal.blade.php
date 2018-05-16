@@ -93,7 +93,7 @@
           <h4 class="modal-title">Adicionar nova Sub. Administrativa?</h4>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{route('equipamentos.cadastro')}}">
+          <form method="POST" action="{{route('equipamentos.index')}}">
             {{csrf_field()}}
             <label>Descrição</label>
             <input class="form-control" type="text" name="descricao">

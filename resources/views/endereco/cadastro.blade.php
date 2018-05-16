@@ -8,40 +8,36 @@
 	<form method="POST" action="{{ route('equipamentos.index') }}">
 		{{ csrf_field() }}
 		<div class="row">
-			<div class="form-group col-md-3" style="padding-left: 0px">
+			<div class="form-group col-md-2" style="padding-left: 0px">
 				<label for="cep">CEP</label>
 				<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx">
 			</div>
 			<div class="form-group col-md-3">
-				<label for="tipo">Tipo</label>
-				<input type="text" class="form-control" name="tipo" id="tipo" placeholder="Rua, Avenida, etc">
+				<label for="logradouro">Logradouro</label>
+				<input type="text" class="form-control" name="logradouro" id="logradouro">
 			</div>
 			<div class="form-group col-md-3">
-				<label for="titulo">Titulo</label>
-				<input type="text" class="form-control" name="titulo" id="titulo" placeholder="Doutor, Coronel, Professor, etc">
+				<label for="bairro">Bairro</label>
+				<input type="text" class="form-control" name="bairro" id="bairro">
 			</div>
-			<div class="form-group col-md-3" style="padding-right: 0px">
-				<label for="preposicao">Preposição</label>
-				<input type="text" class="form-control" name="preposicao" id="preposicao" placeholder="De, Para, etc">
+			<div class="form-group col-md-2">
+				<label for="numero">Número</label>
+				<input type="text" class="form-control" name="numero" id="numero">
+			</div>
+			<div class="form-group col-md-2" style="padding-right: 0px">
+				<label for="complemento">Complemento</label>
+				<input type="text" class="form-control" name="complemento" id="complemento">
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="form-group col-md-3" style="padding-left: 0px">
-				<label for="nomeEndereco">Nome</label>
-				<input type="text" class="form-control" name="nomeEndereco" id="nomeEndereco" placeholder="São João">
+			<div class="form-group col-md-offset-3 col-md-3">
+				<label for="cidade">Cidade</label>
+				<input type="text" class="form-control" name="cidade" id="cidade" placeholder="São João">
 			</div>
 			<div class="form-group col-md-3">
-				<label for="numero">Numero</label>
-				<input type="text" class="form-control" name="numero" id="numero">				
-			</div>
-			<div class="form-group col-md-3">
-				<label for="complemento">Complemento</label>
-				<input type="text" class="form-control" name="complemento" id="complemento">
-			</div>
-			<div class="form-group col-md-3" style="padding-right: 0px">
-				<label for="bairro">Bairro</label>
-				<input type="text" class="form-control" name="bairro" id="bairro">
+				<label for="uf">UF</label>
+				<input type="text" class="form-control" name="uf" id="uf">				
 			</div>
 		</div>
 
@@ -92,10 +88,10 @@
 				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubprefeitura">Adicionar Subprefeitura</button>
 			</div>
 			<div class="col-md-3">
-				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubprefeitura">Adicionar Subprefeitura</button>
+				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito">Adicionar Distrito</button>
 			</div>
 		</div>
-		<div class="form-group col-md-offset-5 col-md-2">
+		<div class="form-group col-md-offset-5 col-md-2" style="padding-top: 10px">
 			<input type="submit" class="form-control btn btn-primary" name="enviar" value="Enviar">
 		</div>
 	</form>

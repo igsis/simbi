@@ -4,13 +4,11 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Simbi\Macrorregiao;
-use Simbi\Regiao;
-use Simbi\Regional;
 use Simbi\Equipamento;
 use Simbi\EquipamentoSigla;
 use Simbi\TipoServico;
 use Simbi\SubordinacaoAdministrativa;
+use Simbi\Secretaria;
 
 class EquipamentoController extends Controller
 {
@@ -37,20 +35,16 @@ class EquipamentoController extends Controller
      */
     public function create()
     {
-        $macrorregioes = Macrorregiao::orderBy('descricao')->get();
-        $regioes = Regiao::orderBy('descricao')->get();
-        $regionais = Regional::orderBy('descricao')->get();
         $tipoServicos = TipoServico::orderBy('descricao')->get();
         $siglas = EquipamentoSigla::orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        $secretarias = Secretaria::orderBy('descricao')->get();
         return view('equipamentos.cadastro', 
             compact(
-                'macrorregioes',
-                'regioes',
-                'regionais',
                 'tipoServicos',
-                'subordinacoesAdministrativas',
-                'siglas'
+                'siglas',
+                'secretarias',
+                'subordinacoesAdministrativas'
             )
         );
     }
@@ -63,9 +57,12 @@ class EquipamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $equipamento = new Equipamento;
+
         if($request->has('novoServico')){
-            $this->validate($request, ['descricao']);
+            $this->validate($request, [
+                'descricao'=>'required'
+            ]);
             
             $tipoServico = new TipoServico;
             $tipoServico->descricao = $request->descricao;
@@ -77,9 +74,9 @@ class EquipamentoController extends Controller
         
         elseif ($request->has('novaSigla')){
             $this->validate($request, [
-                'sigla'=>'max:6',
-                'descricao',
-                'roteiro'
+                'sigla'=>'required|max:6',
+                'descricao'=>'required',
+                'roteiro'=>'required'
             ]);
 
             $sigla = new EquipamentoSigla;
@@ -92,8 +89,8 @@ class EquipamentoController extends Controller
 
         elseif ($request->has('novaSecretaria')) {
             $this->validate($request, [
-                'sigla'=>'max:6',
-                'descricao'
+                'sigla'=>'required|max:6',
+                'descricao'=>'required'
             ]);
 
             $secretaria = new Secretaria;
@@ -101,18 +98,20 @@ class EquipamentoController extends Controller
             $secretaria->descricao = $request->descricao;
             $secretaria->save();
 
-            return redirect()->route('equipamento.cadastro')->with('flash_message',
+            return redirect()->route('equipamentos.cadastro')->with('flash_message',
                 'Secretaria inserida com sucesso');
         }
 
         elseif ($request->has('novaSubordinacaoAdministrativa')) {
-            $this->validate($request, ['descricao']);
+            $this->validate($request, [
+                'descricao'=>'required'
+            ]);
 
             $subAdministrativa = new SubordinacaoAdministrativa;
             $subAdministrativa->descricao = $request->descricao;
             $subAdministrativa->save();
 
-            return redirect()->route('equipamento.cadastro')->with('flash_message', 
+            return redirect()->route('equipamentos.cadastro')->with('flash_message', 
                 'Subordinacao Administrativa inserida com sucesso');
         }
 
@@ -123,22 +122,32 @@ class EquipamentoController extends Controller
                 'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
                 'identificacaoSecretaria'=>'required',
-                'subordinaçãoAdministrativa'=>'required',
-                'tematico',
-                'nomeTematica',
+                'subordinacaoAdministrativa'=>'required',
+                'tematico'=>'nullable',
+                'nomeTematica'=>'nullable',
                 // 'endereco',
                 'telefone'=>'nullable|max:15',
-                'subprefeitura'=>'required',
-                'distrito'=>'required',
-                'macrorregiao'=>'required',
-                'regiao'=>'required',
-                'regional'=>'required',
                 // 'funcionamento',
                 'telecentro'=>'required',
                 'nucleobraile'=>'required',
                 'acervoespecializado'=>'required'
             ]);
+
+            $equipamento->nome = $request->nome;
+            $equipamento->idTipoServico = $request->tipoServico;
+            $equipamento->idSigla = $request->equipamentoSigla;
+            $equipamento->idSecretaria = $request->identificacaoSecretaria;
+            $equipamento->idSubordinacaoAdministrativa = $request->subordinacaoAdministrativa;
+            $equipamento->tematico = $request->tematico;
+            $equipamento->nomeTematica = $request->nomeTematica;
+            $equipamento->telefone = $request->telefone;
+            $equipamento->telecentro = $request->telecentro;
+            $equipamento->acervoEspecializado = $request->acervoespecializado;
+            $equipamento->nucleoBraile = $request->nucleobraile;
+
+            $equipamento->save();
         }
+        return redirect()->route('equipamentos.index');
     }
 
     /**

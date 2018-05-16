@@ -25,7 +25,7 @@
 					<td>{{$equipamento->telefone}}</td>
 					<td>{{$equipamento->idStatusEquipamento}}</td>
 					<td>
-						<a href="{{ route('equipamentos.detalhes', $equipamento->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Mais Detalhes</a>
+						<a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Mais Detalhes</a>
 					</td>
 				</tr>
 			@endforeach

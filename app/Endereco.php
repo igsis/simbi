@@ -13,7 +13,7 @@ class Endereco extends Model
 
     public function user()
     {
-    	return $this->belongsTo('Simbi\User')
+    	return $this->belongsTo('Simbi\User', 'idEndereco', 'idEndereco')
     }
 
     public function macrorregiao()

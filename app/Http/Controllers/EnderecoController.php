@@ -10,9 +10,6 @@ use Simbi\Macrorregiao;
 use Simbi\Regiao;
 use Simbi\Regional;
 use Simbi\Equipamento;
-use Simbi\EquipamentoSigla;
-use Simbi\TipoServico;
-use Simbi\SubordinacaoAdministrativa;
 
 class EnderecoController extends Controller
 {
@@ -26,17 +23,11 @@ class EnderecoController extends Controller
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        $tipoServicos = TipoServico::orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::orderBy('sigla')->get();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         return view('endereco.cadastro', 
             compact(
                 'macrorregioes',
                 'regioes',
-                'regionais',
-                'tipoServicos',
-                'subordinacoesAdministrativas',
-                'siglas'
+                'regionais'
             )
         );
     }
@@ -49,7 +40,22 @@ class EnderecoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $endereco = new Endereco;
+        $this->validate($request[
+            'cep'=>'required',
+            'logradouro'=>'required',
+            'bairro'=>'required',
+            'numero'=>'required',
+            'complemento',
+            'cidade'=>'required',
+            'uf'=>'max:2',
+            'macrorregiao'=>'required',
+            'regiao'=>'required',
+            'regional'=>'required',
+            'subprefeitura'=>'required',
+            'distrito'=>'required'
+        ]);
+        $endereco->equipamento()->
     }
 
     /**
