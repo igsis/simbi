@@ -6,6 +6,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('endereco/cadastro', 'EnderecoController@create');
+
 Route::resource('equipamentos', 'EquipamentoController', [
 	'names' => [
 		'edit' => 'equipamentos.editar',

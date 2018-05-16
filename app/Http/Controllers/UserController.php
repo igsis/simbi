@@ -108,23 +108,31 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        
 
+        if($request->has('novaSenha'))
+        {
+            $user->password = 'simbi@2018';
+            $user->save();
+            return redirect()->route('usuarios.index')
+            ->with('flash_message',
+            'Senha Resetada! Senha padrão: simbi@2018');
+        }
+        
         if ($request->filled('password'))
         {
             $this->validate($request, [
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email,'.$id,
-            'password'=>'required|min:6|confirmed'
-        ]);
+                'name'=>'required',
+                'email'=>'required|email|unique:users,email,'.$id,
+                'password'=>'required|min:6|confirmed'
+            ]);
             $input = $request->only(['name', 'email', 'password']);
         }
         else
         {
             $this->validate($request, [
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email,'.$id,
-        ]);
+                'name'=>'required',
+                'email'=>'required|email|unique:users,email,'.$id,
+            ]);
             $input = $request->only(['name', 'email']);
         }
 

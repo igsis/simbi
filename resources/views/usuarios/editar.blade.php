@@ -19,7 +19,6 @@
         		<input class="form-control" name="email" type="email" value="{{$user->email}}" id="email">
     		</div>
 
-            
             <h5><b>Adicionar Cargo</b></h5>
 
             <div class='form-group'>
@@ -53,8 +52,10 @@
     		<input class="btn btn-primary" type="submit" value="Editar">
         </form>
         @if($user->name != Auth::user()->name)
-        <form>
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario?' data-button="Resetar Senha">Resetar Senha</button>
+        <form id="resetSenha" method="POST" action="{{ url('usuarios', [$user->id])}}" accept-charset="UTF-8">
+            {{ csrf_field() }}
+            <input type="hidden" name="novaSenha">
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario? Senha: simbi@2018' data-button="Resetar Senha">Resetar Senha</button>
         </form>
         @endif
         @include('layouts.excluir_confirm')
@@ -72,14 +73,14 @@
             $(this).find('.modal-footer #confirm').text($button);
 
             // Pass form reference to modal for submission on yes/ok
-            var button = $(e.relatedTarget).closest('button');
-            $(this).find('.modal-footer #confirm').data('button', button);
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
         });
          
         // Form confirm (yes/ok) handler, submits form
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
         {
-           window.location.replace("{{route('usuarios.index')}}");
+            $(this).data('form').submit();
         });
 
         $(document).ready(function () {

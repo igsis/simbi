@@ -83,9 +83,7 @@ class EquipamentoController extends Controller
             ]);
 
             $sigla = new EquipamentoSigla;
-            $sigla->sigla = $request->sigla;
-            $sigla->descricao = $request->descricao;
-            $sigla->roteiro = $request->roteiro;
+            $sigla->fill($request->only(['sigla', 'descricao', 'roteiro']));
             $sigla->save();
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message',
