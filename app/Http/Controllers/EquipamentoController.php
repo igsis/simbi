@@ -9,6 +9,9 @@ use Simbi\Models\EquipamentoSigla;
 use Simbi\Models\TipoServico;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\Secretaria;
+use Simbi\Models\Macrorregiao;
+use Simbi\Models\Regiao;
+use Simbi\Models\Regional;
 
 class EquipamentoController extends Controller
 {
@@ -39,12 +42,19 @@ class EquipamentoController extends Controller
         $siglas = EquipamentoSigla::orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $secretarias = Secretaria::orderBy('descricao')->get();
-        return view('equipamentos.cadastro', 
+        $macrorregioes = Macrorregiao::orderBy('descricao')->get();
+        $regioes = Regiao::orderBy('descricao')->get();
+        $regionais = Regional::orderBy('descricao')->get();
+
+        return view('equipamentos.cadastro',
             compact(
                 'tipoServicos',
                 'siglas',
                 'secretarias',
-                'subordinacoesAdministrativas'
+                'subordinacoesAdministrativas',
+                'macrorregioes',
+                'regioes',
+                'regionais'
             )
         );
     }
@@ -73,43 +83,36 @@ class EquipamentoController extends Controller
         }
         
         elseif ($request->has('novaSigla')){
-            $this->validate($request, [
-                'sigla'=>'required|max:6',
-                'descricao'=>'required',
-                'roteiro'=>'required'
-            ]);
+            $data = $this->validate($request, [
+                        'sigla'=>'required|max:6',
+                        'descricao'=>'required',
+                        'roteiro'=>'required'
+                    ]);
 
-            $sigla = new EquipamentoSigla;
-            $sigla->fill($request->only(['sigla', 'descricao', 'roteiro']));
-            $sigla->save();
+            EquipamentoSigla::create($data);
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message',
              'Sigla do Equipamento inserida com sucesso!');
         }
 
         elseif ($request->has('novaSecretaria')) {
-            $this->validate($request, [
-                'sigla'=>'required|max:6',
-                'descricao'=>'required'
-            ]);
+                $data = $this->validate($request, [
+                            'sigla'=>'required|max:6',
+                            'descricao'=>'required'
+                        ]);
 
-            $secretaria = new Secretaria;
-            $secretaria->sigla = $request->sigla;
-            $secretaria->descricao = $request->descricao;
-            $secretaria->save();
+            Secretaria::create($data);
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message',
                 'Secretaria inserida com sucesso');
         }
 
         elseif ($request->has('novaSubordinacaoAdministrativa')) {
-            $this->validate($request, [
-                'descricao'=>'required'
-            ]);
+            $data = $this->validate($request, [
+                        'descricao'=>'required'
+                    ]);
 
-            $subAdministrativa = new SubordinacaoAdministrativa;
-            $subAdministrativa->descricao = $request->descricao;
-            $subAdministrativa->save();
+            SubordinacaoAdministrativa::create($data);
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message', 
                 'Subordinacao Administrativa inserida com sucesso');
@@ -118,6 +121,7 @@ class EquipamentoController extends Controller
         else{
             // Metodo que grava o novo equipamento
             $this->validate($request, [
+                //Para Tabela Equipamento
                 'nome'=>'required',
                 'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
@@ -125,29 +129,51 @@ class EquipamentoController extends Controller
                 'subordinacaoAdministrativa'=>'required',
                 'tematico'=>'nullable',
                 'nomeTematica'=>'nullable',
-                // 'endereco',
                 'telefone'=>'nullable|max:15',
-                // 'funcionamento',
                 'telecentro'=>'required',
                 'nucleobraile'=>'required',
-                'acervoespecializado'=>'required'
+                'acervoespecializado'=>'required',
+
+                //Para Tabela Endereço
+                'cep'=>'required',
+                'logradouro'=>'nullable',
+                'bairro'=>'nullable',
+                'numero'=>'required|numeric',
+                'complemento'=>'nullable',
+                'cidade'=>'nullable',
+                'uf'=>'nullable|max:2'
             ]);
 
-            $equipamento->nome = $request->nome;
-            $equipamento->idTipoServico = $request->tipoServico;
-            $equipamento->idSigla = $request->equipamentoSigla;
-            $equipamento->idSecretaria = $request->identificacaoSecretaria;
-            $equipamento->idSubordinacaoAdministrativa = $request->subordinacaoAdministrativa;
-            $equipamento->tematico = $request->tematico;
-            $equipamento->nomeTematica = $request->nomeTematica;
-            $equipamento->telefone = $request->telefone;
-            $equipamento->telecentro = $request->telecentro;
-            $equipamento->acervoEspecializado = $request->acervoespecializado;
-            $equipamento->nucleoBraile = $request->nucleobraile;
+            $dataEquip = $request->only([
+                            'nome',
+                            'tipoServico',
+                            'equipamentoSigla',
+                            'identificacaoSecretaria',
+                            'subordinacaoAdministrativa',
+                            'tematico',
+                            'nomeTematica',
+                            'telefone',
+                            'telecentro',
+                            'nucleobraile',
+                            'acervoespecializado'
+                        ]);
 
-            $equipamento->save();
+            $dataEnd = $request->only([
+                            'cep',
+                            'logradouro',
+                            'bairro',
+                            'numero',
+                            'complemento',
+                            'cidade',
+                            'uf'
+                        ]);
+
+            $equipamento->create($dataEquip);
+            $equipamento->endereco()->create($dataEnd);
+
         }
-        return redirect()->route('endereco.cadastro');
+        return redirect()->route('equipamentos.index')->with('flash_message',
+            'Equipamento inserida com sucesso');
     }
 
     /**

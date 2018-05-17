@@ -12,8 +12,8 @@ class Equipamento extends Model
 
 	protected $fillable = [
 		'nome',
-        'idTipoServico',
-        'idEquipamentoSigla',
+        'tipoServico',
+        'equipamentoSigla',
         'identificacaoSecretaria',
         'subordinaçãoAdministrativa',
         'tematico',
@@ -33,4 +33,9 @@ class Equipamento extends Model
 	{
 		$this->hasOne(EquipamentoSigla::class);
 	}
+
+    public function tipoServico()
+    {
+        $this->hasOne(TipoServico::class);
+    }
 }
