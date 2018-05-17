@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Equipamento extends Model
 {
 	public $timestamps = false;
-	protected $primaryKey = 'idEquipamento';
 
 	protected $fillable = [
 		'nome',
@@ -25,11 +24,11 @@ class Equipamento extends Model
 
 	public function endereco()
 	{
-		$this->hasOne('Simbi\Endereco', 'idEquipamento', 'idEquipamento');
+		$this->hasOne(Endereco::class, 'idEquipamento', 'idEquipamento');
 	}
 
-	public function endereco()
+	public function sigla()
 	{
-		$this->hasOne('Simbi\EquipamentoSigla');
+		$this->hasOne(EquipamentoSigla::class);
 	}
 }

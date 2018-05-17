@@ -33,7 +33,7 @@
 		<div class="row">
 			<div class="form-group col-md-offset-3 col-md-3">
 				<label for="cidade">Cidade</label>
-				<input type="text" class="form-control" name="cidade" id="cidade" placeholder="São João">
+				<input type="text" class="form-control" name="cidade" id="cidade">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="uf">UF</label>

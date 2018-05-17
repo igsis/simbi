@@ -41,12 +41,12 @@ class EnderecoController extends Controller
     public function store(Request $request)
     {
         $endereco = new Endereco;
-        $this->validate($request[
+        $this->validate($request, [
             'cep'=>'required',
             'logradouro'=>'required',
             'bairro'=>'required',
             'numero'=>'required',
-            'complemento',
+            'complemento'=>'nullable',
             'cidade'=>'required',
             'uf'=>'max:2',
             'macrorregiao'=>'required',
@@ -55,7 +55,7 @@ class EnderecoController extends Controller
             'subprefeitura'=>'required',
             'distrito'=>'required'
         ]);
-        $endereco->equipamento()->
+        $endereco->equipamento();
     }
 
     /**

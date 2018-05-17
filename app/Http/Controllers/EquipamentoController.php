@@ -147,7 +147,7 @@ class EquipamentoController extends Controller
 
             $equipamento->save();
         }
-        return redirect()->route('equipamentos.index');
+        return redirect()->route('endereco.cadastro');
     }
 
     /**
