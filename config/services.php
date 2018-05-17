@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Simbi\User::class,
+        'model' => \Simbi\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

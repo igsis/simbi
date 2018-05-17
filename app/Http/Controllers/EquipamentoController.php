@@ -4,11 +4,11 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Simbi\Equipamento;
-use Simbi\EquipamentoSigla;
-use Simbi\TipoServico;
-use Simbi\SubordinacaoAdministrativa;
-use Simbi\Secretaria;
+use Simbi\Models\Equipamento;
+use Simbi\Models\EquipamentoSigla;
+use Simbi\Models\TipoServico;
+use Simbi\Models\SubordinacaoAdministrativa;
+use Simbi\Models\Secretaria;
 
 class EquipamentoController extends Controller
 {

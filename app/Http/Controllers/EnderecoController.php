@@ -5,11 +5,11 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 use Simbi\Http\Controllers\Controller;
 
-use Simbi\Endereco;
-use Simbi\Macrorregiao;
-use Simbi\Regiao;
-use Simbi\Regional;
-use Simbi\Equipamento;
+use Simbi\Models\Endereco;
+use Simbi\Models\Macrorregiao;
+use Simbi\Models\Regiao;
+use Simbi\Models\Regional;
+use Simbi\Models\Equipamento;
 
 class EnderecoController extends Controller
 {

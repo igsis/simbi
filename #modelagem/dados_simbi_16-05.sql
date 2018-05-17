@@ -55,12 +55,12 @@ DELETE FROM `model_has_permissions`;
 DELETE FROM `model_has_roles`;
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
 INSERT INTO `model_has_roles` (`role_id`, `model_id`, `model_type`) VALUES
-	(1, 1, 'Simbi\\User'),
-	(1, 4, 'Simbi\\User'),
-	(1, 5, 'Simbi\\User'),
-	(2, 2, 'Simbi\\User'),
-	(3, 3, 'Simbi\\User'),
-	(3, 6, 'Simbi\\User');
+	(1, 1, 'Simbi\\Models\\User'),
+	(1, 4, 'Simbi\\Models\\User'),
+	(1, 5, 'Simbi\\Models\\User'),
+	(2, 2, 'Simbi\\Models\\User'),
+	(3, 3, 'Simbi\\Models\\User'),
+	(3, 6, 'Simbi\\Models\\User');
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.password_resets: ~1 rows (aproximadamente)

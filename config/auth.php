@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Simbi\User::class,
+            'model' => \Simbi\Models\User::class,
         ],
 
         // 'users' => [

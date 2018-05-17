@@ -4,7 +4,7 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Simbi\User;
+use Simbi\Models\User;
 use Auth;
 
 use Spatie\Permission\Models\Role;

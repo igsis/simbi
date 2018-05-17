@@ -1,6 +1,6 @@
 <?php
 
-namespace Simbi;
+namespace Simbi\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -36,6 +36,6 @@ class User extends Authenticatable
 
     public function endereco()
     {
-        $this->hasOne('Simbi\Endereco');
+        $this->hasOne('Simbi\Models\Endereco');
     }
 }

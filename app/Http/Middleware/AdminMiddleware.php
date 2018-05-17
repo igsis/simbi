@@ -4,7 +4,7 @@ namespace Simbi\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Simbi\User;
+use Simbi\Models\User;
 
 class AdminMiddleware
 {
