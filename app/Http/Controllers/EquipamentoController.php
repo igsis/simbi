@@ -70,13 +70,11 @@ class EquipamentoController extends Controller
         $equipamento = new Equipamento;
 
         if($request->has('novoServico')){
-            $this->validate($request, [
-                'descricao'=>'required'
-            ]);
+            $data = $this->validate($request, [
+                        'descricao'=>'required'
+                    ]);
             
-            $tipoServico = new TipoServico;
-            $tipoServico->descricao = $request->descricao;
-            $tipoServico->save();
+            TipoServico::create($data);
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message',
              'Tipo de serviço inserido com sucesso!');
