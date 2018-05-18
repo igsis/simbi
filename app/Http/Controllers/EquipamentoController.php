@@ -4,6 +4,7 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoSigla;
 use Simbi\Models\TipoServico;
@@ -12,6 +13,7 @@ use Simbi\Models\Secretaria;
 use Simbi\Models\Macrorregiao;
 use Simbi\Models\Regiao;
 use Simbi\Models\Regional;
+use Simbi\Models\Status;
 
 class EquipamentoController extends Controller
 {
@@ -27,7 +29,7 @@ class EquipamentoController extends Controller
      */
     public function index()
     {
-        $equipamentos = Equipamento::where('idStatus', '=', 1)->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', 1)->orderBy('nome')->paginate(10);
         return view('equipamentos.index')->with('equipamentos', $equipamentos);
     }
 
@@ -45,6 +47,7 @@ class EquipamentoController extends Controller
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
+        $status = Status::orderBy('descricao')->get();
 
         return view('equipamentos.cadastro',
             compact(
@@ -54,7 +57,8 @@ class EquipamentoController extends Controller
                 'subordinacoesAdministrativas',
                 'macrorregioes',
                 'regioes',
-                'regionais'
+                'regionais',
+                'status'
             )
         );
     }
@@ -67,8 +71,6 @@ class EquipamentoController extends Controller
      */
     public function store(Request $request)
     {
-        $equipamento = new Equipamento;
-
         if($request->has('novoServico')){
             $data = $this->validate($request, [
                         'descricao'=>'required'
@@ -129,8 +131,9 @@ class EquipamentoController extends Controller
                 'nomeTematica'=>'nullable',
                 'telefone'=>'nullable|max:15',
                 'telecentro'=>'required',
-                'nucleobraile'=>'required',
                 'acervoespecializado'=>'required',
+                'nucleobraile'=>'required',
+                'status'=>'required',
 
                 //Para Tabela Endereço
                 'cep'=>'required',
@@ -139,39 +142,46 @@ class EquipamentoController extends Controller
                 'numero'=>'required|numeric',
                 'complemento'=>'nullable',
                 'cidade'=>'nullable',
-                'uf'=>'nullable|max:2'
+                'uf'=>'nullable|max:2',
+                'subprefeitura'=>'nullable',
+                'distrito'=>'nullable',
+                'macrorregiao'=>'nullable',
+                'regiao'=>'nullable',
+                'regional'=>'nullable'
             ]);
 
-            $dataEquip = $request->only([
-                            'nome',
-                            'tipoServico',
-                            'equipamentoSigla',
-                            'identificacaoSecretaria',
-                            'subordinacaoAdministrativa',
-                            'tematico',
-                            'nomeTematica',
-                            'telefone',
-                            'telecentro',
-                            'nucleobraile',
-                            'acervoespecializado'
-                        ]);
-
-            $dataEnd = $request->only([
-                            'cep',
-                            'logradouro',
-                            'bairro',
-                            'numero',
-                            'complemento',
-                            'cidade',
-                            'uf'
-                        ]);
-
-            $equipamento->create($dataEquip);
-            $equipamento->endereco()->create($dataEnd);
-
+            $endereco = new Endereco();
+            $endereco->create([
+                        'cep' => $request->cep,
+                        'logradouro' => $request->logradouro,
+                        'numero' => $request->numero,
+                        'complemento' => $request->complemento,
+                        'bairro' => $request->bairro,
+                        'cidade' => $request->cidade,
+                        'estado' => $request->uf,
+                        'idSubprefeitura' => $request->subprefeitura,
+                        'idDistrito' => $request->distrito,
+                        'idMacrorregiao' => $request->macrorregiao,
+                        'idRegiao' => $request->regiao,
+                        'idRegional' => $request->regional
+                    ])
+            ->equipamento()->create([
+                'nome' => $request->nome,
+                'idTipoServico' => $request->tipoServico,
+                'idSigla' => $request->equipamentoSigla,
+                'idSecretaria' => $request->identificacaoSecretaria,
+                'idSubordinacaoAdministrativa' => $request->subordinacaoAdministrativa,
+                'tematico' => $request->tematico,
+                'nomeTematica' => $request->nomeTematica,
+                'telefone' => $request->telefone,
+                'telecentro' => $request->telecentro,
+                'acervoEspecializado' => $request->acervoespecializado,
+                'nucleoBraile' => $request->nucleobraile,
+                'idStatus' => $request->status
+            ]);
         }
         return redirect()->route('equipamentos.index')->with('flash_message',
-            'Equipamento inserida com sucesso');
+            'Equipamento inserido com sucesso');
     }
 
     /**

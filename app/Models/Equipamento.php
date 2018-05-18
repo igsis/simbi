@@ -12,30 +12,36 @@ class Equipamento extends Model
 
 	protected $fillable = [
 		'nome',
-        'tipoServico',
-        'equipamentoSigla',
-        'identificacaoSecretaria',
-        'subordinaçãoAdministrativa',
+        'idTipoServico',
+        'idSigla',
+        'idSecretaria',
+        'idSubordinacaoAdministrativa',
         'tematico',
         'nomeTematica',
         'telefone',
         'telecentro',
+        'acervoespecializado',
         'nucleobraile',
-        'acervoespecializado'
+        'idStatus'
 	];
 
 	public function endereco()
 	{
-		$this->hasOne(Endereco::class, 'idEquipamento', 'idEquipamento');
+		return $this->belongsTo(Endereco::class);
 	}
 
 	public function sigla()
 	{
-		$this->hasOne(EquipamentoSigla::class);
+		return $this->hasOne(EquipamentoSigla::class);
 	}
 
     public function tipoServico()
     {
-        $this->hasOne(TipoServico::class);
+        return $this->hasOne(TipoServico::class);
+    }
+
+    public function status()
+    {
+        return $this->hasOne(Status::class, null, idStatus);
     }
 }

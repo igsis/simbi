@@ -145,8 +145,7 @@
 					@endforeach
 				</select>
 			</div>
-			<div class="form-group col-md-2"
-			>
+			<div class="form-group col-md-2">
 				<label for="regional">Regional</label>
 				<select class="form-control" name="regional" id="regional">
 					<option value="">Selecione uma Opção</option>
@@ -206,7 +205,7 @@
 		</div> --}}
 
 		<div class="row" style="padding-top: 10px">
-			<div class="form-group col-md-offset-3 col-md-2">
+			<div class="form-group col-md-offset-2 col-md-2">
 				<label for="telecentro">Possui Telecentro?</label>
 				<select class="form-control" name="telecentro" id="telecentro">
 					<option value="0">Não</option>
@@ -225,6 +224,15 @@
 				<select class="form-control" name="acervoespecializado" id="acervoespecializado">
 					<option value="0">Não</option>
 					<option value="1">Sim</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2">
+				<label for="status">Status do Equipamento</label>
+				<select class="form-control" name="status" id="status">
+					<option value="">Selecione uma Opção</option>
+					@foreach ($status as $stats)
+						<option value="{{$stats->idStatus}}">{{$stats->descricao}}</option>
+					@endforeach
 				</select>
 			</div>
 		</div>

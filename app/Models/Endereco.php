@@ -6,9 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Endereco extends Model
 {
+    public $timestamps = false;
+
+    public $fillable = [
+        'cep',
+        'logradouro',
+        'numero',
+        'complemento',
+        'bairro',
+        'cidade',
+        'estado',
+        'idSubprefeitura',
+        'idDistrito',
+        'idMacrorregiao',
+        'idRegiao',
+        'idRegional'
+    ];
+
     public function equipamento()
     {
-    	return $this->belongsTo(Equipamento::class, 'idEquipamento', 'idEndereco');
+    	return $this->hasOne(Equipamento::class, 'idEndereco');
     }
 
     public function user()
