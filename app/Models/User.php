@@ -5,6 +5,7 @@ namespace Simbi\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Simbi\Models\PerguntaSeguranca;
 
 class User extends Authenticatable
 {
@@ -37,5 +38,11 @@ class User extends Authenticatable
     public function endereco()
     {
         $this->hasOne('Simbi\Models\Endereco');
+    }
+
+    // Cria o relacionamento entre Users & Historics
+    public function perguntaSeguranca()
+    {
+        return $this->hasMany(PerguntaSeguranca::class);
     }
 }
