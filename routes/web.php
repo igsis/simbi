@@ -21,3 +21,8 @@ Route::resource('usuarios', 'UserController', [
 Route::resource('cargos', 'RoleController');
 
 Route::resource('permissoes', 'PermissionController');
+
+
+
+
+$this->get('teste', 'UserController@testePergunta');

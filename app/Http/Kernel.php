@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'isAdmin' => \Simbi\Http\Middleware\AdminMiddleware::class,
         'isCoord' => \Simbi\Http\Middleware\CoordMiddleware::class,
         'isFunc' => \Simbi\Http\Middleware\FuncMiddleware::class,
+        'primeiroLogin' => \Simbi\Http\Middleware\LoginMiddleware::class,
     ];
 }

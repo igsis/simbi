@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','idPerguntaSeguranca','respostaSeguranca'
     ];
 
     /**
@@ -43,6 +43,6 @@ class User extends Authenticatable
     // Cria o relacionamento entre Users & Historics
     public function perguntaSeguranca()
     {
-        return $this->hasMany(PerguntaSeguranca::class);
+        return $this->belongsTo(PerguntaSeguranca::class);
     }
 }

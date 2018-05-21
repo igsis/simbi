@@ -169,4 +169,8 @@ class UserController extends Controller
             ->with('flash_message',
              'Usuario Excluido com Sucesso.');
     }
+    public function testePergunta()
+    {
+        return view('auth.pergunta_resposta');
+    }
 }
