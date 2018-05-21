@@ -21,7 +21,7 @@
 			@foreach($equipamentos as $equipamento)
 				<tr>
 					<td>{{$equipamento->nome}}</td>
-					<td>{{$equipamento->idSiglaEquipamento}}</td>
+					<td>{{$equipamento->sigla()->descricao}}</td>
 					<td>{{$equipamento->telefone}}</td>
 					<td>{{$equipamento->idStatusEquipamento}}</td>
 					<td>

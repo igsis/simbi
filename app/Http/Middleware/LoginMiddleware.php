@@ -16,11 +16,11 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $idPergunta = Auth::user()->idPerguntaSeguranca;
-        if (!($idPergunta))
+        if (Auth::attempt(['name' => $request->name, 'password => $request']))
         {
-            return view('auth.pergunta_resposta');
+            return $next($request);
+
         }
-        return $next($request);
+        return view('auth.pergunta_resposta');
     }
 }

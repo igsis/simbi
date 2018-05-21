@@ -7,7 +7,7 @@
 
 	<form method="POST" action="{{ route('equipamentos.index') }}">
 		{{ csrf_field() }}
-		
+
 		<div class="row">
 			<div class="form-group">
 				<label for="nome">Nome do Equipamento</label>
@@ -72,7 +72,7 @@
 		<div class="row" style="padding-top: 10px;">
 			<div class="form-group col-md-3" style="padding-left: 0px">
 				<label>Equipamento Tematico?</label><br>
-				
+
 				<input type="radio" name="tematico" value="0" checked>
 				<label for=tematico style="padding:0 10px 0 5px;">Não</label>
 
@@ -99,11 +99,11 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label for="logradouro">Logradouro</label>
-				<input type="text" class="form-control" name="logradouro" id="logradouro">
+				<input type="text" class="form-control" name="logradouro" id="logradouro" readonly>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="bairro">Bairro</label>
-				<input type="text" class="form-control" name="bairro" id="bairro">
+				<input type="text" class="form-control" name="bairro" id="bairro" readonly>
 			</div>
 			<div class="form-group col-md-2">
 				<label for="numero">Número</label>
@@ -118,11 +118,11 @@
 		<div class="row">
 			<div class="form-group col-md-offset-3 col-md-3">
 				<label for="cidade">Cidade</label>
-				<input type="text" class="form-control" name="cidade" id="cidade">
+				<input type="text" class="form-control" name="cidade" id="cidade" readonly>
 			</div>
 			<div class="form-group col-md-3">
 				<label for="uf">UF</label>
-				<input type="text" class="form-control" name="uf" id="uf">
+				<input type="text" class="form-control" name="uf" id="uf" readonly>
 			</div>
 		</div>
 
@@ -189,14 +189,14 @@
 					<input type="checkbox" name="quinta" id="diasemana04" value="1" /><label style="padding:0 10px 0 5px;"> Quinta</label>
 					<input type="checkbox" name="sexta" id="diasemana05" value="1" /><label  style="padding:0 10px 0 5px;"> Sexta</label>
 					<input type="checkbox" name="sabado" id="diasemana06" value="1" /><label style="padding:0 10px 0 5px;"> Sábado</label>
-				</div>                     
+				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="form-group col-md-offset-3 col-md-3">
 				<label for="horarioAbertura">Horario de Abertura</label>
-				<input type="text" class="form-control" name="horarioAbertura" id="horarioAbertura" data-mask="00:00">				
+				<input type="text" class="form-control" name="horarioAbertura" id="horarioAbertura" data-mask="00:00">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="horarioFechamento">Horario de Fechamento</label>
@@ -244,19 +244,82 @@
 </div>
 @endsection
 @section('scripts_adicionais')
-	<script type="text/javascript">
-		$(document).ready(function()
-		{
-			$('input:radio[name="tematico"]').change(function(e)
+    //Script habilita campo Nome Tematica
+        <script type="text/javascript">
+            $(document).ready(function()
             {
-                if ($(this).val() == 0) 
+                $('input:radio[name="tematico"]').change(function(e)
                 {
-                	$("#nomeTematica").attr('disabled', true);
-                } else
-                {
-                	$("#nomeTematica").attr('disabled', false);
+                    if ($(this).val() == 0)
+                    {
+                        $("#nomeTematica").attr('disabled', true);
+                    } else
+                    {
+                        $("#nomeTematica").attr('disabled', false);
+                    }
+                });
+            });
+        </script>
+
+    //Script CEP
+    <script type="text/javascript" >
+        $(document).ready(function() {
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#logradouro").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+            }
+
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function () {
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if (validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#logradouro").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+                        $("#uf").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#logradouro").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+                            }
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    }
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
                 }
-			});
-		});
-	</script>
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
+    </script>
 @endsection

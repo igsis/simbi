@@ -86,7 +86,7 @@ class EquipamentoController extends Controller
             $data = $this->validate($request, [
                         'sigla'=>'required|max:6',
                         'descricao'=>'required',
-                        'roteiro'=>'required'
+                        'roteiro'=>'nullable'
                     ]);
 
             EquipamentoSigla::create($data);

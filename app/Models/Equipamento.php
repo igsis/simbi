@@ -32,16 +32,21 @@ class Equipamento extends Model
 
 	public function sigla()
 	{
-		return $this->hasOne(EquipamentoSigla::class);
+		return $this->belongsTo(EquipamentoSigla::class, null, 'idEquipamentoSigla');
 	}
 
     public function tipoServico()
     {
-        return $this->hasOne(TipoServico::class);
+        return $this->belongsTo(TipoServico::class);
     }
 
     public function status()
     {
-        return $this->hasOne(Status::class, null, idStatus);
+        return $this->belongsTo(Status::class);
+    }
+
+    public function users()
+    {
+        $this->belongsToMany(User::class);
     }
 }

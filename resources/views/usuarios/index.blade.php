@@ -11,7 +11,7 @@
 			<tr>
 				<th>Nome</th>
 				<th>Email</th>
-				<th>Data/Hora Criação</th>
+				<th>Equipamento Vinculado</th>
 				<th>Cargo</th>
 				<th>Operações</th>
 			</tr>
@@ -21,7 +21,7 @@
 				<tr>
 					<td>{{ $user->name }}</td>
 					<td>{{ $user->email }}</td>
-					<td>{{ $user->created_at->format('d/m/Y - H:i') }}</td>
+					<td>{{ $user->equipamentos()->pluck('nome') }}</td>
 					<td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>
 					<td>
 						<a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
