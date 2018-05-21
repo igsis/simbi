@@ -79,6 +79,16 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 	('admin@teste.com', '$2y$10$GKOT81lQXh3QYLBDAZ2DfOsh1cJsYPqRJrmnHBWni/WvdA0JUVu2y', '2018-05-14 12:44:58');
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 
+-- Copiando dados para a tabela simbi.password_resets: ~4 rows (aproximadamente)
+DELETE FROM `pergunta_segurancas`;
+/*!40000 ALTER TABLE `pergunta_segurancas` DISABLE KEYS */;
+INSERT INTO `pergunta_segurancas` (`id`, `perguntaSeguranca`) VALUES
+	(1, 'Qual a sua cor favorita?'),
+	(2, 'Qual o nome do seu primeiro animal?'),
+	(3, 'Qual o nome do seu primeiro professor?'),
+	(4, 'Qual o nome do seu melhor amigo de infância?');
+/*!40000 ALTER TABLE `pergunta_segurancas` ENABLE KEYS */;
+
 -- Copiando dados para a tabela simbi.permissions: ~3 rows (aproximadamente)
 DELETE FROM `permissions`;
 /*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
