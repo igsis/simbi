@@ -16,7 +16,7 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $idPergunta =  Auth::user()->idPerguntaSeguranca;
+        $idPergunta = Auth::user()->idPerguntaSeguranca;
         if (!($idPergunta))
         {
             return view('auth.pergunta_resposta');

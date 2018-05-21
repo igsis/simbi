@@ -7,8 +7,8 @@
 	    <hr>
 
 	    <form method="POST" action="">
-	    	
-	    	<input type="hidden" name="_method" value="">
+	    	{{ csrf_field() }}
+	    	<input type="hidden" name="_method" value="PUT">
 
 		    <div class="form-group">
 		    	<label for="name" class="">Selecione a Pergunta</label>
