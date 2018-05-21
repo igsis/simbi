@@ -39,6 +39,18 @@ DELETE FROM `equipamento_siglas`;
 -- Copiando dados para a tabela simbi.macrorregiao: ~0 rows (aproximadamente)
 DELETE FROM `macrorregiao`;
 /*!40000 ALTER TABLE `macrorregiao` DISABLE KEYS */;
+INSERT INTO `macrorregiao` (`idMacrorregiao`, `descricao`) VALUES
+	(1, 'Centro'),
+	(2, 'Noroeste'),
+	(3, 'Norte'),
+	(4, 'Leste 1'),
+	(5, 'Leste 2'),
+	(6, 'Leste 3'),
+	(7, 'Leste 4'),
+	(8, 'Sul 1'),
+	(9, 'Sul 2'),
+	(10, 'Sudoeste'),
+	(11, 'Sudeste');
 /*!40000 ALTER TABLE `macrorregiao` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.migrations: ~0 rows (aproximadamente)
@@ -56,11 +68,8 @@ DELETE FROM `model_has_roles`;
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
 INSERT INTO `model_has_roles` (`role_id`, `model_id`, `model_type`) VALUES
 	(1, 1, 'Simbi\\Models\\User'),
-	(1, 4, 'Simbi\\Models\\User'),
-	(1, 5, 'Simbi\\Models\\User'),
 	(2, 2, 'Simbi\\Models\\User'),
-	(3, 3, 'Simbi\\Models\\User'),
-	(3, 6, 'Simbi\\Models\\User');
+	(3, 3, 'Simbi\\Models\\User');
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.password_resets: ~1 rows (aproximadamente)
@@ -82,11 +91,24 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 -- Copiando dados para a tabela simbi.regiao: ~0 rows (aproximadamente)
 DELETE FROM `regiao`;
 /*!40000 ALTER TABLE `regiao` DISABLE KEYS */;
+INSERT INTO `regiao` (`idRegiao`, `descricao`) VALUES
+	(1, 'Norte'),
+	(2, 'Sul'),
+	(3, 'Leste'),
+	(4, 'Oeste'),
+	(5, 'Centro');
 /*!40000 ALTER TABLE `regiao` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.regional: ~0 rows (aproximadamente)
 DELETE FROM `regional`;
 /*!40000 ALTER TABLE `regional` DISABLE KEYS */;
+INSERT INTO `regional` (`idRegional`, `descricao`) VALUES
+	(1, 'Norte'),
+	(2, 'Sul'),
+	(3, 'Leste 1'),
+	(4, 'Leste 2'),
+	(5, 'Oeste'),
+	(6, 'Centro');
 /*!40000 ALTER TABLE `regional` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.roles: ~3 rows (aproximadamente)
@@ -118,6 +140,10 @@ DELETE FROM `secretarias`;
 -- Copiando dados para a tabela simbi.status: ~0 rows (aproximadamente)
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` (`idStatus`, `descricao`) VALUES
+	(1, 'Ativo'),
+	(2, 'Inativo'),
+	(3, 'Fechado');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.subordinacao_administrativas: ~0 rows (aproximadamente)
@@ -133,6 +159,14 @@ DELETE FROM `subprefeituras`;
 -- Copiando dados para a tabela simbi.tipo_servicos: ~0 rows (aproximadamente)
 DELETE FROM `tipo_servicos`;
 /*!40000 ALTER TABLE `tipo_servicos` DISABLE KEYS */;
+INSERT INTO `tipo_servicos` (`idTipoServico`, `descricao`) VALUES
+	(1, 'Bibliotecas CSMB'),
+	(2, 'Bosque da Leitura'),
+	(3, 'Ponto de Leitura'),
+	(4, 'Ônibus Biblioteca'),
+	(5, 'Caixa'),
+	(6, 'Estante'),
+	(7, 'Feira de Troca');
 /*!40000 ALTER TABLE `tipo_servicos` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.users: ~4 rows (aproximadamente)
@@ -141,8 +175,7 @@ DELETE FROM `users`;
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `publicado`) VALUES
 	(1, 'Admin', 'admin@teste.com', '$2y$10$QTa2XVi7nGlNvIyZiF7IGutDOPMQTwBm.3vpKB61Ly77oLnJ.rXyu', 'ftruU1O8HmmfGW11XhoQkAmZmPFPauSzOVlpGAvtkeDeN2F6A4b720xNZLb2', '2018-05-11 15:59:01', '2018-05-11 15:59:01', 1),
 	(2, 'Coordenador', 'coordenador@teste.com.br', '$2y$10$7bQhXdsh5jdE6V6UuA9geOEg4vbMrRo/rFeEY.riwU5nDaws9tR9y', '0P9HnMF5YjfeoKLejOd6uDc4N4jTDfhiS0e9FFyIkJW1ukM35EPoQVWZnYTg', '2018-05-14 15:06:45', '2018-05-14 15:06:45', 1),
-	(5, 'Diego', 'diego.vdossantos@gmail.com', '$2y$10$97xEsBtQKvPK3fXh1PKXquFI4QOJVIVz8k1LojUplaGDSnviMdFTa', 'ES5wfB2LbcV0SrVRHKdJQpMihL2igM8h590SiStSPiyUV4Ti1W5pFd5RCBYn', '2018-05-14 15:37:48', '2018-05-15 15:43:54', 1),
-	(6, 'Funcionario', 'func@teste.com.br', '$2y$10$AW7Mggvjj/HArXAjpyhAN.Z3ehFnVOkBxVofknq1iuAHoR667.ElC', 'kIoobYgkEjLcxSJVqzYvdadvgkfoLum7gOpMpr0eedJjZx3m94mABws2kMai', '2018-05-14 15:40:14', '2018-05-14 19:40:48', 1);
+	(3, 'Funcionario', 'func@teste.com.br', '$2y$10$AW7Mggvjj/HArXAjpyhAN.Z3ehFnVOkBxVofknq1iuAHoR667.ElC', 'kIoobYgkEjLcxSJVqzYvdadvgkfoLum7gOpMpr0eedJjZx3m94mABws2kMai', '2018-05-14 15:40:14', '2018-05-14 19:40:48', 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
