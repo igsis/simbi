@@ -20,7 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'idPerguntaSeguranca',
+        'perguntaSeguranca_id',
         'respostaSeguranca'
     ];
 
@@ -43,8 +43,8 @@ class User extends Authenticatable
         return $this->belongsTo(PerguntaSeguranca::class);
     }
 
-    public function equipamentos()
+    /*public function equipamentos()
     {
         return $this->belongsToMany(Equipamento::class);
-    }
+    }*/
 }

@@ -2,7 +2,12 @@
 
 @section ('conteudo')
 <div class="container">
-	<div style="text-align: center;"><h2>Cadastro de Equipamento</h2></div>
+	<div style="text-align: center;">
+        <h2>
+            Cadastro de Equipamento<br>
+            <small>Teste</small>
+        </h2>
+    </div>
 	<hr>
 
 	<form method="POST" action="{{ route('equipamentos.index') }}">
@@ -56,16 +61,16 @@
 
 		<div class="row">
 			<div class="col-md-3" style="padding-left: 0px">
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addServico">Adicionar Serviço</button>
+				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico">Adicionar Serviço</button>
 			</div>
 			<div class="col-md-3">
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSigla">Adicionar Sigla</button>
+				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla">Adicionar Sigla</button>
 			</div>
 			<div class="col-md-3">
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSecretaria">Adicionar Secretaria</button>
+				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria">Adicionar Secretaria</button>
 			</div>
 			<div class="col-md-3" style="padding-right: 0px">
-				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addSubAdmin">Adicionar Sub. Administrativa</button>
+				<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin">Adicionar Sub. Administrativa</button>
 			</div>
 		</div>
 
@@ -105,6 +110,7 @@
 				<label for="bairro">Bairro</label>
 				<input type="text" class="form-control" name="bairro" id="bairro" readonly>
 			</div>
+
 			<div class="form-group col-md-2">
 				<label for="numero">Número</label>
 				<input type="text" class="form-control" name="numero" id="numero">
@@ -116,45 +122,42 @@
 		</div>
 
 		<div class="row">
-			<div class="form-group col-md-offset-3 col-md-3">
+			<div class="form-group col-md-2" style="padding-left: 0px">
 				<label for="cidade">Cidade</label>
 				<input type="text" class="form-control" name="cidade" id="cidade" readonly>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-1">
 				<label for="uf">UF</label>
 				<input type="text" class="form-control" name="uf" id="uf" readonly>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="form-group col-md-offset-3 col-md-2">
-				<label for="macrorregiao">Macrorregião</label>
-				<select class="form-control" name="macrorregiao" id="macrorregiao">
-					<option value="">Selecione uma Opção</option>
-					@foreach ($macrorregioes as $macrorregiao)
-						<option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
-					@endforeach
-				</select>
-			</div>
-			<div class="form-group col-md-2">
-				<label for="regiao">Região</label>
-				<select class="form-control" name="regiao" id="regiao">
-					<option value="">Selecione uma Opção</option>
-					@foreach ($regioes as $regiao)
-						<option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
-					@endforeach
-				</select>
-			</div>
-			<div class="form-group col-md-2">
-				<label for="regional">Regional</label>
-				<select class="form-control" name="regional" id="regional">
-					<option value="">Selecione uma Opção</option>
-					@foreach ($regionais as $regional)
-						<option value="{{$regional->id}}">{{$regional->descricao}}</option>
-					@endforeach
-				</select>
-			</div>
-		</div>
+            <div class="form-group col-md-3">
+                <label for="macrorregiao">Macrorregião</label>
+                <select class="form-control" name="macrorregiao" id="macrorregiao">
+                    <option value="">Selecione uma Opção</option>
+                    @foreach ($macrorregioes as $macrorregiao)
+                        <option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="regiao">Região</label>
+                <select class="form-control" name="regiao" id="regiao">
+                    <option value="">Selecione uma Opção</option>
+                    @foreach ($regioes as $regiao)
+                        <option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="regional">Regional</label>
+                <select class="form-control" name="regional" id="regional">
+                    <option value="">Selecione uma Opção</option>
+                    @foreach ($regionais as $regional)
+                        <option value="{{$regional->id}}">{{$regional->descricao}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
 		<div class="row">
 			<div class="form-group col-md-offset-3 col-md-3">

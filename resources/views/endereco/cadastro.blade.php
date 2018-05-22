@@ -47,7 +47,7 @@
 				<select class="form-control" name="macrorregiao" id="macrorregiao">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($macrorregioes as $macrorregiao)
-						<option value="{{$macrorregiao->idMacrorregiao}}">{{$macrorregiao->descricao}}</option>
+						<option value="{{$macrorregiao->macrorregiao_id}}">{{$macrorregiao->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -56,7 +56,7 @@
 				<select class="form-control" name="regiao" id="regiao">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($regioes as $regiao)
-						<option value="{{$regiao->idRegiao}}">{{$regiao->descricao}}</option>
+						<option value="{{$regiao->regiao_id}}">{{$regiao->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -66,7 +66,7 @@
 				<select class="form-control" name="regional" id="regional">
 					<option value="">Selecione uma Opção</option>
 				@foreach ($regionais as $regional)
-					<option value="{{$regional->idRegional}}">{{$regional->descricao}}</option>
+					<option value="{{$regional->regional_id}}">{{$regional->descricao}}</option>
 				@endforeach
 				</select>
 			</div>

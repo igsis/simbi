@@ -21,7 +21,7 @@
 				<tr>
 					<td>{{ $user->name }}</td>
 					<td>{{ $user->email }}</td>
-					<td>{{ $user->equipamentos()->pluck('nome') }}</td>
+					<td>{{ $user->name }}</td> {{--TODO: Relacionamento Usuario / Equipamento--}}
 					<td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>
 					<td>
 						<a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>

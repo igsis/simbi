@@ -12,17 +12,17 @@ class Equipamento extends Model
 
 	protected $fillable = [
 		'nome',
-        'idTipoServico',
-        'idSigla',
-        'idSecretaria',
-        'idSubordinacaoAdministrativa',
+        'tipo_servico_id',
+        'equipamento_sigla_id',
+        'secretaria_id',
+        'subordinacao_administrativa_id',
         'tematico',
         'nomeTematica',
         'telefone',
         'telecentro',
         'acervoespecializado',
         'nucleobraile',
-        'idStatus'
+        'status_id'
 	];
 
 	public function endereco()
@@ -32,7 +32,7 @@ class Equipamento extends Model
 
 	public function equipamentoSigla()
 	{
-		return $this->belongsTo(EquipamentoSigla::class, 'idSigla');
+		return $this->belongsTo(EquipamentoSigla::class);
 	}
 
     public function tipoServico()
@@ -42,7 +42,7 @@ class Equipamento extends Model
 
     public function status()
     {
-        return $this->belongsTo(Status::class, 'idStatus');
+        return $this->belongsTo(Status::class);
     }
 
     public function users()

@@ -159,25 +159,25 @@ class EquipamentoController extends Controller
                         'bairro' => $request->bairro,
                         'cidade' => $request->cidade,
                         'estado' => $request->uf,
-                        'idSubprefeitura' => $request->subprefeitura,
-                        'idDistrito' => $request->distrito,
-                        'idMacrorregiao' => $request->macrorregiao,
-                        'idRegiao' => $request->regiao,
-                        'idRegional' => $request->regional
+                        'subprefeitura_id' => $request->subprefeitura,
+                        'distrito_id' => $request->distrito,
+                        'macrorregiao_id' => $request->macrorregiao,
+                        'regiao_id' => $request->regiao,
+                        'regional_id' => $request->regional
                     ])
             ->equipamento()->create([
                 'nome' => $request->nome,
-                'idTipoServico' => $request->tipoServico,
-                'idSigla' => $request->equipamentoSigla,
-                'idSecretaria' => $request->identificacaoSecretaria,
-                'idSubordinacaoAdministrativa' => $request->subordinacaoAdministrativa,
+                'tipo_servico_id' => $request->tipoServico,
+                'equipamento_sigla_id' => $request->equipamentoSigla,
+                'secretaria_id' => $request->identificacaoSecretaria,
+                'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
                 'tematico' => $request->tematico,
                 'nomeTematica' => $request->nomeTematica,
                 'telefone' => $request->telefone,
                 'telecentro' => $request->telecentro,
                 'acervoEspecializado' => $request->acervoespecializado,
                 'nucleoBraile' => $request->nucleobraile,
-                'idStatus' => $request->status
+                'status_id' => $request->status
             ]);
         }
         return redirect()->route('equipamentos.index')->with('flash_message',
@@ -192,7 +192,8 @@ class EquipamentoController extends Controller
      */
     public function show($id)
     {
-        return route('equipamentos.show');
+        $equipamento = Equipamento::findOrFail($id);
+        return view('equipamentos.show', compact('equipamento'));
     }
 
     /**
@@ -203,7 +204,26 @@ class EquipamentoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $equipamento = Equipamento::findOrFail($id);
+        $tipoServicos = TipoServico::orderBy('descricao')->get();
+        $siglas = EquipamentoSigla::orderBy('sigla')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        $secretarias = Secretaria::orderBy('descricao')->get();
+        $macrorregioes = Macrorregiao::orderBy('descricao')->get();
+        $regioes = Regiao::orderBy('descricao')->get();
+        $regionais = Regional::orderBy('descricao')->get();
+        $status = Status::orderBy('descricao')->get();
+        return view ('equipamentos.editar', compact(
+            'equipamento',
+            'tipoServicos',
+            'siglas',
+            'subordinacoesAdministrativas',
+            'secretarias',
+            'macrorregioes',
+            'regioes',
+            'regionais',
+            'status'
+        ));
     }
 
     /**

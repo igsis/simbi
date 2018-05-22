@@ -16,20 +16,20 @@ class Endereco extends Model
         'bairro',
         'cidade',
         'estado',
-        'idSubprefeitura',
-        'idDistrito',
-        'idMacrorregiao',
-        'idRegiao',
-        'idRegional'
+        'subprefeitura_id',
+        'distrito_id',
+        'macrorregiao_id',
+        'regiao_id',
+        'regional_id'
     ];
 
     public function equipamento()
     {
-    	return $this->hasOne(Equipamento::class, 'idEndereco');
+    	return $this->hasOne(Equipamento::class);
     }
 
     public function user()
     {
-    	return $this->belongsTo(User::class, 'idEndereco', 'idEndereco');
+    	return $this->belongsTo(User::class);
     }
 }
