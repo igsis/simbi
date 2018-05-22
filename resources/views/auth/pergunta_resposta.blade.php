@@ -13,7 +13,9 @@
 		    <div class="form-group">
 		    	<label for="name" class="">Selecione a Pergunta</label>
 		    	<select name="" id="" class="form-control">
-		    		{{-- <option value=""></option> --}}
+		    		@foreach($perguntas as $pergunta)
+		    			<option value="{{$pergunta->id}}">{{$pergunta->perguntaSeguranca}}</option>
+		    		@endforeach
 		    	</select>
 		    </div>
 		    <div class="form-group">

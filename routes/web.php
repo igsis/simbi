@@ -18,11 +18,15 @@ Route::resource('usuarios', 'UserController', [
 		'create' => 'usuarios.cadastro',
 ]]);
 
-Route::resource('cargos', 'RoleController');
+Route::group(['middleware' => 'auth'], function (){
 
-Route::resource('permissoes', 'PermissionController');
+	Route::get('seguranca', 'UserController@testePergunta');
 
+	Route::post('teste', 'UserController@testePergunta');
 
+	Route::group(['middleware' => 'primeiroLogin'], function (){
+		Route::get('teste', 'UserController@testePergunta');
+	});
 
+});
 
-$this->get('teste', 'UserController@testePergunta');

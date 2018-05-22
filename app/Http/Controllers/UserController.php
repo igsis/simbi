@@ -5,6 +5,7 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Simbi\Models\User;
+use Simbi\Models\PerguntaSeguranca;
 use Auth;
 
 use Spatie\Permission\Models\Role;
@@ -171,6 +172,7 @@ class UserController extends Controller
     }
     public function testePergunta()
     {
-        return view('auth.pergunta_resposta');
+        $perguntas = PerguntaSeguranca::all();
+        return view('auth.pergunta_resposta', compact('perguntas'));
     }
 }
