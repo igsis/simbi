@@ -14,4 +14,9 @@ class EquipamentoSigla extends Model
     	'descricao',
     	'roteiro'
     ];
+    
+    public function equipamento()
+    {
+        return $this->hasMany('Equipamento::class');
+    }
 }
