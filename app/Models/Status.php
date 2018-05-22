@@ -10,6 +10,6 @@ class Status extends Model
 
     public function equipamento()
     {
-        $this->belongsTo(Equipamento::class, 'idStatus', 'idStatus');
+        $this->hasMany(Equipamento::class);
     }
 }

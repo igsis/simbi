@@ -192,7 +192,7 @@ class EquipamentoController extends Controller
      */
     public function show($id)
     {
-        return redirect()->route('equipamentos.index');
+        return route('equipamentos.show');
     }
 
     /**

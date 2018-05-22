@@ -30,9 +30,9 @@ class Equipamento extends Model
 		return $this->belongsTo(Endereco::class);
 	}
 
-	public function sigla()
+	public function equipamentoSigla()
 	{
-		return $this->belongsTo(EquipamentoSigla::class, null, 'idEquipamentoSigla');
+		return $this->belongsTo(EquipamentoSigla::class, 'idSigla');
 	}
 
     public function tipoServico()
@@ -42,7 +42,7 @@ class Equipamento extends Model
 
     public function status()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'idStatus');
     }
 
     public function users()

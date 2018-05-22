@@ -17,6 +17,6 @@ class EquipamentoSigla extends Model
     
     public function equipamento()
     {
-        return $this->hasMany('Equipamento::class');
+        return $this->hasMany(Equipamento::class);
     }
 }

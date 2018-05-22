@@ -27,9 +27,9 @@ DELETE FROM `equipamentos`;
 /*!40000 ALTER TABLE `equipamentos` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamentos_users: ~0 rows (aproximadamente)
-DELETE FROM `equipamentos_users`;
-/*!40000 ALTER TABLE `equipamentos_users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `equipamentos_users` ENABLE KEYS */;
+DELETE FROM `equipamento_user`;
+/*!40000 ALTER TABLE `equipamento_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `equipamento_user` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamento_siglas: ~0 rows (aproximadamente)
 DELETE FROM `equipamento_siglas`;
@@ -39,7 +39,7 @@ DELETE FROM `equipamento_siglas`;
 -- Copiando dados para a tabela simbi.macrorregiao: ~0 rows (aproximadamente)
 DELETE FROM `macrorregiao`;
 /*!40000 ALTER TABLE `macrorregiao` DISABLE KEYS */;
-INSERT INTO `macrorregiao` (`idMacrorregiao`, `descricao`) VALUES
+INSERT INTO `macrorregiao` (`id`, `descricao`) VALUES
 	(1, 'Centro'),
 	(2, 'Noroeste'),
 	(3, 'Norte'),
@@ -101,7 +101,7 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 -- Copiando dados para a tabela simbi.regiao: ~0 rows (aproximadamente)
 DELETE FROM `regiao`;
 /*!40000 ALTER TABLE `regiao` DISABLE KEYS */;
-INSERT INTO `regiao` (`idRegiao`, `descricao`) VALUES
+INSERT INTO `regiao` (`id`, `descricao`) VALUES
 	(1, 'Norte'),
 	(2, 'Sul'),
 	(3, 'Leste'),
@@ -112,7 +112,7 @@ INSERT INTO `regiao` (`idRegiao`, `descricao`) VALUES
 -- Copiando dados para a tabela simbi.regional: ~0 rows (aproximadamente)
 DELETE FROM `regional`;
 /*!40000 ALTER TABLE `regional` DISABLE KEYS */;
-INSERT INTO `regional` (`idRegional`, `descricao`) VALUES
+INSERT INTO `regional` (`id`, `descricao`) VALUES
 	(1, 'Norte'),
 	(2, 'Sul'),
 	(3, 'Leste 1'),
@@ -150,7 +150,7 @@ DELETE FROM `secretarias`;
 -- Copiando dados para a tabela simbi.status: ~0 rows (aproximadamente)
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` (`idStatus`, `descricao`) VALUES
+INSERT INTO `status` (`id`, `descricao`) VALUES
 	(1, 'Ativo'),
 	(2, 'Inativo'),
 	(3, 'Fechado');
@@ -169,7 +169,7 @@ DELETE FROM `subprefeituras`;
 -- Copiando dados para a tabela simbi.tipo_servicos: ~0 rows (aproximadamente)
 DELETE FROM `tipo_servicos`;
 /*!40000 ALTER TABLE `tipo_servicos` DISABLE KEYS */;
-INSERT INTO `tipo_servicos` (`idTipoServico`, `descricao`) VALUES
+INSERT INTO `tipo_servicos` (`id`, `descricao`) VALUES
 	(1, 'Bibliotecas CSMB'),
 	(2, 'Bosque da Leitura'),
 	(3, 'Ponto de Leitura'),

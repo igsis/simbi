@@ -21,7 +21,7 @@
 				<select class="form-control" name="tipoServico" id="tipoServico">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($tipoServicos as $tipoServico)
-						<option value="{{$tipoServico->idTipoServico}}">{{$tipoServico->descricao}}</option>
+						<option value="{{$tipoServico->id}}">{{$tipoServico->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -30,7 +30,7 @@
 				<select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($siglas as $sigla)
-						<option value="{{$sigla->idEquipamentoSigla}}">{{$sigla->sigla}}</option>
+						<option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -39,7 +39,7 @@
 				<select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($secretarias as $secretaria)
-						<option value="{{$secretaria->idSecretaria}}">{{$secretaria->sigla}}</option>
+						<option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -48,7 +48,7 @@
 				<select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
-						<option value="{{$subordinacaoAdministrativa->idSubordinacaoAdministrativa}}">{{$subordinacaoAdministrativa->descricao}}</option>
+						<option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -85,7 +85,7 @@
 			</div>
 			<div class="form-group col-md-3" style="padding-right: 0px">
 				<label for="telefone">Telefone</label>
-				<input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx">
+				<input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx" value="{{ old('telefone') }}">
 			</div>
 		</div>
 
@@ -95,7 +95,7 @@
 		<div class="row">
 			<div class="form-group col-md-2" style="padding-left: 0px">
 				<label for="cep">CEP</label>
-				<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx">
+				<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ old('cep') }}">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="logradouro">Logradouro</label>
@@ -132,7 +132,7 @@
 				<select class="form-control" name="macrorregiao" id="macrorregiao">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($macrorregioes as $macrorregiao)
-						<option value="{{$macrorregiao->idMacrorregiao}}">{{$macrorregiao->descricao}}</option>
+						<option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -141,7 +141,7 @@
 				<select class="form-control" name="regiao" id="regiao">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($regioes as $regiao)
-						<option value="{{$regiao->idRegiao}}">{{$regiao->descricao}}</option>
+						<option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -150,7 +150,7 @@
 				<select class="form-control" name="regional" id="regional">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($regionais as $regional)
-						<option value="{{$regional->idRegional}}">{{$regional->descricao}}</option>
+						<option value="{{$regional->id}}">{{$regional->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -231,7 +231,7 @@
 				<select class="form-control" name="status" id="status">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($status as $stats)
-						<option value="{{$stats->idStatus}}">{{$stats->descricao}}</option>
+						<option value="{{$stats->id}}">{{$stats->descricao}}</option>
 					@endforeach
 				</select>
 			</div>
@@ -244,25 +244,25 @@
 </div>
 @endsection
 @section('scripts_adicionais')
-    //Script habilita campo Nome Tematica
-        <script type="text/javascript">
-            $(document).ready(function()
-            {
-                $('input:radio[name="tematico"]').change(function(e)
-                {
-                    if ($(this).val() == 0)
-                    {
-                        $("#nomeTematica").attr('disabled', true);
-                    } else
-                    {
-                        $("#nomeTematica").attr('disabled', false);
-                    }
-                });
-            });
-        </script>
+	<script type="text/javascript">
+		//Script habilita campo Nome Tematica
+		$(document).ready(function()
+		{
+			$('input:radio[name="tematico"]').change(function(e)
+			{
+				if ($(this).val() == 0)
+				{
+					$("#nomeTematica").attr('disabled', true);
+				} else
+				{
+					$("#nomeTematica").attr('disabled', false);
+				}
+			});
+		});
+	</script>
 
-    //Script CEP
     <script type="text/javascript" >
+        //Script CEP
         $(document).ready(function() {
             function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.
