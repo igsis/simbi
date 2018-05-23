@@ -8,20 +8,20 @@
         <title>Sistema Simbi</title>
 
         <!-- Bootstrap 3.3.7 -->
-		<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
-      	
+        <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+
         <link rel="stylesheet" href="{{asset('css/app.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-	</head>
+    </head>
     <body>
         <div class="wrapper">
             @if (!Auth::guest())
                 @include ('layouts.sidebar')
             @endif
-			<div id="content">
+            <div id="content">
                 @if (!Auth::guest())
-            	   @include ('layouts.navbar')
+                   @include ('layouts.navbar')
                 @endif
                 @if(Session::has('flash_message'))
                     <div class="container">      
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 @yield ('conteudo')
-			</div>
+            </div>
         </div>
         <div class="overlay"></div>
         @include ('layouts.scripts')

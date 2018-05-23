@@ -17,7 +17,12 @@ class LoginController extends Controller
     {
         return 'name';
     }
-    
+
+    public function showLoginForm()
+    {
+        return view('index');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller
