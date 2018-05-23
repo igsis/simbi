@@ -162,9 +162,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->publicado = 0;
-        $user->save();
+        User::findOrFail($id)
+            ->update(['publicado' => 0]);
 
         return redirect()->route('usuarios.index')
             ->with('flash_message',

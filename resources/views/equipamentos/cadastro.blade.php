@@ -4,8 +4,7 @@
 <div class="container">
 	<div style="text-align: center;">
         <h2>
-            Cadastro de Equipamento<br>
-            <small>Teste</small>
+            Cadastro de Equipamento
         </h2>
     </div>
 	<hr>

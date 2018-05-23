@@ -20,7 +20,7 @@ class EquipamentoController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth', 'isFunc']);
+        $this->middleware(['auth', 'isCoord'])->except(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
@@ -235,7 +235,72 @@ class EquipamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $equipamento = Equipamento::findOrFail($id);
+
+        $this->validate($request, [
+            //Para Tabela Equipamento
+            'nome'=>'required',
+            'tipoServico'=>'required',
+            'equipamentoSigla'=>'required',
+            'identificacaoSecretaria'=>'required',
+            'subordinacaoAdministrativa'=>'required',
+            'tematico'=>'nullable',
+            'nomeTematica'=>'nullable',
+            'telefone'=>'nullable|max:15',
+            'telecentro'=>'required',
+            'acervoespecializado'=>'required',
+            'nucleobraile'=>'required',
+            'status'=>'required',
+
+            //Para Tabela Endereço
+            'cep'=>'required',
+            'logradouro'=>'nullable',
+            'bairro'=>'nullable',
+            'numero'=>'required|numeric',
+            'complemento'=>'nullable',
+            'cidade'=>'nullable',
+            'uf'=>'nullable|max:2',
+            'subprefeitura'=>'nullable',
+            'distrito'=>'nullable',
+            'macrorregiao'=>'nullable',
+            'regiao'=>'nullable',
+            'regional'=>'nullable'
+        ]);
+
+        $equipamento->update([
+                'nome' => $request->nome,
+                'tipo_servico_id' => $request->tipoServico,
+                'equipamento_sigla_id' => $request->equipamentoSigla,
+                'secretaria_id' => $request->identificacaoSecretaria,
+                'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
+                'tematico' => $request->tematico,
+                'nomeTematica' => $request->nomeTematica,
+                'telefone' => $request->telefone,
+                'telecentro' => $request->telecentro,
+                'acervoEspecializado' => $request->acervoespecializado,
+                'nucleoBraile' => $request->nucleobraile,
+                'status_id' => $request->status
+            ]);
+
+        $equipamento->endereco
+            ->update([
+            'cep' => $request->cep,
+            'logradouro' => $request->logradouro,
+            'numero' => $request->numero,
+            'complemento' => $request->complemento,
+            'bairro' => $request->bairro,
+            'cidade' => $request->cidade,
+            'estado' => $request->uf,
+            'subprefeitura_id' => $request->subprefeitura,
+            'distrito_id' => $request->distrito,
+            'macrorregiao_id' => $request->macrorregiao,
+            'regiao_id' => $request->regiao,
+            'regional_id' => $request->regional
+            ]);
+
+        return redirect()->route('equipamentos.index')
+            ->with('flash_message',
+                'Equipamento Editado com Sucesso!');
     }
 
     /**

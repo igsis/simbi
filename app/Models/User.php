@@ -6,6 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+/*TODO: Alterar o delete com "publicado = 0" para Soft Delete
+  use Illuminate\Database\Eloquent\SoftDeletes
+  https://goo.gl/RarucR */
+
 class User extends Authenticatable
 {
     use Notifiable;
