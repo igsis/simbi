@@ -40,6 +40,16 @@ class Equipamento extends Model
         return $this->belongsTo(TipoServico::class);
     }
 
+    public function secretaria()
+    {
+        return $this->belongsTo(Secretaria::class);
+    }
+
+    public function subordinacaoAdministrativa()
+    {
+        return $this->belongsTo(SubordinacaoAdministrativa::class);
+    }
+
     public function status()
     {
         return $this->belongsTo(Status::class);

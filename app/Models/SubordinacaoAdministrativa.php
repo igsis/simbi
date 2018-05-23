@@ -11,4 +11,9 @@ class SubordinacaoAdministrativa extends Model
     protected $fillable = [
     	'descricao'
     ];
+
+    public function equipamentos()
+    {
+        return $this->hasMany(Equipamento::class);
+    }
 }

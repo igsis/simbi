@@ -12,4 +12,9 @@ class Secretaria extends Model
     	'sigla',
     	'descricao'
     ];
+
+    public function equipamentos()
+    {
+        return $this->hasMany(Equipamento::class);
+    }
 }

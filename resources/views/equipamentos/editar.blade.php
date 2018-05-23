@@ -49,7 +49,7 @@
 					</select>
 				</div>
 				<div class="form-group col-md-3" style="padding-right: 0px">
-					<label for="subordinaçãoAdministrativa">Subordinação Administrativa</label>
+					<label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
 					<select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
 						<option value="">Selecione uma Opção</option>
 						@foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
@@ -326,7 +326,17 @@
         // Script resgata valor comboBox e Radio Buttons
         $(document).ready(function () {
             $('input:radio[name="tematico"][value={{$equipamento->tematico}}]').attr('checked', true);
-            $('input:select[name="tipoServico"][value={{$equipamento->tipoServico->id}}]').attr('selected', true);
+            $('#tipoServico').val("{{$equipamento->tipoServico->id}}");
+            $('#equipamentoSigla').val("{{$equipamento->equipamentoSigla->id}}");
+            $('#identificacaoSecretaria').val("{{$equipamento->secretaria->id}}");
+            $('#subordinacaoAdministrativa').val("{{$equipamento->subordinacaoAdministrativa->id}}");
+            $('#macrorregiao').val("{{$equipamento->endereco->macrorregiao->id}}");
+            $('#regiao').val("{{$equipamento->endereco->regiao->id}}");
+            $('#regional').val("{{$equipamento->endereco->regional->id}}");
+            $('#telecentro').val("{{$equipamento->telecentro}}");
+            $('#acervoespecializado').val("{{$equipamento->acervoEspecializado}}");
+            $('#nucleobraile').val("{{$equipamento->nucleoBraile}}");
+            $('#status').val("{{$equipamento->status->id}}");
         });
 	</script>
 @endsection

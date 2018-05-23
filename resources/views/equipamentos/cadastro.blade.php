@@ -49,7 +49,7 @@
 				</select>
 			</div>
 			<div class="form-group col-md-3" style="padding-right: 0px">
-				<label for="subordinaçãoAdministrativa">Subordinação Administrativa</label>
+				<label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
 				<select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
 					<option value="">Selecione uma Opção</option>
 					@foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)

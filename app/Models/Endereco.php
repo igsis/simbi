@@ -23,13 +23,23 @@ class Endereco extends Model
         'regional_id'
     ];
 
+    public function macrorregiao()
+    {
+        return $this->belongsTo(Macrorregiao::class);
+    }
+
+    public function regiao()
+    {
+        return $this->belongsTo(Regiao::class);
+    }
+
+    public function regional()
+    {
+        return $this->belongsTo(Regional::class);
+    }
+
     public function equipamento()
     {
     	return $this->hasOne(Equipamento::class);
-    }
-
-    public function user()
-    {
-    	return $this->belongsTo(User::class);
     }
 }
