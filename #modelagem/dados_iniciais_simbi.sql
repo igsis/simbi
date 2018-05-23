@@ -82,7 +82,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- Copiando dados para a tabela simbi.password_resets: ~4 rows (aproximadamente)
 DELETE FROM `pergunta_segurancas`;
 /*!40000 ALTER TABLE `pergunta_segurancas` DISABLE KEYS */;
-INSERT INTO `pergunta_segurancas` (`id`, `perguntaSeguranca`) VALUES
+INSERT INTO `pergunta_segurancas` (`id`, `pergunta_seguranca`) VALUES
 	(1, 'Qual a sua cor favorita?'),
 	(2, 'Qual o nome do seu primeiro animal?'),
 	(3, 'Qual o nome do seu primeiro professor?'),

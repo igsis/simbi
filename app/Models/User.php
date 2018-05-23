@@ -24,7 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'perguntaSeguranca_id',
+        'pergunta_seguranca_id',
         'respostaSeguranca'
     ];
 
@@ -42,13 +42,13 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function perguntaSeguranca()
+    public function pergunta_seguranca()
     {
         return $this->belongsTo(PerguntaSeguranca::class);
     }
 
-    /*public function equipamentos()
+    public function equipamentos()
     {
         return $this->belongsToMany(Equipamento::class);
-    }*/
+    }
 }

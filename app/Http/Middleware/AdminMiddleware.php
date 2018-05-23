@@ -17,7 +17,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = User::all()->count();
+        $user = User::count();
         if (!($user == 1))
         {
             if (!Auth::user()->hasPermissionTo('Administrador')) //If user does //not have this permission

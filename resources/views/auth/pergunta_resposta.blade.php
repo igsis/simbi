@@ -14,7 +14,7 @@
 		    	<label for="name" class="">Selecione a Pergunta</label>
 		    	<select name="" id="" class="form-control">
 		    		@foreach($perguntas as $pergunta)
-		    			<option value="{{$pergunta->id}}">{{$pergunta->perguntaSeguranca}}</option>
+		    			<option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
 		    		@endforeach
 		    	</select>
 		    </div>

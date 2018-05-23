@@ -3,8 +3,6 @@
 namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Simbi\Models\EquipamentoSigla;
-use Simbi\Models\Endereco;
 
 class Equipamento extends Model
 {
