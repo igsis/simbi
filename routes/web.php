@@ -4,28 +4,34 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('home', function () {
+    return view('index');
+})->middleware('primeiroLogin');
+
+
 Auth::routes();
 
-Route::resource('equipamentos', 'EquipamentoController', [
-	'names' => [
-		'edit' => 'equipamentos.editar',
-		'create' => 'equipamentos.cadastro',
-]]);
-
-Route::resource('usuarios', 'UserController', [
-	'names' => [
-		'edit' => 'usuarios.editar',
-		'create' => 'usuarios.cadastro',
-]]);
 
 Route::group(['middleware' => 'auth'], function (){
 
-	Route::get('seguranca', 'UserController@testePergunta');
+	Route::get('seguranca', 'UserController@perguntaSeguranca');
 
-	Route::post('teste', 'UserController@testePergunta');
+	Route::post('seguranca', 'UserController@updatePergunta')->name('seguranca');
 
 	Route::group(['middleware' => 'primeiroLogin'], function (){
-		Route::get('teste', 'UserController@testePergunta');
+
+		Route::resource('equipamentos', 'EquipamentoController', [
+			'names' => [
+				'edit' => 'equipamentos.editar',
+				'create' => 'equipamentos.cadastro',
+		]]);
+
+		Route::resource('usuarios', 'UserController', [
+			'names' => [
+				'edit' => 'usuarios.editar',
+				'create' => 'usuarios.cadastro',
+		]]);
+		
 	});
 
 });

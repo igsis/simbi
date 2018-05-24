@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isCoord']);
+        $this->middleware(['isCoord'])->except(['perguntaSeguranca']);
     }
     /**
      * Display a listing of the resource.
@@ -169,9 +169,23 @@ class UserController extends Controller
             ->with('flash_message',
              'Usuario Excluido com Sucesso.');
     }
-    public function testePergunta()
+
+ 
+    // Pergunta de seguranca para primeiro acesso
+    public function perguntaSeguranca()
     {
         $perguntas = PerguntaSeguranca::all();
         return view('auth.pergunta_resposta', compact('perguntas'));
+    }
+
+    public function updatePergunta(Request $value)
+    {
+        $user = auth()->user();
+        $user->pergunta_seguranca_id = $value->idPergunta;
+        $user->resposta_seguranca = $value->respostaSeguranca;
+        if($user->update()){
+            return redirect('home');
+        }
+
     }
 }

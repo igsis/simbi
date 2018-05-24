@@ -16,11 +16,9 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::attempt(['name' => $request->name, 'password => $request']))
-        {
-            return $next($request);
-
+        if (auth()->user()->pergunta_seguranca_id == null) {
+            return redirect('seguranca');
         }
-        return view('auth.pergunta_resposta');
+        return $next($request);
     }
 }
