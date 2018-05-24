@@ -335,8 +335,8 @@
             $('#regiao').val("{{$equipamento->endereco->regiao->id}}");
             $('#regional').val("{{$equipamento->endereco->regional->id}}");
             $('#telecentro').val("{{$equipamento->telecentro}}");
-            $('#acervoespecializado').val("{{$equipamento->acervoEspecializado}}");
-            $('#nucleobraile').val("{{$equipamento->nucleoBraile}}");
+            $('#acervoespecializado').val("{{$equipamento->acervo_especializado}}");
+            $('#nucleobraile').val("{{$equipamento->nucleo_braile}}");
             $('#status').val("{{$equipamento->status->id}}");
         });
     </script>

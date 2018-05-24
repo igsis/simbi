@@ -6,43 +6,43 @@
 <div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
 <hr>
 <div class="table-responsive">
-	<table class="table table-bordered table-striped">
-		<thead>
-			<tr>
-				<th>Nome</th>
-				<th>Email</th>
-				<th>Equipamento Vinculado</th>
-				<th>Cargo</th>
-				<th>Operações</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach ($users as $user)
-				<tr>
-					<td>{{ $user->name }}</td>
-					<td>{{ $user->email }}</td>
-					<td>{{ $user->name }}</td> {{--TODO: Relacionamento Usuario / Equipamento--}}
-					<td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>
-					<td>
-						<a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
-						@hasrole('Administrador')
-							<form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
-								{{ csrf_field() }}
-								<input type="hidden" name="_method" value="DELETE">
-								<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'>Excluir
-								</button>
-					        </form>
-						@endhasrole
-					</td>
-				</tr>
-			@endforeach
-			@include('layouts.excluir_confirm')
-		</tbody>
-	</table>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Equipamento(s) Vinculado(s)</th>
+                <th>Cargo</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->equipamentos()->pluck('nome')->implode('') }}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
+                    <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
+                    <td>
+                        <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
+                        @hasrole('Administrador')
+                            <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'>Excluir
+                                </button>
+                            </form>
+                        @endhasrole
+                    </td>
+                </tr>
+            @endforeach
+            @include('layouts.excluir_confirm')
+        </tbody>
+    </table>
 </div>
 <div class="text-center"> {!! $users->links() !!} </div>
 @hasrole('Administrador')
-	<a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
+    <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
 @endhasrole
 @endsection
 

@@ -38,14 +38,14 @@
                     @endif
 
                 <strong>Acervo Especializado: </strong>
-                    @if ($equipamento->acervoEspecializado == 0)
+                    @if ($equipamento->acervo_especializado == 0)
                         Não<br>
                     @else
                         Sim<br>
                     @endif
 
                 <strong>Núcleo Braile: </strong>
-                    @if ($equipamento->nucleoBraile == 0)
+                    @if ($equipamento->nucleo_braile == 0)
                         Não<br>
                     @else
                         Sim<br>

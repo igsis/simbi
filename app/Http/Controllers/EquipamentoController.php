@@ -175,8 +175,8 @@ class EquipamentoController extends Controller
                 'nomeTematica' => $request->nomeTematica,
                 'telefone' => $request->telefone,
                 'telecentro' => $request->telecentro,
-                'acervoEspecializado' => $request->acervoespecializado,
-                'nucleoBraile' => $request->nucleobraile,
+                'acervo_especializado' => $request->acervoespecializado,
+                'nucleo_braile' => $request->nucleobraile,
                 'status_id' => $request->status
             ]);
         }
@@ -277,8 +277,8 @@ class EquipamentoController extends Controller
                 'nomeTematica' => $request->nomeTematica,
                 'telefone' => $request->telefone,
                 'telecentro' => $request->telecentro,
-                'acervoEspecializado' => $request->acervoespecializado,
-                'nucleoBraile' => $request->nucleobraile,
+                'acervo_especializado' => $request->acervoespecializado,
+                'nucleo_braile' => $request->nucleobraile,
                 'status_id' => $request->status
             ]);
 
