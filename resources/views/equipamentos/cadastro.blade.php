@@ -13,14 +13,14 @@
 		{{ csrf_field() }}
 
 		<div class="row">
-			<div class="form-group">
+			<div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
 				<label for="nome">Nome do Equipamento</label>
 				<input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome') }}">
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="form-group col-md-3" style="padding-left: 0px">
+			<div class="form-group col-md-3 has-feedback {{ $errors->has('tipoServico') ? ' has-error' : '' }}" style="padding-left: 0px">
 				<label for="tipoServico">Tipo de Serviço</label>
 				<select class="form-control" name="tipoServico" id="tipoServico">
 					<option value="">Selecione uma Opção</option>
@@ -29,7 +29,7 @@
 					@endforeach
 				</select>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-3 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
 				<label for="equipamentoSigla">Sigla do Equipamento</label>
 				<select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
 					<option value="">Selecione uma Opção</option>
@@ -38,7 +38,7 @@
 					@endforeach
 				</select>
 			</div>
-			<div class="form-group col-md-3">
+			<div class="form-group col-md-3 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
 				<label for="identificacaoSecretaria">Identificação da Secretaria</label>
 				<select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
 					<option value="">Selecione uma Opção</option>
@@ -47,7 +47,7 @@
 					@endforeach
 				</select>
 			</div>
-			<div class="form-group col-md-3" style="padding-right: 0px">
+			<div class="form-group col-md-3 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}" style="padding-right: 0px">
 				<label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
 				<select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
 					<option value="">Selecione uma Opção</option>
@@ -97,7 +97,7 @@
         <hr>
 
 		<div class="row">
-			<div class="form-group col-md-2" style="padding-left: 0px">
+			<div class="form-group col-md-2 has-feedback {{ $errors->has('cep') ? ' has-error' : '' }}" style="padding-left: 0px">
 				<label for="cep">CEP</label>
 				<input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ old('cep') }}">
 			</div>
@@ -110,7 +110,7 @@
 				<input type="text" class="form-control" name="bairro" id="bairro" readonly>
 			</div>
 
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
 				<label for="numero">Número</label>
 				<input type="text" class="form-control" name="numero" id="numero">
 			</div>
@@ -129,7 +129,7 @@
 				<label for="uf">UF</label>
 				<input type="text" class="form-control" name="uf" id="uf" readonly>
 			</div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 has-feedback {{ $errors->has('macrorregiao') ? ' has-error' : '' }}">
                 <label for="macrorregiao">Macrorregião</label>
                 <select class="form-control" name="macrorregiao" id="macrorregiao">
                     <option value="">Selecione uma Opção</option>
@@ -138,7 +138,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 has-feedback {{ $errors->has('regiao') ? ' has-error' : '' }}">
                 <label for="regiao">Região</label>
                 <select class="form-control" name="regiao" id="regiao">
                     <option value="">Selecione uma Opção</option>
@@ -147,7 +147,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 has-feedback {{ $errors->has('regional') ? ' has-error' : '' }}">
                 <label for="regional">Regional</label>
                 <select class="form-control" name="regional" id="regional">
                     <option value="">Selecione uma Opção</option>
@@ -228,7 +228,7 @@
 					<option value="1">Sim</option>
 				</select>
 			</div>
-			<div class="form-group col-md-2">
+			<div class="form-group col-md-2 has-feedback {{ $errors->has('status') ? ' has-error' : '' }}">
 				<label for="status">Status do Equipamento</label>
 				<select class="form-control" name="status" id="status">
 					<option value="">Selecione uma Opção</option>

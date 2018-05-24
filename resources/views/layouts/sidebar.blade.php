@@ -40,7 +40,7 @@
                 </ul>
             </li>
         <li>
-            <a href="welcome">
+            <a href="#">
                 <i class="glyphicon glyphicon-send"></i>
                 Contato</a>
         </li>

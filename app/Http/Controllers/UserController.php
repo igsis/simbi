@@ -181,17 +181,17 @@ class UserController extends Controller
     public function updatePergunta(Request $request)
     {
         $user = auth()->user();
-        if ($request->idPergunta && $request->respostaSeguranca) {
-            $user->update(
-                [
-                    'pergunta_seguranca_id' => $request->idPergunta, 
-                    'resposta_seguranca' => $request->respostaSeguranca
-                ]
-            );
-            return redirect('home');           
-        }else{
-            return redirect()->route('seguranca')
-                    ->with('flash_message','Erro ao gravar!');
-        }
+
+        $this->validate($request, ([
+            'perguntaSeguranca'=>'required',
+            'respostaSeguranca'=>'required'
+        ]));
+
+        $user->update([
+            'pergunta_seguranca_id' => $request->perguntaSeguranca,
+            'resposta_seguranca' => $request->respostaSeguranca
+        ]);
+
+        return redirect('home');
     }
 }

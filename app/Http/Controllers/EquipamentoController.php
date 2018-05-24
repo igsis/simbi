@@ -145,9 +145,9 @@ class EquipamentoController extends Controller
                 'uf'=>'nullable|max:2',
                 'subprefeitura'=>'nullable',
                 'distrito'=>'nullable',
-                'macrorregiao'=>'nullable',
-                'regiao'=>'nullable',
-                'regional'=>'nullable'
+                'macrorregiao'=>'required',
+                'regiao'=>'required',
+                'regional'=>'required'
             ]);
 
             $endereco = new Endereco();
