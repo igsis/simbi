@@ -178,14 +178,20 @@ class UserController extends Controller
         return view('auth.pergunta_resposta', compact('perguntas'));
     }
 
-    public function updatePergunta(Request $value)
+    public function updatePergunta(Request $request)
     {
         $user = auth()->user();
-        $user->pergunta_seguranca_id = $value->idPergunta;
-        $user->resposta_seguranca = $value->respostaSeguranca;
-        if($user->update()){
-            return redirect('home');
+        if ($request->idPergunta && $request->respostaSeguranca) {
+            $user->update(
+                [
+                    'pergunta_seguranca_id' => $request->idPergunta, 
+                    'resposta_seguranca' => $request->respostaSeguranca
+                ]
+            );
+            return redirect('home');           
+        }else{
+            return redirect()->route('seguranca')
+                    ->with('flash_message','Erro ao gravar!');
         }
-
     }
 }
