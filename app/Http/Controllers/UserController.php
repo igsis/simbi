@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'isCoord']);
+        $this->middleware(['isCoord'])->except(['perguntaSeguranca']);
     }
     /**
      * Display a listing of the resource.
@@ -169,9 +169,29 @@ class UserController extends Controller
             ->with('flash_message',
              'Usuario Excluido com Sucesso.');
     }
-    public function testePergunta()
+
+ 
+    // Pergunta de seguranca para primeiro acesso
+    public function perguntaSeguranca()
     {
         $perguntas = PerguntaSeguranca::all();
         return view('auth.pergunta_resposta', compact('perguntas'));
+    }
+
+    public function updatePergunta(Request $request)
+    {
+        $user = auth()->user();
+        if ($request->idPergunta && $request->respostaSeguranca) {
+            $user->update(
+                [
+                    'pergunta_seguranca_id' => $request->idPergunta, 
+                    'resposta_seguranca' => $request->respostaSeguranca
+                ]
+            );
+            return redirect('home');           
+        }else{
+            return redirect()->route('seguranca')
+                    ->with('flash_message','Erro ao gravar!');
+        }
     }
 }
