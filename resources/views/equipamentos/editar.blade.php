@@ -256,10 +256,10 @@
             {
                 if ($(this).val() == 0)
                 {
-                    $("#nomeTematica").attr('disabled', true);
+                    $("#nomeTematica").attr('disabled', true).val("");
                 } else
                 {
-                    $("#nomeTematica").attr('disabled', false);
+                    $("#nomeTematica").attr('disabled', false).val("{{$equipamento->nomeTematica}}");
                 }
             });
         });
