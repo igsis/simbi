@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function (){
 				'edit' => 'usuarios.editar',
 				'create' => 'usuarios.cadastro',
 		]]);
+
+		Route::post('usuarios/vincula', 'UserController@vinculaEquipamento');
 		
 	});
 

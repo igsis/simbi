@@ -25,7 +25,7 @@
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
                     <td>
                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
-                        <button class="btn btn" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-title="Vincular Equipamentos" style="margin-right: 3px">Vincular Equipamento
+                        <button class="btn btn" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px">Vincular Equipamento</button>
                         @hasrole('Administrador')
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                 {{ csrf_field() }}
@@ -55,15 +55,19 @@
                 <h4 class="modal-title">Vincular equipamento ao usuario</h4>
             </div>
             <div class="modal-body">
-                @foreach($equipamentos as $equipamento)
-                    <div class="checkbox-inline">
-                        <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
-                    </div>
-                @endforeach
+                <form id="formVincula" method="POST">
+                    {{csrf_field()}}
+                    <input type="hidden" name="_method" value="PUT">
+
+                    @foreach($equipamentos as $equipamento)
+                        <div class="checkbox-inline">
+                            <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
+                        </div>
+                    @endforeach
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirm">Excluir</button>
+                <input type="submit" class="btn btn-success" value="Vincular">
             </div>
         </div>
     </div>
@@ -71,8 +75,8 @@
 @endsection
 
 @section('scripts_adicionais')
-<!-- Script Msg Excluir Usuario -->
     <script type="text/javascript">
+    // Script Msg Excluir Usuario
         $('#confirmDelete').on('show.bs.modal', function (e)
         {
             $message = $(e.relatedTarget).attr('data-message');
@@ -90,5 +94,16 @@
         {
             $(this).data('form').submit();
         });
+
+    // Alimenta o modal com informações de cada usuario
+        $('#vinculaEquipamento').on('show.bs.modal', function (e)
+        {
+            var nome = $(e.relatedTarget).attr('data-nome');
+            $(this).find('.modal-title').text(`Vincular equipamento ao usuario: ${nome}`);
+
+            var id = $(e.relatedTarget).attr('data-id');
+            $(this).find('#formVincula').attr('action', `{{url('usuarios')}}/${id}`);
+        });
     </script>
+
 @endsection
