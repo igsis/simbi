@@ -49,9 +49,9 @@
                     <input class="form-control" name="password_confirmation" type="password" value="">
                 </div>
 
-                {{--<div class="form-group">
+                <div class="form-group">
                     <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
-                    <select class="form-control" name="perguntaSeguranca">
+                    <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
                         @foreach($perguntas as $pergunta)
                             <option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
                         @endforeach
@@ -60,8 +60,8 @@
 
                 <div class="form-group">
                     <label for="respostaSeguranca">Resposta</label><br>
-                    <input class="form-control" name="respostaSeguranca" type="text" value="">
-                </div>--}} {{--TODO: Descomentar esta parte, assim que a variavel for inserida no controller--}}
+                    <input class="form-control" name="respostaSeguranca" type="text" value="{{$user->resposta_seguranca}}">
+                </div>
             @endif
             <input class="btn btn-primary" type="submit" value="Editar">
         </form>
@@ -74,6 +74,7 @@
         @endif
         @include('layouts.excluir_confirm')
 @endsection
+
 @section('scripts_adicionais')
 <!-- Script Msg Resetar Senha -->
     <script type="text/javascript">
@@ -99,6 +100,10 @@
 
         $(document).ready(function () {
             $('input:radio[name="roles"][value={{$user->roles->first()->id}}]').attr('checked', true);
+
+            @if($user->name == Auth::user()->name)
+                $('#perguntaSeguranca').val("{{$user->perguntaSeguranca->id}}");
+            @endif
         });
     </script>
 @endsection

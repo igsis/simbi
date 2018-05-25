@@ -12,7 +12,33 @@
         </div>
         <hr>
 
-        <div class="col-md-offset-2 col-md-8"></div>
+        {{--<div class="col-md-offset-1 col-md-10">
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6">
+                            <h3 class="panel-title">{{$equipamento->nome}}</h3>
+                        </div>
+                        <div class="col col-xs-6 text-right">
+                            <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <th width="30%">Nome:</th>
+                                <td>{{$equipamento->nome}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>--}}
+
+        <div class="col-md-offset-2 col-md-8">
             <div class="well">
                 <strong>Nome: </strong>{{$equipamento->nome}}<br>
                 <strong>Tipo de Serviço: </strong>{{$equipamento->tipoServico->descricao}}<br>

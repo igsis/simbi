@@ -25,6 +25,7 @@
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
                     <td>
                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
+                        <button class="btn btn" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-title="Vincular Equipamentos" style="margin-right: 3px">Vincular Equipamento
                         @hasrole('Administrador')
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                 {{ csrf_field() }}
@@ -44,6 +45,29 @@
 @hasrole('Administrador')
     <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
 @endhasrole
+
+{{--Modal para vincular Equipamentos--}}
+<div class="modal fade" id="vinculaEquipamento" role="dialog" aria-labelledby="vinculaEquipamentoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Vincular equipamento ao usuario</h4>
+            </div>
+            <div class="modal-body">
+                @foreach($equipamentos as $equipamento)
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
+                    </div>
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm">Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts_adicionais')

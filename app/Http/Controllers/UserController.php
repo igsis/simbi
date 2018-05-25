@@ -4,6 +4,7 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Simbi\Models\Equipamento;
 use Simbi\Models\User;
 use Simbi\Models\PerguntaSeguranca;
 use Auth;
@@ -17,7 +18,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['isCoord'])->except(['perguntaSeguranca']);
+        $this->middleware(['isCoord'])->except(['perguntaSeguranca', 'updatePergunta']);
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +28,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('publicado', '=', 1)->orderBy('name')->paginate(10);
-        return view('usuarios.index')->with('users', $users);
+        $equipamentos = Equipamento::all();
+        return view('usuarios.index', compact('users', 'equipamentos'));
     }
 
     /**
@@ -95,8 +97,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::get();
+        $perguntas = PerguntaSeguranca::all();
 
-        return view('usuarios.editar', compact('user', 'roles'));
+        return view('usuarios.editar', compact('user', 'roles', 'perguntas'));
     }
 
     /**
@@ -112,8 +115,7 @@ class UserController extends Controller
 
         if($request->has('novaSenha'))
         {
-            $user->password = 'simbi@2018';
-            $user->save();
+            $user->update(['password' => 'simbi@2018']);
             return redirect()->route('usuarios.index')
             ->with('flash_message',
             'Senha Resetada! Senha padrão: simbi@2018');
@@ -121,20 +123,24 @@ class UserController extends Controller
         
         if ($request->filled('password'))
         {
-            $this->validate($request, [
-                'name'=>'required',
-                'email'=>'required|email|unique:users,email,'.$id,
-                'password'=>'required|min:6|confirmed'
+            $data = $this->validate($request, [
+                    'name'=>'required',
+                    'email'=>'required|email|unique:users,email,'.$id,
+                    'password'=>'required|min:6|confirmed',
+                    'perguntaSeguranca'=>'required',
+                    'respostaSeguranca'=>'required'
             ]);
-            $input = $request->only(['name', 'email', 'password']);
+            $input = $request->only($data);
         }
         else
         {
-            $this->validate($request, [
-                'name'=>'required',
-                'email'=>'required|email|unique:users,email,'.$id,
+            $data = $this->validate($request, [
+                    'name'=>'required',
+                    'email'=>'required|email|unique:users,email,'.$id,
+                    'perguntaSeguranca'=>'required',
+                    'respostaSeguranca'=>'required'
             ]);
-            $input = $request->only(['name', 'email']);
+            $input = $request->only($data);
         }
 
         $roles = $request['roles'];

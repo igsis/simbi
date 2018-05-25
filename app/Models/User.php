@@ -25,7 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'pergunta_seguranca_id',
-        'respostaSeguranca'
+        'resposta_seguranca'
     ];
 
     /**
@@ -42,7 +42,7 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function pergunta_seguranca()
+    public function perguntaSeguranca()
     {
         return $this->belongsTo(PerguntaSeguranca::class);
     }
