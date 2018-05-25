@@ -64,11 +64,12 @@
                 </div>
             @endif
             <input class="btn btn-primary" type="submit" value="Editar">
-        </form>
+        </form><br>
         @if($user->name != Auth::user()->name)
         <form id="resetSenha" method="POST" action="{{ url('usuarios', [$user->id])}}" accept-charset="UTF-8">
             {{ csrf_field() }}
             <input type="hidden" name="novaSenha">
+            <input type="hidden" name="_method" value="PUT">
             <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario? Senha: simbi@2018' data-button="Resetar Senha">Resetar Senha</button>
         </form>
         @endif
