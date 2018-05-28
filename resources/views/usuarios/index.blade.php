@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-<h1><i class="glyphicon glyphicon-user"></i>Usuarios Cadastrados</h1>
+<h1><i class="glyphicon glyphicon-user"></i>Usuários Cadastrados</h1>
 <div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
 
 <div class="">

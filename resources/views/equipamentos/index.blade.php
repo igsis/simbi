@@ -4,8 +4,30 @@
 
 <h1><i class="glyphicon glyphicon-home"></i> Equipamentos Cadastrados</h1>
 <div class="panel-heading">Pagina {{$equipamentos->currentPage()}} de {{$equipamentos->lastPage()}}</div>
+<div class="form">
+    <form action="" method="POST" class="form form-inline">
+        {{ csrf_field() }}
+        <input type="text" name="name" class="form-control" placeholder="Nome do equipamento">
+        <div class="form-group">
+        	 <select class="form-control" name="status" id="status">
+        	 	<option value="">-- Status --</option>
+        	 	<option value="">Ativo</option>
+        	 	<option value="">Fechado</option>
+        	 	<option value="">Inativo</option>
+        	 </select>
+        </div>
+         <div class="form-group">
+        	 <select class="form-control" name="status" id="status">
+        	 	<option value="">-- Sigla --</option>
+        	 	<option value="">glo</option>
+        	 	<option value="">ssp</option>
+        	 </select>
+        </div>
+        {{-- <input type="text" name="email" class="form-control" placeholder="E-mail"> --}}
+        <button class="btn btn-primary">Pesquisar</button>
+    </form>
+</div>
 <hr>
-
 <div class="table-responsive">
 	<table class="table table-bordered table-striped">
 		<thead>
