@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function (){
 				'create' => 'usuarios.cadastro',
 		]]);
 
+		Route::any('usuarios-search', 'UserController@searchUser')->name('search');
+
 		Route::post('usuarios/vincula', 'UserController@vinculaEquipamento');
 		
 	});

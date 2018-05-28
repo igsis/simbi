@@ -200,4 +200,17 @@ class UserController extends Controller
 
         return redirect('home');
     }
+
+    // filtro de Usuários
+    public function searchUser(Request $request, User $user)
+    {
+        $dataForm = $request->except('_token');
+
+        $users = $user->search($dataForm)->orderBy('name')->paginate(10);
+
+        $equipamentos = Equipamento::all();
+
+        return view('usuarios.index', compact('users', 'equipamentos','dataForm'));
+
+    }
 }

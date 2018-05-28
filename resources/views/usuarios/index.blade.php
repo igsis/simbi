@@ -4,6 +4,17 @@
 
 <h1><i class="glyphicon glyphicon-user"></i>Usuarios Cadastrados</h1>
 <div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
+
+<div class="">
+    <form action="{{ route('search') }}" method="POST" class="form form-inline">
+        {{ csrf_field() }}
+        {{-- <input type="hidden" name="_method" value="PATCH"> --}}
+        <input type="text" name="name" class="form-control" placeholder="Nome">
+        <input type="text" name="email" class="form-control" placeholder="E-mail">
+        {{-- <input type="text" class="form-control" placeholder="Cargo"> --}}
+        <button class="btn btn-primary">Pesquisar</button>
+    </form>
+</div>
 <hr>
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
@@ -41,7 +52,14 @@
         </tbody>
     </table>
 </div>
-<div class="text-center"> {!! $users->links() !!} </div>
+<div class="text-center"> 
+    @if(isset($dataForm))
+        {!! $users->appends($dataForm)->links() !!} 
+    @else
+        {!! $users->links() !!} 
+    @endif
+
+</div>
 @hasrole('Administrador')
     <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
 @endhasrole

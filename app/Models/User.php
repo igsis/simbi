@@ -51,4 +51,22 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Equipamento::class);
     }
+
+    public function search(Array $data)
+    {
+        return $this->where(function ($query) use($data)
+        {
+            $query->where('publicado', 1);
+
+            if (isset($data['name'])) {
+                $query->where('name', $data['name']);
+            }
+            
+            if (isset($data['email'])) {
+                $query->where('email', $data['email']);
+            }
+
+        });
+
+    }
 }
