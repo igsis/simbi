@@ -28,6 +28,8 @@ class User extends Authenticatable
         'resposta_seguranca'
     ];
 
+//    TODO: Adicionar coluna "login" na tabela users
+
     /**
      * The attributes that should be hidden for arrays.
      *
