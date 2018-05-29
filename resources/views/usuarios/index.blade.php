@@ -21,6 +21,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
+                <th>Login</th>
                 <th>Email</th>
                 <th>Equipamento(s) Vinculado(s)</th>
                 <th>Cargo</th>
@@ -31,6 +32,7 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->name }}</td>
+                    <td>{{ $user->login }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->equipamentos()->pluck('nome')->implode('') }}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>

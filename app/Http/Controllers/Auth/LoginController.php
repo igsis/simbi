@@ -15,7 +15,7 @@ class LoginController extends Controller
     */
     public function username()
     {
-        return 'name'; /*TODO: Alterar metodo de login para utilizar a coluna "login" na tabela users*/
+        return 'login';
     }
 
     public function showLoginForm()

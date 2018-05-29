@@ -4,9 +4,11 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoSigla;
+use Simbi\Models\Subprefeitura;
 use Simbi\Models\TipoServico;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\Secretaria;
@@ -47,6 +49,8 @@ class EquipamentoController extends Controller
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
+        $subprefeituras = Subprefeitura::orderBy('descricao')->get();
+        $distritos = Distrito::orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
         return view('equipamentos.cadastro',
@@ -58,6 +62,8 @@ class EquipamentoController extends Controller
                 'macrorregioes',
                 'regioes',
                 'regionais',
+                'subprefeituras',
+                'distritos',
                 'status'
             )
         );
@@ -118,6 +124,28 @@ class EquipamentoController extends Controller
                 'Subordinacao Administrativa inserida com sucesso');
         }
 
+        elseif($request->has('novaSubprefeitura')){
+            $data = $this->validate($request, [
+                'descricao'=>'required'
+            ]);
+
+            Subprefeitura::create($data);
+
+            return redirect()->route('equipamentos.cadastro')->with('flash_message',
+                'Subprefeitura inserida com sucesso!');
+        }
+
+        elseif($request->has('novoDistrito')){
+            $data = $this->validate($request, [
+                'descricao'=>'required'
+            ]);
+
+            Distrito::create($data);
+
+            return redirect()->route('equipamentos.cadastro')->with('flash_message',
+                'Distrito inserido com sucesso!');
+        }
+
         else{
             // Metodo que grava o novo equipamento
             $this->validate($request, [
@@ -128,7 +156,7 @@ class EquipamentoController extends Controller
                 'identificacaoSecretaria'=>'required',
                 'subordinacaoAdministrativa'=>'required',
                 'tematico'=>'nullable',
-                'nomeTematica'=>'nullable',
+                'nome_tematica'=>'nullable',
                 'telefone'=>'nullable|max:15',
                 'telecentro'=>'required',
                 'acervoespecializado'=>'required',
@@ -143,8 +171,8 @@ class EquipamentoController extends Controller
                 'complemento'=>'nullable',
                 'cidade'=>'nullable',
                 'uf'=>'nullable|max:2',
-                'subprefeitura'=>'nullable',
-                'distrito'=>'nullable',
+                'subprefeitura'=>'required',
+                'distrito'=>'required',
                 'macrorregiao'=>'required',
                 'regiao'=>'required',
                 'regional'=>'required'
@@ -172,7 +200,7 @@ class EquipamentoController extends Controller
                 'secretaria_id' => $request->identificacaoSecretaria,
                 'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
                 'tematico' => $request->tematico,
-                'nomeTematica' => $request->nomeTematica,
+                'nome_tematica' => $request->nome_tematica,
                 'telefone' => $request->telefone,
                 'telecentro' => $request->telecentro,
                 'acervo_especializado' => $request->acervoespecializado,
@@ -245,7 +273,7 @@ class EquipamentoController extends Controller
             'identificacaoSecretaria'=>'required',
             'subordinacaoAdministrativa'=>'required',
             'tematico'=>'nullable',
-            'nomeTematica'=>'nullable',
+            'nome_tematica'=>'nullable',
             'telefone'=>'nullable|max:15',
             'telecentro'=>'required',
             'acervoespecializado'=>'required',
@@ -274,7 +302,7 @@ class EquipamentoController extends Controller
                 'secretaria_id' => $request->identificacaoSecretaria,
                 'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
                 'tematico' => $request->tematico,
-                'nomeTematica' => $request->nomeTematica,
+                'nome_tematica' => $request->nome_tematica,
                 'telefone' => $request->telefone,
                 'telecentro' => $request->telecentro,
                 'acervo_especializado' => $request->acervoespecializado,

@@ -71,7 +71,7 @@
              <input class="form-control" type="text" name="sigla">
            </div>
            <div class="form-group">
-             <label>Descrição</label>
+             <label for="descricao">Descrição</label>
              <input class="form-control" type="text" name="descricao">
            </div>
        </div>
@@ -106,3 +106,49 @@
       </div>
     </div>
   </div>
+
+<!-- Adicionar Subprefeitura -->
+    <div class="modal fade" id="addSubprefeitura" role="dialog" aria-labelledby="addSubprefeituraLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Adicionar nova Subprefeitura?</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{route('equipamentos.index')}}">
+                        {{csrf_field()}}
+                        <label>Descrição</label>
+                        <input class="form-control" type="text" name="descricao">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" class="btn btn-success" name="novaSubprefeitura" value="Adicionar">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- Adicionar Distrito -->
+    <div class="modal fade" id="addDistrito" role="dialog" aria-labelledby="addDistritoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Adicionar novo Distrito?</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{route('equipamentos.index')}}">
+                        {{csrf_field()}}
+                        <label>Descrição</label>
+                        <input class="form-control" type="text" name="descricao">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" class="btn btn-success" name="novoDistrito" value="Adicionar">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>

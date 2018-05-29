@@ -86,8 +86,8 @@
                     <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for=nomeTematica>Nome da Tematica</label>
-                    <input type="text" class="form-control" name="nomeTematica" id="nomeTematica" value="{{$equipamento->nomeTematica}}" disabled>
+                    <label for=nome_tematica>Nome da Tematica</label>
+                    <input type="text" class="form-control" name="nome_tematica" id="nome_tematica" value="{{$equipamento->nome_tematica}}" disabled>
                 </div>
                 <div class="form-group col-md-3" style="padding-right: 0px">
                     <label for="telefone">Telefone</label>
@@ -256,10 +256,10 @@
             {
                 if ($(this).val() == 0)
                 {
-                    $("#nomeTematica").attr('disabled', true).val("");
+                    $("#nome_tematica").attr('disabled', true).val("");
                 } else
                 {
-                    $("#nomeTematica").attr('disabled', false).val("{{$equipamento->nomeTematica}}");
+                    $("#nome_tematica").attr('disabled', false).val("{{$equipamento->nome_tematica}}");
                 }
             });
         });

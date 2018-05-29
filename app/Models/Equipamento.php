@@ -15,7 +15,7 @@ class Equipamento extends Model
         'secretaria_id',
         'subordinacao_administrativa_id',
         'tematico',
-        'nomeTematica',
+        'nome_tematica',
         'telefone',
         'telecentro',
         'acervoespecializado',

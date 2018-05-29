@@ -55,7 +55,7 @@
                             </tr>
                             <tr>
                                 <th width="30%">Nome da Temática:</th>
-                                <td>{{$equipamento->nomeTematica}}</td>
+                                <td>{{$equipamento->nome_tematica}}</td>
                             </tr>
                         @else
                             <tr>
