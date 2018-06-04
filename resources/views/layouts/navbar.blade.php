@@ -1,11 +1,13 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-
+        
         <div class="navbar-header">
+            @if(Auth::user()->pergunta_seguranca_id)
             <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                 <i class="glyphicon glyphicon-align-left"></i>
                 <span>Abrir Menu</span>
             </button>
+            @endif
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
