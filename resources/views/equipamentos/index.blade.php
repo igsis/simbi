@@ -11,16 +11,17 @@
         <div class="form-group">
         	 <select class="form-control" name="status" id="status">
         	 	<option value="">-- Status --</option>
-        	 	<option value="">Ativo</option>
-        	 	<option value="">Fechado</option>
-        	 	<option value="">Inativo</option>
+        	 	<option value="1">Ativo</option>
+        	 	<option value="2">Inativo</option>
+        	 	<option value="3">Fechado</option>
         	 </select>
         </div>
          <div class="form-group">
         	 <select class="form-control" name="sigla" id="sigla">
         	 	<option value="">-- Sigla --</option>
-        	 	<option value="">glo</option>
-        	 	<option value="">ssp</option>
+        	 	@foreach($siglas as $sigla)
+					<option value="{{ $sigla->id }}">{{$sigla->sigla}}</option>
+        	 	@endforeach
         	 </select>
         </div>
         {{-- <input type="text" name="email" class="form-control" placeholder="E-mail"> --}}
@@ -54,7 +55,14 @@
 		</tbody>
 	</table>
 </div>
-<div class="text-center"> {!! $equipamentos->links() !!} </div>
+<div class="text-center"> 
+	@if(isset($dataForm))
+        {!! $equipamentos->appends($dataForm)->links() !!} 
+    @else
+        {!! $equipamentos->links() !!} 
+    @endif
+
+</div>
 <a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success">Adicionar Equipamento</a>
 
 @endsection

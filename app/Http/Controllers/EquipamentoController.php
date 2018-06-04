@@ -346,8 +346,11 @@ class EquipamentoController extends Controller
     public function searchEquipamento(Request $request, Equipamento $equipamento)
     {
         $dataForm = $request->except('_token');
+
+        $siglas = EquipamentoSigla::all();
+
         $equipamentos = $equipamento->search($dataForm)->orderBy('nome')->paginate(10);
 
-        return view('equipamentos.index', compact('dataForm', 'equipamentos'));
+        return view('equipamentos.index', compact('dataForm', 'equipamentos', 'siglas'));
     }
 }
