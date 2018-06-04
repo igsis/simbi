@@ -57,4 +57,25 @@ class Equipamento extends Model
     {
         $this->belongsToMany(User::class);
     }
+
+    public function search(Array $data)
+    {
+        return $this->where(function ($query) use($data)
+        {
+            $query->where('publicado', 1);
+
+            if (isset($data['nome'])) {
+                $query->where('nome', $data['nome']);
+            }
+
+            if (isset($data['sigla'])) {
+                $query->where('equipamento_sigla_id', $data['sigla']);
+            }
+            
+            if (isset($data['status'])) {
+                $query->where('status_id', $data['status']);
+            }
+
+        });
+    }
 }

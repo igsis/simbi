@@ -341,4 +341,13 @@ class EquipamentoController extends Controller
     {
         //
     }
+
+    // Filtro de Equipamentos
+    public function searchEquipamento(Request $request, Equipamento $equipamento)
+    {
+        $dataForm = $request->except('_token');
+        $equipamentos = $equipamento->search($dataForm)->orderBy('nome')->paginate(10);
+
+        return view('equipamentos.index', compact('dataForm', 'equipamentos'));
+    }
 }

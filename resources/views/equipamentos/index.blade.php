@@ -5,9 +5,9 @@
 <h1><i class="glyphicon glyphicon-home"></i> Equipamentos Cadastrados</h1>
 <div class="panel-heading">Pagina {{$equipamentos->currentPage()}} de {{$equipamentos->lastPage()}}</div>
 <div class="form">
-    <form action="" method="POST" class="form form-inline">
+    <form action="{{ route('search-equipamento') }}" method="POST" class="form form-inline">
         {{ csrf_field() }}
-        <input type="text" name="name" class="form-control" placeholder="Nome do equipamento">
+        <input type="text" name="nome" class="form-control" placeholder="Nome do equipamento">
         <div class="form-group">
         	 <select class="form-control" name="status" id="status">
         	 	<option value="">-- Status --</option>
@@ -17,7 +17,7 @@
         	 </select>
         </div>
          <div class="form-group">
-        	 <select class="form-control" name="status" id="status">
+        	 <select class="form-control" name="sigla" id="sigla">
         	 	<option value="">-- Sigla --</option>
         	 	<option value="">glo</option>
         	 	<option value="">ssp</option>

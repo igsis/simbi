@@ -203,7 +203,7 @@ class UserController extends Controller
         return redirect('home');
     }
 
-    // filtro de Usuários
+    // Filtro de Usuários
     public function searchUser(Request $request, User $user)
     {
         $dataForm = $request->except('_token');
