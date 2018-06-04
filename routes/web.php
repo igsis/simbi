@@ -26,13 +26,15 @@ Route::group(['middleware' => 'auth'], function (){
 				'create' => 'equipamentos.cadastro',
 		]]);
 
+		Route::any('equipamentos-search', 'EquipamentoController@searchEquipamento')->name('search-equipamento');
+
 		Route::resource('usuarios', 'UserController', [
 			'names' => [
 				'edit' => 'usuarios.editar',
 				'create' => 'usuarios.cadastro',
 		]]);
 
-		Route::any('usuarios-search', 'UserController@searchUser')->name('search');
+		Route::any('usuarios-search', 'UserController@searchUser')->name('search-user');
 
 		Route::post('usuarios/vincula', 'UserController@vinculaEquipamento');
 		

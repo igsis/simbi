@@ -62,6 +62,10 @@ class User extends Authenticatable
             if (isset($data['name'])) {
                 $query->where('name', $data['name']);
             }
+
+            if (isset($data['login'])) {
+                $query->where('login', $data['login']);
+            }
             
             if (isset($data['email'])) {
                 $query->where('email', $data['email']);

@@ -6,10 +6,11 @@
 <div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
 
 <div class="">
-    <form action="{{ route('search') }}" method="POST" class="form form-inline">
+    <form action="{{ route('search-user') }}" method="POST" class="form form-inline">
         {{ csrf_field() }}
         {{-- <input type="hidden" name="_method" value="PATCH"> --}}
         <input type="text" name="name" class="form-control" placeholder="Nome">
+        <input type="text" name="login" class="form-control" placeholder="Login">
         <input type="text" name="email" class="form-control" placeholder="E-mail">
         {{-- <input type="text" class="form-control" placeholder="Cargo"> --}}
         <button class="btn btn-primary">Pesquisar</button>
