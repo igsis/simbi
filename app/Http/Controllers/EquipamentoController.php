@@ -32,7 +32,8 @@ class EquipamentoController extends Controller
     public function index()
     {
         $equipamentos = Equipamento::where('publicado', '=', 1)->orderBy('nome')->paginate(10);
-        return view('equipamentos.index')->with('equipamentos', $equipamentos);
+        $siglas = EquipamentoSigla::all();
+        return view('equipamentos.index', compact('siglas', 'equipamentos'));
     }
 
     /**

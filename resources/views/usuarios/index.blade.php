@@ -39,7 +39,7 @@
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
                     <td>
                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
-                        <button class="btn btn" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px">Vincular Equipamento</button>
+                        <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px">Vincular Equipamento</button>
                         @hasrole('Administrador')
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                 {{ csrf_field() }}
