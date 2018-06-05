@@ -48,7 +48,11 @@
 					<td>{{$equipamento->telefone}}</td>
 					<td>{{$equipamento->status->descricao}}</td>
 					<td>
-						<a href="{{ route('equipamentos.show', $equipamento->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Mais Detalhes</a>
+						@hasrole('Administrador')
+                        <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-info">Editar Equipamento</a>
+                        @endhasrole
+						<a href="{{ route('equipamentos.show', $equipamento->id) }}" class="btn btn-warning pull-left" style="margin-right: 3px">Mais Detalhes</a>
+						<a href="{{ route('equipamentos.show', $equipamento->id) }}" class="btn btn-warning pull-left" style="margin-right: 3px">Mais Detalhes</a>
 					</td>
 				</tr>
 			@endforeach

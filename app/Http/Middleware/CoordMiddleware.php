@@ -33,7 +33,7 @@ class CoordMiddleware
                 }
             }
 
-             if ($request->is("usuarios/$id"))
+            if ($request->is("usuarios/$id"))
             {
                 if (Auth::user()->hasPermissionTo('Funcionario'))
                 {

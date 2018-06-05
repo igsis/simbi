@@ -178,6 +178,16 @@ class UserController extends Controller
              'Usuario Excluido com Sucesso.');
     }
 
+    public function active($id)
+    {
+        User::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('usuarios.desativados')
+            ->with('flash_message',
+             'Usuario Ativado com Sucesso.');
+    }
+
  
     // Pergunta de seguranca para primeiro acesso
     public function perguntaSeguranca()
@@ -203,7 +213,7 @@ class UserController extends Controller
         return redirect('home');
     }
 
-    // Filtro de Usuários
+    // Filtro de Usuários Ativados
     public function searchUser(Request $request, User $user)
     {
         $dataForm = $request->except('_token');
@@ -214,5 +224,25 @@ class UserController extends Controller
 
         return view('usuarios.index', compact('users', 'equipamentos','dataForm'));
 
+    }
+
+    // Filtro de Usuários Desativados
+    public function userDisabled(Request $request, User $user)
+    {
+        $dataForm = $request->except('_token');
+
+        $users = $user->searchUsersDisabled($dataForm)->orderBy('name')->paginate(10);
+
+        $equipamentos = Equipamento::all();
+
+        return view('usuarios.desativados', compact('users', 'equipamentos','dataForm'));
+
+    }
+    // Usuários Desativados
+    public function disabled()
+    {
+        $users = User::where('publicado', '=', 0)->orderBy('name')->paginate(10);
+        $equipamentos = Equipamento::all();
+        return view('usuarios.desativados', compact('users', 'equipamentos'));
     }
 }
