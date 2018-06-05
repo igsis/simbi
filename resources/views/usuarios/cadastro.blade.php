@@ -3,7 +3,7 @@
 @section('conteudo')
 
     <div class="col-lg-6 col-lg-offset-3">
-        <h1><i class="glyphicon glyphicon-user"></i>Cadastrar Usuario</h1>
+        <h1><i class="glyphicon glyphicon-user"></i>Cadastrar Usuário</h1>
         <hr>
 
         <form method="POST" action="{{ route('usuarios.index') }}">
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="form-group col-md-9">
-                    <label for="email">Email</label>
+                    <label for="email">E-mail</label>
                     <input class="form-control" type="email" name="email" id="email">
                 </div>
             </div>

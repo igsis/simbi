@@ -13,7 +13,8 @@
         <input type="text" name="login" class="form-control" placeholder="Login">
         <input type="text" name="email" class="form-control" placeholder="E-mail">
         {{-- <input type="text" class="form-control" placeholder="Cargo"> --}}
-        <button class="btn btn-primary">Pesquisar</button>
+        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
+        Pesquisar</button>
     </form>
 </div>
 <hr>
@@ -23,7 +24,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Login</th>
-                <th>Email</th>
+                <th>E-mail</th>
                 <th>Equipamento(s) Vinculado(s)</th>
                 <th>Cargo</th>
                 <th>Operações</th>
@@ -38,13 +39,13 @@
                     <td>{{ $user->equipamentos()->pluck('nome')->implode('') }}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
                     <td>
-                        <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px">Editar</a>
-                        <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px">Vincular Equipamento</button>
+                        <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                        <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px"><i class="glyphicon glyphicon-retweet"></i> Vincular Equipamento</button>
                         @hasrole('Administrador')
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'>Excluir
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'><i class="glyphicon glyphicon-trash"></i> Excluir
                                 </button>
                             </form>
                         @endhasrole
@@ -64,7 +65,7 @@
 
 </div>
 @hasrole('Administrador')
-    <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success">Adicionar Usuario</a>
+    <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Usuario</a>
 @endhasrole
 
 {{--Modal para vincular Equipamentos--}}
@@ -73,7 +74,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Vincular equipamento ao usuario</h4>
+                <h4 class="modal-title">Vincular equipamento ao usuário</h4>
             </div>
             <div class="modal-body">
                 <form id="formVincula" method="POST">
@@ -120,7 +121,7 @@
         $('#vinculaEquipamento').on('show.bs.modal', function (e)
         {
             var nome = $(e.relatedTarget).attr('data-nome');
-            $(this).find('.modal-title').text(`Vincular equipamento ao usuario: ${nome}`);
+            $(this).find('.modal-title').text(`Vincular equipamento ao usuário: ${nome}`);
 
             var id = $(e.relatedTarget).attr('data-id');
             $(this).find('#formVincula').attr('action', `{{url('usuarios')}}/${id}`);

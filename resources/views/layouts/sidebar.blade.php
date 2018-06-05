@@ -12,19 +12,19 @@
         <li class="active">
             <a href="{{url('/')}}">
             	<i class="glyphicon glyphicon-home"></i>
-            	Inicio
+            	Início
         	</a>
         </li>
         <li>
             @hasanyrole('Coordenador|Administrador')
                 <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false">
                     <i class="glyphicon glyphicon-user"></i>
-                    Usuário
+                    Usuários
                 </a>
                 <ul class="collapse list-unstyled" id="userSubmenu">
-                    <li><a href="{{ route('usuarios.index') }}">Painel de Usuarios</a></li>
+                    <li><a href="{{ route('usuarios.index') }}">Lista de Usuários</a></li>
                     @hasrole('Administrador')
-                        <li><a href="{{ route('usuarios.cadastro') }}">Cadastrar Usuario</a></li>
+                        <li><a href="{{ route('usuarios.cadastro') }}">Cadastrar Usuários</a></li>
                     @endhasrole
                 </ul>
             @endhasanyrole
@@ -32,11 +32,10 @@
             <li>
                 <a href="#modSubmenu" data-toggle="collapse" aria-expanded="false">
                 	<i class="glyphicon glyphicon-th-large"></i>
-                	Módulos</a>
+                	Equipamentos</a>
                 <ul class="collapse list-unstyled" id="modSubmenu">
-                    <li><a href="{{route('equipamentos.index')}}">Equipamentos</a></li>
-                    <li><a href="#">Módulo 2</a></li>
-                    <li><a href="#">Módulo 3</a></li>
+                    <li><a href="{{route('equipamentos.index')}}">Lista de Equipamentos</a></li>
+                    <li><a href="{{ route('equipamentos.cadastro') }}"><i class="fas fa-users"></i>Cadastrar Equipamentos</a></li>
                 </ul>
             </li>
         <li>
