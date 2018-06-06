@@ -74,26 +74,5 @@ class User extends Authenticatable
 
         });
 
-    }
-    public function searchUsersDisabled(Array $data)
-    {
-        return $this->where(function ($query) use($data)
-        {
-            $query->where('publicado', 0);
-
-            if (isset($data['name'])) {
-                $query->where('name', $data['name']);
-            }
-
-            if (isset($data['login'])) {
-                $query->where('login', $data['login']);
-            }
-            
-            if (isset($data['email'])) {
-                $query->where('email', $data['email']);
-            }
-
-        });
-
-    }    
+    } 
 }

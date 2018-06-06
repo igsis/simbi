@@ -169,12 +169,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $types)
     {
+        $type = $types->type;
+
         User::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->route('usuarios.index')
+        return redirect()->route('usuarios.index', ['type' => $type])
             ->with('flash_message',
              'Usuario Excluido com Sucesso.');
     }
@@ -229,25 +231,6 @@ class UserController extends Controller
 
     }
 
-    // Filtro de Usuários Desativados
-    public function userDisabled(Request $request, User $user)
-    {
-        $dataForm = $request->except('_token');
-
-        $users = $user->searchUsersDisabled($dataForm)->orderBy('name')->paginate(10);
-
-        $equipamentos = Equipamento::all();
-
-        return view('usuarios.desativados', compact('users', 'equipamentos','dataForm'));
-
-    }
-    // Usuários Desativados
-    public function disabled()
-    {
-        $users = User::where('publicado', '=', 0)->orderBy('name')->paginate(10);
-        $equipamentos = Equipamento::all();
-        return view('usuarios.desativados', compact('users', 'equipamentos'));
-    }
 
     public function ativarUser(Request $login, User $users)
     {

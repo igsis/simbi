@@ -341,12 +341,14 @@ class EquipamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $types)
     {
+        $type = $types->type;
+
         Equipamento::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->route('equipamentos.index')
+        return redirect()->route('equipamentos.index', ['type' => $type])
             ->with('flash_message',
              'Equipamento Excluido com Sucesso.');
     }

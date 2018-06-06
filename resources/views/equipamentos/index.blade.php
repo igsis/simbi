@@ -63,8 +63,9 @@
 						<a href="{{ route('equipamentos.show', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> Mais Detalhes</a>
 						@hasrole('Administrador')
 						@if($equipamento->publicado == 1)
-							<form method="POST" action="{{ route('equipamentos.destroy', $equipamento->id) }}" style="display: inline;">
+							<form method="POST" action="{{ route('equipamentos.destroy', $equipamento->id, $type) }}" style="display: inline;">
 								{{ csrf_field() }}
+								<input type="hidden" name="type" value="{{ $type }}">
 								<input type="hidden" name="_method" value="DELETE">
 								<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$equipamento->nome}}?" data-message='Desejar realmente excluir este Equipamento?'><i class="glyphicon glyphicon-trash"></i> Excluir
 								</button>
@@ -72,6 +73,7 @@
 						@else
 							<form method="POST" action="{{ route('ativar.equipamento') }}" style="display: inline;">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="type" value="{{ $type }}">
                                 <input type="hidden" name="_method" value="PUT">
                                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$equipamento->name}}?" data-message='Desejar realmente ativar este usuario?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
                                 </button>

@@ -53,6 +53,7 @@
                         @if($user->publicado == 1)
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="type" value="{{ $type }}"> 
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'><i class="glyphicon glyphicon-trash"></i> Excluir
                                 </button>
@@ -60,6 +61,7 @@
                         @else
                             <form method="POST" action="{{ route('ativar.user', $user->login) }}" style="display: inline;">
                                 {{ csrf_field() }}
+                                <input type="hidden" name="type" value="{{ $type }}">
                                 <input type="hidden" name="_method" value="PUT">
                                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuario?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
                                 </button>
