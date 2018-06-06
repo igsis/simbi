@@ -2,13 +2,21 @@
 
 @section('conteudo')
 
-<h1><i class="glyphicon glyphicon-user"></i>Usuários Cadastrados</h1>
+<h1><i class="glyphicon glyphicon-user"></i>
+{{-- Equipamento ativo --}}
+@if($type == 1)
+    Usuários Cadastrados
+@else 
+    Usuários Desativados
+@endif
+</h1>
 <div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
 
 <div class="">
     <form action="{{ route('search-user') }}" method="POST" class="form form-inline">
         {{ csrf_field() }}
         {{-- <input type="hidden" name="_method" value="PATCH"> --}}
+        <input type="hidden" name="types" value="{{ $type }}">
         <input type="text" name="name" class="form-control" placeholder="Nome" title="Pesquisar usuários pelo Nome">
         <input type="text" name="login" class="form-control" placeholder="Login" title="Pesquisar usuários pelo Login/Prodam">
         <input type="text" name="email" class="form-control" placeholder="E-mail" title="Pesquisar usuários pelo E-mail">
@@ -42,12 +50,22 @@
                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px"><i class="glyphicon glyphicon-retweet"></i> Vincular Equipamento</button>
                         @hasrole('Administrador')
+                        @if($user->publicado == 1)
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'><i class="glyphicon glyphicon-trash"></i> Excluir
                                 </button>
                             </form>
+                        @else
+                            <form method="POST" action="{{ route('ativar.user', $user->login) }}" style="display: inline;">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="PUT">
+                                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuario?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
+                                </button>
+                            </form>
+
+                        @endif
                         @endhasrole
                     </td>
                 </tr>

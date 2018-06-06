@@ -22,10 +22,10 @@
                     Usuários
                 </a>
                 <ul class="collapse list-unstyled" id="userSubmenu">
-                    <li><a href="{{ route('usuarios.index') }}">Lista de Usuários</a></li>
+                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}">Lista de Usuários</a></li>
                     @hasrole('Administrador')
                         <li><a href="{{ route('usuarios.cadastro') }}">Cadastrar Usuários</a></li>
-                        <li><a href="{{ route('usuarios.desativados') }}"> Usuários Desativados</a></li>
+                        <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Usuários Desativados</a></li>
                     @endhasrole
                 </ul>
             @endhasanyrole
@@ -35,8 +35,9 @@
                 	<i class="glyphicon glyphicon-th-large"></i>
                 	Equipamentos</a>
                 <ul class="collapse list-unstyled" id="modSubmenu">
-                    <li><a href="{{route('equipamentos.index')}}">Lista de Equipamentos</a></li>
+                    <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Lista de Equipamentos</a></li>
                     <li><a href="{{ route('equipamentos.cadastro') }}"><i class="fas fa-users"></i>Cadastrar Equipamentos</a></li>
+                    <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Equipamentos Desativados</a></li>
                 </ul>
             </li>
         <li>

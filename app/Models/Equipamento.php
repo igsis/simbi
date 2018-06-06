@@ -20,7 +20,8 @@ class Equipamento extends Model
         'telecentro',
         'acervoespecializado',
         'nucleobraile',
-        'status_id'
+        'status_id',
+        'publicado'
 	];
 
 	public function endereco()
@@ -62,7 +63,7 @@ class Equipamento extends Model
     {
         return $this->where(function ($query) use($data)
         {
-            $query->where('publicado', 1);
+            $query->where('publicado', $data['types']);
 
             if (isset($data['nome'])) {
                 $query->where('nome', $data['nome']);

@@ -29,11 +29,12 @@ class EquipamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $types)
     {
-        $equipamentos = Equipamento::where('publicado', '=', 1)->orderBy('nome')->paginate(10);
+        $type = $types->type;
+        $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->paginate(10);
         $siglas = EquipamentoSigla::all();
-        return view('equipamentos.index', compact('siglas', 'equipamentos'));
+        return view('equipamentos.index', compact('siglas', 'equipamentos', 'type'));
     }
 
     /**
@@ -213,6 +214,8 @@ class EquipamentoController extends Controller
             'Equipamento inserido com sucesso');
     }
 
+    
+
     /**
      * Display the specified resource.
      *
@@ -340,7 +343,12 @@ class EquipamentoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Equipamento::findOrFail($id)
+            ->update(['publicado' => 0]);
+
+        return redirect()->route('equipamentos.index')
+            ->with('flash_message',
+             'Equipamento Excluido com Sucesso.');
     }
 
     // Filtro de Equipamentos
@@ -348,10 +356,17 @@ class EquipamentoController extends Controller
     {
         $dataForm = $request->except('_token');
 
+        $type = $request->types;
+
         $siglas = EquipamentoSigla::all();
 
         $equipamentos = $equipamento->search($dataForm)->orderBy('nome')->paginate(10);
 
-        return view('equipamentos.index', compact('dataForm', 'equipamentos', 'siglas'));
+        return view('equipamentos.index', compact('dataForm', 'equipamentos', 'siglas', 'type'));
+    }
+
+    public function ativarEquipamento()
+    {
+        echo 'em andamento';
     }
 }

@@ -58,7 +58,7 @@ class User extends Authenticatable
     {
         return $this->where(function ($query) use($data)
         {
-            $query->where('publicado', 1);
+            $query->where('publicado', $data['types']);
 
             if (isset($data['name'])) {
                 $query->where('name', $data['name']);

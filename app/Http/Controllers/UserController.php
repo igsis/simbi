@@ -25,11 +25,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $types)
     {
-        $users = User::where('publicado', '=', 1)->orderBy('name')->paginate(10);
+        $type = $types->type;
+        $users = User::where('publicado', '=', $type)->orderBy('name')->paginate(10);
         $equipamentos = Equipamento::all();
-        return view('usuarios.index', compact('users', 'equipamentos'));
+        return view('usuarios.index', compact('users', 'equipamentos','type'));
     }
 
     /**
@@ -218,11 +219,13 @@ class UserController extends Controller
     {
         $dataForm = $request->except('_token');
 
+        $type = $request->types;
+
         $users = $user->search($dataForm)->orderBy('name')->paginate(10);
 
         $equipamentos = Equipamento::all();
 
-        return view('usuarios.index', compact('users', 'equipamentos','dataForm'));
+        return view('usuarios.index', compact('users', 'equipamentos','dataForm', 'type'));
 
     }
 
@@ -244,5 +247,17 @@ class UserController extends Controller
         $users = User::where('publicado', '=', 0)->orderBy('name')->paginate(10);
         $equipamentos = Equipamento::all();
         return view('usuarios.desativados', compact('users', 'equipamentos'));
+    }
+
+    public function ativarUser(Request $login, User $users)
+    {
+        // $users->where('login', '=', $login);
+        // $user->update(['publicado' => '1']);
+
+        // dd($users->name);
+        // return redirect()->route('usuarios.index')
+        //             ->with('flash_message',
+        //                 'Usuário ativado com Sucesso');
+        
     }
 }
