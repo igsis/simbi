@@ -353,6 +353,16 @@ class EquipamentoController extends Controller
              'Equipamento Excluido com Sucesso.');
     }
 
+    public function ativarEquipamento(Request $request)
+    {
+        Equipamento::findOrFail($request->id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('equipamentos.index', ['type' => $request->type])
+            ->with('flash_message',
+             'Usuario Ativado com Sucesso.');
+    }
+
     // Filtro de Equipamentos
     public function searchEquipamento(Request $request, Equipamento $equipamento)
     {
@@ -367,8 +377,4 @@ class EquipamentoController extends Controller
         return view('equipamentos.index', compact('dataForm', 'equipamentos', 'siglas', 'type'));
     }
 
-    public function ativarEquipamento()
-    {
-        echo 'em andamento';
-    }
 }

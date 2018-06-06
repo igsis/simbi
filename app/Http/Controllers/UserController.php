@@ -181,12 +181,13 @@ class UserController extends Controller
              'Usuario Excluido com Sucesso.');
     }
 
-    public function active($id)
+    public function ativarUser(Request $request)
     {
-        User::findOrFail($id)
+
+        User::findOrFail($request->id)
             ->update(['publicado' => 1]);
 
-        return redirect()->route('usuarios.desativados')
+        return redirect()->route('usuarios.index', ['type' => $request->type])
             ->with('flash_message',
              'Usuario Ativado com Sucesso.');
     }
@@ -231,16 +232,4 @@ class UserController extends Controller
 
     }
 
-
-    public function ativarUser(Request $login, User $users)
-    {
-        // $users->where('login', '=', $login);
-        // $user->update(['publicado' => '1']);
-
-        // dd($users->name);
-        // return redirect()->route('usuarios.index')
-        //             ->with('flash_message',
-        //                 'Usuário ativado com Sucesso');
-        
-    }
 }

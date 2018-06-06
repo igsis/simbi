@@ -59,9 +59,10 @@
                                 </button>
                             </form>
                         @else
-                            <form method="POST" action="{{ route('ativar.user', $user->login) }}" style="display: inline;">
+                            <form method="POST" action="{{ route('ativar.user') }}" style="display: inline;">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="type" value="{{ $type }}">
+                                <input type="hidden" name="id" value="{{ $user->id }}">
                                 <input type="hidden" name="_method" value="PUT">
                                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuario?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
                                 </button>
@@ -125,6 +126,8 @@
             $(this).find('.modal-body p').text($message);
             $title = $(e.relatedTarget).attr('data-title');
             $(this).find('.modal-title').text($title);
+            $message = $(e.relatedTarget).attr('data-footer');
+            $(this).find('.modal-footer #confirm ').text($message);
              
             // Pass form reference to modal for submission on yes/ok
             var form = $(e.relatedTarget).closest('form');

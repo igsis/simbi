@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::any('ativar-user','UserController@ativarUser')->name('ativar.user');
 
-		Route::any('ativar-equipamento','UserController@ativarEquipamento')->name('ativar.equipamento');
+		Route::any('ativar-equipamento','EquipamentoController@ativarEquipamento')->name('ativar.equipamento');
 
 		Route::any('usuarios/search', 'UserController@searchUser')->name('search-user');
 
