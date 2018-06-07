@@ -120,6 +120,7 @@ class UserController extends Controller
         {
             $user->update(['password' => 'simbi@2018']);
             return redirect()->route('usuarios.index')
+            return redirect()->back()
             ->with('flash_message',
             'Senha Resetada! Senha padrão: simbi@2018');
         }
@@ -158,7 +159,7 @@ class UserController extends Controller
             $user->roles()->detach();
         }
 
-        return redirect()->route('usuarios.index')
+        return redirect()->back()
             ->with('flash_message',
              'Usuario Editado com Sucesso!');
     }
