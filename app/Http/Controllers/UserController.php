@@ -119,7 +119,6 @@ class UserController extends Controller
         if($request->has('novaSenha'))
         {
             $user->update(['password' => 'simbi@2018']);
-            return redirect()->route('usuarios.index')
             return redirect()->back()
             ->with('flash_message',
             'Senha Resetada! Senha padrão: simbi@2018');
