@@ -158,11 +158,11 @@
 
         <div class="row">
             <div class="form-group col-md-offset-3 col-md-3">
-                <label for="subprefeitura">Subprefeitura</label>
-                <select name="subprefeitura" id="subprefeitura" class="form-control">
+                <label for="prefeituraRegional">Prefeituras Regionais</label>
+                <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
                     <option value="">Selecione uma Opção</option>
-                    @foreach($subprefeituras as $subprefeitura)
-                        <option value="{{$subprefeitura->id}}">{{$subprefeitura->descricao}}</option>
+                    @foreach($prefeituraRegionais as $prefeituraRegional)
+                        <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
                     @endforeach
                 </select>
             </div>
@@ -179,7 +179,7 @@
 
         <div class="row">
             <div class="form-group col-md-offset-3 col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubprefeitura">Adicionar Subprefeitura</button>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional">Adicionar Prefeitura Regional</button>
             </div>
             <div class="form-group col-md-3">
                 <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito">Adicionar Distrito</button>

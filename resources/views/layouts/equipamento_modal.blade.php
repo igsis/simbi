@@ -107,13 +107,13 @@
     </div>
   </div>
 
-<!-- Adicionar Subprefeitura -->
-    <div class="modal fade" id="addSubprefeitura" role="dialog" aria-labelledby="addSubprefeituraLabel" aria-hidden="true">
+<!-- Adicionar Prefeitura Regional -->
+    <div class="modal fade" id="addPrefeituraRegional" role="dialog" aria-labelledby="addPrefeituraRegionalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Adicionar nova Subprefeitura?</h4>
+                    <h4 class="modal-title">Adicionar nova Prefeitura Regional?</h4>
                 </div>
                 <div class="modal-body">
                     <form method="POST" action="{{route('equipamentos.index')}}">
@@ -123,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <input type="submit" class="btn btn-success" name="novaSubprefeitura" value="Adicionar">
+                    <input type="submit" class="btn btn-success" name="novaPrefeituraRegional" value="Adicionar">
                 </div>
                 </form>
             </div>

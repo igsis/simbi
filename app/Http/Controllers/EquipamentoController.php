@@ -8,7 +8,7 @@ use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoSigla;
-use Simbi\Models\Subprefeitura;
+use Simbi\Models\PrefeituraRegional;
 use Simbi\Models\TipoServico;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\Secretaria;
@@ -51,7 +51,7 @@ class EquipamentoController extends Controller
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        $subprefeituras = Subprefeitura::orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
         $distritos = Distrito::orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
@@ -64,7 +64,7 @@ class EquipamentoController extends Controller
                 'macrorregioes',
                 'regioes',
                 'regionais',
-                'subprefeituras',
+                'prefeituraRegionais',
                 'distritos',
                 'status'
             )
@@ -126,15 +126,15 @@ class EquipamentoController extends Controller
                 'Subordinacao Administrativa inserida com sucesso');
         }
 
-        elseif($request->has('novaSubprefeitura')){
+        elseif($request->has('novaPrefeituraRegional')){
             $data = $this->validate($request, [
                 'descricao'=>'required'
             ]);
 
-            Subprefeitura::create($data);
+            PrefeituraRegional::create($data);
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message',
-                'Subprefeitura inserida com sucesso!');
+                'Prefeitura Regional inserida com sucesso!');
         }
 
         elseif($request->has('novoDistrito')){
@@ -173,7 +173,7 @@ class EquipamentoController extends Controller
                 'complemento'=>'nullable',
                 'cidade'=>'nullable',
                 'uf'=>'nullable|max:2',
-                'subprefeitura'=>'required',
+                'prefeituraRegional'=>'required',
                 'distrito'=>'required',
                 'macrorregiao'=>'required',
                 'regiao'=>'required',
@@ -189,7 +189,7 @@ class EquipamentoController extends Controller
                         'bairro' => $request->bairro,
                         'cidade' => $request->cidade,
                         'estado' => $request->uf,
-                        'subprefeitura_id' => $request->subprefeitura,
+                        'prefeituraRegional_id' => $request->prefeituraRegional,
                         'distrito_id' => $request->distrito,
                         'macrorregiao_id' => $request->macrorregiao,
                         'regiao_id' => $request->regiao,
@@ -292,7 +292,7 @@ class EquipamentoController extends Controller
             'complemento'=>'nullable',
             'cidade'=>'nullable',
             'uf'=>'nullable|max:2',
-            'subprefeitura'=>'nullable',
+            'prefeituraRegional'=>'nullable',
             'distrito'=>'nullable',
             'macrorregiao'=>'nullable',
             'regiao'=>'nullable',
@@ -323,7 +323,7 @@ class EquipamentoController extends Controller
             'bairro' => $request->bairro,
             'cidade' => $request->cidade,
             'estado' => $request->uf,
-            'subprefeitura_id' => $request->subprefeitura,
+            'prefeituraRegional_id' => $request->prefeituraRegional,
             'distrito_id' => $request->distrito,
             'macrorregiao_id' => $request->macrorregiao,
             'regiao_id' => $request->regiao,

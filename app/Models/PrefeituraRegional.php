@@ -5,8 +5,10 @@ namespace Simbi\Models;
 use Illuminate\Database\Eloquent\Model;
 use Simbi\Models\Endereco;
 
-class Subprefeitura extends Model
+class PrefeituraRegional extends Model
 {
+	protected $table = 'prefeitura_regionais';
+	
     public $timestamps = false;
 
     protected $fillable = [
