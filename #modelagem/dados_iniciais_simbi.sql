@@ -258,10 +258,10 @@ DELETE FROM `subordinacao_administrativas`;
 /*!40000 ALTER TABLE `subordinacao_administrativas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `subordinacao_administrativas` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.subprefeituras: ~0 rows (aproximadamente)
-DELETE FROM `subprefeituras`;
-/*!40000 ALTER TABLE `subprefeituras` DISABLE KEYS */;
-INSERT INTO `subprefeituras` (`id`, `descricao`) VALUES
+-- Copiando dados para a tabela simbi.prefeitura_regionais: ~0 rows (aproximadamente)
+DELETE FROM `prefeitura_regionais`;
+/*!40000 ALTER TABLE `prefeitura_regionais` DISABLE KEYS */;
+INSERT INTO `prefeitura_regionais` (`id`, `descricao`) VALUES
 (1, 'Aricanduva'),
 (2, 'Butantã'),
 (3, 'Campo Limpo'),
@@ -294,7 +294,7 @@ INSERT INTO `subprefeituras` (`id`, `descricao`) VALUES
 (30, 'Vila Maria/Vila Guilherme'),
 (31, 'Vila Mariana'),
 (32, 'Vila Prudente');
-/*!40000 ALTER TABLE `subprefeituras` ENABLE KEYS */;
+/*!40000 ALTER TABLE `prefeitura_regionais` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.tipo_servicos: ~0 rows (aproximadamente)
 DELETE FROM `tipo_servicos`;
