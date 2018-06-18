@@ -75,7 +75,7 @@ class UserController extends Controller
                 $user->assignRole($role_r);
         }
 
-        return redirect()->route('usuarios.index')->with('flash_message',
+        return redirect()->back()->with('flash_message',
              'Usuario Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 
@@ -131,9 +131,18 @@ class UserController extends Controller
                     'email'=>'required|email|unique:users,email,'.$id,
                     'password'=>'required|min:6|confirmed',
                     'perguntaSeguranca'=>'required',
-                    'respostaSeguranca'=>'required'
+                    // 'respostaSeguranca'=>'required'
             ]);
             $input = $request->only($data);
+
+            $user->update([
+                    'name'=> $request->name,
+                    'login'=> $request->login,
+                    'email'=> $request->email,
+                    'password'=> $request->password,
+                    'pergunta_seguranca_id'=> $request->perguntaSeguranca,
+                    'resposta_seguranca'=> $request->respostaSeguranca,
+            ]);
         }
         else
         {
@@ -141,13 +150,21 @@ class UserController extends Controller
                     'name'=>'required',
                     'email'=>'required|email|unique:users,email,'.$id,
                     'perguntaSeguranca'=>'required',
-                    'respostaSeguranca'=>'required'
+                    // 'respostaSeguranca'=>'required'
             ]);
             $input = $request->only($data);
+
+            $user->update([
+                    'name'=> $request->name,
+                    'login'=> $request->login,
+                    'email'=> $request->email,
+                    'pergunta_seguranca_id'=> $request->perguntaSeguranca,
+                    'resposta_seguranca'=> $request->respostaSeguranca,
+                ]);
         }
 
         $roles = $request['roles'];
-        $user->fill($input)->save();
+        // $user->fill($input)->save();
 
         if ($roles != 0)
         {

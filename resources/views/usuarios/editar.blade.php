@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label for="login">Login</label>
-                    <input class="form-control" type="text" name="login" id="login" maxlength="7" value="{{$user->login}}" readonly>
+                    <input class="form-control" type="text" name="login" id="login" maxlength="7" value="{{$user->login}}">{{-- readonly --}}
                 </div>
 
                 <div class="form-group col-md-9">
@@ -39,21 +39,22 @@
                         <input class="form-control" name="password_confirmation" type="password" value="">
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
-                    <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
-                        @foreach($perguntas as $pergunta)
-                            <option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="respostaSeguranca">Resposta</label><br>
-                    <input class="form-control" name="respostaSeguranca" type="text" value="{{$user->resposta_seguranca}}">
-                </div>
             @endif
+
+            <div class="form-group">
+                <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
+                <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
+                    @foreach($perguntas as $pergunta)
+                        <option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="respostaSeguranca">Resposta</label><br>
+                <input class="form-control" name="respostaSeguranca" type="text" value="{{$user->resposta_seguranca}}">
+            </div>
+            
 
             <h5><b>Adicionar Cargo</b></h5>
 
