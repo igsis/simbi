@@ -83,13 +83,13 @@ class EquipamentoController extends Controller
             $data = $this->validate($request, [
                         'descricao'=>'required'
                     ]);
-            
+
             TipoServico::create($data);
 
             return redirect()->route('equipamentos.cadastro')->with('flash_message',
              'Tipo de serviço inserido com sucesso!');
         }
-        
+
         elseif ($request->has('novaSigla')){
             $data = $this->validate($request, [
                         'sigla'=>'required|max:6',
@@ -122,7 +122,7 @@ class EquipamentoController extends Controller
 
             SubordinacaoAdministrativa::create($data);
 
-            return redirect()->route('equipamentos.cadastro')->with('flash_message', 
+            return redirect()->route('equipamentos.cadastro')->with('flash_message',
                 'Subordinacao Administrativa inserida com sucesso');
         }
 
@@ -214,7 +214,7 @@ class EquipamentoController extends Controller
             'Equipamento inserido com sucesso');
     }
 
-    
+
 
     /**
      * Display the specified resource.
@@ -244,6 +244,8 @@ class EquipamentoController extends Controller
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
+        $distritos = Distrito::orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
         return view ('equipamentos.editar', compact(
             'equipamento',
@@ -254,6 +256,8 @@ class EquipamentoController extends Controller
             'macrorregioes',
             'regioes',
             'regionais',
+            'prefeituraRegionais',
+            'distritos',
             'status'
         ));
     }

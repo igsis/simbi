@@ -162,12 +162,22 @@
 
             <div class="row">
                 <div class="form-group col-md-offset-3 col-md-3">
-                    <label for="subprefeitura">Subprefeitura</label>
-                    <input type="text" class="form-control" name="subprefeitura" id="subprefeitura">
+                    <label for="prefeituraRegional">Prefeituras Regionais</label>
+                    <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
+                        <option value="">Selecione uma Opção</option>
+                        @foreach($prefeituraRegionais as $prefeituraRegional)
+                            <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="distrito">Distrito</label>
-                    <input type="text" class="form-control" name="distrito" id="distrito">
+                    <select name="distrito" id="distrito" class="form-control">
+                    <option value="">Selecione uma Opção</option>
+                    @foreach($distritos as $distrito)
+                        <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
+                    @endforeach
+                </select>
                 </div>
             </div>
 
@@ -337,6 +347,8 @@
             $('#telecentro').val("{{$equipamento->telecentro}}");
             $('#acervoespecializado').val("{{$equipamento->acervo_especializado}}");
             $('#nucleobraile').val("{{$equipamento->nucleo_braile}}");
+            $('#prefeituraRegional').val("{{$equipamento->endereco->prefeitura_regional_id}}");
+            $('#distrito').val("{{$equipamento->endereco->distrito_id}}");
             $('#status').val("{{$equipamento->status->id}}");
         });
     </script>
