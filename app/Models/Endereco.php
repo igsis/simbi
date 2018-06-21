@@ -16,7 +16,7 @@ class Endereco extends Model
         'bairro',
         'cidade',
         'estado',
-        'subprefeitura_id',
+        'prefeitura_regional_id',
         'distrito_id',
         'macrorregiao_id',
         'regiao_id',

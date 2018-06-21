@@ -159,11 +159,12 @@
                     </select>
                 </div>
             </div>
+            {{-- {{dd($equipamento->endereco->prefeitura_regional_id)}} --}}
 
             <div class="row">
                 <div class="form-group col-md-offset-3 col-md-3">
                     <label for="prefeituraRegional">Prefeituras Regionais</label>
-                    <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
+                    <select class="form-control" name="prefeituraRegional" id="prefeituraRegional">
                         <option value="">Selecione uma Opção</option>
                         @foreach($prefeituraRegionais as $prefeituraRegional)
                             <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
@@ -172,7 +173,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="distrito">Distrito</label>
-                    <select name="distrito" id="distrito" class="form-control">
+                    <select class="form-control" name="distrito" id="distrito">
                     <option value="">Selecione uma Opção</option>
                     @foreach($distritos as $distrito)
                         <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>

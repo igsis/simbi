@@ -79,6 +79,7 @@ class EquipamentoController extends Controller
      */
     public function store(Request $request)
     {
+ 
         if($request->has('novoServico')){
             $data = $this->validate($request, [
                         'descricao'=>'required'
@@ -152,7 +153,7 @@ class EquipamentoController extends Controller
             // Metodo que grava o novo equipamento
             $this->validate($request, [
                 //Para Tabela Equipamento
-                'nome'=>'required',
+                'nome'=>'required', 
                 'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
                 'identificacaoSecretaria'=>'required',
@@ -189,7 +190,7 @@ class EquipamentoController extends Controller
                         'bairro' => $request->bairro,
                         'cidade' => $request->cidade,
                         'estado' => $request->uf,
-                        'prefeituraRegional_id' => $request->prefeituraRegional,
+                        'prefeitura_regional_id' => $request->prefeituraRegional,
                         'distrito_id' => $request->distrito,
                         'macrorregiao_id' => $request->macrorregiao,
                         'regiao_id' => $request->regiao,
@@ -327,7 +328,7 @@ class EquipamentoController extends Controller
             'bairro' => $request->bairro,
             'cidade' => $request->cidade,
             'estado' => $request->uf,
-            'prefeituraRegional_id' => $request->prefeituraRegional,
+            'prefeitura_regional_id' => $request->prefeituraRegional,
             'distrito_id' => $request->distrito,
             'macrorregiao_id' => $request->macrorregiao,
             'regiao_id' => $request->regiao,
