@@ -208,7 +208,8 @@ class EquipamentoController extends Controller
                 'telecentro' => $request->telecentro,
                 'acervo_especializado' => $request->acervoespecializado,
                 'nucleo_braile' => $request->nucleobraile,
-                'status_id' => $request->status
+                'status_id' => $request->status,
+                'observacao' => $request->observacao
             ]);
         }
         return redirect()->route('equipamentos.index')->with('flash_message',

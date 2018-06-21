@@ -268,8 +268,8 @@
                 </select>
             </div>
             <div class="form-group col-md-8">
-                <label for="descricao">Descrição</label>
-                <input type="text" class="form-control" name="descricao" id="descricao" placeholder disabled>
+                <label for="observacao">Observação</label>
+                <input type="text" class="form-control" name="observacao" id="observacao" placeholder disabled>
             </div>
         </div>
         <div class="row">
@@ -306,17 +306,17 @@
             {
                 if ($(this).val() == 0 || $(this).val() == 1)
                 {
-                    $("#descricao").attr('disabled', true);
-                    $("#descricao").attr('placeholder', '');
+                    $("#observacao").attr('disabled', true);
+                    $("#observacao").attr('placeholder', '');
                 } else if($(this).val() == 2 )
                 {
-                    $("#descricao").attr('disabled', false);
-                    $("#descricao").attr('placeholder', 'Por que está Inativo?');
+                    $("#observacao").attr('disabled', false);
+                    $("#observacao").attr('placeholder', 'Por que está Inativo?');
                 }
                 else if($(this).val() == 3 )
                 {
-                    $("#descricao").attr('disabled', false);
-                    $("#descricao").attr('placeholder', 'Por que está Fechado?');
+                    $("#observacao").attr('disabled', false);
+                    $("#observacao").attr('placeholder', 'Por que está Fechado?');
                 }
             });
         });

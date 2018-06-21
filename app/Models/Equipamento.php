@@ -21,7 +21,8 @@ class Equipamento extends Model
         'acervoespecializado',
         'nucleobraile',
         'status_id',
-        'publicado'
+        'publicado',
+        'observacao'
 	];
 
 	public function endereco()
