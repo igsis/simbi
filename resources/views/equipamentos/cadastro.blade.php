@@ -18,7 +18,7 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('tipoServico') ? ' has-error' : '' }}">
+            <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('tipoServico') ? ' has-error' : '' }}">
                 <label for="tipoServico">Tipo de Serviço</label>
                 <select class="form-control" name="tipoServico" id="tipoServico">
                     <option value="">Selecione uma Opção</option>
@@ -27,7 +27,13 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
+
+            <div class="form-group col-xs-4 col-md-2">
+                <label for="tipoServico ">Adicionar</label>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+            </div>
+
+            <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
                 <label for="equipamentoSigla">Sigla do Equipamento</label>
                 <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
                     <option value="">Selecione uma Opção</option>
@@ -36,7 +42,15 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
+
+            <div class="form-group col-xs-4 col-md-2">
+                <label for="equipamentoSigla">Adicionar</label>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
                 <label for="identificacaoSecretaria">Identificação da Secretaria</label>
                 <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
                     <option value="">Selecione uma Opção</option>
@@ -45,7 +59,13 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}">
+
+            <div class="form-group col-xs-4 col-md-2">
+                <label for="identificacaoSecretaria">Adicionar</label>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+            </div>
+
+            <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}">
                 <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
                 <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
                     <option value="">Selecione uma Opção</option>
@@ -54,21 +74,12 @@
                     @endforeach
                 </select>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="form-group col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico">Adicionar Serviço</button>
+            <div class="form-group col-xs-4 col-md-2">
+                <label for="subordinacaoAdministrativa">Adicionar</label>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
             </div>
-            <div class="form-group col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla">Adicionar Sigla</button>
-            </div>
-            <div class="form-group col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria">Adicionar Secretaria</button>
-            </div>
-            <div class="form-group col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin">Adicionar Sub. Administrativa</button>
-            </div>
+
         </div>
 
         <div class="row">
@@ -99,35 +110,40 @@
                 <label for="cep">CEP</label>
                 <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ old('cep') }}">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-10">
                 <label for="logradouro">Logradouro</label>
                 <input type="text" class="form-control" name="logradouro" id="logradouro" readonly>
             </div>
-            <div class="form-group col-md-3">
-                <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" name="bairro" id="bairro" readonly>
-            </div>
-
+        </div>
+        <div class="row">           
             <div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
                 <label for="numero">Número</label>
                 <input type="text" class="form-control" name="numero" id="numero">
             </div>
-            <div class="form-group col-md-2">
+
+            <div class="form-group col-md-3">
                 <label for="complemento">Complemento</label>
                 <input type="text" class="form-control" name="complemento" id="complemento">
             </div>
-        </div>
 
-        <div class="row">
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" name="bairro" id="bairro" readonly>
+            </div>            
+
+            <div class="form-group col-md-3">
                 <label for="cidade">Cidade</label>
                 <input type="text" class="form-control" name="cidade" id="cidade" readonly>
             </div>
+
             <div class="form-group col-md-1">
                 <label for="uf">UF</label>
                 <input type="text" class="form-control" name="uf" id="uf" readonly>
             </div>
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('macrorregiao') ? ' has-error' : '' }}">
+        </div>
+
+        <div class="row">             
+            <div class="form-group col-md-4 has-feedback {{ $errors->has('macrorregiao') ? ' has-error' : '' }}">
                 <label for="macrorregiao">Macrorregião</label>
                 <select class="form-control" name="macrorregiao" id="macrorregiao">
                     <option value="">Selecione uma Opção</option>
@@ -136,7 +152,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('regiao') ? ' has-error' : '' }}">
+            <div class="form-group col-md-4 has-feedback {{ $errors->has('regiao') ? ' has-error' : '' }}">
                 <label for="regiao">Região</label>
                 <select class="form-control" name="regiao" id="regiao">
                     <option value="">Selecione uma Opção</option>
@@ -145,7 +161,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3 has-feedback {{ $errors->has('regional') ? ' has-error' : '' }}">
+            <div class="form-group col-md-4 has-feedback {{ $errors->has('regional') ? ' has-error' : '' }}">
                 <label for="regional">Regional</label>
                 <select class="form-control" name="regional" id="regional">
                     <option value="">Selecione uma Opção</option>
@@ -157,7 +173,7 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-offset-3 col-md-3">
+            <div class="form-group col-xs-8 col-md-4">
                 <label for="prefeituraRegional">Prefeituras Regionais</label>
                 <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
                     <option value="">Selecione uma Opção</option>
@@ -166,7 +182,14 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-3">
+                
+            {{-- Add Prefeituras Regionais --}}
+            <div class="form-group col-xs-4 col-md-2">
+                <label for="prefeituraRegional">Adicionar </label>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+            </div>
+  
+            <div class="form-group col-xs-8 col-md-4">
                 <label for="distrito">Distrito</label>
                 <select name="distrito" id="distrito" class="form-control">
                     <option value="">Selecione uma Opção</option>
@@ -175,14 +198,10 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-offset-3 col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional">Adicionar Prefeitura Regional</button>
-            </div>
-            <div class="form-group col-md-3">
-                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito">Adicionar Distrito</button>
+            {{-- Add Distrito --}}
+            <div class="form-group col-xs-4 col-md-2">
+                <label for="distrito">Adicionar</label>
+                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
             </div>
         </div>
 
@@ -215,28 +234,31 @@
         </div> --}}
 
         <div class="row">
-            <div class="form-group col-md-offset-2 col-md-2">
+            <div class="form-group col-md-4">
                 <label for="telecentro">Possui Telecentro?</label>
                 <select class="form-control" name="telecentro" id="telecentro">
                     <option value="0">Não</option>
                     <option value="1">Sim</option>
                 </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
                 <label for="nucleobraile">Possui Nucleo Braile?</label>
                 <select class="form-control" name="nucleobraile" id="nucleobraile">
                     <option value="0">Não</option>
                     <option value="1">Sim</option>
                 </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-4">
                 <label for="acervoespecializado">Acervo Especializado?</label>
                 <select class="form-control" name="acervoespecializado" id="acervoespecializado">
                     <option value="0">Não</option>
                     <option value="1">Sim</option>
                 </select>
             </div>
-            <div class="form-group col-md-2 has-feedback {{ $errors->has('status') ? ' has-error' : '' }}">
+        </div> 
+
+        <div class="row">
+            <div class="form-group col-md-4 has-feedback {{ $errors->has('status') ? ' has-error' : '' }}">
                 <label for="status">Status do Equipamento</label>
                 <select class="form-control" name="status" id="status">
                     <option value="">Selecione uma Opção</option>
@@ -245,9 +267,16 @@
                     @endforeach
                 </select>
             </div>
+            <div class="form-group col-md-8">
+                <label for="descricao">Descrição</label>
+                <input type="text" class="form-control" name="descricao" id="descricao" placeholder disabled>
+            </div>
         </div>
-        <div class="form-group col-md-offset-5 col-md-2">
-            <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
+        <div class="row">
+            <hr>
+            <div class="form-group col-md-12">
+                <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
+            </div>
         </div>
     </form>
     @include('layouts.equipamento_modal')
@@ -266,6 +295,28 @@
                 } else
                 {
                     $("#nome_tematica").attr('disabled', false);
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('select[name="status"]').change(function(e)
+            {
+                if ($(this).val() == 0 || $(this).val() == 1)
+                {
+                    $("#descricao").attr('disabled', true);
+                    $("#descricao").attr('placeholder', '');
+                } else if($(this).val() == 2 )
+                {
+                    $("#descricao").attr('disabled', false);
+                    $("#descricao").attr('placeholder', 'Por que está Inativo?');
+                }
+                else if($(this).val() == 3 )
+                {
+                    $("#descricao").attr('disabled', false);
+                    $("#descricao").attr('placeholder', 'Por que está Fechado?');
                 }
             });
         });

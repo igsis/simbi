@@ -159,7 +159,6 @@
                     </select>
                 </div>
             </div>
-            {{-- {{dd($equipamento->endereco->prefeitura_regional_id)}} --}}
 
             <div class="row">
                 <div class="form-group col-md-offset-3 col-md-3">
