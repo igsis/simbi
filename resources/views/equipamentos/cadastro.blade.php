@@ -47,8 +47,8 @@
                 <label for="equipamentoSigla">Adicionar</label>
                 <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
             </div>
-
         </div>
+
         <div class="row">
             <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
                 <label for="identificacaoSecretaria">Identificação da Secretaria</label>
@@ -79,7 +79,6 @@
                 <label for="subordinacaoAdministrativa">Adicionar</label>
                 <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
             </div>
-
         </div>
 
         <div class="row">
@@ -115,6 +114,7 @@
                 <input type="text" class="form-control" name="logradouro" id="logradouro" readonly>
             </div>
         </div>
+
         <div class="row">           
             <div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
                 <label for="numero">Número</label>
@@ -185,7 +185,7 @@
                 
             {{-- Add Prefeituras Regionais --}}
             <div class="form-group col-xs-4 col-md-2">
-                <label for="prefeituraRegional">Adicionar </label>
+                <label for="prefeituraRegional">Adicionar</label>
                 <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
             </div>
   
@@ -242,7 +242,7 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="nucleobraile">Possui Nucleo Braile?</label>
+                <label for="nucleobraile">Possui Núcleo Braile?</label>
                 <select class="form-control" name="nucleobraile" id="nucleobraile">
                     <option value="0">Não</option>
                     <option value="1">Sim</option>

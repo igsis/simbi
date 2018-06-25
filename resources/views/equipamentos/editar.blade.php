@@ -14,15 +14,13 @@
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="PUT">
 
-            <div class="row">
-                <div class="form-group">
-                    <label for="nome">Nome do Equipamento</label>
-                    <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento->nome }}">
-                </div>
+            <div class="form-group">
+                <label for="nome">Nome do Equipamento</label>
+                <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento->nome }}">
             </div>
 
             <div class="row">
-                <div class="form-group col-md-3" style="padding-left: 0px">
+                <div class="form-group col-xs-8 col-md-4">
                     <label for="tipoServico">Tipo de Serviço</label>
                     <select class="form-control" name="tipoServico" id="tipoServico">
                         <option value="">Selecione uma Opção</option>
@@ -31,7 +29,13 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+
+                <div class="form-group col-xs-4 col-md-2">
+                    <label for="tipoServico">Adicionar</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
+
+                <div class="form-group col-xs-8 col-md-4">
                     <label for="equipamentoSigla">Sigla do Equipamento</label>
                     <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
                         <option value="">Selecione uma Opção</option>
@@ -40,7 +44,15 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+
+                <div class="form-group col-xs-4 col-md-2">
+                <label for="equipamentoSigla">Adicionar</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
+            </div>
+            <div class="row">                
+
+                <div class="form-group col-xs-8 col-md-4">
                     <label for="identificacaoSecretaria">Identificação da Secretaria</label>
                     <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
                         <option value="">Selecione uma Opção</option>
@@ -49,7 +61,13 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3" style="padding-right: 0px">
+
+                <div class="form-group col-xs-4 col-md-2">
+                    <label for="identificacaoSecretaria">Adicionar</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
+
+                <div class="form-group col-xs-8 col-md-4">
                     <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
                     <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
                         <option value="">Selecione uma Opção</option>
@@ -58,25 +76,15 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-3" style="padding-left: 0px">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico">Adicionar Serviço</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla">Adicionar Sigla</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria">Adicionar Secretaria</button>
-                </div>
-                <div class="col-md-3" style="padding-right: 0px">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin">Adicionar Sub. Administrativa</button>
+                <div class="form-group col-xs-4 col-md-2">
+                    <label for="subordinacaoAdministrativa">Adicionar</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                 </div>
             </div>
 
-            <div class="row" style="padding-top: 10px;">
-                <div class="form-group col-md-3" style="padding-left: 0px">
+            <div class="row" >
+                <div class="form-group col-md-3" >
                     <label>Equipamento Tematico?</label><br>
 
                     <input type="radio" name="tematico" value="0" checked>
@@ -99,39 +107,43 @@
             <hr>
 
             <div class="row">
-                <div class="form-group col-md-2" style="padding-left: 0px">
+                <div class="form-group col-md-2">
                     <label for="cep">CEP</label>
                     <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ $equipamento->endereco->cep }}">
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-10">
                     <label for="logradouro">Logradouro</label>
                     <input type="text" class="form-control" name="logradouro" id="logradouro" value="{{$equipamento->endereco->logradouro}}" readonly>
                 </div>
+            </div>
+
+            <div class="row">    
+                <div class="form-group col-md-2">
+                    <label for="numero">Número</label>
+                    <input type="text" class="form-control" name="numero" id="numero" value="{{$equipamento->endereco->numero}}">
+                </div>             
+                <div class="form-group col-md-3">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" class="form-control" name="complemento" id="complemento" value="{{$equipamento->endereco->complemento}}">
+                </div>
+                
                 <div class="form-group col-md-3">
                     <label for="bairro">Bairro</label>
                     <input type="text" class="form-control" name="bairro" id="bairro" value="{{$equipamento->endereco->bairro}}" readonly>
                 </div>
-
-                <div class="form-group col-md-2">
-                    <label for="numero">Número</label>
-                    <input type="text" class="form-control" name="numero" id="numero" value="{{$equipamento->endereco->numero}}">
-                </div>
-                <div class="form-group col-md-2" style="padding-right: 0px">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control" name="complemento" id="complemento" value="{{$equipamento->endereco->complemento}}">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-2" style="padding-left: 0px">
+                <div class="form-group col-md-3">
                     <label for="cidade">Cidade</label>
                     <input type="text" class="form-control" name="cidade" id="cidade" value="{{$equipamento->endereco->cidade}}" readonly>
                 </div>
+
                 <div class="form-group col-md-1">
                     <label for="uf">UF</label>
                     <input type="text" class="form-control" name="uf" id="uf" value="{{$equipamento->endereco->estado}}" readonly>
                 </div>
-                <div class="form-group col-md-3">
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
                     <label for="macrorregiao">Macrorregião</label>
                     <select class="form-control" name="macrorregiao" id="macrorregiao">
                         <option value="">Selecione uma Opção</option>
@@ -140,7 +152,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="regiao">Região</label>
                     <select class="form-control" name="regiao" id="regiao">
                         <option value="">Selecione uma Opção</option>
@@ -149,7 +161,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label for="regional">Regional</label>
                     <select class="form-control" name="regional" id="regional">
                         <option value="">Selecione uma Opção</option>
@@ -161,7 +173,7 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-offset-3 col-md-3">
+                <div class="form-group col-xs-8 col-md-4">
                     <label for="prefeituraRegional">Prefeituras Regionais</label>
                     <select class="form-control" name="prefeituraRegional" id="prefeituraRegional">
                         <option value="">Selecione uma Opção</option>
@@ -170,7 +182,14 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-3">
+
+                <div class="form-group col-xs-4 col-md-2">
+                    <label for="prefeituraRegional">Adicionar</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
+
+
+                <div class="form-group col-xs-8 col-md-4">
                     <label for="distrito">Distrito</label>
                     <select class="form-control" name="distrito" id="distrito">
                     <option value="">Selecione uma Opção</option>
@@ -179,16 +198,13 @@
                     @endforeach
                 </select>
                 </div>
+
+                <div class="form-group col-xs-4 col-md-2">
+                    <label for="distrito">Adicionar</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-offset-3 col-md-3">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubprefeitura">Adicionar Subprefeitura</button>
-                </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito">Adicionar Distrito</button>
-                </div>
-            </div>
 
             {{-- <div class="form-row">
                 <center><h3>Horario de Funcionamento</h3></center>
@@ -218,29 +234,32 @@
                 </div>
             </div> --}}
 
-            <div class="row" style="padding-top: 10px">
-                <div class="form-group col-md-offset-2 col-md-2">
+            <div class="row">
+                <div class="form-group col-md-4">
                     <label for="telecentro">Possui Telecentro?</label>
                     <select class="form-control" name="telecentro" id="telecentro">
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
                 </div>
-                <div class="form-group col-md-2">
-                    <label for="nucleobraile">Possui Nucleo Braile?</label>
+                <div class="form-group col-md-4">
+                    <label for="nucleobraile">Possui Núcleo Braile?</label>
                     <select class="form-control" name="nucleobraile" id="nucleobraile">
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label for="acervoespecializado">Acervo Especializado?</label>
                     <select class="form-control" name="acervoespecializado" id="acervoespecializado">
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </select>
                 </div>
-                <div class="form-group col-md-2">
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
                     <label for="status">Status do Equipamento</label>
                     <select class="form-control" name="status" id="status">
                         <option value="">Selecione uma Opção</option>
@@ -249,15 +268,46 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group col-md-8">
+                    <label for="observacao">Observação</label>
+                    <input type="text" class="form-control" name="observacao" id="observacao" value="{{ $equipamento->observacao }}" placeholder disabled>
+                </div>
             </div>
-            <div class="form-group col-md-offset-5 col-md-2">
-                <input type="submit" class="form-control btn btn-primary" name="enviar" value="Atualizar">
+
+            <div class="row">
+                <hr>
+                <div class="form-group col-md-12">
+                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Atualizar">
+                </div>
             </div>
         </form>
         @include('layouts.equipamento_modal')
     </div>
 @endsection
 @section('scripts_adicionais')
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('select[name="status"]').change(function(e)
+            {
+                if ($(this).val() == 0 || $(this).val() == 1)
+                {
+                    $("#observacao").attr('disabled', true);
+                    $("#observacao").attr('placeholder', '');
+                } else if($(this).val() == 2 )
+                {
+                    $("#observacao").attr('disabled', false);
+                    $("#observacao").attr('placeholder', 'Por que está Inativo?');
+                }
+                else if($(this).val() == 3 )
+                {
+                    $("#observacao").attr('disabled', false);
+                    $("#observacao").attr('placeholder', 'Por que está Fechado?');
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
         //Script habilita campo Nome Tematica
         $(document).ready(function()

@@ -212,7 +212,7 @@ class EquipamentoController extends Controller
                 'observacao' => $request->observacao
             ]);
         }
-        return redirect()->route('equipamentos.index')->with('flash_message',
+        return redirect()->back()->with('flash_message',
             'Equipamento inserido com sucesso');
     }
 
@@ -336,8 +336,7 @@ class EquipamentoController extends Controller
             'regional_id' => $request->regional
             ]);
 
-        return redirect()->route('equipamentos.index')
-            ->with('flash_message',
+        return redirect()->back()->with('flash_message',
                 'Equipamento Editado com Sucesso!');
     }
 
