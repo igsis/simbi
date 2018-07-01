@@ -1,7 +1,9 @@
 @extends ('layouts.master')
 
 @section ('conteudo')
+
 <div class="container">
+    <div id="sucesso" hidden class="alert alert-success"><em></em></div>
     <div style="text-align: center;">
         <h2>
             Cadastro de Equipamento
@@ -283,6 +285,78 @@
 </div>
 @endsection
 @section('scripts_adicionais')
+
+    <script type="text/javascript">
+
+        $('#addServico').submit(function(e) {
+            e.preventDefault();
+            let novoServico = $('#addServico input[name="novoServico"]').val();
+            let _token = $('#addServico input[name="_token"]').val();
+            let descricao = $('#addServico input[name="descricao"]').val();
+            $.ajax({
+                url: '{{route('equipamentos.index')}}', 
+                type: 'POST',
+                data: {'novoServico': '','_token': _token, 'descricao': descricao},
+                success: function(data) {
+                    $("#tipoServico option").remove();
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso em").html("Tipo de serviço inserido com sucesso!");
+                    $("#tipoServico").append(`<option value=''>Selecione uma Opção</option>`);
+                    $('#addServico').modal('hide');
+                    $("#tipoServico").focus();
+                    for(let item of data ){
+                        $("#tipoServico").append(`<option value='${item.id}'>${item.descricao}<otion>`);
+                    }
+                },
+                error: function() {
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").addClass( "alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Tipo de serviço!`);
+                }
+            });
+            return false;
+        });
+
+        $('#addSigla').submit(function(e) {
+            e.preventDefault();
+            let novaSigla = $('#addSigla input[name="novaSigla"]').val();
+            let _token = $('#addSigla input[name="_token"]').val();
+            let sigla = $('#addSigla input[name="sigla"]').val();
+            let descricao = $('#addSigla input[name="descricao"]').val();
+            let roteiro = $('#addSigla input[name="roteiro"]').val();
+            $.ajax({
+                url: '{{route('equipamentos.index')}}', 
+                type: 'POST',
+                data: {
+                        'novaSigla': '',
+                        '_token': _token,
+                        'sigla':sigla, 
+                        'descricao': descricao, 
+                        'roteiro': roteiro
+                    },
+                success: function(data) {
+                    $("#equipamentoSigla option").remove();
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso em").html("Sigla do Equipamento inserida com sucesso!");
+                    $("#equipamentoSigla").append(`<option value=''>Selecione uma Opção</option>`);
+                    $('#addSigla').modal('hide');
+                    $("#equipamentoSigla").focus();
+                    for(let item of data ){
+                        $("#equipamentoSigla").append(`<option value='${item.id}'>${item.sigla}<otion>`);
+                    }
+                },
+                error: function(jqXHR, textStatus, error) {
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").addClass( "alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Sigla do Equipamento!`);
+                    alert("Status: " + textStatus); alert("Error: " + jqXHR.responseText);
+                }
+            });
+            return false;
+        });
+    </script>
     <script type="text/javascript">
         //Script habilita campo Nome Tematica
         $(document).ready(function()

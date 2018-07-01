@@ -3,6 +3,7 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use response;
 
 use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
@@ -86,9 +87,10 @@ class EquipamentoController extends Controller
                     ]);
 
             TipoServico::create($data);
-
-            return redirect()->route('equipamentos.cadastro')->with('flash_message',
-             'Tipo de serviço inserido com sucesso!');
+            $data = TipoServico::orderBy('descricao')->get();
+            return response()->json($data);
+            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
+            //  'Tipo de serviço inserido com sucesso!');
         }
 
         elseif ($request->has('novaSigla')){
@@ -99,9 +101,11 @@ class EquipamentoController extends Controller
                     ]);
 
             EquipamentoSigla::create($data);
+            $data = EquipamentoSigla::orderBy('descricao')->get();
+            return response()->json($data);
 
-            return redirect()->route('equipamentos.cadastro')->with('flash_message',
-             'Sigla do Equipamento inserida com sucesso!');
+            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
+            //  'Sigla do Equipamento inserida com sucesso!');
         }
 
         elseif ($request->has('novaSecretaria')) {
