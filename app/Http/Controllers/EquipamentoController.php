@@ -182,7 +182,8 @@ class EquipamentoController extends Controller
                 'distrito'=>'required',
                 'macrorregiao'=>'required',
                 'regiao'=>'required',
-                'regional'=>'required'
+                'regional'=>'required',
+                'observacao' => 'nullable'
             ]);
 
             $endereco = new Endereco();

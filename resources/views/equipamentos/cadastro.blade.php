@@ -25,7 +25,11 @@
                 <select class="form-control" name="tipoServico" id="tipoServico">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($tipoServicos as $tipoServico)
-                        <option value="{{$tipoServico->id}}">{{$tipoServico->descricao}}</option>
+                        @if ($tipoServico->id == old('tipoServico'))
+                            <option value="{{$tipoServico->id}}"selected>{{$tipoServico->descricao}}</option>
+                        @else
+                            <option value="{{$tipoServico->id}}">{{$tipoServico->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -40,7 +44,11 @@
                 <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($siglas as $sigla)
-                        <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
+                        @if ($sigla->id == old('equipamentoSigla'))
+                            <option value="{{$sigla->id}}" selected>{{$sigla->sigla}}</option>
+                        @else
+                            <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -57,7 +65,11 @@
                 <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($secretarias as $secretaria)
-                        <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                        @if ($secretaria->id == old('identificacaoSecretaria'))
+                            <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
+                        @else
+                            <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -72,7 +84,11 @@
                 <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
+                        @if ($subordinacaoAdministrativa->id == old('subordinacaoAdministrativa'))
+                        <option value="{{$subordinacaoAdministrativa->id}}" selected>{{$subordinacaoAdministrativa->descricao}}</option>
+                        @else
                         <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -85,17 +101,25 @@
 
         <div class="row">
             <div class="form-group col-md-3">
-                <label>Equipamento Tematico?</label><br>
+                <label>Equipamento Temático?</label><br>
+                @if (old('tematico') == 1)
+                    <input type="radio" name="tematico" value="0" >
+                    <label for=tematico style="padding:0 10px 0 5px;">Não</label>
 
-                <input type="radio" name="tematico" value="0" checked>
-                <label for=tematico style="padding:0 10px 0 5px;">Não</label>
+                    <input type="radio" name="tematico" value="1" checked>
+                    <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
+                @else
+                    <input type="radio" name="tematico" value="0" checked>
+                    <label for=tematico style="padding:0 10px 0 5px;">Não</label>
 
-                <input type="radio" name="tematico" value="1">
-                <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
+                    <input type="radio" name="tematico" value="1">
+                    <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
+                @endif
+                
             </div>
             <div class="form-group col-md-6">
-                <label for=nome_tematica>Nome da Tematica</label>
-                <input type="text" class="form-control" name="nome_tematica" id="nome_tematica" disabled>
+                <label for=nome_tematica>Nome da Temática</label>
+                <input type="text" class="form-control" name="nome_tematica" id="nome_tematica"  value="{{old('nome_tematica')}}" disabled>
             </div>
             <div class="form-group col-md-3">
                 <label for="telefone">Telefone</label>
@@ -113,34 +137,34 @@
             </div>
             <div class="form-group col-md-10">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" class="form-control" name="logradouro" id="logradouro" readonly>
+                <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{old('logradouro')}}">
             </div>
         </div>
 
         <div class="row">           
             <div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
                 <label for="numero">Número</label>
-                <input type="text" class="form-control" name="numero" id="numero">
+                <input type="text" class="form-control" name="numero" id="numero" value="{{old('numero')}}">
             </div>
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 has-feedback {{ $errors->has('complemento') ? ' has-error' : '' }}">
                 <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" name="complemento" id="complemento">
+                <input type="text" class="form-control" name="complemento" id="complemento" value="{{old('complemento')}}">
             </div>
 
             <div class="form-group col-md-3">
                 <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" name="bairro" id="bairro" readonly>
+                <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{old('bairro')}}">
             </div>            
 
             <div class="form-group col-md-3">
                 <label for="cidade">Cidade</label>
-                <input type="text" class="form-control" name="cidade" id="cidade" readonly>
+                <input type="text" class="form-control" name="cidade" id="cidade" readonly value="{{old('cidade')}}">
             </div>
 
             <div class="form-group col-md-1">
                 <label for="uf">UF</label>
-                <input type="text" class="form-control" name="uf" id="uf" readonly>
+                <input type="text" class="form-control" name="uf" id="uf" readonly value="{{old('uf')}}">
             </div>
         </div>
 
@@ -150,7 +174,11 @@
                 <select class="form-control" name="macrorregiao" id="macrorregiao">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($macrorregioes as $macrorregiao)
-                        <option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
+                        @if ($macrorregiao->id == old('macrorregiao'))
+                            <option value="{{$macrorregiao->id}}" selected>{{$macrorregiao->descricao}}</option>
+                        @else
+                            <option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -159,7 +187,11 @@
                 <select class="form-control" name="regiao" id="regiao">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($regioes as $regiao)
-                        <option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
+                        @if ($regiao->id == old('regiao'))
+                            <option value="{{$regiao->id}}" selected>{{$regiao->descricao}}</option>
+                        @else
+                            <option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -168,19 +200,27 @@
                 <select class="form-control" name="regional" id="regional">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($regionais as $regional)
-                        <option value="{{$regional->id}}">{{$regional->descricao}}</option>
+                        @if ($regional->id == old('regional'))
+                            <option value="{{$regional->id}}" selected>{{$regional->descricao}}</option>
+                        @else
+                            <option value="{{$regional->id}}">{{$regional->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group col-xs-8 col-md-4">
+            <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('prefeituraRegional') ? 'has-error' : ''}}">
                 <label for="prefeituraRegional">Prefeituras Regionais</label>
                 <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
                     <option value="">Selecione uma Opção</option>
                     @foreach($prefeituraRegionais as $prefeituraRegional)
-                        <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
+                        @if ($prefeituraRegional->id == old('prefeituraRegional'))
+                            <option value="{{$prefeituraRegional->id}}" selected>{{$prefeituraRegional->descricao}}</option>
+                        @else
+                            <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -191,12 +231,16 @@
                 <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
             </div>
   
-            <div class="form-group col-xs-8 col-md-4">
+            <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('distrito') ? 'has-error' : ''}}">
                 <label for="distrito">Distrito</label>
                 <select name="distrito" id="distrito" class="form-control">
                     <option value="">Selecione uma Opção</option>
                     @foreach($distritos as $distrito)
-                        <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
+                        @if ($distrito->id == old('distrito'))
+                            <option value="{{$distrito->id}}" selected>{{$distrito->descricao}}</option>
+                        @else
+                            <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -239,22 +283,37 @@
             <div class="form-group col-md-4">
                 <label for="telecentro">Possui Telecentro?</label>
                 <select class="form-control" name="telecentro" id="telecentro">
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
+                    @if (old('telecentro') == "1")
+                        <option value="0">Não</option>
+                        <option value="1" selected>Sim</option>
+                    @else
+                        <option value="0" selected>Não</option>
+                        <option value="1">Sim</option>
+                    @endif
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label for="nucleobraile">Possui Núcleo Braile?</label>
                 <select class="form-control" name="nucleobraile" id="nucleobraile">
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
+                    @if (old('nucleobraile') == "1")
+                        <option value="0">Não</option>
+                        <option value="1" selected>Sim</option>
+                    @else
+                        <option value="0" selected>Não</option>
+                        <option value="1">Sim</option>
+                    @endif
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label for="acervoespecializado">Acervo Especializado?</label>
                 <select class="form-control" name="acervoespecializado" id="acervoespecializado">
-                    <option value="0">Não</option>
-                    <option value="1">Sim</option>
+                    @if (old('acervoespecializado') == "1")
+                        <option value="0">Não</option>
+                        <option value="1" selected>Sim</option>
+                    @else
+                        <option value="0" selected>Não</option>
+                        <option value="1">Sim</option>
+                    @endif
                 </select>
             </div>
         </div> 
@@ -265,13 +324,17 @@
                 <select class="form-control" name="status" id="status">
                     <option value="">Selecione uma Opção</option>
                     @foreach ($status as $stats)
-                        <option value="{{$stats->id}}">{{$stats->descricao}}</option>
+                        @if ($stats->id == old('status'))
+                            <option value="{{$stats->id}}" selected>{{$stats->descricao}}</option>
+                        @else
+                            <option value="{{$stats->id}}">{{$stats->descricao}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-md-8">
+            <div class="form-group col-md-8 has-feedback {{ $errors->has('observacao') ? ' has-error' : '' }}">
                 <label for="observacao">Observação</label>
-                <input type="text" class="form-control" name="observacao" id="observacao" placeholder disabled>
+                <input type="text" class="form-control" name="observacao" id="observacao"  value="{{old('observacao')}}" disabled>
             </div>
         </div>
         <div class="row">
@@ -359,6 +422,12 @@
     </script>
     <script type="text/javascript">
         //Script habilita campo Nome Tematica
+        let radio = $("input[name='tematico']:checked").val();
+        if(radio == 0){
+            $("#nome_tematica").attr('disabled', true);
+        }else{
+            $("#nome_tematica").attr('disabled', false);
+        }
         $(document).ready(function()
         {
             $('input:radio[name="tematico"]').change(function(e)
@@ -366,14 +435,25 @@
                 if ($(this).val() == 0)
                 {
                     $("#nome_tematica").attr('disabled', true);
+                    $("#nome_tematica").attr('placeholder', '');
+                    $("#nome_tematica").attr('value', '');
                 } else
                 {
                     $("#nome_tematica").attr('disabled', false);
+                    $("#nome_tematica").attr('placeholder', 'Insira o nome da Temática');
+                    $("#nome_tematica").attr('required', true);
                 }
             });
         });
     </script>
     <script type="text/javascript">
+
+        let status = $("#status option:selected").val();
+        if(status == '' || status == '1' ){
+            $("#observacao").attr('disabled', true);
+        }else{
+            $("#observacao").attr('disabled', false);
+        }
         $(document).ready(function()
         {
             $('select[name="status"]').change(function(e)
@@ -382,15 +462,18 @@
                 {
                     $("#observacao").attr('disabled', true);
                     $("#observacao").attr('placeholder', '');
+                    $("input[name='observacao']").val('');
                 } else if($(this).val() == 2 )
                 {
                     $("#observacao").attr('disabled', false);
                     $("#observacao").attr('placeholder', 'Por que está Inativo?');
+                    $("#observacao").attr('required', true);
                 }
                 else if($(this).val() == 3 )
                 {
                     $("#observacao").attr('disabled', false);
                     $("#observacao").attr('placeholder', 'Por que está Fechado?');
+                    $("#observacao").attr('required', true);
                 }
             });
         });
