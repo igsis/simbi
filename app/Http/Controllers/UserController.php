@@ -178,7 +178,7 @@ class UserController extends Controller
         return redirect()->back()
             ->with('flash_message',
              'Usuario Editado com Sucesso!');
-        /** sdf */
+        
     }
 
     /**

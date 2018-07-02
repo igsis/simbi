@@ -60,20 +60,19 @@
 
             <div class='form-group'>
             @if(!(Auth::user()->hasrole('Funcionario')))
-                    <input type="radio" value="0" name="roles" checked>
-                    <label for="semCargo">Sem Cargo</label><br>
 
                     @hasrole('Administrador')
                     <input type="radio" value="1" name="roles">
                     <label for="Administrador">Administrador</label><br>
-                    @endhasrole
+                    
 
                     <input type="radio" value="2" name="roles">
                     <label for="Coordenador">Coordenador</label><br>
+                    @endhasrole
 
                 @endif
                     <input type="radio" value="3" name="roles">
-                    <label for="Funcionario">Funcionario</label><br>
+                    <label for="Funcionario">Funcionário</label><br>
             </div>
             <input class="btn btn-primary" type="submit" value="Editar">
         </form><br>
