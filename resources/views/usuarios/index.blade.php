@@ -55,7 +55,7 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="type" value="{{ $type }}"> 
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$user->name}}?" data-message='Desejar realmente excluir este usuario?'><i class="glyphicon glyphicon-trash"></i> Excluir
+                                <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este usuário?'><i class="glyphicon glyphicon-trash"></i> Desativar
                                 </button>
                             </form>
                         @else
@@ -64,7 +64,7 @@
                                 <input type="hidden" name="type" value="{{ $type }}">
                                 <input type="hidden" name="id" value="{{ $user->id }}">
                                 <input type="hidden" name="_method" value="PUT">
-                                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuario?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
+                                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuário?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
                                 </button>
                             </form>
 
@@ -86,7 +86,9 @@
 
 </div>
 @hasrole('Administrador')
-    <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Usuario</a>
+    @if($type == 1)
+        <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Usuario</a>
+    @endif
 @endhasrole
 
 {{--Modal para vincular Equipamentos--}}
@@ -119,7 +121,7 @@
 
 @section('scripts_adicionais')
     <script type="text/javascript">
-    // Script Msg Excluir Usuario
+        // Script Msg Excluir Usuario
         $('#confirmDelete').on('show.bs.modal', function (e)
         {
             $message = $(e.relatedTarget).attr('data-message');
@@ -140,7 +142,7 @@
             $(this).data('form').submit();
         });
 
-    // Alimenta o modal com informações de cada usuario
+        // Alimenta o modal com informações de cada usuario
         $('#vinculaEquipamento').on('show.bs.modal', function (e)
         {
             var nome = $(e.relatedTarget).attr('data-nome');
