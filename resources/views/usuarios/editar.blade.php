@@ -52,7 +52,7 @@
 
             <div class="form-group">
                 <label for="respostaSeguranca">Resposta</label><br>
-                <input class="form-control" name="respostaSeguranca" type="text" value="{{$user->resposta_seguranca}}">
+                <input class="form-control" name="respostaSeguranca" readonly type="text" value="{{$user->resposta_seguranca}}">
             </div>
             
 
@@ -81,7 +81,7 @@
             {{ csrf_field() }}
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="novaSenha">
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuario? Senha: simbi@2018' data-button="Resetar Senha">Resetar Senha</button>
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Resetar a Senha?" data-message='Desejar realmente resetar a senha deste usuário? Senha: simbi@2018' data-button="Resetar Senha">Resetar Senha</button>
         </form>
         @endif
         @include('layouts.excluir_confirm')

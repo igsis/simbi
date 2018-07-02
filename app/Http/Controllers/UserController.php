@@ -76,7 +76,7 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with('flash_message',
-             'Usuario Adicionado com Sucesso!  Senha padrão: simbi@2018');
+             'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 
     /**
@@ -177,7 +177,7 @@ class UserController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-             'Usuario Editado com Sucesso!');
+             'Usuário Editado com Sucesso!');
         
     }
 
@@ -196,7 +196,7 @@ class UserController extends Controller
 
         return redirect()->route('usuarios.index', ['type' => $type])
             ->with('flash_message',
-             'Usuario Excluido com Sucesso.');
+             'Usuário Excluido com Sucesso.');
     }
 
     public function ativarUser(Request $request)
@@ -207,7 +207,7 @@ class UserController extends Controller
 
         return redirect()->route('usuarios.index', ['type' => $request->type])
             ->with('flash_message',
-             'Usuario Ativado com Sucesso.');
+             'Usuário Ativado com Sucesso.');
     }
 
  

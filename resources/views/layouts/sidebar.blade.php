@@ -30,20 +30,15 @@
                 </ul>
             @endhasanyrole
         </li>
-            <li>
-                <a href="#modSubmenu" data-toggle="collapse" aria-expanded="false">
-                	<i class="glyphicon glyphicon-th-large"></i>
-                	Equipamentos</a>
-                <ul class="collapse list-unstyled" id="modSubmenu">
-                    <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Lista de Equipamentos</a></li>
-                    <li><a href="{{ route('equipamentos.cadastro') }}"><i class="fas fa-users"></i>Cadastrar Equipamentos</a></li>
-                    <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Equipamentos Desativados</a></li>
-                </ul>
-            </li>
         <li>
-            <a href="#">
-                <i class="glyphicon glyphicon-send"></i>
-                Contato</a>
+            <a href="#modSubmenu" data-toggle="collapse" aria-expanded="false">
+            	<i class="glyphicon glyphicon-th-large"></i>
+            	Equipamentos</a>
+            <ul class="collapse list-unstyled" id="modSubmenu">
+                <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Lista de Equipamentos</a></li>
+                <li><a href="{{ route('equipamentos.cadastro') }}"><i class="fas fa-users"></i>Cadastrar Equipamentos</a></li>
+                <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Equipamentos Desativados</a></li>
+            </ul>
         </li>
     </ul>
 </nav>

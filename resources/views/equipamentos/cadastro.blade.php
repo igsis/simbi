@@ -344,11 +344,11 @@
             </div>
         </div>
     </form>
+    
     @include('layouts.equipamento_modal')
 </div>
 @endsection
 @section('scripts_adicionais')
-
     <script type="text/javascript">
 
         $('#addServico').submit(function(e) {
@@ -599,7 +599,6 @@
             });
         });
     </script>
-
     <script type="text/javascript" >
         //Script CEP
         $(document).ready(function() {
