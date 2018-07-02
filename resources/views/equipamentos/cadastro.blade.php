@@ -10,7 +10,7 @@
         </h2>
     </div>
     <hr>
-
+    
     <form method="POST" action="{{ route('equipamentos.index') }}">
         {{ csrf_field() }}
 
@@ -415,6 +415,37 @@
                     $("#sucesso").addClass( "alert-danger");
                     $("#sucesso em").html(`Erro ao cadastrar Sigla do Equipamento!`);
                     alert("Status: " + textStatus); alert("Error: " + jqXHR.responseText);
+                }
+            });
+            return false;
+        });
+
+        $('#addSecretaria').submit(function(e) {
+            e.preventDefault();
+            let novaSecretaria = $("#addSecretaria input[name='novaSecretaria']").val();
+            let _token = $("#addSecretaria input[name='_token']").val();
+            let sigla = $("#addSecretaria input[name='sigla']").val();
+            let descricao = $("#addSecretaria input[name='descricao']").val();
+            $.ajax({
+                url: '{{route('equipamentos.index')}}', 
+                type: 'POST',
+                data: {'novaSecretaria': '','_token': _token, 'sigla':sigla, 'descricao': descricao},
+                success: function(data) {
+                    $("#identificacaoSecretaria option").remove();
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso em").html("Secretaria inserida com sucesso!");
+                    $("#identificacaoSecretaria").append(`<option value=''>Selecione uma Opção</option>`);
+                    $('#addSecretaria').modal('hide');
+                    $("#identificacaoSecretaria").focus();
+                    for(let item of data ){
+                        $("#identificacaoSecretaria").append(`<option value='${item.id}'>${item.sigla}<otion>`);
+                    }
+                },
+                error: function() {
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").addClass( "alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Secretaria!`);
                 }
             });
             return false;

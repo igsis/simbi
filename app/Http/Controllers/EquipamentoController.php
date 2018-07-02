@@ -115,9 +115,11 @@ class EquipamentoController extends Controller
                         ]);
 
             Secretaria::create($data);
+            $data = Secretaria::orderBy('descricao')->get();
+            return response()->json($data);
 
-            return redirect()->route('equipamentos.cadastro')->with('flash_message',
-                'Secretaria inserida com sucesso');
+            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
+            //     'Secretaria inserida com sucesso');
         }
 
         elseif ($request->has('novaSubordinacaoAdministrativa')) {

@@ -64,7 +64,7 @@
          <h4 class="modal-title">Adicionar nova Secretaria?</h4>
        </div>
        <div class="modal-body">
-         <form method="POST" action="{{route('equipamentos.index')}}">
+         <form method="POST" id="addSecretaria" action="{{route('equipamentos.index')}}">
            {{csrf_field()}}
            <div class="form-group">
              <label>Sigla</label>
