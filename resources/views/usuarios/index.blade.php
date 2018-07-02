@@ -47,8 +47,11 @@
                     <td>{{ $user->equipamentos()->pluck('nome')->implode('') }}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
                     <td>
-                        <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                        @if($type == 1)
+                            <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                        
                         <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px"><i class="glyphicon glyphicon-retweet"></i> Vincular Equipamento</button>
+                        @endif
                         @hasrole('Administrador')
                         @if($user->publicado == 1)
                             <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">

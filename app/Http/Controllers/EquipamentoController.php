@@ -303,6 +303,7 @@ class EquipamentoController extends Controller
             'acervoespecializado'=>'required',
             'nucleobraile'=>'required',
             'status'=>'required',
+            'observacao' => 'nullable',
 
             //Para Tabela Endereço
             'cep'=>'required',
@@ -331,7 +332,8 @@ class EquipamentoController extends Controller
                 'telecentro' => $request->telecentro,
                 'acervo_especializado' => $request->acervoespecializado,
                 'nucleo_braile' => $request->nucleobraile,
-                'status_id' => $request->status
+                'status_id' => $request->status,
+                'observacao' => $request->observacao
             ]);
 
         $equipamento->endereco
@@ -347,7 +349,7 @@ class EquipamentoController extends Controller
             'distrito_id' => $request->distrito,
             'macrorregiao_id' => $request->macrorregiao,
             'regiao_id' => $request->regiao,
-            'regional_id' => $request->regional
+            'regional_id' => $request->regional            
             ]);
 
         return redirect()->back()->with('flash_message',
