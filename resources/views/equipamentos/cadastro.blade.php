@@ -450,6 +450,96 @@
             });
             return false;
         });
+
+        $('#addSubAdmin').submit(function(e) {
+            e.preventDefault();
+            let novaSubordinacaoAdministrativa = $("#addSubAdmin input[name='novaSubordinacaoAdministrativa']").val();
+            let _token = $("#addSubAdmin input[name='_token']").val();
+            let descricao = $("#addSubAdmin input[name='descricao']").val();
+            $.ajax({
+                url: '{{route('equipamentos.index')}}', 
+                type: 'POST',
+                data: {'novaSubordinacaoAdministrativa': '','_token': _token, 'descricao': descricao},
+                success: function(data) {
+                    $("#subordinacaoAdministrativa option").remove();
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso em").html("Subordinacao Administrativa inserida com sucesso!");
+                    $("#subordinacaoAdministrativa").append(`<option value=''>Selecione uma Opção</option>`);
+                    $('#addSubAdmin').modal('hide');
+                    for(let item of data ){
+                        $("#subordinacaoAdministrativa").append(`<option value='${item.id}'>${item.descricao}<otion>`);
+                    }
+                    $("#subordinacaoAdministrativa").focus();
+                },
+                error: function() {
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").addClass( "alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Subordinacao Administrativa!`);
+                }
+            });
+            return false;
+        });
+
+        $('#addPrefeituraRegional').submit(function(e) {
+            e.preventDefault();
+            let novaPrefeituraRegional = $("#addPrefeituraRegional input[name='novaPrefeituraRegional']").val();
+            let _token = $("#addPrefeituraRegional input[name='_token']").val();
+            let descricao = $("#addPrefeituraRegional input[name='descricao']").val();
+            $.ajax({
+                url: '{{route('equipamentos.index')}}', 
+                type: 'POST',
+                data: {'novaPrefeituraRegional': '','_token': _token, 'descricao': descricao},
+                success: function(data) {
+                    $("#prefeituraRegional option").remove();
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso em").html("Prefeitura Regional inserida com sucesso!");
+                    $("#prefeituraRegional").append(`<option value=''>Selecione uma Opção</option>`);
+                    $('#addPrefeituraRegional').modal('hide');
+                    for(let item of data ){
+                        $("#prefeituraRegional").append(`<option value='${item.id}'>${item.descricao}<otion>`);
+                    }
+                    $("#prefeituraRegional").focus();
+                },
+                error: function() {
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").addClass( "alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional!`);
+                }
+            });
+            return false;
+        });
+
+        $('#addDistrito').submit(function(e) {
+            e.preventDefault();
+            let novoDistrito = $("#addDistrito input[name='novoDistrito']").val();
+            let _token = $("#addDistrito input[name='_token']").val();
+            let descricao = $("#addDistrito input[name='descricao']").val();
+            $.ajax({
+                url: '{{route('equipamentos.index')}}', 
+                type: 'POST',
+                data: {'novoDistrito': '','_token': _token, 'descricao': descricao},
+                success: function(data) {
+                    $("#distrito option").remove();
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso em").html("Distrito inserido com sucesso!");
+                    $("#distrito").append(`<option value=''>Selecione uma Opção</option>`);
+                    $('#addDistrito').modal('hide');
+                    for(let item of data ){
+                        $("#distrito").append(`<option value='${item.id}'>${item.descricao}<otion>`);
+                    }
+                    $("#distrito").focus();
+                },
+                error: function() {
+                    $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").addClass( "alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Distrito inserido!`);
+                }
+            });
+            return false;
+        });
     </script>
     <script type="text/javascript">
         //Script habilita campo Nome Tematica

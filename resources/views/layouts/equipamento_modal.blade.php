@@ -93,7 +93,7 @@
           <h4 class="modal-title">Adicionar nova Sub. Administrativa?</h4>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{route('equipamentos.index')}}">
+          <form method="POST" id="addSubAdmin" action="{{route('equipamentos.index')}}">
             {{csrf_field()}}
             <label>Descrição</label>
             <input class="form-control" type="text" name="descricao">
@@ -116,7 +116,7 @@
                     <h4 class="modal-title">Adicionar nova Prefeitura Regional?</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{route('equipamentos.index')}}">
+                    <form method="POST" id="addPrefeituraRegional" action="{{route('equipamentos.index')}}">
                         {{csrf_field()}}
                         <label>Descrição</label>
                         <input class="form-control" type="text" name="descricao">
@@ -139,7 +139,7 @@
                     <h4 class="modal-title">Adicionar novo Distrito?</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{route('equipamentos.index')}}">
+                  <form method="POST" id="addDistrito" action="{{route('equipamentos.index')}}">
                         {{csrf_field()}}
                         <label>Descrição</label>
                         <input class="form-control" type="text" name="descricao">

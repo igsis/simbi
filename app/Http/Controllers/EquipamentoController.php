@@ -5,7 +5,7 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 use response;
 
-use Simbi\Models\Distrito;
+use Simbi\Models\Distrito; 
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoSigla;
@@ -123,14 +123,16 @@ class EquipamentoController extends Controller
         }
 
         elseif ($request->has('novaSubordinacaoAdministrativa')) {
-            $data = $this->validate($request, [
+                $data = $this->validate($request, [
                         'descricao'=>'required'
                     ]);
 
             SubordinacaoAdministrativa::create($data);
+            $data = SubordinacaoAdministrativa::orderBy('descricao')->get();
+            return response()->json($data);
 
-            return redirect()->route('equipamentos.cadastro')->with('flash_message',
-                'Subordinacao Administrativa inserida com sucesso');
+            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
+            //     'Subordinacao Administrativa inserida com sucesso');
         }
 
         elseif($request->has('novaPrefeituraRegional')){
@@ -139,9 +141,11 @@ class EquipamentoController extends Controller
             ]);
 
             PrefeituraRegional::create($data);
+            $data = PrefeituraRegional::orderBy('descricao')->get();
+            return response()->json($data);
 
-            return redirect()->route('equipamentos.cadastro')->with('flash_message',
-                'Prefeitura Regional inserida com sucesso!');
+            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
+            //     'Prefeitura Regional inserida com sucesso!');
         }
 
         elseif($request->has('novoDistrito')){
@@ -151,8 +155,11 @@ class EquipamentoController extends Controller
 
             Distrito::create($data);
 
-            return redirect()->route('equipamentos.cadastro')->with('flash_message',
-                'Distrito inserido com sucesso!');
+            $data = Distrito::orderBy('descricao')->get();
+            return response()->json($data);
+
+            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
+            //     'Distrito inserido com sucesso!');
         }
 
         else{
