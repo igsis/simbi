@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function (){
 		Route::any('usuarios/search', 'UserController@searchUser')->name('search-user');
 
 
-		Route::post('usuarios/vincula', 'UserController@vinculaEquipamento');
+		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
 		
 	});
 

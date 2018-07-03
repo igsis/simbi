@@ -250,4 +250,26 @@ class UserController extends Controller
 
     }
 
+    public function vinculaEquipamento(Request $request, $id)
+    {
+        /** @var User $usuario */
+        $usuario = User::findOrFail($id);
+        $equipamentos = $request['equipamento'];
+
+        if ($equipamentos != 0)
+        {
+            $usuario->equipamentos()->sync($equipamentos);
+        }
+        else
+        {
+            $usuario->equipamentos()->detach();
+        }
+
+        return redirect()->route('usuarios.index', ['type' => $request->type])
+            ->with('flash_message',
+                'Equipamentos Vinculados com sucesso.');
+    }
+
+
+
 }

@@ -103,10 +103,9 @@
                 <h4 class="modal-title">Vincular equipamento ao usuário</h4>
             </div>
             <div class="modal-body">
-                <form id="formVincula" method="POST">
+                <form id="formVincula" method="POST" {{--action via javascript--}}>
                     {{csrf_field()}}
-                    <input type="hidden" name="_method" value="PUT">
-
+                    <input type="hidden" name="type" value="{{ $type }}">
                     @foreach($equipamentos as $equipamento)
                         <div class="checkbox-inline">
                             <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
@@ -148,11 +147,11 @@
         // Alimenta o modal com informações de cada usuario
         $('#vinculaEquipamento').on('show.bs.modal', function (e)
         {
-            var nome = $(e.relatedTarget).attr('data-nome');
+            let nome = $(e.relatedTarget).attr('data-nome');
             $(this).find('.modal-title').text(`Vincular equipamento ao usuário: ${nome}`);
 
-            var id = $(e.relatedTarget).attr('data-id');
-            $(this).find('#formVincula').attr('action', `{{url('usuarios')}}/${id}`);
+            let id = $(e.relatedTarget).attr('data-id');
+            $(this).find('#formVincula').attr('action', `{{url('usuarios')}}/${id}/vincular`);
         });
     </script>
 

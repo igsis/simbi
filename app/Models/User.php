@@ -54,6 +54,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Equipamento::class);
     }
 
+
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
