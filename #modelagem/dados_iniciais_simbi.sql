@@ -224,7 +224,7 @@ DELETE FROM `roles`;
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'Administrador', 'web', '2018-05-11 16:04:58', '2018-05-11 16:04:58'),
 	(2, 'Coordenador', 'web', '2018-05-11 16:05:09', '2018-05-11 16:05:09'),
-	(3, 'Funcionario', 'web', '2018-05-11 16:05:19', '2018-05-11 16:05:19');
+	(3, 'Funcionário', 'web', '2018-05-11 16:05:19', '2018-05-11 16:05:19');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.role_has_permissions: ~6 rows (aproximadamente)
@@ -312,10 +312,10 @@ INSERT INTO `tipo_servicos` (`id`, `descricao`) VALUES
 -- Copiando dados para a tabela simbi.users: ~4 rows (aproximadamente)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `publicado`) VALUES
-	(1, 'Admin', 'admin@teste.com', '$2y$10$QTa2XVi7nGlNvIyZiF7IGutDOPMQTwBm.3vpKB61Ly77oLnJ.rXyu', 'ftruU1O8HmmfGW11XhoQkAmZmPFPauSzOVlpGAvtkeDeN2F6A4b720xNZLb2', '2018-05-11 15:59:01', '2018-05-11 15:59:01', 1),
-	(2, 'Coordenador', 'coordenador@teste.com.br', '$2y$10$7bQhXdsh5jdE6V6UuA9geOEg4vbMrRo/rFeEY.riwU5nDaws9tR9y', '0P9HnMF5YjfeoKLejOd6uDc4N4jTDfhiS0e9FFyIkJW1ukM35EPoQVWZnYTg', '2018-05-14 15:06:45', '2018-05-14 15:06:45', 1),
-	(3, 'Funcionario', 'func@teste.com.br', '$2y$10$AW7Mggvjj/HArXAjpyhAN.Z3ehFnVOkBxVofknq1iuAHoR667.ElC', 'kIoobYgkEjLcxSJVqzYvdadvgkfoLum7gOpMpr0eedJjZx3m94mABws2kMai', '2018-05-14 15:40:14', '2018-05-14 19:40:48', 1);
+INSERT INTO `users` (`id`, `name`, `login`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `publicado`) VALUES
+	(1, 'Admin', '0000000', 'admin@teste.com', '$2y$10$QTa2XVi7nGlNvIyZiF7IGutDOPMQTwBm.3vpKB61Ly77oLnJ.rXyu', 'ftruU1O8HmmfGW11XhoQkAmZmPFPauSzOVlpGAvtkeDeN2F6A4b720xNZLb2', '2018-05-11 15:59:01', '2018-05-11 15:59:01', 1),
+	(2, 'Coordenador', '1111111', 'coordenador@teste.com.br', '$2y$10$7bQhXdsh5jdE6V6UuA9geOEg4vbMrRo/rFeEY.riwU5nDaws9tR9y', '0P9HnMF5YjfeoKLejOd6uDc4N4jTDfhiS0e9FFyIkJW1ukM35EPoQVWZnYTg', '2018-05-14 15:06:45', '2018-05-14 15:06:45', 1),
+	(3, 'Funcionario', '2222222', 'func@teste.com.br', '$2y$10$AW7Mggvjj/HArXAjpyhAN.Z3ehFnVOkBxVofknq1iuAHoR667.ElC', 'kIoobYgkEjLcxSJVqzYvdadvgkfoLum7gOpMpr0eedJjZx3m94mABws2kMai', '2018-05-14 15:40:14', '2018-05-14 19:40:48', 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
