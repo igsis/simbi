@@ -350,7 +350,7 @@
 @endsection
 @section('scripts_adicionais')
     <script type="text/javascript">
-
+        
         $('#addServico').submit(function(e) {
             e.preventDefault();
             let novoServico = $('#addServico input[name="novoServico"]').val();
@@ -378,6 +378,7 @@
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass( "alert-danger");
                     $("#sucesso em").html(`Erro ao cadastrar Tipo de serviço! Verifique se o campo já foi cadastrado!`);
+                    $('#addServico').modal('hide');
                 }
             });
             return false;
@@ -452,6 +453,7 @@
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass("alert-danger");
                     $("#sucesso em").html(`Erro ao cadastrar Secretaria! Verifique se o campo já foi cadastrado!`);
+                    $('#addSecretaria').modal('hide');
                 }
             });
             return false;
@@ -484,6 +486,7 @@
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass("alert-danger");
                     $("#sucesso em").html(`Erro ao cadastrar Subordinacao Administrativa! Verifique se o campo já foi cadastrado!`);
+                    $('#addSubAdmin').modal('hide');
                 }
             });
             return false;
@@ -506,16 +509,17 @@
                     $("#sucesso em").html("Prefeitura Regional inserida com sucesso!");
                     $("#prefeituraRegional").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addPrefeituraRegional').modal('hide');
+                    $("#prefeituraRegional").focus();
                     for(let item of data ){
                         $("#prefeituraRegional").append(`<option value='${item.id}'>${item.descricao}<otion>`);
                     }
-                    $("#prefeituraRegional").focus();
                 },
                 error: function() {
                     $("#sucesso").removeAttr("hidden");
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass("alert-danger");
                     $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional! Verifique se o campo já foi cadastrado!`);
+                    $('#addPrefeituraRegional').modal('hide');
                 }
             });
             return false;
@@ -548,6 +552,7 @@
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass("alert-danger");
                     $("#sucesso em").html(`Erro ao cadastrar Distrito inserido! Verifique se o campo já foi cadastrado!`);
+                    $('#addDistrito').modal('hide');
                 }
             });
             return false;

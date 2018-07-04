@@ -317,10 +317,9 @@
                 success: function(data) {
                     $("#tipoServico option").remove();
                     $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass("alert-danger");
+                    $("#sucesso").addClass( "alert-success");
                     $("#sucesso em").html("Tipo de serviço inserido com sucesso!");
-                    setTimeout(function () {
-                        $("#sucesso").hide(); 
-                    }, 3500);
                     $("#tipoServico").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addServico').modal('hide');
                     $("#tipoServico").focus();
@@ -330,9 +329,10 @@
                 },
                 error: function() {
                     $("#sucesso").removeAttr("hidden");
-                    $("#sucesso").removeClass( "alert-success");
+                    $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass( "alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Tipo de serviço!`);
+                    $("#sucesso em").html(`Erro ao cadastrar Tipo de serviço! Verifique se o campo já foi cadastrado!`);
+                    $('#addServico').modal('hide');
                 }
             });
             return false;
@@ -358,6 +358,8 @@
                 success: function(data) {
                     $("#equipamentoSigla option").remove();
                     $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass("alert-danger");
+                    $("#sucesso").addClass( "alert-success");
                     $("#sucesso em").html("Sigla do Equipamento inserida com sucesso!");
                     $("#equipamentoSigla").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addSigla').modal('hide');
@@ -366,12 +368,12 @@
                         $("#equipamentoSigla").append(`<option value='${item.id}'>${item.sigla}<otion>`);
                     }
                 },
-                error: function(jqXHR, textStatus, error) {
+                error: function() {
                     $("#sucesso").removeAttr("hidden");
-                    $("#sucesso").removeClass( "alert-success");
-                    $("#sucesso").addClass( "alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Sigla do Equipamento!`);
-                    alert("Status: " + textStatus); alert("Error: " + jqXHR.responseText);
+                    $("#sucesso").removeClass("alert-success");
+                    $("#sucesso").addClass("alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Sigla do Equipamento! Verifique se o campo já foi cadastrado!`);
+                    $('#addSigla').modal('hide');
                 }
             });
             return false;
@@ -390,6 +392,8 @@
                 success: function(data) {
                     $("#identificacaoSecretaria option").remove();
                     $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass("alert-danger");
+                    $("#sucesso").addClass( "alert-success");
                     $("#sucesso em").html("Secretaria inserida com sucesso!");
                     $("#identificacaoSecretaria").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addSecretaria').modal('hide');
@@ -400,9 +404,10 @@
                 },
                 error: function() {
                     $("#sucesso").removeAttr("hidden");
-                    $("#sucesso").removeClass( "alert-success");
-                    $("#sucesso").addClass( "alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Secretaria!`);
+                    $("#sucesso").removeClass("alert-success");
+                    $("#sucesso").addClass("alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Secretaria! Verifique se o campo já foi cadastrado!`);
+                    $('#addSecretaria').modal('hide');
                 }
             });
             return false;
@@ -420,6 +425,8 @@
                 success: function(data) {
                     $("#subordinacaoAdministrativa option").remove();
                     $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass("alert-danger");
+                    $("#sucesso").addClass("alert-success");
                     $("#sucesso em").html("Subordinacao Administrativa inserida com sucesso!");
                     $("#subordinacaoAdministrativa").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addSubAdmin').modal('hide');
@@ -430,9 +437,10 @@
                 },
                 error: function() {
                     $("#sucesso").removeAttr("hidden");
-                    $("#sucesso").removeClass( "alert-success");
-                    $("#sucesso").addClass( "alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Subordinacao Administrativa!`);
+                    $("#sucesso").removeClass("alert-success");
+                    $("#sucesso").addClass("alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Subordinacao Administrativa! Verifique se o campo já foi cadastrado!`);
+                    $('#addSubAdmin').modal('hide');
                 }
             });
             return false;
@@ -450,19 +458,22 @@
                 success: function(data) {
                     $("#prefeituraRegional option").remove();
                     $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass("alert-danger");
+                    $("#sucesso").addClass( "alert-success");
                     $("#sucesso em").html("Prefeitura Regional inserida com sucesso!");
                     $("#prefeituraRegional").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addPrefeituraRegional').modal('hide');
+                    $("#prefeituraRegional").focus();
                     for(let item of data ){
                         $("#prefeituraRegional").append(`<option value='${item.id}'>${item.descricao}<otion>`);
                     }
-                    $("#prefeituraRegional").focus();
                 },
                 error: function() {
                     $("#sucesso").removeAttr("hidden");
-                    $("#sucesso").removeClass( "alert-success");
-                    $("#sucesso").addClass( "alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional!`);
+                    $("#sucesso").removeClass("alert-success");
+                    $("#sucesso").addClass("alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional! Verifique se o campo já foi cadastrado!`);
+                    $('#addPrefeituraRegional').modal('hide');
                 }
             });
             return false;
@@ -480,6 +491,8 @@
                 success: function(data) {
                     $("#distrito option").remove();
                     $("#sucesso").removeAttr("hidden");
+                    $("#sucesso").removeClass("alert-danger");
+                    $("#sucesso").addClass( "alert-success");
                     $("#sucesso em").html("Distrito inserido com sucesso!");
                     $("#distrito").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addDistrito').modal('hide');
@@ -490,9 +503,10 @@
                 },
                 error: function() {
                     $("#sucesso").removeAttr("hidden");
-                    $("#sucesso").removeClass( "alert-success");
-                    $("#sucesso").addClass( "alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Distrito inserido!`);
+                    $("#sucesso").removeClass("alert-success");
+                    $("#sucesso").addClass("alert-danger");
+                    $("#sucesso em").html(`Erro ao cadastrar Distrito inserido! Verifique se o campo já foi cadastrado!`);
+                    $('#addDistrito').modal('hide');
                 }
             });
             return false;
