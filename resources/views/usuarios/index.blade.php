@@ -44,8 +44,8 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->login }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->equipamentos()->pluck('nome')->implode(', ')}}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
-                    <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
+                    <td>{{ $user->equipamentos->implode('nome', ', ')}}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
+                    <td>{{ $user->roles->implode('name', '') }}</td>
                     <td>
                         @if($type == 1)
                             <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
