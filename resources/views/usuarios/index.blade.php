@@ -44,7 +44,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->login }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->equipamentos()->pluck('nome')->implode('') }}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
+                    <td>{{ $user->equipamentos()->pluck('nome')->implode(', ')}}</td> {{--TODO: Relacionamento Usuario / Equipamento no Controller--}}
                     <td>{{ $user->roles()->pluck('name')->implode('') }}</td>
                     <td>
                         @if($type == 1)
