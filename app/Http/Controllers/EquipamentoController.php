@@ -83,7 +83,7 @@ class EquipamentoController extends Controller
  
         if($request->has('novoServico')){
             $data = $this->validate($request, [
-                        'descricao'=>'required'
+                        'descricao'=>'required|unique:tipo_servicos'
                     ]);
 
             TipoServico::create($data);
@@ -95,7 +95,7 @@ class EquipamentoController extends Controller
 
         elseif ($request->has('novaSigla')){
             $data = $this->validate($request, [
-                        'sigla'=>'required|max:6',
+                        'sigla'=>'required|max:6|unique:equipamento_siglas',
                         'descricao'=>'required',
                         'roteiro'=>'nullable'
                     ]);
@@ -110,7 +110,7 @@ class EquipamentoController extends Controller
 
         elseif ($request->has('novaSecretaria')) {
                 $data = $this->validate($request, [
-                            'sigla'=>'required|max:6',
+                            'sigla'=>'required|max:6|unique:secretarias',
                             'descricao'=>'required'
                         ]);
 
@@ -124,7 +124,7 @@ class EquipamentoController extends Controller
 
         elseif ($request->has('novaSubordinacaoAdministrativa')) {
                 $data = $this->validate($request, [
-                        'descricao'=>'required'
+                        'descricao'=>'required|unique:subordinacao_administrativas'
                     ]);
 
             SubordinacaoAdministrativa::create($data);
@@ -150,7 +150,7 @@ class EquipamentoController extends Controller
 
         elseif($request->has('novoDistrito')){
             $data = $this->validate($request, [
-                'descricao'=>'required'
+                'descricao'=>'required|unique:distritos'
             ]);
 
             Distrito::create($data);
@@ -166,7 +166,7 @@ class EquipamentoController extends Controller
             // Metodo que grava o novo equipamento
             $this->validate($request, [
                 //Para Tabela Equipamento
-                'nome'=>'required', 
+                'nome'=>'required|unique:equipamentos', 
                 'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
                 'identificacaoSecretaria'=>'required',
