@@ -14,4 +14,4 @@ INSERT INTO simbi.enderecos (id, cep, logradouro, numero, complemento, bairro, c
 
 INSERT INTO simbi.equipamentos (id, nome, tipo_servico_id, equipamento_sigla_id, secretaria_id, subordinacao_administrativa_id, tematico, nome_tematica, endereco_id, telefone, telecentro, acervo_especializado, nucleo_braile, status_id, publicado) VALUES
 (1, 'Biblioteca Mario de Andrade', 1, 1, 1, 1, 0, null, 1, '(11) 3775-0002', 0, 0, 0, 1, 1),
-(2, 'Biblioteca Monteiro Lobato', 1, 2, 1, 1, 0, null, 2, '(11) 3256-4122', 1, 0, 0, 1, 1, null);
+(2, 'Biblioteca Monteiro Lobato', 1, 2, 1, 1, 0, null, 2, '(11) 3256-4122', 1, 0, 0, 1, 1);

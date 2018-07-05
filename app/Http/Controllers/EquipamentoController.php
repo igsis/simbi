@@ -195,6 +195,18 @@ class EquipamentoController extends Controller
                 'observacao' => 'nullable'
             ]);
 
+           /* $funcionamento = $this->validate($request->only([
+                'domingo[]',
+                'segunda[]',
+                'terca[]',
+                'quarta[]',
+                'quinta[]',
+                'sexta[]',
+                'sabado[]',
+                'horarioAbertura[]',
+                'horarioFechamento[]'
+            ]);*/
+
             $endereco = new Endereco();
             $endereco->create([
                         'cep' => $request->cep,
@@ -224,7 +236,16 @@ class EquipamentoController extends Controller
                 'nucleo_braile' => $request->nucleobraile,
                 'status_id' => $request->status,
                 'observacao' => $request->observacao
-            ]);
+            ])
+            ->funcionamentos()->create($request->only([
+                    'segunda[]',
+                    'terca[]',
+                    'quarta[]',
+                    'quinta[]',
+                    'sexta[]',
+                    'horarioAbertura[]',
+                    'horarioFechamento[]'
+                ]));
         }
         return redirect()->back()->with('flash_message',
             'Equipamento inserido com sucesso');

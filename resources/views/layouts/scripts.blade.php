@@ -1,4 +1,4 @@
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <script src="{{asset('js/jquery.mask.js')}}"></script>
 <script src="{{asset('js/scripts.js')}}"></script>
