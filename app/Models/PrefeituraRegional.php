@@ -7,7 +7,7 @@ use Simbi\Models\Endereco;
 
 class PrefeituraRegional extends Model
 {
-	protected $table = 'prefeitura_regionais';
+	protected $table = 'subprefeituras';
 	
     public $timestamps = false;
 

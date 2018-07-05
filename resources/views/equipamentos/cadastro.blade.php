@@ -26,7 +26,7 @@
                     <option value="">Selecione uma Opção</option>
                     @foreach ($tipoServicos as $tipoServico)
                         @if ($tipoServico->id == old('tipoServico'))
-                            <option value="{{$tipoServico->id}}"selected>{{$tipoServico->descricao}}</option>
+                            <option value="{{$tipoServico->id}}" selected>{{$tipoServico->descricao}}</option>
                         @else
                             <option value="{{$tipoServico->id}}">{{$tipoServico->descricao}}</option>
                         @endif
@@ -103,11 +103,16 @@
             <div class="form-group col-md-3">
                 <label>Equipamento Temático?</label><br>
                 @if (old('tematico') == 1)
-                    <input type="radio" name="tematico" value="0" >
-                    <label for=tematico style="padding:0 10px 0 5px;">Não</label>
 
-                    <input type="radio" name="tematico" value="1" checked>
-                    <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
+                    <label for=tematico style="padding:0 10px 0 5px;">
+                        Não
+                        <input type="radio" name="tematico" value="0" >
+                    </label>
+
+                    <label for=tematico style="padding:0 10px 0 5px;">
+                        Sim
+                        <input type="radio" name="tematico" value="1" checked>
+                    </label>
                 @else
                     <input type="radio" name="tematico" value="0" checked>
                     <label for=tematico style="padding:0 10px 0 5px;">Não</label>
@@ -251,33 +256,43 @@
             </div>
         </div>
 
-        {{-- <div class="form-row">
-            <center><h3>Horario de Funcionamento</h3></center>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
-                    <input type="checkbox" name="domingo" id="diasemana07" value="1" /><label  style="padding:0 10px 0 5px;"> Domingo</label>
-                    <input type="checkbox" name="segunda" id="diasemana01" value="1"/><label style="padding:0 10px 0 5px;"> Segunda</label>
-                    <input type="checkbox" name="terca" id="diasemana02" value="1" /><label  style="padding:0 10px 0 5px;"> Terça</label>
-                    <input type="checkbox" name="quarta" id="diasemana03" value="1" /><label style="padding:0 10px 0 5px;"> Quarta</label>
-                    <input type="checkbox" name="quinta" id="diasemana04" value="1" /><label style="padding:0 10px 0 5px;"> Quinta</label>
-                    <input type="checkbox" name="sexta" id="diasemana05" value="1" /><label  style="padding:0 10px 0 5px;"> Sexta</label>
-                    <input type="checkbox" name="sabado" id="diasemana06" value="1" /><label style="padding:0 10px 0 5px;"> Sábado</label>
+        <div style="text-align: center;"><h2>Horario de Funcionamento</h2></div>
+        <hr>
+
+        <div id="horario">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
+                        <input type="checkbox" name="domingo" id="diasemana07" value="1" /><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                        <input type="checkbox" name="segunda" id="diasemana01" value="1"/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                        <input type="checkbox" name="terca" id="diasemana02" value="1" /><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                        <input type="checkbox" name="quarta" id="diasemana03" value="1" /><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                        <input type="checkbox" name="quinta" id="diasemana04" value="1" /><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                        <input type="checkbox" name="sexta" id="diasemana05" value="1" /><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                        <input type="checkbox" name="sabado" id="diasemana06" value="1" /><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-offset-4 col-md-2">
+                    <label for="horarioAbertura">Horario de Abertura</label>
+                    <input type="text" class="form-control" name="horarioAbertura" id="horarioAbertura" data-mask="00:00">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="horarioFechamento">Horario de Fechamento</label>
+                    <input type="text" class="form-control" name="horarioFechamento" id="horarioFechamento" data-mask="00:00">
                 </div>
             </div>
         </div>
 
+        <hr>
+
         <div class="row">
-            <div class="form-group col-md-offset-3 col-md-3">
-                <label for="horarioAbertura">Horario de Abertura</label>
-                <input type="text" class="form-control" name="horarioAbertura" id="horarioAbertura" data-mask="00:00">
+            <div class="form-group col-md-offset-4 col-md-4">
+                <a class="btn btn-info btn-block" href="javascript:void(0)" id="addInput">Adicionar Novo Horario</a>
             </div>
-            <div class="form-group col-md-3">
-                <label for="horarioFechamento">Horario de Fechamento</label>
-                <input type="text" class="form-control" name="horarioFechamento" id="horarioFechamento" data-mask="00:00">
-            </div>
-        </div> --}}
+        </div>
 
         <div class="row">
             <div class="form-group col-md-4">

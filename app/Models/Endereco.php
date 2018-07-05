@@ -8,7 +8,7 @@ class Endereco extends Model
 {
     public $timestamps = false;
 
-    public $fillable = [
+    protected $fillable = [
         'cep',
         'logradouro',
         'numero',

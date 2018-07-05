@@ -60,6 +60,10 @@ class Equipamento extends Model
         $this->belongsToMany(User::class);
     }
 
+    public function funcionamentos(){
+	    $this->hasMany(Funcionamento::class);
+    }
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
