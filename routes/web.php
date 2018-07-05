@@ -43,9 +43,33 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
 
+		# Gerenciar Selects
 		// Route::group(['prefix' => 'gerenciar'], function(){
+			
+		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 		Route::get('/' , 'TipoServicoController@index')->name('');
+		// 	});
 
-		// 	Route::get('' , 'Controller@')->name();
+		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 		Route::get('/' , 'EquipamentoSiglaController@index')->name('');
+		// 	});
+
+		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 		Route::get('/' , 'SecretariaController@index')->name('');
+		// 	});
+
+		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 		Route::get('/' , 'SubordinacaoAdministrativaController@')->name('');
+		// 	});
+
+		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 		Route::get('/' , 'PrefeituraRegionalController@index')->name('');
+		// 	});
+
+		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 		Route::get('/' , 'DistritoController@index')->name('');
+		// 	});
+
 		// });
 		
 	});

@@ -41,16 +41,18 @@
             </ul>
         </li>
         <li>
-            <a href="#gerenciar" data-toggle="collapse" aria-expanded="false">
-                <i class="glyphicon glyphicon-cog"></i>
-                Gerenciar Selects
-            </a>
-            <ul class="collapse list-unstyled" id="gerenciar">
-                <li><a href="">Tipo de Serviço</a></li>
-                <li><a href="">Sigla do Equipamento</a></li>
-                <li><a href="">Indentificação da Secretaria</a></li>
-                <li><a href="">Subordinação Administrativa</a></li>
-            </ul>
+            @hasanyrole('Coordenador|Administrador')
+                <a href="#gerenciar" data-toggle="collapse" aria-expanded="false">
+                    <i class="glyphicon glyphicon-cog"></i>
+                    Gerenciar Selects
+                </a>
+                <ul class="collapse list-unstyled" id="gerenciar">
+                    <li><a href="">Tipo de Serviço</a></li>
+                    <li><a href="">Sigla do Equipamento</a></li>
+                    <li><a href="">Indentificação da Secretaria</a></li>
+                    <li><a href="">Subordinação Administrativa</a></li>
+                </ul>
+            @endhasanyrole
         </li>
     </ul>
 </nav>
