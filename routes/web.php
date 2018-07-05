@@ -44,33 +44,35 @@ Route::group(['middleware' => 'auth'], function (){
 		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
 
 		# Gerenciar Selects
-		// Route::group(['prefix' => 'gerenciar'], function(){
+		Route::group(['prefix' => 'gerenciar'], function(){
 			
-		// 	Route::group(['prefix' => 'tipo-servico'], function(){
-		// 		Route::get('/' , 'TipoServicoController@index')->name('');
-		// 	});
+			Route::group(['prefix' => 'tipo-servico'], function(){
+				Route::get('/' , 'TipoServicoController@index')->name('tipoServico');
 
-		// 	Route::group(['prefix' => 'tipo-servico'], function(){
-		// 		Route::get('/' , 'EquipamentoSiglaController@index')->name('');
-		// 	});
+				// Route::post()...
+			});
 
-		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+			Route::group(['prefix' => 'sigla-equipamento'], function(){
+				Route::get('/' , 'EquipamentoSiglaController@index')->name('siglaEquipamento');
+			});
+
+		// 	Route::group(['prefix' => 'secretaria'], function(){
 		// 		Route::get('/' , 'SecretariaController@index')->name('');
 		// 	});
 
-		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 	Route::group(['prefix' => 'subordinacao-administrativa'], function(){
 		// 		Route::get('/' , 'SubordinacaoAdministrativaController@')->name('');
 		// 	});
 
-		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 	Route::group(['prefix' => 'prefeitura-regional'], function(){
 		// 		Route::get('/' , 'PrefeituraRegionalController@index')->name('');
 		// 	});
 
-		// 	Route::group(['prefix' => 'tipo-servico'], function(){
+		// 	Route::group(['prefix' => 'distrito'], function(){
 		// 		Route::get('/' , 'DistritoController@index')->name('');
 		// 	});
 
-		// });
+		});
 		
 	});
 
