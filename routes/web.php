@@ -42,6 +42,11 @@ Route::group(['middleware' => 'auth'], function (){
 
 
 		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
+
+		// Route::group(['prefix' => 'gerenciar'], function(){
+
+		// 	Route::get('' , 'Controller@')->name();
+		// });
 		
 	});
 
