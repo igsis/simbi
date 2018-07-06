@@ -12,7 +12,8 @@ class EquipamentoSigla extends Model
     protected $fillable = [
     	'sigla',
     	'descricao',
-    	'roteiro'
+    	'roteiro',
+        'publicado'
     ];
     
     public function equipamento()

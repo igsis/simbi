@@ -10,7 +10,8 @@ class Secretaria extends Model
 
     protected $fillable = [
     	'sigla',
-    	'descricao'
+    	'descricao',
+		'publicado'
     ];
 
     public function equipamentos()

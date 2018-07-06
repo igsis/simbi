@@ -10,8 +10,27 @@ use Simbi\Models\SubordinacaoAdministrativa;
 class SubordinacaoAdministrativaController extends Controller
 {
     public function index(){
-    	$subordinacaoAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+    	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
 
     	return view('gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
     }
+
+    public function disabled(){
+    	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
+
+    	return view('gerenciar.subordinacaoAdministrativa.desativados', compact('subordinacaoAdministrativas'));
+    }
+
+    public function store(Request $request)
+    {
+    	if ($request->has('novo')) {
+            $data = $this->validate($request, [
+                    'descricao'=>'required|unique:subordinacao_administrativas'
+                ]);
+
+            SubordinacaoAdministrativa::create($data);
+            $data = SubordinacaoAdministrativa::orderBy('descricao')->get();
+            return response()->json($data);
+        }
+	}    
 }

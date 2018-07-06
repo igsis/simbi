@@ -6,6 +6,17 @@
 	<hr>
 	{{-- <div class="panel-heading">Página {{ $equipamentoSiglas->currentPage() }} de {{ $equipamentoSiglas->lastPage() }}</div> --}}
 
+	<div class="form">
+	    <form method="POST" class="form form-inline">
+	        {{ csrf_field() }}
+	        <input type="text" name="sigla" class="form-control" placeholder="Sigla" title="Pesquisa pela Sigla">
+	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
+	        <input type="text" name="roteiro" class="form-control" placeholder="Roteiro" title="Pesquisa pelo Roteiro">
+	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
+	        Pesquisar</button>
+	    </form>
+	</div><br>
+
 	<div class="table-responsive">
 	    <table class="table table-bordered table-striped ">
 		<thead>
@@ -32,6 +43,13 @@
 		</table>
 	</div>			
 	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button> 	
+</div>
+<div class="text-center"> 
+	@if(isset($dataForm))
+        {!! $equipamentoSiglas->appends($dataForm)->links() !!} 
+    @else
+        {!! $equipamentoSiglas->links() !!} 
+    @endif
 </div>
 
 @endsection

@@ -10,9 +10,29 @@ use Simbi\Models\TipoServico;
 class TipoServicoController extends Controller
 {
     public function index(){
-    	$tipoServicos = TipoServico::orderBy('descricao')->get();
+    	$tipoServicos = TipoServico::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
     	
     	return view('gerenciar.tipoServico.index', compact('tipoServicos'));
 
+    }
+
+    public function disabled(){
+    	$tipoServicos = TipoServico::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
+    	
+    	return view('gerenciar.tipoServico.desativados', compact('tipoServicos'));
+
+    }
+
+    public function store(Request $request)
+    {
+        if($request->has('novo')){
+            $data = $this->validate($request, [
+                        'descricao'=>'required|unique:tipo_servicos'
+                    ]);
+
+            TipoServico::create($data);
+            $data = TipoServico::orderBy('descricao')->get();
+            return response()->json($data);
+        }
     }
 }

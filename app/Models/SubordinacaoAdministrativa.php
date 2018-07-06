@@ -9,7 +9,8 @@ class SubordinacaoAdministrativa extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'descricao'
+    	'descricao',
+		'publicado'
     ];
 
     public function equipamentos()

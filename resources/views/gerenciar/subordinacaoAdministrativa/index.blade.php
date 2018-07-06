@@ -6,6 +6,15 @@
 	<hr>
 	{{-- <div class="panel-heading">Página {{ $subordinacaoAdministrativas->currentPage() }} de {{ $subordinacaoAdministrativas->lastPage() }}</div> --}}
 
+	<div class="form">
+	    <form method="POST" class="form form-inline">
+	        {{ csrf_field() }}
+	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
+	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
+	        Pesquisar</button>
+	    </form>
+	</div><br>
+
 	<div class="table-responsive">
 	    <table class="table table-bordered table-striped ">
 		<thead>
@@ -29,5 +38,11 @@
 	</div>			
 	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button> 	
 </div>
-
+<div class="text-center"> 
+	@if(isset($dataForm))
+        {!! $subordinacaoAdministrativas->appends($dataForm)->links() !!} 
+    @else
+        {!! $subordinacaoAdministrativas->links() !!} 
+    @endif
+</div>
 @endsection

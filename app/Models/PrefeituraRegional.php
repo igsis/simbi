@@ -12,7 +12,8 @@ class PrefeituraRegional extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'descricao'
+        'descricao',
+        'publicado'
     ];
 
     public function enderecos()
