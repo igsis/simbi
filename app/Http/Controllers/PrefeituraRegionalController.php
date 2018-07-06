@@ -10,7 +10,8 @@ use Simbi\Models\PrefeituraRegional;
 class PrefeituraRegionalController extends Controller
 {
     public function index(){
-    	$prefeituraRegional = PrefeituraRegional::orderBy('descricao')->get();
-    	dd($prefeituraRegional);
+    	$prefeiturasRegionais = PrefeituraRegional::orderBy('descricao')->get();
+
+    	return view('gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
     }
 }

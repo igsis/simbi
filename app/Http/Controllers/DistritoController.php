@@ -9,9 +9,9 @@ use Simbi\Models\Distrito;
 
 class DistritoController extends Controller
 {
-
     public function index(){
-    	$distrito = Distrito::orderBy('descricao')->get();
-    	dd($distrito);
+    	$distritos = Distrito::orderBy('descricao')->get();
+    	
+    	return view('gerenciar.distritos.index', compact('distritos'));
     }
 }

@@ -10,7 +10,9 @@ use Simbi\Models\TipoServico;
 class TipoServicoController extends Controller
 {
     public function index(){
-    	$tipoServico = TipoServico::orderBy('descricao')->get();
-    	dd($tipoServico);
+    	$tipoServicos = TipoServico::orderBy('descricao')->get();
+    	
+    	return view('gerenciar.tipoServico.index', compact('tipoServicos'));
+
     }
 }

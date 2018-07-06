@@ -10,7 +10,8 @@ use Simbi\Models\EquipamentoSigla;
 class EquipamentoSiglaController extends Controller
 {
     public function index(){
-    	$equipamentoSigla = EquipamentoSigla::orderBy('descricao')->get();
-    	dd($equipamentoSigla);
+    	$equipamentoSiglas = EquipamentoSigla::orderBy('descricao')->get();
+
+    	return view('gerenciar.equipamentoSigla.index', compact('equipamentoSiglas'));
     }
 }
