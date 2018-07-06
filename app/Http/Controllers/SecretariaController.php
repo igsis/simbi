@@ -10,6 +10,7 @@ use Simbi\Models\Secretaria;
 class SecretariaController extends Controller
 {
     public function index(){
-    	
+    	$secretaria = Secretaria::orderBy('descricao')->get();
+    	dd($secretaria);
     }
 }

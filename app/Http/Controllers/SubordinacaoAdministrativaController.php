@@ -10,6 +10,7 @@ use Simbi\Models\SubordinacaoAdministrativa;
 class SubordinacaoAdministrativaController extends Controller
 {
     public function index(){
-    	
+    	$subordinacaoAdministrativa = SubordinacaoAdministrativa::orderBy('descricao')->get();
+    	dd($subordinacaoAdministrativa);
     }
 }

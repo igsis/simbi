@@ -11,6 +11,7 @@ class DistritoController extends Controller
 {
 
     public function index(){
-    	
+    	$distrito = Distrito::orderBy('descricao')->get();
+    	dd($distrito);
     }
 }

@@ -56,21 +56,21 @@ Route::group(['middleware' => 'auth'], function (){
 				Route::get('/' , 'EquipamentoSiglaController@index')->name('siglaEquipamento');
 			});
 
-		// 	Route::group(['prefix' => 'secretaria'], function(){
-		// 		Route::get('/' , 'SecretariaController@index')->name('');
-		// 	});
+			Route::group(['prefix' => 'secretaria'], function(){
+				Route::get('/' , 'SecretariaController@index')->name('secretaria');
+			});
 
-		// 	Route::group(['prefix' => 'subordinacao-administrativa'], function(){
-		// 		Route::get('/' , 'SubordinacaoAdministrativaController@')->name('');
-		// 	});
+			Route::group(['prefix' => 'subordinacao-administrativa'], function(){
+				Route::get('/' , 'SubordinacaoAdministrativaController@index')->name('subordinacaoAdministrativa');
+			});
 
-		// 	Route::group(['prefix' => 'prefeitura-regional'], function(){
-		// 		Route::get('/' , 'PrefeituraRegionalController@index')->name('');
-		// 	});
+			Route::group(['prefix' => 'prefeitura-regional'], function(){
+				Route::get('/' , 'PrefeituraRegionalController@index')->name('prefeituraRegional');
+			});
 
-		// 	Route::group(['prefix' => 'distrito'], function(){
-		// 		Route::get('/' , 'DistritoController@index')->name('');
-		// 	});
+			Route::group(['prefix' => 'distrito'], function(){
+				Route::get('/' , 'DistritoController@index')->name('distrito');
+			});
 
 		});
 		
