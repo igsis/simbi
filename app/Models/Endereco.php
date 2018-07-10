@@ -42,4 +42,9 @@ class Endereco extends Model
     {
     	return $this->hasOne(Equipamento::class);
     }
+
+    public function funcionamentos()
+    {
+        return $this->hasManyThrough(Funcionamento::class, Equipamento::class);
+    }
 }

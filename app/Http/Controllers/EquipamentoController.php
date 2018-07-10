@@ -9,6 +9,7 @@ use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoSigla;
+use Simbi\Models\Funcionamento;
 use Simbi\Models\PrefeituraRegional;
 use Simbi\Models\TipoServico;
 use Simbi\Models\SubordinacaoAdministrativa;
@@ -195,20 +196,8 @@ class EquipamentoController extends Controller
                 'observacao' => 'nullable'
             ]);
 
-           /* $funcionamento = $this->validate($request->only([
-                'domingo[]',
-                'segunda[]',
-                'terca[]',
-                'quarta[]',
-                'quinta[]',
-                'sexta[]',
-                'sabado[]',
-                'horarioAbertura[]',
-                'horarioFechamento[]'
-            ]);*/
-
             $endereco = new Endereco();
-            $endereco->create([
+            $id = $endereco->create([
                         'cep' => $request->cep,
                         'logradouro' => $request->logradouro,
                         'numero' => $request->numero,
@@ -236,16 +225,22 @@ class EquipamentoController extends Controller
                 'nucleo_braile' => $request->nucleobraile,
                 'status_id' => $request->status,
                 'observacao' => $request->observacao
-            ])
-            ->funcionamentos()->create($request->only([
-                    'segunda[]',
-                    'terca[]',
-                    'quarta[]',
-                    'quinta[]',
-                    'sexta[]',
-                    'horarioAbertura[]',
-                    'horarioFechamento[]'
-                ]));
+                ])->id;
+
+            $funcionamento = new Funcionamento();
+            foreach ($request->input('funcionamento') as $key => $value)
+            $funcionamento->create([
+                'domingo' => $request->input("domingo.{$key}", '0'),
+                'segunda' => $request->input("segunda.{$key}", '0'),
+                'terca' => $request->input("terca.{$key}", '0'),
+                'quarta' => $request->input("quarta.{$key}", '0'),
+                'quinta' => $request->input("quinta.{$key}", '0'),
+                'sexta' => $request->input("sexta.{$key}", '0'),
+                'sabado' => $request->input("sabado.{$key}", '0'),
+                'hora_inicial' => $request->input("horarioAbertura.{$key}"),
+                'hora_final' => $request->input("horarioFechamento.{$key}"),
+                'equipamento_id' => $id
+            ]);
         }
         return redirect()->back()->with('flash_message',
             'Equipamento inserido com sucesso');

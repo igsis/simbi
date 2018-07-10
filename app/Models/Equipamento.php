@@ -61,7 +61,7 @@ class Equipamento extends Model
     }
 
     public function funcionamentos(){
-	    $this->hasMany(Funcionamento::class);
+	    return $this->hasMany(Funcionamento::class);
     }
 
     public function search(Array $data)

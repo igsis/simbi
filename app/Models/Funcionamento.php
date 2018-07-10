@@ -9,7 +9,6 @@ class Funcionamento extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'equipamento_id',
         'segunda',
         'terca',
         'quarta',
@@ -19,7 +18,7 @@ class Funcionamento extends Model
         'domingo',
         'hora_inicial',
         'hora_final',
-        'publicado'
+        'equipamento_id'
     ];
 
     public function equipamento(){

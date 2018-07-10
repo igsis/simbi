@@ -271,16 +271,18 @@
                 <div class="form-group">
                     <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
                         <input type="hidden" name="funcionamento[]">
-                        <input type="checkbox" name="domingo[]" id="diasemana07" value="1" /><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
-                        <input type="checkbox" name="segunda[]" id="diasemana01" value="1"/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
-                        <input type="checkbox" name="terca[]" id="diasemana02" value="1" /><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
-                        <input type="checkbox" name="quarta[]" id="diasemana03" value="1" /><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
-                        <input type="checkbox" name="quinta[]" id="diasemana04" value="1" /><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
-                        <input type="checkbox" name="sexta[]" id="diasemana05" value="1" /><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
-                        <input type="checkbox" name="sabado[]" id="diasemana06" value="1" /><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                        <input type="checkbox" name="domingo[]" value="1" /><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                        <input type="checkbox" name="segunda[]" value="1"/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                        <input type="checkbox" name="terca[]" value="1" /><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                        <input type="checkbox" name="quarta[]" value="1" /><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                        <input type="checkbox" name="quinta[]" value="1" /><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                        <input type="checkbox" name="sexta[]" value="1" /><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                        <input type="checkbox" name="sabado[]" value="1" /><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
                     </div>
                 </div>
             </div>
+
+
 
             <div class="row">
                 <div class="form-group col-md-offset-4 col-md-2">
