@@ -21,6 +21,22 @@ class EquipamentoSiglaController extends Controller
     	return view('gerenciar.equipamentoSigla.desativados', compact('equipamentoSiglas'));
     }
 
+    public function update(Request $request)
+    {
+        $equipamentoSigla = EquipamentoSigla::findOrFail($request->id);
+
+        $equipamentoSigla->update([
+            'sigla' => $request->sigla,
+            'descricao' => $request->descricao,
+            'roteiro' => $request->roteiro
+        ]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Sigla do Equipamento editado com Sucesso!');
+
+    }
+
     public function store(Request $request)
     {
 		if ($request->has('novo')){

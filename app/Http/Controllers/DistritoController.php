@@ -21,6 +21,20 @@ class DistritoController extends Controller
     	return view('gerenciar.distritos.desativados', compact('distritos'));
     }
 
+    public function update(Request $request)
+    {
+        $distrito = Distrito::findOrFail($request->id);
+
+        $distrito->update([
+            'descricao' => $request->descricao
+        ]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Distrito editado com Sucesso!');
+
+    }
+
     public function store(Request $request)
     {
     	if($request->has('novo')){

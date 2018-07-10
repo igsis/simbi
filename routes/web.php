@@ -49,27 +49,39 @@ Route::group(['middleware' => 'auth'], function (){
 			Route::group(['prefix' => 'tipo-servico'], function(){
 				Route::get('/' , 'TipoServicoController@index')->name('tipoServico');
 
-				// Route::post()...
+				Route::post('/' , 'TipoServicoController@update')->name('editarTipoServico');
 			});
 
 			Route::group(['prefix' => 'sigla-equipamento'], function(){
 				Route::get('/' , 'EquipamentoSiglaController@index')->name('siglaEquipamento');
+
+				Route::post('/' , 'EquipamentoSiglaController@update')->name('editarSiglaEquipamento');
 			});
 
 			Route::group(['prefix' => 'secretaria'], function(){
 				Route::get('/' , 'SecretariaController@index')->name('secretaria');
+
+				Route::post('/' , 'SecretariaController@update')->name('editarSecretaria');
 			});
 
 			Route::group(['prefix' => 'subordinacao-administrativa'], function(){
 				Route::get('/' , 'SubordinacaoAdministrativaController@index')->name('subordinacaoAdministrativa');
+
+				Route::post('/' , 'SubordinacaoAdministrativaController@update')->name('editarSubordinacaoAdministrativa');
 			});
 
 			Route::group(['prefix' => 'prefeitura-regional'], function(){
 				Route::get('/' , 'PrefeituraRegionalController@index')->name('prefeituraRegional');
+
+				Route::post('/' , 'PrefeituraRegionalController@update')->name('editarPrefeituraRegional');
 			});
 
 			Route::group(['prefix' => 'distrito'], function(){
 				Route::get('/' , 'DistritoController@index')->name('distrito');
+
+				Route::post('/' , 'DistritoController@update')->name('editarDistrito');
+
+				// Route::post('/' , 'DistritoController@create')->name('createDistrito');
 			});
 
 		});

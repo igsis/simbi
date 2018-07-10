@@ -21,6 +21,20 @@ class PrefeituraRegionalController extends Controller
     	return view('gerenciar.prefeiturasRegionais.desativados', compact('prefeiturasRegionais'));
     }
 
+    public function update(Request $request)
+    {
+        $prefeituraRegional = PrefeituraRegional::findOrFail($request->id);
+
+        $prefeituraRegional->update([
+            'descricao' => $request->descricao
+        ]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Prefeitura Regional editada com Sucesso!');
+
+    }
+
     public function store(Request $request)
     {
     	if($request->has('novo')){

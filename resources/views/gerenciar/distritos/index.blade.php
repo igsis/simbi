@@ -28,7 +28,7 @@
 			<tr>
 				<td>{{$distrito->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#editar" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#distrito" 
 							data-id="{{$distrito->id}}"
 							data-descricao="{{$distrito->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i>
@@ -40,10 +40,10 @@
 		</tbody>
 		</table>
 	</div>			
-	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button> 	
+	<button class="btn btn-success" data-toggle="modal" data-target="#distrito" ><i class="glyphicon glyphicon-plus"></i></button> 	
 
 	<!-- Editar Distrito -->
-	<div class="modal fade" id="editar" role="dialog" aria-labelledby="addDistritoLabel" aria-hidden="true">
+	<div class="modal fade" id="distrito" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -51,7 +51,7 @@
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST"  action="">
+					<form method="POST"  action="{{route('editarDistrito')}}">
 						{{csrf_field()}}
 						<input type="hidden" name="id">
 						<label>Descrição</label>
@@ -80,14 +80,23 @@
     <script type="text/javascript">
 
         // Alimenta o modal com informações de cada Tipo de Serviço
-        $('#editar').on('show.bs.modal', function (e)
+        $('#distrito').on('show.bs.modal', function (e)
         {
-            let id = $(e.relatedTarget).attr('data-id');
-            let descricao = $(e.relatedTarget).attr('data-descricao');
-            $(this).find('.modal-title').text(` Editar ${descricao}`);
-            $(this).find('form input[name="id"]').attr('value', id);
-            $(this).find('form input[name="descricao"]').attr('value', descricao);
+        	if ($(e.relatedTarget).attr('data-id')) 
+        	{
+	            let id = $(e.relatedTarget).attr('data-id');
+	            let descricao = $(e.relatedTarget).attr('data-descricao');
+	            $(this).find('.modal-title').text(` Editar ${descricao}`);
+	            $(this).find('form input[name="id"]').attr('value', id);
+	            $(this).find('form input[name="descricao"]').attr('value', descricao);
+            	// $(this).find('form').attr('action', `{{route('editarDistrito')}}/${id}`);
+            }else
+            {
+            	$(this).find('.modal-title').text('Adicionar Distrito');
+	            $(this).find('form input[name="id"]').attr('value', '');
+	            $(this).find('form input[name="descricao"]').attr('value', '');
+	            // $(this).find('form').attr('action', `/${id}`);
+            }
         });
     </script>
-
 @endsection

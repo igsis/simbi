@@ -50,7 +50,7 @@
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="">
+					<form method="POST" action="{{route('editarSubordinacaoAdministrativa')}}">
 						{{csrf_field()}}
 						<input type="hidden" name="id">
 						<label>Descrição</label>

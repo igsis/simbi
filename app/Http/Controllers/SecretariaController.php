@@ -21,12 +21,27 @@ class SecretariaController extends Controller
     	return view('gerenciar.secretarias.desativados', compact('secretarias'));
     }
 
+    public function update(Request $request)
+    {
+        $secretaria = Secretaria::findOrFail($request->id);
+
+        $secretaria->update([
+            'sigla'     => $request->sigla,
+            'descricao' => $request->descricao
+        ]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Secretaria editada com Sucesso!');
+
+    }
+
     public function store(Request $request)
     {
 		if ($request->has('novo')) {
             $data = $this->validate($request, [
-                        'sigla'=>'required|max:6|unique:secretarias',
-                        'descricao'=>'required'
+                        'sigla'     => 'required|max:6|unique:secretarias',
+                        'descricao' => 'required'
                     ]);
 
         	Secretaria::create($data);

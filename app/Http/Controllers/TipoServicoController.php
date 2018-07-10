@@ -23,6 +23,20 @@ class TipoServicoController extends Controller
 
     }
 
+    public function update(Request $request)
+    {
+        $tipoServico = TipoServico::findOrFail($request->id);
+
+        $tipoServico->update([
+            'descricao' => $request->descricao
+        ]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Tipo de Serviço editado com Sucesso!');
+
+    }
+
     public function store(Request $request)
     {
         if($request->has('novo')){
