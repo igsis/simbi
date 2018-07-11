@@ -79,9 +79,9 @@ Route::group(['middleware' => 'auth'], function (){
 			Route::group(['prefix' => 'distrito'], function(){
 				Route::get('/' , 'DistritoController@index')->name('distrito');
 
-				Route::post('/' , 'DistritoController@update')->name('editarDistrito');
+				Route::post('/', 'DistritoController@create')->name('createDistrito');
 
-				// Route::post('/' , 'DistritoController@create')->name('createDistrito');
+				Route::put('/{id}', 'DistritoController@update')->name('editarDistrito');
 			});
 
 		});

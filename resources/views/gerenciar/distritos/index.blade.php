@@ -51,15 +51,14 @@
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST"  action="{{route('editarDistrito')}}">
-						{{csrf_field()}}
-						<input type="hidden" name="id">
+					<form method="POST"> {{-- action Pelo js --}}
+						{{ csrf_field() }}
 						<label>Descrição</label>
 						<input class="form-control" type="text" name="descricao">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" class="btn btn-success" name="novoDistrito" value="Editar">
+						<input type="submit" class="btn btn-success" name="novoDistrito" value="">
 					</div>
 				</form>
 			</div>
@@ -87,15 +86,16 @@
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
 	            $(this).find('.modal-title').text(` Editar ${descricao}`);
-	            $(this).find('form input[name="id"]').attr('value', id);
 	            $(this).find('form input[name="descricao"]').attr('value', descricao);
-            	// $(this).find('form').attr('action', `{{route('editarDistrito')}}/${id}`);
+	            $(this).find('.modal-footer input').attr('value', 'Editar');
+	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`)
+            	$(this).find('form').attr('action', `{{route('editarDistrito', '')}}/${id}`);
             }else
             {
             	$(this).find('.modal-title').text('Adicionar Distrito');
-	            $(this).find('form input[name="id"]').attr('value', '');
 	            $(this).find('form input[name="descricao"]').attr('value', '');
-	            // $(this).find('form').attr('action', `/${id}`);
+	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
+	            $(this).find('form').attr('action', `{{route('createDistrito')}}`);
             }
         });
     </script>

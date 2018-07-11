@@ -21,9 +21,22 @@ class DistritoController extends Controller
     	return view('gerenciar.distritos.desativados', compact('distritos'));
     }
 
-    public function update(Request $request)
+
+    public function create(Request $request){
+
+            $data = $this->validate($request, [
+                'descricao'=>'required|unique:distritos'
+            ]);
+
+            Distrito::create($data);
+            
+            return redirect()->back()->with('flash_message',
+                'Distrito inserido com sucesso!');
+        }
+
+    public function update(Request $request, $id)
     {
-        $distrito = Distrito::findOrFail($request->id);
+        $distrito = Distrito::findOrFail($id);
 
         $distrito->update([
             'descricao' => $request->descricao
@@ -31,22 +44,10 @@ class DistritoController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-            'Distrito editado com Sucesso!');
+            'Distrito atualizado com Sucesso!');
 
     }
 
-    public function store(Request $request)
-    {
-    	if($request->has('novo')){
-            $data = $this->validate($request, [
-                'descricao'=>'required|unique:distritos'
-            ]);
-
-            Distrito::create($data);
-            $data = Distrito::orderBy('descricao')->get();
-            return response()->json($data);
-        }
-	}
 
     public function destroy($id)
     {
