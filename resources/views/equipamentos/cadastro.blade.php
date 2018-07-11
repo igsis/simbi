@@ -265,7 +265,7 @@
 
         <div style="text-align: center;"><h2>Horario de Funcionamento</h2></div>
 
-        <div id="horario">
+        <div id="horario" data-cont="0">
             <div class="row">
                 <hr>
                 <div class="form-group">
@@ -287,11 +287,11 @@
             <div class="row">
                 <div class="form-group col-md-offset-4 col-md-2">
                     <label for="horarioAbertura">Horario de Abertura</label>
-                    <input type="text" class="form-control" name="horarioAbertura[]" id="horarioAbertura" data-mask="00:00">
+                    <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="horarioFechamento">Horario de Fechamento</label>
-                    <input type="text" class="form-control" name="horarioFechamento[]" id="horarioFechamento" data-mask="00:00">
+                    <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                 </div>
             </div>
         </div>
