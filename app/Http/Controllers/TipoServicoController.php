@@ -23,9 +23,14 @@ class TipoServicoController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function create(Request $request){
+
+        
+    }
+
+    public function update(Request $request, $id)
     {
-        $tipoServico = TipoServico::findOrFail($request->id);
+        $tipoServico = TipoServico::findOrFail($id);
 
         $tipoServico->update([
             'descricao' => $request->descricao
@@ -49,4 +54,14 @@ class TipoServicoController extends Controller
             return response()->json($data);
         }
     }
+
+    public function destroy($id)
+    {
+        TipoServico::findOrFail($id)
+            ->update(['publicado' => 0]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Tipo de Serviço desativado com Sucesso!');
+    } 
 }

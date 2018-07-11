@@ -59,9 +59,8 @@
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST"action="{{route('editarSiglaEquipamento')}}">
+					<form method="POST" > {{-- action Pelo js --}}
 						{{csrf_field()}}
-						<input type="hidden" name="id">
 						<div class="form-group">
 							<label>Sigla</label>
 							<input class="form-control" type="text" name="sigla">
@@ -100,15 +99,23 @@
         // Alimenta o modal com informações de cada Sigla do Equipamento
         $('#editar').on('show.bs.modal', function (e)
         {
-            let id = $(e.relatedTarget).attr('data-id');
-            let sigla = $(e.relatedTarget).attr('data-sigla');
-            let descricao = $(e.relatedTarget).attr('data-descricao');
-            let roteiro = $(e.relatedTarget).attr('data-roteiro');
-            $(this).find('.modal-title').text(` Editar ${descricao}`);
-            $(this).find('form input[name="id"]').attr('value', id);
-            $(this).find('form input[name="sigla"]').attr('value', sigla);
-            $(this).find('form input[name="descricao"]').attr('value', descricao);
-            $(this).find('form input[name="roteiro"]').attr('value', roteiro);
+        	if ($(e.relatedTarget).attr('data-id')) 
+        	{
+	            let id = $(e.relatedTarget).attr('data-id');
+	            let sigla = $(e.relatedTarget).attr('data-sigla');
+	            let descricao = $(e.relatedTarget).attr('data-descricao');
+	            let roteiro = $(e.relatedTarget).attr('data-roteiro');
+	            $(this).find('.modal-title').text(` Editar ${descricao}`);
+	            $(this).find('form input[name="id"]').attr('value', id);
+	            $(this).find('form input[name="sigla"]').attr('value', sigla);
+	            $(this).find('form input[name="descricao"]').attr('value', descricao);
+	            $(this).find('form input[name="roteiro"]').attr('value', roteiro);
+	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
+	            $(this).find('form').attr('action', `{{route('editSiglaEquipamento', '')}}/${id}`);
+	        }else
+	        {
+	        	
+	        }
         });
     </script>
 

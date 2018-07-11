@@ -51,9 +51,8 @@
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST"  action="{{route('editarPrefeituraRegional')}}">
+					<form method="POST"  action="">
 						{{csrf_field()}}
-						<input type="hidden" name="id">
 						<label>Descrição</label>
 						<input class="form-control" type="text" name="descricao">
 					</div>
@@ -81,11 +80,19 @@
         // Alimenta o modal com informações de cada Tipo de Serviço
         $('#editar').on('show.bs.modal', function (e)
         {
-            let id = $(e.relatedTarget).attr('data-id');
-            let descricao = $(e.relatedTarget).attr('data-descricao');
-            $(this).find('.modal-title').text(` Editar ${descricao}`);
-            $(this).find('form input[name="id"]').attr('value', id);
-            $(this).find('form input[name="descricao"]').attr('value', descricao);
+        	if ($(e.relatedTarget).attr('data-id')) 
+        	{
+	            let id = $(e.relatedTarget).attr('data-id');
+	            let descricao = $(e.relatedTarget).attr('data-descricao');
+	            $(this).find('.modal-title').text(` Editar ${descricao}`);
+	            $(this).find('form input[name="id"]').attr('value', id);
+	            $(this).find('form input[name="descricao"]').attr('value', descricao);
+	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
+		        $(this).find('form').attr('action', `{{route('editPrefeituraRegional', '')}}/${id}`);
+		    }else
+	        {
+	        	
+	        }
         });
     </script>
 

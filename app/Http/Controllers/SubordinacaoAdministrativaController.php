@@ -21,9 +21,14 @@ class SubordinacaoAdministrativaController extends Controller
     	return view('gerenciar.subordinacaoAdministrativa.desativados', compact('subordinacaoAdministrativas'));
     }
 
-    public function update(Request $request)
+    public function create(Request $request){
+
+        
+    }
+
+    public function update(Request $request, $id)
     {
-        $subordinacaoAdministrativa = SubordinacaoAdministrativa::findOrFail($request->id);
+        $subordinacaoAdministrativa = SubordinacaoAdministrativa::findOrFail($id);
 
         $subordinacaoAdministrativa->update([
             'descricao' => $request->descricao
@@ -46,5 +51,15 @@ class SubordinacaoAdministrativaController extends Controller
             $data = SubordinacaoAdministrativa::orderBy('descricao')->get();
             return response()->json($data);
         }
-	}    
+	}  
+
+    public function destroy($id)
+    {
+        SubordinacaoAdministrativa::findOrFail($id)
+            ->update(['publicado' => 0]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Subordinação Administrativa desativada com Sucesso!');
+    }  
 }

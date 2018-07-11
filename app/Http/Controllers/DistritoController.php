@@ -24,15 +24,15 @@ class DistritoController extends Controller
 
     public function create(Request $request){
 
-            $data = $this->validate($request, [
-                'descricao'=>'required|unique:distritos'
-            ]);
+        $data = $this->validate($request, [
+            'descricao'=>'required|unique:distritos'
+        ]);
 
-            Distrito::create($data);
-            
-            return redirect()->back()->with('flash_message',
-                'Distrito inserido com sucesso!');
-        }
+        Distrito::create($data);
+        
+        return redirect()->back()->with('flash_message',
+            'Distrito inserido com sucesso!');
+    }
 
     public function update(Request $request, $id)
     {
@@ -54,6 +54,8 @@ class DistritoController extends Controller
         Distrito::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return view('gerenciar.distritos.index', compact('distritos'));
+        return redirect()->back()
+            ->with('flash_message',
+            'Distrito desativado com Sucesso!');
     }
 }

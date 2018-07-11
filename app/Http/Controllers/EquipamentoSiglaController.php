@@ -21,9 +21,14 @@ class EquipamentoSiglaController extends Controller
     	return view('gerenciar.equipamentoSigla.desativados', compact('equipamentoSiglas'));
     }
 
-    public function update(Request $request)
+    public function create(Request $request){
+
+        
+    }
+
+    public function update(Request $request, $id)
     {
-        $equipamentoSigla = EquipamentoSigla::findOrFail($request->id);
+        $equipamentoSigla = EquipamentoSigla::findOrFail($id);
 
         $equipamentoSigla->update([
             'sigla' => $request->sigla,
@@ -51,4 +56,14 @@ class EquipamentoSiglaController extends Controller
             return response()->json($data);
         }
 	}
+
+    public function destroy($id)
+    {
+        EquipamentoSigla::findOrFail($id)
+            ->update(['publicado' => 0]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Sigla do Equipamento desativada com Sucesso!');
+    }
 }

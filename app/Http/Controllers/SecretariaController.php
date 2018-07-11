@@ -21,9 +21,14 @@ class SecretariaController extends Controller
     	return view('gerenciar.secretarias.desativados', compact('secretarias'));
     }
 
-    public function update(Request $request)
+    public function create(Request $request){
+
+        
+    }
+
+    public function update(Request $request, $id)
     {
-        $secretaria = Secretaria::findOrFail($request->id);
+        $secretaria = Secretaria::findOrFail($id);
 
         $secretaria->update([
             'sigla'     => $request->sigla,
@@ -49,4 +54,14 @@ class SecretariaController extends Controller
         	return response()->json($data);
         }
 	}    
+
+    public function destroy($id)
+    {
+        Secretaria::findOrFail($id)
+            ->update(['publicado' => 0]);
+
+        return redirect()->back()
+            ->with('flash_message',
+            'Secretaria desativada com Sucesso!');
+    }
 }

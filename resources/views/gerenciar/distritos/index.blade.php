@@ -86,10 +86,10 @@
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
 	            $(this).find('.modal-title').text(` Editar ${descricao}`);
-	            $(this).find('form input[name="descricao"]').attr('value', descricao);
 	            $(this).find('.modal-footer input').attr('value', 'Editar');
+	            $(this).find('form input[name="descricao"]').attr('value', descricao);
 	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`)
-            	$(this).find('form').attr('action', `{{route('editarDistrito', '')}}/${id}`);
+            	$(this).find('form').attr('action', `{{route('editDistrito', '')}}/${id}`);
             }else
             {
             	$(this).find('.modal-title').text('Adicionar Distrito');
