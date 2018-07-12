@@ -40,6 +40,10 @@ class SubordinacaoAdministrativaController extends Controller
     {
         $subordinacaoAdministrativa = SubordinacaoAdministrativa::findOrFail($id);
 
+        $this->validate($request, [
+            'descricao'=>'required|unique:subordinacao_administrativas'
+        ]);
+
         $subordinacaoAdministrativa->update([
             'descricao' => $request->descricao
         ]);
@@ -53,8 +57,8 @@ class SubordinacaoAdministrativaController extends Controller
     {
     	if ($request->has('novo')) {
             $data = $this->validate($request, [
-                    'descricao' => 'required|unique:subordinacao_administrativas'
-                ]);
+                'descricao' => 'required|unique:subordinacao_administrativas'
+            ]);
 
             SubordinacaoAdministrativa::create($data);
             $data = SubordinacaoAdministrativa::orderBy('descricao')->get();

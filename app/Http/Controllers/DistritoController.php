@@ -41,6 +41,10 @@ class DistritoController extends Controller
     {
         $distrito = Distrito::findOrFail($id);
 
+        $this->validate($request, [
+            'descricao'=>'required|unique:distritos'
+        ]);
+
         $distrito->update([
             'descricao' => $request->descricao
         ]);

@@ -40,6 +40,11 @@ class SecretariaController extends Controller
     {
         $secretaria = Secretaria::findOrFail($id);
 
+        $this->validate($request, [
+            'sigla'=>'required|max:6|unique:secretarias',
+            'descricao'=>'required'
+        ]);
+
         $secretaria->update([
             'sigla'     => $request->sigla,
             'descricao' => $request->descricao

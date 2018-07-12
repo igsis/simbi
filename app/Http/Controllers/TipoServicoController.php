@@ -41,6 +41,10 @@ class TipoServicoController extends Controller
     {
         $tipoServico = TipoServico::findOrFail($id);
 
+        $this->validate($request, [
+            'descricao'=>'required|unique:tipo_servicos'
+        ]);
+
         $tipoServico->update([
             'descricao' => $request->descricao
         ]);

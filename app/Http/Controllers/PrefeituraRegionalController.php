@@ -23,7 +23,7 @@ class PrefeituraRegionalController extends Controller
 
     public function create(Request $request){
         $data = $this->validate($request, [
-            'descricao'=>'required'
+            'descricao'=>'required|unique:prefeitura_regionais'
         ]);
 
         PrefeituraRegional::create($data);
@@ -36,6 +36,10 @@ class PrefeituraRegionalController extends Controller
     public function update(Request $request, $id)
     {
         $prefeituraRegional = PrefeituraRegional::findOrFail($id);
+
+        $this->validate($request, [
+            'descricao'=>'required|unique:prefeitura_regionais'
+        ]);
 
         $prefeituraRegional->update([
             'descricao' => $request->descricao

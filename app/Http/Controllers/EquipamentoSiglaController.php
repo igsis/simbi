@@ -23,10 +23,10 @@ class EquipamentoSiglaController extends Controller
 
     public function create(Request $request){
         $data = $this->validate($request, [
-                        'sigla'=>'required|max:6|unique:equipamento_siglas',
-                        'descricao'=>'required',
-                        'roteiro'=>'nullable'
-                    ]);
+            'sigla'=>'required|max:6|unique:equipamento_siglas',
+            'descricao'=>'required',
+            'roteiro'=>'nullable'
+        ]);
 
         EquipamentoSigla::create($data);
 
@@ -38,6 +38,12 @@ class EquipamentoSiglaController extends Controller
     public function update(Request $request, $id)
     {
         $equipamentoSigla = EquipamentoSigla::findOrFail($id);
+
+        $this->validate($request, [
+            'sigla'=>'required|max:6|unique:equipamento_siglas',
+            'descricao'=>'required',
+            'roteiro'=>'nullable'
+        ]);
 
         $equipamentoSigla->update([
             'sigla' => $request->sigla,
