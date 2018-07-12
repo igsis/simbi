@@ -10,8 +10,7 @@
 	    <form method="POST" class="form form-inline">
 	        {{ csrf_field() }}
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
-	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
-	        Pesquisar</button>
+	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
 	    </form>
 	</div><br>	
 
@@ -40,7 +39,7 @@
 		</tbody>
 		</table>
 	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#distrito" ><i class="glyphicon glyphicon-plus"></i></button> 	
+	<button class="btn btn-success" data-toggle="modal" data-target="#distrito"><i class="glyphicon glyphicon-plus"></i></button> 	
 
 	<!-- Editar Distrito -->
 	<div class="modal fade" id="distrito" role="dialog" aria-hidden="true">
@@ -93,8 +92,8 @@
             }else
             {
             	$(this).find('.modal-title').text('Adicionar Distrito');
-	            $(this).find('form input[name="descricao"]').attr('value', '');
 	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
+	            $(this).find('form input[type="text"]').attr('value', '');
 	            $(this).find('form').attr('action', `{{route('createDistrito')}}`);
             }
         });

@@ -9,20 +9,23 @@ use Simbi\Models\Distrito;
 
 class DistritoController extends Controller
 {
-    public function index(){
+    public function index()
+    {
     	$distritos = Distrito::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
     	
     	return view('gerenciar.distritos.index', compact('distritos'));
     }
 
-    public function disabled(){
+    public function disabled()
+    {
     	$distritos = Distrito::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
     	
     	return view('gerenciar.distritos.desativados', compact('distritos'));
     }
 
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
 
         $data = $this->validate($request, [
             'descricao'=>'required|unique:distritos'
@@ -30,8 +33,8 @@ class DistritoController extends Controller
 
         Distrito::create($data);
         
-        return redirect()->back()->with('flash_message',
-            'Distrito inserido com sucesso!');
+        return redirect()->back()
+            ->with('flash_message', 'Distrito Inserido com sucesso!');
     }
 
     public function update(Request $request, $id)
@@ -43,8 +46,7 @@ class DistritoController extends Controller
         ]);
 
         return redirect()->back()
-            ->with('flash_message',
-            'Distrito atualizado com Sucesso!');
+            ->with('flash_message', 'Distrito Editado com Sucesso!');
 
     }
 
@@ -55,7 +57,6 @@ class DistritoController extends Controller
             ->update(['publicado' => 0]);
 
         return redirect()->back()
-            ->with('flash_message',
-            'Distrito desativado com Sucesso!');
+            ->with('flash_message', 'Distrito Desativado com Sucesso!');
     }
 }

@@ -22,7 +22,14 @@ class PrefeituraRegionalController extends Controller
     }
 
     public function create(Request $request){
+        $data = $this->validate($request, [
+            'descricao'=>'required'
+        ]);
 
+        PrefeituraRegional::create($data);
+
+        return redirect()->back()->with('flash_message',
+            'Prefeitura Regional Inserida com sucesso!');
         
     }
 
@@ -36,7 +43,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-            'Prefeitura Regional editada com Sucesso!');
+            'Prefeitura Regional Editada com Sucesso!');
 
     }
 
@@ -60,6 +67,6 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-            'Prefeitura Regional desativada com Sucesso!');
+            'Prefeitura Regional Desativada com Sucesso!');
     }
 }

@@ -9,20 +9,30 @@ use Simbi\Models\SubordinacaoAdministrativa;
 
 class SubordinacaoAdministrativaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
     	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
 
     	return view('gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
     }
 
-    public function disabled(){
+    public function disabled()
+    {
     	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
 
     	return view('gerenciar.subordinacaoAdministrativa.desativados', compact('subordinacaoAdministrativas'));
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
+        $data = $this->validate($request, [
+            'descricao'=>'required|unique:subordinacao_administrativas'
+        ]);
 
+        SubordinacaoAdministrativa::create($data);
+
+        return redirect()->back()
+            ->with('flash_message','Subordinacao Administrativa Inserida com sucesso');
         
     }
 
@@ -35,8 +45,7 @@ class SubordinacaoAdministrativaController extends Controller
         ]);
 
         return redirect()->back()
-            ->with('flash_message',
-            'Subordinação Administrativa editada com Sucesso!');
+            ->with('flash_message','Subordinação Administrativa Editada com Sucesso!');
 
     }
 
@@ -59,7 +68,6 @@ class SubordinacaoAdministrativaController extends Controller
             ->update(['publicado' => 0]);
 
         return redirect()->back()
-            ->with('flash_message',
-            'Subordinação Administrativa desativada com Sucesso!');
+            ->with('flash_message', 'Subordinação Administrativa Desativada com Sucesso!');
     }  
 }

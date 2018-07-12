@@ -12,8 +12,7 @@
 	        <input type="text" name="sigla" class="form-control" placeholder="Sigla" title="Pesquisa pela Sigla">
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <input type="text" name="roteiro" class="form-control" placeholder="Roteiro" title="Pesquisa pelo Roteiro">
-	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
-	        Pesquisar</button>
+	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
 	    </form>
 	</div><br>
 
@@ -34,7 +33,7 @@
 				<td>{{$equipamentoSigla->descricao}}</td>
 				<td>{{$equipamentoSigla->roteiro}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#editar"
+					<button class="btn btn-info" data-toggle="modal" data-target="#equipamentoSigla"
 							data-id="{{$equipamentoSigla->id}}" 
 							data-sigla="{{$equipamentoSigla->sigla}}" 
 							data-descricao="{{$equipamentoSigla->descricao}}" 
@@ -48,10 +47,10 @@
 		</tbody>
 		</table>
 	</div>			
-	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button> 	
+	<button class="btn btn-success" data-toggle="modal" data-target="#equipamentoSigla"><i class="glyphicon glyphicon-plus"></i></button> 	
 
 	<!-- Editar Sigla -->
-	<div class="modal fade" id="editar" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="equipamentoSigla" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -76,7 +75,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" class="btn btn-success" name="novaSigla" value="Editar">
+						<input type="submit" class="btn btn-success" name="novaSigla" value="">
 					</div>
 				</form>
 			</div>
@@ -97,7 +96,7 @@
     <script type="text/javascript">
 
         // Alimenta o modal com informações de cada Sigla do Equipamento
-        $('#editar').on('show.bs.modal', function (e)
+        $('#equipamentoSigla').on('show.bs.modal', function (e)
         {
         	if ($(e.relatedTarget).attr('data-id')) 
         	{
@@ -106,6 +105,7 @@
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
 	            let roteiro = $(e.relatedTarget).attr('data-roteiro');
 	            $(this).find('.modal-title').text(` Editar ${descricao}`);
+	            $(this).find('.modal-footer input').attr('value', 'Editar');
 	            $(this).find('form input[name="id"]').attr('value', id);
 	            $(this).find('form input[name="sigla"]').attr('value', sigla);
 	            $(this).find('form input[name="descricao"]').attr('value', descricao);
@@ -114,7 +114,10 @@
 	            $(this).find('form').attr('action', `{{route('editSiglaEquipamento', '')}}/${id}`);
 	        }else
 	        {
-	        	
+	        	$(this).find('.modal-title').text('Adicionar Sigla do Equipamento');
+	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
+	            $(this).find('form input[type="text"]').attr('value', '');
+	            $(this).find('form').attr('action', `{{route('createSiglaEquipamento')}}`);
 	        }
         });
     </script>

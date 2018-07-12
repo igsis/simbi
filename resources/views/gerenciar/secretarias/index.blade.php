@@ -12,8 +12,7 @@
 	        {{ csrf_field() }}
 	        <input type="text" name="sigla" class="form-control" placeholder="Sigla" title="Pesquisa pela Sigla">
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
-	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
-	        Pesquisar</button>
+	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
 	    </form>
 	</div><br>
 
@@ -32,7 +31,7 @@
 				<td>{{$secretaria->sigla}}</td>
 				<td>{{$secretaria->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#editar" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#secretaria" 
 							data-id="{{$secretaria->id}}"
 							data-sigla="{{$secretaria->sigla}}"
 							data-descricao="{{$secretaria->descricao}}">
@@ -45,10 +44,10 @@
 		</tbody>
 		</table>
 	</div>			
-	<button class="btn btn-success"><i class="glyphicon glyphicon-plus"></i></button> 	
+	<button class="btn btn-success" data-toggle="modal" data-target="#secretaria"><i class="glyphicon glyphicon-plus"></i></button> 	
 
 	<!-- Editar Secretaria -->
-	<div class="modal fade" id="editar" role="dialog" aria-hidden="true">
+	<div class="modal fade" id="secretaria" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -56,7 +55,7 @@
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
-					<form method="POST" action="{{route('editSecretaria', '')}}">
+					<form method="POST"> {{-- action Pelo js --}}
 						{{csrf_field()}}
 						<input type="hidden" name="id">
 						<div class="form-group">
@@ -70,7 +69,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" class="btn btn-success" name="novaSecretaria" value="Editar">
+						<input type="submit" class="btn btn-success" name="novaSecretaria" value="">
 					</div>
 				</form>
 			</div>
@@ -90,15 +89,27 @@
     <script type="text/javascript">
 
         // Alimenta o modal com informações das Secretarias
-        $('#editar').on('show.bs.modal', function (e)
+        $('#secretaria').on('show.bs.modal', function (e)
         {
-            let id = $(e.relatedTarget).attr('data-id');
-            let sigla = $(e.relatedTarget).attr('data-sigla');
-            let descricao = $(e.relatedTarget).attr('data-descricao');
-            $(this).find('.modal-title').text(` Editar ${descricao}`);
-            $(this).find('form input[name="id"]').attr('value', id);
-            $(this).find('form input[name="sigla"]').attr('value', sigla);
-            $(this).find('form input[name="descricao"]').attr('value', descricao);
+        	if ($(e.relatedTarget).attr('data-id')) 
+        	{
+	            let id = $(e.relatedTarget).attr('data-id');
+	            let sigla = $(e.relatedTarget).attr('data-sigla');
+	            let descricao = $(e.relatedTarget).attr('data-descricao');
+	            $(this).find('.modal-title').text(` Editar ${descricao}`);
+	            $(this).find('.modal-footer input').attr('value', 'Editar');
+	            $(this).find('form input[name="id"]').attr('value', id);
+	            $(this).find('form input[name="sigla"]').attr('value', sigla);
+	            $(this).find('form input[name="descricao"]').attr('value', descricao);
+	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
+	            $(this).find('form').attr('action', `{{route('editSecretaria', '')}}/${id}`);
+	        }else
+	        {
+	        	$(this).find('.modal-title').text('Adicionar Secretaria');
+	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
+	            $(this).find('form input[type="text"]').attr('value', '');
+	            $(this).find('form').attr('action', `{{route('createSecretaria')}}`);
+	        }
         });
     </script>
 

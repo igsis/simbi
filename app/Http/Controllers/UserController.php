@@ -76,7 +76,7 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with('flash_message',
-             'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2018');
+            'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 
     /**

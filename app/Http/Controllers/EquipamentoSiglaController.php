@@ -22,7 +22,16 @@ class EquipamentoSiglaController extends Controller
     }
 
     public function create(Request $request){
+        $data = $this->validate($request, [
+                        'sigla'=>'required|max:6|unique:equipamento_siglas',
+                        'descricao'=>'required',
+                        'roteiro'=>'nullable'
+                    ]);
 
+        EquipamentoSigla::create($data);
+
+        return redirect()->back()->with('flash_message',
+         'Sigla do Equipamento Inserida com sucesso!');
         
     }
 
@@ -38,7 +47,7 @@ class EquipamentoSiglaController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-            'Sigla do Equipamento editado com Sucesso!');
+            'Sigla do Equipamento Editado com Sucesso!');
 
     }
 
@@ -64,6 +73,6 @@ class EquipamentoSiglaController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-            'Sigla do Equipamento desativada com Sucesso!');
+            'Sigla do Equipamento Desativada com Sucesso!');
     }
 }

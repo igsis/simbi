@@ -9,23 +9,32 @@ use Simbi\Models\TipoServico;
 
 class TipoServicoController extends Controller
 {
-    public function index(){
+    public function index()
+    {
     	$tipoServicos = TipoServico::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
     	
     	return view('gerenciar.tipoServico.index', compact('tipoServicos'));
 
     }
 
-    public function disabled(){
+    public function disabled()
+    {
     	$tipoServicos = TipoServico::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
     	
     	return view('gerenciar.tipoServico.desativados', compact('tipoServicos'));
 
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
+        $data = $this->validate($request, [
+            'descricao'=>'required|unique:tipo_servicos'
+        ]);
 
-        
+        TipoServico::create($data);
+
+        return redirect()->back()
+            ->with('flash_message', 'Tipo de serviço Inserido com sucesso!');
     }
 
     public function update(Request $request, $id)
@@ -37,8 +46,7 @@ class TipoServicoController extends Controller
         ]);
 
         return redirect()->back()
-            ->with('flash_message',
-            'Tipo de Serviço editado com Sucesso!');
+            ->with('flash_message', 'Tipo de Serviço Editado com Sucesso!');
 
     }
 
@@ -62,6 +70,6 @@ class TipoServicoController extends Controller
 
         return redirect()->back()
             ->with('flash_message',
-            'Tipo de Serviço desativado com Sucesso!');
+            'Tipo de Serviço Desativado com Sucesso!');
     } 
 }
