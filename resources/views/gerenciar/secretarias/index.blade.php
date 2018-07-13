@@ -37,7 +37,12 @@
 							data-descricao="{{$secretaria->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i>
 					</button>
-					<button class="btn btn-danger"><i class="glyphicon glyphicon-remove"> </i></button>					
+					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
+								data-id="{{$secretaria->id}}" 
+								data-title="{{$secretaria->sigla}}"
+								data-route="{{route('deleteSecretaria', '')}}">
+						<i class="glyphicon glyphicon-remove"></i>
+					</button>					
 				</td>
 			</tr>
 			@endforeach				
@@ -75,7 +80,7 @@
 			</div>
 		</div>
 	</div>
-
+	@include('layouts.desativar')
 </div>
 <div class="text-center"> 
 	@if(isset($dataForm))
@@ -112,5 +117,7 @@
 	        }
         });
     </script>
+
+    @include('scripts.desativar_modal')
 
 @endsection

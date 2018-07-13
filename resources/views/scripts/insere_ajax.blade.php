@@ -3,7 +3,7 @@
 
     $('#addServico').submit(function(e) {
         e.preventDefault();
-        let novoServico = $('#addServico input[name="novoServico"]').val();
+        // let novoServico = $('#addServico input[name="novoServico"]').val();
         let _token = $('#addServico input[name="_token"]').val();
         let descricao = $('#addServico input[name="descricao"]').val();
         $.ajax({

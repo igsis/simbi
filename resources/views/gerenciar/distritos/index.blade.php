@@ -32,7 +32,12 @@
 							data-descricao="{{$distrito->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i>
 					</button>
-					<button class="btn btn-danger"><i class="glyphicon glyphicon-remove"> </i></button>					
+					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
+								data-id="{{$distrito->id}}" 
+								data-title="{{$distrito->descricao}}"
+								data-route="{{route('deleteDistrito', '')}}">
+						<i class="glyphicon glyphicon-remove"></i>
+					</button>					
 				</td>
 			</tr>
 			@endforeach				
@@ -63,7 +68,7 @@
 			</div>
 		</div>
 	</div>
-
+	@include('layouts.desativar')
 </div>
 <div class="text-center"> 
 	@if(isset($dataForm))
@@ -98,4 +103,6 @@
             }
         });
     </script>
+
+    @include('scripts.desativar_modal')
 @endsection
