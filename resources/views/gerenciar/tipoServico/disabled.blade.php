@@ -10,7 +10,7 @@
 	        {{ csrf_field() }}
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <select name="publicado" class="form-control">
-	        	<option value="1">Selecione</option>
+	        	<option value="0">Selecione</option>
 	        	<option value="1">Ativo</option>
 	        	<option value="0">Desativado</option>
 	        </select>
@@ -36,12 +36,12 @@
 							data-descricao="{{$tipoServico->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i>
 					</button>
-						<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$tipoServico->id}}" 
-								data-title="{{$tipoServico->descricao}}"
-								data-route="{{route('deleteTipoServico', '')}}">
-							<i class="glyphicon glyphicon-remove"></i>
-						</button>
+					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
+							data-id="{{$tipoServico->id}}" 
+							data-title="{{$tipoServico->descricao}}"
+							data-route="{{route('toActivateTipoServico', '')}}">
+						<i class="glyphicon glyphicon-ok"></i>
+					</button>
 				</td>
 			</tr>
 			@endforeach				

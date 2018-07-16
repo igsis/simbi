@@ -21,7 +21,7 @@ class TipoServicoController extends Controller
     {
     	$tipoServicos = TipoServico::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
     	
-    	return view('gerenciar.tipoServico.desativados', compact('tipoServicos'));
+    	return view('gerenciar.tipoServico.disabled', compact('tipoServicos'));
 
     }
 
@@ -72,8 +72,34 @@ class TipoServicoController extends Controller
         TipoServico::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->back()
+        return redirect()->route('tipoServico')
             ->with('flash_message',
             'Tipo de Serviço Desativado com Sucesso!');
     } 
+
+    public function toActivate($id)
+    {
+        TipoServico::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('tipoServicoDisabled')
+            ->with('flash_message',
+            'Tipo de Serviço Ativado com Sucesso!');
+    } 
+    
+
+    public function search(Request $request, TipoServico $tipoServico)
+    {
+        $dataForm = $request->all();
+
+        $tipoServicos = $tipoServico->search($dataForm)->orderBy('descricao')->paginate(10);
+
+        if ($dataForm['publicado'] == 1) 
+        {
+            return view('gerenciar.tipoServico.index', compact('tipoServicos'));
+        }else
+        {   
+            return view('gerenciar.tipoServico.disabled', compact('tipoServicos'));
+        }
+    }
 }

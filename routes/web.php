@@ -49,11 +49,18 @@ Route::group(['middleware' => 'auth'], function (){
 			Route::group(['prefix' => 'tipo-servico'], function(){
 				Route::get('/' , 'TipoServicoController@index')->name('tipoServico');
 
+				Route::get('/desativados' , 'TipoServicoController@disabled')->name('tipoServicoDisabled');
+
 				Route::post('/' , 'TipoServicoController@create')->name('createTipoServico');
 
 				Route::put('/{id}' , 'TipoServicoController@update')->name('editTipoServico');
 
+				Route::put('/ativar/{id}' , 'TipoServicoController@toActivate')->name('toActivateTipoServico');
+				
+
 				Route::delete('/{id}' , 'TipoServicoController@destroy')->name('deleteTipoServico');
+
+				Route::post('/search' , 'TipoServicoController@search')->name('searchTipoServico');
 			});
 
 			Route::group(['prefix' => 'sigla-equipamento'], function(){
