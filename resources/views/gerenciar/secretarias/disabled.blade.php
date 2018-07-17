@@ -2,12 +2,15 @@
 
 @section('conteudo')
 <div class="container-fluid">
-	<h1><i class='glyphicon glyphicon-cog'></i> Tipos de Serviços </h1>
+<div class="container-fluid">
+	<h1><i class='glyphicon glyphicon-cog'></i> Secretarias </h1>
 	<hr>
-	{{-- <div class="panel-heading">Página {{ $tipoServicos->currentPage() }} de {{ $tipoServicos->lastPage() }}</div> --}}
+	{{-- <div class="panel-heading">Página {{ $secretarias->currentPage() }} de {{ $secretarias->lastPage() }}</div> --}}
+
 	<div class="form">
-	    <form method="POST" class="form form-inline" action="{{route('searchTipoServico')}}">
+	    <form method="POST" class="form form-inline" action="{{route('searchSecretaria')}}">
 	        {{ csrf_field() }}
+	        <input type="text" name="sigla" class="form-control" placeholder="Sigla" title="Pesquisa pela Sigla">
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <select name="publicado" class="form-control">
 	        	<option value="0">Selecione</option>
@@ -22,46 +25,54 @@
 	    <table class="table table-bordered table-striped ">
 		<thead>
 			<tr>
+				<th>Sigla</th>
 				<th>Descrição</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($tipoServicos as $tipoServico)
+			@foreach($secretarias as $secretaria)
 			<tr>
-				<td>{{$tipoServico->descricao}}</td>
+				<td>{{$secretaria->sigla}}</td>
+				<td>{{$secretaria->descricao}}</td>
 				<td>
 					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
-							data-id="{{$tipoServico->id}}" 
-							data-title="{{$tipoServico->descricao}}"
-							data-route="{{route('toActivateTipoServico', '')}}">
+							data-id="{{$secretaria->id}}" 
+							data-title="{{$secretaria->sigla}}"
+							data-route="{{route('toActivateSecretaria', '')}}">
 						<i class="glyphicon glyphicon-ok"></i>
-					</button>
+					</button>					
 				</td>
 			</tr>
 			@endforeach				
 		</tbody>
 		</table>
-	</div>			
+	</div>				
 
-	<!-- Editar Serviço -->
-	<div class="modal fade" id="tipoServico" role="dialog" aria-hidden="true">
+	<!-- Editar Secretaria -->
+	<div class="modal fade" id="secretaria" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body">
 					<form method="POST"> {{-- action Pelo js --}}
 						{{csrf_field()}}
-						<label>Descrição</label>
 						<input type="hidden" name="id">
-						<input class="form-control" type="text" name="descricao">
+						<div class="form-group">
+							<label>Sigla</label>
+							<input class="form-control" type="text" name="sigla">
+						</div>
+						<div class="form-group">
+							<label for="descricao">Descrição</label>
+							<input class="form-control" type="text" name="descricao">
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" class="btn btn-success" name="editar" value="">
+						<input type="submit" class="btn btn-success" name="novaSecretaria" value="">
 					</div>
 				</form>
 			</div>
@@ -69,17 +80,14 @@
 	</div>
 	@include('layouts.desativar')
 </div>
-
 <div class="text-center"> 
 	@if(isset($dataForm))
-        {!! $tipoServicos->appends($dataForm)->links() !!} 
+        {!! $secretarias->appends($dataForm)->links() !!} 
     @else
-        {!! $tipoServicos->links() !!} 
+        {!! $secretarias->links() !!} 
     @endif
 </div>
-
 @endsection
 @section('scripts_adicionais')
     @include('scripts.desativar_modal')
 @endsection
-

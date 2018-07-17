@@ -11,7 +11,7 @@
 	        {{ csrf_field() }}
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <select name="publicado" class="form-control">
-	        	<option value="1">Selecione</option>
+	        	<option value="0">Selecione</option>
 	        	<option value="1">Ativo</option>
 	        	<option value="0">Desativado</option>
 	        </select>
@@ -32,16 +32,11 @@
 			<tr>
 				<td>{{$subordinacaoAdministrativa->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#subordinacaoAdministrativa" 
-							data-id="{{$subordinacaoAdministrativa->id}}"
-							data-descricao="{{$subordinacaoAdministrativa->descricao}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
-					</button>
-					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$subordinacaoAdministrativa->id}}" 
-								data-title="{{$subordinacaoAdministrativa->descricao}}"
-								data-route="{{route('deleteSubordinacaoAdministrativa', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
+							data-id="{{$subordinacaoAdministrativa->id}}" 
+							data-title="{{$subordinacaoAdministrativa->descricao}}"
+							data-route="{{route('toActivateSubordinacaoAdministrativa', '')}}">
+						<i class="glyphicon glyphicon-ok"></i>
 					</button>					
 				</td>
 			</tr>
@@ -49,7 +44,8 @@
 		</tbody>
 		</table>
 	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#subordinacaoAdministrativa"><i class="glyphicon glyphicon-plus"></i></button> 	
+
+
 	<!-- Editar Sub. Administrativa -->
 	<div class="modal fade" id="subordinacaoAdministrativa" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
@@ -84,31 +80,5 @@
 </div>
 @endsection
 @section('scripts_adicionais')
-    <script type="text/javascript">
-
-        // Alimenta o modal com informações de cada Tipo de Serviço
-        $('#subordinacaoAdministrativa').on('show.bs.modal', function (e)
-        {
-        	if ($(e.relatedTarget).attr('data-id')) 
-        	{
-	            let id = $(e.relatedTarget).attr('data-id');
-	            let descricao = $(e.relatedTarget).attr('data-descricao');
-	            $(this).find('.modal-title').text(` Editar ${descricao}`);
-	            $(this).find('.modal-footer input').attr('value', 'Editar');
-	            $(this).find('form input[name="id"]').attr('value', id);
-	            $(this).find('form input[name="descricao"]').attr('value', descricao);
-	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
-		        $(this).find('form').attr('action', `{{route('editSubordinacaoAdministrativa', '')}}/${id}`);
-			}else
-	        {
-	        	$(this).find('.modal-title').text('Adicionar Subordinação Administrativa');
-	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
-	            $(this).find('form input[type="text"]').attr('value', '');
-	            $(this).find('form').attr('action', `{{route('createSubordinacaoAdministrativa')}}`);
-	        }		        
-        });
-    </script>
-
     @include('scripts.desativar_modal')
-
 @endsection

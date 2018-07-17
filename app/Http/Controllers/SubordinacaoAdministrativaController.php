@@ -20,7 +20,7 @@ class SubordinacaoAdministrativaController extends Controller
     {
     	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.subordinacaoAdministrativa.desativados', compact('subordinacaoAdministrativas'));
+    	return view('gerenciar.subordinacaoAdministrativa.disabled', compact('subordinacaoAdministrativas'));
     }
 
     public function create(Request $request)
@@ -31,7 +31,7 @@ class SubordinacaoAdministrativaController extends Controller
 
         SubordinacaoAdministrativa::create($data);
 
-        return redirect()->back()
+        return redirect()->route('subordinacaoAdministrativa')
             ->with('flash_message','Subordinacao Administrativa Inserida com sucesso');
         
     }
@@ -48,7 +48,7 @@ class SubordinacaoAdministrativaController extends Controller
             'descricao' => $request->descricao
         ]);
 
-        return redirect()->back()
+        return redirect()->route('subordinacaoAdministrativa')
             ->with('flash_message','Subordinação Administrativa Editada com Sucesso!');
 
     }
@@ -71,7 +71,31 @@ class SubordinacaoAdministrativaController extends Controller
         SubordinacaoAdministrativa::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->back()
+        return redirect()->route('subordinacaoAdministrativa')
             ->with('flash_message', 'Subordinação Administrativa Desativada com Sucesso!');
+    }
+
+    public function toActivate($id)
+    {
+        SubordinacaoAdministrativa::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('subordinacaoAdministrativaDisabled')
+            ->with('flash_message', 'Subordinação Administrativa Ativada com Sucesso!');
+    }
+
+    public function search(Request $request, SubordinacaoAdministrativa $subordinacaoAdministrativa)
+    {
+        $dataForm = $request->all();
+
+        $subordinacaoAdministrativas = $subordinacaoAdministrativa->search($dataForm)->orderBy('descricao')->paginate(10);
+
+        if ($dataForm['publicado'] == 1) 
+        {
+            return view('gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
+        }else
+        {   
+            return view('gerenciar.subordinacaoAdministrativa.disabled', compact('subordinacaoAdministrativas'));
+        }
     }  
 }

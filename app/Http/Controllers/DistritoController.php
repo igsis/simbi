@@ -20,7 +20,7 @@ class DistritoController extends Controller
     {
     	$distritos = Distrito::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
     	
-    	return view('gerenciar.distritos.desativados', compact('distritos'));
+    	return view('gerenciar.distritos.disabled', compact('distritos'));
     }
 
 
@@ -33,7 +33,7 @@ class DistritoController extends Controller
 
         Distrito::create($data);
         
-        return redirect()->back()
+        return redirect()->route('distrito')
             ->with('flash_message', 'Distrito Inserido com sucesso!');
     }
 
@@ -49,18 +49,41 @@ class DistritoController extends Controller
             'descricao' => $request->descricao
         ]);
 
-        return redirect()->back()
+        return redirect()->route('distrito')
             ->with('flash_message', 'Distrito Editado com Sucesso!');
 
     }
-
 
     public function destroy($id)
     {
         Distrito::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->back()
+        return redirect()->route('distrito')
             ->with('flash_message', 'Distrito Desativado com Sucesso!');
+    }
+
+    public function toActivate($id)
+    {
+        Distrito::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('distritoDisabled')
+            ->with('flash_message', 'Distrito Ativado com Sucesso!');
+    }
+
+    public function search(Request $request, Distrito $distrito)
+    {
+        $dataForm = $request->all();
+
+        $distritos = $distrito->search($dataForm)->orderBy('descricao')->paginate(10);
+
+        if ($dataForm['publicado'] == 1) 
+        {
+            return view('gerenciar.distritos.index', compact('distritos'));
+        }else
+        {   
+            return view('gerenciar.distritos.disabled', compact('distritos'));
+        }
     }
 }

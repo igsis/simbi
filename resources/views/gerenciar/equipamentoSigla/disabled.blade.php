@@ -13,7 +13,7 @@
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <input type="text" name="roteiro" class="form-control" placeholder="Roteiro" title="Pesquisa pelo Roteiro">
 	        <select name="publicado" class="form-control">
-	        	<option value="1">Selecione</option>
+	        	<option value="0">Selecione</option>
 	        	<option value="1">Ativo</option>
 	        	<option value="0">Desativado</option>
 	        </select>
@@ -38,26 +38,18 @@
 				<td>{{$equipamentoSigla->descricao}}</td>
 				<td>{{$equipamentoSigla->roteiro}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#equipamentoSigla"
+					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
 							data-id="{{$equipamentoSigla->id}}" 
-							data-sigla="{{$equipamentoSigla->sigla}}" 
-							data-descricao="{{$equipamentoSigla->descricao}}" 
-							data-roteiro="{{$equipamentoSigla->roteiro}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
-					</button>
-					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$equipamentoSigla->id}}" 
-								data-title="{{$equipamentoSigla->sigla}}"
-								data-route="{{route('deleteSiglaEquipamento', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+							data-title="{{$equipamentoSigla->sigla}}"
+							data-route="{{route('toActivateSiglaEquipamento', '')}}">
+						<i class="glyphicon glyphicon-ok"></i>
 					</button>					
 				</td>
 			</tr>
 			@endforeach				
 		</tbody>
 		</table>
-	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#equipamentoSigla"><i class="glyphicon glyphicon-plus"></i></button> 	
+	</div>			 	
 
 	<!-- Editar Sigla -->
 	<div class="modal fade" id="equipamentoSigla" role="dialog" aria-hidden="true">
@@ -103,35 +95,5 @@
 
 @endsection
 @section('scripts_adicionais')
-    <script type="text/javascript">
-
-        // Alimenta o modal com informações de cada Sigla do Equipamento
-        $('#equipamentoSigla').on('show.bs.modal', function (e)
-        {
-        	if ($(e.relatedTarget).attr('data-id')) 
-        	{
-	            let id = $(e.relatedTarget).attr('data-id');
-	            let sigla = $(e.relatedTarget).attr('data-sigla');
-	            let descricao = $(e.relatedTarget).attr('data-descricao');
-	            let roteiro = $(e.relatedTarget).attr('data-roteiro');
-	            $(this).find('.modal-title').text(` Editar ${descricao}`);
-	            $(this).find('.modal-footer input').attr('value', 'Editar');
-	            $(this).find('form input[name="id"]').attr('value', id);
-	            $(this).find('form input[name="sigla"]').attr('value', sigla);
-	            $(this).find('form input[name="descricao"]').attr('value', descricao);
-	            $(this).find('form input[name="roteiro"]').attr('value', roteiro);
-	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
-	            $(this).find('form').attr('action', `{{route('editSiglaEquipamento', '')}}/${id}`);
-	        }else
-	        {
-	        	$(this).find('.modal-title').text('Adicionar Sigla do Equipamento');
-	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
-	            $(this).find('form input[type="text"]').attr('value', '');
-	            $(this).find('form').attr('action', `{{route('createSiglaEquipamento')}}`);
-	        }
-        });
-    </script>
-
     @include('scripts.desativar_modal')
-
 @endsection

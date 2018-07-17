@@ -30,7 +30,8 @@ class EquipamentoSiglaController extends Controller
 
         EquipamentoSigla::create($data);
 
-        return redirect()->back()->with('flash_message',
+        return redirect()->route('siglaEquipamento')
+        ->with('flash_message',
          'Sigla do Equipamento Inserida com sucesso!');
         
     }
@@ -51,7 +52,7 @@ class EquipamentoSiglaController extends Controller
             'roteiro' => $request->roteiro
         ]);
 
-        return redirect()->back()
+        return redirect()->route('siglaEquipamento')
             ->with('flash_message',
             'Sigla do Equipamento Editado com Sucesso!');
 
@@ -77,8 +78,33 @@ class EquipamentoSiglaController extends Controller
         EquipamentoSigla::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->back()
+        return redirect()->route('siglaEquipamento')
             ->with('flash_message',
             'Sigla do Equipamento Desativada com Sucesso!');
+    }
+
+    public function toActivate($id)
+    {
+        EquipamentoSigla::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('siglaEquipamentoDisabled')
+            ->with('flash_message',
+            'Sigla do Equipamento Ativada com Sucesso!');
+    }
+
+    public function search(Request $request, EquipamentoSigla $equipamentoSigla)
+    {
+        $dataForm = $request->all();
+
+        $equipamentoSiglas = $equipamentoSigla->search($dataForm)->orderBy('sigla')->paginate(10);
+
+        if ($dataForm['publicado'] == 1) 
+        {
+            return view('gerenciar.equipamentoSigla.index', compact('equipamentoSiglas'));
+        }else
+        {   
+            return view('gerenciar.equipamentoSigla.disabled', compact('equipamentoSiglas'));
+        }
     }
 }

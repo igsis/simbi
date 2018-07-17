@@ -11,7 +11,7 @@
 	        {{ csrf_field() }}
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <select name="publicado" class="form-control">
-	        	<option value="1">Selecione</option>
+	        	<option value="0">Selecione</option>
 	        	<option value="1">Ativo</option>
 	        	<option value="0">Desativado</option>
 	        </select>
@@ -32,16 +32,11 @@
 			<tr>
 				<td>{{$distrito->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#distrito" 
-							data-id="{{$distrito->id}}"
-							data-descricao="{{$distrito->descricao}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
-					</button>
-					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$distrito->id}}" 
-								data-title="{{$distrito->descricao}}"
-								data-route="{{route('deleteDistrito', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
+							data-id="{{$distrito->id}}" 
+							data-title="{{$distrito->descricao}}"
+							data-route="{{route('toActivateDistrito', '')}}">
+						<i class="glyphicon glyphicon-ok"></i>
 					</button>					
 				</td>
 			</tr>
@@ -49,8 +44,7 @@
 		</tbody>
 		</table>
 	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#distrito"><i class="glyphicon glyphicon-plus"></i></button> 	
-
+	
 	<!-- Editar Distrito -->
 	<div class="modal fade" id="distrito" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
@@ -85,29 +79,5 @@
 
 @endsection
 @section('scripts_adicionais')
-    <script type="text/javascript">
-
-        // Alimenta o modal com informações de cada Tipo de Serviço
-        $('#distrito').on('show.bs.modal', function (e)
-        {
-        	if ($(e.relatedTarget).attr('data-id')) 
-        	{
-	            let id = $(e.relatedTarget).attr('data-id');
-	            let descricao = $(e.relatedTarget).attr('data-descricao');
-	            $(this).find('.modal-title').text(` Editar ${descricao}`);
-	            $(this).find('.modal-footer input').attr('value', 'Editar');
-	            $(this).find('form input[name="descricao"]').attr('value', descricao);
-	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`)
-            	$(this).find('form').attr('action', `{{route('editDistrito', '')}}/${id}`);
-            }else
-            {
-            	$(this).find('.modal-title').text('Adicionar Distrito');
-	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
-	            $(this).find('form input[type="text"]').attr('value', '');
-	            $(this).find('form').attr('action', `{{route('createDistrito')}}`);
-            }
-        });
-    </script>
-
     @include('scripts.desativar_modal')
 @endsection

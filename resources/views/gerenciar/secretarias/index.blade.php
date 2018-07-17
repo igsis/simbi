@@ -8,10 +8,15 @@
 	{{-- <div class="panel-heading">Página {{ $secretarias->currentPage() }} de {{ $secretarias->lastPage() }}</div> --}}
 
 	<div class="form">
-	    <form method="POST" class="form form-inline">
+	    <form method="POST" class="form form-inline" action="{{route('searchSecretaria')}}">
 	        {{ csrf_field() }}
 	        <input type="text" name="sigla" class="form-control" placeholder="Sigla" title="Pesquisa pela Sigla">
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
+	        <select name="publicado" class="form-control">
+	        	<option value="1">Selecione</option>
+	        	<option value="1">Ativo</option>
+	        	<option value="0">Desativado</option>
+	        </select>
 	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
 	    </form>
 	</div><br>

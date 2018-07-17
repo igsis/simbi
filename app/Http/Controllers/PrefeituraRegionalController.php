@@ -18,7 +18,7 @@ class PrefeituraRegionalController extends Controller
     public function disabled(){
     	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.prefeiturasRegionais.desativados', compact('prefeiturasRegionais'));
+    	return view('gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
     }
 
     public function create(Request $request){
@@ -28,7 +28,8 @@ class PrefeituraRegionalController extends Controller
 
         PrefeituraRegional::create($data);
 
-        return redirect()->back()->with('flash_message',
+        return redirect()->route('prefeituraRegional')
+            ->with('flash_message',
             'Prefeitura Regional Inserida com sucesso!');
         
     }
@@ -45,7 +46,7 @@ class PrefeituraRegionalController extends Controller
             'descricao' => $request->descricao
         ]);
 
-        return redirect()->back()
+        return redirect()->route('prefeituraRegional')
             ->with('flash_message',
             'Prefeitura Regional Editada com Sucesso!');
 
@@ -69,8 +70,33 @@ class PrefeituraRegionalController extends Controller
         PrefeituraRegional::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->back()
+        return redirect()->route('prefeituraRegional')
             ->with('flash_message',
             'Prefeitura Regional Desativada com Sucesso!');
+    }
+
+    public function toActivate($id)
+    {
+        PrefeituraRegional::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('prefeituraRegionalDisabled')
+            ->with('flash_message',
+            'Prefeitura Regional Ativado com Sucesso!');
+    }
+
+    public function search(Request $request, PrefeituraRegional $prefeituraRegional)
+    {
+        $dataForm = $request->all();
+
+        $prefeiturasRegionais = $prefeituraRegional->search($dataForm)->orderBy('descricao')->paginate(10);
+
+        if ($dataForm['publicado'] == 1) 
+        {
+            return view('gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
+        }else
+        {   
+            return view('gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
+        }
     }
 }

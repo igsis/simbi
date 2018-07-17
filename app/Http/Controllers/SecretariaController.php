@@ -20,7 +20,7 @@ class SecretariaController extends Controller
     {
     	$secretarias = Secretaria::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.secretarias.desativados', compact('secretarias'));
+    	return view('gerenciar.secretarias.disabled', compact('secretarias'));
     }
 
     public function create(Request $request)
@@ -32,7 +32,7 @@ class SecretariaController extends Controller
 
         Secretaria::create($data);
 
-        return redirect()->back()
+        return redirect()->route('secretaria')
             ->with('flash_message','Secretaria Inserida com sucesso!');
     }
 
@@ -50,7 +50,7 @@ class SecretariaController extends Controller
             'descricao' => $request->descricao
         ]);
 
-        return redirect()->back()
+        return redirect()->route('secretaria')
             ->with('flash_message',
             'Secretaria Editada com Sucesso!');
 
@@ -75,8 +75,33 @@ class SecretariaController extends Controller
         Secretaria::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->back()
+        return redirect()->route('secretaria')
             ->with('flash_message',
             'Secretaria Desativada com Sucesso!');
+    }
+
+    public function toActivate($id)
+    {
+        Secretaria::findOrFail($id)
+            ->update(['publicado' => 1]);
+
+        return redirect()->route('secretariaDisabled')
+            ->with('flash_message',
+            'Secretaria Ativada com Sucesso!');
+    }
+
+    public function search(Request $request, Secretaria $secretaria)
+    {
+        $dataForm = $request->all();
+
+        $secretarias = $secretaria->search($dataForm)->orderBy('descricao')->paginate(10);
+
+        if ($dataForm['publicado'] == 1) 
+        {
+            return view('gerenciar.secretarias.index', compact('secretarias'));
+        }else
+        {   
+            return view('gerenciar.secretarias.disabled', compact('secretarias'));
+        }
     }
 }

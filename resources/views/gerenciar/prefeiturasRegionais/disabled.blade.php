@@ -11,7 +11,7 @@
 	        {{ csrf_field() }}
 	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
 	        <select name="publicado" class="form-control">
-	        	<option value="1">Selecione</option>
+	        	<option value="0">Selecione</option>
 	        	<option value="1">Ativo</option>
 	        	<option value="0">Desativado</option>
 	        </select>
@@ -32,16 +32,11 @@
 			<tr>
 				<td>{{$prefeituraRegional->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#prefeituraRegional" 
-							data-id="{{$prefeituraRegional->id}}"
-							data-descricao="{{$prefeituraRegional->descricao}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
-					</button>
-					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$prefeituraRegional->id}}" 
-								data-title="{{$prefeituraRegional->descricao}}"
-								data-route="{{route('deletePrefeituraRegional', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
+							data-id="{{$prefeituraRegional->id}}" 
+							data-title="{{$prefeituraRegional->descricao}}"
+							data-route="{{route('toActivatePrefeituraRegional', '')}}">
+						<i class="glyphicon glyphicon-ok"></i>
 					</button>					
 				</td>
 			</tr>
@@ -49,8 +44,6 @@
 		</tbody>
 		</table>
 	</div>
-	{{-- Add Prefeitura Regional  --}}
-	<button class="btn btn-success" data-toggle="modal" data-target="#prefeituraRegional"><i class="glyphicon glyphicon-plus"></i></button> 	
 
 	<!-- Editar Prefeitura Regional -->
 	<div class="modal fade" id="prefeituraRegional" role="dialog" aria-hidden="true">
@@ -85,33 +78,5 @@
 </div>
 @endsection
 @section('scripts_adicionais')
-    <script type="text/javascript">
-
-        // Alimenta o modal com informações de cada Tipo de Serviço
-        $('#prefeituraRegional').on('show.bs.modal', function (e)
-        {	
-        	/**
-        	*	Modal editar e adicionar
-        	*/	
-        	if ($(e.relatedTarget).attr('data-id')) 
-        	{
-	            let id = $(e.relatedTarget).attr('data-id');
-	            let descricao = $(e.relatedTarget).attr('data-descricao');
-	            $(this).find('.modal-title').text(` Editar ${descricao}`);
-	            $(this).find('.modal-footer input').attr('value', 'Editar');
-	            $(this).find('form input[name="id"]').attr('value', id);
-	            $(this).find('form input[name="descricao"]').attr('value', descricao);
-	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
-		        $(this).find('form').attr('action', `{{route('editPrefeituraRegional', '')}}/${id}`);
-		    }else 
-	        {
-	        	$(this).find('.modal-title').text('Adicionar Prefeitura Regional');
-	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
-	            $(this).find('form input[name="descricao"]').attr('value', '');
-	            $(this).find('form').attr('action', `{{route('createPrefeituraRegional')}}`);
-	        }
-        });
-    </script>
-
     @include('scripts.desativar_modal')
 @endsection

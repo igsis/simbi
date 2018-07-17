@@ -18,4 +18,16 @@ class Distrito extends Model
     {
         return $this->hasMany(Endereco::class);
     }
+
+    public function search(Array $data)
+    {
+    	return $this->where(function($query) use ($data) {
+    		if (isset($data['descricao'])) {
+    			$query->where('descricao', 'LIKE', '%'.$data['descricao'].'%');
+    		}
+    		if (isset($data['publicado'])) {
+    			$query->where('publicado', '=', $data['publicado']);
+    		}
+    	});
+    }
 }
