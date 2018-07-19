@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Equipamento::class);
     }
 
+    public function frequencias()
+    {
+        return $this->hasManyThrough(Frequencia::class, Evento::class);
+    }
+
 
 
     public function search(Array $data)
