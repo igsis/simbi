@@ -47,11 +47,11 @@
                 </div>
 
                 <div class="form-group col-xs-4 col-md-2">
-                <label for="equipamentoSigla">Adicionar</label>
+                    <label for="equipamentoSigla">Adicionar</label>
                     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                 </div>
             </div>
-            <div class="row">                
+            <div class="row">
 
                 <div class="form-group col-xs-8 col-md-4">
                     <label for="identificacaoSecretaria">Identificação da Secretaria</label>
@@ -118,16 +118,16 @@
                 </div>
             </div>
 
-            <div class="row">    
+            <div class="row">
                 <div class="form-group col-md-2">
                     <label for="numero">Número</label>
                     <input type="text" class="form-control" name="numero" id="numero" value="{{$equipamento->endereco->numero}}">
-                </div>             
+                </div>
                 <div class="form-group col-md-3">
                     <label for="complemento">Complemento</label>
                     <input type="text" class="form-control" name="complemento" id="complemento" value="{{$equipamento->endereco->complemento}}">
                 </div>
-                
+
                 <div class="form-group col-md-3">
                     <label for="bairro">Bairro</label>
                     <input type="text" class="form-control" name="bairro" id="bairro" value="{{$equipamento->endereco->bairro}}" readonly>
@@ -193,11 +193,11 @@
                 <div class="form-group col-xs-8 col-md-4">
                     <label for="distrito">Distrito</label>
                     <select class="form-control" name="distrito" id="distrito">
-                    <option value="">Selecione uma Opção</option>
-                    @foreach($distritos as $distrito)
-                        <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
-                    @endforeach
-                </select>
+                        <option value="">Selecione uma Opção</option>
+                        @foreach($distritos as $distrito)
+                            <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group col-xs-4 col-md-2">
@@ -206,42 +206,57 @@
                 </div>
             </div>
 
+            <div style="text-align: center;"><h2>Horario de Funcionamento</h2></div>
+            @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
+                <div class="horario">
+                    <div class="row">
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
+                                <input type="hidden" name="funcionamento[{{$key}}]" value="{{$funcionamento->id}}">
+                                <input type="checkbox" name="domingo[{{$key}}]" value="1" {{$funcionamento->domingo == 1 ? "checked" : ""}}/><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                                <input type="checkbox" name="segunda[{{$key}}]" value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                                <input type="checkbox" name="terca[{{$key}}]" value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                                <input type="checkbox" name="quarta[{{$key}}]" value="1" {{$funcionamento->quarta == 1 ? "checked" : ""}}/><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                                <input type="checkbox" name="quinta[{{$key}}]" value="1" {{$funcionamento->quinta == 1 ? "checked" : ""}}/><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                                <input type="checkbox" name="sexta[{{$key}}]" value="1" {{$funcionamento->sexta == 1 ? "checked" : ""}}/><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                                <input type="checkbox" name="sabado[{{$key}}]" value="1" {{$funcionamento->sabado == 1 ? "checked" : ""}}/><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                            </div>
+                        </div>
+                    </div>
 
-            {{-- <div class="form-row">
-                <center><h3>Horario de Funcionamento</h3></center>
-            </div>
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
-                        <input type="checkbox" name="domingo" id="diasemana07" value="1" /><label  style="padding:0 10px 0 5px;"> Domingo</label>
-                        <input type="checkbox" name="segunda" id="diasemana01" value="1"/><label style="padding:0 10px 0 5px;"> Segunda</label>
-                        <input type="checkbox" name="terca" id="diasemana02" value="1" /><label  style="padding:0 10px 0 5px;"> Terça</label>
-                        <input type="checkbox" name="quarta" id="diasemana03" value="1" /><label style="padding:0 10px 0 5px;"> Quarta</label>
-                        <input type="checkbox" name="quinta" id="diasemana04" value="1" /><label style="padding:0 10px 0 5px;"> Quinta</label>
-                        <input type="checkbox" name="sexta" id="diasemana05" value="1" /><label  style="padding:0 10px 0 5px;"> Sexta</label>
-                        <input type="checkbox" name="sabado" id="diasemana06" value="1" /><label style="padding:0 10px 0 5px;"> Sábado</label>
+                    <div class="row">
+                        <div class="form-group col-md-offset-4 col-md-2">
+                            <label for="horarioAbertura">Horario de Abertura</label>
+                            <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="horarioFechamento">Horario de Fechamento</label>
+                            <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+
+            <hr class="botoes">
 
             <div class="row">
-                <div class="form-group col-md-offset-3 col-md-3">
-                    <label for="horarioAbertura">Horario de Abertura</label>
-                    <input type="text" class="form-control" name="horarioAbertura" id="horarioAbertura" data-mask="00:00">
+                {{--TODO: Otimizar href dos botoes com javascript:void(0)--}}
+                <div class="form-group col-md-offset-2 col-md-4">
+                    <a class="btn btn-info btn-block" href="#" id="addInput">Adicionar Novo Horario</a>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="horarioFechamento">Horario de Fechamento</label>
-                    <input type="text" class="form-control" name="horarioFechamento" id="horarioFechamento" data-mask="00:00">
+                <div class="form-group col-md-4">
+                    <a class="btn btn-info btn-block" href="#" id="remInput">Remover Ultimo Horario</a>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="telecentro">Possui Telecentro?</label>
                     <select class="form-control" name="telecentro" id="telecentro">
                         @if (old('telecentro') == "1")
-                        <option value="0">Não</option>
-                        <option value="1" selected>Sim</option>
+                            <option value="0">Não</option>
+                            <option value="1" selected>Sim</option>
                         @else
                             <option value="0" selected>Não</option>
                             <option value="1">Sim</option>
@@ -252,8 +267,8 @@
                     <label for="nucleobraile">Possui Núcleo Braile?</label>
                     <select class="form-control" name="nucleobraile" id="nucleobraile">
                         @if (old('nucleobraile') == "1")
-                        <option value="0">Não</option>
-                        <option value="1" selected>Sim</option>
+                            <option value="0">Não</option>
+                            <option value="1" selected>Sim</option>
                         @else
                             <option value="0" selected>Não</option>
                             <option value="1">Sim</option>
@@ -264,8 +279,8 @@
                     <label for="acervoespecializado">Acervo Especializado?</label>
                     <select class="form-control" name="acervoespecializado" id="acervoespecializado">
                         @if (old('acervoespecializado') == "1")
-                        <option value="0">Não</option>
-                        <option value="1" selected>Sim</option>
+                            <option value="0">Não</option>
+                            <option value="1" selected>Sim</option>
                         @else
                             <option value="0" selected>Não</option>
                             <option value="1">Sim</option>
@@ -311,7 +326,7 @@
             let _token = $('#addServico input[name="_token"]').val();
             let descricao = $('#addServico input[name="descricao"]').val();
             $.ajax({
-                url: '{{route('equipamentos.index')}}', 
+                url: '{{route('equipamentos.index')}}',
                 type: 'POST',
                 data: {'novoServico': '','_token': _token, 'descricao': descricao},
                 success: function(data) {
@@ -346,15 +361,15 @@
             let descricao = $('#addSigla input[name="descricao"]').val();
             let roteiro = $('#addSigla input[name="roteiro"]').val();
             $.ajax({
-                url: '{{route('equipamentos.index')}}', 
+                url: '{{route('equipamentos.index')}}',
                 type: 'POST',
                 data: {
-                        'novaSigla': '',
-                        '_token': _token,
-                        'sigla':sigla, 
-                        'descricao': descricao, 
-                        'roteiro': roteiro
-                    },
+                    'novaSigla': '',
+                    '_token': _token,
+                    'sigla':sigla,
+                    'descricao': descricao,
+                    'roteiro': roteiro
+                },
                 success: function(data) {
                     $("#equipamentoSigla option").remove();
                     $("#sucesso").removeAttr("hidden");
@@ -386,7 +401,7 @@
             let sigla = $("#addSecretaria input[name='sigla']").val();
             let descricao = $("#addSecretaria input[name='descricao']").val();
             $.ajax({
-                url: '{{route('equipamentos.index')}}', 
+                url: '{{route('equipamentos.index')}}',
                 type: 'POST',
                 data: {'novaSecretaria': '','_token': _token, 'sigla':sigla, 'descricao': descricao},
                 success: function(data) {
@@ -419,7 +434,7 @@
             let _token = $("#addSubAdmin input[name='_token']").val();
             let descricao = $("#addSubAdmin input[name='descricao']").val();
             $.ajax({
-                url: '{{route('equipamentos.index')}}', 
+                url: '{{route('equipamentos.index')}}',
                 type: 'POST',
                 data: {'novaSubordinacaoAdministrativa': '','_token': _token, 'descricao': descricao},
                 success: function(data) {
@@ -452,7 +467,7 @@
             let _token = $("#addPrefeituraRegional input[name='_token']").val();
             let descricao = $("#addPrefeituraRegional input[name='descricao']").val();
             $.ajax({
-                url: '{{route('equipamentos.index')}}', 
+                url: '{{route('equipamentos.index')}}',
                 type: 'POST',
                 data: {'novaPrefeituraRegional': '','_token': _token, 'descricao': descricao},
                 success: function(data) {
@@ -485,7 +500,7 @@
             let _token = $("#addDistrito input[name='_token']").val();
             let descricao = $("#addDistrito input[name='descricao']").val();
             $.ajax({
-                url: '{{route('equipamentos.index')}}', 
+                url: '{{route('equipamentos.index')}}',
                 type: 'POST',
                 data: {'novoDistrito': '','_token': _token, 'descricao': descricao},
                 success: function(data) {

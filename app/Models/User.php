@@ -10,6 +10,10 @@ use Spatie\Permission\Traits\HasRoles;
   use Illuminate\Database\Eloquent\SoftDeletes
   https://goo.gl/RarucR */
 
+/*TODO: Adicionar campos cargo_id, funcao_id, escolaridade_id, previsão_aposentadoria, secretaria_id e subordinação administrativa*/
+/*TODO: Criar Models: Funcao, Cargo, Escolaridade*/
+/*TODO: Atualizar 'usuarios.cadastro' e 'usuarios.editar'*/
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -49,9 +53,11 @@ class User extends Authenticatable
         return $this->belongsTo(PerguntaSeguranca::class);
     }
 
+/*TODO: Analisar possibilidade de FK na tabela intermediaria
+https://goo.gl/BcqZQr*/
     public function equipamentos()
     {
-        return $this->belongsToMany(Equipamento::class);
+        return $this->belongsToMany(Equipamento::class)->withPivot('dataInicio', 'data_fim');
     }
 
     public function frequencias()

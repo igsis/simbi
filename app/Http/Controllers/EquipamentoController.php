@@ -368,6 +368,11 @@ class EquipamentoController extends Controller
             'regional_id' => $request->regional            
             ]);
 
+        foreach ($equipamento->funcionamentos as $key => $funcionamento)
+        {
+
+        }
+
         return redirect()->back()->with('flash_message',
                 'Equipamento Editado com Sucesso!');
     }
