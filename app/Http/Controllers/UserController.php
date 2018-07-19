@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Simbi\Models\Equipamento;
 use Simbi\Models\User;
 use Simbi\Models\PerguntaSeguranca;
+use Simbi\Models\Frequencia;
 use Auth;
 
 use Spatie\Permission\Models\Role;
@@ -270,6 +271,11 @@ class UserController extends Controller
                 'Equipamentos Vinculados com sucesso.');
     }
 
+    public function hasManyThrough(Frequencia $frequencia)
+    {
+        // dd($frequencia->all());
 
+        return view('usuarios.frequencia');
+    }
 
 }

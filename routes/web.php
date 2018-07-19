@@ -40,8 +40,9 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::any('usuarios/search', 'UserController@searchUser')->name('search-user');
 
-
 		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
+
+		Route::get('frequencia', 'UserController@hasManyThrough')->name('hasManyThrough');
 
 		# Gerenciar Selects
 		Route::group(['prefix' => 'gerenciar'], function(){
