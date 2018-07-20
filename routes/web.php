@@ -44,7 +44,12 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::get('frequencia', 'UserController@hasManyThrough')->name('hasManyThrough');
 
-		# Gerenciar Selects
+        Route::get('equipamentos/{equipamento}/detalhes', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
+
+        Route::post('equipamentos/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
+
+
+        # Gerenciar Selects
 		Route::group(['prefix' => 'gerenciar'], function(){
 			
 			Route::group(['prefix' => 'tipo-servico'], function(){

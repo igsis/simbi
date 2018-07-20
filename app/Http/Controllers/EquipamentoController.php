@@ -242,7 +242,7 @@ class EquipamentoController extends Controller
                 'equipamento_id' => $id
             ]);
         }
-        return redirect()->back()->with('flash_message',
+        return redirect()->route('equipamentos.criaDetalhes', $id)->with('flash_message',
             'Equipamento inserido com sucesso');
     }
 
@@ -368,10 +368,7 @@ class EquipamentoController extends Controller
             'regional_id' => $request->regional            
             ]);
 
-        foreach ($equipamento->funcionamentos as $key => $funcionamento)
-        {
-
-        }
+        /*TODO: Atualização do horario de funcionamento*/
 
         return redirect()->back()->with('flash_message',
                 'Equipamento Editado com Sucesso!');
@@ -393,6 +390,20 @@ class EquipamentoController extends Controller
         return redirect()->route('equipamentos.index', ['type' => $type])
             ->with('flash_message',
              'Equipamento Excluido com Sucesso.');
+    }
+
+    public function criaDetalhes($id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.detalhestecnicos', compact('equipamento'));
+    }
+
+    public function gravaDetalhes($id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.detalhestecnicos', compact('equipamento'));
     }
 
     public function ativarEquipamento(Request $request)

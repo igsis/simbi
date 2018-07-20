@@ -13,6 +13,7 @@
                         <div class="col col-xs-6 text-right">
                             @hasrole('Administrador')
                                 <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
+                                <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Editar Detalhes Técnicos</a>
                             @endhasrole
                         </div>
                     </div>
