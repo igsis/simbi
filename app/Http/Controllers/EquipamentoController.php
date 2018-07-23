@@ -5,10 +5,15 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 use response;
 
-use Simbi\Models\Distrito; 
+use Simbi\Models\AcessibilidadeArquitetonica;
+use Simbi\Models\ContratoUso;
+use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
+use Simbi\Models\EquipamentoPadrao;
+use Simbi\Models\EquipamentoPorte;
 use Simbi\Models\EquipamentoSigla;
+use Simbi\Models\EquipamentoUtilizacao;
 use Simbi\Models\Funcionamento;
 use Simbi\Models\PrefeituraRegional;
 use Simbi\Models\TipoServico;
@@ -396,7 +401,20 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::find($id);
 
-        return view('equipamentos.detalhestecnicos', compact('equipamento'));
+        $contratos = ContratoUso::all();
+        $utilizacoes = EquipamentoUtilizacao::all();
+        $portes = EquipamentoPorte::all();
+        $padroes = EquipamentoPadrao::all();
+        $arquitetonicas = AcessibilidadeArquitetonica::all();
+
+        return view('equipamentos.detalhestecnicos', compact(
+            'equipamento',
+            'contratos',
+            'utilizacoes',
+            'portes',
+            'padroes',
+            'arquitetonicas'
+        ));
     }
 
     public function gravaDetalhes(Request $request, $id)

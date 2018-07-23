@@ -11,14 +11,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Copiando dados para a tabela simbi.acessibilidades_arquitetonicas:
-DELETE FROM `acessibilidades_arquitetonicas`;
-/*!40000 ALTER TABLE `acessibilidades_arquitetonicas` DISABLE KEYS */;
-INSERT INTO `acessibilidades_arquitetonicas` (`id`, `acessibilidade_arquitetonica`) VALUES
+-- Copiando dados para a tabela simbi.acessibilidade_arquitetonicas:
+DELETE FROM `acessibilidade_arquitetonicas`;
+/*!40000 ALTER TABLE `acessibilidade_arquitetonicas` DISABLE KEYS */;
+INSERT INTO `acessibilidade_arquitetonicas` (`id`, `acessibilidade_arquitetonica`) VALUES
   (1, 'Total'),
   (2, 'Parcial'),
   (3, 'Não Acessível');
-/*!40000 ALTER TABLE `acessibilidades_arquitetonicas` ENABLE KEYS */;
+/*!40000 ALTER TABLE `acessibilidade_arquitetonicas` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.contrato_usos:
 DELETE FROM `contrato_usos`;
