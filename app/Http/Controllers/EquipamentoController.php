@@ -399,12 +399,39 @@ class EquipamentoController extends Controller
         return view('equipamentos.detalhestecnicos', compact('equipamento'));
     }
 
-    public function gravaDetalhes($id)
+    public function gravaDetalhes(Request $request, $id)
     {
         $equipamento = Equipamento::find($id);
 
         return view('equipamentos.detalhestecnicos', compact('equipamento'));
     }
+
+    public function criaReforma($id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.reforma', compact('equipamento'));
+    }
+
+    public function gravaReforma(Request $request, $id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        $data = $this->validate($request, [
+            'inicioReforma' => 'required|before:terminoReforma',
+            'terminoReforma' => 'required|after:inicioReforma',
+            'descricaoReforma' => 'required'
+        ]);
+
+        $equipamento->reformas()->create([
+            'inicio_reforma' => $request->inicioReforma,
+            'termino_reforma' => $request->terminoReforma,
+            'descricao' => $request->descricaoReforma
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Período de Reforma incluido com sucesso');
+    }
+
 
     public function ativarEquipamento(Request $request)
     {

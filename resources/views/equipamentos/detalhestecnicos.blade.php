@@ -15,7 +15,7 @@
         <form method="POST" action="{{ route('equipamentos.gravaDetalhes', $equipamento->id) }}">
             {{ csrf_field() }}
 
-            
+
         </form>
 
     </div>

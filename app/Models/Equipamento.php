@@ -4,6 +4,7 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/*TODO: Incluir ocorrencia dos equipamentos (nota) na view "equipamentos.editar"*/
 class Equipamento extends Model
 {
 	public $timestamps = false;
@@ -60,8 +61,14 @@ class Equipamento extends Model
         $this->belongsToMany(User::class);
     }
 
-    public function funcionamentos(){
+    public function funcionamentos()
+    {
 	    return $this->hasMany(Funcionamento::class);
+    }
+
+    public function reformas()
+    {
+        return $this->hasMany(Reforma::class);
     }
 
     public function search(Array $data)

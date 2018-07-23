@@ -48,6 +48,10 @@ Route::group(['middleware' => 'auth'], function (){
 
         Route::post('equipamentos/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 
+        Route::get('equipamentos/{equipamento}/reforma', 'EquipamentoController@criaReforma')->name('equipamentos.criaReforma');
+
+        Route::post('equipamentos/{equipamento}/reforma', 'EquipamentoController@gravaReforma')->name('equipamentos.gravaReforma');
+
 
         # Gerenciar Selects
 		Route::group(['prefix' => 'gerenciar'], function(){

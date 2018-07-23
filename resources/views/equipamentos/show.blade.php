@@ -3,22 +3,31 @@
 @section('conteudo')
 
     <div class="container">
+        <div style="text-align: center;">
+            <h2>
+                Detalhes<br>
+                <small>{{$equipamento->nome}}</small>
+            </h2>
+        </div>
+        <hr>
+
         <div class="col-md-offset-1 col-md-10">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col col-xs-6">
-                            <h3 class="panel-title">{{$equipamento->nome}}</h3>
-                        </div>
-                        <div class="col col-xs-6 text-right">
-                            @hasrole('Administrador')
-                                <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
-                                <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Editar Detalhes Técnicos</a>
-                            @endhasrole
+                        <div class="col text-right">
+                            @hasanyrole('Coordenador|Administrador')
+                                <a href="{{ route('equipamentos.criaReforma', $equipamento->id) }}" class="btn btn-success">Inserir Reforma</a>
+                                @hasrole('Administrador')
+                                    <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
+                                    <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Editar Detalhes Técnicos</a>
+                                @endhasrole
+                            @endhasanyrole
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
+                    {{--TODO: Alterar exibição para Labels--}}
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
