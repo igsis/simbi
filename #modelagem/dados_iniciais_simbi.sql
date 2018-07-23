@@ -11,7 +11,25 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Copiando dados para a tabela simbi.distritos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela simbi.acessibilidades_arquitetonicas:
+DELETE FROM `acessibilidades_arquitetonicas`;
+/*!40000 ALTER TABLE `acessibilidades_arquitetonicas` DISABLE KEYS */;
+INSERT INTO `acessibilidades_arquitetonicas` (`id`, `acessibilidade_arquitetonica`) VALUES
+  (1, 'Total'),
+  (2, 'Parcial'),
+  (3, 'Não Acessível');
+/*!40000 ALTER TABLE `acessibilidades_arquitetonicas` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.contrato_usos:
+DELETE FROM `contrato_usos`;
+/*!40000 ALTER TABLE `contrato_usos` DISABLE KEYS */;
+INSERT INTO `contrato_usos` (`id`, `contrato_uso`) VALUES
+(1, 'Alugado'),
+(2, 'Concessão de uso'),
+(3, 'Próprio');
+/*!40000 ALTER TABLE `contrato_usos` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.distritos:
 DELETE FROM `distritos`;
 /*!40000 ALTER TABLE `distritos` DISABLE KEYS */;
 INSERT INTO `distritos` (`id`, `descricao`) VALUES
@@ -123,10 +141,35 @@ DELETE FROM `equipamentos`;
 /*!40000 ALTER TABLE `equipamentos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `equipamentos` ENABLE KEYS */;
 
+-- Copiando dados para a tabela simbi.equipamento_padroes:
+DELETE FROM `equipamento_padroes`;
+/*!40000 ALTER TABLE `equipamento_padroes` DISABLE KEYS */;
+INSERT INTO `equipamento_padroes` (`id`, `padrao`) VALUES
+  (1, 'Jânio Novo'),
+  (2, 'Jãnio Antigo');
+/*!40000 ALTER TABLE `equipamento_padroes` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.equipamento_portes:
+DELETE FROM `equipamento_portes`;
+/*!40000 ALTER TABLE `equipamento_portes` DISABLE KEYS */;
+INSERT INTO `equipamento_portes` (`id`, `porte`) VALUES
+  (1, 'Grande'),
+  (2, 'Médio'),
+  (3, 'Grande');
+/*!40000 ALTER TABLE `equipamento_portes` ENABLE KEYS */;
+
 -- Copiando dados para a tabela simbi.equipamentos_users: ~0 rows (aproximadamente)
 DELETE FROM `equipamento_user`;
 /*!40000 ALTER TABLE `equipamento_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `equipamento_user` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.equipamento_utilizacoes:
+DELETE FROM `equipamento_utilizacoes`;
+/*!40000 ALTER TABLE `equipamento_utilizacoes` DISABLE KEYS */;
+INSERT INTO `equipamento_utilizacoes` (`id`, `utilizacao`) VALUES
+  (1, 'Parcial'),
+  (2, 'Total');
+/*!40000 ALTER TABLE `equipamento_utilizacoes` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamento_siglas: ~0 rows (aproximadamente)
 DELETE FROM `equipamento_siglas`;
@@ -195,6 +238,53 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(3, 'Funcionario', 'web', '2018-05-11 16:04:42', '2018-05-11 16:04:42');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
+-- Copiando dados para a tabela simbi.praca_classificacoes:
+DELETE FROM `praca_classificacoes`;
+/*!40000 ALTER TABLE `praca_classificacoes` DISABLE KEYS */;
+INSERT INTO `praca_classificacoes` (`id`, `classificacao`) VALUES
+  (1, 'Grande'),
+  (2, 'Médio'),
+  (3, 'Grande');
+/*!40000 ALTER TABLE `praca_classificacoes` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.prefeitura_regionais: ~0 rows (aproximadamente)
+DELETE FROM `prefeitura_regionais`;
+/*!40000 ALTER TABLE `prefeitura_regionais` DISABLE KEYS */;
+INSERT INTO `prefeitura_regionais` (`id`, `descricao`) VALUES
+  (1, 'Aricanduva'),
+  (2, 'Butantã'),
+  (3, 'Campo Limpo'),
+  (4, 'Capela do Socorro'),
+  (5, 'Casa Verde'),
+  (6, 'Cidade Ademar'),
+  (7, 'Cidade Tiradentes'),
+  (8, 'Ermelino Matarazzo'),
+  (9, 'Freguesia do Ó'),
+  (10, 'Guaianases'),
+  (11, 'Ipiranga'),
+  (12, 'Itaim Paulista'),
+  (13, 'Itaquera'),
+  (14, 'Jabaquara'),
+  (15, 'Jaçanã'),
+  (16, 'Lapa'),
+  (17, 'M''Boi Mirim'),
+  (18, 'Mooca'),
+  (19, 'Parelheiros'),
+  (20, 'Penha'),
+  (21, 'Perus'),
+  (22, 'Pinheiros'),
+  (23, 'Pirituba'),
+  (24, 'Santana'),
+  (25, 'Santo Amaro'),
+  (26, 'São Mateus'),
+  (27, 'São Miguel'),
+  (28, 'Sapopemba'),
+  (29, 'Sé'),
+  (30, 'Vila Maria/Vila Guilherme'),
+  (31, 'Vila Mariana'),
+  (32, 'Vila Prudente');
+/*!40000 ALTER TABLE `prefeitura_regionais` ENABLE KEYS */;
+
 -- Copiando dados para a tabela simbi.regiao: ~0 rows (aproximadamente)
 DELETE FROM `regiao`;
 /*!40000 ALTER TABLE `regiao` DISABLE KEYS */;
@@ -244,7 +334,7 @@ DELETE FROM `secretarias`;
 /*!40000 ALTER TABLE `secretarias` DISABLE KEYS */;
 /*!40000 ALTER TABLE `secretarias` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.status: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela simbi.status:
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`id`, `descricao`) VALUES
@@ -257,44 +347,6 @@ INSERT INTO `status` (`id`, `descricao`) VALUES
 DELETE FROM `subordinacao_administrativas`;
 /*!40000 ALTER TABLE `subordinacao_administrativas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `subordinacao_administrativas` ENABLE KEYS */;
-
--- Copiando dados para a tabela simbi.prefeitura_regionais: ~0 rows (aproximadamente)
-DELETE FROM `prefeitura_regionais`;
-/*!40000 ALTER TABLE `prefeitura_regionais` DISABLE KEYS */;
-INSERT INTO `prefeitura_regionais` (`id`, `descricao`) VALUES
-(1, 'Aricanduva'),
-(2, 'Butantã'),
-(3, 'Campo Limpo'),
-(4, 'Capela do Socorro'),
-(5, 'Casa Verde'),
-(6, 'Cidade Ademar'),
-(7, 'Cidade Tiradentes'),
-(8, 'Ermelino Matarazzo'),
-(9, 'Freguesia do Ó'),
-(10, 'Guaianases'),
-(11, 'Ipiranga'),
-(12, 'Itaim Paulista'),
-(13, 'Itaquera'),
-(14, 'Jabaquara'),
-(15, 'Jaçanã'),
-(16, 'Lapa'),
-(17, 'M''Boi Mirim'),
-(18, 'Mooca'),
-(19, 'Parelheiros'),
-(20, 'Penha'),
-(21, 'Perus'),
-(22, 'Pinheiros'),
-(23, 'Pirituba'),
-(24, 'Santana'),
-(25, 'Santo Amaro'),
-(26, 'São Mateus'),
-(27, 'São Miguel'),
-(28, 'Sapopemba'),
-(29, 'Sé'),
-(30, 'Vila Maria/Vila Guilherme'),
-(31, 'Vila Mariana'),
-(32, 'Vila Prudente');
-/*!40000 ALTER TABLE `prefeitura_regionais` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.tipo_servicos: ~0 rows (aproximadamente)
 DELETE FROM `tipo_servicos`;
