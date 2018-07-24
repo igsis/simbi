@@ -15,6 +15,7 @@ use Simbi\Models\EquipamentoPorte;
 use Simbi\Models\EquipamentoSigla;
 use Simbi\Models\EquipamentoUtilizacao;
 use Simbi\Models\Funcionamento;
+use Simbi\Models\PracaClassificacao;
 use Simbi\Models\PrefeituraRegional;
 use Simbi\Models\TipoServico;
 use Simbi\Models\SubordinacaoAdministrativa;
@@ -406,6 +407,7 @@ class EquipamentoController extends Controller
         $portes = EquipamentoPorte::all();
         $padroes = EquipamentoPadrao::all();
         $arquitetonicas = AcessibilidadeArquitetonica::all();
+        $pracaClassificacoes = PracaClassificacao::all();
 
         return view('equipamentos.detalhestecnicos', compact(
             'equipamento',
@@ -413,7 +415,8 @@ class EquipamentoController extends Controller
             'utilizacoes',
             'portes',
             'padroes',
-            'arquitetonicas'
+            'arquitetonicas',
+            'pracaClassificacoes'
         ));
     }
 

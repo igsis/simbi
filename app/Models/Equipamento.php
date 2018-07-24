@@ -71,6 +71,21 @@ class Equipamento extends Model
         return $this->hasMany(Reforma::class);
     }
 
+    public function detalhe()
+    {
+        return $this->hasOne(EquipamentoDetalhe::class);
+    }
+
+    public function capacidade()
+    {
+        return $this->hasOne(EquipamentoCapacidade::class);
+    }
+
+    public function area()
+    {
+        return $this->hasOne(EquipamentoArea::class);
+    }
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
