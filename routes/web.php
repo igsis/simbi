@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
 
-		Route::get('frequencia', 'UserController@hasManyThrough')->name('hasManyThrough');
+		Route::get('frequencia', 'UserController@hasManyThrough')->name('frequencia');
 
         Route::get('equipamentos/{equipamento}/detalhes', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
 

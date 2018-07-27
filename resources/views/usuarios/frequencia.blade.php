@@ -14,7 +14,6 @@
                 <input class="form-control" type="date" name="name" id="name">
             </div>
 
-        
             <div class="form-group ">
                 <label for="login">Hora</label>
                 <input class="form-control" type="number" name="login" id="login" maxlength="7">
@@ -29,7 +28,6 @@
                 <label for="jovem">Jovem</label>
                 <input class="form-control" type="number" name="jovem" >
             </div>
-
 
             <div class="form-group ">
                 <label for="adulto">Adulto</label>
@@ -50,5 +48,8 @@
         </form>
 
     </div>
+
+@endsection
+@section('scripts_adicionais')
 
 @endsection

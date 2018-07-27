@@ -26,6 +26,7 @@
                     @hasrole('Administrador')
                         <li><a href="{{ route('usuarios.cadastro') }}">Cadastrar Usuários</a></li>
                         <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Usuários Desativados</a></li>
+                        <li><a href="{{ route('frequencia') }}"> Frequência Usuários</a></li>
                     @endhasrole
                 </ul>
             @endhasanyrole

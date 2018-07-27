@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="{{asset('css/app.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+        @yield('scripts_css')
 
     </head>
     <body>
