@@ -1,6 +1,16 @@
 @extends('layouts.master')
 
+
+@section('scripts_css')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet">
+    <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
+@endsection
+
 @section('conteudo')
+
+
 
     <div class="col-lg-6 col-lg-offset-3">
         <h1><i class="glyphicon glyphicon-user"></i>Frequência de Usuário</h1>
@@ -8,10 +18,12 @@
 
         <form method="POST" action="">
             {{ csrf_field() }}
-
-            <div class="form-group">
-                <label for="name">Data</label>
-                <input class="form-control" type="date" name="name" id="name">
+            <label for="name">Data</label>
+            <div class="input-group date" data-provide="datepicker">                
+                <input type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
             </div>
 
             <div class="form-group ">
@@ -49,7 +61,16 @@
 
     </div>
 
+    </div>
+
 @endsection
+
 @section('scripts_adicionais')
+
+    <script type="text/javascript">
+        $('#exemplo').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    </script>
 
 @endsection
