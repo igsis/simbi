@@ -152,3 +152,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Adicionar Ocorrência -->
+    <div class="modal fade" id="addOcorrencia" role="dialog"  aria-labelledby="addOcorrencia" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">Adicionar Ocorrência</h4>
+        </div>
+        <div class="modal-body">
+            <form method="POST" id="addOcorrencia" action="{{route('equipamento.ocorrencia')}}">
+              {{csrf_field()}}                    
+                <div class="form-group">
+                    <input type="date" class="form-control"  name="data" >
+                </div>
+                <div class="form-group">                    
+                    <input type="text" class="form-control"  name="ocorrencia" placeholder="Ocorrencia">                    
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control"  name="observacaoOcorrencia" placeholder="Observação da Ocorrência">
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <input type="submit" class="btn btn-success"  value="Adicionar">
+      </div>
+  </form>
+</div>
+</div>
+</div>
+

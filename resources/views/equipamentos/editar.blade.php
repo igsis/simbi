@@ -206,7 +206,7 @@
                 </div>
             </div>
 
-            <div style="text-align: center;"><h2>Horario de Funcionamento</h2></div>
+            <div style="text-align: center;"><h2>Horário de Funcionamento</h2></div>
             @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
                 <div class="horario">
                     <div class="row">
@@ -300,9 +300,14 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-4">
                     <label for="observacao">Observação</label>
                     <input type="text" class="form-control" name="observacao" id="observacao" value="{{ $equipamento->observacao }}" placeholder disabled>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="ocorrencia">Ocorrência</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                 </div>
             </div>
 
@@ -314,6 +319,7 @@
             </div>
         </form>
         @include('layouts.equipamento_modal')
+        @include('scripts.cadastrar_ocorrencia')
     </div>
 @endsection
 @section('scripts_adicionais')

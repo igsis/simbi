@@ -24,6 +24,7 @@ use Simbi\Models\Macrorregiao;
 use Simbi\Models\Regiao;
 use Simbi\Models\Regional;
 use Simbi\Models\Status;
+use Simbi\Models\EquipamentoOcorrencia;
 
 class EquipamentoController extends Controller
 {
@@ -476,6 +477,11 @@ class EquipamentoController extends Controller
         $equipamentos = $equipamento->search($dataForm)->orderBy('nome')->paginate(10);
 
         return view('equipamentos.index', compact('dataForm', 'equipamentos', 'siglas', 'type'));
+    }
+
+    public function equipamentoOcorrencia(Request $request)
+    {
+       dd($request->all());
     }
 
 }

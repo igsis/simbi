@@ -52,6 +52,9 @@ Route::group(['middleware' => 'auth'], function (){
 
         Route::post('equipamentos/{equipamento}/reforma', 'EquipamentoController@gravaReforma')->name('equipamentos.gravaReforma');
 
+        Route::post('equipamentos/ocorrencia', 'EquipamentoController@equipamentoOcorrencia')->name('equipamento.ocorrencia');
+        
+
 
         # Gerenciar Selects
 		Route::group(['prefix' => 'gerenciar'], function(){
