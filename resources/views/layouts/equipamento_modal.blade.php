@@ -163,7 +163,8 @@
         </div>
         <div class="modal-body">
             <form method="POST" id="addOcorrencia" action="{{route('equipamento.ocorrencia')}}">
-              {{csrf_field()}}                    
+              {{csrf_field()}}    
+              <input type="hidden" class="form-control"  name="idEquipamento">                
                 <div class="form-group">
                     <input type="date" class="form-control"  name="data" >
                 </div>
@@ -171,7 +172,7 @@
                     <input type="text" class="form-control"  name="ocorrencia" placeholder="Ocorrencia">                    
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control"  name="observacaoOcorrencia" placeholder="Observação da Ocorrência">
+                    <input type="text" class="form-control"  name="observacao" placeholder="Observação da Ocorrência">
                 </div>
         </div>
         <div class="modal-footer">

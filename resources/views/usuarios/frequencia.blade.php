@@ -1,16 +1,6 @@
 @extends('layouts.master')
 
-
-@section('scripts_css')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet">
-    <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}"></script>
-@endsection
-
 @section('conteudo')
-
-
 
     <div class="col-lg-6 col-lg-offset-3">
         <h1><i class="glyphicon glyphicon-user"></i>Frequência de Usuário</h1>
@@ -18,79 +8,63 @@
 
         <form method="POST" action="">
             {{ csrf_field() }}
-            <label for="name">Data</label>
-            <div class="input-group date" data-provide="datepicker">                
-                <input type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
+
+            <div class="form-group ">
+                <label for="evento">Evento</label>
+                <input class="form-control" type="text" name="evento">
+            </div>
+
+            <div class="form-group ">
+                <label for="email">Data</label>
+                <input class="form-control" type="date" name="data">
             </div>
 
             <div class="form-group ">
                 <label for="login">Hora</label>
-                <input class="form-control" type="number" name="login" id="login" maxlength="7">
+                <input class="form-control" type="text" data-mask="00:00" name="hora" id="hora">
             </div>
 
             <div class="form-group ">
                 <label for="email">Criança</label>
-                <input class="form-control" type="number" name="crianca">
+                <input class="form-control" type="number" id="crianca" name="crianca">
             </div>
 
             <div class="form-group ">
                 <label for="jovem">Jovem</label>
-                <input class="form-control" type="number" name="jovem" >
+                <input class="form-control" type="number" id="jovem" name="jovem" >
             </div>
 
             <div class="form-group ">
                 <label for="adulto">Adulto</label>
-                <input class="form-control" type="number" name="adulto" >
+                <input class="form-control" type="number" id="adulto" name="adulto" >
             </div>
         
             <div class="form-group ">
                 <label for="idoso">Idoso</label>
-                <input class="form-control" type="number" name="idoso" >
+                <input class="form-control" type="number" id="idoso" name="idoso" >
             </div>
 
             <div class="form-group ">
                 <label for="total">Total</label>
-                <input class="form-control" type="number"  >
+                <input class="form-control" id="total" type="number" disabled>
+            </div>
+
+            <div class="form-group ">
+                <label for="total">Observação</label>
+                <input class="form-control" type="text" name="observacao">
             </div>
 
             <input class="btn btn-success" type="submit" value="Cadastrar">
         </form>
 
-        <div class="row">
-            <div class='col-sm-6'>
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker1').datetimepicker();
-                });
-            </script>
-        </div>
     </div>
-
-    </div>
-
-
-
 
 @endsection
 
 @section('scripts_adicionais')
-
     <script type="text/javascript">
-        $('#exemplo').datepicker({
-            format: 'dd/mm/yyyy'
-        });
+        
+
     </script>
 
 @endsection

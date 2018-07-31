@@ -1,13 +1,20 @@
 <script type="text/javascript">
 
+
+    $('#addOcorrencia').on('show.bs.modal', function (e)
+    {
+        let idEquipamento = $(e.relatedTarget).attr('data-id');
+        $(this).find('form input[name="idEquipamento"]').attr('value', idEquipamento);
+    });
+
    
     $('#addOcorrencia').submit(function(e) {
         e.preventDefault();
         let _token = $('#addOcorrencia input[name="_token"]').val();
         let data = $('#addOcorrencia input[name="data"]').val();
         let ocorrencia = $('#addOcorrencia input[name="ocorrencia"]').val();
-        let observacaoOcorrencia = $('#addOcorrencia input[name="observacaoOcorrencia"]').val();
-        let idEquipamento = $(e.relatedTarget).attr('data-id');
+        let observacao = $('#addOcorrencia input[name="observacao"]').val();
+        let idEquipamento = $('#addOcorrencia input[name="idEquipamento"]').val();
         $.ajax({
             url: '{{route('equipamento.ocorrencia')}}',
             type: 'POST',
@@ -15,27 +22,27 @@
                 '_token':               _token, 
                 'data':                 data, 
                 'ocorrencia':           ocorrencia, 
-                'observacaoOcorrencia': observacaoOcorrencia, 
+                'observacao': observacao, 
                 'idEquipamento':        idEquipamento
             },
             success: function(data) {
-                $("#tipoServicoblaaaaaaaaaa option").remove();
+                
                 $("#sucesso").removeAttr("hidden");
                 $("#sucesso").removeClass("alert-danger");
                 $("#sucesso").addClass( "alert-success");
-                $("#sucesso em").html("Tipo de serviço inserido com sucesso!");
-                $("#tipoServicoblaaaaaaaaaa").append(`<option value=''>Selecione uma Opção</option>`);
+                $("#sucesso em").html("Ocorrência inserida com sucesso!");
+                
                 $('#addOcorrencia').modal('hide');
-                $("#tipoServicoblaaaaaaaaaa").focus();
-                for(let item of data ){
-                    $("#tipoServicoblaaaaaaaaaa").append(`<option value='${item.id}'>${item.descricao}<otion>`);
+
+                for(let i in data ){
+                    console.log(data[i]);
                 }
             },
-            error: function() {
+            error: function(request, status, erro) {
                 $("#sucesso").removeAttr("hidden");
                 $("#sucesso").removeClass("alert-success");
                 $("#sucesso").addClass( "alert-danger");
-                $("#sucesso em").html(`Erro ao cadastrar Tipo de serviço! Verifique se o campo já foi cadastrado!`);
+                $("#sucesso em").html(`${request}, ${status}, ${erro}`);
                 $('#addOcorrencia').modal('hide');
             }
         });

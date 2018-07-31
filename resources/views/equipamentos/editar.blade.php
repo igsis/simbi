@@ -319,11 +319,12 @@
             </div>
         </form>
         @include('layouts.equipamento_modal')
-        @include('scripts.cadastrar_ocorrencia')
+
     </div>
 @endsection
 @section('scripts_adicionais')
 @section('scripts_adicionais')
+    @include('scripts.cadastrar_ocorrencia')
     <script type="text/javascript">
 
         $('#addServico').submit(function(e) {

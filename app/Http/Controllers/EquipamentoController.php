@@ -481,7 +481,28 @@ class EquipamentoController extends Controller
 
     public function equipamentoOcorrencia(Request $request)
     {
-       dd($request->all());
+       
+       $equipamento = Equipamento::findOrFail($request->idEquipamento);
+
+       $data = $this->validate($request, 
+                    [
+                        'data'=> 'required',
+                        'ocorrencia'=>'required',
+                        'observacao'=>'required'
+
+                    ]);
+        
+        EquipamentoOcorrencia::create([
+            'equipamento_id' => $request->idEquipamento,
+            'data' => $request->data,
+            'ocorrencia' => $request->ocorrencia,
+            'observacao' => $request->observacao
+        ]);
+
+       
+
+       return response()->json($request->all());
+
     }
 
 }

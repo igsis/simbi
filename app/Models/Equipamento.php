@@ -86,6 +86,11 @@ class Equipamento extends Model
         return $this->hasOne(EquipamentoArea::class);
     }
 
+    public function ocorrencia()
+    {
+        return $this->hasMany(EquipamentoOcorrencia::class);
+    }
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
