@@ -48,6 +48,18 @@ Route::group(['middleware' => 'auth'], function (){
 
         Route::post('equipamentos/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 
+        Route::get('equipamentos/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
+
+        Route::post('equipamentos/{equipamento}/acessibilidade', 'EquipamentoController@gravaAcessibilidade')->name('equipamentos.gravaAcessibilidade');
+
+        Route::get('equipamentos/{equipamento}/capacidade', 'EquipamentoController@criaCapacidade')->name('equipamentos.criaCapacidade');
+
+        Route::post('equipamentos/{equipamento}/capacidade', 'EquipamentoController@gravaCapacidade')->name('equipamentos.gravaCapacidade');
+
+        Route::get('equipamentos/{equipamento}/area', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
+
+        Route::post('equipamentos/{equipamento}/area', 'EquipamentoController@gravaArea')->name('equipamentos.gravaArea');
+
         Route::get('equipamentos/{equipamento}/reforma', 'EquipamentoController@criaReforma')->name('equipamentos.criaReforma');
 
         Route::post('equipamentos/{equipamento}/reforma', 'EquipamentoController@gravaReforma')->name('equipamentos.gravaReforma');

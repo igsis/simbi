@@ -430,6 +430,46 @@ class EquipamentoController extends Controller
         return view('equipamentos.detalhestecnicos', compact('equipamento'));
     }
 
+    public function criaAcessibilidade($id)
+    {
+        $equipamento = Equipamento::find($id);
+
+
+        $arquitetonicas = AcessibilidadeArquitetonica::all();
+
+        return view('equipamentos.acessibilidade', compact(
+            'equipamento',
+            'arquitetonicas'
+        ));
+    }
+
+    public function gravaAcessibilidade(Request $request, $id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.detalhestecnicos', compact('equipamento'));
+    }
+
+    public function criaCapacidade($id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        $pracaClassificacoes = PracaClassificacao::all();
+
+        return view('equipamentos.capacidade', compact(
+            'equipamento',
+            'pracaClassificacoes'
+        ));
+    }
+
+    public function gravaCapacidade(Request $request, $id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.capacidade', compact('equipamento'));
+    }
+
+
     public function criaReforma($id)
     {
         $equipamento = Equipamento::find($id);

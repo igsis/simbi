@@ -5,61 +5,16 @@
     <div class="container">
         <div class="centralizado">
             <h2>
-                Detalhes Técnicos<br>
+                Capacidades<br>
                 <small>{{$equipamento->nome}}</small>
             </h2>
+            <hr>
         </div>
 
         <hr>
 
         <form method="POST" action="{{ route('equipamentos.gravaDetalhes', $equipamento->id) }}">
             {{ csrf_field() }}
-
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label for="contratoUso">Contrato de Uso</label>
-                    <select class="form-control" name="contratoUso" id="contratoUso">
-                        <option value="">Selecione...</option>
-                        @foreach($contratos as $contrato)
-                            <option value="{{$contrato->id}}">{{$contrato->contrato_uso}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="utilizacao">Utilização</label>
-                    <select class="form-control" name="utilizacao" id="utilizacao">
-                        <option value="">Selecione...</option>
-                        @foreach($utilizacoes as $utilizacao)
-                            <option value="{{$utilizacao->id}}">{{$utilizacao->utilizacao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="porte">Porte</label>
-                    <select class="form-control" name="porte" id="porte">
-                        <option value="">Selecione...</option>
-                        @foreach($portes as $porte)
-                            <option value="{{$porte->id}}">{{$porte->utilizacao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="padrao">Padrão</label>
-                    <select class="form-control" name="padrao" id="padrao">
-                        <option value="">Selecione...</option>
-                        @foreach($padroes as $padrao)
-                            <option value="{{$padrao->id}}">{{$padrao->padrao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="centralizado">
-                <h2>
-                    Capacidades
-                </h2>
-                <hr>
-            </div>
 
             <div class="row">
                 <div class="form-group col-md-2 centralizado">
@@ -291,53 +246,19 @@
                         </label>
                     @endif
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="qtdVagasPublico">Capacidade do Estacionamento</label>
-                    <input type="text" class="form-control" name="qtdVagasPublico" id="qtdVagasPublico"  value="{{old('qtdVagasPublico')}}" disabled>
-                </div>
-            </div>
-
-            <div class="centralizado">
-                <h2>
-                    Áreas
-                </h2>
-                <hr>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-2">
-                    <label for="areaInterna">Área Interna</label>
-                    <input type="text" class="form-control" name="areaInterna" id="areaInterna"  value="{{old('areaInterna')}}">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="areaAuditorio">Área do Auditório</label>
-                    <input type="text" class="form-control" name="areaAuditorio" id="areaAuditorio"  value="{{old('areaAuditorio')}}">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="areaTeatro">Área do Teatro</label>
-                    <input type="text" class="form-control" name="areaTeatro" id="areaTeatro"  value="{{old('areaTeatro')}}">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="areaTotalConstruida">Área Total Construída</label>
-                    <input type="text" class="form-control" name="areaTotalConstruida" id="areaTotalConstruida"  value="{{old('areaTotalConstruida')}}">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="areaTotalConstruida">Área Total Construída</label>
-                    <input type="text" class="form-control" name="areaTotalConstruida" id="areaTotalConstruida"  value="{{old('areaTotalConstruida')}}">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="areaTotalTerreno">Área Total do Terreno</label>
-                    <input type="text" class="form-control" name="areaTotalTerreno" id="areaTotalTerreno"  value="{{old('areaTotalTerreno')}}">
-                </div>
-            </div>
-            <div class="row">
-                <hr>
                 <div class="form-group col-md-offset-4 col-md-2">
                     <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
                         Retornar à Detalhes
                     </a>
                 </div>
                 <div class="form-group col-md-2">
+                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
+                </div>
+            </div>
+
+            <div class="row">
+                <hr>
+                <div class="form-group col-md-offset-5 col-md-2">
                     <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
                 </div>
             </div>
