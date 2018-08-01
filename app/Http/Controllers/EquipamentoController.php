@@ -265,8 +265,7 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id)->with('ocorrencias')->get();
         $equipamento = $equipamento[0];
-        // dd($equipamento);
-        // $equipamento = Equipamento::where('id', $id);
+
         return view('equipamentos.show', compact('equipamento'));       
     }
 
@@ -494,8 +493,11 @@ class EquipamentoController extends Controller
                         'observacao'=>'required'
 
                     ]);
+       
+       $user = auth()->user();
 
        $ok = $equipamento->ocorrencias()->create([
+            'user_id' => $user,
             'data' => $request->data,
             'ocorrencia' => $request->ocorrencia,
             'observacao' => $request->observacao

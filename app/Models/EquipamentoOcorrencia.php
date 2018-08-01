@@ -10,6 +10,7 @@ class EquipamentoOcorrencia extends Model
 	public $timestamps = false;
 
     protected $fillable = [
+        'user_id',
     	'equipamento_id',
     	'data',
     	'ocorrencia',

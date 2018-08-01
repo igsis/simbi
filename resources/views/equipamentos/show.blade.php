@@ -108,7 +108,8 @@
                                 <th width="30%">Status:</th>
                                 <td>{{$equipamento->status->descricao}}</td>
                             </tr>
-
+                            
+                            @foreach ($equipamento->ocorrencias as $ocorrencia)
                             <tr>
                                 <th colspan="2" class="text-center list-group-item-success">Ocorrências</th>
                             </tr>
@@ -116,15 +117,16 @@
                             <tr>
                                 <td colspan="4">
                                 
-                                    @foreach ($equipamento->ocorrencias as $ocorrencia)
+                                    
                                         <div class="list-group-item">                                            
                                             <strong>{{$ocorrencia->data}}</strong><br>
                                             <label>Ocorrência: </label> {{$ocorrencia->ocorrencia}}<br>
                                             <label>Observação: </label> {{$ocorrencia->observacao}}                                   
                                         </div>                                        
-                                    @endforeach         
+                                            
                                 </td>
                             </tr>
+                            @endforeach 
 
 
                             <tr>
