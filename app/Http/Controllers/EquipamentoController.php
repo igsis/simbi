@@ -263,8 +263,11 @@ class EquipamentoController extends Controller
      */
     public function show($id)
     {
-        $equipamento = Equipamento::findOrFail($id);
-        return view('equipamentos.show', compact('equipamento'));
+        $equipamento = Equipamento::findOrFail($id)->with('ocorrencias')->get();
+        $equipamento = $equipamento[0];
+        // dd($equipamento);
+        // $equipamento = Equipamento::where('id', $id);
+        return view('equipamentos.show', compact('equipamento'));       
     }
 
     /**
@@ -491,17 +494,14 @@ class EquipamentoController extends Controller
                         'observacao'=>'required'
 
                     ]);
-        
-        EquipamentoOcorrencia::create([
-            'equipamento_id' => $request->idEquipamento,
+
+       $ok = $equipamento->ocorrencias()->create([
             'data' => $request->data,
             'ocorrencia' => $request->ocorrencia,
             'observacao' => $request->observacao
         ]);
 
-       
-
-       return response()->json($request->all());
+       return response()->json($ok);
 
     }
 

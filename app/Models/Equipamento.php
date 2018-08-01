@@ -86,7 +86,7 @@ class Equipamento extends Model
         return $this->hasOne(EquipamentoArea::class);
     }
 
-    public function ocorrencia()
+    public function ocorrencias()
     {
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
