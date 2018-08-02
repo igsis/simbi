@@ -45,7 +45,7 @@
             @hasanyrole('Coordenador|Administrador')
                 <a href="#gerenciar" data-toggle="collapse" aria-expanded="false">
                     <i class="glyphicon glyphicon-cog"></i>
-                    Gerenciar Selects
+                    Gerenciar 
                 </a>
                 <ul class="collapse list-unstyled" id="gerenciar">
                     <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>

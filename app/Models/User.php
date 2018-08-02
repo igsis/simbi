@@ -65,6 +65,10 @@ https://goo.gl/BcqZQr*/
         return $this->hasManyThrough(Frequencia::class, Evento::class);
     }
 
+    public function ocorrencia()
+    {
+        return $this->hasMany(EquipamentoOcorrencia::class);
+    }
 
 
     public function search(Array $data)

@@ -25,6 +25,8 @@ use Simbi\Models\Regiao;
 use Simbi\Models\Regional;
 use Simbi\Models\Status;
 use Simbi\Models\EquipamentoOcorrencia;
+use Auth;
+
 
 class EquipamentoController extends Controller
 {
@@ -534,7 +536,8 @@ class EquipamentoController extends Controller
 
                     ]);
        
-       $user = auth()->user();
+       $user =  Auth::user()->id;
+       
 
        $ok = $equipamento->ocorrencias()->create([
             'user_id' => $user,

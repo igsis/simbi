@@ -22,4 +22,10 @@ class EquipamentoOcorrencia extends Model
     {
         return $this->belongsTo(Equipamento::class);
     }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
