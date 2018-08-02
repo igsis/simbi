@@ -271,11 +271,46 @@ class UserController extends Controller
                 'Equipamentos Vinculados com sucesso.');
     }
 
-    public function hasManyThrough(Frequencia $frequencia)
+    public function frequencia()
+    {
+        $equipamentos = Equipamento::orderBy('nome')->get();        
+
+        return view('usuarios.frequencia', compact('equipamentos'));
+    }
+
+    
+    public function createFrequencia(Request $request)
     {
         // dd($frequencia->all());
 
-        return view('usuarios.frequencia');
+
+
+        $this->validate($request, [
+            'equipamento'   => 'required',
+            'data'          =>  'required',
+            'hora'          =>  'required'
+        ]);
+
+        $user =  Auth::user();
+
+        // dd($request->equipamento);
+
+        $user->frequencias()->create([
+            'evento_id' => $request->evento,
+            'data' => $request->data,
+            'hora' => $request->hora,
+            'crianca' => $request->crianca,
+            'jovem' => $request->jovem,
+            'adulto' => $request->adulto,
+            'idoso' => $request->idoso,
+            'total' => $request->total,
+            'observacao' => $request->observacao,
+            'user_id' => $user->id, 
+            'equipamento_id' => $request->equipamento
+        ]);
+
+        return redirect()->back()->with('flash_message',
+            'Frequência Inserida Com Sucesso!');
     }
 
 }

@@ -62,7 +62,9 @@ https://goo.gl/BcqZQr*/
 
     public function frequencias()
     {
-        return $this->hasManyThrough(Frequencia::class, Evento::class);
+        // return $this->hasManyThrough(Frequencia::class, Evento::class);
+
+        return $this->hasMany(Frequencia::class);
     }
 
     public function ocorrencia()

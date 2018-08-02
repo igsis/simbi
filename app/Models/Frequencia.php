@@ -8,7 +8,10 @@ class Frequencia extends Model
 {
     protected $table = 'frequencia';
 
+    public $timestamps = false;
+
     protected $fillable = [
+        'evento_id',
         'data',
         'hora',
         'crianca',
@@ -16,7 +19,9 @@ class Frequencia extends Model
         'adulto',
         'idoso',
         'total',
-        'observacao'
+        'observacao',
+        'user_id',
+        'equipamento_id'
     ];
 
     public function user()

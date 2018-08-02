@@ -6,52 +6,66 @@
         <h1><i class="glyphicon glyphicon-user"></i>Frequência de Usuário</h1>
         <hr>
 
-        <form method="POST" action="">
+        <form method="POST" action="{{route('createFrequencia')}}">
             {{ csrf_field() }}
 
             <div class="form-group ">
                 <label for="evento">Evento</label>
-                <input class="form-control" type="text" name="evento">
+                <input class="form-control" type="number" name="evento" value="{{old('evento')}}">
             </div>
 
             <div class="form-group ">
                 <label for="email">Data</label>
-                <input class="form-control" type="date" name="data">
+                <input class="form-control" type="date" name="data" value="{{old('data')}}">
             </div>
 
             <div class="form-group ">
                 <label for="login">Hora</label>
-                <input class="form-control" type="text" data-mask="00:00" name="hora" id="hora">
+                <input class="form-control" type="text" data-mask="00:00" name="hora" id="hora" value="{{old('hora')}}">
             </div>
 
             <div class="form-group ">
                 <label for="email">Criança</label>
-                <input class="form-control" type="number" id="crianca" name="crianca">
+                <input class="form-control" type="number" id="crianca" name="crianca" value="{{old('crianca')}}">
             </div>
 
             <div class="form-group ">
                 <label for="jovem">Jovem</label>
-                <input class="form-control" type="number" id="jovem" name="jovem" >
+                <input class="form-control" type="number" id="jovem" name="jovem" value="{{old('jovem')}}">
             </div>
 
             <div class="form-group ">
                 <label for="adulto">Adulto</label>
-                <input class="form-control" type="number" id="adulto" name="adulto" >
+                <input class="form-control" type="number" id="adulto" name="adulto" value="{{old('adulto')}}">
             </div>
         
             <div class="form-group ">
                 <label for="idoso">Idoso</label>
-                <input class="form-control" type="number" id="idoso" name="idoso" >
+                <input class="form-control" type="number" id="idoso" name="idoso" value="{{old('idoso')}}">
             </div>
 
             <div class="form-group ">
                 <label for="total">Total</label>
-                <input class="form-control" id="total" type="number" disabled>
+                <input class="form-control" id="total" type="number" name="total" value="{{old('total')}}">
             </div>
 
             <div class="form-group ">
                 <label for="total">Observação</label>
-                <input class="form-control" type="text" name="observacao">
+                <input class="form-control" type="text" name="observacao" value="{{old('observacao')}}">
+            </div>
+
+            <div class="form-group ">
+                <label for="total">Equipamento</label>
+                <select class="form-control" name="equipamento" id="equipamento">
+                    <option value="">Selecione</option>
+                    @foreach ($equipamentos as $equipamento)
+                        @if ($equipamento->id == old('equipamento'))
+                            <option value="{{$equipamento->id}}" selected>{{$equipamento->nome}}</option>
+                        @else
+                            <option value="{{$equipamento->id}}">{{$equipamento->nome}}</option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
 
             <input class="btn btn-success" type="submit" value="Cadastrar">
