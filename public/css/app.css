@@ -174,3 +174,7 @@ a.article, a.article:hover {
 .centralizado {
     text-align: center;
 }
+
+.botao-margem{
+    margin: 10px 0 10px 0;
+}

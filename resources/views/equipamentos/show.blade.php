@@ -17,7 +17,6 @@
                     <div class="row">
                         <div class="col text-right">
                             @hasanyrole('Coordenador|Administrador')
-                                <a href="{{ route('equipamentos.criaReforma', $equipamento->id) }}" class="btn btn-success">Inserir Reforma</a>
                                 @hasrole('Administrador')
                                     <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
                                     <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Editar Detalhes Técnicos</a>
@@ -42,7 +41,7 @@
                                     <a href="#dados-endereco" data-toggle="tab">Dados do Endereço</a>
                                 </li>
                                 <li>
-                                    <a href="#reformas" data-toogle="tab">Reformas</a>
+                                    <a href="#reformas" data-toggle="tab">Reformas</a>
                                 </li>
 
                                 <!--DROPMENU-->
@@ -51,11 +50,11 @@
                                         Dados do Edifício <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Detalhes Tecnicos</a></li>
+                                        <li><a href="#detalhes-tecnicos" data-toggle="tab">Detalhes Técnicos</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#">Capacidade</a></li>
+                                        <li><a href="#capacidade" data-toggle="tab">Capacidade</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#">Área (m²)</a></li>
+                                        <li><a href="#area" data-toggle="tab">Área (m²)</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -233,6 +232,68 @@
                                 </tbody>
                             </table>                      
                         </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="reformas">
+                            <!--Label Reformas-->
+                            <div class="col text-center botao-margem">
+                                @hasanyrole('Coordenador|Administrador')
+                                    <a href="{{ route('equipamentos.criaReforma', $equipamento->id) }}" class="btn btn-success">Inserir Reforma</a>
+                                @endhasanyrole 
+                            </div>
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" class="text-center">Reformas</th>
+                                    </tr>
+                                    @foreach ($equipamento->reformas as $reforma)
+                                        <tr>
+                                            <th width="30%">Inicio da Reforma:</th>
+
+                                            <td>{{ date('d/m/Y', strtotime($reforma->inicio_reforma)) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th width="30%">Fim da Reforma:</th>
+                                            <td>{{ date('d/m/Y', strtotime($reforma->termino_reforma)) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Descrição da Reforma:</th>
+                                            <td>{{$reforma->descricao}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="detalhes-tecnicos">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" class="text-center">Detalhes Técnicos</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="capacidade">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" class="text-center">Capacidade</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade in" id="area">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th colspan="2" class="text-center">Área (m²)</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
