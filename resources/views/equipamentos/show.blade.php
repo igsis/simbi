@@ -194,12 +194,12 @@
                                         <td>{{$equipamento->endereco->estado}}</td>
                                     </tr>
                                     <tr>
-                                        <th width="30%">Subprefeitura:</th>
-                                        <td>{{--TODO: Adicionar relacionamento para Subprefeitura--}}</td>
+                                        <th width="30%">Prefeitura Regional:</th>
+                                        <td>{{$equipamento->endereco->prefeituraRegional->descricao}}</td>
                                     </tr>
                                     <tr>
                                         <th width="30%">Distrito:</th>
-                                        <td>{{--TODO: Adicionar relacionamento para Distrito--}}</td>
+                                        <td>{{$equipamento->endereco->distrito->descricao}}</td>
                                     </tr>
                                     <tr>
                                         <th width="30%">Macrorregião:</th>

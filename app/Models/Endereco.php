@@ -47,4 +47,14 @@ class Endereco extends Model
     {
         return $this->hasManyThrough(Funcionamento::class, Equipamento::class);
     }
+
+    public function prefeituraRegional()
+    {
+        return $this->belongsTo(PrefeituraRegional::class);
+    }
+
+    public function distrito()
+    {
+        return $this->belongsTo(Distrito::class);
+    }
 }
