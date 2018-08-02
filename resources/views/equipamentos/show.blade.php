@@ -41,6 +41,23 @@
                                 <li>
                                     <a href="#dados-endereco" data-toggle="tab">Dados do Endereço</a>
                                 </li>
+                                <li>
+                                    <a href="#reformas" data-toogle="tab">Reformas</a>
+                                </li>
+
+                                <!--DROPMENU-->
+                               <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Dados do Edifício <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Detalhes Tecnicos</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Capacidade</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Área (m²)</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -133,7 +150,7 @@
                             </table>
                         </div>
 
-                        <div role="tabpanel" class="tab-pane fade" id="ocorrencia">
+                        <div role="tabpanel" class="tab-pane fade in" id="ocorrencia">
 
                            <!--Label Ocorrencia-->
                            <table class="table table-bordered">
@@ -157,7 +174,7 @@
                             </table>
                         </div>
 
-                        <div role="tabpanel" class="tab-pane fade" id="dados-endereco">
+                        <div role="tabpanel" class="tab-pane fade in" id="dados-endereco">
                             <!--Label Dados Endereço-->
                             <table class="table table-bordered">
                                 <tbody>
