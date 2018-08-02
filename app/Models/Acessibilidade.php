@@ -8,6 +8,16 @@ class Acessibilidade extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'acessibilidade_arquitetonica_id',
+        'banheiros_adaptados',
+        'rampas_acesso',
+        'elevador',
+        'piso_tatil',
+        'estacionamento_acessivel',
+        'quantidade_vagas'
+    ];
+
     public function detalhes()
     {
         return $this->hasMany(EquipamentoDetalhe::class);

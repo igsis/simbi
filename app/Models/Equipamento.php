@@ -4,7 +4,8 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/*TODO: Incluir ocorrencia dos equipamentos (nota) na view "equipamentos.editar"*/
+/*TODO: Criar Model "Legislacao"*/
+
 class Equipamento extends Model
 {
 	public $timestamps = false;

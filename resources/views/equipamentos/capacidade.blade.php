@@ -5,15 +5,13 @@
     <div class="container">
         <div class="centralizado">
             <h2>
-                Capacidades<br>
+                Detalhes de Capacidades<br>
                 <small>{{$equipamento->nome}}</small>
             </h2>
             <hr>
         </div>
 
-        <hr>
-
-        <form method="POST" action="{{ route('equipamentos.gravaDetalhes', $equipamento->id) }}">
+        <form method="POST" action="{{ route('equipamentos.gravaCapacidade', $equipamento->id) }}">
             {{ csrf_field() }}
 
             <div class="row">
@@ -246,19 +244,15 @@
                         </label>
                     @endif
                 </div>
+            </div>
+            <div class="row">
+                <hr>
                 <div class="form-group col-md-offset-4 col-md-2">
                     <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
                         Retornar à Detalhes
                     </a>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
-                </div>
-            </div>
-
-            <div class="row">
-                <hr>
-                <div class="form-group col-md-offset-5 col-md-2">
                     <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 use response;
 
+use Simbi\Models\Acessibilidade;
 use Simbi\Models\AcessibilidadeArquitetonica;
 use Simbi\Models\ContratoUso;
 use Simbi\Models\Distrito;
@@ -429,7 +430,43 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::find($id);
 
-        return view('equipamentos.detalhestecnicos', compact('equipamento'));
+        $detalhes = $this->validate($request, [
+            'contratoUso' => 'required',
+            'utilizacao' => 'required',
+            'porte' => 'required',
+            'padrao' => 'required',
+            'pavimento' => 'required|numeric',
+            'validade' => 'date'
+        ]);
+
+        $this->validate($request, [
+            'acessibilidadeArquitetonica' => 'required',
+            'qtdVagasAcessiveis' => 'nullable'
+        ]);
+
+        $acessibilidade = new Acessibilidade();
+
+        $acessibilidade_id = $acessibilidade->create([
+            'acessibilidade_arquitetonica_id' => $request->acessibilidadeArquitetonica,
+            'banheiros_adaptados' => $request->banheiros,
+            'rampas_acesso' => $request->rampas,
+            'elevador' => $request->elevador,
+            'piso_tatil' => $request->pisoTatil,
+            'estacionamento_acessivel' => $request->estacionamentoAcessivel,
+            'quantidade_vagas' => $request->qtdVagasAcessiveis
+        ]);
+
+        $equipamento->detalhe()->create([
+            'contrato_uso_id' => $request->contratoUso,
+            'equipamento_utilizacao_id' => $request->utilizacao,
+            'equipamento_porte_id' => $request->porte,
+            'equipamento_padrao_id' => $request->padrao,
+            'pavimento' => $request->pavimento,
+            'acessibilidade_id' => $acessibilidade_id->id,
+            'validade_avcb' => $request->validade
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhes Técnicos cadastrado com sucesso');
     }
 
     public function criaAcessibilidade($id)
@@ -471,6 +508,19 @@ class EquipamentoController extends Controller
         return view('equipamentos.capacidade', compact('equipamento'));
     }
 
+    public function criaArea($id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.area', compact('equipamento'));
+    }
+
+    public function gravaArea(Request $request, $id)
+    {
+        $equipamento = Equipamento::find($id);
+
+        return view('equipamentos.capacidade', compact('equipamento'));
+    }
 
     public function criaReforma($id)
     {

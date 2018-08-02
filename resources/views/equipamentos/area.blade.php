@@ -11,9 +11,7 @@
             <hr>
         </div>
 
-        <hr>
-
-        <form method="POST" action="{{ route('equipamentos.gravaDetalhes', $equipamento->id) }}">
+        <form method="POST" action="{{ route('equipamentos.gravaArea', $equipamento->id) }}">
             {{ csrf_field() }}
 
             <div class="row">
@@ -44,7 +42,12 @@
             </div>
             <div class="row">
                 <hr>
-                <div class="form-group col-md-offset-5 col-md-2">
+                <div class="form-group col-md-offset-4 col-md-2">
+                    <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
+                        Retornar à Detalhes
+                    </a>
+                </div>
+                <div class="form-group col-md-2">
                     <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
                 </div>
             </div>

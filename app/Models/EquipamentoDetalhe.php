@@ -8,6 +8,16 @@ class EquipamentoDetalhe extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'contrato_uso_id',
+        'equipamento_utilizacao_id',
+        'equipamento_porte_id',
+        'equipamento_padrao_id',
+        'pavimento',
+        'acessibilidade_id',
+        'validade_avcb'
+    ];
+
     public function equipamento()
     {
         return $this->belongsTo(Equipamento::class);
