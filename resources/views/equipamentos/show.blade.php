@@ -161,7 +161,7 @@
                                         <td colspan="4">
                                             @foreach ($equipamento->ocorrencias as $ocorrencia)                                            
                                             <div class="list-group-item">                                            
-                                                <strong>{{$ocorrencia->data}}</strong><br>
+                                                <strong>{{ date('d/m/Y', strtotime($ocorrencia->data)) }}</strong><br>
                                                 <label>Usuário: </label> {{$ocorrencia->user->name}}<br>                              
                                                 <label>Ocorrência: </label> {{$ocorrencia->ocorrencia}}<br>
                                                 <label>Observação: </label> {{$ocorrencia->observacao}}
