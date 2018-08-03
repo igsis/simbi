@@ -469,26 +469,6 @@ class EquipamentoController extends Controller
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhes Técnicos cadastrado com sucesso');
     }
 
-    public function criaAcessibilidade($id)
-    {
-        $equipamento = Equipamento::find($id);
-
-
-        $arquitetonicas = AcessibilidadeArquitetonica::all();
-
-        return view('equipamentos.acessibilidade', compact(
-            'equipamento',
-            'arquitetonicas'
-        ));
-    }
-
-    public function gravaAcessibilidade(Request $request, $id)
-    {
-        $equipamento = Equipamento::find($id);
-
-        return view('equipamentos.detalhestecnicos', compact('equipamento'));
-    }
-
     public function criaCapacidade($id)
     {
         $equipamento = Equipamento::find($id);
@@ -503,9 +483,22 @@ class EquipamentoController extends Controller
 
     public function gravaCapacidade(Request $request, $id)
     {
+        /*TODO: Utilizar findOrCreate para as tabelas adicionais*/
+
         $equipamento = Equipamento::find($id);
 
-        return view('equipamentos.capacidade', compact('equipamento'));
+        $equipamento->capacidade()->create([
+            'auditorio' => $request->auditorio,
+            'teatro' => $request->teatro,
+            'sala_multiuso' => $request->multiuso,
+            'sala_estudo_grupo' => $request->estudoGrupo,
+            'sala_estudo_individual' => $request->estudoIndividual,
+            'sala_infantil' => $request->infantil,
+            'estacionamento' => $request->estacionamentoPublico,
+            'praca' => $request->praca
+        ]);
+
+        return redirect();
     }
 
     public function criaArea($id)
@@ -519,7 +512,23 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::find($id);
 
-        return view('equipamentos.capacidade', compact('equipamento'));
+        $this->validate($request, [
+            'areaInterna' => 'required|numeric',
+            'areaTotalConstruida' => 'required|numeric',
+            'areaTotalTerreno' => 'required|numeric',
+            'areaAuditorio' => 'nullable|numeric',
+            'areaTeatro' => 'nullable|numeric'
+        ]);
+
+        $equipamento->area()->create([
+            'interna' => $request->areaInterna,
+            'auditorio' => $request->areaAuditorio,
+            'teatro' => $request->areaTeatro,
+            'total_construida' => $request->areaTotalConstruida,
+            'total_terreno' => $request->areaTotalTerreno
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área cadastrada com sucesso');
     }
 
     public function criaReforma($id)
