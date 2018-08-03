@@ -305,9 +305,15 @@
                     <input type="text" class="form-control" name="observacao" id="observacao" value="{{ $equipamento->observacao }}" placeholder disabled>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label for="ocorrencia">Adicionar Ocorrência</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                <div class="form-group col-md-3">
+                    <label for="ocorrencia">Adicionar Ocorrência</label>                    
+                    <button type="button" id="ocorrencia" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
+
+                <div class="form-group col-md-1 text-center">
+                    <label for="ocorrencia">Total</label>                    
+                    
+                    <p id="totalOcorrencia" class="text-info"><b></b></p>
                 </div>
             </div>
 

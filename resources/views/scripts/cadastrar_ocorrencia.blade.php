@@ -1,6 +1,28 @@
 <script type="text/javascript">
 
 
+    function quantidadeDeOcorrencias()
+    {
+         let id = $('#ocorrencia').attr('data-id');
+         $.ajax({
+            url: `{{route('ocorrencias.count', '')}}/${id}`,
+            type: 'GET',
+            data: {
+                '_token': '{{csrf_field()}}'
+            },
+            success: function(data) {
+                $('#totalOcorrencia b').html(data);
+            },
+            error: function(request, status, erro) {
+
+            }
+        });
+        
+    }
+
+    quantidadeDeOcorrencias()
+
+
     $('#addOcorrencia').on('show.bs.modal', function (e)
     {
         let idEquipamento = $(e.relatedTarget).attr('data-id');
@@ -33,10 +55,7 @@
                 $("#sucesso em").html("Ocorrência inserida com sucesso!");
                 
                 $('#addOcorrencia').modal('hide');
-
-                for(let i in data ){
-                    console.log(data[i]);
-                }
+                quantidadeDeOcorrencias();
             },
             error: function(request, status, erro) {
                 $("#sucesso").removeAttr("hidden");

@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function (){
 
         Route::post('equipamentos/ocorrencia', 'EquipamentoController@equipamentoOcorrencia')->name('equipamento.ocorrencia');
         
+        Route::get('equipamentos/ocorrencias/{equipamento}', 'EquipamentoController@countOcorrencias')->name('ocorrencias.count');   
 
 
         # Gerenciar Selects
