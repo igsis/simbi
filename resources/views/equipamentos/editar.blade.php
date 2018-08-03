@@ -306,7 +306,7 @@
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="ocorrencia">Ocorrência</label>
+                    <label for="ocorrencia">Adicionar Ocorrência</label>
                     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                 </div>
             </div>

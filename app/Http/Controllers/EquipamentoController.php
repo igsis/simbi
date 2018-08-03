@@ -600,4 +600,9 @@ class EquipamentoController extends Controller
 
     }
 
+    public function countOcorrencias($id)
+    {
+        $count = EquipamentoOcorrencia::where('equipamento_id',$id)->get()->count();
+    }
+
 }

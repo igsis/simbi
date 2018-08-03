@@ -9,7 +9,7 @@ INSERT INTO simbi.subordinacao_administrativas (id, descricao) VALUES
 (1, 'Teste Sub. Administrativa');
 
 INSERT INTO simbi.enderecos (id, cep, logradouro, numero, complemento, bairro, cidade, estado, prefeitura_regional_id, distrito_id, macrorregiao_id, regiao_id, regional_id) VALUES
-(1, '01302-000', 'Rua da Consolação', 94, null, 'Consolação', 'São Paulo', 'SP', null, null, 1, 5, 6),
+(1, '01302-000', 'Rua da Consolação', 94, null, 'Consolação', 'São Paulo', 'SP', 1, 1, 1, 5, 6),
 (2, '01223-011', 'Rua General Jardim', 485, null, 'Vila Buarque', 'São Paulo', 'SP', 29, 69, 1, 5, 6);
 
 INSERT INTO simbi.equipamentos (id, nome, tipo_servico_id, equipamento_sigla_id, secretaria_id, subordinacao_administrativa_id, tematico, nome_tematica, endereco_id, telefone, telecentro, acervo_especializado, nucleo_braile, status_id, publicado) VALUES
