@@ -266,8 +266,11 @@ class EquipamentoController extends Controller
      */
     public function show($id)
     {
-        $equipamento = Equipamento::findOrFail($id)->with('ocorrencias')->get();
-        $equipamento = $equipamento[0];
+        /*TODO: Há a necessidade desta linha?*/
+        /*$equipamento = Equipamento::findOrFail($id)->with('ocorrencias')->get();
+        $equipamento = $equipamento[0];*/
+
+        $equipamento = Equipamento::findOrFail($id);
 
         return view('equipamentos.show', compact('equipamento'));       
     }
