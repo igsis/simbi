@@ -3,10 +3,13 @@
 @section('conteudo')
 
     <div class="col-lg-6 col-lg-offset-3">
-        <h1><i class="glyphicon glyphicon-user"></i> Frequência</h1>
+        <h1>
+            <i class="glyphicon glyphicon-user"></i> Frequência
+            <small>{{$equipamento->nome}}</small>
+        </h1>
         <hr>
 
-        <form method="POST" action="{{route('createFrequencia')}}">
+        <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}">
             {{ csrf_field() }}
 
             <div class="form-group ">
@@ -64,20 +67,6 @@
             <div class="form-group ">
                 <label for="total">Observação</label>
                 <input class="form-control" type="text" name="observacao" value="{{old('observacao')}}">
-            </div>
-
-            <div class="form-group ">
-                <label for="total">Equipamento</label>
-                <select class="form-control" name="equipamento" id="equipamento">
-                    <option value="">Selecione</option>
-                    @foreach ($equipamentos as $equipamento)
-                        @if ($equipamento->id == old('equipamento'))
-                            <option value="{{$equipamento->id}}" selected>{{$equipamento->nome}}</option>
-                        @else
-                            <option value="{{$equipamento->id}}">{{$equipamento->nome}}</option>
-                        @endif
-                    @endforeach
-                </select>
             </div>
 
             <input class="btn btn-success" type="submit" value="Cadastrar">

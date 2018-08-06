@@ -28,4 +28,9 @@ class Frequencia extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function equipamento()
+    {
+        return $this->belongsTo(Equipamento::class);
+    }
 }

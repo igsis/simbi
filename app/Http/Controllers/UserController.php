@@ -271,11 +271,12 @@ class UserController extends Controller
                 'Equipamentos Vinculados com sucesso.');
     }
 
+    /*TODO: Retirar metodos de frequencia*/
     public function frequencia()
     {
         $equipamentos = Equipamento::orderBy('nome')->get();        
 
-        return view('usuarios.frequencia', compact('equipamentos'));
+        return view('frequencia.cadastro', compact('equipamentos'));
     }
 
     

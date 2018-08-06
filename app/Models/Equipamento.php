@@ -92,6 +92,11 @@ class Equipamento extends Model
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
 
+    public function frequencias()
+    {
+        return $this->hasMany(Frequencia::class);
+    }
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
