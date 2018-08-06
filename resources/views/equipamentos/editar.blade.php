@@ -206,7 +206,7 @@
                 </div>
             </div>
 
-            <div style="text-align: center;"><h2>Horário de Funcionamento</h2></div>
+            <div class="text-center" ><h2>Horário de Funcionamento</h2></div>
             @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
                 <div class="horario">
                     <div class="row">
