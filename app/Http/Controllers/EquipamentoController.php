@@ -544,6 +544,7 @@ class EquipamentoController extends Controller
     public function gravaReforma(Request $request, $id)
     {
         $equipamento = Equipamento::find($id);
+        $user =  Auth::user();
 
         $data = $this->validate($request, [
             'inicioReforma' => 'required',
@@ -552,6 +553,7 @@ class EquipamentoController extends Controller
         ]);
 
         $equipamento->reformas()->create([
+            'user_id' => $user->id,
             'inicio_reforma' => $request->inicioReforma,
             'termino_reforma' => $request->terminoReforma,
             'descricao' => $request->descricaoReforma
