@@ -4,7 +4,7 @@
 
     <div class="col-lg-6 col-lg-offset-3">
         <h1>
-            <i class="glyphicon glyphicon-user"></i> Frequência
+            <i class="glyphicon glyphicon-user"></i> Frequência de Eventos <br>
             <small>{{$equipamento->nome}}</small>
         </h1>
         <hr>
@@ -12,9 +12,15 @@
         <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}">
             {{ csrf_field() }}
 
+            {{--TODO: Alterar Evento para combobox--}}
             <div class="form-group ">
                 <label for="evento">Evento</label>
                 <input class="form-control" type="number" name="evento" value="{{old('evento')}}">
+            </div>
+
+            <div class="form-group ">
+                <label for="nomeEvento">Nome Evento</label>
+                <input class="form-control" type="text" name="nomeEvento" disabled>
             </div>
 
             <div class="row">
@@ -57,11 +63,6 @@
                         <input class="form-control" type="number" id="idoso" name="idoso" value="{{old('idoso')}}">
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group ">
-                <label for="total">Total</label>
-                <input class="form-control" id="total" type="number" name="total" placeholder="Total de Pessoas" value="{{old('total')}}">
             </div>
 
             <div class="form-group ">

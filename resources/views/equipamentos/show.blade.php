@@ -19,7 +19,6 @@
                             @hasanyrole('Coordenador|Administrador')
                                 @hasrole('Administrador')
                                     <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
-                                    <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Editar Detalhes Técnicos</a>
                                 @endhasrole
                             @endhasanyrole
                         </div>
@@ -259,7 +258,7 @@
                                                         <label>Inicio da Reforma: </label> {{ date('d/m/Y', strtotime($reforma->inicio_reforma)) }} <br>
                                                         <label>Fim da Reforma : </label> {{ date('d/m/Y', strtotime($reforma->termino_reforma)) }} <br>
                                                         <label>Descrição da Reforma</label> {{ $reforma->descricao }} <br>
-                                                        <label>Usuário: </label> {{--TODO: Adicionar usuario--}}
+                                                        {{--<label>Usuário: </label>--}} {{--TODO: Adicionar usuario--}}
                                                     </div>
                                                 @endforeach
                                             </td>
@@ -275,6 +274,11 @@
 
                         <div role="tabpanel" class="tab-pane fade in" id="detalhes-tecnicos">
                             <!--Label Detalhes Tecnicos-->
+                            <div class="col text-center botao-margem">
+                                @hasanyrole('Coordenador|Administrador')
+                                <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Inserir Detalhes Técnicos</a>
+                                @endhasanyrole
+                            </div>
                             <table class="table table-bordered">
                                 <tbody>
                                     @if (isset ($equipamento->detalhe))
@@ -388,6 +392,11 @@
 
                         <div role="tabpanel" class="tab-pane fade in" id="capacidade">
                             <!--Label Capacidade-->
+                            <div class="col text-center botao-margem">
+                                @hasanyrole('Coordenador|Administrador')
+                                <a href="{{ route('equipamentos.criaCapacidade', $equipamento->id) }}" class="btn btn-success">Inserir Capacidades</a>
+                                @endhasanyrole
+                            </div>
                             <table class="table table-bordered">
                                 <tbody>
                                     @if (isset($equipamento->capacidade))
@@ -405,6 +414,11 @@
 
                         <div role="tabpanel" class="tab-pane fade in" id="area">
                             <!--Label Area-->
+                            <div class="col text-center botao-margem">
+                                @hasanyrole('Coordenador|Administrador')
+                                <a href="{{ route('equipamentos.criaArea', $equipamento->id) }}" class="btn btn-success">Inserir Áreas</a>
+                                @endhasanyrole
+                            </div>
                             <table class="table table-bordered">
                                 <tbody>
                                     @if (isset($equipamento->area))
@@ -443,6 +457,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <hr>
+        <div class="form-group col-md-offset-4 col-md-4">
+            <a href="{{route('equipamentos.index', ['type' => '1'])}}" class="form-control btn btn-warning">
+                Retornar à Lista de Equipamentos
+            </a>
         </div>
     </div>
 

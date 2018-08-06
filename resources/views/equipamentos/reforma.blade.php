@@ -17,11 +17,11 @@
 
             <div class="row form-group">
                 <div class="col-md-offset-3 col-md-3">
-                    <label for="inicioReforma">Inicio da Reforma</label>
+                    <label for="inicioReforma">Início da Reforma</label>
                     <input class="form-control" type="date" name="inicioReforma" id="inicioReforma">
                 </div>
                 <div class="col-md-3">
-                    <label for="terminoReforma">Termino da Reforma</label>
+                    <label for="terminoReforma">Término da Reforma</label>
                     <input class="form-control" type="date" name="terminoReforma" id="terminoReforma">
                 </div>
             </div>

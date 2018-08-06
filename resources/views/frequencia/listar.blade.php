@@ -29,7 +29,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="4">
-                                                Total: {{$frequencia->crianca + $frequencia->jovem + $frequencia->adulto + $frequencia->idoso}}
+                                                Total: {{$frequencia->total}}
                                             </td>
                                         </tr>
                                         <tr>

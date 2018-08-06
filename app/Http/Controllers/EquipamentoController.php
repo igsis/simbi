@@ -546,8 +546,8 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::find($id);
 
         $data = $this->validate($request, [
-            'inicioReforma' => 'required|before:terminoReforma',
-            'terminoReforma' => 'required|after:inicioReforma',
+            'inicioReforma' => 'required',
+            'terminoReforma' => 'nullable|after:inicioReforma',
             'descricaoReforma' => 'required'
         ]);
 

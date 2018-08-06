@@ -42,10 +42,6 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
 
-		Route::get('frequencia', 'UserController@frequencia')->name('frequencia');
-
-		Route::post('frequencia', 'UserController@createFrequencia')->name('createFrequencia');
-
         Route::get('equipamentos/{equipamento}/detalhes', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
 
         Route::post('equipamentos/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');

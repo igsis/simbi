@@ -56,6 +56,8 @@ class FrequenciaController extends Controller
 
         // dd($request->equipamento);
 
+        $total = $request->crianca + $request->jovem + $request->adulto + $request->idoso;
+
         $user->frequencias()->create([
             'evento_id' => $request->evento,
             'data' => $request->data,
@@ -64,9 +66,8 @@ class FrequenciaController extends Controller
             'jovem' => $request->jovem,
             'adulto' => $request->adulto,
             'idoso' => $request->idoso,
-            'total' => $request->total,
+            'total' => $total,
             'observacao' => $request->observacao,
-            'user_id' => $user->id,
             'equipamento_id' => $id
         ]);
 
