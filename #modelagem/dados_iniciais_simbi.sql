@@ -242,7 +242,7 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 DELETE FROM `praca_classificacoes`;
 /*!40000 ALTER TABLE `praca_classificacoes` DISABLE KEYS */;
 INSERT INTO `praca_classificacoes` (`id`, `classificacao`) VALUES
-  (1, 'Grande'),
+  (1, 'Pequeno'),
   (2, 'Médio'),
   (3, 'Grande');
 /*!40000 ALTER TABLE `praca_classificacoes` ENABLE KEYS */;
