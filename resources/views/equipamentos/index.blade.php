@@ -67,7 +67,7 @@
 								{{ csrf_field() }}
 								<input type="hidden" name="type" value="{{ $type }}">
 								<input type="hidden" name="_method" value="DELETE">
-								<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Excluir {{$equipamento->nome}}?" data-message='Desejar realmente excluir este Equipamento?' data-footer="Excluir"><i class="glyphicon glyphicon-trash"></i> Excluir
+								<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$equipamento->nome}}?" data-message='Desejar realmente desativar este Equipamento?' data-footer="Desativar"><i class="glyphicon glyphicon-trash"></i> Desativar
 								</button>
 							</form>
 						@else
