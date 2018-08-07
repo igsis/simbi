@@ -350,11 +350,7 @@
                                             <tr>
                                                 <th width="30%">Elevador: </th>
                                                 <td>
-                                                    @if ($equipamento->detalhe->acessibilidade->elevador == 0)
-                                                        Não
-                                                    @else
-                                                        Sim
-                                                    @endif
+                                                    {{ $equipamento->detalhe->acessibilidade->elevador->elevador }}
                                                 </td>
                                             </tr>
                                             <tr>

@@ -7,6 +7,7 @@ use response;
 
 use Simbi\Models\Acessibilidade;
 use Simbi\Models\AcessibilidadeArquitetonica;
+use Simbi\Models\Elevador;
 use Simbi\Models\ContratoUso;
 use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
@@ -412,6 +413,7 @@ class EquipamentoController extends Controller
         $portes = Porte::all();
         $padroes = Padrao::all();
         $arquitetonicas = AcessibilidadeArquitetonica::all();
+        $elevadores = Elevador::all();
         $pracaClassificacoes = PracaClassificacao::all();
 
         return view('equipamentos.detalhestecnicos', compact(
@@ -421,6 +423,7 @@ class EquipamentoController extends Controller
             'portes',
             'padroes',
             'arquitetonicas',
+            'elevadores',
             'pracaClassificacoes'
         ));
     }
@@ -449,7 +452,7 @@ class EquipamentoController extends Controller
             'acessibilidade_arquitetonica_id' => $request->acessibilidadeArquitetonica,
             'banheiros_adaptados' => $request->banheiros,
             'rampas_acesso' => $request->rampas,
-            'elevador' => $request->elevador,
+            'elevador_id' => $request->elevador,
             'piso_tatil' => $request->pisoTatil,
             'estacionamento_acessivel' => $request->estacionamentoAcessivel,
             'quantidade_vagas' => $request->qtdVagasAcessiveis

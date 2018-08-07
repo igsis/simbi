@@ -100,8 +100,10 @@
                 <div class="form-group col-md-3">
                     <label for="elevador">Possui Elevador?</label>
                     <select class="form-control" name="elevador" id="elevador">
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
+                        <option value="">Selecione...</option>
+                        @foreach ($elevadores as $elevador)
+                            <option value="{{ $elevador->id }}">{{ $elevador->elevador }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-3">

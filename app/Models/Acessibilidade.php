@@ -12,7 +12,7 @@ class Acessibilidade extends Model
         'acessibilidade_arquitetonica_id',
         'banheiros_adaptados',
         'rampas_acesso',
-        'elevador',
+        'elevador_id',
         'piso_tatil',
         'estacionamento_acessivel',
         'quantidade_vagas'
@@ -26,5 +26,10 @@ class Acessibilidade extends Model
     public function acessibilidadeArquitetonica()
     {
         return $this->belongsTo(AcessibilidadeArquitetonica::class);
+    }
+
+    public function elevador()
+    {
+        return $this->belongsTo(Elevador::class);
     }
 }
