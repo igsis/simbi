@@ -368,6 +368,12 @@
             <div class="form-group col-md-12">
                 <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
             </div>
+
+            <div class="form-group col-md-12">
+                <a href="{{route('equipamentos.index', ['type' => '1'])}}" class="form-control btn btn-warning">
+                    Retornar à Lista de Equipamentos
+                </a>
+            </div>
         </div>
     </form>
     

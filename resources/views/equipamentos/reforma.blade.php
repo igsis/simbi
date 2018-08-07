@@ -33,9 +33,15 @@
                 </div>
             </div>
 
-            <div class="row centralizado">
+            <div class="form-group col-md-offset-4 col-md-2">
+                <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
+                    Retornar à Detalhes
+                </a>
+            </div>
+            <div class="form-group col-md-2">
                 <input class="btn btn-success" type="submit" value="Inserir Reforma">
             </div>
+
         </form>
 
     </div>

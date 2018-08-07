@@ -321,6 +321,13 @@
                 <div class="form-group col-md-12">
                     <input type="submit" class="form-control btn btn-primary" name="enviar" value="Atualizar">
                 </div>
+
+                <div class="form-group col-md-12">
+                    <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
+                        Retornar à Detalhes
+                    </a>
+                </div>
+
             </div>
         </form>
         @include('layouts.equipamento_modal')
