@@ -2,6 +2,9 @@
 
 @section('conteudo')
 
+    {{--TODO: Update para a Área--}}
+
+
     <div class="container">
         <div class="centralizado">
             <h2>

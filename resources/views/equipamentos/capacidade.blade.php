@@ -2,6 +2,8 @@
 
 @section('conteudo')
 
+    {{--TODO: Update para as capacidades--}}
+
     <div class="container">
         <div class="centralizado">
             <h2>

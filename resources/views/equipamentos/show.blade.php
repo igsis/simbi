@@ -17,9 +17,7 @@
                     <div class="row">
                         <div class="col text-right">
                             @hasanyrole('Coordenador|Administrador')
-                                @hasrole('Administrador')
-                                    <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
-                                @endhasrole
+                                <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
                             @endhasanyrole
                         </div>
                     </div>
@@ -275,9 +273,15 @@
                         <div role="tabpanel" class="tab-pane fade in" id="detalhes-tecnicos">
                             <!--Label Detalhes Tecnicos-->
                             <div class="col text-center botao-margem">
-                                @hasanyrole('Coordenador|Administrador')
-                                <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Inserir Detalhes Técnicos</a>
-                                @endhasanyrole
+                                @if (!isset($equipamento->detalhe))
+                                    @hasanyrole('Coordenador|Administrador')
+                                        <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Inserir Detalhes Técnicos</a>
+                                    @endhasanyrole
+                                @else
+                                    @hasanyrole('Coordenador|Administrador')
+                                        <a href="#" class="btn btn-success">Alterar Detalhes Técnicos</a>
+                                    @endhasanyrole
+                                @endif
                             </div>
                             <table class="table table-bordered">
                                 <tbody>
@@ -390,9 +394,15 @@
                         <div role="tabpanel" class="tab-pane fade in" id="capacidade">
                             <!--Label Capacidade-->
                             <div class="col text-center botao-margem">
-                                @hasanyrole('Coordenador|Administrador')
-                                <a href="{{ route('equipamentos.criaCapacidade', $equipamento->id) }}" class="btn btn-success">Inserir Capacidades</a>
-                                @endhasanyrole
+                                @if (!isset($equipamento->capacidade))
+                                    @hasanyrole('Coordenador|Administrador')
+                                    <a href="{{ route('equipamentos.criaCapacidade', $equipamento->id) }}" class="btn btn-success">Inserir Capacidades</a>
+                                    @endhasanyrole
+                                @else
+                                    @hasanyrole('Coordenador|Administrador')
+                                    <a href="#" class="btn btn-success">Alterar Capacidades</a>
+                                    @endhasanyrole
+                                @endif
                             </div>
                             <table class="table table-bordered">
                                 <tbody>
@@ -412,9 +422,15 @@
                         <div role="tabpanel" class="tab-pane fade in" id="area">
                             <!--Label Area-->
                             <div class="col text-center botao-margem">
-                                @hasanyrole('Coordenador|Administrador')
-                                <a href="{{ route('equipamentos.criaArea', $equipamento->id) }}" class="btn btn-success">Inserir Áreas</a>
-                                @endhasanyrole
+                                @if (!isset($equipamento->area))
+                                    @hasanyrole('Coordenador|Administrador')
+                                        <a href="{{ route('equipamentos.criaArea', $equipamento->id) }}" class="btn btn-success">Inserir Áreas</a>
+                                    @endhasanyrole
+                                @else
+                                    @hasanyrole('Coordenador|Administrador')
+                                        <a href="#" class="btn btn-success">Alterar Área</a>
+                                    @endhasanyrole
+                                @endif
                             </div>
                             <table class="table table-bordered">
                                 <tbody>
