@@ -297,12 +297,11 @@
         <hr class="botoes">
 
         <div class="row">
-            {{--TODO: Otimizar href dos botoes com javascript:void(0)--}}
             <div class="form-group col-md-offset-2 col-md-4">
-                <a class="btn btn-info btn-block" href="#" id="addInput">Adicionar Novo Horario</a>
+                <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
             </div>
             <div class="form-group col-md-4">
-                <a class="btn btn-info btn-block" href="#" id="remInput">Remover Ultimo Horario</a>
+                <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
             </div>
         </div>
 
