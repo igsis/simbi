@@ -141,13 +141,13 @@ DELETE FROM `equipamentos`;
 /*!40000 ALTER TABLE `equipamentos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `equipamentos` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.equipamento_padroes:
-DELETE FROM `equipamento_padroes`;
-/*!40000 ALTER TABLE `equipamento_padroes` DISABLE KEYS */;
-INSERT INTO `equipamento_padroes` (`id`, `padrao`) VALUES
+-- Copiando dados para a tabela simbi.padroes:
+DELETE FROM `padroes`;
+/*!40000 ALTER TABLE `padroes` DISABLE KEYS */;
+INSERT INTO `padroes` (`id`, `padrao`) VALUES
   (1, 'Jânio Novo'),
   (2, 'Jãnio Antigo');
-/*!40000 ALTER TABLE `equipamento_padroes` ENABLE KEYS */;
+/*!40000 ALTER TABLE `padroes` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamento_portes:
 DELETE FROM `equipamento_portes`;

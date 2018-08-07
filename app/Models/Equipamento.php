@@ -27,6 +27,21 @@ class Equipamento extends Model
         'observacao'
 	];
 
+    public function area()
+    {
+        return $this->hasOne(Area::class);
+    }
+
+    public function capacidade()
+    {
+        return $this->hasOne(EquipamentoCapacidade::class);
+    }
+
+	public function detalhe()
+    {
+        return $this->hasOne(Detalhe::class);
+    }
+
 	public function endereco()
 	{
 		return $this->belongsTo(Endereco::class);
@@ -37,54 +52,14 @@ class Equipamento extends Model
 		return $this->belongsTo(EquipamentoSigla::class);
 	}
 
-    public function tipoServico()
+    public function frequencias()
     {
-        return $this->belongsTo(TipoServico::class);
-    }
-
-    public function secretaria()
-    {
-        return $this->belongsTo(Secretaria::class);
-    }
-
-    public function subordinacaoAdministrativa()
-    {
-        return $this->belongsTo(SubordinacaoAdministrativa::class);
-    }
-
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
-
-    public function users()
-    {
-        $this->belongsToMany(User::class);
+        return $this->hasMany(Frequencia::class);
     }
 
     public function funcionamentos()
     {
-	    return $this->hasMany(Funcionamento::class);
-    }
-
-    public function reformas()
-    {
-        return $this->hasMany(Reforma::class);
-    }
-
-    public function detalhe()
-    {
-        return $this->hasOne(EquipamentoDetalhe::class);
-    }
-
-    public function capacidade()
-    {
-        return $this->hasOne(EquipamentoCapacidade::class);
-    }
-
-    public function area()
-    {
-        return $this->hasOne(EquipamentoArea::class);
+        return $this->hasMany(Funcionamento::class);
     }
 
     public function ocorrencias()
@@ -92,9 +67,34 @@ class Equipamento extends Model
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
 
-    public function frequencias()
+    public function reformas()
     {
-        return $this->hasMany(Frequencia::class);
+        return $this->hasMany(Reforma::class);
+    }
+
+    public function secretaria()
+    {
+        return $this->belongsTo(Secretaria::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    public function subordinacaoAdministrativa()
+    {
+        return $this->belongsTo(SubordinacaoAdministrativa::class);
+    }
+
+    public function tipoServico()
+    {
+        return $this->belongsTo(TipoServico::class);
+    }
+
+    public function users()
+    {
+        $this->belongsToMany(User::class);
     }
 
     public function search(Array $data)

@@ -4,7 +4,7 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EquipamentoArea extends Model
+class Area extends Model
 {
     public $timestamps = false;
 

@@ -4,15 +4,15 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EquipamentoDetalhe extends Model
+class Detalhe extends Model
 {
     public $timestamps = false;
 
     protected $fillable = [
         'contrato_uso_id',
-        'equipamento_utilizacao_id',
-        'equipamento_porte_id',
-        'equipamento_padrao_id',
+        'utilizacao_id',
+        'porte_id',
+        'padrao_id',
         'pavimento',
         'acessibilidade_id',
         'validade_avcb'
@@ -30,17 +30,17 @@ class EquipamentoDetalhe extends Model
 
     public function utilizacao()
     {
-        return $this->belongsTo(EquipamentoUtilizacao::class);
+        return $this->belongsTo(Utilizacao::class);
     }
 
     public function porte()
     {
-        return $this->belongsTo(EquipamentoPorte::class);
+        return $this->belongsTo(Porte::class);
     }
 
     public function padrao()
     {
-        return $this->belongsTo(EquipamentoPadrao::class);
+        return $this->belongsTo(Padrao::class);
     }
 
     public function acessibilidade()

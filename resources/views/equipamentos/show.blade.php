@@ -292,19 +292,16 @@
                                         </tr>
                                         <tr>
                                             <th width="30%">Utilização:</th>
-                                            <td>{{ $equipamento->detalhe->utilizacao }}
-                                            {{--TODO: problema no relacionamento utilizacao e de mais--}}
+                                            <td>{{ $equipamento->detalhe->utilizacao->utilizacao }}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th width="30%">Porte:</th>
-                                            <td>{{ $equipamento->detalhe->porte }}</td>
-                                            {{--TODO: problema no relacionamento porte e de mais--}}
+                                            <td>{{ $equipamento->detalhe->porte->porte }}</td>
                                         </tr>
                                         <tr>
                                             <th width="30%">Padrão:</th>
-                                            <td>{{ $equipamento->detalhe->padrao }}</td>
-                                            {{--TODO: problema no relacionamento padrao e de mais--}}
+                                            <td>{{ $equipamento->detalhe->padrao->padrao }}</td>
                                         </tr>
                                         <tr>
                                             <th width="30%">Pavimentos:</th>

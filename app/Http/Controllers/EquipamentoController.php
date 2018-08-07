@@ -11,10 +11,10 @@ use Simbi\Models\ContratoUso;
 use Simbi\Models\Distrito;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
-use Simbi\Models\EquipamentoPadrao;
-use Simbi\Models\EquipamentoPorte;
+use Simbi\Models\Padrao;
+use Simbi\Models\Porte;
 use Simbi\Models\EquipamentoSigla;
-use Simbi\Models\EquipamentoUtilizacao;
+use Simbi\Models\Utilizacao;
 use Simbi\Models\Funcionamento;
 use Simbi\Models\PracaClassificacao;
 use Simbi\Models\PrefeituraRegional;
@@ -266,10 +266,6 @@ class EquipamentoController extends Controller
      */
     public function show($id)
     {
-        /*TODO: Há a necessidade desta linha?*/
-        /*$equipamento = Equipamento::findOrFail($id)->with('ocorrencias')->get();
-        $equipamento = $equipamento[0];*/
-
         $equipamento = Equipamento::findOrFail($id);
 
         return view('equipamentos.show', compact('equipamento'));       
@@ -412,9 +408,9 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::find($id);
 
         $contratos = ContratoUso::all();
-        $utilizacoes = EquipamentoUtilizacao::all();
-        $portes = EquipamentoPorte::all();
-        $padroes = EquipamentoPadrao::all();
+        $utilizacoes = Utilizacao::all();
+        $portes = Porte::all();
+        $padroes = Padrao::all();
         $arquitetonicas = AcessibilidadeArquitetonica::all();
         $pracaClassificacoes = PracaClassificacao::all();
 
@@ -461,9 +457,9 @@ class EquipamentoController extends Controller
 
         $equipamento->detalhe()->create([
             'contrato_uso_id' => $request->contratoUso,
-            'equipamento_utilizacao_id' => $request->utilizacao,
-            'equipamento_porte_id' => $request->porte,
-            'equipamento_padrao_id' => $request->padrao,
+            'utilizacao_id' => $request->utilizacao,
+            'porte_id' => $request->porte,
+            'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id->id,
             'validade_avcb' => $request->validade
@@ -486,7 +482,7 @@ class EquipamentoController extends Controller
 
     public function gravaCapacidade(Request $request, $id)
     {
-        /*TODO: Utilizar findOrCreate para as tabelas adicionais*/
+        /*TODO: Reavaliar estas tabelas e ver se é possivel otimizar*/
 
         $equipamento = Equipamento::find($id);
 

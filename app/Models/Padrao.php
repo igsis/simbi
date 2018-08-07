@@ -4,12 +4,14 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EquipamentoPorte extends Model
+class Padrao extends Model
 {
+    public $table = 'padroes';
+
     public $timestamps = false;
 
     public function detalhes()
     {
-        return $this->hasMany(EquipamentoDetalhe::class);
+        return $this->hasMany(Detalhe::class);
     }
 }

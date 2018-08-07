@@ -20,7 +20,7 @@ class Acessibilidade extends Model
 
     public function detalhes()
     {
-        return $this->hasMany(EquipamentoDetalhe::class);
+        return $this->hasMany(Detalhe::class);
     }
 
     public function acessibilidadeArquitetonica()
