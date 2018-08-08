@@ -49,14 +49,17 @@ class FrequenciaController extends Controller
     {
         $this->validate($request, [
             'data'          =>  'required',
-            'hora'          =>  'required'
+            'hora'          =>  'required',
+            'crianca'       =>  'required|digits:4',
+            'jovem'         =>  'required|digits:4',
+            'adulto'        =>  'required|digits:4',
+            'idoso'         =>  'required|digits:4',
+            'total'         =>  'required|digits:5'
         ]);
 
         $user =  Auth::user();
 
         // dd($request->equipamento);
-
-        $total = $request->crianca + $request->jovem + $request->adulto + $request->idoso;
 
         $user->frequencias()->create([
             'evento_id' => $request->evento,
@@ -66,7 +69,7 @@ class FrequenciaController extends Controller
             'jovem' => $request->jovem,
             'adulto' => $request->adulto,
             'idoso' => $request->idoso,
-            'total' => $total,
+            'total' => $request->total,
             'observacao' => $request->observacao,
             'equipamento_id' => $id
         ]);
