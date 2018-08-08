@@ -4,7 +4,7 @@
 
     <div class="col-lg-6 col-lg-offset-3">
         <h1>
-            <i class="glyphicon glyphicon-user"></i> Frequência de Eventos <br>
+            <i class="glyphicon glyphicon-user"></i> Eventos Culturais <br>
             <small>{{$equipamento->nome}}</small>
         </h1>
         <hr>
