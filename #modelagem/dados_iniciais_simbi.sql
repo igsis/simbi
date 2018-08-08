@@ -137,6 +137,19 @@ DELETE FROM `enderecos`;
 /*!40000 ALTER TABLE `enderecos` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamentos: ~0 rows (aproximadamente)
+DELETE FROM `simbi.escolaridades`;
+/*!40000 ALTER TABLE `simbi.escolaridades` DISABLE KEYS */;
+INSERT INTO simbi.escolaridades (id, escolaridade) VALUES
+(1, 'Fundamental'),
+(2, 'Médio'),
+(3, 'Superior Incompleto'),
+(4, 'Superior Completo'),
+(5, 'Pós Graduação'),
+(6, 'Mestrado'),
+(7, 'Doutorado');
+/*!40000 ALTER TABLE `simbi.escolaridades` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.equipamentos: ~0 rows (aproximadamente)
 DELETE FROM `equipamentos`;
 /*!40000 ALTER TABLE `equipamentos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `equipamentos` ENABLE KEYS */;

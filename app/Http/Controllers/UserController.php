@@ -5,6 +5,9 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Simbi\Models\Equipamento;
+use Simbi\Models\Escolaridade;
+use Simbi\Models\Secretaria;
+use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\User;
 use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\Frequencia;
@@ -42,7 +45,15 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
-        return view('usuarios.cadastro', ['roles'=>$roles]);
+        $secretarias = Secretaria::all();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::all();
+        $escolaridades = Escolaridade::all();
+        return view('usuarios.cadastro', compact(
+            'roles',
+            'secretarias',
+            'subordinacoesAdministrativas',
+            'escolaridades'
+            ));
     }
 
     /**
@@ -54,9 +65,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required',
-            'login'=>'required|max:7|unique:users',
-            'email'=>'required|email|unique:users'
+            'name'  =>'required',
+            'login' =>'required|max:7|unique:users',
+            'email' =>'required|email|unique:users',
+            'cargo' => 'required',
+            'funcao' => 'required',
+            'subordinacaoAdministrativa' => 'required',
+            'identificacaoSecretaria' => 'required',
+            'escolaridade' => 'required'
         ]);
 
         $user = new User();

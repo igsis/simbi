@@ -31,6 +31,12 @@ class User extends Authenticatable
         'password',
         'pergunta_seguranca_id',
         'resposta_seguranca',
+        'cargo_id',
+        'funcao_id',
+        'escolaridade_id',
+        'previsao_aposentadoria',
+        'secretaria_id',
+        'subordinacao_administrativa_id',
         'publicado'
     ];
 

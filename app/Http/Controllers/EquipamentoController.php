@@ -101,8 +101,6 @@ class EquipamentoController extends Controller
             TipoServico::create($data);
             $data = TipoServico::orderBy('descricao')->get();
             return response()->json($data);
-            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
-            //  'Tipo de serviço inserido com sucesso!');
         }
 
         elseif ($request->has('novaSigla')){
@@ -115,9 +113,6 @@ class EquipamentoController extends Controller
             EquipamentoSigla::create($data);
             $data = EquipamentoSigla::orderBy('descricao')->get();
             return response()->json($data);
-
-            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
-            //  'Sigla do Equipamento inserida com sucesso!');
         }
 
         elseif ($request->has('novaSecretaria')) {
@@ -129,9 +124,6 @@ class EquipamentoController extends Controller
             Secretaria::create($data);
             $data = Secretaria::orderBy('descricao')->get();
             return response()->json($data);
-
-            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
-            //     'Secretaria inserida com sucesso');
         }
 
         elseif ($request->has('novaSubordinacaoAdministrativa')) {
@@ -142,9 +134,6 @@ class EquipamentoController extends Controller
             SubordinacaoAdministrativa::create($data);
             $data = SubordinacaoAdministrativa::orderBy('descricao')->get();
             return response()->json($data);
-
-            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
-            //     'Subordinacao Administrativa inserida com sucesso');
         }
 
         elseif($request->has('novaPrefeituraRegional')){
@@ -155,9 +144,6 @@ class EquipamentoController extends Controller
             PrefeituraRegional::create($data);
             $data = PrefeituraRegional::orderBy('descricao')->get();
             return response()->json($data);
-
-            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
-            //     'Prefeitura Regional inserida com sucesso!');
         }
 
         elseif($request->has('novoDistrito')){
@@ -169,9 +155,6 @@ class EquipamentoController extends Controller
 
             $data = Distrito::orderBy('descricao')->get();
             return response()->json($data);
-
-            // return redirect()->route('equipamentos.cadastro')->with('flash_message',
-            //     'Distrito inserido com sucesso!');
         }
 
         else{

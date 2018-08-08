@@ -59,6 +59,8 @@
             </div>
         </div>
 
+
+
         <div class="row">
             <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
                 <label for="identificacaoSecretaria">Identificação da Secretaria</label>
