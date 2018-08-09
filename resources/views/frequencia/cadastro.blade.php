@@ -13,9 +13,18 @@
             {{ csrf_field() }}
 
             {{--TODO: Alterar Evento para combobox--}}
-            <div class="form-group ">
-                <label for="evento">Evento</label>
-                <input class="form-control" type="number" name="evento" value="{{old('evento')}}">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <div class="form-group">
+                        <label for="evento">Evento</label>
+                        <div class="row">
+                            <div class="form-inline col-md-10">
+                                <input class="form-control" type="text" name="evento" value="{{old('evento')}}">
+                                <input class="btn btn-info form-control" id="pesquisar" type="button" value="Pesquisar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group ">
@@ -102,6 +111,40 @@
         }
 
         window.onload = calcular();
+
+    </script>
+
+    <script type="text/javascript">
+      let botao = document.querySelector('#pesquisar');
+
+        botao.addEventListener('click', () => {
+            let idEvento = document.querySelector('input[name="evento"]').value;
+            console.log(idEvento);
+            fetch(`http://localhost/node/api/api_teste/?id=${idEvento}`).then(resposta => {
+                console.log(resposta);
+                return resposta.json();
+            }).then(dados => {
+                if(dados){
+                    let obj = JSON.stringify(dados)
+                    console.log(`${JSON.stringify(dados)}`);
+
+                    let percorrer = JSON.parse(obj)
+                    console.log(percorrer);
+                    console.log(percorrer['idEvento']);
+                    console.log(percorrer['nomeEvento']);
+                    console.log(percorrer['projeto']);
+
+                    document.querySelector('input[name="nomeEvento"]').value = percorrer['nomeEvento'];
+
+                    console.log("Deu certo");
+                }
+                else{
+                    // alterarCadastro(cadastro);
+                    console.log(" Não Encontrado");
+                }
+            });
+
+        });
     </script>
 
 @endsection
