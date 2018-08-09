@@ -140,7 +140,10 @@
                 }
                 else{
                     // alterarCadastro(cadastro);
-                    console.log(" Não Encontrado");
+                    // console.log(" Não Encontrado");
+
+                    document.querySelector('input[name="nomeEvento"]').value = 'Não Encontrado';
+
                 }
             });
 
