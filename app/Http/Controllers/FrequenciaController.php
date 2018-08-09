@@ -50,11 +50,11 @@ class FrequenciaController extends Controller
         $this->validate($request, [
             'data'          =>  'required',
             'hora'          =>  'required',
-            'crianca'       =>  'required|digits:4',
-            'jovem'         =>  'required|digits:4',
-            'adulto'        =>  'required|digits:4',
-            'idoso'         =>  'required|digits:4',
-            'total'         =>  'required|digits:5'
+            'crianca'       =>  'required|integer|between: 0, 9999',
+            'jovem'         =>  'required|integer|between: 0, 9999',
+            'adulto'        =>  'required|integer|between: 0, 9999',
+            'idoso'         =>  'required|integer|between: 0, 9999',
+            'total'         =>  'required|integer|between: 0, 99999'
         ]);
 
         $user =  Auth::user();
