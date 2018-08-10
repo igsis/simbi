@@ -7,7 +7,7 @@
           <h4 class="modal-title">Adicionar novo Serviço?</h4>
         </div>
         <div class="modal-body">
-          <form method="POST" id="addServico" action="{{route('equipamentos.index')}}">
+          <form method="POST" id="addServico" action="{{route('equipamentos.index', ['tela => 1'])}}">
             {{csrf_field()}}
             <label>Descrição</label>
             <input class="form-control" type="text" name="descricao">

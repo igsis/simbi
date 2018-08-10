@@ -38,33 +38,39 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::any('ativar-equipamento','EquipamentoController@ativarEquipamento')->name('ativar.equipamento');
 
-		Route::any('usuarios/search', 'UserController@searchUser')->name('search-user');
+        Route::group(['prefix' => 'usuarios'], function() {
+            Route::any('/search', 'UserController@searchUser')->name('search-user');
 
-		Route::post('usuarios/{usuario}/vincular', 'UserController@vinculaEquipamento');
+            Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento');
 
-        Route::get('equipamentos/{equipamento}/detalhes', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
+            Route::post('/{usuario}/reset', 'UserController@vinculaEquipamento')->name('usuarios.reset');
+        });
 
-        Route::post('equipamentos/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
+        Route::group(['prefix' => 'equipamentos'], function() {
+            Route::get('/{equipamento}/detalhes', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
 
-        Route::get('equipamentos/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
+            Route::post('/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 
-        Route::post('equipamentos/{equipamento}/acessibilidade', 'EquipamentoController@gravaAcessibilidade')->name('equipamentos.gravaAcessibilidade');
+            Route::get('/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
 
-        Route::get('equipamentos/{equipamento}/capacidade', 'EquipamentoController@criaCapacidade')->name('equipamentos.criaCapacidade');
+            Route::post('/{equipamento}/acessibilidade', 'EquipamentoController@gravaAcessibilidade')->name('equipamentos.gravaAcessibilidade');
 
-        Route::post('equipamentos/{equipamento}/capacidade', 'EquipamentoController@gravaCapacidade')->name('equipamentos.gravaCapacidade');
+            Route::get('/{equipamento}/capacidade', 'EquipamentoController@criaCapacidade')->name('equipamentos.criaCapacidade');
 
-        Route::get('equipamentos/{equipamento}/area', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
+            Route::post('/{equipamento}/capacidade', 'EquipamentoController@gravaCapacidade')->name('equipamentos.gravaCapacidade');
 
-        Route::post('equipamentos/{equipamento}/area', 'EquipamentoController@gravaArea')->name('equipamentos.gravaArea');
+            Route::get('/{equipamento}/area', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
 
-        Route::get('equipamentos/{equipamento}/reforma', 'EquipamentoController@criaReforma')->name('equipamentos.criaReforma');
+            Route::post('/{equipamento}/area', 'EquipamentoController@gravaArea')->name('equipamentos.gravaArea');
 
-        Route::post('equipamentos/{equipamento}/reforma', 'EquipamentoController@gravaReforma')->name('equipamentos.gravaReforma');
+            Route::get('/{equipamento}/reforma', 'EquipamentoController@criaReforma')->name('equipamentos.criaReforma');
 
-        Route::post('equipamentos/ocorrencia', 'EquipamentoController@equipamentoOcorrencia')->name('equipamento.ocorrencia');
-        
-        Route::get('equipamentos/ocorrencias/{equipamento}', 'EquipamentoController@countOcorrencias')->name('ocorrencias.count');   
+            Route::post('/{equipamento}/reforma', 'EquipamentoController@gravaReforma')->name('equipamentos.gravaReforma');
+
+            Route::post('/ocorrencia', 'EquipamentoController@equipamentoOcorrencia')->name('equipamento.ocorrencia');
+
+            Route::get('/ocorrencias/{equipamento}', 'EquipamentoController@countOcorrencias')->name('ocorrencias.count');
+        });
 
 
         # Gerenciar Selects

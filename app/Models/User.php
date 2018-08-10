@@ -78,6 +78,11 @@ https://goo.gl/BcqZQr*/
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
 
+    public function escolaridade()
+    {
+        return $this->belongsTo(Escolaridade::class);
+    }
+
 
     public function search(Array $data)
     {

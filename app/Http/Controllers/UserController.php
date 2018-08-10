@@ -72,8 +72,10 @@ class UserController extends Controller
             'funcao' => 'required',
             'subordinacaoAdministrativa' => 'required',
             'identificacaoSecretaria' => 'required',
-            'escolaridade' => 'required'
+            'escolaridade' => 'required',
+            'aposentadoria' => 'required'
         ]);
+
 
         $user = new User();
         
@@ -81,6 +83,12 @@ class UserController extends Controller
         $user->login = $request->login;
         $user->email = $request->email;
         $user->password = 'simbi@2018';
+        $user->cargo_id = $request->cargo;
+        $user->funcao_id = $request->funcao;
+        $user->escolaridade_id = $request->escolaridade;
+        $user->previsao_aposentadoria = $request->aposentadoria;
+        $user->secretaria_id = $request->identificacaoSecretaria;
+        $user->subordinacao_administrativa_id = $request->subordinacaoAdministrativa;
 
         $user->save();
 
@@ -118,8 +126,18 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::get();
         $perguntas = PerguntaSeguranca::all();
+        $secretarias = Secretaria::all();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::all();
+        $escolaridades = Escolaridade::all();
 
-        return view('usuarios.editar', compact('user', 'roles', 'perguntas'));
+        return view('usuarios.editar', compact(
+            'user',
+            'roles',
+            'perguntas',
+            'secretarias',
+            'subordinacoesAdministrativas',
+            'escolaridades'
+        ));
     }
 
     /**
@@ -132,14 +150,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
-        if($request->has('novaSenha'))
-        {
-            $user->update(['password' => 'simbi@2018']);
-            return redirect()->back()
-            ->with('flash_message',
-            'Senha Resetada! Senha padrão: simbi@2018');
-        }
         
         if ($request->filled('password'))
         {
@@ -214,6 +224,14 @@ class UserController extends Controller
         return redirect()->route('usuarios.index', ['type' => $type])
             ->with('flash_message',
              'Usuário Excluido com Sucesso.');
+    }
+
+    public function resetSenha($id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update(['password' => 'simbi@2018']);
+        return redirect()->back()->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
     }
 
     public function ativarUser(Request $request)
