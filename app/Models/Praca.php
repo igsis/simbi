@@ -8,13 +8,13 @@ class Praca extends Model
 {
     public $timestamps = false;
 
-    public function capacidade()
+    public function equipamento()
     {
         return $this->belongsTo(Equipamento::class);
     }
 
     public function classificacao()
     {
-        return $this->belongsTo(PracaClassificacao::class);
+        return $this->belongsTo(Classificacao::class);
     }
 }

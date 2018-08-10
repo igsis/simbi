@@ -4,9 +4,9 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PracaClassificacao extends Model
+class Classificacao extends Model
 {
-    public $table = 'praca_classificacoes';
+    public $table = 'classificacoes';
 
     public $timestamps = false;
 
