@@ -389,28 +389,215 @@
 
                         <div role="tabpanel" class="tab-pane fade in" id="capacidade">
                             <!--Label Capacidade-->
-                            <div class="col text-center botao-margem">
-                                @if (!isset($equipamento->capacidade))
-                                    @hasanyrole('Coordenador|Administrador')
-                                    <a href="{{ route('equipamentos.criaCapacidade', $equipamento->id) }}" class="btn btn-success">Inserir Capacidades</a>
-                                    @endhasanyrole
-                                @else
-                                    @hasanyrole('Coordenador|Administrador')
-                                    <a href="#" class="btn btn-success">Alterar Capacidades</a>
-                                    @endhasanyrole
-                                @endif
-                            </div>
-                            <table class="table table-bordered">
+                            <table class="table table-striped">
                                 <tbody>
-                                    @if (isset($equipamento->capacidade))
+                                    <tr>
+                                        <th colspan="2" class="text-center">Auditório</th>
+                                    </tr>
+                                    @if (isset($equipamento->auditorio))
                                         <tr>
-                                            <th colspan="2" class="text-center">Capacidade</th>
+                                            <th class="text-center">Nome: </th>
+                                            <td class="text-center">{{ $equipamento->capacidade->nome }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center">Capacidade: </th>
+                                            <td class="text-center">{{ $equipamento->auditorio->capacidade }}</td>
                                         </tr>
                                     @else
                                         <tr>
-                                            <th colspan="2" class="text-center">Não ha capacidade cadastrada</th>
+                                            <th class="text-center">
+                                                Sem dados cadastrados
+                                            </th>
+                                            <th>
+                                                @hasanyrole('Coordenador|Administrador')
+                                                <a href="#" class="btn btn-success">Adicionar</a>
+                                                @endhasanyrole
+                                            </th>
                                         </tr>
                                     @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Estacionamento</th>
+                                </tr>
+                                @if (isset($equipamento->estacionamento))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->estacionamento->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <th>
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </th>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Praça</th>
+                                </tr>
+                                @if (isset($equipamento->praca))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->praca->capacidade }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Classificação: </th>
+                                        <td class="text-center">{{ $equipamento->praca->classificacao->classificacao }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <th>
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </th>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Sala de Estudo em Grupo</th>
+                                </tr>
+                                @if (isset($equipamento->estudoGrupo))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->estudoGrupo->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <th>
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </th>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Sala de Estudo Individual</th>
+                                </tr>
+                                @if (isset($equipamento->estudoIndividual))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->estudoIndividual->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <th>
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </th>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Sala Infantil</th>
+                                </tr>
+                                @if (isset($equipamento->infantil))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->infantil->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <th>
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </th>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Sala Multiuso</th>
+                                </tr>
+                                @if (isset($equipamento->multiuso))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->multiuso->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <td>
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </td>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Teatro</th>
+                                </tr>
+                                @if (isset($equipamento->teatro))
+                                    <tr>
+                                        <th class="text-center">Nome: </th>
+                                        <td class="text-center">{{ $equipamento->teatro->nome }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->teatro->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td class="text-center">
+                                            Sem dados cadastrados
+                                        </td>
+                                        <td class="text-center">
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </td>
+                                    </tr>
+                                @endif
                                 </tbody>
                             </table>
                         </div>

@@ -32,11 +32,6 @@ class Equipamento extends Model
         return $this->hasOne(Area::class);
     }
 
-    public function capacidade()
-    {
-        return $this->hasOne(EquipamentoCapacidade::class);
-    }
-
 	public function detalhe()
     {
         return $this->hasOne(Detalhe::class);
@@ -117,4 +112,45 @@ class Equipamento extends Model
 
         });
     }
+
+    public function auditorio()
+    {
+        return $this->hasOne(Auditorio::class);
+    }
+
+    public function teatro()
+    {
+        return $this->hasOne(Teatro::class);
+    }
+
+    public function multiuso()
+    {
+        return $this->hasOne(SalaMultiuso::class);
+    }
+
+    public function estudoGrupo()
+    {
+        return $this->hasOne(SalaEstudoGrupo::class);
+    }
+
+    public function estudoIndividual()
+    {
+        return $this->hasOne(SalaEstudoIndividual::class);
+    }
+
+    public function infantil()
+    {
+        return $this->hasOne(SalaInfantil::class);
+    }
+
+    public function estacionamento()
+    {
+        return $this->hasOne(Estacionamento::class);
+    }
+
+    public function praca()
+    {
+        return $this->hasOne(Praca::class);
+    }
+
 }

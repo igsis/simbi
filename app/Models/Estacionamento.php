@@ -10,6 +10,6 @@ class Estacionamento extends Model
 
     public function capacidade()
     {
-        return $this->belongsTo(EquipamentoCapacidade::class);
+        return $this->belongsTo(Equipamento::class);
     }
 }
