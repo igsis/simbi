@@ -119,20 +119,20 @@
             <h5><b>Nível de Acesso</b></h5>
 
             <div class='form-group'>
-            @if(!(Auth::user()->hasrole('Funcionario')))
-
+                @if(!(Auth::user()->hasrole('Funcionario')))
                     @hasrole('Administrador')
-                    <input type="radio" value="1" name="roles">
-                    <label for="Administrador">Administrador</label><br>
-                    
-
-                    <input type="radio" value="2" name="roles">
-                    <label for="Coordenador">Coordenador</label><br>
+                        <input type="radio" value="1" name="roles">
+                        <label for="Administrador">Administrador</label><br>
                     @endhasrole
 
+                    @hasrole('Administrador|Coordenador')
+                        <input type="radio" value="2" name="roles">
+                        <label for="Coordenador">Coordenador</label><br>
+                    @endhasrole
                 @endif
-                    <input type="radio" value="3" name="roles">
-                    <label for="Funcionario">Funcionário</label><br>
+
+                <input type="radio" value="3" name="roles">
+                <label for="Funcionario">Funcionário</label><br>
             </div>
             <input class="btn btn-primary" type="submit" value="Editar">
         </form>
