@@ -2,32 +2,31 @@
 
 namespace Simbi\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use response;
-
 use Simbi\Models\Acessibilidade;
 use Simbi\Models\AcessibilidadeArquitetonica;
-use Simbi\Models\Elevador;
+use Simbi\Models\Classificacao;
 use Simbi\Models\ContratoUso;
 use Simbi\Models\Distrito;
+use Simbi\Models\Elevador;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
+use Simbi\Models\EquipamentoOcorrencia;
+use Simbi\Models\EquipamentoSigla;
+use Simbi\Models\Funcionamento;
+use Simbi\Models\Macrorregiao;
 use Simbi\Models\Padrao;
 use Simbi\Models\Porte;
-use Simbi\Models\EquipamentoSigla;
-use Simbi\Models\Utilizacao;
-use Simbi\Models\Funcionamento;
-use Simbi\Models\Classificacao;
 use Simbi\Models\PrefeituraRegional;
-use Simbi\Models\TipoServico;
-use Simbi\Models\SubordinacaoAdministrativa;
-use Simbi\Models\Secretaria;
-use Simbi\Models\Macrorregiao;
 use Simbi\Models\Regiao;
 use Simbi\Models\Regional;
+use Simbi\Models\Secretaria;
 use Simbi\Models\Status;
-use Simbi\Models\EquipamentoOcorrencia;
-use Auth;
+use Simbi\Models\SubordinacaoAdministrativa;
+use Simbi\Models\TipoServico;
+use Simbi\Models\Utilizacao;
 
 
 class EquipamentoController extends Controller
@@ -468,7 +467,7 @@ class EquipamentoController extends Controller
 
     public function gravaCapacidade(Request $request, $id)
     {
-        /*TODO: Reavaliar estas tabelas e ver se é possivel otimizar*/
+        /*TODO: Adaptar à nova modelagem*/
 
         $equipamento = Equipamento::find($id);
 

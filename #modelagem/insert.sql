@@ -248,14 +248,14 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(3, 'Funcionario', 'web', '2018-05-11 16:04:42', '2018-05-11 16:04:42');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.praca_classificacoes:
-DELETE FROM `praca_classificacoes`;
-/*!40000 ALTER TABLE `praca_classificacoes` DISABLE KEYS */;
-INSERT INTO `praca_classificacoes` (`id`, `classificacao`) VALUES
+-- Copiando dados para a tabela simbi.classificacoes:
+DELETE FROM `classificacoes`;
+/*!40000 ALTER TABLE `classificacoes` DISABLE KEYS */;
+INSERT INTO `classificacoes` (`id`, `classificacao`) VALUES
   (1, 'Pequeno'),
   (2, 'Médio'),
   (3, 'Grande');
-/*!40000 ALTER TABLE `praca_classificacoes` ENABLE KEYS */;
+/*!40000 ALTER TABLE `classificacoes` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.prefeitura_regionais: ~0 rows (aproximadamente)
 DELETE FROM `prefeitura_regionais`;

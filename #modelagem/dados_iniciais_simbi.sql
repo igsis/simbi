@@ -137,9 +137,9 @@ DELETE FROM `enderecos`;
 /*!40000 ALTER TABLE `enderecos` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamentos: ~0 rows (aproximadamente)
-DELETE FROM `simbi.escolaridades`;
-/*!40000 ALTER TABLE `simbi.escolaridades` DISABLE KEYS */;
-INSERT INTO simbi.escolaridades (id, escolaridade) VALUES
+DELETE FROM `escolaridades`;
+/*!40000 ALTER TABLE `escolaridades` DISABLE KEYS */;
+INSERT INTO escolaridades (id, escolaridade) VALUES
 (1, 'Fundamental'),
 (2, 'Médio'),
 (3, 'Superior Incompleto'),
@@ -147,7 +147,7 @@ INSERT INTO simbi.escolaridades (id, escolaridade) VALUES
 (5, 'Pós Graduação'),
 (6, 'Mestrado'),
 (7, 'Doutorado');
-/*!40000 ALTER TABLE `simbi.escolaridades` ENABLE KEYS */;
+/*!40000 ALTER TABLE `escolaridades` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamentos: ~0 rows (aproximadamente)
 DELETE FROM `equipamentos`;
@@ -162,27 +162,27 @@ INSERT INTO `padroes` (`id`, `padrao`) VALUES
   (2, 'Jãnio Antigo');
 /*!40000 ALTER TABLE `padroes` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.equipamento_portes:
-DELETE FROM `equipamento_portes`;
-/*!40000 ALTER TABLE `equipamento_portes` DISABLE KEYS */;
-INSERT INTO `equipamento_portes` (`id`, `porte`) VALUES
+-- Copiando dados para a tabela simbi.portes:
+DELETE FROM `portes`;
+/*!40000 ALTER TABLE `portes` DISABLE KEYS */;
+INSERT INTO `portes` (`id`, `porte`) VALUES
   (1, 'Grande'),
   (2, 'Médio'),
   (3, 'Grande');
-/*!40000 ALTER TABLE `equipamento_portes` ENABLE KEYS */;
+/*!40000 ALTER TABLE `portes` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamentos_users: ~0 rows (aproximadamente)
 DELETE FROM `equipamento_user`;
 /*!40000 ALTER TABLE `equipamento_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `equipamento_user` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.equipamento_utilizacoes:
-DELETE FROM `equipamento_utilizacoes`;
-/*!40000 ALTER TABLE `equipamento_utilizacoes` DISABLE KEYS */;
-INSERT INTO `equipamento_utilizacoes` (`id`, `utilizacao`) VALUES
+-- Copiando dados para a tabela simbi.utilizacoes:
+DELETE FROM `utilizacoes`;
+/*!40000 ALTER TABLE `utilizacoes` DISABLE KEYS */;
+INSERT INTO `utilizacoes` (`id`, `utilizacao`) VALUES
   (1, 'Parcial'),
   (2, 'Total');
-/*!40000 ALTER TABLE `equipamento_utilizacoes` ENABLE KEYS */;
+/*!40000 ALTER TABLE `utilizacoes` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.equipamento_siglas: ~0 rows (aproximadamente)
 DELETE FROM `equipamento_siglas`;
@@ -251,14 +251,14 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(3, 'Funcionario', 'web', '2018-05-11 16:04:42', '2018-05-11 16:04:42');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.praca_classificacoes:
-DELETE FROM `praca_classificacoes`;
-/*!40000 ALTER TABLE `praca_classificacoes` DISABLE KEYS */;
-INSERT INTO `praca_classificacoes` (`id`, `classificacao`) VALUES
+-- Copiando dados para a tabela simbi.classificacoes:
+DELETE FROM `classificacoes`;
+/*!40000 ALTER TABLE `classificacoes` DISABLE KEYS */;
+INSERT INTO `classificacoes` (`id`, `classificacao`) VALUES
   (1, 'Pequeno'),
   (2, 'Médio'),
   (3, 'Grande');
-/*!40000 ALTER TABLE `praca_classificacoes` ENABLE KEYS */;
+/*!40000 ALTER TABLE `classificacoes` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.prefeitura_regionais: ~0 rows (aproximadamente)
 DELETE FROM `prefeitura_regionais`;

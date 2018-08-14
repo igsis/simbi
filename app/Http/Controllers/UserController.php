@@ -2,21 +2,18 @@
 
 namespace Simbi\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
-
+use Session;
+use Simbi\Models\Cargo;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Escolaridade;
+use Simbi\Models\Funcao;
+use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\Secretaria;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\User;
-use Simbi\Models\PerguntaSeguranca;
-use Simbi\Models\Frequencia;
-use Auth;
-
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-
-use Session;
 
 class UserController extends Controller
 {
@@ -48,11 +45,15 @@ class UserController extends Controller
         $secretarias = Secretaria::all();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::all();
         $escolaridades = Escolaridade::all();
+        $cargos = Cargo::all();
+        $funcoes = Funcao::all();
         return view('usuarios.cadastro', compact(
             'roles',
             'secretarias',
             'subordinacoesAdministrativas',
-            'escolaridades'
+            'escolaridades',
+            'cargos',
+            'funcoes'
             ));
     }
 

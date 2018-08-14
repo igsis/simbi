@@ -54,12 +54,13 @@
                         Gerenciar
                     </a>
                     <ul class="collapse list-unstyled" id="gerenciar">
-                        <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>
-                        <li><a href="{{route('siglaEquipamento')}}">Sigla do Equipamento</a></li>
-                        <li><a href="{{route('secretaria')}}">Indentificação da Secretaria</a></li>
-                        <li><a href="{{route('subordinacaoAdministrativa')}}">Subordinação Administrativa</a></li>
-                        <li><a href="{{route('prefeituraRegional')}}">Prefeituras Regionais</a></li>
+                        <li><a href="{{route('cargo')}}">Cargo</a></li>
                         <li><a href="{{route('distrito')}}">Distrito</a></li>
+                        <li><a href="{{route('secretaria')}}">Indentificação da Secretaria</a></li>
+                        <li><a href="{{route('prefeituraRegional')}}">Prefeituras Regionais</a></li>
+                        <li><a href="{{route('siglaEquipamento')}}">Sigla do Equipamento</a></li>
+                        <li><a href="{{route('subordinacaoAdministrativa')}}">Subordinação Administrativa</a></li>
+                        <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>
                     </ul>
                 </li>
             </ul>

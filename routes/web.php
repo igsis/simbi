@@ -75,6 +75,22 @@ Route::group(['middleware' => 'auth'], function (){
 
         # Gerenciar Selects
 		Route::group(['prefix' => 'gerenciar'], function(){
+
+            Route::group(['prefix' => 'cargo'], function(){
+                Route::get('/' , 'CargoController@index')->name('cargo');
+
+                Route::get('/desativados' , 'CargoController@disabled')->name('cargoDisabled');
+
+                Route::post('/' , 'CargoController@create')->name('createCargo');
+
+                Route::put('/{id}' , 'CargoController@update')->name('editCargo');
+
+                Route::put('/ativar/{id}' , 'CargoController@toActivate')->name('toActivateCargo');
+
+                Route::delete('/{id}' , 'CargoController@destroy')->name('deleteCargo');
+
+                Route::post('/search' , 'CargoController@search')->name('searchCargo');
+            });
 			
 			Route::group(['prefix' => 'tipo-servico'], function(){
 				Route::get('/' , 'TipoServicoController@index')->name('tipoServico');

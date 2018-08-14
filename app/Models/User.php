@@ -2,17 +2,13 @@
 
 namespace Simbi\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 /*TODO: Alterar o delete com "publicado = 0" para Soft Delete
   use Illuminate\Database\Eloquent\SoftDeletes
   https://goo.gl/RarucR */
-
-/*TODO: Adicionar campos cargo_id, funcao_id, escolaridade_id, previsão_aposentadoria, secretaria_id e subordinação administrativa*/
-/*TODO: Criar Models: Funcao, Cargo, Escolaridade*/
-/*TODO: Atualizar 'usuarios.cadastro' e 'usuarios.editar'*/
 
 class User extends Authenticatable
 {
@@ -54,9 +50,14 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function perguntaSeguranca()
+    public function cargo()
     {
-        return $this->belongsTo(PerguntaSeguranca::class);
+        return $this->belongsTo(Cargo::class);
+    }
+
+    public function escolaridade()
+    {
+        return $this->belongsTo(Escolaridade::class);
     }
 
 /*TODO: Analisar possibilidade de FK na tabela intermediaria
@@ -73,14 +74,19 @@ https://goo.gl/BcqZQr*/
         return $this->hasMany(Frequencia::class);
     }
 
+    public function funcao()
+    {
+        return $this->belongsTo(Funcao::class);
+    }
+
     public function ocorrencia()
     {
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
 
-    public function escolaridade()
+    public function perguntaSeguranca()
     {
-        return $this->belongsTo(Escolaridade::class);
+        return $this->belongsTo(PerguntaSeguranca::class);
     }
 
 
