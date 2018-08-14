@@ -9,7 +9,7 @@
         <div class="form">
             <form method="POST" class="form form-inline" action="{{route('searchCargo')}}">
                 {{ csrf_field() }}
-                <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
+                <input type="text" name="cargo" class="form-control" placeholder="Cargo" title="Pesquisa pela Descrição">
                 <select name="publicado" class="form-control">
                     <option value="1">Selecione</option>
                     <option value="1">Ativo</option>
@@ -23,25 +23,25 @@
             <table class="table table-bordered table-striped ">
                 <thead>
                 <tr>
-                    <th>Descrição</th>
+                    <th width="50%">Cargo</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($cargos as $cargo)
                     <tr>
-                        <td>{{$cargo->descricao}}</td>
+                        <td>{{$cargo->cargo}}</td>
                         <td>
                             <button class="btn btn-info" data-toggle="modal" data-target="#cargo"
                                     data-id="{{$cargo->id}}"
-                                    data-descricao="{{$cargo->descricao}}">
-                                <i class="glyphicon glyphicon-pencil"> </i>
+                                    data-cargo="{{$cargo->cargo}}">
+                                <i class="glyphicon glyphicon-pencil"> </i> Editar
                             </button>
                             <button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
                                     data-id="{{$cargo->id}}"
-                                    data-title="{{$cargo->descricao}}"
+                                    data-title="{{$cargo->cargo}}"
                                     data-route="{{route('deleteCargo', '')}}">
-                                <i class="glyphicon glyphicon-remove"></i>
+                                <i class="glyphicon glyphicon-remove"> </i> Excluir
                             </button>
                         </td>
                     </tr>
@@ -62,8 +62,8 @@
                     <div class="modal-body">
                         <form method="POST"> {{-- action Pelo js --}}
                             {{ csrf_field() }}
-                            <label>Descrição</label>
-                            <input class="form-control" type="text" name="descricao">
+                            <label>Cargo</label>
+                            <input class="form-control" type="text" name="cargo">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -93,10 +93,10 @@
             if ($(e.relatedTarget).attr('data-id'))
             {
                 let id = $(e.relatedTarget).attr('data-id');
-                let descricao = $(e.relatedTarget).attr('data-descricao');
-                $(this).find('.modal-title').text(` Editar ${descricao}`);
+                let cargo = $(e.relatedTarget).attr('data-cargo');
+                $(this).find('.modal-title').text(` Editar ${cargo}`);
                 $(this).find('.modal-footer input').attr('value', 'Editar');
-                $(this).find('form input[name="descricao"]').attr('value', descricao);
+                $(this).find('form input[name="cargo"]').attr('value', cargo);
                 $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`)
                 $(this).find('form').attr('action', `{{route('editCargo', '')}}/${id}`);
             }else

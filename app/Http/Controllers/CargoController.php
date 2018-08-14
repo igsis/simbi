@@ -10,14 +10,14 @@ class CargoController extends Controller
 {
     public function index()
     {
-        $cargos = Cargo::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
+        $cargos = Cargo::where('publicado', '=', '1')->orderBy('cargo')->paginate(10);
 
         return view('gerenciar.cargos.index', compact('cargos'));
     }
 
     public function disabled()
     {
-        $cargos = Cargo::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
+        $cargos = Cargo::where('publicado', '=', '0')->orderBy('cargo')->paginate(10);
 
         return view('gerenciar.cargos.disabled', compact('cargos'));
     }
@@ -27,12 +27,12 @@ class CargoController extends Controller
     {
 
         $data = $this->validate($request, [
-            'descricao'=>'required|unique:cargos'
+            'cargo'=>'required|unique:cargos'
         ]);
 
         Cargo::create($data);
 
-        return redirect()->route('Cargo')
+        return redirect()->route('cargo')
             ->with('flash_message', 'Cargo Inserido com sucesso!');
     }
 
@@ -41,14 +41,14 @@ class CargoController extends Controller
         $Cargo = Cargo::findOrFail($id);
 
         $this->validate($request, [
-            'descricao'=>'required|unique:cargos'
+            'cargo'=>'required|unique:cargos'
         ]);
 
         $Cargo->update([
-            'descricao' => $request->descricao
+            'cargo' => $request->cargo
         ]);
 
-        return redirect()->route('Cargo')
+        return redirect()->route('cargo')
             ->with('flash_message', 'Cargo Editado com Sucesso!');
 
     }
@@ -58,7 +58,7 @@ class CargoController extends Controller
         Cargo::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->route('Cargo')
+        return redirect()->route('cargo')
             ->with('flash_message', 'Cargo Desativado com Sucesso!');
     }
 
@@ -75,14 +75,14 @@ class CargoController extends Controller
     {
         $dataForm = $request->all();
 
-        $cargos = $Cargo->search($dataForm)->orderBy('descricao')->paginate(10);
+        $cargos = $Cargo->search($dataForm)->orderBy('cargo')->paginate(10);
 
         if ($dataForm['publicado'] == 1)
         {
             return view('gerenciar.cargos.index', compact('cargos'));
-        }else
+        }else if($dataForm['publicado'] == 2)
         {
-            return view('gerenciar.cargos.disabled', compact('cargos'));
+            return view('gerenciar.cargos.index', compact('cargos'));
         }
     }
 }

@@ -8,7 +8,7 @@
 	<div class="form">
 	    <form method="POST" class="form form-inline" action="{{route('searchTipoServico')}}">
 	        {{ csrf_field() }}
-	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
+	        <input type="text" name="cargo" class="form-control" placeholder="Cargo" title="Pesquisa pela Cargo">
 	        <select name="publicado" class="form-control">
 	        	<option value="0">Selecione</option>
 	        	<option value="1">Ativo</option>
@@ -22,18 +22,18 @@
 	    <table class="table table-bordered table-striped ">
 		<thead>
 			<tr>
-				<th>Descrição</th>
+				<th>Cargo</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($tipoServicos as $tipoServico)
 			<tr>
-				<td>{{$tipoServico->descricao}}</td>
+				<td>{{$tipoServico->cargo}}</td>
 				<td>
 					<button class="btn btn-success" data-toggle="modal" data-target="#ativar"
 							data-id="{{$tipoServico->id}}" 
-							data-title="{{$tipoServico->descricao}}"
+							data-title="{{$tipoServico->cargo}}"
 							data-route="{{route('toActivateTipoServico', '')}}">
 						<i class="glyphicon glyphicon-ok"></i>
 					</button>
@@ -55,9 +55,9 @@
 				<div class="modal-body">
 					<form method="POST"> {{-- action Pelo js --}}
 						{{csrf_field()}}
-						<label>Descrição</label>
+						<label>Cargo</label>
 						<input type="hidden" name="id">
-						<input class="form-control" type="text" name="descricao">
+						<input class="form-control" type="text" name="cargo">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
