@@ -177,7 +177,7 @@ class UserController extends Controller
             $data = $this->validate($request, [
                     'name'=>'required',
                     'email'=>'required|email|unique:users,email,'.$id,
-                    'perguntaSeguranca'=>'required',
+                    // 'perguntaSeguranca'=>'required',
                     // 'respostaSeguranca'=>'required'
             ]);
             $input = $request->only($data);
