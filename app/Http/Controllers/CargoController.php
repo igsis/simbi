@@ -80,7 +80,7 @@ class CargoController extends Controller
         if ($dataForm['publicado'] == 1)
         {
             return view('gerenciar.cargos.index', compact('cargos'));
-        }else if($dataForm['publicado'] == 2)
+        }else if($dataForm['publicado'] == 2) 
         {
             return view('gerenciar.cargos.index', compact('cargos'));
         }
