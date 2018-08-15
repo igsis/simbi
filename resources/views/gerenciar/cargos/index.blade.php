@@ -9,7 +9,7 @@
         <div class="form">
             <form method="POST" class="form form-inline" action="{{route('searchCargo')}}">
                 {{ csrf_field() }}
-                <input type="text" name="cargo" class="form-control" placeholder="Cargo" title="Pesquisa pela Descrição">
+                <input type="text" name="cargo" class="form-control" placeholder="Cargo" title="Pesquisa pelo Cargo">
                 <select name="publicado" class="form-control">
                     <option value="1">Selecione</option>
                     <option value="1">Ativo</option>
