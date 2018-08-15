@@ -42,7 +42,7 @@
 							data-id="{{$equipamentoSigla->id}}" 
 							data-title="{{$equipamentoSigla->sigla}}"
 							data-route="{{route('toActivateSiglaEquipamento', '')}}">
-						<i class="glyphicon glyphicon-ok"></i>
+						<i class="glyphicon glyphicon-ok"></i> Ativar
 					</button>					
 				</td>
 			</tr>

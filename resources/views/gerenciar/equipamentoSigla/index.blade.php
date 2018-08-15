@@ -43,13 +43,13 @@
 							data-sigla="{{$equipamentoSigla->sigla}}" 
 							data-descricao="{{$equipamentoSigla->descricao}}" 
 							data-roteiro="{{$equipamentoSigla->roteiro}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
+						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
 								data-id="{{$equipamentoSigla->id}}" 
 								data-title="{{$equipamentoSigla->sigla}}"
 								data-route="{{route('deleteSiglaEquipamento', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+						<i class="glyphicon glyphicon-remove"></i> Excluir
 					</button>					
 				</td>
 			</tr>
