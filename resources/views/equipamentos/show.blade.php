@@ -644,10 +644,10 @@
                                     </tr>
                                 @else
                                     <tr>
-                                        <td class="text-center" style="border: none;">
+                                        <th class="text-center" style="border: none;">
                                             Sem dados cadastrados
-                                        </td>
-                                        <td style="border: none;" class="text-center">
+                                        </th>
+                                        <td style="border: none;">
                                             @hasanyrole('Coordenador|Administrador')
                                             <a href="#" class="btn btn-success">Adicionar</a>
                                             @endhasanyrole
@@ -699,7 +699,7 @@
                                         </tr>
                                     @else
                                         <tr>
-                                            <th colspan="2" class="text-center">Não ha areas cadastradas</th>
+                                            <th colspan="2" class="text-center">Não ha áreas cadastradas</th>
                                         </tr>
                                     @endif
                                 </tbody>
