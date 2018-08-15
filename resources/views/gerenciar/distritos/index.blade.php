@@ -23,7 +23,7 @@
 	    <table class="table table-bordered table-striped ">
 		<thead>
 			<tr>
-				<th>Descrição</th>
+				<th width="50%">Descrição</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
@@ -35,13 +35,13 @@
 					<button class="btn btn-info" data-toggle="modal" data-target="#distrito" 
 							data-id="{{$distrito->id}}"
 							data-descricao="{{$distrito->descricao}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
+						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
 								data-id="{{$distrito->id}}" 
 								data-title="{{$distrito->descricao}}"
 								data-route="{{route('deleteDistrito', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+						<i class="glyphicon glyphicon-remove"></i> Excluir
 					</button>					
 				</td>
 			</tr>
