@@ -450,6 +450,31 @@
 
                             <table class="table table-bordered">
                                 <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">Capacidade da Biblioteca</th>
+                                </tr>
+                                @if (isset($equipamento->equipamentoCapacidade))
+                                    <tr>
+                                        <th class="text-center">Capacidade: </th>
+                                        <td class="text-center">{{ $equipamento->equipamentoCapacidade->capacidade }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <th class="text-center" style="border: none;">
+                                            Sem dados cadastrados
+                                        </th>
+                                        <td style="border: none;">
+                                            @hasanyrole('Coordenador|Administrador')
+                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                            @endhasanyrole
+                                        </td>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered">
+                                <tbody>
                                     <tr>
                                         <th colspan="2" class="text-center">Auditório</th>
                                     </tr>

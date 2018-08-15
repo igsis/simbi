@@ -471,16 +471,7 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::find($id);
 
-        $equipamento->capacidade()->create([
-            'auditorio' => $request->auditorio,
-            'teatro' => $request->teatro,
-            'sala_multiuso' => $request->multiuso,
-            'sala_estudo_grupo' => $request->estudoGrupo,
-            'sala_estudo_individual' => $request->estudoIndividual,
-            'sala_infantil' => $request->infantil,
-            'estacionamento' => $request->estacionamentoPublico,
-            'praca' => $request->praca
-        ]);
+        $equipamento->capacidade()->create([]);
 
         return redirect();
     }

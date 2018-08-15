@@ -153,4 +153,9 @@ class Equipamento extends Model
         return $this->hasOne(Praca::class);
     }
 
+    public function equipamentoCapacidade()
+    {
+        return $this->hasOne(EquipamentosCapacidade::class);
+    }
+
 }
