@@ -396,10 +396,14 @@
                                         <div role="tabpanel">
                                             <ul class="nav nav-tabs">
                                                 <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <a href="#" class="dropdown-toggle label-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white">
                                                         Editar <span class="caret"></span>
                                                     </a>
                                                     <ul class="dropdown-menu">
+                                                        @if (isset($equipamento->equipamentoCapacidade))
+                                                            <li><a href="#">Capacidade do Equipamento</a></li>
+                                                            <li role="separator" class="divider"></li>
+                                                        @endif
                                                         @if(isset($equipamento->auditorio))
                                                             <li><a href="#">Auditório</a></li>
                                                             <li role="separator" class="divider"></li>
@@ -451,11 +455,11 @@
                             <table class="table table-bordered">
                                 <tbody>
                                 <tr>
-                                    <th colspan="2" class="text-center">Capacidade da Biblioteca</th>
+                                    <th colspan="2" class="text-center">Capacidade do Equipamento</th>
                                 </tr>
                                 @if (isset($equipamento->equipamentoCapacidade))
                                     <tr>
-                                        <th class="text-center">Capacidade: </th>
+                                        <th width="50%" class="text-center">Capacidade: </th>
                                         <td class="text-center">{{ $equipamento->equipamentoCapacidade->capacidade }}</td>
                                     </tr>
                                 @else
