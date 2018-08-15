@@ -40,7 +40,7 @@
 							data-id="{{$secretaria->id}}" 
 							data-title="{{$secretaria->sigla}}"
 							data-route="{{route('toActivateSecretaria', '')}}">
-						<i class="glyphicon glyphicon-ok"></i>
+						<i class="glyphicon glyphicon-ok"></i> Ativar
 					</button>					
 				</td>
 			</tr>

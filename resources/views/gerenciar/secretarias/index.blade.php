@@ -40,13 +40,13 @@
 							data-id="{{$secretaria->id}}"
 							data-sigla="{{$secretaria->sigla}}"
 							data-descricao="{{$secretaria->descricao}}">
-						<i class="glyphicon glyphicon-pencil"> </i>
+						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
 								data-id="{{$secretaria->id}}" 
 								data-title="{{$secretaria->sigla}}"
 								data-route="{{route('deleteSecretaria', '')}}">
-						<i class="glyphicon glyphicon-remove"></i>
+						<i class="glyphicon glyphicon-remove"></i> Excluir
 					</button>					
 				</td>
 			</tr>
