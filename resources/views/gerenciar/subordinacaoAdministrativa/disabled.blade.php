@@ -36,7 +36,7 @@
 							data-id="{{$subordinacaoAdministrativa->id}}" 
 							data-title="{{$subordinacaoAdministrativa->descricao}}"
 							data-route="{{route('toActivateSubordinacaoAdministrativa', '')}}">
-						<i class="glyphicon glyphicon-ok"></i>
+						<i class="glyphicon glyphicon-ok"></i> Ativar
 					</button>					
 				</td>
 			</tr>
