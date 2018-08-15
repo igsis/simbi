@@ -23,7 +23,7 @@
 	    <table class="table table-bordered table-striped ">
 		<thead>
 			<tr>
-				<th>Descrição</th>
+				<th width="50%">Descrição</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
@@ -36,7 +36,7 @@
 							data-id="{{$prefeituraRegional->id}}" 
 							data-title="{{$prefeituraRegional->descricao}}"
 							data-route="{{route('toActivatePrefeituraRegional', '')}}">
-						<i class="glyphicon glyphicon-ok"></i>
+						<i class="glyphicon glyphicon-ok"></i> Ativar
 					</button>					
 				</td>
 			</tr>
