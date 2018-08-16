@@ -79,6 +79,8 @@ class UserController extends Controller
 
 
         $user = new User();
+
+        $cargo = Cargo::findOrCreate("id", $request->cargo);
         
         $user->name = $request->name;
         $user->login = $request->login;

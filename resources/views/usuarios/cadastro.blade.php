@@ -57,15 +57,15 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
+                <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
                     <label for="cargo">Cargo</label>
                     <select class="form-control" name="cargo" id="cargo">
                         <option value="">Selecione uma Opção</option>
                         @foreach ($cargos as $cargo)
                             @if ($cargo->id == old('cargo'))
-                                <option value="{{$cargo->id}}" selected>{{$cargo->sigla}}</option>
+                                <option value="{{$cargo->id}}" selected>{{$cargo->cargo}}</option>
                             @else
-                                <option value="{{$cargo->id}}">{{$cargo->sigla}}</option>
+                                <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -74,7 +74,7 @@
                     <label for="aposentadoria">Previsão de Aposentadoria</label>
                     <input type="date" class="form-control" name="aposentadoria" id="aposentadoria">
                 </div>
-                <div class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
+                <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
                     <label for="funcao">Função</label>
                     <select class="form-control" name="funcao" id="funcao">
                         <option value="">Selecione uma Opção</option>
