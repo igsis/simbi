@@ -203,6 +203,20 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
 
         });
+
+        Route::group(['prefix' => 'frequencia-publico-atendido'], function(){
+
+            Route::get('/', 'FrequenciaController@index')->name('frequencia.publico.index');
+
+            Route::get('/relatorio', 'FrequenciasPublicoController@relatorio')->name('frequencia.publico.relatorio');
+
+            Route::get('/{equipamento}/cadastro', 'FrequenciasPublicoController@create')->name('frequencia.publico.cadastro');
+
+            Route::post('/{equipamento}/cadastro', 'FrequenciasPublicoController@store')->name('frequencia.publico.gravar');
+
+            Route::get('/{equipamento}/listar', 'FrequenciasPublicoController@listar')->name('frequencia.publico.listar');
+
+        });
 		
 	});
 

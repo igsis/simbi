@@ -52,6 +52,11 @@ class Equipamento extends Model
         return $this->hasMany(Frequencia::class);
     }
 
+    public function frequencias_publicos()
+    {
+        return $this->hasMany(FrequenciasPublico::class);
+    }
+
     public function funcionamentos()
     {
         return $this->hasMany(Funcionamento::class);

@@ -23,6 +23,7 @@
                     <td>
                         @if($type == 1)
                             <a href="{{ route('frequencia.cadastro', $equipamento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Inserir Frequência</a>
+                            <a href="{{ route('frequencia.publico.cadastro', $equipamento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Inserir Publico Atendido</a>
                         @else
                             <a href="{{ route('frequencia.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Exibir Frequência</a>
                         @endif
