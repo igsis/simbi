@@ -35,7 +35,7 @@
                             <button class="btn btn-success" data-toggle="modal" data-target="#ativar"
                                     data-id="{{$cargo->id}}"
                                     data-title="{{$cargo->cargo}}"
-                                    data-route="{{route('toActivateDistrito', '')}}">
+                                    data-route="{{route('toActivateCargo', '')}}">
                                 <i class="glyphicon glyphicon-ok"></i> Ativar
                             </button>
                         </td>

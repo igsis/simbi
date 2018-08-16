@@ -67,7 +67,7 @@ class CargoController extends Controller
         Cargo::findOrFail($id)
             ->update(['publicado' => 1]);
 
-        return redirect()->route('CargoDisabled')
+        return redirect()->route('cargoDisabled')
             ->with('flash_message', 'Cargo Ativado com Sucesso!');
     }
 
