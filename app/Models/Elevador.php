@@ -9,4 +9,9 @@ class Elevador extends Model
     protected $table = 'elevadores';
 
     public $timestamps = false;
+
+    public function acessibilidades()
+    {
+        return $this->hasMany(Acessibilidade::class);
+    }
 }

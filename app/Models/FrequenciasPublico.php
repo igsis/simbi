@@ -9,8 +9,7 @@ class FrequenciasPublico extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'data',
-        'hora',
+        'dia_semana_id',
         'crianca',
         'jovem',
         'adulto',
@@ -20,13 +19,17 @@ class FrequenciasPublico extends Model
         'equipamento_id'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function diaSemana(){
+        return $this->belongsTo(DiaSemana::class);
     }
 
     public function equipamento()
     {
         return $this->belongsTo(Equipamento::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

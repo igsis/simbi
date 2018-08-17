@@ -13,18 +13,14 @@
             {{ csrf_field() }}
 
             <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="form-group ">
-                        <label for="email">Data</label>
-                        <input class="form-control" type="date" name="data" value="{{old('data')}}">
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <div class="form-group">
-                        <label for="login">Hora</label>
-                        <input class="form-control" type="text" data-mask="00:00" name="hora" id="hora" placeholder="Digite a hora" value="{{old('hora')}}">
-                    </div>
-                </div>
+                <div class="form-group col-xs-12 col-md-10">
+                    <label for="tipoServico">Dia da semana</label>
+                    <select class="form-control" name="diaSemana" id="diaSemana">
+                        <option value="">Selecione uma Opção</option>
+                        @foreach ($diaSemanas as $diaSemana)
+                            <option value="{{$diaSemana->id}}">{{$diaSemana->dia}}</option>
+                        @endforeach
+                    </select>
             </div>
 
             <div class="row">

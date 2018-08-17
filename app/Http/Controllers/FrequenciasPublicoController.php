@@ -5,6 +5,7 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Compound;
 use Simbi\Http\Controllers\Controller;
+use Simbi\Models\DiaSemana;
 use Simbi\Models\Equipamento;
 use Auth;
 
@@ -22,8 +23,11 @@ class FrequenciasPublicoController extends Controller
      */
     public function create($id)
     {
+        $diaSemanas = DiaSemana::orderBy('id')->get();
         $equipamento = Equipamento::findOrFail($id);
-        return view('frequencia.publico.cadastro', compact('equipamento'));
+        return view('frequencia.publico.cadastro', compact(
+            'diaSemanas',
+            'equipamento'));
     }
 
     /**
@@ -35,8 +39,7 @@ class FrequenciasPublicoController extends Controller
     public function store(Request $request, $id)
     {
         $this->validate($request, [
-            'data'          =>  'required',
-            'hora'          =>  'required',
+            'diaSemana'     =>  'required',
             'crianca'       =>  'required|integer|between: 0, 9999',
             'jovem'         =>  'required|integer|between: 0, 9999',
             'adulto'        =>  'required|integer|between: 0, 9999',
@@ -49,8 +52,7 @@ class FrequenciasPublicoController extends Controller
         // dd($request->equipamento);
 
         $user->frequencias_publicos()->create([
-            'data' => $request->data,
-            'hora' => $request->hora,
+            'dia_semana_id' => $request->diaSemana,
             'crianca' => $request->crianca,
             'jovem' => $request->jovem,
             'adulto' => $request->adulto,
