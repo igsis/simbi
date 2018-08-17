@@ -70,9 +70,9 @@ class UserController extends Controller
             'login' =>'required|max:7|unique:users',
             'email' =>'required|email|unique:users',
             'cargo' => 'required',
-            'funcao' => 'required',
+            /*'funcao' => 'required',
             'subordinacaoAdministrativa' => 'required',
-            'identificacaoSecretaria' => 'required',
+            'identificacaoSecretaria' => 'required',*/
             'escolaridade' => 'required',
             'aposentadoria' => 'required'
         ]);
@@ -80,14 +80,16 @@ class UserController extends Controller
 
         $user = new User();
 
-        $cargo = Cargo::findOrCreate("id", $request->cargo);
+        $cargo = Cargo::firstOrNew(['id' => $request->cargo, 'cargo' => $request->novoCargo])->save();
+
+        $funcao = Funcao::firstOrNew(['id' => $request->funcao, 'funcao' => $request->novaFuncao])->save();
         
         $user->name = $request->name;
         $user->login = $request->login;
         $user->email = $request->email;
         $user->password = 'simbi@2018';
-        $user->cargo_id = $request->cargo;
-        $user->funcao_id = $request->funcao;
+        $user->cargo_id = $cargo->id;
+        $user->funcao_id = $funcao->id;
         $user->escolaridade_id = $request->escolaridade;
         $user->previsao_aposentadoria = $request->aposentadoria;
         $user->secretaria_id = $request->identificacaoSecretaria;

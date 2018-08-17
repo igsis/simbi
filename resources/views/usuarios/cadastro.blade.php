@@ -57,10 +57,10 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
+                <div id="divCargo" class="form-group col-xs-8 col-md-3 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
                     <label for="cargo">Cargo</label>
                     <select class="form-control" name="cargo" id="cargo">
-                        <option value="">Selecione uma Opção</option>
+                        <option value="">Selecione...</option>
                         @foreach ($cargos as $cargo)
                             @if ($cargo->id == old('cargo'))
                                 <option value="{{$cargo->id}}" selected>{{$cargo->cargo}}</option>
@@ -70,22 +70,30 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group col-xs-2 col-md-1">
+                    <label for="addCargo"></label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addCargo"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                </div>
                 <div class="form-group col-md-4 has-feedback {{ $errors->has('aposentadoria') ? ' has-error' : '' }}">
                     <label for="aposentadoria">Previsão de Aposentadoria</label>
                     <input type="date" class="form-control" name="aposentadoria" id="aposentadoria">
                 </div>
-                <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
+                <div id="divFuncao" class="form-group col-xs-8 col-md-3 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
                     <label for="funcao">Função</label>
                     <select class="form-control" name="funcao" id="funcao">
-                        <option value="">Selecione uma Opção</option>
+                        <option value="">Selecione...</option>
                         @foreach ($funcoes as $funcao)
                             @if ($funcao->id == old('funcao'))
                                 <option value="{{$funcao->id}}" selected>{{$funcao->sigla}}</option>
                             @else
-                                <option value="{{$funcao->id}}">{{$funcao->sigla}}</option>
+                                <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
                             @endif
                         @endforeach
                     </select>
+                </div>
+                <div class="form-group col-xs-2 col-md-1">
+                    <label for="addFunção"></label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addFuncao"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                 </div>
             </div>
 
@@ -113,6 +121,56 @@
             <input class="btn btn-primary" type="submit" value="Adicionar">
         </form>
 
+    @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
+    @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
+
     </div>
 
+@endsection
+@section('scripts_adicionais')
+    <script>
+        function insertCargo()
+        {
+            let select = document.getElementById("cargo"),
+                div = document.getElementById("divCargo"),
+                i = {{$cargo->count()}},
+                txtVal = document.getElementById("novoCargo").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
+
+            newOption.appendChild(newOptionVal);
+            newOption.setAttribute("value", `${i+1}`);
+            select.insertBefore(newOption,select.lastChild);
+            $('#addCargo').modal('hide');
+            $("input[id='novoCargo']").val('');
+
+            newInput.setAttribute("type", "hidden");
+            newInput.setAttribute("name", "novoCargo");
+            newInput.setAttribute("value", newOptionVal.textContent);
+            div.insertBefore(newInput, div.lastChild);
+        }
+
+        function insertFuncao()
+        {
+            let select = document.getElementById("funcao"),
+                div = document.getElementById("divFuncao"),
+                i = document.getElementById("funcao").length,
+                txtVal = document.getElementById("novaFuncao").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
+
+            newOption.appendChild(newOptionVal);
+            newOption.setAttribute("value", `${i}`);
+            select.insertBefore(newOption,select.lastChild);
+            $('#addFuncao').modal('hide');
+            $("input[id='novoCargo']").val('');
+
+            newInput.setAttribute("type", "hidden");
+            newInput.setAttribute("name", "novaFuncao");
+            newInput.setAttribute("value", newOptionVal.textContent);
+            div.insertBefore(newInput, div.lastChild);
+        }
+    </script>
 @endsection
