@@ -24,13 +24,14 @@ class Frequencia extends Model
         'equipamento_id'
     ];
 
+    public function equipamento()
+    {
+        return $this->belongsTo(Equipamento::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function equipamento()
-    {
-        return $this->belongsTo(Equipamento::class);
-    }
 }

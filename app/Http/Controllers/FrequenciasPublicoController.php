@@ -51,7 +51,7 @@ class FrequenciasPublicoController extends Controller
 
         // dd($request->equipamento);
 
-        $user->frequencias_publicos()->create([
+        $user->frequenciasPublicos()->create([
             'dia_semana_id' => $request->diaSemana,
             'crianca' => $request->crianca,
             'jovem' => $request->jovem,

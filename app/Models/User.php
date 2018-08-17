@@ -74,9 +74,9 @@ https://goo.gl/BcqZQr*/
         return $this->hasMany(Frequencia::class);
     }
 
-    public function frequencias_publicos()
+    public function frequenciasPublicos()
     {
-        return $this->belongsTo(FrequenciasPublico::class);
+        return $this->hasMany(FrequenciasPublico::class);
     }
 
     public function funcao()
@@ -93,8 +93,7 @@ https://goo.gl/BcqZQr*/
     {
         return $this->belongsTo(PerguntaSeguranca::class);
     }
-
-
+    
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
