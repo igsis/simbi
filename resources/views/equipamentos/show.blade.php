@@ -57,11 +57,11 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="tab-content">
                         <!--Label Dados Equipamentos-->
                         <div role="tabpanel" class="tab-pane fade in active" id="dados-equipamento">
-                                
+
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
@@ -141,7 +141,7 @@
                                     <tr>
                                         <th width="30%">Status:</th>
                                         <td>{{$equipamento->status->descricao}}</td>
-                                    </tr>    
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -233,7 +233,7 @@
                                         <td>{{$equipamento->endereco->regional->descricao}}</td>
                                     </tr>
                                 </tbody>
-                            </table>                      
+                            </table>
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade in" id="reformas">
@@ -241,7 +241,7 @@
                             <div class="col text-center botao-margem">
                                 @hasanyrole('Coordenador|Administrador')
                                     <a href="{{ route('equipamentos.criaReforma', $equipamento->id) }}" class="btn btn-success">Inserir Reforma</a>
-                                @endhasanyrole 
+                                @endhasanyrole
                             </div>
                             <table class="table table-bordered">
                                 <tbody>
@@ -289,7 +289,7 @@
                                         <tr>
                                             <th colspan="2" class="text-center">Detalhes Técnicos</th>
                                         </tr>
-                                        
+
                                         <tr>
                                             <th width="30%">Contrato de Uso:</th>
                                             <td>{{ $equipamento->detalhe->contratoUso->contrato_uso }}</td>
@@ -356,7 +356,7 @@
                                             <tr>
                                                 <th width="30%">Piso Tátil: </th>
                                                 <td>
-                                                
+
                                                     @if ($equipamento->detalhe->acessibilidade->piso_tatil == 0)
                                                         Não
                                                     @else
@@ -371,14 +371,14 @@
                                                         Não
                                                     @else
                                                         Sim
-                                                    @endif                                                    
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th width="30%">Quantidade de Vagas: </th>
                                                 <td>{{ $equipamento->detalhe->acessibilidade->quantidade_vagas }}</td>
                                             </tr>
-                                    @else 
+                                    @else
                                         <tr>
                                             <th colspan="2" class="text-center">Não ha detalhes cadastrados</th>
                                         </tr>
@@ -696,7 +696,7 @@
                                     @endhasanyrole
                                 @else
                                     @hasanyrole('Coordenador|Administrador')
-                                        <a href="#" class="btn btn-success">Alterar Área</a>
+                                        <a href="{{ route('equipamentos.criaArea', $equipamento->id) }}" class="btn btn-success">Alterar Área</a>
                                     @endhasanyrole
                                 @endif
                             </div>

@@ -59,9 +59,13 @@ Route::group(['middleware' => 'auth'], function (){
 
             Route::post('/{equipamento}/capacidade', 'EquipamentoController@gravaCapacidade')->name('equipamentos.gravaCapacidade');
 
-            Route::get('/{equipamento}/area', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
+            Route::group(['prefix' => 'area/{equipamento}'], function(){
+              Route::get('/', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
 
-            Route::post('/{equipamento}/area', 'EquipamentoController@gravaArea')->name('equipamentos.gravaArea');
+              Route::post('/novo', 'EquipamentoController@gravaArea')->name('equipamentos.gravaArea');
+
+              Route::post('/editar', 'EquipamentoController@atualizaArea')->name('equipamentos.atualizaArea');
+            });
 
             Route::get('/{equipamento}/reforma', 'EquipamentoController@criaReforma')->name('equipamentos.criaReforma');
 
@@ -91,7 +95,7 @@ Route::group(['middleware' => 'auth'], function (){
 
                 Route::post('/search' , 'CargoController@search')->name('searchCargo');
             });
-			
+
 			Route::group(['prefix' => 'tipo-servico'], function(){
 				Route::get('/' , 'TipoServicoController@index')->name('tipoServico');
 
@@ -113,7 +117,7 @@ Route::group(['middleware' => 'auth'], function (){
 
 				Route::get('/desativados' , 'EquipamentoSiglaController@disabled')->name('siglaEquipamentoDisabled');
 
-				Route::post('/' , 'EquipamentoSiglaController@create')->name('createSiglaEquipamento');				
+				Route::post('/' , 'EquipamentoSiglaController@create')->name('createSiglaEquipamento');
 
 				Route::put('/{id}' , 'EquipamentoSiglaController@update')->name('editSiglaEquipamento');
 
@@ -217,8 +221,7 @@ Route::group(['middleware' => 'auth'], function (){
             Route::get('/{equipamento}/listar', 'FrequenciasPublicoController@listar')->name('frequencia.publico.listar');
 
         });
-		
+
 	});
 
 });
-

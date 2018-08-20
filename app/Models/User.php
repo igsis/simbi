@@ -93,7 +93,7 @@ https://goo.gl/BcqZQr*/
     {
         return $this->belongsTo(PerguntaSeguranca::class);
     }
-    
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)

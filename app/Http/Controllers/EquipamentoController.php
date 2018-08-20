@@ -91,7 +91,7 @@ class EquipamentoController extends Controller
      */
     public function store(Request $request)
     {
- 
+
         if($request->has('novoServico')){
             $data = $this->validate($request, [
                         'descricao'=>'required|unique:tipo_servicos'
@@ -160,7 +160,7 @@ class EquipamentoController extends Controller
             // Metodo que grava o novo equipamento
             $this->validate($request, [
                 //Para Tabela Equipamento
-                'nome'=>'required|unique:equipamentos', 
+                'nome'=>'required|unique:equipamentos',
                 'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
                 'identificacaoSecretaria'=>'required',
@@ -251,7 +251,7 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        return view('equipamentos.show', compact('equipamento'));       
+        return view('equipamentos.show', compact('equipamento'));
     }
 
     /**
@@ -359,7 +359,7 @@ class EquipamentoController extends Controller
             'distrito_id' => $request->distrito,
             'macrorregiao_id' => $request->macrorregiao,
             'regiao_id' => $request->regiao,
-            'regional_id' => $request->regional            
+            'regional_id' => $request->regional
             ]);
 
         /*TODO: Atualização do horario de funcionamento*/
@@ -506,6 +506,29 @@ class EquipamentoController extends Controller
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área cadastrada com sucesso');
     }
 
+    public function atualizaArea(Request $request, $id)
+    {
+      $equipamento = Equipamento::find($id);
+
+      $this->validate($request, [
+          'areaInterna' => 'required|numeric',
+          'areaTotalConstruida' => 'required|numeric',
+          'areaTotalTerreno' => 'required|numeric',
+          'areaAuditorio' => 'nullable|numeric',
+          'areaTeatro' => 'nullable|numeric'
+      ]);
+
+      $equipamento->area()->update([
+        'interna' => $request->areaInterna,
+        'auditorio' => $request->areaAuditorio,
+        'teatro' => $request->areaTeatro,
+        'total_construida' => $request->areaTotalConstruida,
+        'total_terreno' => $request->areaTotalTerreno
+      ]);
+
+      return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área atualizada com sucesso');
+    }
+
     public function criaReforma($id)
     {
         $equipamento = Equipamento::find($id);
@@ -561,19 +584,19 @@ class EquipamentoController extends Controller
 
     public function equipamentoOcorrencia(Request $request)
     {
-       
+
        $equipamento = Equipamento::findOrFail($request->idEquipamento);
 
-       $data = $this->validate($request, 
+       $data = $this->validate($request,
                     [
                         'data'=> 'required',
                         'ocorrencia'=>'required',
                         'observacao'=>'required'
 
                     ]);
-       
+
        $user =  Auth::user()->id;
-       
+
 
        $ok = $equipamento->ocorrencias()->create([
             'user_id' => $user,
