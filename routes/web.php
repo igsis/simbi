@@ -47,9 +47,15 @@ Route::group(['middleware' => 'auth'], function (){
         });
 
         Route::group(['prefix' => 'equipamentos'], function() {
-            Route::get('/{equipamento}/detalhes', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
 
-            Route::post('/{equipamento}/detalhes', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
+            Route::group(['prefix' => 'detalhes/{equipamento}'], function(){
+              Route::get('/', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
+
+              Route::post('/novo', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
+
+              Route::post('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
+
+            });
 
             Route::get('/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
 

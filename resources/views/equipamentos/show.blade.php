@@ -279,7 +279,7 @@
                                     @endhasanyrole
                                 @else
                                     @hasanyrole('Coordenador|Administrador')
-                                        <a href="#" class="btn btn-success">Alterar Detalhes Técnicos</a>
+                                        <a href="{{ route('equipamentos.criaDetalhes', $equipamento->id) }}" class="btn btn-success">Alterar Detalhes Técnicos</a>
                                     @endhasanyrole
                                 @endif
                             </div>

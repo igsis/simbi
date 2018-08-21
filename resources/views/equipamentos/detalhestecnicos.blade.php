@@ -1,20 +1,20 @@
 @extends('layouts.master')
-
+<?php $path = isset($equipamento->detalhe) ? 'equipamentos.atualizaDetalhes'
+                                        : 'equipamentos.gravaDetalhes'; ?>
 @section('conteudo')
-
-    {{--TODO: Update para os detalhes tecnicos--}}
-
+    <!-- TODO: Mostrar informacoes caso seja "alterar" -->
     <div class="container">
         <div class="centralizado">
             <h2>
                 Detalhes Técnicos<br>
+                <?php echo $path; ?>
                 <small>{{$equipamento->nome}}</small>
             </h2>
         </div>
 
         <hr>
 
-        <form method="POST" action="{{ route('equipamentos.gravaDetalhes', $equipamento->id) }}">
+        <form method="POST" action="{{ route($path, $equipamento->id) }}">
             {{ csrf_field() }}
 
             <div class="row">
@@ -134,7 +134,7 @@
                     </a>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Cadastrar">
+                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Salvar">
                 </div>
             </div>
         </form>

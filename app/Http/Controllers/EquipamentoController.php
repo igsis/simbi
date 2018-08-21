@@ -450,7 +450,52 @@ class EquipamentoController extends Controller
             'validade_avcb' => $request->validade
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhes Técnicos cadastrado com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
+    }
+
+    public function atualizaDetalhes(Request $request, $id)
+    {
+      $equipamento = Equipamento::find($id);
+
+      $detalhes = $this->validate($request, [
+          'contratoUso' => 'required',
+          'utilizacao' => 'required',
+          'porte' => 'required',
+          'padrao' => 'required',
+          'pavimento' => 'required|numeric',
+          'validade' => 'date'
+      ]);
+
+      $this->validate($request, [
+          'acessibilidadeArquitetonica' => 'required',
+          'qtdVagasAcessiveis' => 'nullable'
+      ]);
+
+      $acessibilidade_id = $equipamento->detalhe->acessibilidade_id;
+      $acessibilidade = Acessibilidade::find($acessibilidade_id);
+
+      $acessibilidade->update([
+          'acessibilidade_arquitetonica_id' => $request->acessibilidadeArquitetonica,
+          'banheiros_adaptados' => $request->banheiros,
+          'rampas_acesso' => $request->rampas,
+          'elevador_id' => $request->elevador,
+          'piso_tatil' => $request->pisoTatil,
+          'estacionamento_acessivel' => $request->estacionamentoAcessivel,
+          'quantidade_vagas' => $request->qtdVagasAcessiveis
+      ]);
+
+      $equipamento->detalhe()->update([
+          'contrato_uso_id' => $request->contratoUso,
+          'utilizacao_id' => $request->utilizacao,
+          'porte_id' => $request->porte,
+          'padrao_id' => $request->padrao,
+          'pavimento' => $request->pavimento,
+          'acessibilidade_id' => $acessibilidade_id,
+          'validade_avcb' => $request->validade
+      ]);
+
+      return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');
+
     }
 
     public function criaCapacidade($id)
