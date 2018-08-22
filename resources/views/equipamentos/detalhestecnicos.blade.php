@@ -1,13 +1,20 @@
+<?php
+$path = isset($equipamento->detalhe) ? 'equipamentos.atualizaDetalhes'
+    : 'equipamentos.gravaDetalhes';
+$pathAtualiza = false;
+if($path == 'equipamentos.atualizaDetalhes')
+{
+    $pathAtualiza = true;
+}
+?>
+
 @extends('layouts.master')
-<?php $path = isset($equipamento->detalhe) ? 'equipamentos.atualizaDetalhes'
-                                        : 'equipamentos.gravaDetalhes'; ?>
+
 @section('conteudo')
-    <!-- TODO: Mostrar informacoes caso seja "alterar" -->
     <div class="container">
         <div class="centralizado">
             <h2>
                 Detalhes Técnicos<br>
-                <?php echo $path; ?>
                 <small>{{$equipamento->nome}}</small>
             </h2>
         </div>
@@ -58,11 +65,13 @@
             <div class="row">
                 <div class="form-group col-md-offset-3 col-md-3">
                     <label for="pavimento">Pavimentos</label>
-                    <input type="text" class="form-control" name="pavimento" id="pavimento">
+                    <input type="text" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
+                                                                                                                                             : old('pavimento') }}">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
-                    <input type="date" class="form-control" name="validade" id="validade">
+                    <input type="date" class="form-control" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? $equipamento->detalhe->validade_avcb
+                                                                                                                                                : "old('validate')"}}">
                 </div>
             </div>
 
@@ -88,6 +97,7 @@
                     <select class="form-control" name="banheiros" id="banheiros">
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
+
                     </select>
                 </div>
                 <div class="form-group col-md-3">
@@ -100,7 +110,7 @@
                 <div class="form-group col-md-3">
                     <label for="elevador">Possui Elevador?</label>
                     <select class="form-control" name="elevador" id="elevador">
-                        <option value="">Selecione...</option>
+                        <option selected value="">Selecione...</option>
                         @foreach ($elevadores as $elevador)
                             <option value="{{ $elevador->id }}">{{ $elevador->elevador }}</option>
                         @endforeach
@@ -122,7 +132,8 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="qtdVagasAcessiveis">Quantidade de vagas?</label>
-                    <input type="text" class="form-control" name="qtdVagasAcessiveis" id="qtdVagasAcessiveis">
+                    <input type="text" class="form-control" name="qtdVagasAcessiveis" id="qtdVagasAcessiveis" value="{{isset($equipamento->detalhe->acessibilidade->quantidade_vagas) ? $equipamento->detalhe->acessibilidade->quantidade_vagas
+                                                                                                                                                                                       : old('qtdVagasAcessiveis')}}">
                 </div>
             </div>
 
@@ -198,4 +209,5 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
+    @includeWhen($pathAtualiza, 'scripts.preenche_detalhe')
 @endsection
