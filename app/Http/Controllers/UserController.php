@@ -70,8 +70,8 @@ class UserController extends Controller
             'login' =>'required|max:7|unique:users',
             'email' =>'required|email|unique:users',
             'cargo' => 'required',
-            /*'funcao' => 'required',
-            'subordinacaoAdministrativa' => 'required',
+            'funcao' => 'required',
+            /*'subordinacaoAdministrativa' => 'required',
             'identificacaoSecretaria' => 'required',*/
             'escolaridade' => 'required',
             'aposentadoria' => 'required'
@@ -80,10 +80,27 @@ class UserController extends Controller
 
         $user = new User();
 
-        $cargo = Cargo::firstOrNew(['id' => $request->cargo, 'cargo' => $request->novoCargo])->save();
+        $cargo = Cargo::findOrNew($request->cargo);
+        if (!($cargo->exists))
+        {
+            $cargo->cargo = $request->novoCargo;
+            $cargo->save();
+        }
 
-        $funcao = Funcao::firstOrNew(['id' => $request->funcao, 'funcao' => $request->novaFuncao])->save();
-        
+        $funcao = Funcao::findOrNew($request->funcao);
+        if (!($funcao->exists))
+        {
+            $funcao->funcao = $request->novaFuncao;
+            $funcao->save();
+        }
+
+        $funcao = Funcao::findOrNew($request->funcao);
+        if (!($funcao->exists))
+        {
+            $funcao->funcao = $request->novaFuncao;
+            $funcao->save();
+        }
+
         $user->name = $request->name;
         $user->login = $request->login;
         $user->email = $request->email;

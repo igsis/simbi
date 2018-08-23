@@ -12,22 +12,22 @@
             <div class="row">
                 <div class="form-group col-md-7 has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name">Nome</label>
-                    <input class="form-control" type="text" name="name" id="name">
+                    <input class="form-control" type="text" name="name" id="name" >
                 </div>
 
-                <div class="form-group col-md-5 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                <div class="form-group col-md-5 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
+                    <label for="login">Login</label>
+                    <input class="form-control" type="text" name="login" id="login" maxlength="7">
+                </div>
+
+                <div class="form-group col-md-12 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email">E-mail</label>
                     <input class="form-control" type="email" name="email" id="email">
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-md-3 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
-                    <label for="login">Login</label>
-                    <input class="form-control" type="text" name="login" id="login" maxlength="7">
-                </div>
-
-                <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}">
+                <div id="divSubAdm" class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}">
                     <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
                     <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
                         <option value="">Selecione uma Opção</option>
@@ -40,13 +40,19 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group col-xs-2 col-md-1">
+                    <label for="addSubAdm">&emsp;</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdm">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                    </button>
+                </div>
 
-                <div class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
+                <div id="divSecretaria" class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
                     <label for="identificacaoSecretaria">Identificação da Secretaria</label>
                     <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
                         <option value="">Selecione uma Opção</option>
-                    @foreach ($secretarias as $secretaria)
-                        @if ($secretaria->id == old('identificacaoSecretaria'))
+                        @foreach ($secretarias as $secretaria)
+                            @if ($secretaria->id == old('identificacaoSecretaria'))
                                 <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
                             @else
                                 <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
@@ -54,10 +60,16 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group col-xs-2 col-md-1">
+                    <label for="addSecretaria">&emsp;</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                    </button>
+                </div>
             </div>
 
             <div class="row">
-                <div id="divCargo" class="form-group col-xs-8 col-md-3 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
+                <div id="divCargo" class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
                     <label for="cargo">Cargo</label>
                     <select class="form-control" name="cargo" id="cargo">
                         <option value="">Selecione...</option>
@@ -71,14 +83,13 @@
                     </select>
                 </div>
                 <div class="form-group col-xs-2 col-md-1">
-                    <label for="addCargo"></label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addCargo"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                    <label for="addCargo">&emsp;</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addCargo">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                    </button>
                 </div>
-                <div class="form-group col-md-4 has-feedback {{ $errors->has('aposentadoria') ? ' has-error' : '' }}">
-                    <label for="aposentadoria">Previsão de Aposentadoria</label>
-                    <input type="date" class="form-control" name="aposentadoria" id="aposentadoria">
-                </div>
-                <div id="divFuncao" class="form-group col-xs-8 col-md-3 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
+
+                <div id="divFuncao" class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
                     <label for="funcao">Função</label>
                     <select class="form-control" name="funcao" id="funcao">
                         <option value="">Selecione...</option>
@@ -92,8 +103,10 @@
                     </select>
                 </div>
                 <div class="form-group col-xs-2 col-md-1">
-                    <label for="addFunção"></label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addFuncao"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                    <label for="addFunção">&emsp;</label>
+                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addFuncao">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                    </button>
                 </div>
             </div>
 
@@ -107,7 +120,15 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-6 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
+
+                <div class="form-group col-md-6 has-feedback {{ $errors->has('aposentadoria') ? ' has-error' : '' }}">
+                    <label for="aposentadoria">Previsão de Aposentadoria</label>
+                    <input type="date" class="form-control" name="aposentadoria" id="aposentadoria">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
                     <label for="roles">Nivel de Acesso</label>
                     <select class="form-control" name="roles" id="roles">
                         <option value="">Selecione uma Opção</option>
@@ -123,34 +144,22 @@
 
     @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
     @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
+    @include('layouts.modal', ['idModal' => 'addSubAdm', 'titulo' => 'Adicionar nova Sub. Administrativa', 'idInput' => 'novaSubAdm', 'funcaoJS' => 'insertSubAdm'])
+    @include('layouts.modal', ['idModal' => 'addSecretaria', 'titulo' => 'Adicionar nova Secretaria', 'idInput' => 'novaSecretaria', 'funcaoJS' => 'insertSecretaria'])
 
     </div>
 
+    {{--TODO: Acertar include abaixo--}}
 @endsection
 @section('scripts_adicionais')
+    @include('scripts.novo_via_modal', [
+        'nomeFuncao' => 'insertCargo',
+        'idSelect' => 'cargo',
+        'divSelect' => 'divCargo',
+        'countTabela' => '$cargo->count()',
+        'idInputModal' => 'novoCargo'
+    ])
     <script>
-        function insertCargo()
-        {
-            let select = document.getElementById("cargo"),
-                div = document.getElementById("divCargo"),
-                i = {{$cargo->count()}},
-                txtVal = document.getElementById("novoCargo").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal);
-
-            newOption.appendChild(newOptionVal);
-            newOption.setAttribute("value", `${i+1}`);
-            select.insertBefore(newOption,select.lastChild);
-            $('#addCargo').modal('hide');
-            $("input[id='novoCargo']").val('');
-
-            newInput.setAttribute("type", "hidden");
-            newInput.setAttribute("name", "novoCargo");
-            newInput.setAttribute("value", newOptionVal.textContent);
-            div.insertBefore(newInput, div.lastChild);
-        }
-
         function insertFuncao()
         {
             let select = document.getElementById("funcao"),
@@ -161,16 +170,20 @@
                 newInput = document.createElement("INPUT"),
                 newOptionVal = document.createTextNode(txtVal);
 
-            newOption.appendChild(newOptionVal);
-            newOption.setAttribute("value", `${i}`);
-            select.insertBefore(newOption,select.lastChild);
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
+
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "novaFuncao");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+            }
             $('#addFuncao').modal('hide');
             $("input[id='novoCargo']").val('');
-
-            newInput.setAttribute("type", "hidden");
-            newInput.setAttribute("name", "novaFuncao");
-            newInput.setAttribute("value", newOptionVal.textContent);
-            div.insertBefore(newInput, div.lastChild);
         }
     </script>
 @endsection
