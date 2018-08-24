@@ -46,41 +46,6 @@ Route::group(['middleware' => 'auth'], function (){
             Route::post('/{usuario}/reset', 'UserController@vinculaEquipamento')->name('usuarios.reset');
         });
 
-        Route::group(['prefix' => 'equipamentos'], function() {
-
-            Route::group(['prefix' => 'detalhes/{equipamento}'], function(){
-              Route::get('/', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
-
-              Route::post('/novo', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
-
-              Route::post('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
-
-            });
-
-            Route::get('/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
-
-            Route::post('/{equipamento}/acessibilidade', 'EquipamentoController@gravaAcessibilidade')->name('equipamentos.gravaAcessibilidade');
-
-            Route::get('/{equipamento}/capacidade', 'EquipamentoController@criaCapacidade')->name('equipamentos.criaCapacidade');
-
-            Route::post('/{equipamento}/capacidade', 'EquipamentoController@gravaCapacidade')->name('equipamentos.gravaCapacidade');
-
-            Route::group(['prefix' => 'area/{equipamento}'], function(){
-              Route::get('/', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
-
-              Route::post('/novo', 'EquipamentoController@gravaArea')->name('equipamentos.gravaArea');
-
-              Route::post('/editar', 'EquipamentoController@atualizaArea')->name('equipamentos.atualizaArea');
-            });
-
-            Route::get('/{equipamento}/reforma', 'EquipamentoController@criaReforma')->name('equipamentos.criaReforma');
-
-            Route::post('/{equipamento}/reforma', 'EquipamentoController@gravaReforma')->name('equipamentos.gravaReforma');
-
-            Route::post('/ocorrencia', 'EquipamentoController@equipamentoOcorrencia')->name('equipamento.ocorrencia');
-
-            Route::get('/ocorrencias/{equipamento}', 'EquipamentoController@countOcorrencias')->name('ocorrencias.count');
-        });
 
 
         # Gerenciar Selects
@@ -199,34 +164,6 @@ Route::group(['middleware' => 'auth'], function (){
 			});
 
 		});
-
-        Route::group(['prefix' => 'frequencia'], function(){
-
-            Route::get('/', 'FrequenciaController@index')->name('frequencia.index');
-
-            Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
-
-            Route::get('/{equipamento}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
-
-            Route::post('/{equipamento}/cadastro', 'FrequenciaController@store')->name('frequencia.gravar');
-
-            Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
-
-        });
-
-        Route::group(['prefix' => 'frequencia-publico-atendido'], function(){
-
-            Route::get('/', 'FrequenciaController@index')->name('frequencia.publico.index');
-
-            Route::get('/relatorio', 'FrequenciasPublicoController@relatorio')->name('frequencia.publico.relatorio');
-
-            Route::get('/{equipamento}/cadastro', 'FrequenciasPublicoController@create')->name('frequencia.publico.cadastro');
-
-            Route::post('/{equipamento}/cadastro', 'FrequenciasPublicoController@store')->name('frequencia.publico.gravar');
-
-            Route::get('/{equipamento}/listar', 'FrequenciasPublicoController@listar')->name('frequencia.publico.listar');
-
-        });
 
 	});
 
