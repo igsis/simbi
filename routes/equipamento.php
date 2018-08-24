@@ -1,5 +1,36 @@
 <?php
 
+Route::resource('equipamentos', 'EquipamentoController', [
+    'names' => [
+        'edit' => 'equipamentos.editar',
+        'create' => 'equipamentos.cadastro',
+    ]]);
+
+Route::any('equipamentos-search', 'EquipamentoController@searchEquipamento')->name('search-equipamento');
+
+Route::resource('usuarios', 'UserController', [
+    'names' => [
+        'edit' => 'usuarios.editar',
+        'create' => 'usuarios.cadastro',
+    ]]);
+
+
+Route::group(['prefix' => 'sigla-equipamento'], function(){
+    Route::get('/' , 'EquipamentoSiglaController@index')->name('siglaEquipamento');
+
+    Route::get('/desativados' , 'EquipamentoSiglaController@disabled')->name('siglaEquipamentoDisabled');
+
+    Route::post('/' , 'EquipamentoSiglaController@create')->name('createSiglaEquipamento');
+
+    Route::put('/{id}' , 'EquipamentoSiglaController@update')->name('editSiglaEquipamento');
+
+    Route::put('/ativar/{id}' , 'EquipamentoSiglaController@toActivate')->name('toActivateSiglaEquipamento');
+
+    Route::delete('/{id}' , 'EquipamentoSiglaController@destroy')->name('deleteSiglaEquipamento');
+
+    Route::post('/search' , 'EquipamentoSiglaController@search')->name('searchSiglaEquipamento');
+});
+
 
 Route::group(['prefix' => 'equipamentos'], function() {
 

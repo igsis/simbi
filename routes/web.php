@@ -14,25 +14,11 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function (){
 
-	Route::get('seguranca', 'UserController@perguntaSeguranca');
 
-	Route::post('seguranca', 'UserController@updatePergunta')->name('seguranca');
 
 	Route::group(['middleware' => 'primeiroLogin'], function (){
 
-		Route::resource('equipamentos', 'EquipamentoController', [
-			'names' => [
-				'edit' => 'equipamentos.editar',
-				'create' => 'equipamentos.cadastro',
-		]]);
 
-		Route::any('equipamentos-search', 'EquipamentoController@searchEquipamento')->name('search-equipamento');
-
-		Route::resource('usuarios', 'UserController', [
-			'names' => [
-				'edit' => 'usuarios.editar',
-				'create' => 'usuarios.cadastro',
-		]]);
 
 		Route::any('ativar-user','UserController@ativarUser')->name('ativar.user');
 
@@ -45,8 +31,6 @@ Route::group(['middleware' => 'auth'], function (){
 
             Route::post('/{usuario}/reset', 'UserController@vinculaEquipamento')->name('usuarios.reset');
         });
-
-
 
         # Gerenciar Selects
 		Route::group(['prefix' => 'gerenciar'], function(){
@@ -81,22 +65,6 @@ Route::group(['middleware' => 'auth'], function (){
 				Route::delete('/{id}' , 'TipoServicoController@destroy')->name('deleteTipoServico');
 
 				Route::post('/search' , 'TipoServicoController@search')->name('searchTipoServico');
-			});
-
-			Route::group(['prefix' => 'sigla-equipamento'], function(){
-				Route::get('/' , 'EquipamentoSiglaController@index')->name('siglaEquipamento');
-
-				Route::get('/desativados' , 'EquipamentoSiglaController@disabled')->name('siglaEquipamentoDisabled');
-
-				Route::post('/' , 'EquipamentoSiglaController@create')->name('createSiglaEquipamento');
-
-				Route::put('/{id}' , 'EquipamentoSiglaController@update')->name('editSiglaEquipamento');
-
-				Route::put('/ativar/{id}' , 'EquipamentoSiglaController@toActivate')->name('toActivateSiglaEquipamento');
-
-				Route::delete('/{id}' , 'EquipamentoSiglaController@destroy')->name('deleteSiglaEquipamento');
-
-				Route::post('/search' , 'EquipamentoSiglaController@search')->name('searchSiglaEquipamento');
 			});
 
 			Route::group(['prefix' => 'secretaria'], function(){
