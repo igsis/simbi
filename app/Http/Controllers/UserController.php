@@ -69,14 +69,13 @@ class UserController extends Controller
             'name'  =>'required',
             'login' =>'required|max:7|unique:users',
             'email' =>'required|email|unique:users',
+            'subordinacaoAdministrativa' => 'required',
+            'identificacaoSecretaria' => 'required',
             'cargo' => 'required',
             'funcao' => 'required',
-            /*'subordinacaoAdministrativa' => 'required',
-            'identificacaoSecretaria' => 'required',*/
             'escolaridade' => 'required',
             'aposentadoria' => 'required'
         ]);
-
 
         $user = new User();
 
@@ -94,11 +93,19 @@ class UserController extends Controller
             $funcao->save();
         }
 
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
+        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
+        if (!($subAdm->exists))
         {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
+            $subAdm->descricao = $request->novaSubAdm;
+            $subAdm->save();
+        }
+
+        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+        if (!($secretaria->exists))
+        {
+            $secretaria->sigla = $request->siglaSecretaria;
+            $secretaria->descricao = $request->descricaoSecretaria;
+            $secretaria->save();
         }
 
         $user->name = $request->name;
@@ -109,8 +116,8 @@ class UserController extends Controller
         $user->funcao_id = $funcao->id;
         $user->escolaridade_id = $request->escolaridade;
         $user->previsao_aposentadoria = $request->aposentadoria;
-        $user->secretaria_id = $request->identificacaoSecretaria;
-        $user->subordinacao_administrativa_id = $request->subordinacaoAdministrativa;
+        $user->secretaria_id = $secretaria->id;
+        $user->subordinacao_administrativa_id = $subAdm->id;
 
         $user->save();
 
