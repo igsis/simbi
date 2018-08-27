@@ -157,6 +157,8 @@ class UserController extends Controller
         $perguntas = PerguntaSeguranca::all();
         $secretarias = Secretaria::all();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::all();
+        $cargos = Cargo::orderBy('cargo')->get();
+        $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
 
         return view('usuarios.editar', compact(
@@ -165,7 +167,9 @@ class UserController extends Controller
             'perguntas',
             'secretarias',
             'subordinacoesAdministrativas',
-            'escolaridades'
+            'escolaridades',
+            'cargos',
+            'funcoes'
         ));
     }
 
@@ -178,6 +182,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /*TODO: Atualizar este metodo para o novo update*/
         $user = User::findOrFail($id);
         
         if ($request->filled('password'))
@@ -187,7 +192,7 @@ class UserController extends Controller
                     'email'=>'required|email|unique:users,email,'.$id,
                     'password'=>'required|min:6|confirmed',
                     'perguntaSeguranca'=>'required',
-                    // 'respostaSeguranca'=>'required'
+                    'respostaSeguranca'=>'required'
             ]);
             $input = $request->only($data);
 
