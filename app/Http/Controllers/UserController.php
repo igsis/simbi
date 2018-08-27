@@ -41,12 +41,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::get();
-        $secretarias = Secretaria::all();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::all();
+        $roles = Role::all();
+        $secretarias = Secretaria::orderBy('descricao')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $escolaridades = Escolaridade::all();
-        $cargos = Cargo::all();
-        $funcoes = Funcao::all();
+        $cargos = Cargo::orderBy('cargo')->get();
+        $funcoes = Funcao::orderBy('funcao')->get();
         return view('usuarios.cadastro', compact(
             'roles',
             'secretarias',
@@ -129,7 +129,7 @@ class UserController extends Controller
                 $user->assignRole($role_r);
         }
 
-        return redirect()->back()->with('flash_message',
+        return redirect()->route('usuarios.index')->with('flash_message',
             'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 

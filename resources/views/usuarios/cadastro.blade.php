@@ -139,7 +139,17 @@
                 </div>
             </div>
 
-            <input class="btn btn-primary" type="submit" value="Adicionar">
+            <div class="row">
+                <hr>
+                <div class="form-group col-md-offset-4 col-md-2">
+                    <a href="{{route('usuarios.index', ['type' => '1'])}}" class="form-control btn btn-warning">
+                        Retornar
+                    </a>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Adicionar">
+                </div>
+            </div>
         </form>
 
         @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
@@ -172,8 +182,6 @@
         </div>
 
     </div>
-
-    {{--TODO: Acertar include abaixo--}}
 @endsection
 @section('scripts_adicionais')
     <script>
@@ -181,7 +189,7 @@
         {
             let select = document.getElementById("cargo"),
                 div = document.getElementById("divCargo"),
-                i = {{$cargo->count()}},
+                i = {{$cargos->count()}},
                 txtVal = document.getElementById("novoCargo").value,
                 newOption = document.createElement("OPTION"),
                 newInput = document.createElement("INPUT"),
@@ -233,7 +241,7 @@
         {
             let select = document.getElementById("subordinacaoAdministrativa"),
                 div = document.getElementById("divSubAdm"),
-                i = {{$cargo->count()}},
+                i = {{$cargos->count()}},
                 txtVal = document.getElementById("novaSubAdm").value,
                 newOption = document.createElement("OPTION"),
                 newInput = document.createElement("INPUT"),
@@ -259,7 +267,7 @@
         {
             let select = document.getElementById("identificacaoSecretaria"),
                 div = document.getElementById("divSecretaria"),
-                i = {{$cargo->count()}},
+                i = {{$cargos->count()}},
                 txtVal = document.getElementById("novaSecretaria").value,
                 txtVal2 = document.getElementById("siglaSecretaria").value,
                 newOption = document.createElement("OPTION"),
