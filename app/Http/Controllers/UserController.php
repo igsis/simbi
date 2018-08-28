@@ -129,7 +129,7 @@ class UserController extends Controller
                 $user->assignRole($role_r);
         }
 
-        return redirect()->route('usuarios.index')->with('flash_message',
+        return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
             'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 
@@ -212,7 +212,7 @@ class UserController extends Controller
             $secretaria->descricao = $request->descricaoSecretaria;
             $secretaria->save();
         }
-        
+
         if ($request->filled('password'))
         {
             $this->validate($request, [
@@ -280,7 +280,7 @@ class UserController extends Controller
         return redirect()->back()
             ->with('flash_message',
              'Usuário Editado com Sucesso!');
-        
+
     }
 
     /**
@@ -320,7 +320,7 @@ class UserController extends Controller
              'Usuário Ativado com Sucesso.');
     }
 
- 
+
     // Pergunta de seguranca para primeiro acesso
     public function perguntaSeguranca()
     {
