@@ -235,7 +235,7 @@
             var form = $(e.relatedTarget).closest('form');
             $(this).find('.modal-footer #confirm').data('form', form);
         });
-         
+
         // Form confirm (yes/ok) handler, submits form
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
         {
@@ -312,7 +312,7 @@
         {
             let select = document.getElementById("subordinacaoAdministrativa"),
                 div = document.getElementById("divSubAdm"),
-                i = {{$subordinacaoAdministrativa->count()}},
+                i = {{$subordinacoesAdministrativas->count()}},
                 txtVal = document.getElementById("novaSubAdm").value,
                 newOption = document.createElement("OPTION"),
                 newInput = document.createElement("INPUT"),
