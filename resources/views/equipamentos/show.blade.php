@@ -144,6 +144,44 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            @foreach ($equipamento->funcionamentos as $funcionamento)
+                              @if ($funcionamento->publicado == 1)
+                                <table class="table table-bordered">
+                                  <tbody>
+                                    <tr>
+                                      <th colspan="2" class="text-center">
+                                        @if (($funcionamento->segunda == 1) && ($funcionamento->terca == 1) && ($funcionamento->quarta == 1) && ($funcionamento->quinta == 1) && ($funcionamento->sexta == 1) && ($funcionamento->sabado == 1) && ($funcionamento->domingo == 1))
+                                          Todos os Dias
+                                        @elseif (($funcionamento->segunda == 1) && ($funcionamento->terca == 1) && ($funcionamento->quarta == 1) && ($funcionamento->quinta == 1) && ($funcionamento->sexta == 1) && ($funcionamento->sabado == 0) && ($funcionamento->domingo == 0))
+                                          Segunda a Sexta
+                                        @elseif  (($funcionamento->segunda == 0) && ($funcionamento->terca == 0) && ($funcionamento->quarta == 0) && ($funcionamento->quinta == 0) && ($funcionamento->sexta == 0) && ($funcionamento->sabado == 1) && ($funcionamento->domingo == 1))
+                                          Final de Semana
+                                        @elseif  (($funcionamento->segunda == 0) && ($funcionamento->terca == 1) && ($funcionamento->quarta == 1) && ($funcionamento->quinta == 1) && ($funcionamento->sexta == 1) && ($funcionamento->sabado == 1) && ($funcionamento->domingo == 1))
+                                          Terça a Domingo
+                                        @else
+                                          {{ ($funcionamento->segunda == 1) ? "Segunda " : " " }}
+                                          {{ ($funcionamento->terca == 1) ? "Terça " : " " }}
+                                          {{ ($funcionamento->quarta == 1) ? "Quarta " : " " }}
+                                          {{ ($funcionamento->quinta == 1) ? "Quinta " : " " }}
+                                          {{ ($funcionamento->sexta == 1) ? "Sexta " : " " }}
+                                          {{ ($funcionamento->sabado == 1) ? "Sabado " : " " }}
+                                          {{ ($funcionamento->domingo == 1) ? "Domingo " : " " }}
+                                        @endif
+
+                                    </th>
+                                    </tr>
+                                        <tr>
+                                          <th width="30%">Abre às: </th>
+                                          <td>{{ date('G:i', strtotime($funcionamento->hora_inicial)) }}</td>
+                                        </tr>
+                                        <tr>
+                                          <th width="30%">Fecha às: </th>
+                                          <td>{{ date('G:i', strtotime($funcionamento->hora_final)) }}</td>
+                                        </tr>
+                                  </tbody>
+                                </table>
+                            @endif
+                          @endforeach
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade in" id="ocorrencia">
