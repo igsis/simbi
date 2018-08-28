@@ -114,10 +114,10 @@ class UserController extends Controller
         $user->password = 'simbi@2018';
         $user->cargo_id = $cargo->id;
         $user->funcao_id = $funcao->id;
-        $user->escolaridade_id = $request->escolaridade;
-        $user->previsao_aposentadoria = $request->aposentadoria;
         $user->secretaria_id = $secretaria->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
+        $user->escolaridade_id = $request->escolaridade;
+        $user->previsao_aposentadoria = $request->aposentadoria;
 
         $user->save();
 
@@ -155,8 +155,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::get();
         $perguntas = PerguntaSeguranca::all();
-        $secretarias = Secretaria::all();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::all();
+        $secretarias = Secretaria::orderBy('descricao')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
@@ -182,50 +182,91 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*TODO: Atualizar este metodo para o novo update*/
         $user = User::findOrFail($id);
+
+        $cargo = Cargo::findOrNew($request->cargo);
+        if (!($cargo->exists))
+        {
+            $cargo->cargo = $request->novoCargo;
+            $cargo->save();
+        }
+
+        $funcao = Funcao::findOrNew($request->funcao);
+        if (!($funcao->exists))
+        {
+            $funcao->funcao = $request->novaFuncao;
+            $funcao->save();
+        }
+
+        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
+        if (!($subAdm->exists))
+        {
+            $subAdm->descricao = $request->novaSubAdm;
+            $subAdm->save();
+        }
+
+        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+        if (!($secretaria->exists))
+        {
+            $secretaria->sigla = $request->siglaSecretaria;
+            $secretaria->descricao = $request->descricaoSecretaria;
+            $secretaria->save();
+        }
         
         if ($request->filled('password'))
         {
-            $data = $this->validate($request, [
-                    'name'=>'required',
-                    'email'=>'required|email|unique:users,email,'.$id,
-                    'password'=>'required|min:6|confirmed',
-                    'perguntaSeguranca'=>'required',
-                    'respostaSeguranca'=>'required'
+            $this->validate($request, [
+                'name'=>'required',
+                'email'=>'required|email|unique:users,email,'.$id,
+                'password'=>'required|min:6|confirmed',
+                'subordinacaoAdministrativa'=>'required',
+                'identificacaoSecretaria'=>'required',
+                'cargo'=>'required',
+                'funcao'=>'required',
+                'aposentadoria' => 'required',
+                'perguntaSeguranca'=>'required',
+                'respostaSeguranca'=>'required'
             ]);
-            $input = $request->only($data);
 
             $user->update([
-                    'name'=> $request->name,
-                    'login'=> $request->login,
-                    'email'=> $request->email,
-                    'password'=> $request->password,
-                    'pergunta_seguranca_id'=> $request->perguntaSeguranca,
-                    'resposta_seguranca'=> $request->respostaSeguranca,
+                'name'=> $request->name,
+                'login'=> $request->login,
+                'email'=> $request->email,
+                'password'=> $request->password,
+                'cargo_id' => $cargo->id,
+                'funcao_id' => $funcao->id,
+                'secretaria_id' => $secretaria->id,
+                'subordinacao_administrativa_id' => $subAdm->id,
+                'previsao_aposentadoria' => $request->aposentadoria,
+                'pergunta_seguranca_id'=> $request->perguntaSeguranca,
+                'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
         }
         else
         {
-            $data = $this->validate($request, [
-                    'name'=>'required',
-                    'email'=>'required|email|unique:users,email,'.$id,
-                    // 'perguntaSeguranca'=>'required',
-                    // 'respostaSeguranca'=>'required'
+            $this->validate($request, [
+                'name'=>'required',
+                'email'=>'required|email|unique:users,email,'.$id,
+                'subordinacaoAdministrativa'=>'required',
+                'identificacaoSecretaria'=>'required',
+                'cargo'=>'required',
+                'funcao'=>'required',
+                'aposentadoria' => 'required'
             ]);
-            $input = $request->only($data);
 
             $user->update([
-                    'name'=> $request->name,
-                    'login'=> $request->login,
-                    'email'=> $request->email,
-                    'pergunta_seguranca_id'=> $request->perguntaSeguranca,
-                    'resposta_seguranca'=> $request->respostaSeguranca,
-                ]);
+                'name'=> $request->name,
+                'login'=> $request->login,
+                'email'=> $request->email,
+                'cargo_id' => $cargo->id,
+                'funcao_id' => $funcao->id,
+                'secretaria_id' => $secretaria->id,
+                'subordinacao_administrativa_id' => $subAdm->id,
+                'previsao_aposentadoria' => $request->aposentadoria,
+            ]);
         }
 
         $roles = $request['roles'];
-        // $user->fill($input)->save();
 
         if ($roles != 0)
         {

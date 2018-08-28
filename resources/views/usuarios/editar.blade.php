@@ -203,11 +203,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Sigla:</label>
-                            <input class="form-control" type="text" name="siglaSecretaria" id="novaSecretaria" maxlength="6">
+                            <input class="form-control" type="text" name="secretariaSigla" id="secretariaSigla" maxlength="6">
                         </div>
                         <div class="form-group">
                             <label>Descrição:</label>
-                            <input class="form-control" type="text" name="descricaoSecretaria" id="siglaSecretaria">
+                            <input class="form-control" type="text" name="secretariaDescricao" id="secretariaDescricao">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -286,7 +286,7 @@
         {
             let select = document.getElementById("funcao"),
                 div = document.getElementById("divFuncao"),
-                i = document.getElementById("funcao").length,
+                i = {{$funcoes->count()}},
                 txtVal = document.getElementById("novaFuncao").value,
                 newOption = document.createElement("OPTION"),
                 newInput = document.createElement("INPUT"),
@@ -312,7 +312,7 @@
         {
             let select = document.getElementById("subordinacaoAdministrativa"),
                 div = document.getElementById("divSubAdm"),
-                i = {{$cargos->count()}},
+                i = {{$subordinacaoAdministrativa->count()}},
                 txtVal = document.getElementById("novaSubAdm").value,
                 newOption = document.createElement("OPTION"),
                 newInput = document.createElement("INPUT"),
@@ -338,11 +338,12 @@
         {
             let select = document.getElementById("identificacaoSecretaria"),
                 div = document.getElementById("divSecretaria"),
-                i = {{$cargos->count()}},
-                txtVal = document.getElementById("novaSecretaria").value,
-                txtVal2 = document.getElementById("siglaSecretaria").value,
+                i = {{$secretarias->count()}},
+                txtVal = document.getElementById("secretariaSigla").value,
+                txtVal2 = document.getElementById("secretariaDescricao").value,
                 newOption = document.createElement("OPTION"),
                 newInput = document.createElement("INPUT"),
+                newInput2 = document.createElement("INPUT"),
                 newOptionVal = document.createTextNode(txtVal),
                 newOptionVal2 = document.createTextNode(txtVal2);
 
@@ -354,14 +355,14 @@
                 newOption.setAttribute('selected', 'selected');
 
                 newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "descricaoSecretaria");
+                newInput.setAttribute("name", "siglaSecretaria");
                 newInput.setAttribute("value", newOptionVal.textContent);
                 div.insertBefore(newInput, div.lastChild);
 
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "siglaSecretaria");
-                newInput.setAttribute("value", newOptionVal2.textContent);
-                div.insertBefore(newInput, div.lastChild);
+                newInput2.setAttribute("type", "hidden");
+                newInput2.setAttribute("name", "descricaoSecretaria");
+                newInput2.setAttribute("value", newOptionVal2.textContent);
+                div.insertBefore(newInput2, div.lastChild);
             }
             $('#addSecretaria').modal('hide');
             $("input[id='novaSecretaria']").val('');
