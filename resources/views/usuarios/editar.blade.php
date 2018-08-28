@@ -188,6 +188,8 @@
         </form>
         @endif
         @include('layouts.excluir_confirm')
+        
+        <a class="btn btn-warning" href="{{ route('usuarios.index', ['type' => '1']) }}">Voltar</a>
 
         @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
         @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
