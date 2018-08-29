@@ -36,25 +36,25 @@
 				<td>{{$secretaria->sigla}}</td>
 				<td>{{$secretaria->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#secretaria" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#secretaria"
 							data-id="{{$secretaria->id}}"
 							data-sigla="{{$secretaria->sigla}}"
 							data-descricao="{{$secretaria->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$secretaria->id}}" 
+								data-id="{{$secretaria->id}}"
 								data-title="{{$secretaria->sigla}}"
 								data-route="{{route('deleteSecretaria', '')}}">
 						<i class="glyphicon glyphicon-remove"></i> Excluir
-					</button>					
+					</button>
 				</td>
 			</tr>
-			@endforeach				
+			@endforeach
 		</tbody>
 		</table>
-	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#secretaria"><i class="glyphicon glyphicon-plus"></i></button> 	
+	</div>
+	<button class="btn btn-success" data-toggle="modal" data-target="#secretaria"><i class="glyphicon glyphicon-plus"> Adicionar</i></button> 	
 
 	<!-- Editar Secretaria -->
 	<div class="modal fade" id="secretaria" role="dialog" aria-hidden="true">
@@ -87,11 +87,11 @@
 	</div>
 	@include('layouts.desativar')
 </div>
-<div class="text-center"> 
+<div class="text-center">
 	@if(isset($dataForm))
-        {!! $secretarias->appends($dataForm)->links() !!} 
+        {!! $secretarias->appends($dataForm)->links() !!}
     @else
-        {!! $secretarias->links() !!} 
+        {!! $secretarias->links() !!}
     @endif
 </div>
 @endsection
@@ -101,7 +101,7 @@
         // Alimenta o modal com informações das Secretarias
         $('#secretaria').on('show.bs.modal', function (e)
         {
-        	if ($(e.relatedTarget).attr('data-id')) 
+        	if ($(e.relatedTarget).attr('data-id'))
         	{
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let sigla = $(e.relatedTarget).attr('data-sigla');

@@ -32,25 +32,25 @@
 			<tr>
 				<td>{{$prefeituraRegional->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#prefeituraRegional" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#prefeituraRegional"
 							data-id="{{$prefeituraRegional->id}}"
 							data-descricao="{{$prefeituraRegional->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$prefeituraRegional->id}}" 
+								data-id="{{$prefeituraRegional->id}}"
 								data-title="{{$prefeituraRegional->descricao}}"
 								data-route="{{route('deletePrefeituraRegional', '')}}">
 						<i class="glyphicon glyphicon-remove"></i> Excluir
-					</button>					
+					</button>
 				</td>
 			</tr>
-			@endforeach				
+			@endforeach
 		</tbody>
 		</table>
 	</div>
 	{{-- Add Prefeitura Regional  --}}
-	<button class="btn btn-success" data-toggle="modal" data-target="#prefeituraRegional"><i class="glyphicon glyphicon-plus"></i></button> 	
+	<button class="btn btn-success" data-toggle="modal" data-target="#prefeituraRegional"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 	
 
 	<!-- Editar Prefeitura Regional -->
 	<div class="modal fade" id="prefeituraRegional" role="dialog" aria-hidden="true">
@@ -76,11 +76,11 @@
 	</div>
 	@include('layouts.desativar')
 </div>
-<div class="text-center"> 
+<div class="text-center">
 	@if(isset($dataForm))
-        {!! $prefeiturasRegionais->appends($dataForm)->links() !!} 
+        {!! $prefeiturasRegionais->appends($dataForm)->links() !!}
     @else
-        {!! $prefeiturasRegionais->links() !!} 
+        {!! $prefeiturasRegionais->links() !!}
     @endif
 </div>
 @endsection
@@ -89,11 +89,11 @@
 
         // Alimenta o modal com informações de cada Tipo de Serviço
         $('#prefeituraRegional').on('show.bs.modal', function (e)
-        {	
+        {
         	/**
         	*	Modal editar e adicionar
-        	*/	
-        	if ($(e.relatedTarget).attr('data-id')) 
+        	*/
+        	if ($(e.relatedTarget).attr('data-id'))
         	{
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
@@ -103,7 +103,7 @@
 	            $(this).find('form input[name="descricao"]').attr('value', descricao);
 	            $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`);
 		        $(this).find('form').attr('action', `{{route('editPrefeituraRegional', '')}}/${id}`);
-		    }else 
+		    }else
 	        {
 	        	$(this).find('.modal-title').text('Adicionar Prefeitura Regional');
 	            $(this).find('.modal-footer input').attr('value', 'Adicionar');

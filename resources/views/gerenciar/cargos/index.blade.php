@@ -49,7 +49,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-success" data-toggle="modal" data-target="#cargo"><i class="glyphicon glyphicon-plus"></i></button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#cargo"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
 
         <!-- Editar Cargo -->
         <div class="modal fade" id="cargo" role="dialog" aria-hidden="true">

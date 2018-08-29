@@ -17,7 +17,7 @@
 	        </select>
 	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
 	    </form>
-	</div><br>	
+	</div><br>
 
 	<div class="table-responsive">
 	    <table class="table table-bordered table-striped ">
@@ -32,24 +32,24 @@
 			<tr>
 				<td>{{$distrito->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#distrito" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#distrito"
 							data-id="{{$distrito->id}}"
 							data-descricao="{{$distrito->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$distrito->id}}" 
+								data-id="{{$distrito->id}}"
 								data-title="{{$distrito->descricao}}"
 								data-route="{{route('deleteDistrito', '')}}">
 						<i class="glyphicon glyphicon-remove"></i> Excluir
-					</button>					
+					</button>
 				</td>
 			</tr>
-			@endforeach				
+			@endforeach
 		</tbody>
 		</table>
-	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#distrito"><i class="glyphicon glyphicon-plus"></i></button> 	
+	</div>
+	<button class="btn btn-success" data-toggle="modal" data-target="#distrito"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
 
 	<!-- Editar Distrito -->
 	<div class="modal fade" id="distrito" role="dialog" aria-hidden="true">
@@ -75,11 +75,11 @@
 	</div>
 	@include('layouts.desativar')
 </div>
-<div class="text-center"> 
+<div class="text-center">
 	@if(isset($dataForm))
-        {!! $distritos->appends($dataForm)->links() !!} 
+        {!! $distritos->appends($dataForm)->links() !!}
     @else
-        {!! $distritos->links() !!} 
+        {!! $distritos->links() !!}
     @endif
 </div>
 
@@ -90,7 +90,7 @@
         // Alimenta o modal com informações de cada Tipo de Serviço
         $('#distrito').on('show.bs.modal', function (e)
         {
-        	if ($(e.relatedTarget).attr('data-id')) 
+        	if ($(e.relatedTarget).attr('data-id'))
         	{
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
