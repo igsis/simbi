@@ -362,7 +362,24 @@ class EquipamentoController extends Controller
             'regional_id' => $request->regional
             ]);
 
-        /*TODO: Atualização do horario de funcionamento*/
+        $funcionamento = new Funcionamento();
+        foreach ($request->input('funcionamento') as $key => $value)
+        {
+            $funcionamento->updateOrCreate(['id' => $request->input("funcionamento.{$key}")], [
+                'domingo' => $request->input("domingo.{$key}", '0'),
+                'segunda' => $request->input("segunda.{$key}", '0'),
+                'terca' => $request->input("terca.{$key}", '0'),
+                'quarta' => $request->input("quarta.{$key}", '0'),
+                'quinta' => $request->input("quinta.{$key}", '0'),
+                'sexta' => $request->input("sexta.{$key}", '0'),
+                'sabado' => $request->input("sabado.{$key}", '0'),
+                'hora_inicial' => $request->input("horarioAbertura.{$key}"),
+                'hora_final' => $request->input("horarioFechamento.{$key}"),
+                'equipamento_id' => $id
+            ]);
+        }
+
+        /*TODO: Remover funcionamento com ajax*/
 
         return redirect()->back()->with('flash_message',
                 'Equipamento Editado com Sucesso!');

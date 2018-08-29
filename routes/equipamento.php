@@ -20,7 +20,7 @@ Route::group(['prefix' => 'equipamentos'], function() {
 
         Route::post('/novo', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 
-        Route::post('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
+        Route::put('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
 
     });
 
