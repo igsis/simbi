@@ -379,10 +379,17 @@ class EquipamentoController extends Controller
             ]);
         }
 
-        /*TODO: Remover funcionamento com ajax*/
-
         return redirect()->back()->with('flash_message',
                 'Equipamento Editado com Sucesso!');
+
+        /*TODO: remover um funcionamento*/
+    }
+
+    public function removeFuncionamento($id)
+    {
+        Funcionamento::findOrFail($id)->update(['publicado' => 0]);
+
+        return redirect()->back()->with('flash_message', 'Funcionamento excluído com Sucesso.');
     }
 
     /**
