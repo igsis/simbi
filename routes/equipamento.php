@@ -15,13 +15,14 @@ Route::resource('equipamentos', 'EquipamentoController', [
 
 Route::group(['prefix' => 'equipamentos'], function() {
 
+    Route::put('/{funcionamento}/funcionamento', 'EquipamentoController@removeFuncionamento')->name('equipamentos.removeFuncionamento');
+
     Route::group(['prefix' => 'detalhes/{equipamento}'], function(){
         Route::get('/', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
 
         Route::post('/novo', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 
-        Route::post('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
-
+        Route::put('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
     });
 
     Route::get('/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
