@@ -32,24 +32,24 @@
 			<tr>
 				<td>{{$subordinacaoAdministrativa->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#subordinacaoAdministrativa" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#subordinacaoAdministrativa"
 							data-id="{{$subordinacaoAdministrativa->id}}"
 							data-descricao="{{$subordinacaoAdministrativa->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$subordinacaoAdministrativa->id}}" 
+								data-id="{{$subordinacaoAdministrativa->id}}"
 								data-title="{{$subordinacaoAdministrativa->descricao}}"
 								data-route="{{route('deleteSubordinacaoAdministrativa', '')}}">
 						<i class="glyphicon glyphicon-remove"></i> Excluir
-					</button>					
+					</button>
 				</td>
 			</tr>
-			@endforeach				
+			@endforeach
 		</tbody>
 		</table>
-	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#subordinacaoAdministrativa"><i class="glyphicon glyphicon-plus"></i></button> 	
+	</div>
+	<button class="btn btn-success" data-toggle="modal" data-target="#subordinacaoAdministrativa"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 	
 	<!-- Editar Sub. Administrativa -->
 	<div class="modal fade" id="subordinacaoAdministrativa" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
@@ -75,11 +75,11 @@
 	</div>
 	@include('layouts.desativar')
 </div>
-<div class="text-center"> 
+<div class="text-center">
 	@if(isset($dataForm))
-        {!! $subordinacaoAdministrativas->appends($dataForm)->links() !!} 
+        {!! $subordinacaoAdministrativas->appends($dataForm)->links() !!}
     @else
-        {!! $subordinacaoAdministrativas->links() !!} 
+        {!! $subordinacaoAdministrativas->links() !!}
     @endif
 </div>
 @endsection
@@ -89,7 +89,7 @@
         // Alimenta o modal com informações de cada Tipo de Serviço
         $('#subordinacaoAdministrativa').on('show.bs.modal', function (e)
         {
-        	if ($(e.relatedTarget).attr('data-id')) 
+        	if ($(e.relatedTarget).attr('data-id'))
         	{
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
@@ -105,7 +105,7 @@
 	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
 	            $(this).find('form input[type="text"]').attr('value', '');
 	            $(this).find('form').attr('action', `{{route('createSubordinacaoAdministrativa')}}`);
-	        }		        
+	        }
         });
     </script>
 

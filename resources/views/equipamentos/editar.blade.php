@@ -207,20 +207,20 @@
             </div>
 
             <div class="text-center" ><h2>Horário de Funcionamento</h2></div>
-            @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
+            @if ($equipamento->funcionamentos->count() == false)
                 <div class="horario">
                     <div class="row">
                         <hr>
                         <div class="form-group">
                             <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
-                                <input type="hidden" name="funcionamento[{{$key}}]" value="{{$funcionamento->id}}">
-                                <input type="checkbox" name="domingo[{{$key}}]" value="1" {{$funcionamento->domingo == 1 ? "checked" : ""}}/><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
-                                <input type="checkbox" name="segunda[{{$key}}]" value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
-                                <input type="checkbox" name="terca[{{$key}}]" value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
-                                <input type="checkbox" name="quarta[{{$key}}]" value="1" {{$funcionamento->quarta == 1 ? "checked" : ""}}/><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
-                                <input type="checkbox" name="quinta[{{$key}}]" value="1" {{$funcionamento->quinta == 1 ? "checked" : ""}}/><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
-                                <input type="checkbox" name="sexta[{{$key}}]" value="1" {{$funcionamento->sexta == 1 ? "checked" : ""}}/><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
-                                <input type="checkbox" name="sabado[{{$key}}]" value="1" {{$funcionamento->sabado == 1 ? "checked" : ""}}/><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                                <input type="hidden" name="funcionamento[0]" value="0">
+                                <input type="checkbox" name="domingo[0]" value="1" /><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                                <input type="checkbox" name="segunda[0]" value="1"/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                                <input type="checkbox" name="terca[0]" value="1" /><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                                <input type="checkbox" name="quarta[0]" value="1" /><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                                <input type="checkbox" name="quinta[0]" value="1" /><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                                <input type="checkbox" name="sexta[0]" value="1" /><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                                <input type="checkbox" name="sabado[0]" value="1" /><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
                             </div>
                         </div>
                     </div>
@@ -228,15 +228,46 @@
                     <div class="row">
                         <div class="form-group col-md-offset-4 col-md-2">
                             <label for="horarioAbertura">Horario de Abertura</label>
-                            <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
+                            <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="horarioFechamento">Horario de Fechamento</label>
-                            <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
+                            <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @else
+                @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
+                    <div class="horario">
+                        <div class="row">
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
+                                    <input type="hidden" name="funcionamento[{{$key}}]" value="{{$funcionamento->id}}">
+                                    <input type="checkbox" name="domingo[{{$key}}]" value="1" {{$funcionamento->domingo == 1 ? "checked" : ""}}/><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                                    <input type="checkbox" name="segunda[{{$key}}]" value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                                    <input type="checkbox" name="terca[{{$key}}]" value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                                    <input type="checkbox" name="quarta[{{$key}}]" value="1" {{$funcionamento->quarta == 1 ? "checked" : ""}}/><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                                    <input type="checkbox" name="quinta[{{$key}}]" value="1" {{$funcionamento->quinta == 1 ? "checked" : ""}}/><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                                    <input type="checkbox" name="sexta[{{$key}}]" value="1" {{$funcionamento->sexta == 1 ? "checked" : ""}}/><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                                    <input type="checkbox" name="sabado[{{$key}}]" value="1" {{$funcionamento->sabado == 1 ? "checked" : ""}}/><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-offset-4 col-md-2">
+                                <label for="horarioAbertura">Horario de Abertura</label>
+                                <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="horarioFechamento">Horario de Fechamento</label>
+                                <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
 
             <hr class="botoes">
 
@@ -318,11 +349,11 @@
 
             <div class="row">
                 <hr>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-offset-4 col-md-2">
                     <input type="submit" class="form-control btn btn-primary" name="enviar" value="Atualizar">
                 </div>
 
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-2">
                     <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
                         Retornar à Detalhes
                     </a>
@@ -331,12 +362,28 @@
             </div>
         </form>
         @include('layouts.equipamento_modal')
+        @include('layouts.excluir_confirm')
 
     </div>
 @endsection
 @section('scripts_adicionais')
 @section('scripts_adicionais')
     @include('scripts.cadastrar_ocorrencia')
+    <script type="text/javascript" >
+        $('#addInput').on('click', function(e) {
+            let i = $('.horario').length;
+            $('.horario').first().clone().find("input").attr('name', function(idx, attrVal) {
+                return attrVal.replace('[0]','')+'['+i+']';
+            }).removeAttr('checked').end().find("input[type=text]").val('').end().insertBefore('.botoes').end().find("input[type=hidden]").val(i+1);
+        });
+
+        $('#remInput').on('click', function(e) {
+            let i = $('.horario').length;
+            if (i > 1){
+                $('.horario').last().remove();
+            }
+        });
+    </script>
     <script type="text/javascript">
 
         $('#addServico').submit(function(e) {
@@ -682,6 +729,27 @@
             $('#prefeituraRegional').val("{{$equipamento->endereco->prefeitura_regional_id}}");
             $('#distrito').val("{{$equipamento->endereco->distrito_id}}");
             $('#status').val("{{$equipamento->status->id}}");
+        });
+
+        // Script Msg Excluir Usuario
+        $('#confirmDelete').on('show.bs.modal', function (e)
+        {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+            $message = $(e.relatedTarget).attr('data-footer');
+            $(this).find('.modal-footer #confirm ').text($message);
+
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
+        });
+
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
+        {
+            $(this).data('form').submit();
         });
     </script>
 @endsection

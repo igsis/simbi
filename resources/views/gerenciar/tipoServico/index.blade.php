@@ -31,24 +31,24 @@
 			<tr>
 				<td>{{$tipoServico->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#tipoServico" 
+					<button class="btn btn-info" data-toggle="modal" data-target="#tipoServico"
 							data-id="{{$tipoServico->id}}"
 							data-descricao="{{$tipoServico->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 						<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$tipoServico->id}}" 
+								data-id="{{$tipoServico->id}}"
 								data-title="{{$tipoServico->descricao}}"
 								data-route="{{route('deleteTipoServico', '')}}">
 							<i class="glyphicon glyphicon-remove"></i> Excluir
 						</button>
 				</td>
 			</tr>
-			@endforeach				
+			@endforeach
 		</tbody>
 		</table>
-	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#tipoServico"><i class="glyphicon glyphicon-plus"></i></button> 
+	</div>
+	<button class="btn btn-success" data-toggle="modal" data-target="#tipoServico"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 
 
 	<!-- Editar Serviço -->
 	<div class="modal fade" id="tipoServico" role="dialog" aria-hidden="true">
@@ -76,11 +76,11 @@
 	@include('layouts.desativar')
 </div>
 
-<div class="text-center"> 
+<div class="text-center">
 	@if(isset($dataForm))
-        {!! $tipoServicos->appends($dataForm)->links() !!} 
+        {!! $tipoServicos->appends($dataForm)->links() !!}
     @else
-        {!! $tipoServicos->links() !!} 
+        {!! $tipoServicos->links() !!}
     @endif
 </div>
 
@@ -91,7 +91,7 @@
         // Alimenta o modal com informações de cada Tipo de Serviço
         $('#tipoServico').on('show.bs.modal', function (e)
         {
-        	if ($(e.relatedTarget).attr('data-id')) 
+        	if ($(e.relatedTarget).attr('data-id'))
         	{
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let descricao = $(e.relatedTarget).attr('data-descricao');
@@ -107,7 +107,7 @@
 	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
 	            $(this).find('form input[type="text"]').attr('value', '');
 	            $(this).find('form').attr('action', `{{route('createTipoServico')}}`);
-	        }	            
+	        }
         });
 
     </script>
@@ -115,4 +115,3 @@
     @include('scripts.desativar_modal')
 
 @endsection
-

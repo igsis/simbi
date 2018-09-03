@@ -18,7 +18,8 @@ class Funcionamento extends Model
         'domingo',
         'hora_inicial',
         'hora_final',
-        'equipamento_id'
+        'equipamento_id',
+        'publicado'
     ];
 
     public function equipamento(){

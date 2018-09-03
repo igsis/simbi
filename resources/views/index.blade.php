@@ -11,6 +11,8 @@
 
 	<hr>
 
+
+
     @if(Auth::guest())
         @include('auth.login')
     @endif

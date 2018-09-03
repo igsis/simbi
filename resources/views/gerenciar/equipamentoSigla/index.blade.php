@@ -39,25 +39,25 @@
 				<td>{{$equipamentoSigla->roteiro}}</td>
 				<td>
 					<button class="btn btn-info" data-toggle="modal" data-target="#equipamentoSigla"
-							data-id="{{$equipamentoSigla->id}}" 
-							data-sigla="{{$equipamentoSigla->sigla}}" 
-							data-descricao="{{$equipamentoSigla->descricao}}" 
+							data-id="{{$equipamentoSigla->id}}"
+							data-sigla="{{$equipamentoSigla->sigla}}"
+							data-descricao="{{$equipamentoSigla->descricao}}"
 							data-roteiro="{{$equipamentoSigla->roteiro}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$equipamentoSigla->id}}" 
+								data-id="{{$equipamentoSigla->id}}"
 								data-title="{{$equipamentoSigla->sigla}}"
 								data-route="{{route('deleteSiglaEquipamento', '')}}">
 						<i class="glyphicon glyphicon-remove"></i> Excluir
-					</button>					
+					</button>
 				</td>
 			</tr>
-			@endforeach				
+			@endforeach
 		</tbody>
 		</table>
-	</div>			
-	<button class="btn btn-success" data-toggle="modal" data-target="#equipamentoSigla"><i class="glyphicon glyphicon-plus"></i></button> 	
+	</div>
+	<button class="btn btn-success" data-toggle="modal" data-target="#equipamentoSigla"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 	
 
 	<!-- Editar Sigla -->
 	<div class="modal fade" id="equipamentoSigla" role="dialog" aria-hidden="true">
@@ -93,11 +93,11 @@
 	</div>
 	@include('layouts.desativar')
 </div>
-<div class="text-center"> 
+<div class="text-center">
 	@if(isset($dataForm))
-        {!! $equipamentoSiglas->appends($dataForm)->links() !!} 
+        {!! $equipamentoSiglas->appends($dataForm)->links() !!}
     @else
-        {!! $equipamentoSiglas->links() !!} 
+        {!! $equipamentoSiglas->links() !!}
     @endif
 </div>
 
@@ -108,7 +108,7 @@
         // Alimenta o modal com informações de cada Sigla do Equipamento
         $('#equipamentoSigla').on('show.bs.modal', function (e)
         {
-        	if ($(e.relatedTarget).attr('data-id')) 
+        	if ($(e.relatedTarget).attr('data-id'))
         	{
 	            let id = $(e.relatedTarget).attr('data-id');
 	            let sigla = $(e.relatedTarget).attr('data-sigla');
