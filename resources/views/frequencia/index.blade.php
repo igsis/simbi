@@ -18,7 +18,7 @@
             </thead>
             <tbody>
             @foreach($equipamentos as $equipamento)
-                <tr>
+                <tr> 
                     <td>{{$equipamento->nome}}</td>
                     <td>
                         @if($type == 1)
