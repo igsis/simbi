@@ -82,7 +82,7 @@ class Equipamento extends Model
         return $this->hasMany(FrequenciasPublico::class);
     }
 
-    public function publicoPortarias()
+    public function frequenciasPortarias()
     {
         return $this->hasMany(FrequenciasPortaria::class);
     }

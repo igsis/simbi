@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<?php
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
+?>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +20,7 @@
 
     </head>
     <body>
+        @include('layouts.br')
         <div class="wrapper">
             @if (!Auth::guest())
                 @include ('layouts.sidebar')

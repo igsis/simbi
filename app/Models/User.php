@@ -79,6 +79,11 @@ https://goo.gl/BcqZQr*/
         return $this->hasMany(FrequenciasPublico::class);
     }
 
+    public function frequenciasPortarias()
+    {
+        return $this->hasMany(FrequenciasPortaria::class);
+    }
+
     public function funcao()
     {
         return $this->belongsTo(Funcao::class);

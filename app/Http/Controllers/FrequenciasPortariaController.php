@@ -3,6 +3,9 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Simbi\Models\Equipamento;
+use Auth;
+
 
 class FrequenciasPortariaController extends Controller
 {
@@ -31,21 +34,17 @@ class FrequenciasPortariaController extends Controller
     public function store(Request $request, $id)
     {
         $this->validate($request, [
-            'nome'     =>  'required',
-
+            'data'          =>  'required',
+            'nome'          =>  'required'
         ]);
 
         $user =  Auth::user();
 
         // dd($request->equipamento);
 
-        $user->FrequenciasPortaria()->create([
-            'dia_semana_id' => $request->diaSemana,
-            'crianca' => $request->crianca,
-            'jovem' => $request->jovem,
-            'adulto' => $request->adulto,
-            'idoso' => $request->idoso,
-            'total' => $request->total,
+        $user->frequenciasPortarias()->create([
+            'data' => $request->data,
+            'nome' => $request->nome,
             'equipamento_id' => $id
         ]);
 

@@ -9,20 +9,20 @@
         </h1>
         <hr>
 
-        <form method="POST" action="{{route('frequencia.publico.gravar', $equipamento->id)}}">
+        <form method="POST" action="{{route('frequencia.portaria.gravar', $equipamento->id)}}">
             {{ csrf_field() }}
 
             <div class="row">
               <div class="form-group">
                 <label for="nome">Nome/Nome Social</label>
-                <input type="text" class="form-control" class="form-control" id="nome">
+                <input type="text" class="form-control" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
               </div>
             </div>
 
             <div class="row">
               <div class="form-group">
                 <label for="data">Data</label>
-                <input class="form-control" type="text" name="data" value="{{date('d/m/Y')}}" readonly>
+                <input class="form-control" type="date" name="data">
               </div>
             </div>
 
