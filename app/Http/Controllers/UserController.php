@@ -360,6 +360,14 @@ class UserController extends Controller
 
     }
 
+    public function exibeVincular($id)
+    {
+        $user = User::findOrFail($id);
+        $equipamentos = Equipamento::all();
+
+        return view('usuarios.vincular', compact('user', 'equipamentos'));
+    }
+
     public function vinculaEquipamento(Request $request, $id)
     {
         /** @var User $usuario */

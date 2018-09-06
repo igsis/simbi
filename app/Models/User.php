@@ -64,7 +64,7 @@ class User extends Authenticatable
 https://goo.gl/BcqZQr*/
     public function equipamentos()
     {
-        return $this->belongsToMany(Equipamento::class)->withPivot('data_inicio', 'data_fim');
+        return $this->belongsToMany(Equipamento::class)->withPivot('data_inicio', 'data_fim', 'responsabilidade_tipo_id');
     }
 
     public function frequencias()
