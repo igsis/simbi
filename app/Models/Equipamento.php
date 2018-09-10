@@ -24,7 +24,8 @@ class Equipamento extends Model
         'nucleobraile',
         'status_id',
         'publicado',
-        'observacao'
+        'observacao',
+        'portaria'
 	];
 
     public function auditorio()

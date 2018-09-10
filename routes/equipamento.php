@@ -25,6 +25,8 @@ Route::group(['prefix' => 'equipamentos'], function() {
         Route::put('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');
     });
 
+    Route::put('/{equipamento}' , 'EquipamentoController@editPortaria')->name('equipamentos.editPortaria');
+
     Route::get('/{equipamento}/acessibilidade', 'EquipamentoController@criaAcessibilidade')->name('equipamentos.criaAcessibilidade');
 
     Route::post('/{equipamento}/acessibilidade', 'EquipamentoController@gravaAcessibilidade')->name('equipamentos.gravaAcessibilidade');

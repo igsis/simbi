@@ -18,11 +18,7 @@
             </thead>
             <tbody>
             @foreach($equipamentos as $equipamento)
-<<<<<<< HEAD
-                <tr>  
-=======
                 <tr>
->>>>>>> FrequenciaPortaria#19
                     <td>{{$equipamento->nome}}</td>
                     <td>
                         @if($type == 1)
