@@ -4,7 +4,7 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Escolaridade extends Model
+class Etnia extends Model
 {
     public $timestamps = false;
 
@@ -13,8 +13,4 @@ class Escolaridade extends Model
         return $this->hasMany(ComplementoPortaria::class);
     }
 
-    public function usuarios()
-    {
-        return $this->hasMany(Equipamento::class);
-    }
 }
