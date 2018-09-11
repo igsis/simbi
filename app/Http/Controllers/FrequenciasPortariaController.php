@@ -3,8 +3,13 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Simbi\Models\Deficiencia;
 use Simbi\Models\Equipamento;
 use Auth;
+use Simbi\Models\Escolaridade;
+use Simbi\Models\Etnia;
+use Simbi\Models\Idade;
+use Simbi\Models\Sexo;
 
 
 class FrequenciasPortariaController extends Controller
@@ -23,6 +28,25 @@ class FrequenciasPortariaController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
         return view('frequencia.portaria.cadastro', compact('equipamento'));
+    }
+
+    public function criaPortariaCompleta($id)
+    {
+        $equipamento = Equipamento::find($id);
+        $etnias = Etnia::all();
+        $idades = Idade::all();
+        $escolaridades = Escolaridade::all();
+        $sexos = Sexo::all();
+        $deficiencias = Deficiencia::all();
+
+        return view('frequencia.portaria.cadastroCompleto', compact(
+            'equipamento',
+            'etnias',
+            'idades',
+            'escolaridades',
+            'sexos',
+            'deficiencias'
+        ));
     }
 
     /**
