@@ -9,7 +9,7 @@
         </h1>
         <hr>
 
-        <form method="POST" action="{{route('frequencia.portaria.gravar', $equipamento->id)}}">
+        <form method="POST" action="{{route('frequencia.portaria.gravaCompleto', $equipamento->id)}}">
             {{ csrf_field() }}
 
             <div class="row">
@@ -27,7 +27,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="status">Sexo</label>
-                    <select class="form-control" name="status" id="sexo">
+                    <select class="form-control" name="sexo" id="sexo">
                         <option value="">Selecione...</option>
                         @foreach ($sexos as $sexo)
                             @if ($sexo->id == old('sexo'))
@@ -41,7 +41,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="status">Idade</label>
-                    <select class="form-control" name="status" id="idade">
+                    <select class="form-control" name="idade" id="idade">
                         <option value="">Selecione...</option>
                         @foreach ($idades as $idade)
                             @if ($idade->id == old('idade'))
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="status">Etnia</label>
-                    <select class="form-control" name="status" id="etnia">
+                    <select class="form-control" name="etnia" id="etnia">
                         <option value="">Selecione...</option>
                         @foreach ($etnias as $etnia)
                             @if ($etnia->id == old('etnia'))
@@ -71,7 +71,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="status">Escolaridade</label>
-                    <select class="form-control" name="status" id="escolaridade">
+                    <select class="form-control" name="escolaridade" id="escolaridade">
                         <option value="">Selecione...</option>
                         @foreach ($escolaridades as $escolaridade)
                             @if ($escolaridade->id == old('$escolaridade'))
@@ -85,7 +85,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="status">Deficiencia</label>
-                    <select class="form-control" name="status" id="deficiencia">
+                    <select class="form-control" name="deficiencia" id="deficiencia">
                         <option value="">Selecione...</option>
                         @foreach ($deficiencias as $deficiencia)
                             @if ($deficiencia->id == old('deficiencia'))

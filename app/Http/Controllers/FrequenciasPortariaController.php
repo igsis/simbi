@@ -64,12 +64,40 @@ class FrequenciasPortariaController extends Controller
 
         $user =  Auth::user();
 
-        // dd($request->equipamento);
+        $user->frequenciasPortarias()->create([
+            'data' => $request->data,
+            'nome' => $request->nome,
+            'equipamento_id' => $id
+        ]);
+
+        return redirect()->route('frequencia.portaria.index')->with('flash_message',
+            'Frequência Inserida Com Sucesso!');
+    }
+
+    public function gravaPortariaCompleta(Request $request, $id)
+    {
+        $this->validate($request, [
+            'data'          =>  'required',
+            'nome'          =>  'required',
+            'idade'         =>  'required',
+            'sexo'          =>  'required',
+            'etnia'         =>  'required',
+            'escolaridade'  =>  'required',
+            'deficiencia'   =>  'required'
+        ]);
+
+        $user =  Auth::user();
 
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
             'nome' => $request->nome,
             'equipamento_id' => $id
+        ])->complementoPortaria()->create([
+            'idade_id' => $request->idade,
+            'sexo_id'  => $request->sexo,
+            'etnia_id' => $request->etnia,
+            'escolaridade_id' => $request->escolaridade,
+            'deficiencia_id' => $request->deficiencia
         ]);
 
         return redirect()->route('frequencia.portaria.index')->with('flash_message',
