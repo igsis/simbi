@@ -16,9 +16,12 @@ class FormularioMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->pergunta_seguranca_id == null) {
-            return redirect('frequencia.portaria.cadastroCompleto');
+        $equipamento = Equipamento::findOrFail($request->route('equipamento'));
+
+        if ($equipamento->portaria == 1) {
+            return redirect()->route('frequencia.portaria.cadastroCompleto', $equipamento->id);
         }
+
         return $next($request);
     }
 }
