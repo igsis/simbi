@@ -83,9 +83,10 @@
                 <label for="observacao">Observação</label>
                 <input class="form-control" type="text" name="observacao" value="{{old('observacao')}}">
             </div>
-
-            <input class="btn btn-success" type="submit" value="Cadastrar">
         </form>
+
+            {{--TODO: Alterar para input quando funcionamento estiver OK--}}
+            <button class="btn btn-success" >Cadastrar</button>
 
     </div>
 
@@ -120,7 +121,7 @@
         botao.addEventListener('click', () => {
             let idEvento = document.querySelector('input[name="evento"]').value;
             console.log(idEvento);
-            fetch(`http://localhost/node/api/api_teste/?id=${idEvento}`).then(resposta => {
+            fetch(`http://smcsistemas.prefeitura.sp.gov.br/igsis/funcoes/api_simbi.php?id=${idEvento}`).then(resposta => {
                 console.log(resposta);
                 return resposta.json();
             }).then(dados => {
