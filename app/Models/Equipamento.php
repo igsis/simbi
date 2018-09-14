@@ -24,7 +24,8 @@ class Equipamento extends Model
         'nucleobraile',
         'status_id',
         'publicado',
-        'observacao'
+        'observacao',
+        'portaria'
 	];
 
     public function auditorio()
@@ -80,6 +81,11 @@ class Equipamento extends Model
     public function frequenciasPublicos()
     {
         return $this->hasMany(FrequenciasPublico::class);
+    }
+
+    public function frequenciasPortarias()
+    {
+        return $this->hasMany(FrequenciasPortaria::class);
     }
 
     public function funcionamentos()

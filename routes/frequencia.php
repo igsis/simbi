@@ -14,16 +14,20 @@ Route::group(['prefix' => 'frequencia'], function(){
 
 });
 
-Route::group(['prefix' => 'frequencia-publico-atendido'], function(){
+Route::group(['prefix' => 'portaria'], function(){
 
-    Route::get('/', 'FrequenciaController@index')->name('frequencia.publico.index');
+    Route::get('/', 'FrequenciaController@index')->name('frequencia.portaria.index');
 
-    Route::get('/relatorio', 'FrequenciasPublicoController@relatorio')->name('frequencia.publico.relatorio');
+    Route::get('/relatorio', 'FrequenciasPortariaController@relatorio')->name('frequencia.portaria.relatorio');
 
-    Route::get('/{equipamento}/cadastro', 'FrequenciasPublicoController@create')->name('frequencia.publico.cadastro');
+    Route::get('/{equipamento}/cadastro', 'FrequenciasPortariaController@create')->name('frequencia.portaria.cadastro')->middleware('portaria');
 
-    Route::post('/{equipamento}/cadastro', 'FrequenciasPublicoController@store')->name('frequencia.publico.gravar');
+    Route::get('/{equipamento}/cadastroCompleto', 'FrequenciasPortariaController@criaPortariaCompleta')->name('frequencia.portaria.cadastroCompleto');
 
-    Route::get('/{equipamento}/listar', 'FrequenciasPublicoController@listar')->name('frequencia.publico.listar');
+    Route::post('/{equipamento}/cadastroCompleto', 'FrequenciasPortariaController@gravaPortariaCompleta')->name('frequencia.portaria.gravaCompleto');
+
+    Route::post('/{equipamento}/cadastro', 'FrequenciasPortariaController@store')->name('frequencia.portaria.gravar');
+
+    Route::get('/{equipamento}/listar', 'FrequenciasPortariaController@listar')->name('frequencia.portaria.listar');
 
 });

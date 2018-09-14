@@ -17,6 +17,23 @@
                     <div class="row">
                         <div class="col text-right">
                             @hasanyrole('Coordenador|Administrador')
+                            @if($equipamento->portaria == 1)
+                                <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}" style="display: inline;">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $equipamento->id }}">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Simples?' data-footer="Trocar"> Formulário Completo
+                                    </button>
+                                </form>
+                            @else
+                                <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}" style="display: inline;">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $equipamento->id }}">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Completo?' data-footer="Trocar"> Formulário Simples
+                                    </button>
+                                </form>
+                            @endif
                                 <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
                             @endhasanyrole
                         </div>
@@ -561,7 +578,7 @@
                                         </th>
                                         <th style="border: none;">
                                             @hasanyrole('Coordenador|Administrador')
-                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                                <a href="#" class="btn btn-success">Adicionar</a>
                                             @endhasanyrole
                                         </th>
                                     </tr>
@@ -716,7 +733,7 @@
                                         </th>
                                         <td style="border: none;">
                                             @hasanyrole('Coordenador|Administrador')
-                                            <a href="#" class="btn btn-success">Adicionar</a>
+                                                <a href="#" class="btn btn-success">Adicionar</a>
                                             @endhasanyrole
                                         </td>
                                     </tr>
@@ -784,5 +801,54 @@
             </a>
         </div>
     </div>
+
+    <div class="modal fade" id="confirmTroca" role="dialog" aria-labelledby="confirmTrocarFormulario" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p>Confirma?</p>
+                </div>
+                <div class="modal-footer">
+                    <form method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="PUT">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <input type="submit" class="btn btn-success" value="Trocar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('scripts_adicionais')
+    <script type="text/javascript">
+        // Script Msg Excluir Equipamento
+        $('#confirmTroca').on('show.bs.modal', function (e)
+        {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+            $message = $(e.relatedTarget).attr('data-footer');
+            $(this).find('.modal-footer #confirm ').text($message);
+
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
+        });
+
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirm').find('.modal-footer #confirm').on('click', function()
+        {
+            $(this).data('form').submit();
+        });
+
+    </script>
 
 @endsection
