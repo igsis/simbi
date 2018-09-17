@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Compound;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
+use Simbi\Models\EventosIgsis;
 use Auth;
 
 class FrequenciaController extends Controller
@@ -125,4 +126,16 @@ class FrequenciaController extends Controller
     {
         //
     }
+
+
+      public function testeIsa()
+      {
+        // $eventos = EventosIgsis::all();
+
+        $teste= EventosIgsis::all();
+
+       dd($teste);
+
+
+      }
 }

@@ -152,11 +152,6 @@ class FrequenciasPortariaController extends Controller
         //
     }
 
-    public function testeIsa()
-    {
-        
-        
-    }
 
-    
+
 }
