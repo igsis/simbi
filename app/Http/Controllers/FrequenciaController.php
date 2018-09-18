@@ -127,15 +127,13 @@ class FrequenciaController extends Controller
         //
     }
 
+    public function importarEventos()
+    {
+        $idEvento = 170;
+        $eventos = EventosIgsis::where('idEvento', $idEvento);
 
-      public function testeIsa()
-      {
-        // $eventos = EventosIgsis::all();
+        //$teste= EventosIgsis::all();
 
-        $teste= EventosIgsis::all();
-
-       dd($teste);
-
-
-      }
+        dd($eventos);
+    }
 }

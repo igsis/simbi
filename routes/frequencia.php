@@ -12,7 +12,7 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
 
-    Route::get('/TesteIsa', 'FrequenciaController@testeIsa')->name('frequencia.testeIsa');
+    Route::get('/importar/eventos', 'FrequenciaController@importarEventos')->name('frequencia.testeIsa');
 
 });
 

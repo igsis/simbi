@@ -27,6 +27,7 @@ use Simbi\Models\Status;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\TipoServico;
 use Simbi\Models\Utilizacao;
+use Simbi\Models\EquipamentosIgsis;
 
 
 class EquipamentoController extends Controller
@@ -81,6 +82,13 @@ class EquipamentoController extends Controller
                 'status'
             )
         );
+    }
+
+    public function importarEquipamentos()
+    {
+        $equipamentos = EquipamentosIgsis::where('idInstituicao', 14, 'publicado', 1);
+
+
     }
 
     /**

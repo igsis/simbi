@@ -12,6 +12,7 @@ Route::resource('equipamentos', 'EquipamentoController', [
 
     Route::any('equipamentos-search', 'EquipamentoController@searchEquipamento')->name('search-equipamento');
 
+    Route::get('importar/equipamentos', 'EquipamentoController@importarEquipamentos')->name('equipamentos.importar');
 
 Route::group(['prefix' => 'equipamentos'], function() {
 
