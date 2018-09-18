@@ -13,7 +13,19 @@ class EquipamentosIgsis extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        
+        'idLocal',
+        'sala',
+        'lotacao',
+        'idInstituicao',
+        'publicado',
+        'rider',
+        'rua',
+        'cidade',
+        'estado',
+        'cep',
+        'pais',
+        'telefone',
+        'spcultura'
     ];
 
 }

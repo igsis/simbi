@@ -50,6 +50,14 @@ class EquipamentoController extends Controller
         return view('equipamentos.index', compact('siglas', 'equipamentos', 'type'));
     }
 
+
+    public function importarEquipamentos()
+    {
+        $equipamentos = EquipamentosIgsis::where('idInstituicao', '=', 14)->orderBy('sala')->paginate(10);
+
+        return view('equipamentos.importarIgsis', compact('equipamentos'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -84,11 +92,35 @@ class EquipamentoController extends Controller
         );
     }
 
-    public function importarEquipamentos()
+    public function createIgsis($igsis_id)
     {
-        $equipamentos = EquipamentosIgsis::where('idInstituicao', 14, 'publicado', 1);
+        $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=',$igsis_id)->get();
+        $tipoServicos = TipoServico::orderBy('descricao')->get();
+        $siglas = EquipamentoSigla::orderBy('sigla')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        $secretarias = Secretaria::orderBy('descricao')->get();
+        $macrorregioes = Macrorregiao::orderBy('descricao')->get();
+        $regioes = Regiao::orderBy('descricao')->get();
+        $regionais = Regional::orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
+        $distritos = Distrito::orderBy('descricao')->get();
+        $status = Status::orderBy('descricao')->get();
 
-
+        return view('equipamentos.cadastroIgsis',
+            compact(
+                'equipamentoIgsis',
+                'tipoServicos',
+                'siglas',
+                'secretarias',
+                'subordinacoesAdministrativas',
+                'macrorregioes',
+                'regioes',
+                'regionais',
+                'prefeituraRegionais',
+                'distritos',
+                'status'
+            )
+        );
     }
 
     /**

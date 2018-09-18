@@ -11,6 +11,7 @@ class Equipamento extends Model
 	public $timestamps = false;
 
 	protected $fillable = [
+	    'igsis_id',
 		'nome',
         'tipo_servico_id',
         'equipamento_sigla_id',
