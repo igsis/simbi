@@ -17,14 +17,14 @@
             </thead>
             <tbody>
             @foreach($equipamentos as $equipamento)
-                    <tr>
-                        <td>{{$equipamento->sala}}</td>
-                        <td>
-                            @hasrole('Administrador')
-                                <a href="{{ route('equipamentos.cadastro,importe', $equipamento->idLocal) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Importar Equipamento</a>
-                            @endhasrole
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{$equipamento->sala}}</td>
+                    <td>
+                        @hasrole('Administrador')
+                            <a href="{{ route('equipamentos.cadastro,importe', $equipamento->idLocal) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Importar Equipamento</a>
+                        @endhasrole
+                    </td>
+                </tr>
             @endforeach
             @include('layouts.excluir_confirm')
             </tbody>

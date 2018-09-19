@@ -71,9 +71,12 @@ class EquipamentoController extends Controller
         $equipamentos = EquipamentosIgsis::where([
             ['idInstituicao', '=', 14],
             ['publicado', '=', 1],
+            ['sala', 'LIKE', 'Biblioteca%']
         ])->orderBy('sala')->paginate(10);
 
-        return view('equipamentos.importarIgsis', compact('equipamentos'));
+        $cadastrados = Equipamento::all();
+
+        return view('equipamentos.importarIgsis', compact('equipamentos', 'cadastrados'));
     }
 
     /**
