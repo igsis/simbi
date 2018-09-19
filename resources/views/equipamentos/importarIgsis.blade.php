@@ -17,7 +17,6 @@
             </thead>
             <tbody>
             @foreach($equipamentos as $equipamento)
-                @if($equipamento->publicado === 1)
                     <tr>
                         <td>{{$equipamento->sala}}</td>
                         <td>
@@ -26,7 +25,6 @@
                             @endhasrole
                         </td>
                     </tr>
-                @endif
             @endforeach
             @include('layouts.excluir_confirm')
             </tbody>

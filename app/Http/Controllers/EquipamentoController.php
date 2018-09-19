@@ -53,7 +53,25 @@ class EquipamentoController extends Controller
 
     public function importarEquipamentos()
     {
-        $equipamentos = EquipamentosIgsis::where('idInstituicao', '=', 14)->orderBy('sala')->paginate(10);
+//        $igsis = EquipamentosIgsis::where([
+//            ['idInstituicao', '=', 14],
+//            ['publicado', '=', 1],
+//        ])->pluck('idLocal')->toArray();
+//
+//        $simbi = Equipamento::all()->pluck('igsis_id')->toArray();
+//
+//        foreach ($igsis as $id){
+//            if (!(in_array($id, $simbi))){
+//                $equipamentos[] = EquipamentosIgsis::where('idLocal', '=', $id);
+//            }
+//        }
+//
+//        $equipamentos = $equipamentos->orderBy('sala')->paginate(10);
+
+        $equipamentos = EquipamentosIgsis::where([
+            ['idInstituicao', '=', 14],
+            ['publicado', '=', 1],
+        ])->orderBy('sala')->paginate(10);
 
         return view('equipamentos.importarIgsis', compact('equipamentos'));
     }
@@ -201,6 +219,7 @@ class EquipamentoController extends Controller
             $this->validate($request, [
                 //Para Tabela Equipamento
                 'nome'=>'required|unique:equipamentos',
+                'igsis_id'=>'nullable',
                 'tipoServico'=>'required',
                 'equipamentoSigla'=>'required',
                 'identificacaoSecretaria'=>'required',
@@ -246,6 +265,7 @@ class EquipamentoController extends Controller
                     ])
             ->equipamento()->create([
                 'nome' => $request->nome,
+                'igsis_id' => $request->igsis_id,
                 'tipo_servico_id' => $request->tipoServico,
                 'equipamento_sigla_id' => $request->equipamentoSigla,
                 'secretaria_id' => $request->identificacaoSecretaria,

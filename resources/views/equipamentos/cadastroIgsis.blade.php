@@ -8,8 +8,8 @@
             <h2>
                 Importar
                 @foreach($equipamentoIgsis as $igsis)
-                    <?php $equipamento = $igsis->sala;
-                          $igsis_id = $igsis->idLocal;?>
+                    {{ $equipamento = $igsis->sala }}
+                    <?php $igsis_id = $igsis->idLocal; ?>
                 @endforeach
                 do IGSIS
 
@@ -23,6 +23,11 @@
             <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                 <label for="nome">Nome do Equipamento</label>
                 <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento }}">
+            </div>
+
+            <div class="hidden">
+                <label for="igisi_id">ID do igsis</label>
+                <input type="text" class="form-control" name="igsis_id" id="igsis_id" value="{{ $igsis_id }}">
             </div>
 
             <div class="row">

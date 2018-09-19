@@ -53,15 +53,9 @@
 			@foreach($equipamentos as $equipamento)
 				<tr>
 					<td>{{$equipamento->nome}}</td>
-					@if($equipamento->siga == 0)
-						<td> - </td>
-						<td> - </td>
-						<td> - </td>
-					@else
-						<td>{{$equipamento->equipamentoSigla->sigla}}</td>
-						<td>{{$equipamento->telefone}}</td>
-						<td>{{$equipamento->status->descricao}}</td>
-					@endif
+					<td>{{$equipamento->equipamentoSigla->sigla}}</td>
+					<td>{{$equipamento->telefone}}</td>
+					<td>{{$equipamento->status->descricao}}</td>
 					<td>
 						@hasrole('Administrador')
                         <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar Equipamento</a>
