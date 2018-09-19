@@ -20,19 +20,37 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-offset-3 col-md-3">
                     <label for="dataInicio">Data de Inicio:</label>
-                    <input type="date" class="form-control" name="dataInicio" id="dataInicio">
+                    <input type="date" class="form-control" name="dataInicio" id="dataInicio" value="{{old('dataInicio')}}">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
                     <label for="dataFim">Data de Término:</label>
-                    <input type="date" class="form-control" name="dataFim" id="dataFim">
+                    <input type="date" class="form-control" name="dataFim" id="dataFim" value="{{old('dataFim')}}">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-offset-4 col-md-4">
-                    <label for="dataInicio">Cargo:</label>
-                    <input type="date" class="form-control" name="dataInicio" id="dataInicio">
+                    <label for="responsabilidadeTipo">Cargo:</label>
+                    <select class="form-control" name="responsabilidadeTipo" id="cargo">
+                        <option value="">Selecione...</option>
+                        @foreach($cargos as $cargo)
+
+                            <option value="{{$cargo->id}}">{{$cargo->responsabilidade_tipo}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr>
+                <div class="form-group col-md-offset-4 col-md-2">
+                    <a href="{{route('usuarios.index', ['type' => 1])}}" class="form-control btn btn-warning">
+                        Voltar
+                    </a>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Vincular">
                 </div>
             </div>
         </form>
