@@ -17,14 +17,26 @@
             </thead>
             <tbody>
             @foreach($equipamentos as $equipamento)
-                <tr>
-                    <td>{{$equipamento->sala}}</td>
-                    <td>
-                        @hasrole('Administrador')
+                @if (!(in_array($equipamento->idLocal, $cadastrados)))
+                    <tr>
+                        <td>{{$equipamento->sala}}</td>
+                        <td>
+                            @hasrole('Administrador')
                             <a href="{{ route('equipamentos.cadastro,importe', $equipamento->idLocal) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Importar Equipamento</a>
-                        @endhasrole
-                    </td>
-                </tr>
+                            @endhasrole
+                        </td>
+                    </tr>
+                @else
+                    <tr class="bg-success">
+                        <td class="bg-success">{{$equipamento->sala}} </td>
+                        <td class="bg-success">
+                            @hasrole('Administrador')
+                            <a href="{{ route('equipamentos.index') }}" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i> Lista de Equipamentos</a>
+                            @endhasrole
+                        </td>
+                    </tr>
+                @endif
+
             @endforeach
             @include('layouts.excluir_confirm')
             </tbody>

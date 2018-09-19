@@ -59,6 +59,11 @@ class Equipamento extends Model
 		return $this->belongsTo(EquipamentoSigla::class);
 	}
 
+    public function equipamentoIgsis()
+    {
+        return $this->belongsTo(EquipamentosIgsis::class);
+    }
+
     public function estudoGrupo()
     {
         return $this->hasOne(SalaEstudoGrupo::class);

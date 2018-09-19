@@ -74,7 +74,7 @@ class EquipamentoController extends Controller
             ['sala', 'LIKE', 'Biblioteca%']
         ])->orderBy('sala')->paginate(10);
 
-        $cadastrados = Equipamento::all();
+        $cadastrados = Equipamento::all()->pluck('igsis_id')->toArray();
 
         return view('equipamentos.importarIgsis', compact('equipamentos', 'cadastrados'));
     }

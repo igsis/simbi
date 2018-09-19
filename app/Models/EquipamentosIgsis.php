@@ -28,4 +28,9 @@ class EquipamentosIgsis extends Model
         'spcultura'
     ];
 
+    public function equipamento()
+    {
+        return $this->hasOne(Equipamento::class);
+    }
+
 }
