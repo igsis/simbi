@@ -31,12 +31,11 @@
                         <td class="bg-success">{{$equipamento->sala}} </td>
                         <td class="bg-success">
                             @hasrole('Administrador')
-                            <a href="{{ route('equipamentos.index') }}" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i> Lista de Equipamentos</a>
+                            <a href="{{ route('equipamentos.index', ['type'=>1]) }}" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i> Lista de Equipamentos</a>
                             @endhasrole
                         </td>
                     </tr>
                 @endif
-
             @endforeach
             @include('layouts.excluir_confirm')
             </tbody>
