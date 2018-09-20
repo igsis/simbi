@@ -8,6 +8,7 @@ use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EventosIgsis;
 use Auth;
+use Simbi\Models\OcorrenciasIgsis;
 
 class FrequenciaController extends Controller
 {
@@ -37,7 +38,18 @@ class FrequenciaController extends Controller
     public function create($id)
     {
         $equipamento = Equipamento::findOrFail($id);
-        return view('frequencia.cadastro', compact('equipamento'));
+
+//        $ocorrenciaIgsis = OcorrenciasIgsis::where([
+//            ['local', ' = ', $equipamento->igsis_id],
+//            ['publicado', ' = ', 1],
+//        ]);
+//
+//        $eventoIgsis = EventosIgsis::where([
+//            ['publicado', ' = ', 1],
+//            ['idEvento', ' = ', $ocorrenciaIgsis->idEvento],
+//        ]);
+
+        return view('frequencia.cadastro', compact('equipamento', 'eventoIgsis'));
     }
 
     /**
