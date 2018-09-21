@@ -47,7 +47,7 @@
         @else
             {!! $equipamentos->links() !!}
         @endif
-
+    </div>
 @endsection
 
 @section('scripts_adicionais')

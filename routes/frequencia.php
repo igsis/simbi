@@ -6,6 +6,12 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
 
+    Route::get('/{equipamento_igsis}/eventos', 'FrequenciaController@listarEventos')->name('frequencia.eventos');
+
+    Route::get('/{evento}/editar', 'FrequenciaController@editarEvento')->name('frequencia.editaEvento');
+
+    Route::post('/{idOcorrencia}/editar', 'FrequenciaController@uploadOcorrencia')->name('frequencia.updateOcorrencia');
+
     Route::get('/{equipamento}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
 
     Route::post('/{equipamento}/cadastro', 'FrequenciaController@store')->name('frequencia.gravar');

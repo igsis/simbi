@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Compound;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
+use Simbi\Models\Evento;
+use Simbi\Models\EventoOcorrencia;
 use Simbi\Models\EventosIgsis;
 use Auth;
 use Simbi\Models\OcorrenciasIgsis;
@@ -28,6 +30,44 @@ class FrequenciaController extends Controller
         $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
         return view('frequencia.index', compact('equipamentos', 'type'));
 
+    }
+
+    public function listarEventos($igsis_id)
+    {
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id')
+            ->where('evento_ocorrencias.igsis_id', $igsis_id)
+            ->distinct('eventos.igsis_evento_id')
+            ->orderBy('evento_ocorrencias.data')
+            ->paginate(10);
+
+        //$eventos = Evento::where('igsis_id', $igsis_id)->orderBy('nome_evento')->paginate(10);
+
+        return view('frequencia.eventos', compact('eventos'));
+    }
+
+    public function editarEvento($id)
+    {
+        $ocorrencia = EventoOcorrencia::findOrFail($id);
+
+        return view('frequencia.editar', compact('ocorrencia'));
+    }
+
+    public function uploadOcorrencia(Request $request, $id)
+    {
+        $ocorrencia = EventoOcorrencia::findOrFail($id);
+
+        $this->validate($request, [
+            'data'=>'required',
+            'hora'=>'required'
+        ]);
+
+        $ocorrencia->update([
+            'data' => $request->data,
+            'hora' => $request->hora
+        ]);
+
+        return redirect()->route('frequencia.eventos', $ocorrencia->igsis_id)
+            ->with('flash_message', 'Ocorrência do Evento editada com sucesso!');
     }
 
     /**

@@ -27,4 +27,8 @@ class Evento extends Model
     public function projetoEspecial(){
         return $this->belongsTo(ProjetoEspecial::class);
     }
+
+    public function eventoOcorrencia(){
+        return $this->hasMany(EventoOcorrencia::class);
+    }
 }
