@@ -10,6 +10,7 @@ use Simbi\Models\Equipamento;
 use Simbi\Models\Escolaridade;
 use Simbi\Models\Funcao;
 use Simbi\Models\PerguntaSeguranca;
+use Simbi\Models\ResponsabilidadeTipo;
 use Simbi\Models\Secretaria;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\User;
@@ -191,6 +192,7 @@ class UserController extends Controller
             $cargo->save();
         }
 
+        /** @var Funcao $funcao */
         $funcao = Funcao::findOrNew($request->funcao);
         if (!($funcao->exists))
         {
@@ -301,6 +303,11 @@ class UserController extends Controller
              'Usuário Excluido com Sucesso.');
     }
 
+    /**
+     * Reseta senha do usuario para a senha padrão
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function resetSenha($id)
     {
         $user = User::findOrFail($id);
@@ -309,6 +316,11 @@ class UserController extends Controller
         return redirect()->back()->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
     }
 
+    /**
+     * Atualiza o registro do usuario para 'publicodo = 1'
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function ativarUser(Request $request)
     {
 
@@ -360,22 +372,46 @@ class UserController extends Controller
 
     }
 
+    public function exibeVincular($id)
+    {
+        $user = User::findOrFail($id);
+        $equipamentos = Equipamento::all();
+        $cargos = ResponsabilidadeTipo::all();
+
+        return view('usuarios.vincular', compact('user', 'equipamentos', 'cargos'));
+    }
+
     public function vinculaEquipamento(Request $request, $id)
     {
         /** @var User $usuario */
         $usuario = User::findOrFail($id);
         $equipamentos = $request['equipamento'];
 
+        $this->validate($request, [
+            'dataInicio'            =>  'required_with:equipamento',
+            'dataFim'               =>  'required_with:equipamento',
+            'responsabilidadeTipo'  =>  'required_with:equipamento'
+        ]);
+
+        $syncData = [];
+
         if ($equipamentos != 0)
         {
-            $usuario->equipamentos()->sync($equipamentos);
-        }
-        else
-        {
-            $usuario->equipamentos()->detach();
+
+            foreach ($equipamentos as $id)
+            {
+                $pivotData = [
+                    'data_inicio'               =>  $request->dataInicio,
+                    'data_fim'                  =>  $request->dataFim,
+                    'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
+                ];
+                $syncData[$id] = $pivotData;
+            }
         }
 
-        return redirect()->route('usuarios.index', ['type' => $request->type])
+        $usuario->equipamentos()->sync($syncData);
+
+        return redirect()->route('usuarios.index', ['type' => 1])
             ->with('flash_message',
                 'Equipamentos Vinculados com sucesso.');
     }

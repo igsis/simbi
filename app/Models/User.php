@@ -10,6 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
   use Illuminate\Database\Eloquent\SoftDeletes
   https://goo.gl/RarucR */
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -60,11 +61,14 @@ class User extends Authenticatable
         return $this->belongsTo(Escolaridade::class);
     }
 
-/*TODO: Analisar possibilidade de FK na tabela intermediaria
-https://goo.gl/BcqZQr*/
+    /**
+     * Função de relacionamento entre Usuarios e Equipamentos
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function equipamentos()
     {
-        return $this->belongsToMany(Equipamento::class)->withPivot('data_inicio', 'data_fim');
+        /*TODO: Alterar o vincular de geral para cada equipamento, para poder registrar as datas e cargos para cada um*/
+        return $this->belongsToMany(Equipamento::class)->using(EquipamentoUser::class);
     }
 
     public function frequencias()

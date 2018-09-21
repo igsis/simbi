@@ -44,13 +44,14 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->login }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->equipamentos->implode('nome', ', ')}}</td>
+                    {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
+                    <td>{{ $user->equipamentos->implode('nome', ', ') }}</td>
                     <td>{{ $user->roles->implode('name', '') }}</td>
                     <td>
                         @if($type == 1)
                             <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                         
-                        <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#vinculaEquipamento" data-nome="{{$user->name}}" data-id="{{$user->id}}" style="margin-right: 3px"><i class="glyphicon glyphicon-retweet"></i> Vincular Equipamento</button>
+                        <a href="{{ route('usuarios.exibeVincular', $user->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-retweet"></i> Vincular Equipamento</a>
                         @endif
                         @hasrole('Administrador')
                         @if($user->publicado == 1)

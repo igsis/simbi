@@ -21,7 +21,9 @@ Route::group(['middleware' => 'auth'], function (){
         Route::group(['prefix' => 'usuarios'], function() {
             Route::any('/search', 'UserController@searchUser')->name('search-user');
 
-            Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento');
+            Route::get('/{usuario}/vincular', 'UserController@exibeVincular')->name('usuarios.exibeVincular');
+
+            Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento')->name('usuarios.vincular');
 
             Route::post('/{usuario}/reset', 'UserController@vinculaEquipamento')->name('usuarios.reset');
         });

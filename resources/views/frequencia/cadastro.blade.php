@@ -121,7 +121,7 @@
         botao.addEventListener('click', () => {
             let idEvento = document.querySelector('input[name="evento"]').value;
             console.log(idEvento);
-            fetch(`http://smcsistemas.prefeitura.sp.gov.br/igsis/funcoes/api_simbi.php?id=${idEvento}`).then(resposta => {
+            fetch(`http://smcsistemas.prefeitura.sp.gov.br/igsis/funcoes/api_equipamento_simbi.php`).then(resposta => {
                 console.log(resposta);
                 return resposta.json();
             }).then(dados => {
@@ -131,11 +131,10 @@
 
                     let percorrer = JSON.parse(obj)
                     console.log(percorrer);
-                    console.log(percorrer['idEvento']);
-                    console.log(percorrer['nomeEvento']);
-                    console.log(percorrer['projeto']);
+                    console.log(percorrer['igsis_id']);
+                    console.log(percorrer['nome']);
 
-                    document.querySelector('input[name="nomeEvento"]').value = percorrer['nomeEvento'];
+                    document.querySelector('input[name="nomeEvento"]').value = percorrer['nome'];
 
                     console.log("Deu certo");
                 }
