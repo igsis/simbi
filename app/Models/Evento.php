@@ -23,4 +23,8 @@ class Evento extends Model
     {
         return $this->belongsTo(ContratacaoForma::class);
     }
+
+    public function projetoEspecial(){
+        return $this->belongsTo(ProjetoEspecial::class);
+    }
 }
