@@ -77,7 +77,11 @@ class FrequenciaController extends Controller
      */
     public function create($id)
     {
-        $equipamento = Equipamento::findOrFail($id);
+        $ocorrencia = EventoOcorrencia::findOrFail($id);
+
+        $evento = Evento::where('igsis_evento_id' , ' = ', $ocorrencia->igsis_evento_id);
+
+        $equipamento = Equipamento::where('igsis_id', ' = ', $ocorrencia->igsis_id);
 
 //        $ocorrenciaIgsis = OcorrenciasIgsis::where([
 //            ['local', ' = ', $equipamento->igsis_id],
@@ -89,7 +93,7 @@ class FrequenciaController extends Controller
 //            ['idEvento', ' = ', $ocorrenciaIgsis->idEvento],
 //        ]);
 
-        return view('frequencia.cadastro', compact('equipamento', 'eventoIgsis'));
+        return view('frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento'));
     }
 
     /**

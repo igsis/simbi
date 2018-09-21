@@ -25,7 +25,8 @@
                     <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                     <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                     <td>
-                        <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Eventos</a>
+                        <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                        <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
                     </td>
                 </tr>
             @endforeach

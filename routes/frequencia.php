@@ -12,7 +12,7 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::post('/{idOcorrencia}/editar', 'FrequenciaController@uploadOcorrencia')->name('frequencia.updateOcorrencia');
 
-    Route::get('/{equipamento}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
+    Route::get('/{idOcorrencia}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
 
     Route::post('/{equipamento}/cadastro', 'FrequenciaController@store')->name('frequencia.gravar');
 
