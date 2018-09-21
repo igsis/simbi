@@ -264,6 +264,7 @@
                                 <label for="horarioFechamento">Horario de Fechamento</label>
                                 <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
                             </div>
+
                         </div>
                     </div>
                 @endforeach

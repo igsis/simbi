@@ -44,7 +44,8 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->login }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->equipamentos->implode('nome', ', ')}}</td>
+                    {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
+                    <td>{{ $user->equipamentos->implode('nome', ', ') }}</td>
                     <td>{{ $user->roles->implode('name', '') }}</td>
                     <td>
                         @if($type == 1)

@@ -10,11 +10,11 @@
             {{ csrf_field() }}
 
             <div class="row">
-                <label>Bibliotecas cadastradas:</label>
+                <label>Equipamentos vinculados:</label>
                 <div class="well">
                     @foreach($equipamentos as $equipamento)
                         <div class="checkbox-inline">
-                            <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
+                            <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "checked" : "" }}>{{$equipamento->nome}}</label>
                         </div>
                     @endforeach
                 </div>
@@ -22,11 +22,11 @@
             <div class="row">
                 <div class="form-group col-md-offset-3 col-md-3">
                     <label for="dataInicio">Data de Inicio:</label>
-                    <input type="date" class="form-control" name="dataInicio" id="dataInicio" value="{{old('dataInicio')}}">
+                    <input type="date" class="form-control" name="dataInicio" id="dataInicio">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="dataFim">Data de Término:</label>
-                    <input type="date" class="form-control" name="dataFim" id="dataFim" value="{{old('dataFim')}}">
+                    <input type="date" class="form-control" name="dataFim" id="dataFim" value="">
                 </div>
             </div>
             <div class="row">

@@ -67,6 +67,7 @@ class User extends Authenticatable
      */
     public function equipamentos()
     {
+        /*TODO: Alterar o vincular de geral para cada equipamento, para poder registrar as datas e cargos para cada um*/
         return $this->belongsToMany(Equipamento::class)->using(EquipamentoUser::class);
     }
 

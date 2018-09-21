@@ -388,26 +388,28 @@ class UserController extends Controller
         $equipamentos = $request['equipamento'];
 
         $this->validate($request, [
-            'dataInicio'            =>  'required',
-            'dataFim'               =>  'required|after:dataInicio',
-            'responsabilidadeTipo'  =>  'required'
+            'dataInicio'            =>  'required_with:equipamento',
+            'dataFim'               =>  'required_with:equipamento',
+            'responsabilidadeTipo'  =>  'required_with:equipamento'
         ]);
+
+        $syncData = [];
 
         if ($equipamentos != 0)
         {
-            foreach ($equipamentos as $equipamento)
+
+            foreach ($equipamentos as $id)
             {
-                $usuario->equipamentos()->attach($equipamento, [
+                $pivotData = [
                     'data_inicio'               =>  $request->dataInicio,
                     'data_fim'                  =>  $request->dataFim,
                     'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
-                ]);
+                ];
+                $syncData[$id] = $pivotData;
             }
         }
-        else
-        {
-            $usuario->equipamentos()->detach();
-        }
+
+        $usuario->equipamentos()->sync($syncData);
 
         return redirect()->route('usuarios.index', ['type' => 1])
             ->with('flash_message',
