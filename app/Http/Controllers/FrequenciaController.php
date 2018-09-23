@@ -10,6 +10,7 @@ use Simbi\Models\Evento;
 use Simbi\Models\EventoOcorrencia;
 use Simbi\Models\EventosIgsis;
 use Auth;
+use Simbi\Models\Frequencia;
 use Simbi\Models\OcorrenciasIgsis;
 
 class FrequenciaController extends Controller
@@ -79,9 +80,15 @@ class FrequenciaController extends Controller
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
-        $evento = Evento::where('igsis_evento_id' , ' = ', $ocorrencia->igsis_evento_id);
+//        dd($ocorrencia);
 
-        $equipamento = Equipamento::where('igsis_id', ' = ', $ocorrencia->igsis_id);
+        $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
+
+//        dd($evento);
+
+        $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
+
+//        dd($equipamento);
 
 //        $ocorrenciaIgsis = OcorrenciasIgsis::where([
 //            ['local', ' = ', $equipamento->igsis_id],
@@ -105,8 +112,7 @@ class FrequenciaController extends Controller
     public function store(Request $request, $id)
     {
         $this->validate($request, [
-            'data'          =>  'required',
-            'hora'          =>  'required',
+            'evento_ocorrencia_id'  => 'required',
             'crianca'       =>  'required|integer|between: 0, 9999',
             'jovem'         =>  'required|integer|between: 0, 9999',
             'adulto'        =>  'required|integer|between: 0, 9999',
@@ -116,12 +122,8 @@ class FrequenciaController extends Controller
 
         $user =  Auth::user();
 
-        // dd($request->equipamento);
-
         $user->frequencias()->create([
-            'evento_id' => $request->evento,
-            'data' => $request->data,
-            'hora' => $request->hora,
+            'evento_ocorrencia_id' => $request->evento_ocorrencia_id,
             'crianca' => $request->crianca,
             'jovem' => $request->jovem,
             'adulto' => $request->adulto,
@@ -157,6 +159,9 @@ class FrequenciaController extends Controller
     public function listar($id)
     {
         $equipamento = Equipamento::findOrFail($id);
+
+        $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('data', 'horario');
+
         return view('frequencia.listar', compact('equipamento'));
     }
 

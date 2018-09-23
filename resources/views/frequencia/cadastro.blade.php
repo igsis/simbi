@@ -5,12 +5,20 @@
     <div class="col-lg-6 col-lg-offset-3">
         <h1>
             <i class="glyphicon glyphicon-user"></i> Eventos Culturais <br>
-            <small></small>
+            <small>{{ $evento->nome_evento }}</small>
         </h1>
         <hr>
 
         <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}">
             {{ csrf_field() }}
+
+            <div class="hidden">
+                <div class="form-group">
+                    <label for="evento_ocorrencia_id">Id da ocorrencia</label>
+                    <input class="form-control" type="text" id="evento_ocorrencia_id" name="evento_ocorrencia_id" value="{{$ocorrencia->id}}">
+                </div>
+            </div>
+
 
             <div class="row">
                 <div class="form-group col-md-3">
@@ -48,9 +56,10 @@
                 <label for="observacao">Observação</label>
                 <input class="form-control" type="text" name="observacao" value="{{old('observacao')}}">
             </div>
+
+            <button class="btn btn-success"> Cadastrar</button>
         </form>
 
-            <button class="btn btn-success" >Cadastrar</button>
 
     </div>
 

@@ -15,8 +15,8 @@ class EventoOcorrencia extends Model
         'horario'
     ];
 
-    public function evento()
+    public function frequencia()
     {
-        return $this->belongsTo(Evento::class);
+        return $this->belongsTo(Frequencia::class);
     }
 }
