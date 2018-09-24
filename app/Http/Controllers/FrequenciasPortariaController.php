@@ -151,4 +151,7 @@ class FrequenciasPortariaController extends Controller
     {
         //
     }
+
+
+
 }

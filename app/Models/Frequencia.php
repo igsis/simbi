@@ -11,9 +11,7 @@ class Frequencia extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'evento_id',
-        'data',
-        'hora',
+        'evento_ocorrencia_id',
         'crianca',
         'jovem',
         'adulto',
@@ -27,6 +25,11 @@ class Frequencia extends Model
     public function equipamento()
     {
         return $this->belongsTo(Equipamento::class);
+    }
+
+    public function eventoOcorrencia()
+    {
+        return $this->hasMany(EventoOcorrencia::class);
     }
 
     public function user()

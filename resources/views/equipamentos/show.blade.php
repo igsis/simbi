@@ -17,20 +17,26 @@
                     <div class="row">
                         <div class="col text-right">
                             @hasanyrole('Coordenador|Administrador')
-                                @if($equipamento->portaria == 1)
-                                    <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Alterar Formulário?" data-message='Deseja Trocar o Formulário para o modelo Simples?' data-footer="Trocar"> Formulário Completo
-                                        </button>
-                                    </form>
-                                @else
-                                    <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}" style="display: inline;">
-                                        {{ csrf_field() }}
-                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Alterar Formulário?" data-message='Deseja Trocar o Formulário para o modelo Completo?' data-footer="Trocar"> Formulário Simples
-                                        </button>
-                                    </form>
-                                @endif
-                                    <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
+                            @if($equipamento->portaria == 1)
+                                <label for="formulario">Formulário Completo</label>
+                                <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}" style="display: inline;">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $equipamento->id }}">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Simples?' data-footer="Trocar"> Trocar Formulário
+                                    </button>
+                                </form>
+                            @else
+                                <label for="formulario">Formulário Simples</label>
+                                <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}" style="display: inline;">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $equipamento->id }}">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Completo?' data-footer="Trocar"> Trocar Formulário
+                                    </button>
+                                </form>
+                            @endif
+                                <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
                             @endhasanyrole
                         </div>
                     </div>

@@ -5,15 +5,38 @@
 		<h2>Bem Vindo ao SIMBI</h2>
 		<h3>Sistema de Indicadores das Bibliotecas Públicas Municipais</h3>
 	</div>
-	<hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-	<hr>
-
-
 
     @if(Auth::guest())
         @include('auth.login')
-    @endif
+    @else
+		<hr>
+		@if($ocorrencias != null)
+			@foreach($ocorrencias as $ocorrencia)
+				@if(!(in_array($ocorrencia->id, $frequenciasCadastradas)) && $ocorrencia->publicado == 1)
+					<?php
+							$dataOcorrencia = strtotime($ocorrencia->data);
+							$diaHoje = strtotime(date('Y-m-d'));
+
+							$res = $dataOcorrencia - $diaHoje;
+
+							$res = $res / 86400;
+
+							$faltaFrequencia = 0;
+
+							if($res < 0){
+								$faltaFrequencia = 1;
+							}
+
+					?>
+				@endif
+			@endforeach
+			@if($faltaFrequencia == 1)
+				<div class="alert alert-danger" role="alert">
+					<strong>Frequências!</strong> Existem frequências a serem adicionadas.
+				</div>
+			@endif
+		@endif
+
+		<hr>
+	@endif
 @endsection

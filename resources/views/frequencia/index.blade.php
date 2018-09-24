@@ -22,18 +22,25 @@
                     <td>{{$equipamento->nome}}</td>
                     <td>
                         @if($type == 1)
-                            <a href="{{ route('frequencia.cadastro', $equipamento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Evento Interno</a>
+                            <a href="{{ route('frequencia.eventos', $equipamento->igsis_id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
                             <a href="#" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
-                            <a href="{{ route('frequencia.portaria.cadastro', $equipamento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Portaria</a>
+                            <a href="{{ route('frequencia.portaria.cadastro', $equipamento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Recepção</a>
                         @else
                             <a href="{{ route('frequencia.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
                             <a href="#" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Evento Externo</a>
-                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Portaria</a>
+                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Recepção</a>
                         @endif
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="text-center">
+        @if(isset($dataForm))
+            {!! $equipamentos->appends($dataForm)->links() !!}
+        @else
+            {!! $equipamentos->links() !!}
+        @endif
     </div>
 @endsection

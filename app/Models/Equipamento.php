@@ -11,6 +11,7 @@ class Equipamento extends Model
 	public $timestamps = false;
 
 	protected $fillable = [
+	    'igsis_id',
 		'nome',
         'tipo_servico_id',
         'equipamento_sigla_id',
@@ -57,6 +58,11 @@ class Equipamento extends Model
 	{
 		return $this->belongsTo(EquipamentoSigla::class);
 	}
+
+    public function equipamentoIgsis()
+    {
+        return $this->belongsTo(EquipamentosIgsis::class);
+    }
 
     public function estudoGrupo()
     {

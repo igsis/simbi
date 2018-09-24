@@ -6,12 +6,19 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
 
-    Route::get('/{equipamento}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
+    Route::get('/{equipamento_igsis}/eventos', 'FrequenciaController@listarEventos')->name('frequencia.eventos');
+
+    Route::get('/{evento}/editar', 'FrequenciaController@editarEvento')->name('frequencia.editaEvento');
+
+    Route::post('/{idOcorrencia}/editar', 'FrequenciaController@uploadOcorrencia')->name('frequencia.updateOcorrencia');
+
+    Route::delete('/{idOcorrencia}/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
+
+    Route::get('/{idOcorrencia}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
 
     Route::post('/{equipamento}/cadastro', 'FrequenciaController@store')->name('frequencia.gravar');
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
-
 });
 
 Route::group(['prefix' => 'portaria'], function(){
@@ -29,5 +36,6 @@ Route::group(['prefix' => 'portaria'], function(){
     Route::post('/{equipamento}/cadastro', 'FrequenciasPortariaController@store')->name('frequencia.portaria.gravar');
 
     Route::get('/{equipamento}/listar', 'FrequenciasPortariaController@listar')->name('frequencia.portaria.listar');
+
 
 });

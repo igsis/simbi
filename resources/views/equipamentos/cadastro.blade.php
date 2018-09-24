@@ -19,6 +19,11 @@
             <input type="text" class="form-control" name="nome" id="nome" value="{{ old('nome') }}">
         </div>
 
+        <div class="hidden">
+            <label for="igisi_id">ID do igsis</label>
+            <input type="text" class="form-control" name="igsis_id" id="igsis_id" value="0">
+        </div>
+
         <div class="row">
             <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('tipoServico') ? ' has-error' : '' }}">
                 <label for="tipoServico">Tipo de Serviço</label>
