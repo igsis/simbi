@@ -12,14 +12,13 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::post('/{idOcorrencia}/editar', 'FrequenciaController@uploadOcorrencia')->name('frequencia.updateOcorrencia');
 
+    Route::delete('/{idOcorrencia}/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
+
     Route::get('/{idOcorrencia}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
 
     Route::post('/{equipamento}/cadastro', 'FrequenciaController@store')->name('frequencia.gravar');
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
-
-    Route::get('/importar/eventos', 'FrequenciaController@importarEventos')->name('frequencia.testeIsa');
-
 });
 
 Route::group(['prefix' => 'portaria'], function(){

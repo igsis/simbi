@@ -64,7 +64,7 @@ class FrequenciaController extends Controller
 
         $ocorrencia->update([
             'data' => $request->data,
-            'hora' => $request->hora
+            'horario' => $request->hora
         ]);
 
         return redirect()->route('frequencia.eventos', $ocorrencia->igsis_id)
@@ -80,15 +80,9 @@ class FrequenciaController extends Controller
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
-//        dd($ocorrencia);
-
         $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
 
-//        dd($evento);
-
         $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
-
-//        dd($equipamento);
 
 //        $ocorrenciaIgsis = OcorrenciasIgsis::where([
 //            ['local', ' = ', $equipamento->igsis_id],
@@ -177,6 +171,18 @@ class FrequenciaController extends Controller
         //
     }
 
+    public function removeOcorrencia($id)
+    {
+        $ocorrencia = EventoOcorrencia::findOrFail($id);
+        
+        EventoOcorrencia::findOrFail($id)
+            ->update(['publicado' => 0]);
+
+        return redirect()->route('frequencia.eventos', $ocorrencia->igsis_id)
+            ->with('flash_message',
+                'Ocorrencia do Evento Excluido com Sucesso.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -185,7 +191,7 @@ class FrequenciaController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 
     public function importarEventos()

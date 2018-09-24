@@ -12,7 +12,8 @@ class EventoOcorrencia extends Model
         'igsis_evento_id',
         'igsis_id',
         'data',
-        'horario'
+        'horario',
+        'publicado'
     ];
 
     public function frequencia()

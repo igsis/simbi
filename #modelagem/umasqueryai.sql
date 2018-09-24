@@ -21,8 +21,6 @@ FROM igsis_agenda as agenda
 WHERE agenda.idInstituicao = 14
 AND agenda.data > '2018-09-01';
 
-
-
 use simbi;
 
 INSERT INTO `eventos` (`igsis_evento_id`,`nome_evento`,`tipo_evento_id`,`projeto_especial_id`,`publicado`) VALUES

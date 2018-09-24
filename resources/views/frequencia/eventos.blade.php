@@ -20,16 +20,27 @@
             </thead>
             <tbody>
             @foreach($eventos as $evento)
-                <tr>
-                    <td>{{ $evento->nome_evento }}</td>
-                    <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                    <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                    <td>
-                        <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                        <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
-                    </td>
-                </tr>
+                @if($evento->publicado == 1)
+                    <tr>
+                        <td>{{ $evento->nome_evento }}</td>
+                        <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                        <td>
+                            <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                            @hasrole('Administrador')
+                                <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Desativar"><i class="glyphicon glyphicon-trash"></i> Remover
+                                    </button>
+                                </form>
+                            @endhasrole
+                        </td>
+                    </tr>
+                @endif
             @endforeach
+            @include('layouts.excluir_confirm')
             </tbody>
         </table>
     </div>
@@ -40,4 +51,31 @@
             {!! $eventos->links() !!}
         @endif
     </div>
+@endsection
+
+@section('scripts_adicionais')
+    <script type="text/javascript">
+
+        $('#confirmDelete').on('show.bs.modal', function (e)
+        {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+            $message = $(e.relatedTarget).attr('data-footer');
+            $(this).find('.modal-footer #confirm ').text($message);
+
+            // Pass form reference to modal for submission on yes/ok
+            var form = $(e.relatedTarget).closest('form');
+            $(this).find('.modal-footer #confirm').data('form', form);
+        });
+
+        // Form confirm (yes/ok) handler, submits form
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
+        {
+            $(this).data('form').submit();
+        });
+
+    </script>
+
 @endsection
