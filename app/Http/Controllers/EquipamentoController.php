@@ -15,6 +15,7 @@ use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoOcorrencia;
 use Simbi\Models\EquipamentoSigla;
+use Simbi\Models\EquipamentosIgsis;
 use Simbi\Models\Funcionamento;
 use Simbi\Models\Macrorregiao;
 use Simbi\Models\Padrao;
@@ -27,7 +28,6 @@ use Simbi\Models\Status;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\TipoServico;
 use Simbi\Models\Utilizacao;
-use Simbi\Models\EquipamentosIgsis;
 
 
 class EquipamentoController extends Controller
@@ -37,6 +37,7 @@ class EquipamentoController extends Controller
     {
         $this->middleware(['auth', 'isCoord'])->except(['index', 'show']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -115,7 +116,7 @@ class EquipamentoController extends Controller
 
     public function createIgsis($igsis_id)
     {
-        $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=',$igsis_id)->get();
+        $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->get();
         $tipoServicos = TipoServico::orderBy('descricao')->get();
         $siglas = EquipamentoSigla::orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
@@ -147,167 +148,154 @@ class EquipamentoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
-        if($request->has('novoServico')){
+        if ($request->has('novoServico')) {
             $data = $this->validate($request, [
-                        'descricao'=>'required|unique:tipo_servicos'
-                    ]);
+                'descricao' => 'required|unique:tipo_servicos'
+            ]);
 
             TipoServico::create($data);
             $data = TipoServico::orderBy('descricao')->get();
             return response()->json($data);
-        }
-
-        elseif ($request->has('novaSigla')){
+        } elseif ($request->has('novaSigla')) {
             $data = $this->validate($request, [
-                        'sigla'=>'required|max:6|unique:equipamento_siglas',
-                        'descricao'=>'required',
-                        'roteiro'=>'nullable'
-                    ]);
+                'sigla' => 'required|max:6|unique:equipamento_siglas',
+                'descricao' => 'required',
+                'roteiro' => 'nullable'
+            ]);
 
             EquipamentoSigla::create($data);
             $data = EquipamentoSigla::orderBy('descricao')->get();
             return response()->json($data);
-        }
-
-        elseif ($request->has('novaSecretaria')) {
-                $data = $this->validate($request, [
-                            'sigla'=>'required|max:6|unique:secretarias',
-                            'descricao'=>'required'
-                        ]);
+        } elseif ($request->has('novaSecretaria')) {
+            $data = $this->validate($request, [
+                'sigla' => 'required|max:6|unique:secretarias',
+                'descricao' => 'required'
+            ]);
 
             Secretaria::create($data);
             $data = Secretaria::orderBy('descricao')->get();
             return response()->json($data);
-        }
-
-        elseif ($request->has('novaSubordinacaoAdministrativa')) {
-                $data = $this->validate($request, [
-                        'descricao'=>'required|unique:subordinacao_administrativas'
-                    ]);
+        } elseif ($request->has('novaSubordinacaoAdministrativa')) {
+            $data = $this->validate($request, [
+                'descricao' => 'required|unique:subordinacao_administrativas'
+            ]);
 
             SubordinacaoAdministrativa::create($data);
             $data = SubordinacaoAdministrativa::orderBy('descricao')->get();
             return response()->json($data);
-        }
-
-        elseif($request->has('novaPrefeituraRegional')){
+        } elseif ($request->has('novaPrefeituraRegional')) {
             $data = $this->validate($request, [
-                'descricao'=>'required'
+                'descricao' => 'required'
             ]);
 
             PrefeituraRegional::create($data);
             $data = PrefeituraRegional::orderBy('descricao')->get();
             return response()->json($data);
-        }
-
-        elseif($request->has('novoDistrito')){
+        } elseif ($request->has('novoDistrito')) {
             $data = $this->validate($request, [
-                'descricao'=>'required|unique:distritos'
+                'descricao' => 'required|unique:distritos'
             ]);
 
             Distrito::create($data);
 
             $data = Distrito::orderBy('descricao')->get();
             return response()->json($data);
-        }
-
-        else{
+        } else {
             // Metodo que grava o novo equipamento
             $this->validate($request, [
                 //Para Tabela Equipamento
-                'nome'=>'required|unique:equipamentos',
-                'igsis_id'=>'nullable',
-                'tipoServico'=>'required',
-                'equipamentoSigla'=>'required',
-                'identificacaoSecretaria'=>'required',
-                'subordinacaoAdministrativa'=>'required',
-                'tematico'=>'nullable',
-                'nome_tematica'=>'nullable',
-                'telefone'=>'nullable|max:15',
-                'telecentro'=>'required',
-                'acervoespecializado'=>'required',
-                'nucleobraile'=>'required',
-                'status'=>'required',
+                'nome' => 'required|unique:equipamentos',
+                'igsis_id' => 'nullable',
+                'tipoServico' => 'required',
+                'equipamentoSigla' => 'required',
+                'identificacaoSecretaria' => 'required',
+                'subordinacaoAdministrativa' => 'required',
+                'tematico' => 'nullable',
+                'nome_tematica' => 'nullable',
+                'telefone' => 'nullable|max:15',
+                'telecentro' => 'required',
+                'acervoespecializado' => 'required',
+                'nucleobraile' => 'required',
+                'status' => 'required',
 
                 //Para Tabela Endereço
-                'cep'=>'required',
-                'logradouro'=>'nullable',
-                'bairro'=>'nullable',
-                'numero'=>'required|numeric',
-                'complemento'=>'nullable',
-                'cidade'=>'nullable',
-                'uf'=>'nullable|max:2',
-                'prefeituraRegional'=>'required',
-                'distrito'=>'required',
-                'macrorregiao'=>'required',
-                'regiao'=>'required',
-                'regional'=>'required',
+                'cep' => 'required',
+                'logradouro' => 'nullable',
+                'bairro' => 'nullable',
+                'numero' => 'required|numeric',
+                'complemento' => 'nullable',
+                'cidade' => 'nullable',
+                'uf' => 'nullable|max:2',
+                'prefeituraRegional' => 'required',
+                'distrito' => 'required',
+                'macrorregiao' => 'required',
+                'regiao' => 'required',
+                'regional' => 'required',
                 'observacao' => 'nullable'
             ]);
 
             $endereco = new Endereco();
             $id = $endereco->create([
-                        'cep' => $request->cep,
-                        'logradouro' => $request->logradouro,
-                        'numero' => $request->numero,
-                        'complemento' => $request->complemento,
-                        'bairro' => $request->bairro,
-                        'cidade' => $request->cidade,
-                        'estado' => $request->uf,
-                        'prefeitura_regional_id' => $request->prefeituraRegional,
-                        'distrito_id' => $request->distrito,
-                        'macrorregiao_id' => $request->macrorregiao,
-                        'regiao_id' => $request->regiao,
-                        'regional_id' => $request->regional
-                    ])
-            ->equipamento()->create([
-                'nome' => $request->nome,
-                'igsis_id' => $request->igsis_id,
-                'tipo_servico_id' => $request->tipoServico,
-                'equipamento_sigla_id' => $request->equipamentoSigla,
-                'secretaria_id' => $request->identificacaoSecretaria,
-                'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
-                'tematico' => $request->tematico,
-                'nome_tematica' => $request->nome_tematica,
-                'telefone' => $request->telefone,
-                'telecentro' => $request->telecentro,
-                'acervo_especializado' => $request->acervoespecializado,
-                'nucleo_braile' => $request->nucleobraile,
-                'status_id' => $request->status,
-                'observacao' => $request->observacao
+                'cep' => $request->cep,
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'complemento' => $request->complemento,
+                'bairro' => $request->bairro,
+                'cidade' => $request->cidade,
+                'estado' => $request->uf,
+                'prefeitura_regional_id' => $request->prefeituraRegional,
+                'distrito_id' => $request->distrito,
+                'macrorregiao_id' => $request->macrorregiao,
+                'regiao_id' => $request->regiao,
+                'regional_id' => $request->regional
+            ])
+                ->equipamento()->create([
+                    'nome' => $request->nome,
+                    'igsis_id' => $request->igsis_id,
+                    'tipo_servico_id' => $request->tipoServico,
+                    'equipamento_sigla_id' => $request->equipamentoSigla,
+                    'secretaria_id' => $request->identificacaoSecretaria,
+                    'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
+                    'tematico' => $request->tematico,
+                    'nome_tematica' => $request->nome_tematica,
+                    'telefone' => $request->telefone,
+                    'telecentro' => $request->telecentro,
+                    'acervo_especializado' => $request->acervoespecializado,
+                    'nucleo_braile' => $request->nucleobraile,
+                    'status_id' => $request->status,
+                    'observacao' => $request->observacao
                 ])->id;
 
             $funcionamento = new Funcionamento();
             foreach ($request->input('funcionamento') as $key => $value)
-            $funcionamento->create([
-                'domingo' => $request->input("domingo.{$key}", '0'),
-                'segunda' => $request->input("segunda.{$key}", '0'),
-                'terca' => $request->input("terca.{$key}", '0'),
-                'quarta' => $request->input("quarta.{$key}", '0'),
-                'quinta' => $request->input("quinta.{$key}", '0'),
-                'sexta' => $request->input("sexta.{$key}", '0'),
-                'sabado' => $request->input("sabado.{$key}", '0'),
-                'hora_inicial' => $request->input("horarioAbertura.{$key}"),
-                'hora_final' => $request->input("horarioFechamento.{$key}"),
-                'equipamento_id' => $id
-            ]);
+                $funcionamento->create([
+                    'domingo' => $request->input("domingo.{$key}", '0'),
+                    'segunda' => $request->input("segunda.{$key}", '0'),
+                    'terca' => $request->input("terca.{$key}", '0'),
+                    'quarta' => $request->input("quarta.{$key}", '0'),
+                    'quinta' => $request->input("quinta.{$key}", '0'),
+                    'sexta' => $request->input("sexta.{$key}", '0'),
+                    'sabado' => $request->input("sabado.{$key}", '0'),
+                    'hora_inicial' => $request->input("horarioAbertura.{$key}"),
+                    'hora_final' => $request->input("horarioFechamento.{$key}"),
+                    'equipamento_id' => $id
+                ]);
         }
         return redirect()->route('equipamentos.criaDetalhes', $id)->with('flash_message',
             'Equipamento inserido com sucesso');
     }
 
 
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -320,7 +308,7 @@ class EquipamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -336,7 +324,7 @@ class EquipamentoController extends Controller
         $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
         $distritos = Distrito::orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
-        return view ('equipamentos.editar', compact(
+        return view('equipamentos.editar', compact(
             'equipamento',
             'tipoServicos',
             'siglas',
@@ -354,8 +342,8 @@ class EquipamentoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -364,70 +352,69 @@ class EquipamentoController extends Controller
 
         $this->validate($request, [
             //Para Tabela Equipamento
-            'nome'=>'required',
-            'tipoServico'=>'required',
-            'equipamentoSigla'=>'required',
-            'identificacaoSecretaria'=>'required',
-            'subordinacaoAdministrativa'=>'required',
-            'tematico'=>'nullable',
-            'nome_tematica'=>'nullable',
-            'telefone'=>'nullable|max:15',
-            'telecentro'=>'required',
-            'acervoespecializado'=>'required',
-            'nucleobraile'=>'required',
-            'status'=>'required',
+            'nome' => 'required',
+            'tipoServico' => 'required',
+            'equipamentoSigla' => 'required',
+            'identificacaoSecretaria' => 'required',
+            'subordinacaoAdministrativa' => 'required',
+            'tematico' => 'nullable',
+            'nome_tematica' => 'nullable',
+            'telefone' => 'nullable|max:15',
+            'telecentro' => 'required',
+            'acervoespecializado' => 'required',
+            'nucleobraile' => 'required',
+            'status' => 'required',
             'observacao' => 'nullable',
 
             //Para Tabela Endereço
-            'cep'=>'required',
-            'logradouro'=>'nullable',
-            'bairro'=>'nullable',
-            'numero'=>'required|numeric',
-            'complemento'=>'nullable',
-            'cidade'=>'nullable',
-            'uf'=>'nullable|max:2',
-            'prefeituraRegional'=>'nullable',
-            'distrito'=>'nullable',
-            'macrorregiao'=>'nullable',
-            'regiao'=>'nullable',
-            'regional'=>'nullable'
+            'cep' => 'required',
+            'logradouro' => 'nullable',
+            'bairro' => 'nullable',
+            'numero' => 'required|numeric',
+            'complemento' => 'nullable',
+            'cidade' => 'nullable',
+            'uf' => 'nullable|max:2',
+            'prefeituraRegional' => 'nullable',
+            'distrito' => 'nullable',
+            'macrorregiao' => 'nullable',
+            'regiao' => 'nullable',
+            'regional' => 'nullable'
         ]);
 
         $equipamento->update([
-                'nome' => $request->nome,
-                'tipo_servico_id' => $request->tipoServico,
-                'equipamento_sigla_id' => $request->equipamentoSigla,
-                'secretaria_id' => $request->identificacaoSecretaria,
-                'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
-                'tematico' => $request->tematico,
-                'nome_tematica' => $request->nome_tematica,
-                'telefone' => $request->telefone,
-                'telecentro' => $request->telecentro,
-                'acervo_especializado' => $request->acervoespecializado,
-                'nucleo_braile' => $request->nucleobraile,
-                'status_id' => $request->status,
-                'observacao' => $request->observacao
-            ]);
+            'nome' => $request->nome,
+            'tipo_servico_id' => $request->tipoServico,
+            'equipamento_sigla_id' => $request->equipamentoSigla,
+            'secretaria_id' => $request->identificacaoSecretaria,
+            'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
+            'tematico' => $request->tematico,
+            'nome_tematica' => $request->nome_tematica,
+            'telefone' => $request->telefone,
+            'telecentro' => $request->telecentro,
+            'acervo_especializado' => $request->acervoespecializado,
+            'nucleo_braile' => $request->nucleobraile,
+            'status_id' => $request->status,
+            'observacao' => $request->observacao
+        ]);
 
         $equipamento->endereco
             ->update([
-            'cep' => $request->cep,
-            'logradouro' => $request->logradouro,
-            'numero' => $request->numero,
-            'complemento' => $request->complemento,
-            'bairro' => $request->bairro,
-            'cidade' => $request->cidade,
-            'estado' => $request->uf,
-            'prefeitura_regional_id' => $request->prefeituraRegional,
-            'distrito_id' => $request->distrito,
-            'macrorregiao_id' => $request->macrorregiao,
-            'regiao_id' => $request->regiao,
-            'regional_id' => $request->regional
+                'cep' => $request->cep,
+                'logradouro' => $request->logradouro,
+                'numero' => $request->numero,
+                'complemento' => $request->complemento,
+                'bairro' => $request->bairro,
+                'cidade' => $request->cidade,
+                'estado' => $request->uf,
+                'prefeitura_regional_id' => $request->prefeituraRegional,
+                'distrito_id' => $request->distrito,
+                'macrorregiao_id' => $request->macrorregiao,
+                'regiao_id' => $request->regiao,
+                'regional_id' => $request->regional
             ]);
 
         $funcionamento = new Funcionamento();
-        foreach ($request->input('funcionamento') as $key => $value)
-        {
+        foreach ($request->input('funcionamento') as $key => $value) {
             $funcionamento->updateOrCreate(['id' => $request->input("funcionamento.{$key}")], [
                 'domingo' => $request->input("domingo.{$key}", '0'),
                 'segunda' => $request->input("segunda.{$key}", '0'),
@@ -443,7 +430,7 @@ class EquipamentoController extends Controller
         }
 
         return redirect()->back()->with('flash_message',
-                'Equipamento Editado com Sucesso!');
+            'Equipamento Editado com Sucesso!');
 
         /*TODO: remover um funcionamento*/
     }
@@ -458,7 +445,7 @@ class EquipamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $types)
@@ -470,7 +457,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $type])
             ->with('flash_message',
-             'Equipamento Excluido com Sucesso.');
+                'Equipamento Excluido com Sucesso.');
     }
 
     public function criaDetalhes($id)
@@ -542,46 +529,46 @@ class EquipamentoController extends Controller
 
     public function atualizaDetalhes(Request $request, $id)
     {
-      $equipamento = Equipamento::find($id);
+        $equipamento = Equipamento::find($id);
 
-      $detalhes = $this->validate($request, [
-          'contratoUso' => 'required',
-          'utilizacao' => 'required',
-          'porte' => 'required',
-          'padrao' => 'required',
-          'pavimento' => 'required|numeric',
-          'validade' => 'date'
-      ]);
+        $detalhes = $this->validate($request, [
+            'contratoUso' => 'required',
+            'utilizacao' => 'required',
+            'porte' => 'required',
+            'padrao' => 'required',
+            'pavimento' => 'required|numeric',
+            'validade' => 'date'
+        ]);
 
-      $this->validate($request, [
-          'acessibilidadeArquitetonica' => 'required',
-          'qtdVagasAcessiveis' => 'nullable'
-      ]);
+        $this->validate($request, [
+            'acessibilidadeArquitetonica' => 'required',
+            'qtdVagasAcessiveis' => 'nullable'
+        ]);
 
-      $acessibilidade_id = $equipamento->detalhe->acessibilidade_id;
-      $acessibilidade = Acessibilidade::find($acessibilidade_id);
+        $acessibilidade_id = $equipamento->detalhe->acessibilidade_id;
+        $acessibilidade = Acessibilidade::find($acessibilidade_id);
 
-      $acessibilidade->update([
-          'acessibilidade_arquitetonica_id' => $request->acessibilidadeArquitetonica,
-          'banheiros_adaptados' => $request->banheiros,
-          'rampas_acesso' => $request->rampas,
-          'elevador_id' => $request->elevador,
-          'piso_tatil' => $request->pisoTatil,
-          'estacionamento_acessivel' => $request->estacionamentoAcessivel,
-          'quantidade_vagas' => $request->qtdVagasAcessiveis
-      ]);
+        $acessibilidade->update([
+            'acessibilidade_arquitetonica_id' => $request->acessibilidadeArquitetonica,
+            'banheiros_adaptados' => $request->banheiros,
+            'rampas_acesso' => $request->rampas,
+            'elevador_id' => $request->elevador,
+            'piso_tatil' => $request->pisoTatil,
+            'estacionamento_acessivel' => $request->estacionamentoAcessivel,
+            'quantidade_vagas' => $request->qtdVagasAcessiveis
+        ]);
 
-      $equipamento->detalhe()->update([
-          'contrato_uso_id' => $request->contratoUso,
-          'utilizacao_id' => $request->utilizacao,
-          'porte_id' => $request->porte,
-          'padrao_id' => $request->padrao,
-          'pavimento' => $request->pavimento,
-          'acessibilidade_id' => $acessibilidade_id,
-          'validade_avcb' => $request->validade
-      ]);
+        $equipamento->detalhe()->update([
+            'contrato_uso_id' => $request->contratoUso,
+            'utilizacao_id' => $request->utilizacao,
+            'porte_id' => $request->porte,
+            'padrao_id' => $request->padrao,
+            'pavimento' => $request->pavimento,
+            'acessibilidade_id' => $acessibilidade_id,
+            'validade_avcb' => $request->validade
+        ]);
 
-      return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');
 
     }
 
@@ -640,25 +627,25 @@ class EquipamentoController extends Controller
 
     public function atualizaArea(Request $request, $id)
     {
-      $equipamento = Equipamento::find($id);
+        $equipamento = Equipamento::find($id);
 
-      $this->validate($request, [
-          'areaInterna' => 'required|numeric',
-          'areaTotalConstruida' => 'required|numeric',
-          'areaTotalTerreno' => 'required|numeric',
-          'areaAuditorio' => 'nullable|numeric',
-          'areaTeatro' => 'nullable|numeric'
-      ]);
+        $this->validate($request, [
+            'areaInterna' => 'required|numeric',
+            'areaTotalConstruida' => 'required|numeric',
+            'areaTotalTerreno' => 'required|numeric',
+            'areaAuditorio' => 'nullable|numeric',
+            'areaTeatro' => 'nullable|numeric'
+        ]);
 
-      $equipamento->area()->update([
-        'interna' => $request->areaInterna,
-        'auditorio' => $request->areaAuditorio,
-        'teatro' => $request->areaTeatro,
-        'total_construida' => $request->areaTotalConstruida,
-        'total_terreno' => $request->areaTotalTerreno
-      ]);
+        $equipamento->area()->update([
+            'interna' => $request->areaInterna,
+            'auditorio' => $request->areaAuditorio,
+            'teatro' => $request->areaTeatro,
+            'total_construida' => $request->areaTotalConstruida,
+            'total_terreno' => $request->areaTotalTerreno
+        ]);
 
-      return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área atualizada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área atualizada com sucesso');
     }
 
     public function criaReforma($id)
@@ -671,7 +658,7 @@ class EquipamentoController extends Controller
     public function gravaReforma(Request $request, $id)
     {
         $equipamento = Equipamento::find($id);
-        $user =  Auth::user();
+        $user = Auth::user();
 
         $data = $this->validate($request, [
             'inicioReforma' => 'required',
@@ -697,7 +684,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $request->type])
             ->with('flash_message',
-             'Usuario Ativado com Sucesso.');
+                'Usuario Ativado com Sucesso.');
     }
 
     // Filtro de Equipamentos
@@ -717,33 +704,33 @@ class EquipamentoController extends Controller
     public function equipamentoOcorrencia(Request $request)
     {
 
-       $equipamento = Equipamento::findOrFail($request->idEquipamento);
+        $equipamento = Equipamento::findOrFail($request->idEquipamento);
 
-       $data = $this->validate($request,
-                    [
-                        'data'=> 'required',
-                        'ocorrencia'=>'required',
-                        'observacao'=>'required'
+        $data = $this->validate($request,
+            [
+                'data' => 'required',
+                'ocorrencia' => 'required',
+                'observacao' => 'required'
 
-                    ]);
+            ]);
 
-       $user =  Auth::user()->id;
+        $user = Auth::user()->id;
 
 
-       $ok = $equipamento->ocorrencias()->create([
+        $ok = $equipamento->ocorrencias()->create([
             'user_id' => $user,
             'data' => $request->data,
             'ocorrencia' => $request->ocorrencia,
             'observacao' => $request->observacao
         ]);
 
-       return response()->json($ok);
+        return response()->json($ok);
 
     }
 
     public function countOcorrencias($id)
     {
-        $count = EquipamentoOcorrencia::where('equipamento_id',$id)->get()->count();
+        $count = EquipamentoOcorrencia::where('equipamento_id', $id)->get()->count();
 
         return response()->json($count);
 
@@ -753,10 +740,10 @@ class EquipamentoController extends Controller
     public function editPortaria($id)
     {
         $equipamento = Equipamento::findOrFail($id);
-        if($equipamento->portaria == 1){
+        if ($equipamento->portaria == 1) {
             $equipamento->update(['portaria' => 0]);
             return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Formulário atualizado para o simples.');
-        }else{
+        } else {
             $equipamento->update(['portaria' => 1]);
             return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Formulário atualizado para o completo.');
         }
