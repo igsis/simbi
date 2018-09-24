@@ -29,6 +29,15 @@ INSERT INTO `contrato_usos` (`id`, `contrato_uso`) VALUES
 (3, 'Próprio');
 /*!40000 ALTER TABLE `contrato_usos` ENABLE KEYS */;
 
+-- Copiando dados para a tabela simbi.classificacoes:
+DELETE FROM `classificacoes`;
+/*!40000 ALTER TABLE `classificacoes` DISABLE KEYS */;
+INSERT INTO `classificacoes` (`id`, `classificacao`) VALUES
+(1, 'Pequeno'),
+(2, 'Médio'),
+(3, 'Grande');
+/*!40000 ALTER TABLE `classificacoes` ENABLE KEYS */;
+
 -- Copiando dados para a tabela simbi.distritos:
 DELETE FROM `distritos`;
 /*!40000 ALTER TABLE `distritos` DISABLE KEYS */;
@@ -166,7 +175,7 @@ INSERT INTO `padroes` (`id`, `padrao`) VALUES
 DELETE FROM `portes`;
 /*!40000 ALTER TABLE `portes` DISABLE KEYS */;
 INSERT INTO `portes` (`id`, `porte`) VALUES
-  (1, 'Grande'),
+  (1, 'Pequeno'),
   (2, 'Médio'),
   (3, 'Grande');
 /*!40000 ALTER TABLE `portes` ENABLE KEYS */;
@@ -251,15 +260,6 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(3, 'Funcionario', 'web', '2018-05-11 16:04:42', '2018-05-11 16:04:42');
 /*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 
--- Copiando dados para a tabela simbi.classificacoes:
-DELETE FROM `classificacoes`;
-/*!40000 ALTER TABLE `classificacoes` DISABLE KEYS */;
-INSERT INTO `classificacoes` (`id`, `classificacao`) VALUES
-  (1, 'Pequeno'),
-  (2, 'Médio'),
-  (3, 'Grande');
-/*!40000 ALTER TABLE `classificacoes` ENABLE KEYS */;
-
 -- Copiando dados para a tabela simbi.prefeitura_regionais: ~0 rows (aproximadamente)
 DELETE FROM `prefeitura_regionais`;
 /*!40000 ALTER TABLE `prefeitura_regionais` DISABLE KEYS */;
@@ -308,6 +308,15 @@ INSERT INTO `regiao` (`id`, `descricao`) VALUES
 	(4, 'Oeste'),
 	(5, 'Centro');
 /*!40000 ALTER TABLE `regiao` ENABLE KEYS */;
+
+-- Copiando dados para a tabela simbi.responsabilidade_tipos: ~0 rows (aproximadamente)
+DELETE FROM `responsabilidade_tipos`;
+/*!40000 ALTER TABLE `responsabilidade_tipos` DISABLE KEYS */;
+INSERT INTO `responsabilidade_tipos` (`id`, `responsabilidade_tipo`) VALUES
+(1, 'Funcionário'),
+(2, 'Coordenador'),
+(3, 'Coordenador Substituto');
+/*!40000 ALTER TABLE `responsabilidade_tipos` ENABLE KEYS */;
 
 -- Copiando dados para a tabela simbi.regional: ~0 rows (aproximadamente)
 DELETE FROM `regional`;

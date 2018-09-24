@@ -23,6 +23,9 @@ if($path == 'equipamentos.atualizaDetalhes')
 
         <form method="POST" action="{{ route($path, $equipamento->id) }}">
             {{ csrf_field() }}
+            @if($pathAtualiza)
+                <input type="hidden" name="_method" value="PUT">
+            @endif
 
             <div class="row">
                 <div class="form-group col-md-3">
