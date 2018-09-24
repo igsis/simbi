@@ -21,23 +21,35 @@
             <tbody>
             @foreach($eventos as $evento)
                 @if($evento->publicado == 1)
-                    <tr>
-                        <td>{{ $evento->nome_evento }}</td>
-                        <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                        <td>
-                            <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
-                            @hasrole('Administrador')
-                                <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Desativar"><i class="glyphicon glyphicon-trash"></i> Remover
-                                    </button>
-                                </form>
-                            @endhasrole
-                        </td>
-                    </tr>
+                    @if(!(in_array($evento->id, $frequenciasCadastradas)))
+                        <tr>
+                            <td>{{ $evento->nome_evento }}</td>
+                            <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                            <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                            <td>
+                                <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                                <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                                @hasrole('Administrador')
+                                    <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Desativar"><i class="glyphicon glyphicon-trash"></i> Remover
+                                        </button>
+                                    </form>
+                                @endhasrole
+                            </td>
+                        </tr>
+                        @else
+                        <tr class="bg-success">
+                            <td class="bg-success">{{ $evento->nome_evento }}</td>
+                            <td class="bg-success">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                            <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
+                            <td class="bg-success">
+                                <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                                <a href="{{ route('frequencia.cadastro', $evento->id) }}" disabled class="btn btn-success disabled" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                            </td>
+                        </tr>
+                    @endif
                 @endif
             @endforeach
             @include('layouts.excluir_confirm')

@@ -41,9 +41,9 @@ class FrequenciaController extends Controller
             ->orderBy('evento_ocorrencias.data')
             ->paginate(10);
 
-        //$eventos = Evento::where('igsis_id', $igsis_id)->orderBy('nome_evento')->paginate(10);
+        $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
-        return view('frequencia.eventos', compact('eventos'));
+        return view('frequencia.eventos', compact('eventos', 'frequenciasCadastradas'));
     }
 
     public function editarEvento($id)
@@ -174,7 +174,7 @@ class FrequenciaController extends Controller
     public function removeOcorrencia($id)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
-        
+
         EventoOcorrencia::findOrFail($id)
             ->update(['publicado' => 0]);
 
