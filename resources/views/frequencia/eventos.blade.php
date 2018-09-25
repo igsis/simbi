@@ -20,6 +20,7 @@
             </thead>
             <tbody>
             @foreach($eventos as $evento)
+                <input type="hidden" value="{{ $igsis_id = $evento->igsis_id }}">
                 @if(!(in_array($evento->id, $frequenciasCadastradas)))
                     <tr>
                         <td>{{ $evento->nome_evento }}</td>
@@ -61,6 +62,9 @@
             {!! $eventos->links() !!}
         @endif
     </div>
+
+    <a href="{{ route('eventos.cadastro', $igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
+    <a href="{{ route('eventos.cadastro', $igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Cadastrar Ocorrência</a>
 @endsection
 
 @section('scripts_adicionais')

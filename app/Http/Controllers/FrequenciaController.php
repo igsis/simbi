@@ -5,6 +5,7 @@ namespace Simbi\Http\Controllers;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Compound;
 use Simbi\Http\Controllers\Controller;
+use Simbi\Models\ContratacaoForma;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Evento;
 use Simbi\Models\EventoOcorrencia;
@@ -12,6 +13,8 @@ use Simbi\Models\EventosIgsis;
 use Auth;
 use Simbi\Models\Frequencia;
 use Simbi\Models\OcorrenciasIgsis;
+use Simbi\Models\ProjetoEspecial;
+use Simbi\Models\TipoEvento;
 
 class FrequenciaController extends Controller
 {
@@ -31,6 +34,23 @@ class FrequenciaController extends Controller
         $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
         return view('frequencia.index', compact('equipamentos', 'type'));
 
+    }
+
+    public function cadastrarEvento($id){
+        $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
+        $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
+        $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
+
+        return view('frequencia.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao'));
+    }
+
+    public function cadastrarOcorrencia($id)
+    {
+        $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
+        $eventos = Evento::all()->orderBy('nome_evento');
+
+//        return view('frequencia.cadastroOcorrencia', compact('equipamento', 'eventos'));
     }
 
     public function listarEventos($igsis_id)

@@ -19,6 +19,9 @@ Route::group(['prefix' => 'frequencia'], function(){
     Route::post('/{equipamento}/cadastro', 'FrequenciaController@store')->name('frequencia.gravar');
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
+
+    Route::get('/{equipamento_igsis}/cadastro/evento', 'FrequenciaController@cadastrarEvento')->name('eventos.cadastro');
+
 });
 
 Route::group(['prefix' => 'portaria'], function(){
