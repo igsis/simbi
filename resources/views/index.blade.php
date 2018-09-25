@@ -10,7 +10,7 @@
         @include('auth.login')
     @else
 		<hr>
-		@if($ocorrencias != null)
+		@if($ocorrencias != null && $frequenciasCadastradas != null)
 			@foreach($ocorrencias as $ocorrencia)
 				@if(!(in_array($ocorrencia->id, $frequenciasCadastradas)) && $ocorrencia->publicado == 1)
 					<?php
