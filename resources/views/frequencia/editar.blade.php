@@ -6,17 +6,23 @@
     <div class="col-lg-6 col-lg-offset-3">
         <h1>
             <i class="glyphicon glyphicon-user"></i> Editar evento <br>
+            <small>{{ $evento->nome_evento }}</small>
         </h1>
         <hr>
 
         <form method="POST" action="{{route('frequencia.updateOcorrencia', $ocorrencia->id)}}">
             {{ csrf_field() }}
 
+            <div class="form-group">
+                <label for="tipoEvento">Categoria do Evento</label>
+                <input type="text" readonly class="form-control" value="{{ $evento->tipoEvento->tipo_evento }}">
+            </div>
+            
             <div class="row">
                 <div class="form-group col-md-6">
                     <div class="form-group ">
                         <label for="email">Data</label>
-                        <input class="form-control" type="date" name="data" value="{{$ocorrencia->data}}">
+                        <input class="form-control" type="date" name="data" value="{{$ocorrencia->data}}" onblur="arrumaData()">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -41,61 +47,51 @@
 
 @section('scripts_adicionais')
     <script type="text/javascript">
-        function calcular() {
-            var crianca = parseInt(document.getElementById('crianca').value, 10);
-            var jovem = parseInt(document.getElementById('jovem').value, 10);
-            var adulto = parseInt(document.getElementById('adulto').value, 10);
-            var idoso = parseInt(document.getElementById('idoso').value, 10);
+        function arrumaData() {
+            var data = document.querySelector('input[name="data"]').value;
 
-            crianca = isNaN(crianca) ? 0 : crianca;
-            jovem = isNaN(jovem) ? 0 : jovem;
-            adulto = isNaN(adulto) ? 0 : adulto;
-            idoso = isNaN(idoso) ? 0 : idoso;
+            data = new Date(data);
 
-            var calcula = crianca + jovem + adulto + idoso;
-            var publico = document.getElementById("publicoTotal");
+            dayName = new Array ("Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo");
 
-            publico.value = String(calcula);
+            document.querySelector('input[name="diaSemana"').value = dayName[data.getDay() + 1];
         }
-
-        window.onload = calcular();
-
     </script>
 
     <script type="text/javascript">
-        let botao = document.querySelector('#pesquisar');
-
-        botao.addEventListener('click', () => {
-            let idEvento = document.querySelector('input[name="evento"]').value;
-            console.log(idEvento);
-            fetch(`http://smcsistemas.prefeitura.sp.gov.br/igsis/funcoes/api_simbi.php?id=${idEvento}`).then(resposta => {
-                console.log(resposta);
-                return resposta.json();
-            }).then(dados => {
-                if(dados){
-                    let obj = JSON.stringify(dados)
-                    console.log(`${JSON.stringify(dados)}`);
-
-                    let percorrer = JSON.parse(obj)
-                    console.log(percorrer);
-                    console.log(percorrer['idEvento']);
-                    console.log(percorrer['nomeEvento']);
-                    console.log(percorrer['projeto']);
-
-                    document.querySelector('input[name="nomeEvento"]').value = percorrer['nomeEvento'];
-
-                    console.log("Deu certo");
-                }
-                else{
-                    // alterarCadastro(cadastro);
-                    // console.log(" Não Encontrado");
-
-                    document.querySelector('input[name="nomeEvento"]').value = 'Não Encontrado';
-
-                }
-            });
-
-        });
+        // let botao = document.querySelector('#pesquisar');
+        //
+        // botao.addEventListener('click', () => {
+        //     let idEvento = document.querySelector('input[name="evento"]').value;
+        //     console.log(idEvento);
+        //     fetch(`http://smcsistemas.prefeitura.sp.gov.br/igsis/funcoes/api_simbi.php?id=${idEvento}`).then(resposta => {
+        //         console.log(resposta);
+        //         return resposta.json();
+        //     }).then(dados => {
+        //         if(dados){
+        //             let obj = JSON.stringify(dados)
+        //             console.log(`${JSON.stringify(dados)}`);
+        //
+        //             let percorrer = JSON.parse(obj)
+        //             console.log(percorrer);
+        //             console.log(percorrer['idEvento']);
+        //             console.log(percorrer['nomeEvento']);
+        //             console.log(percorrer['projeto']);
+        //
+        //             document.querySelector('input[name="nomeEvento"]').value = percorrer['nomeEvento'];
+        //
+        //             console.log("Deu certo");
+        //         }
+        //         else{
+        //             // alterarCadastro(cadastro);
+        //             // console.log(" Não Encontrado");
+        //
+        //             document.querySelector('input[name="nomeEvento"]').value = 'Não Encontrado';
+        //
+        //         }
+        //     });
+        //
+        // });
     </script>
 
 @endsection

@@ -23,7 +23,7 @@
         Route::group(['prefix' => 'detalhes/{equipamento}'], function(){
             Route::get('/', 'EquipamentoController@criaDetalhes')->name('equipamentos.criaDetalhes');
 
-            Route::post('/formulario' , 'EquipamentoController@editPortaria')->name('equipamentos.editPortaria');
+            Route::put('/formulario' , 'EquipamentoController@editPortaria')->name('equipamentos.editPortaria');
 
             Route::post('/novo', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 

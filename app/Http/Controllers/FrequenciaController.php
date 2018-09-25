@@ -36,7 +36,10 @@ class FrequenciaController extends Controller
     public function listarEventos($igsis_id)
     {
         $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id')
-            ->where('evento_ocorrencias.igsis_id', $igsis_id)
+            ->where([
+                ['evento_ocorrencias.igsis_id', $igsis_id],
+                ['evento_ocorrencias.publicado', 1]
+            ])
             ->distinct('eventos.igsis_evento_id')
             ->orderBy('evento_ocorrencias.data')
             ->paginate(10);
@@ -50,7 +53,9 @@ class FrequenciaController extends Controller
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
-        return view('frequencia.editar', compact('ocorrencia'));
+        $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
+
+        return view('frequencia.editar', compact('ocorrencia', 'evento'));
     }
 
     public function uploadOcorrencia(Request $request, $id)
