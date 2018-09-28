@@ -6,13 +6,11 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
 
-    Route::get('/{equipamento_igsis}/eventos', 'FrequenciaController@listarEventos')->name('frequencia.eventos');
+    Route::get('/{equipamento_igsis}/ocorrencias', 'FrequenciaController@listarOcorrencias')->name('frequencia.ocorrencias');
 
-    Route::get('/{evento}/editar', 'FrequenciaController@editarEvento')->name('frequencia.editaEvento');
+    Route::get('/{evento}/editar', 'FrequenciaController@editarOcorrencia')->name('frequencia.editarOcorrencia');
 
     Route::post('/{idOcorrencia}/editar', 'FrequenciaController@uploadOcorrencia')->name('frequencia.updateOcorrencia');
-
-    Route::delete('/{idOcorrencia}/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
 
     Route::get('/{idOcorrencia}/cadastro', 'FrequenciaController@create')->name('frequencia.cadastro');
 
@@ -20,7 +18,18 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
 
-    Route::get('/{equipamento_igsis}/cadastro/evento', 'FrequenciaController@cadastrarEvento')->name('eventos.cadastro');
+    Route::delete('/{idOcorrencia}/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
+
+});
+
+Route::group(['prefix' => '{equipamento_igsis}/eventos'], function (){
+    Route::get('/cadastro', 'FrequenciaController@cadastrarEvento')->name('eventos.cadastro');
+
+    Route::get('/', 'FrequenciaController@listaEventos')->name('eventos.listar');
+
+    Route::get('/cadastro/{evento_igsis}/ocorrencia', 'FrequenciaController@cadastrarOcorrencia')->name('eventos.cadastro.ocorrencia');
+
+    Route::post('/cadastro/{evento_igsis}/ocorrencia', 'FrequenciaController@gravaOcorrencia')->name('eventos.grava.ocorrencia');
 
 });
 
@@ -39,6 +48,5 @@ Route::group(['prefix' => 'portaria'], function(){
     Route::post('/{equipamento}/cadastro', 'FrequenciasPortariaController@store')->name('frequencia.portaria.gravar');
 
     Route::get('/{equipamento}/listar', 'FrequenciasPortariaController@listar')->name('frequencia.portaria.listar');
-
 
 });

@@ -45,15 +45,33 @@ class FrequenciaController extends Controller
         return view('frequencia.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao'));
     }
 
-    public function cadastrarOcorrencia($id)
+    public function cadastrarOcorrencia($igsis_id, $igsis_evento_id)
     {
-        $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
-        $eventos = Evento::all()->orderBy('nome_evento');
+        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+        $evento = Evento::where('igsis_evento_id', $igsis_evento_id)->firstOrFail();
 
-//        return view('frequencia.cadastroOcorrencia', compact('equipamento', 'eventos'));
+        return view('frequencia.cadastroOcorrencia', compact('equipamento', 'evento'));
     }
 
-    public function listarEventos($igsis_id)
+    public function gravaOcorrencia($igsis_id, $igsis_evento_id, Request $request)
+    {
+        $this->validate($request, [
+            'data'=>'required',
+            'hora'=>'required'
+        ]);
+
+        EventoOcorrencia::create([
+            'igsis_evento_id' => $igsis_evento_id,
+            'igsis_id' => $igsis_id,
+            'data' => $request->data,
+            'horario' => $request->hora
+        ]);
+
+        return redirect()->route('eventos.listar', $igsis_id)->with('flash_message',
+            'Ocorrência Inserida Com Sucesso!');
+    }
+
+    public function listarOcorrencias($igsis_id)
     {
         $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id')
             ->where([
@@ -66,16 +84,27 @@ class FrequenciaController extends Controller
 
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
-        return view('frequencia.eventos', compact('eventos', 'frequenciasCadastradas'));
+        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+
+        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento'));
     }
 
-    public function editarEvento($id)
+    public function editarOcorrencia($id)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
         $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
 
-        return view('frequencia.editar', compact('ocorrencia', 'evento'));
+        return view('frequencia.editarOcorrencia', compact('ocorrencia', 'evento'));
+    }
+
+    public function listaEventos($igisis_id)
+    {
+        $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->paginate(10);
+
+        $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
+
+        return view('frequencia.listaEventos', compact('eventos', 'equipamento'));
     }
 
     public function uploadOcorrencia(Request $request, $id)
@@ -203,9 +232,9 @@ class FrequenciaController extends Controller
         EventoOcorrencia::findOrFail($id)
             ->update(['publicado' => 0]);
 
-        return redirect()->route('frequencia.eventos', $ocorrencia->igsis_id)
+        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
             ->with('flash_message',
-                'Ocorrencia do Evento Excluido com Sucesso.');
+                'Ocorrência do Evento Excluido com Sucesso.');
     }
 
     /**

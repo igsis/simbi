@@ -3,8 +3,9 @@
 @section('conteudo')
 
     <h1>
-        <i class="glyphicon glyphicon-home"></i>
-        Eventos do equipamento
+        <i class="glyphicon glyphicon-th-list"></i>
+        Ocorrências de Eventos <br>
+        <small>{{ $equipamento->nome }}</small>
     </h1>
     <div class="panel-heading">Pagina {{$eventos->currentPage()}} de {{$eventos->lastPage()}}</div>
     <hr>
@@ -27,7 +28,7 @@
                         <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                         <td>
-                            <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                             <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
                             @hasrole('Administrador')
                                 <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
@@ -45,7 +46,7 @@
                         <td class="bg-success">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                         <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
                         <td class="bg-success">
-                            <a href="{{ route('frequencia.editaEvento', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                             <a href="{{ route('frequencia.cadastro', $evento->id) }}" disabled class="btn btn-success disabled" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
                         </td>
                     </tr>
@@ -64,7 +65,7 @@
     </div>
 
     <a href="{{ route('eventos.cadastro', $igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
-    <a href="{{ route('eventos.cadastro', $igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Cadastrar Ocorrência</a>
+    <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
 @endsection
 
 @section('scripts_adicionais')

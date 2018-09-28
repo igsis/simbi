@@ -22,7 +22,7 @@
                     <td>{{$equipamento->nome}}</td>
                     <td>
                         @if($type == 1)
-                            <a href="{{ route('frequencia.eventos', $equipamento->igsis_id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
+                            <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
                             <a href="#" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
                             <a href="{{ route('frequencia.portaria.cadastro', $equipamento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Recepção</a>
                         @else
