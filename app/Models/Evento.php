@@ -9,9 +9,12 @@ class Evento extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'igsis_evento_id',
         'nome_evento',
         'tipo_evento_id',
-        'contratacao_forma_id'
+        'contratacao_forma_id',
+        'projeto_especial_id',
+        'publicado'
     ];
 
     public function tipoEvento()

@@ -3,6 +3,7 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use phpDocumentor\Reflection\Types\Compound;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\ContratacaoForma;
@@ -42,7 +43,30 @@ class FrequenciaController extends Controller
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
-        return view('frequencia.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao'));
+        $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
+
+        return view('frequencia.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+    }
+
+    public function gravarEvento(Request $request, $igsis_id)
+    {
+        $this->validate($request, [
+            'nome'=>'required',
+            'tipoEvento'=>'required',
+            'projetoEspecial'=>'required',
+            'contratacao'=>'required'
+        ]);
+
+        Evento::create([
+            'igsis_evento_id' => $request->igsis_evento_id,
+            'nome_evento' => $request->nome,
+            'tipo_evento_id' => $request->tipoEvento,
+            'projeto_especial_id' => $request->projetoEspecial,
+            'contratacao_forma_id' => $request->contratacao
+        ]);
+
+        return redirect()->route('frequencia.ocorrencias', $igsis_id)->with('flash_message',
+            'Evento Inserido Com Sucesso!');
     }
 
     public function cadastrarOcorrencia($igsis_id, $igsis_evento_id)
