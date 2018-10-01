@@ -13,7 +13,7 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th width="50%">Eventos</th>
+                <th width="50%">Ocorrências</th>
                 <th>Data</th>
                 <th>Hora</th>
                 <th>Operações</th>
@@ -34,7 +34,7 @@
                                 <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover esta ocorrência?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover
                                     </button>
                                 </form>
                             @endhasrole

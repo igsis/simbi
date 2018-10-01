@@ -91,7 +91,7 @@ class FrequenciaController extends Controller
             'horario' => $request->hora
         ]);
 
-        return redirect()->route('eventos.listar', $igsis_id)->with('flash_message',
+        return redirect()->route('frequencia.ocorrencias', $igsis_id)->with('flash_message',
             'Ocorrência Inserida Com Sucesso!');
     }
 
@@ -145,7 +145,7 @@ class FrequenciaController extends Controller
             'horario' => $request->hora
         ]);
 
-        return redirect()->route('frequencia.eventos', $ocorrencia->igsis_id)
+        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
             ->with('flash_message', 'Ocorrência do Evento editada com sucesso!');
     }
 
@@ -194,6 +194,8 @@ class FrequenciaController extends Controller
 
         $user =  Auth::user();
 
+        $ocorrencia = EventoOcorrencia::findOrFail($request->evento_ocorrencia_id);
+
         $user->frequencias()->create([
             'evento_ocorrencia_id' => $request->evento_ocorrencia_id,
             'crianca' => $request->crianca,
@@ -205,7 +207,7 @@ class FrequenciaController extends Controller
             'equipamento_id' => $id
         ]);
 
-        return redirect()->route('frequencia.index')->with('flash_message',
+        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)->with('flash_message',
             'Frequência Inserida Com Sucesso!');
     }
 

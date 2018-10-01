@@ -32,6 +32,11 @@ class Frequencia extends Model
         return $this->hasMany(EventoOcorrencia::class);
     }
 
+    public function projetoEspecial()
+    {
+        return $this->belongsTo(ProjetoEspecial::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

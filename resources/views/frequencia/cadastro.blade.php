@@ -4,7 +4,7 @@
 
     <div class="col-lg-6 col-lg-offset-3">
         <h1>
-            <i class="glyphicon glyphicon-user"></i> Eventos Culturais <br>
+            <i class="glyphicon glyphicon-pushpin"></i> Eventos Culturais <br>
             <small>{{ $evento->nome_evento }}</small>
         </h1>
         <hr>
@@ -17,6 +17,16 @@
                     <label for="evento_ocorrencia_id">Id da ocorrencia</label>
                     <input class="form-control" type="text" id="evento_ocorrencia_id" name="evento_ocorrencia_id" value="{{$ocorrencia->id}}">
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoEvento">Categoria do Evento</label>
+                <input type="text" readonly class="form-control" value="{{ $evento->tipoEvento->tipo_evento }}">
+            </div>
+
+            <div class="form-group">
+                <label for="tipoEvento">Projeto Especial</label>
+                <input type="text" readonly class="form-control" value="{{ $evento->projetoEspecial->projeto_especial }}">
             </div>
 
 
