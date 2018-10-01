@@ -48,6 +48,8 @@
             {!! $eventos->links() !!}
         @endif
     </div>
+
+    <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar de Ocorrências</a>
 @endsection
 
 @section('scripts_adicionais')
