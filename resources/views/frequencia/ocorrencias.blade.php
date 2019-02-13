@@ -64,7 +64,7 @@
         @endif
     </div>
 
-    <a href="{{ route('eventos.cadastro', $igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
+    <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
     <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
 @endsection
 
