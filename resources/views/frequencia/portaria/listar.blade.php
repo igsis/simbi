@@ -7,7 +7,7 @@
         <div class="col-md-offset-1 col-md-10">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
-                    Frequência Portaria
+                    Público Atendido
                 </div>
                 <div class="panel-body">
                     <table class="table table-bordered">
