@@ -65,8 +65,9 @@ class FrequenciaController extends Controller
             'contratacao_forma_id' => $request->contratacao
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', $igsis_id)->with('flash_message',
-            'Evento Inserido Com Sucesso!');
+        $evento_igsis = $request->igsis_evento_id;
+
+        return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis'=>$igsis_id,'evento_igsis'=>$evento_igsis]);
     }
 
     public function cadastrarOcorrencia($igsis_id, $igsis_evento_id)

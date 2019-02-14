@@ -4,7 +4,7 @@
 
     <div class="col-lg-6 col-lg-offset-3">
         <h1>
-            <i class="glyphicon glyphicon-flag"></i> Cadastrar Evento<br>
+            <i class="glyphicon glyphicon-flag"></i> Cadastrar Ocorrência<br>
             <small>{{ $equipamento->nome }}</small>
         </h1>
         <hr>
