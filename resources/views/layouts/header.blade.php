@@ -22,14 +22,14 @@
                 <!-- Notifications: style can be found in dropdown.less -->
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Usuario <span class="caret"></span>
+                        {{ Auth::user()->name }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#">Minha conta</a>
+                            <a href="{{ route('usuarios.editar', Auth::user()->id) }}">Minha conta</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 Sair

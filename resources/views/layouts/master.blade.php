@@ -4,45 +4,57 @@
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
 ?>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Sistema Simbi</title>
+    {{-- Include com cabeçalho do HTML <HEAD> --}}
+    @includeIf('layouts.head')
 
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-        <link rel="stylesheet" href="{{asset('css/app.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-        @yield('scripts_css')
+    {{-- Include com SideBar da parte de cima do site <HEADER> --}}
+    @if(!Auth::guest())
+        @includeIf('layouts.header')
+    @endif
+    {{-- Include com Menu lateral esquerdo do site <ASIDE> --}}
+    @if(!Auth::guest())
+        @includeIf('layouts.sidebarLateral')
+    @endif
 
-    </head>
-    <body>
-        @include('layouts.br')
-        <div class="wrapper">
-            @if (!Auth::guest())
-                @include ('layouts.sidebar')
-            @endif
-            <div id="content">
-                @if (!Auth::guest())
-                   @include ('layouts.navbar')
-                @endif
-                @if(Session::has('flash_message'))
-                    <div class="container">      
-                        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
-                    </div>
-                @endif 
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">              
-                        @include ('layouts.erros')
-                    </div>
-                </div>
-                @yield ('conteudo')
-            </div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        {{--<section class="content-header">--}}
+            {{--<h1>--}}
+                {{--Dashboard--}}
+                {{--<small>Version 2.0</small>--}}
+            {{--</h1>--}}
+            {{--<ol class="breadcrumb">--}}
+                {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
+                {{--<li class="active">Dashboard</li>--}}
+            {{--</ol>--}}
+        {{--</section>--}}
+
+        <!-- Main content -->
+        @if(Session::has('flash_message'))
+            <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+        @endif
+        <div class="row">
+            @includeIf('layouts.erros')
         </div>
-        <div class="overlay"></div>
-        @include ('layouts.scripts')
-    </body>
+        <section class="content">
+            @yield('conteudo')
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    {{-- Include com footer do site <FOOTER> --}}
+    @includeIf('layouts.footer')
+
+
+</div>
+<!-- ./wrapper -->
+
+@includeIf('layouts.scripts')
+
+</body>
 </html>

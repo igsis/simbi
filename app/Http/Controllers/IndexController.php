@@ -14,6 +14,7 @@ class IndexController extends Controller
 
         $ocorrencias = EventoOcorrencia::all();
 
+        //return view('teste');
         return view('index', compact('frequenciasCadastradas', 'ocorrencias'));
     }
 }
