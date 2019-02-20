@@ -9,6 +9,7 @@ date_default_timezone_set('America/Sao_Paulo');
     @includeIf('layouts.head')
 
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
     {{-- Include com SideBar da parte de cima do site <HEADER> --}}
@@ -21,6 +22,7 @@ date_default_timezone_set('America/Sao_Paulo');
     @endif
 
     <div class="content-wrapper">
+
         <!-- Content Header (Page header) -->
         {{--<section class="content-header">--}}
             {{--<h1>--}}
@@ -35,10 +37,14 @@ date_default_timezone_set('America/Sao_Paulo');
 
         <!-- Main content -->
         @if(Session::has('flash_message'))
-            <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+            <div class="col-md-10 col-sm-10">
+                <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+            </div>
         @endif
         <div class="row">
-            @includeIf('layouts.erros')
+            <div class="col-md-10 col-sm-10">
+                @includeIf('layouts.erros')
+            </div>
         </div>
         <section class="content">
             @yield('conteudo')

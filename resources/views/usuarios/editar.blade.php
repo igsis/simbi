@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-    <div class="col-lg-8 col-lg-offset-2">
+    <div class="col-6">
         <h1><i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}</h1>
         <hr>
 
@@ -219,6 +219,7 @@
                 </div>
             </div>
         </div>
+    </div>
 @endsection
 
 @section('scripts_adicionais')
