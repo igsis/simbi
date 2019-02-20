@@ -46,10 +46,14 @@ date_default_timezone_set('America/Sao_Paulo');
                 @includeIf('layouts.erros')
             </div>
         </div>
-        <section class="content">
-            @yield('conteudo')
-        </section>
-        <!-- /.content -->
+        <div class="content">
+            <div class="box box-default">
+                <div class="box-body">
+                    @yield('conteudo')  
+                </div>
+            </div>
+        </div>
+        
     </div>
     <!-- /.content-wrapper -->
 

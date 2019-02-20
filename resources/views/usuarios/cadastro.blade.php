@@ -2,7 +2,7 @@
 
 @section('conteudo')
 
-    <div class="col-lg-8 col-lg-offset-2">
+    <div class="col-10">
         <h1><i class="glyphicon glyphicon-user"></i>Cadastrar Usuário</h1>
         <hr>
 
