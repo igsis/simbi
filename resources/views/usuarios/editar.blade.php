@@ -175,7 +175,9 @@
                 <input type="radio" value="3" name="roles">
                 <label for="Funcionario">Funcionário</label><br>
             </div>
-            <input class="btn btn-primary" type="submit" value="Editar">
+            <div class="form-group col-md-12">
+                <input class="form-control btn btn-primary" type="submit" value="Editar">
+            </div>    
         </form>
         <br>
 
@@ -188,7 +190,9 @@
         @endif
         @include('layouts.excluir_confirm')
         
-        <a class="btn btn-warning" href="{{ route('usuarios.index', ['type' => '1']) }}">Voltar</a>
+        <div class="form-group col-md-12">
+            <a class="form-control btn btn-warning" href="{{ route('usuarios.index', ['type' => '1']) }}">Voltar</a>
+        </div>    
 
         @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
         @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])

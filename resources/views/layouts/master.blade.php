@@ -42,7 +42,7 @@ date_default_timezone_set('America/Sao_Paulo');
             </div>
         @endif
         <div class="row">
-            <div class="col-md-10 col-sm-10">
+            <div class="col-xs-12">
                 @includeIf('layouts.erros')
             </div>
         </div>

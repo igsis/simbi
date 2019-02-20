@@ -3,7 +3,7 @@
                                         : 'equipamentos.gravaArea'; ?>
 @section('conteudo')
 
-    <div class="container">
+
         <div class="centralizado">
             <h2>
                 Áreas<br>
@@ -61,6 +61,5 @@
                 </div>
             </div>
         </form>
-    </div>
 
 @endsection

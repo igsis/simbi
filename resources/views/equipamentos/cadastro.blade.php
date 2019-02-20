@@ -2,7 +2,7 @@
 
 @section ('conteudo')
 
-<div class="container">
+
     <div id="sucesso" hidden class="alert "><em></em></div>
     <div style="text-align: center;">
         <h2>
@@ -385,7 +385,7 @@
     </form>
     
     @include('layouts.equipamento_modal')
-</div>
+
 @endsection
 @section('scripts_adicionais')
     @include('scripts.insere_ajax')

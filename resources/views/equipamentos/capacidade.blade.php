@@ -2,7 +2,6 @@
 
 @section('conteudo')
 
-    <div class="container">
         <div class="centralizado">
             <h2>
                 Detalhes de Capacidades<br>
@@ -257,7 +256,6 @@
                 </div>
             </div>
         </form>
-    </div>
 
 @endsection
 @section('scripts_adicionais')

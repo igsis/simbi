@@ -11,7 +11,7 @@ if($path == 'equipamentos.atualizaDetalhes')
 @extends('layouts.master')
 
 @section('conteudo')
-    <div class="container">
+
         <div class="centralizado">
             <h2>
                 Detalhes Técnicos<br>
@@ -152,7 +152,6 @@ if($path == 'equipamentos.atualizaDetalhes')
                 </div>
             </div>
         </form>
-    </div>
 
 @endsection
 @section('scripts_adicionais')
