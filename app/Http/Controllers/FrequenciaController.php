@@ -105,7 +105,8 @@ class FrequenciaController extends Controller
             ])
             ->distinct('eventos.igsis_evento_id')
             ->orderBy('evento_ocorrencias.data')
-            ->paginate(10);
+            ->paginate(10)
+            ->orderBy('data','desc');
 
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
