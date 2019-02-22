@@ -16,6 +16,7 @@ use Simbi\Models\Frequencia;
 use Simbi\Models\OcorrenciasIgsis;
 use Simbi\Models\ProjetoEspecial;
 use Simbi\Models\TipoEvento;
+use Simbi\Models\igProjetoEspecial;
 
 class FrequenciaController extends Controller
 {
@@ -39,7 +40,7 @@ class FrequenciaController extends Controller
 
     public function cadastrarEvento($id){
         $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
-        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
+        $projetoEspecial = igProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
