@@ -26,3 +26,7 @@ Route::group(['middleware' => 'auth'], function (){
 	});
 
 });
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');

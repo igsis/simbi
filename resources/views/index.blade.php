@@ -1,14 +1,18 @@
-@extends('layouts.master')
+@if (Auth::guest())
+	<script>window.location = "{{redirect('login')}}";</script>
+@else
+	@extends('layouts.master')
+@endif
 
 @section('conteudo')
-	<div style="text-align: center;">
-		<h2>Bem Vindo ao SIMBI</h2>
-		<h3>Sistema de Indicadores das Bibliotecas Públicas Municipais</h3>
-	</div>
 
     @if(Auth::guest())
         @include('auth.login')
     @else
+		<div style="text-align: center;">
+			<h2>Bem Vindo ao SIMBI</h2>
+			<h3>Sistema de Indicadores das Bibliotecas Públicas Municipais</h3>
+		</div>
 		<hr>
 		<?php $faltaFrequencia = 0; ?>
 		@if($ocorrencias != null || $frequenciasCadastradas != null)
