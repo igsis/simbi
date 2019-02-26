@@ -54,7 +54,7 @@ return [
             'engine' => null,
         ],
 
-        'mysql2' => [
+        'another' => [
             'driver' => 'mysql',
             'host' => env('DB_ANOTHER_HOST', '127.0.0.1'),
             'port' => env('DB_ANOTHER_PORT', '3306'),
