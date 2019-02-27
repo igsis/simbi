@@ -1,65 +1,51 @@
 <!DOCTYPE html>
 <html>
-<?php
-setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-date_default_timezone_set('America/Sao_Paulo');
-?>
+@include('layouts.br')
 
     {{-- Include com cabeçalho do HTML <HEAD> --}}
 @include('layouts.head')
-@auth
-<body class="hold-transition skin-blue sidebar-mini">
 
-<div class="wrapper">
-@endauth
+    <body class="hold-transition skin-blue sidebar-mini">
 
-@guest
-  <body class="hold-transition login-page">
-@endguest
-    {{-- Include com SideBar da parte de cima do site <HEADER> --}}
-    @includeWhen(Auth::user(),'layouts.header')
+        <div class="wrapper">
 
-    {{-- Include com Menu lateral esquerdo do site <ASIDE> --}}
-    @includeWhen(Auth::user(),'layouts.sidebarLateral')
+        {{-- Include com SideBar da parte de cima do site <HEADER> --}}
+        @include('layouts.header')
 
-@auth
-    <div class="content-wrapper">
-@endauth
+        {{-- Include com Menu lateral esquerdo do site <ASIDE> --}}
+        @include('layouts.sidebarLateral')
 
-        <!-- Main content -->
-        @if(Session::has('flash_message'))
-            <div class="col-md-12 col-sm-12 center-block" style="margin-top: 15px">
-                <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
-            </div>
-        @endif
-        <div class="row">
-            <div class="col-xs-12">
-                @includeIf('layouts.erros')
-            </div>
-        </div>
-        <div class="content">
-            @auth
-            <div class="box box-default">
-                <div class="box-body">
-            @endauth
-                    @yield('conteudo')
-            @auth
+            <div class="content-wrapper">
+
+                @if(Session::has('flash_message'))
+                    <div class="col-md-12 col-sm-12 center-block" style="margin-top: 15px">
+                        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+                    </div>
+                @endif
+                <div class="row">
+                    <div class="col-xs-12">
+                        @includeIf('layouts.erros')
+                    </div>
+                </div>
+
+                <!-- Main content -->
+                <div class="content">
+                    <div class="box box-default">
+                        <div class="box-body">
+                            @yield('conteudo')
+                        </div>
+                    </div>
                 </div>
             </div>
-            @endauth
+            <!-- /.content-wrapper -->
+
+        {{-- Include com footer do site <FOOTER> --}}
+        @includeIf('layouts.footer')
+
         </div>
-        
-    </div>
-    <!-- /.content-wrapper -->
-@auth
-    {{-- Include com footer do site <FOOTER> --}}
-    @includeIf('layouts.footer')
-@endauth
+        <!-- ./wrapper -->
 
-</div>
-<!-- ./wrapper -->
+        @includeIf('layouts.scripts')
 
-@includeIf('layouts.scripts')
-
-</body>
+    </body>
 </html>
