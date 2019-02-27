@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
+@section('tituloPagina','<i class="glyphicon glyphicon-wrench"></i>Permissões Disponiveis')
+
 @section('conteudo')
 
 	<div class="col-lg-10 col-lg-offset-1">
-		<h1><i class="glyphicon glyphicon-wrench"></i>Permissões Disponiveis</h1>
-		<hr>
 
 		<div class="table-responsive">
 			<table class="table table-bordered table-striped">

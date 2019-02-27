@@ -1,9 +1,8 @@
 @extends ('layouts.master')
 
+@section('tituloPagina','Cadastro de Endereço')
+
 @section ('conteudo')
-<div class="container">
-	<center><h2>Cadastro de Endereço</h2></center>
-	<hr>
 
 	<form method="POST" action="{{ route('equipamentos.index') }}">
 		{{ csrf_field() }}
@@ -96,5 +95,4 @@
 		</div>
 	</form>
 	@include('layouts.equipamento_modal')
-</div>
 @endsection

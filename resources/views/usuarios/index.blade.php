@@ -1,15 +1,17 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-user"></i>
+    {{-- Equipamento ativo --}}
+    @if($type == 1)
+        Usuários Cadastrados
+    @else
+        Usuários Desativados
+    @endif
+@endsection
+
 @section('conteudo')
 
-<h1><i class="glyphicon glyphicon-user"></i>
-{{-- Equipamento ativo --}}
-@if($type == 1)
-    Usuários Cadastrados
-@else 
-    Usuários Desativados
-@endif
-</h1>
 <div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
 
 <div class="">

@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+	<i class="glyphicon glyphicon-cog"></i> Secretarias
+@endsection
+
 @section('conteudo')
-<div class="container-fluid">
-<div class="container-fluid">
-	<h1><i class='glyphicon glyphicon-cog'></i> Secretarias </h1>
-	<hr>
+
 	{{-- <div class="panel-heading">Página {{ $secretarias->currentPage() }} de {{ $secretarias->lastPage() }}</div> --}}
 
 	<div class="form">
@@ -86,7 +87,6 @@
 		</div>
 	</div>
 	@include('layouts.desativar')
-</div>
 <div class="text-center">
 	@if(isset($dataForm))
         {!! $secretarias->appends($dataForm)->links() !!}

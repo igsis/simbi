@@ -1,16 +1,9 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    Inserir Período de Reforma <small>{{$equipamento->nome}}</small>
+@endsection
 @section('conteudo')
-
-    <div class="container">
-        <div class="centralizado">
-            <h2>
-                Inserir Período de Reforma<br>
-                <small>{{$equipamento->nome}}</small>
-            </h2>
-        </div>
-
-        <hr>
 
         <form method="POST" action="{{ route('equipamentos.gravaReforma', $equipamento->id) }}">
             {{ csrf_field() }}
@@ -43,7 +36,5 @@
             </div>
 
         </form>
-
-    </div>
 
 @endsection

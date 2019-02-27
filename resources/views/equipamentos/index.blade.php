@@ -1,15 +1,17 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+	<i class="glyphicon glyphicon-home"></i>
+	{{-- Equipamento ativo --}}
+	@if($type == 1)
+		Equipamentos Cadastrados
+	@else
+		Equipamentos Desativados
+	@endif
+@endsection
+
 @section('conteudo')
 
-<h1><i class="glyphicon glyphicon-home"></i>
-{{-- Equipamento ativo --}}
-@if($type == 1)
-	Equipamentos Cadastrados
-@else 
-	Equipamentos Desativados
-@endif
-</h1>
 <div class="panel-heading">Pagina {{$equipamentos->currentPage()}} de {{$equipamentos->lastPage()}}</div>
 <div class="form">
     <form action="{{ route('search-equipamento') }}" method="POST" class="form form-inline">

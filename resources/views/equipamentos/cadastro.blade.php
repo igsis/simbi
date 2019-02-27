@@ -1,15 +1,8 @@
 @extends ('layouts.master')
 
+@section('tituloPagina','Cadastro de Equipamento')
+
 @section ('conteudo')
-
-
-    <div id="sucesso" hidden class="alert "><em></em></div>
-    <div style="text-align: center;">
-        <h2>
-            Cadastro de Equipamento
-        </h2>
-    </div>
-    <hr>
     
     <form method="POST" action="{{ route('equipamentos.index') }}">
         {{ csrf_field() }}

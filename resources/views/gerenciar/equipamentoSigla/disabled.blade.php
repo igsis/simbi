@@ -1,9 +1,10 @@
 @extends('layouts.master')
+@section('tituloPagina')
+	<i class="glyphicon glyphicon-cog"></i> Siglas dos Equipamentos
+@endsection
 
 @section('conteudo')
-<div class="container-fluid">
-	<h1><i class='glyphicon glyphicon-cog'></i> Siglas dos Equipamentos </h1>
-	<hr>
+
 	{{-- <div class="panel-heading">Página {{ $equipamentoSiglas->currentPage() }} de {{ $equipamentoSiglas->lastPage() }}</div> --}}
 
 	<div class="form">
@@ -84,7 +85,6 @@
 		</div>
 	</div>
 	@include('layouts.desativar')
-</div>
 <div class="text-center"> 
 	@if(isset($dataForm))
         {!! $equipamentoSiglas->appends($dataForm)->links() !!} 

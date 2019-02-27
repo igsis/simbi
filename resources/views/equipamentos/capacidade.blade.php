@@ -1,14 +1,11 @@
 @extends('layouts.master')
 
-@section('conteudo')
+@section('tituloPagina')
+    Detalhes de Capacidades 
+    <small>{{$equipamento->nome}}</small>
+@endsection
 
-        <div class="centralizado">
-            <h2>
-                Detalhes de Capacidades<br>
-                <small>{{$equipamento->nome}}</small>
-            </h2>
-            <hr>
-        </div>
+@section('conteudo')
 
         <form method="POST" action="{{ route('equipamentos.gravaCapacidade', $equipamento->id) }}">
             {{ csrf_field() }}

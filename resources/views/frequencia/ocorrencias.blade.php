@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-th-list"></i>
+    Ocorrências de Eventos
+    <small>{{ $equipamento->nome }}</small>
+@endsection
+
 @section('conteudo')
 
-    <h1>
-        <i class="glyphicon glyphicon-th-list"></i>
-        Ocorrências de Eventos <br>
-        <small>{{ $equipamento->nome }}</small>
-    </h1>
     <div class="panel-heading">Pagina {{$eventos->currentPage()}} de {{$eventos->lastPage()}}</div>
     <hr>
     <div class="table-responsive">

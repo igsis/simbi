@@ -1,15 +1,12 @@
 @extends ('layouts.master')
 
+@section('tituloPagina')
+    Edição do Equipamento <small>{{$equipamento->nome}}</small>
+@endsection
+
 @section ('conteudo')
     <div class="container">
         <div id="sucesso" hidden class="alert alert-success"><em></em></div>
-        <div style="text-align: center;">
-            <h2>
-                Edição do Equipamento<br>
-                <small>{{$equipamento->nome}}</small>
-            </h2>
-        </div>
-        <hr>
 
         <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}">
             {{ csrf_field() }}

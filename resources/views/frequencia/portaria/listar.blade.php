@@ -1,13 +1,16 @@
 @include('layouts.br')
 @extends ('layouts.master')
 
+@section('tituloPagina')
+    Público Atendido
+@endsection
+
 @section('conteudo')
 
-    <div class="container">
         <div class="col-md-offset-1 col-md-10">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
-                    Público Atendido
+
                 </div>
                 <div class="panel-body">
                     <table class="table table-bordered">
@@ -42,5 +45,4 @@
                 </a>
             </div>
         </div>
-    </div>
 @endsection

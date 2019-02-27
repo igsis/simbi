@@ -1,20 +1,17 @@
 @extends ('layouts.master')
 
+@section('tituloPagina')
+    Importar
+    @foreach($equipamentoIgsis as $igsis)
+        {{ $equipamento = $igsis->sala }}
+        <?php $igsis_id = $igsis->idLocal; ?>
+    @endforeach
+    do IGSIS
+@endsection
+
 @section ('conteudo')
 
         <div id="sucesso" hidden class="alert "><em></em></div>
-        <div style="text-align: center;">
-            <h2>
-                Importar
-                @foreach($equipamentoIgsis as $igsis)
-                    {{ $equipamento = $igsis->sala }}
-                    <?php $igsis_id = $igsis->idLocal; ?>
-                @endforeach
-                do IGSIS
-
-            </h2>
-        </div>
-        <hr>
 
         <form method="POST" action="{{ route('equipamentos.index') }}">
             {{ csrf_field() }}

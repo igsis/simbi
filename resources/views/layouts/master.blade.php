@@ -28,14 +28,23 @@
                     </div>
                 </div>
 
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>@yield('tituloPagina')</h1>
+                </section>
+
                 <!-- Main content -->
-                <div class="content">
-                    <div class="box box-default">
+                <section class="content">
+
+                    <!-- Default box -->
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"></h3>
+                        </div>
                         <div class="box-body">
                             @yield('conteudo')
                         </div>
-                    </div>
-                </div>
+                </section>
             </div>
             <!-- /.content-wrapper -->
 

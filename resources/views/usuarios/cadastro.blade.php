@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-user"></i>Cadastrar Usuário
+@endsection
 @section('conteudo')
 
     <div class="col-10">
-        <h1><i class="glyphicon glyphicon-user"></i>Cadastrar Usuário</h1>
-        <hr>
 
         <form method="POST" action="{{ route('usuarios.index') }}">
             {{ csrf_field() }}

@@ -10,16 +10,11 @@ if($path == 'equipamentos.atualizaDetalhes')
 
 @extends('layouts.master')
 
+@section('tituloPagina')
+    Detalhes Técnicos <small>{{$equipamento->nome}}</small>
+@endsection
+
 @section('conteudo')
-
-        <div class="centralizado">
-            <h2>
-                Detalhes Técnicos<br>
-                <small>{{$equipamento->nome}}</small>
-            </h2>
-        </div>
-
-        <hr>
 
         <form method="POST" action="{{ route($path, $equipamento->id) }}">
             {{ csrf_field() }}

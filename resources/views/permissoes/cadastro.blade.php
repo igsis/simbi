@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
+@section('tituloPagina','<i class="glyphicon glyphicon-plus-sign"></i>Adicionar Permissão')
+
 @section('conteudo')
 
 	<div class="col-lg-4 col-lg-offset-4">
-		<h1><i class="glyphicon glyphicon-plus-sign"></i>Adicionar Permissão</h1>
-		<br>
-
 		<form method="POST" action="{{ url('/permissoes') }}" accept-charset="UTF-8">
 			<div class="form-group">
 				<label for="name">Nome</label>

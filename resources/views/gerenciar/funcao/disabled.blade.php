@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-cog"></i> Distritos
+@endsection
+
 @section('conteudo')
-    <div class="container-fluid">
-        <h1><i class='glyphicon glyphicon-cog'></i> Distritos </h1>
-        <hr>
+
         {{-- <div class="panel-heading">Página {{ $distritos->currentPage() }} de {{ $distritos->lastPage() }}</div> --}}
 
         <div class="form">
@@ -68,7 +70,6 @@
             </div>
         </div>
         @include('layouts.desativar')
-    </div>
     <div class="text-center">
         @if(isset($dataForm))
             {!! $distritos->appends($dataForm)->links() !!}
