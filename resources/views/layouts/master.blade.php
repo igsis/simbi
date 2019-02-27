@@ -6,34 +6,25 @@ date_default_timezone_set('America/Sao_Paulo');
 ?>
 
     {{-- Include com cabeçalho do HTML <HEAD> --}}
-    @includeIf('layouts.head')
-
+    @include('layouts.head')
+@auth
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
+@endauth
 
+@guest
+  <body class="hold-transition login-page">
+@endguest
     {{-- Include com SideBar da parte de cima do site <HEADER> --}}
-    @if(!Auth::guest())
-        @includeIf('layouts.header')
-    @endif
+    @includeWhen(Auth::user(),'layouts.header')
+
     {{-- Include com Menu lateral esquerdo do site <ASIDE> --}}
-    @if(!Auth::guest())
-        @includeIf('layouts.sidebarLateral')
-    @endif
+    @includeWhen(Auth::user(),'layouts.sidebarLateral')
 
+@auth
     <div class="content-wrapper">
-
-        <!-- Content Header (Page header) -->
-        {{--<section class="content-header">--}}
-            {{--<h1>--}}
-                {{--Dashboard--}}
-                {{--<small>Version 2.0</small>--}}
-            {{--</h1>--}}
-            {{--<ol class="breadcrumb">--}}
-                {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
-                {{--<li class="active">Dashboard</li>--}}
-            {{--</ol>--}}
-        {{--</section>--}}
+@endauth
 
         <!-- Main content -->
         @if(Session::has('flash_message'))
@@ -47,19 +38,23 @@ date_default_timezone_set('America/Sao_Paulo');
             </div>
         </div>
         <div class="content">
+            @auth
             <div class="box box-default">
                 <div class="box-body">
-                    @yield('conteudo')  
+            @endauth
+                    @yield('conteudo')
+            @auth
                 </div>
             </div>
+            @endauth
         </div>
         
     </div>
     <!-- /.content-wrapper -->
-
+@auth
     {{-- Include com footer do site <FOOTER> --}}
     @includeIf('layouts.footer')
-
+@endauth
 
 </div>
 <!-- ./wrapper -->

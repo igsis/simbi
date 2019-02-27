@@ -1,10 +1,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE | Dashboard</title>
-
-    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
-
+    @guest
+        <title>SIMBI | Login</title>
+    @endguest
+    @auth
+        <title>SIMBI | Dashboard</title>
+    @endauth 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     @yield('scripts_css')
 
@@ -23,6 +25,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/skins/_all-skins.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/iCheck/square/blue.css') }}">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

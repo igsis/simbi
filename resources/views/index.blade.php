@@ -1,13 +1,10 @@
-@if (Auth::guest())
-	<script>window.location = "{{redirect('login')}}";</script>
-@else
-	@extends('layouts.master')
-@endif
+
+@extends('layouts.master')
 
 @section('conteudo')
 
     @if(Auth::guest())
-        @include('auth.login')
+		@include('auth.login')
     @else
 		<div style="text-align: center;">
 			<h2>Bem Vindo ao SIMBI</h2>

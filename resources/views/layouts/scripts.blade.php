@@ -19,6 +19,8 @@
     <script src="{{asset('AdminLTE/dist/js/pages/dashboard2.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('AdminLTE/dist/js/demo.js')}}"></script>
+    <script src="{{asset('AdminLTE/plugins/iCheck/icheck.min.js')}}"></script>
+
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
