@@ -1,7 +1,7 @@
 <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.0
+    <div class="pull-right hidden-xs" align="right">
+        <strong>2019 &copy; SIMBI</strong><br/>
+        STI - Sistemas de Informação - <b>Version</b> 2.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <img src="{{asset('images/logo_cultura.png')}}" alt="Logo Secretaria Municipal de Cultura">
 </footer>
