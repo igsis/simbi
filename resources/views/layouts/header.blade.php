@@ -1,5 +1,4 @@
 <header class="main-header">
-
     <!-- Logo -->
     <a href="{{url('/home')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -14,35 +13,32 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
-        <!-- Navbar Right Menu -->
+
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- Messages: style can be found in dropdown.less-->
 
-                <!-- Notifications: style can be found in dropdown.less -->
-                <li class="dropdown notifications-menu">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        <span class="hidden-xs"><i class="fa fa-gears"></i> {{ Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="{{ route('usuarios.editar', Auth::user()->id) }}">Minha conta</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                Sair
-                            </a>
 
-                            <form id="logout-form" action="" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="{{ route('usuarios.editar', Auth::user()->id) }}" class="btn btn-default btn-flat">Minha Conta</a>
+                            </div>
+                            <div class="pull-right">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="submit" class="btn btn-default btn-flat" value="Sair">
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
-
     </nav>
 </header>

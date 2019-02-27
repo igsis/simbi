@@ -6,7 +6,7 @@ date_default_timezone_set('America/Sao_Paulo');
 ?>
 
     {{-- Include com cabeçalho do HTML <HEAD> --}}
-    @include('layouts.head')
+@include('layouts.head')
 @auth
 <body class="hold-transition skin-blue sidebar-mini">
 
