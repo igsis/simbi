@@ -28,7 +28,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
         <!-- Main content -->
         @if(Session::has('flash_message'))
-            <div class="col-md-10 col-sm-10">
+            <div class="col-md-12 col-sm-12 center-block" style="margin-top: 15px">
                 <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
             </div>
         @endif
