@@ -14,7 +14,7 @@
 
             <div class="form-group">
                 <div class="form-group">
-                    <label for="evento_ocorrencia_id">Nome do Evento</label>
+                    <label for="nome">Nome do Evento</label>
                     <input class="form-control" type="text" id="nome" name="nome" readonly value="{{ $evento->nome_evento }}">
                 </div>
             </div>
@@ -22,14 +22,14 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <div class="form-group ">
-                        <label for="email">Data</label>
+                        <label for="data">Data</label>
                         <input class="form-control" type="date" name="data" value="{{ old('data') }}" onblur="arrumaData()">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <div class="form-group ">
-                        <label for="login">Hora</label>
-                        <input class="form-control" type="text" data-mask="00:00" name="hora" id="hora" placeholder="Digite a hora" value="{{ old('hora') }}">
+                        <label for="hora">Hora</label>
+                        <input class="form-control hora" maxlength="5" type="text" data-mask="00:00" name="hora" id="hora" placeholder="Digite a hora" value="{{ old('hora') }}">
                     </div>
                 </div>
             </div>
@@ -41,7 +41,9 @@
 
 @section('scripts_adicionais')
     <script type="text/javascript">
-
+    $(document).ready(function(){
+        $(".hora").mask("99:99");
+    });
     </script>
 
     <script type="text/javascript">
