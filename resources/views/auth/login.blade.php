@@ -11,8 +11,8 @@
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
             @if ($errors->has('login'))
                 <span class="help-block">
-                        <strong>{{ $errors->first('login') }}</strong>
-                    </span>
+                    <strong>{{ $errors->first('login') }}</strong>
+                </span>
             @endif
         </div>
 
@@ -21,8 +21,8 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             @if ($errors->has('password'))
                 <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
             @endif
         </div>
         <div class="row">
