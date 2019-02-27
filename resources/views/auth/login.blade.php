@@ -6,7 +6,7 @@
     <form method="POST" action="{{ route('login') }}">
 
         {{ csrf_field() }}
-        <div class="form-group has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
+        <div class="form-group has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
             <input id="login" type="text" class="form-control" name="login" maxlength="7" value="{{ old('login') }}" required placeholder="Usuário">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
             @if ($errors->has('login'))
