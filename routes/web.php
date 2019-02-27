@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'IndexController@index')->middleware('auth');
 
 Route::get('home', 'IndexController@index')->middleware('primeiroLogin');
 
