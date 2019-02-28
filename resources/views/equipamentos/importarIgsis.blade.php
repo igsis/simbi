@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-home"></i>
+    Importar Equipamentos IGSIS
+@endsection
+
 @section('conteudo')
 
-    <h1><i class="glyphicon glyphicon-home"></i>
-        Importar Equipamentos IGSIS
-    </h1>
     <div class="panel-heading">Pagina {{$equipamentos->currentPage()}} de {{$equipamentos->lastPage()}}</div>
 
     <div class="table-responsive">

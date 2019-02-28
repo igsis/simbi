@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-home"></i>
+    Frequência nos Equipamentos
+@endsection
+
 @section('conteudo')
 
-    <h1>
-        <i class="glyphicon glyphicon-home"></i>
-        Frequência nos Equipamentos
-    </h1>
     <div class="panel-heading">Pagina {{$equipamentos->currentPage()}} de {{$equipamentos->lastPage()}}</div>
     <hr>
     <div class="table-responsive">

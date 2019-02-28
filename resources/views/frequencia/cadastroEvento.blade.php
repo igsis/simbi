@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-flag"></i> Cadastrar Evento <br>
+@endsection
+
 @section('conteudo')
 
     <div class="col-lg-6 col-lg-offset-3">
-        <h1>
-            <i class="glyphicon glyphicon-flag"></i> Cadastrar Evento <br>
-        </h1>
-        <hr>
 
         <form method="POST" action="{{route('eventos.gravar', $equipamento->igsis_id) }}">
             {{ csrf_field() }}

@@ -1,9 +1,10 @@
 @extends('layouts.master')
 
-@section('conteudo')
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}
+@endsection
 
-        <h1><i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}</h1>
-        <hr>
+@section('conteudo')
 
         <form method="POST" action="{{ url('usuarios', [$user->id]) }}" accept-charset="UTF-8">
             {{ csrf_field() }}

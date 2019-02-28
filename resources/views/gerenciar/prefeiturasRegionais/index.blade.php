@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+	<i class="glyphicon glyphicon-cog"></i> Prefeituras Regionais
+@endsection
+
 @section('conteudo')
-<div class="container-fluid">
-	<h1><i class='glyphicon glyphicon-cog'></i> Prefeituras Regionais </h1>
-	<hr>
+
 	{{-- <div class="panel-heading">Página {{ $prefeiturasRegionais->currentPage() }} de {{ $prefeiturasRegionais->lastPage() }}</div> --}}
 
 	<div class="form">
@@ -75,7 +77,6 @@
 		</div>
 	</div>
 	@include('layouts.desativar')
-</div>
 <div class="text-center">
 	@if(isset($dataForm))
         {!! $prefeiturasRegionais->appends($dataForm)->links() !!}

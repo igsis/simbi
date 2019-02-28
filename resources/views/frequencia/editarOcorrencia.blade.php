@@ -1,14 +1,14 @@
 @include('layouts.br')
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-user"></i> Editar evento
+    <small>{{ $evento->nome_evento }}</small>
+@endsection
+
 @section('conteudo')
 
     <div class="col-lg-6 col-lg-offset-3">
-        <h1>
-            <i class="glyphicon glyphicon-user"></i> Editar evento <br>
-            <small>{{ $evento->nome_evento }}</small>
-        </h1>
-        <hr>
 
         <form method="POST" action="{{route('frequencia.updateOcorrencia', $ocorrencia->id)}}">
             {{ csrf_field() }}

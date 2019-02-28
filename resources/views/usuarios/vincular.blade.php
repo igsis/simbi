@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-user"></i> Vincular Equipamento: {{$user->name}}
+@endsection
+
 @section('conteudo')
 
     <div class="col-lg-8 col-lg-offset-2">
-        <h1><i class="glyphicon glyphicon-user"></i> Vincular Equipamento: {{$user->name}}</h1>
-        <hr>
 
         <form method="POST" action="{{ route('usuarios.vincular', $user->id) }}" accept-charset="UTF-8">
             {{ csrf_field() }}

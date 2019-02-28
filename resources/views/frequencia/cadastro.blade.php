@@ -1,13 +1,12 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-pushpin"></i> Eventos Culturais <small>{{ $evento->nome_evento }}</small>
+@endsection
+
 @section('conteudo')
 
     <div class="col-lg-6 col-lg-offset-3">
-        <h1>
-            <i class="glyphicon glyphicon-pushpin"></i> Eventos Culturais <br>
-            <small>{{ $evento->nome_evento }}</small>
-        </h1>
-        <hr>
 
         <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}">
             {{ csrf_field() }}

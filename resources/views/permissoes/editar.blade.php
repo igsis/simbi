@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
+@section('tituloPagina','<i class="glyphicon glyphicon-plus-sign"></i>')
+
 @section('conteudo')
 
 	<div class="col-lg-4 col-lg-offset-4">
-		<h1><i class="glyphicon glyphicon-plus-sign"></i></h1>
-		<br>
 
 		{{ Form::model($permission, array('route' => array('permissions.update', $permission->id), 'method' => 'PUT')) }}
 

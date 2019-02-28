@@ -1,9 +1,10 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+	<i class="glyphicon glyphicon-cog"></i> Tipos de Serviços
+@endsection
+
 @section('conteudo')
-<div class="container-fluid">
-	<h1><i class='glyphicon glyphicon-cog'></i> Tipos de Serviços </h1>
-	<hr>
 	{{-- <div class="panel-heading">Página {{ $tipoServicos->currentPage() }} de {{ $tipoServicos->lastPage() }}</div> --}}
 	<div class="form">
 	    <form method="POST" class="form form-inline" action="{{route('searchTipoServico')}}">
@@ -64,17 +65,16 @@
 						<label>Descrição</label>
 						<input type="hidden" name="id">
 						<input class="form-control" type="text" name="descricao">
-					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						<input type="submit" class="btn btn-success" name="editar" value="">
 					</div>
 				</form>
+				</div>
 			</div>
 		</div>
 	</div>
 	@include('layouts.desativar')
-</div>
 
 <div class="text-center">
 	@if(isset($dataForm))

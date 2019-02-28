@@ -1,14 +1,16 @@
 @include('layouts.br')
 @extends ('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-th-list"></i>
+    Eventos Cadastrados
+    <small>{{ $equipamento->nome }}</small>
+@endsection
 @section('conteudo')
 
-    <div class="container">
         <div class="col-md-offset-1 col-md-10">
             <div class="panel panel-default panel-table">
-                <div class="panel-heading">
-                    Frequência
-                </div>
+
                 <div class="panel-body">
                     <table class="table table-bordered">
                         <tbody>
@@ -53,5 +55,4 @@
                 </a>
             </div>
         </div>
-    </div>
 @endsection

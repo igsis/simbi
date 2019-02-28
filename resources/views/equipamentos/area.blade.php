@@ -1,16 +1,10 @@
 @extends('layouts.master')
 <?php $path = isset($equipamento->area) ? 'equipamentos.atualizaArea'
                                         : 'equipamentos.gravaArea'; ?>
+
+@section('tituloPagina','Áreas<br><small>{{$equipamento->nome}}</small>')
+
 @section('conteudo')
-
-
-        <div class="centralizado">
-            <h2>
-                Áreas<br>
-                <small>{{$equipamento->nome}}</small>
-            </h2>
-            <hr>
-        </div>
 
         <form method="POST" action="{{ route($path, $equipamento->id) }}">
             {{ csrf_field() }}

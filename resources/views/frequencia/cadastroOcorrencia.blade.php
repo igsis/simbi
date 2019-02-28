@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
+@section('tituloPagina')
+    <i class="glyphicon glyphicon-flag"></i> Cadastrar Ocorrência
+    <small>{{ $equipamento->nome }}</small>
+@endsection
+
 @section('conteudo')
 
     <div class="col-lg-6 col-lg-offset-3">
-        <h1>
-            <i class="glyphicon glyphicon-flag"></i> Cadastrar Ocorrência<br>
-            <small>{{ $equipamento->nome }}</small>
-        </h1>
-        <hr>
 
         <form method="POST" action="{{route('eventos.grava.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id])}}">
             {{ csrf_field() }}

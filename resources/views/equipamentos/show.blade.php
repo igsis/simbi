@@ -1,15 +1,10 @@
 @extends ('layouts.master')
 
-@section('conteudo')
+@section('tituloPagina')
+    Detalhes <small>{{$equipamento->nome}}</small>
+@endsection
 
-    <div class="container">
-        <div style="text-align: center;">
-            <h2>
-                Detalhes<br>
-                <small>{{$equipamento->nome}}</small>
-            </h2>
-        </div>
-        <hr>
+@section('conteudo')
 
         <div class="col-md-offset-1 col-md-10">
             <div class="panel panel-default panel-table">
