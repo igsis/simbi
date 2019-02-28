@@ -1,5 +1,7 @@
 @extends('layouts.master2')
 
+@section('titulo', 'Editar Usuario')
+
 @section('conteudo')
 <div class="content-wrapper">
 

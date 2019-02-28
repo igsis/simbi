@@ -1,5 +1,7 @@
 @extends('layouts.master2')
 
+@section('titulo', 'Cadastrar Usuario')
+
 @section('conteudo')
 <div class="content-wrapper">
 
