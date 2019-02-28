@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('linksAdicionais')
+	@includeIf('links.tabelas_AdminLTE')
+@endsection
+
 @section('tituloPagina')
 	<i class="glyphicon glyphicon-cog"></i> Subordinação Administrativas
 @endsection
@@ -8,29 +12,15 @@
 
 	{{-- <div class="panel-heading">Página {{ $subordinacaoAdministrativas->currentPage() }} de {{ $subordinacaoAdministrativas->lastPage() }}</div> --}}
 
-	<div class="form">
-	    <form method="POST" class="form form-inline" action="{{route('searchSubordinacaoAdministrativa')}}">
-	        {{ csrf_field() }}
-	        <input type="text" name="descricao" class="form-control" placeholder="Descrição" title="Pesquisa pela Descrição">
-	        <select name="publicado" class="form-control">
-	        	<option value="1">Selecione</option>
-	        	<option value="1">Ativo</option>
-	        	<option value="0">Desativado</option>
-	        </select>
-	        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
-	    </form>
-	</div><br>
-
-	<div class="table-responsive">
-	    <table class="table table-bordered table-striped ">
+	<table id="tabela1" class="table table-bordered table-striped">
 		<thead>
-			<tr>
-				<th width="50%">Descrição</th>
-				<th>Ações</th>
-			</tr>
+		<tr>
+			<th width="50%">Descrição</th>
+			<th>Ações</th>
+		</tr>
 		</thead>
 		<tbody>
-			@foreach($subordinacaoAdministrativas as $subordinacaoAdministrativa)
+		@foreach($subordinacaoAdministrativas as $subordinacaoAdministrativa)
 			<tr>
 				<td>{{$subordinacaoAdministrativa->descricao}}</td>
 				<td>
@@ -40,17 +30,22 @@
 						<i class="glyphicon glyphicon-pencil"> </i> Editar
 					</button>
 					<button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-								data-id="{{$subordinacaoAdministrativa->id}}"
-								data-title="{{$subordinacaoAdministrativa->descricao}}"
-								data-route="{{route('deleteSubordinacaoAdministrativa', '')}}">
+							data-id="{{$subordinacaoAdministrativa->id}}"
+							data-title="{{$subordinacaoAdministrativa->descricao}}"
+							data-route="{{route('deleteSubordinacaoAdministrativa', '')}}">
 						<i class="glyphicon glyphicon-remove"></i> Excluir
 					</button>
 				</td>
 			</tr>
-			@endforeach
+		@endforeach
 		</tbody>
-		</table>
-	</div>
+		<tfoot>
+		<tr>
+			<th width="50%">Descrição</th>
+			<th>Ações</th>
+		</tr>
+		</tfoot>
+	</table>
 	<button class="btn btn-success" data-toggle="modal" data-target="#subordinacaoAdministrativa"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 	
 	<!-- Editar Sub. Administrativa -->
 	<div class="modal fade" id="subordinacaoAdministrativa" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
@@ -69,7 +64,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" class="btn btn-success" name="novaSubordinacaoAdministrativa" value="">
+						<input type="submit" class="btn btn-success" name="novaSubordinacaoAdministrativa" value="Adicionar">
 					</div>
 				</form>
 			</div>
@@ -110,6 +105,7 @@
         });
     </script>
 
-    @include('scripts.desativar_modal')
+	@includeIf('scripts.tabelas_admin')
 
+    @include('scripts.desativar_modal')
 @endsection
