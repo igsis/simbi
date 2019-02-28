@@ -4,6 +4,25 @@
     Detalhes <small>{{$equipamento->nome}}</small>
 @endsection
 
+<div class="content-wrapper">
+
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 class="page-header">@yield('tituloPagina')</h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- boxDados.blade.php -->
+        @include('equipamentos.boxDados')
+
+        <!-- boxDados.blade.php -->
+
+    </section>
+</div>
+
 @section('conteudo')
 
         <div class="col-md-offset-1 col-md-10">
@@ -38,8 +57,8 @@
                                     </form>
                                 
                             @endif
-                                <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
-                            </div>
+                                    <a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-success">Editar Equipamento</a>
+                                </div>
                             @endhasanyrole
                         </div>
                     </div>
