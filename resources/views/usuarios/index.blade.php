@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('linksAdicionais')
+    @includeIf('links.tabelas_AdminLTE')
+@endsection
+
+
 @section('tituloPagina')
     <i class="glyphicon glyphicon-user"></i>
     {{-- Equipamento ativo --}}
@@ -12,24 +17,8 @@
 
 @section('conteudo')
 
-<div class="panel-heading">Página {{ $users->currentPage() }} de {{ $users->lastPage() }}</div>
-
-<div class="">
-    <form action="{{ route('search-user') }}" method="POST" class="form form-inline">
-        {{ csrf_field() }}
-        {{-- <input type="hidden" name="_method" value="PATCH"> --}}
-        <input type="hidden" name="types" value="{{ $type }}">
-        <input type="text" name="name" class="form-control" placeholder="Nome" title="Pesquisar usuários pelo Nome">
-        <input type="text" name="login" class="form-control" placeholder="Login" title="Pesquisar usuários pelo Login/Prodam">
-        <input type="text" name="email" class="form-control" placeholder="E-mail" title="Pesquisar usuários pelo E-mail">
-        {{-- <input type="text" class="form-control" placeholder="Cargo"> --}}
-        <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
-        Pesquisar</button>
-    </form>
-</div>
-<hr>
 <div class="table-responsive">
-    <table class="table table-bordered table-striped">
+    <table id="tabela1" class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -81,6 +70,16 @@
             @endforeach
             @include('layouts.excluir_confirm')
         </tbody>
+        <tfoot>
+            <tr>
+                <th>Nome</th>
+                <th>Login</th>
+                <th>E-mail</th>
+                <th>Equipamento(s) Vinculado(s)</th>
+                <th>Cargo</th>
+                <th>Operações</th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 <div class="text-center"> 
@@ -157,5 +156,7 @@
             $(this).find('#formVincula').attr('action', `{{url('usuarios')}}/${id}/vincular`);
         });
     </script>
+
+    @includeIf('scripts.tabelas_admin')
 
 @endsection
