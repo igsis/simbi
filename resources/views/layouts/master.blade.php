@@ -30,20 +30,21 @@
 
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>@yield('tituloPagina')</h1>
+                    <h1 class="page-header">@yield('tituloPagina')</h1>
                 </section>
 
                 <!-- Main content -->
                 <section class="content">
 
                     <!-- Default box -->
-                    <div class="box">
+                    <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title"></h3>
+                            <h3 class="box-title">@yield('subTitulo')</h3>
                         </div>
                         <div class="box-body">
                             @yield('conteudo')
                         </div>
+                    </div>
                 </section>
             </div>
             <!-- /.content-wrapper -->
