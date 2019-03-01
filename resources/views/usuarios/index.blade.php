@@ -1,9 +1,3 @@
-@if($type == 1)
-    {{$pagina = "Usuários Cadastrados"}}
-@else
-    {{$pagina = "Usuários Desativados"}}
-@endif
-
 @extends('layouts.master2')
 
 @section('linksAdicionais')
@@ -11,6 +5,11 @@
 @endsection
 
 @section('titulo')
+    @if($type == 1)
+        {{$pagina = "Usuários Cadastrados"}}
+    @else
+        {{$pagina = "Usuários Desativados"}}
+    @endif
     {{$pagina}}
 @endsection
 

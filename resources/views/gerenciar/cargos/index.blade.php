@@ -1,87 +1,103 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
-@section('tituloPagina')
-    <i class="glyphicon glyphicon-cog"></i> Cargos
+@section('linksAdicionais')
+    @includeIf('links.tabelas_AdminLTE')
 @endsection
+
+@section('titulo','Cargos')
 
 @section('conteudo')
 
-        {{-- <div class="panel-heading">Página {{ $cargos->currentPage() }} de {{ $cargos->lastPage() }}</div> --}}
+    <div class="content-wrapper">
 
-        <div class="form">
-            <form method="POST" class="form form-inline" action="{{route('searchCargo')}}">
-                {{ csrf_field() }}
-                <input type="text" name="cargo" class="form-control" placeholder="Cargo" title="Pesquisa pelo Cargo">
-                <select name="publicado" class="form-control">
-                    <option value="1">Selecione</option>
-                    <option value="1">Ativo</option>
-                    <option value="0">Desativado</option>
-                </select>
-                <button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
-            </form>
-        </div><br>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped ">
-                <thead>
-                <tr>
-                    <th width="50%">Cargo</th>
-                    <th>Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($cargos as $cargo)
-                    <tr>
-                        <td>{{$cargo->cargo}}</td>
-                        <td>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#cargo"
-                                    data-id="{{$cargo->id}}"
-                                    data-cargo="{{$cargo->cargo}}">
-                                <i class="glyphicon glyphicon-pencil"> </i> Editar
-                            </button>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
-                                    data-id="{{$cargo->id}}"
-                                    data-title="{{$cargo->cargo}}"
-                                    data-route="{{route('deleteCargo', '')}}">
-                                <i class="glyphicon glyphicon-remove"> </i> Excluir
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-        <button class="btn btn-success" data-toggle="modal" data-target="#cargo"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
-
-        <!-- Editar Cargo -->
-        <div class="modal fade" id="cargo" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST"> {{-- action Pelo js --}}
-                            {{ csrf_field() }}
-                            <label>Cargo</label>
-                            <input class="form-control" type="text" name="cargo">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-success" name="novoCargo" value="">
-                    </div>
-                    </form>
-                </div>
+        <div class="row">
+            <div class="col-xs-12">
+                @includeIf('layouts.erros')
             </div>
         </div>
-        @include('layouts.desativar')
-    <div class="text-center">
-        @if(isset($dataForm))
-            {!! $cargos->appends($dataForm)->links() !!}
-        @else
-            {!! $cargos->links() !!}
-        @endif
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header">
+                <i class="glyphicon glyphicon-cog"></i> Cargos
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Pesquisa</h3>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="tabela1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="50%">Cargo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($cargos as $cargo)
+                                <tr>
+                                    <td>{{$cargo->cargo}}</td>
+                                    <td>
+                                        <button class="btn btn-info" data-toggle="modal" data-target="#cargo"
+                                                data-id="{{$cargo->id}}"
+                                                data-cargo="{{$cargo->cargo}}">
+                                            <i class="glyphicon glyphicon-pencil"> </i> Editar
+                                        </button>
+                                        <button class="btn btn-danger" data-toggle="modal" data-target="#desativar"
+                                                data-id="{{$cargo->id}}"
+                                                data-title="{{$cargo->cargo}}"
+                                                data-route="{{route('deleteCargo', '')}}">
+                                            <i class="glyphicon glyphicon-remove"> </i> Excluir
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfooter>
+                                <tr>
+                                    <th width="50%">Cargo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfooter>
+                        </table>
+                    </div>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#cargo"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+
+                    <!-- Editar Cargo -->
+                    <div class="modal fade" id="cargo" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title"></h4>
+                                </div>
+
+                                <form method="POST"> {{-- action Pelo js --}}
+                                <div class="modal-body">
+                                        {{ csrf_field() }}
+                                        <label>Cargo</label>
+                                        <input class="form-control" type="text" name="cargo">
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <input type="submit" class="btn btn-success" name="novoCargo" value="Adicionar">
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @include('layouts.desativar')
+                </div>
+            </div>
+        </section>
     </div>
 
 @endsection
@@ -111,4 +127,6 @@
     </script>
 
     @include('scripts.desativar_modal')
+
+    @include('scripts.tabelas_admin')
 @endsection

@@ -73,7 +73,7 @@ class EquipamentoController extends Controller
             ['idInstituicao', '=', 14],
             ['publicado', '=', 1],
             ['sala', 'LIKE', 'Biblioteca%']
-        ])->orderBy('sala')->paginate(10);
+        ])->orderBy('sala')->get();
 
         $cadastrados = Equipamento::all()->pluck('igsis_id')->toArray();
 

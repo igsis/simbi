@@ -1,9 +1,3 @@
-@if($type == 1)
-	{{$pagina = "Equipamentos Cadastrados"}}
-@else
-	{{$pagina = "Equipamentos Desativados"}}
-@endif
-
 @extends('layouts.master2')
 
 @section('linksAdicionais')
@@ -11,6 +5,11 @@
 @endsection
 
 @section('titulo')
+	@if($type == 1)
+		{{$pagina = "Equipamentos Cadastrados"}}
+	@else
+		{{$pagina = "Equipamentos Desativados"}}
+	@endif
 	{{$pagina}}
 @endsection
 
@@ -18,11 +17,17 @@
 
 <div class="content-wrapper">
 
+	<div class="row">
+		<div class="col-xs-12">
+			@includeIf('layouts.erros')
+		</div>
+	</div>
+
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1 class="page-header"><i class="glyphicon glyphicon-home"></i>
 			{{-- Equipamento ativo --}}
-			<?php echo $pagina ?>
+			<?= $pagina ?>
 		</h1>
 	</section>
 
@@ -35,35 +40,8 @@
 				<h3 class="box-title">Pesquisa de equipamentos</h3>
 			</div>
 			<div class="box-body">
-				<div class="form">
-					<form action="{{ route('search-equipamento') }}" method="POST" class="form form-inline">
-						{{ csrf_field() }}
-						<input type="hidden" name="types" value="{{ $type }}">
-						<input type="text" name="nome" class="form-control" placeholder="Nome do equipamento">
-						<div class="form-group">
-							<select class="form-control" name="status" id="status">
-								<option value="">-- Status --</option>
-								<option value="1">Ativo</option>
-								<option value="2">Inativo</option>
-								<option value="3">Fechado</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="form-control" name="sigla" id="sigla">
-								<option value="">-- Sigla --</option>
-								@foreach($siglas as $sigla)
-									<option value="{{ $sigla->id }}">{{$sigla->sigla}}</option>
-								@endforeach
-							</select>
-						</div>
-						{{-- <input type="text" name="email" class="form-control" placeholder="E-mail"> --}}
-						<button class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
-							Pesquisar</button>
-					</form>
-				</div>
-				<hr>
 				<div class="table-responsive">
-					<table class="table table-bordered table-striped">
+					<table id="tabela1" class="table table-bordered table-striped">
 						<thead>
 						<tr>
 							<th>Nome do Equipamento</th>
@@ -110,6 +88,15 @@
 						@endforeach
 						@include('layouts.excluir_confirm')
 						</tbody>
+						<tfoot>
+							<tr>
+								<th>Nome do Equipamento</th>
+								<th>Sigla do Equipamento</th>
+								<th>Telefone</th>
+								<th>Status</th>
+								<th>Operações</th>
+							</tr>
+						</tfoot>
 					</table>
 				</div>
 				<div class="text-center">
@@ -127,7 +114,6 @@
 		</div>
 	</section>
 </div>
-
 
 @endsection
 
