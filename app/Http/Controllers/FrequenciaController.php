@@ -105,7 +105,7 @@ class FrequenciaController extends Controller
             ])
             ->distinct('eventos.igsis_evento_id')
             ->orderBy('evento_ocorrencias.data', 'desc')
-            ->paginate(10);
+            ->get();
 
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
@@ -125,7 +125,7 @@ class FrequenciaController extends Controller
 
     public function listaEventos($igisis_id)
     {
-        $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->paginate(10);
+        $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
 
@@ -221,7 +221,7 @@ class FrequenciaController extends Controller
     public function relatorio()
     {
         $type = 2;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('frequencia.index', compact('equipamentos', 'type'));
     }
 

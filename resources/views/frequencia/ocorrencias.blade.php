@@ -1,72 +1,102 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
-@section('tituloPagina')
-    <i class="glyphicon glyphicon-th-list"></i>
-    Ocorrências de Eventos
-    <small>{{ $equipamento->nome }}</small>
+@section('linksAdicionais')
+    @includeIf('links.tabelas_AdminLTE')
 @endsection
+
+@section('titulo','Ocorrências de Eventos')
 
 @section('conteudo')
 
-    <div class="panel-heading">Pagina {{$eventos->currentPage()}} de {{$eventos->lastPage()}}</div>
-    <hr>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th width="50%">Ocorrências</th>
-                <th>Data</th>
-                <th>Hora</th>
-                <th>Operações</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($eventos as $evento)
-                <input type="hidden" value="{{ $igsis_id = $evento->igsis_id }}">
-                @if(!(in_array($evento->id, $frequenciasCadastradas)))
-                    <tr>
-                        <td>{{ $evento->nome_evento }}</td>
-                        <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                        <td>
-                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
-                            @hasrole('Administrador')
-                                <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover esta ocorrência?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover
-                                    </button>
-                                </form>
-                            @endhasrole
-                        </td>
-                    </tr>
-                    @else
-                    <tr class="bg-success">
-                        <td class="bg-success">{{ $evento->nome_evento }}</td>
-                        <td class="bg-success">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                        <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
-                        <td class="bg-success">
-                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" disabled class="btn btn-success disabled" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
-                        </td>
-                    </tr>
-                @endif
-            @endforeach
-            @include('layouts.excluir_confirm')
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
-        @if(isset($dataForm))
-            {!! $eventos->appends($dataForm)->links() !!}
-        @else
-            {!! $eventos->links() !!}
-        @endif
-    </div>
+    <div class="content-wrapper">
 
-    <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
-    <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
+        <div class="row">
+            <div class="col-xs-12">
+                @includeIf('layouts.erros')
+            </div>
+        </div>
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header">
+                <i class="glyphicon glyphicon-th-list"></i>
+                Ocorrências de Eventos
+                <small>{{ $equipamento->nome }}</small>
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Lista de Ocorrências</h3>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="tabela1" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th width="50%">Ocorrências</th>
+                                <th>Data</th>
+                                <th>Hora</th>
+                                <th>Operações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($eventos as $evento)
+                                <input type="hidden" value="{{ $igsis_id = $evento->igsis_id }}">
+                                @if(!(in_array($evento->id, $frequenciasCadastradas)))
+                                    <tr>
+                                        <td>{{ $evento->nome_evento }}</td>
+                                        <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                                        <td>
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                                            @hasrole('Administrador')
+                                            <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover esta ocorrência?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover
+                                                </button>
+                                            </form>
+                                            @endhasrole
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr class="bg-success">
+                                        <td class="bg-success">{{ $evento->nome_evento }}</td>
+                                        <td class="bg-success">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                        <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
+                                        <td class="bg-success">
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" disabled class="btn btn-success disabled" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            @include('layouts.excluir_confirm')
+                            </tbody>
+                            <tfooter>
+                                <thead>
+                                <tr>
+                                    <th width="50%">Ocorrências</th>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Operações</th>
+                                </tr>
+                                </thead>
+                            </tfooter>
+                        </table>
+                    </div>
+                    <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
+                    <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
+                </div>
+            </div>
+        </section>
+    </div>
 @endsection
 
 @section('scripts_adicionais')
@@ -93,5 +123,7 @@
         });
 
     </script>
+
+    @include('scripts.tabelas_admin')
 
 @endsection

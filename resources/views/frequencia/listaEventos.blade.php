@@ -1,10 +1,10 @@
-    @extends('layouts.master2')
+@extends('layouts.master2')
 
-    @section('linksAdicionais')
-        @includeIf('links.tabelas_AdminLTE')
-    @endsection
+@section('linksAdicionais')
+    @includeIf('links.tabelas_AdminLTE')
+@endsection
 
-    @section('titulo','Eventos Cadastrados')
+@section('titulo','Eventos Cadastrados')
 
 
 @section('conteudo')

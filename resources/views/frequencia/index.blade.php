@@ -37,8 +37,8 @@
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th width="50%">Nome do Equipamento</th>
-                                <th>Operações</th>
+                                <th>Nome do Equipamento</th>
+                                <th width="60%">Operações</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,10 +61,10 @@
                             </tbody>
                             <tfooter>
                                 <thead>
-                                <tr>
-                                    <th width="50%">Nome do Equipamento</th>
-                                    <th>Operações</th>
-                                </tr>
+                                    <tr>
+                                        <th>Nome do Equipamento</th>
+                                        <th width="60%">Operações</th>
+                                    </tr>
                                 </thead>
                             </tfooter>
                         </table>
