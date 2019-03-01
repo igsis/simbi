@@ -56,26 +56,15 @@
                                 @endif
                         </tbody>
                     </table>
+                    <div class="form-group col-md-offset-4 col-md-4">
+                        <a href="{{route('frequencia.relatorio')}}" class="form-control btn btn-warning">
+                            Retornar à Lista de Equipamentos
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
-
-        <div class="col-md-offset-1 col-md-10">
-            <div class="panel panel-default panel-table">
-                <div class="panel-heading">
-
-                </div>
-                <div class="panel-body">
-
-                </div>
-            </div>
-            <div class="form-group col-md-offset-4 col-md-4">
-                <a href="{{route('frequencia.relatorio')}}" class="form-control btn btn-warning">
-                    Retornar à Lista de Equipamentos
-                </a>
-            </div>
-        </div>
 @endsection
 
 @section('scripts_adicionais')
