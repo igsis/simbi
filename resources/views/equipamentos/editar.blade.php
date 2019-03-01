@@ -1,370 +1,375 @@
-@extends ('layouts.master')
+@extends ('layouts.master2')
 
 @section('tituloPagina')
     Edição do Equipamento <small>{{$equipamento->nome}}</small>
 @endsection
 
 @section ('conteudo')
-    <div class="container">
-        <div id="sucesso" hidden class="alert alert-success"><em></em></div>
+<div class="content-wrapper">
 
-        <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="_method" value="PUT">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 class="page-header">@yield('tituloPagina')</h1>
+    </section>
 
-            <div class="form-group">
-                <label for="nome">Nome do Equipamento</label>
-                <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento->nome }}">
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{$equipamento->nome}}</h3>
             </div>
+            <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}">
+                {{ csrf_field() }}
+                <div class="box-body">
+                    <input type="hidden" name="_method" value="PUT">
 
-            <div class="row">
-                <div class="form-group col-xs-8 col-md-4">
-                    <label for="tipoServico">Tipo de Serviço</label>
-                    <select class="form-control" name="tipoServico" id="tipoServico">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($tipoServicos as $tipoServico)
-                            <option value="{{$tipoServico->id}}">{{$tipoServico->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="tipoServico">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-
-                <div class="form-group col-xs-8 col-md-4">
-                    <label for="equipamentoSigla">Sigla do Equipamento</label>
-                    <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($siglas as $sigla)
-                            <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="equipamentoSigla">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="form-group col-xs-8 col-md-4">
-                    <label for="identificacaoSecretaria">Identificação da Secretaria</label>
-                    <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($secretarias as $secretaria)
-                            <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="identificacaoSecretaria">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-
-                <div class="form-group col-xs-8 col-md-4">
-                    <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
-                    <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
-                            <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="subordinacaoAdministrativa">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-            </div>
-
-            <div class="row" >
-                <div class="form-group col-md-3" >
-                    <label>Equipamento Tematico?</label><br>
-
-                    <input type="radio" name="tematico" value="0" checked>
-                    <label for=tematico style="padding:0 10px 0 5px;">Não</label>
-
-                    <input type="radio" name="tematico" value="1">
-                    <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for=nome_tematica>Nome da Tematica</label>
-                    <input type="text" class="form-control" name="nome_tematica" id="nome_tematica" value="{{$equipamento->nome_tematica}}" disabled>
-                </div>
-                <div class="form-group col-md-3" style="padding-right: 0px">
-                    <label for="telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx" value="{{ $equipamento->telefone }}">
-                </div>
-            </div>
-
-            <div style="text-align: center;"><h2>Endereço</h2></div>
-            <hr>
-
-            <div class="row">
-                <div class="form-group col-md-2">
-                    <label for="cep">CEP</label>
-                    <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ $equipamento->endereco->cep }}">
-                </div>
-                <div class="form-group col-md-10">
-                    <label for="logradouro">Logradouro</label>
-                    <input type="text" class="form-control" name="logradouro" id="logradouro" value="{{$equipamento->endereco->logradouro}}" readonly>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-2">
-                    <label for="numero">Número</label>
-                    <input type="text" class="form-control" name="numero" id="numero" value="{{$equipamento->endereco->numero}}">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control" name="complemento" id="complemento" value="{{$equipamento->endereco->complemento}}">
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" name="bairro" id="bairro" value="{{$equipamento->endereco->bairro}}" readonly>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control" name="cidade" id="cidade" value="{{$equipamento->endereco->cidade}}" readonly>
-                </div>
-
-                <div class="form-group col-md-1">
-                    <label for="uf">UF</label>
-                    <input type="text" class="form-control" name="uf" id="uf" value="{{$equipamento->endereco->estado}}" readonly>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="macrorregiao">Macrorregião</label>
-                    <select class="form-control" name="macrorregiao" id="macrorregiao">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($macrorregioes as $macrorregiao)
-                            <option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="regiao">Região</label>
-                    <select class="form-control" name="regiao" id="regiao">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($regioes as $regiao)
-                            <option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="regional">Regional</label>
-                    <select class="form-control" name="regional" id="regional">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($regionais as $regional)
-                            <option value="{{$regional->id}}">{{$regional->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-xs-8 col-md-4">
-                    <label for="prefeituraRegional">Prefeituras Regionais</label>
-                    <select class="form-control" name="prefeituraRegional" id="prefeituraRegional">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach($prefeituraRegionais as $prefeituraRegional)
-                            <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="prefeituraRegional">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-
-
-                <div class="form-group col-xs-8 col-md-4">
-                    <label for="distrito">Distrito</label>
-                    <select class="form-control" name="distrito" id="distrito">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach($distritos as $distrito)
-                            <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="distrito">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-            </div>
-
-            <div class="text-center" ><h2>Horário de Funcionamento</h2></div>
-            @if ($equipamento->funcionamentos->count() == false)
-                <div class="horario">
-                    <div class="row">
-                        <hr>
-                        <div class="form-group">
-                            <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
-                                <input type="hidden" name="funcionamento[0]" value="0">
-                                <input type="checkbox" name="domingo[0]" value="1" /><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
-                                <input type="checkbox" name="segunda[0]" value="1"/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
-                                <input type="checkbox" name="terca[0]" value="1" /><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
-                                <input type="checkbox" name="quarta[0]" value="1" /><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
-                                <input type="checkbox" name="quinta[0]" value="1" /><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
-                                <input type="checkbox" name="sexta[0]" value="1" /><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
-                                <input type="checkbox" name="sabado[0]" value="1" /><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="nome">Nome do Equipamento</label>
+                        <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento->nome }}">
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-offset-4 col-md-2">
-                            <label for="horarioAbertura">Horario de Abertura</label>
-                            <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
+                        <div class="form-group col-xs-8 col-md-4">
+                            <label for="tipoServico">Tipo de Serviço</label>
+                            <select class="form-control" name="tipoServico" id="tipoServico">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($tipoServicos as $tipoServico)
+                                    <option value="{{$tipoServico->id}}">{{$tipoServico->descricao}}</option>
+                                @endforeach
+                            </select>
                         </div>
+
+                        <div class="form-group col-xs-4 col-md-2">
+                            <label for="tipoServico">Adicionar</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
+
+                        <div class="form-group col-xs-8 col-md-4">
+                            <label for="equipamentoSigla">Sigla do Equipamento</label>
+                            <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($siglas as $sigla)
+                                    <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-4 col-md-2">
+                            <label for="equipamentoSigla">Adicionar</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-xs-8 col-md-4">
+                            <label for="identificacaoSecretaria">Identificação da Secretaria</label>
+                            <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($secretarias as $secretaria)
+                                    <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-4 col-md-2">
+                            <label for="identificacaoSecretaria">Adicionar</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSecretaria"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
+
+                        <div class="form-group col-xs-8 col-md-4">
+                            <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
+                            <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
+                                    <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-4 col-md-2">
+                            <label for="subordinacaoAdministrativa">Adicionar</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdmin"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="row" >
+                        <div class="form-group col-md-3" >
+                            <label>Equipamento Tematico?</label><br>
+
+                            <input type="radio" name="tematico" value="0" checked>
+                            <label for=tematico style="padding:0 10px 0 5px;">Não</label>
+
+                            <input type="radio" name="tematico" value="1">
+                            <label for=tematico style="padding:0 10px 0 5px;">Sim</label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for=nome_tematica>Nome da Tematica</label>
+                            <input type="text" class="form-control" name="nome_tematica" id="nome_tematica" value="{{$equipamento->nome_tematica}}" disabled>
+                        </div>
+                        <div class="form-group col-md-3" style="padding-right: 0px">
+                            <label for="telefone">Telefone</label>
+                            <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx" value="{{ $equipamento->telefone }}">
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;"><h2>Endereço</h2></div>
+                    <hr>
+
+                    <div class="row">
                         <div class="form-group col-md-2">
-                            <label for="horarioFechamento">Horario de Fechamento</label>
-                            <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
+                            <label for="cep">CEP</label>
+                            <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ $equipamento->endereco->cep }}">
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label for="logradouro">Logradouro</label>
+                            <input type="text" class="form-control" name="logradouro" id="logradouro" value="{{$equipamento->endereco->logradouro}}" readonly>
                         </div>
                     </div>
-                </div>
-            @else
-                @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
-                    <div class="horario">
-                        <div class="row">
-                            <hr>
-                            <div class="form-group">
-                                <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
-                                    <input type="hidden" name="funcionamento[{{$key}}]" value="{{$funcionamento->id}}">
-                                    <input type="checkbox" name="domingo[{{$key}}]" value="1" {{$funcionamento->domingo == 1 ? "checked" : ""}}/><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
-                                    <input type="checkbox" name="segunda[{{$key}}]" value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
-                                    <input type="checkbox" name="terca[{{$key}}]" value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
-                                    <input type="checkbox" name="quarta[{{$key}}]" value="1" {{$funcionamento->quarta == 1 ? "checked" : ""}}/><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
-                                    <input type="checkbox" name="quinta[{{$key}}]" value="1" {{$funcionamento->quinta == 1 ? "checked" : ""}}/><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
-                                    <input type="checkbox" name="sexta[{{$key}}]" value="1" {{$funcionamento->sexta == 1 ? "checked" : ""}}/><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
-                                    <input type="checkbox" name="sabado[{{$key}}]" value="1" {{$funcionamento->sabado == 1 ? "checked" : ""}}/><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label for="numero">Número</label>
+                            <input type="text" class="form-control" name="numero" id="numero" value="{{$equipamento->endereco->numero}}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="complemento">Complemento</label>
+                            <input type="text" class="form-control" name="complemento" id="complemento" value="{{$equipamento->endereco->complemento}}">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="bairro">Bairro</label>
+                            <input type="text" class="form-control" name="bairro" id="bairro" value="{{$equipamento->endereco->bairro}}" readonly>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cidade">Cidade</label>
+                            <input type="text" class="form-control" name="cidade" id="cidade" value="{{$equipamento->endereco->cidade}}" readonly>
+                        </div>
+
+                        <div class="form-group col-md-1">
+                            <label for="uf">UF</label>
+                            <input type="text" class="form-control" name="uf" id="uf" value="{{$equipamento->endereco->estado}}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="macrorregiao">Macrorregião</label>
+                            <select class="form-control" name="macrorregiao" id="macrorregiao">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($macrorregioes as $macrorregiao)
+                                    <option value="{{$macrorregiao->id}}">{{$macrorregiao->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="regiao">Região</label>
+                            <select class="form-control" name="regiao" id="regiao">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($regioes as $regiao)
+                                    <option value="{{$regiao->id}}">{{$regiao->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="regional">Regional</label>
+                            <select class="form-control" name="regional" id="regional">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($regionais as $regional)
+                                    <option value="{{$regional->id}}">{{$regional->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-xs-8 col-md-4">
+                            <label for="prefeituraRegional">Prefeituras Regionais</label>
+                            <select class="form-control" name="prefeituraRegional" id="prefeituraRegional">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach($prefeituraRegionais as $prefeituraRegional)
+                                    <option value="{{$prefeituraRegional->id}}">{{$prefeituraRegional->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-4 col-md-2">
+                            <label for="prefeituraRegional">Adicionar</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
+
+
+                        <div class="form-group col-xs-8 col-md-4">
+                            <label for="distrito">Distrito</label>
+                            <select class="form-control" name="distrito" id="distrito">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach($distritos as $distrito)
+                                    <option value="{{$distrito->id}}">{{$distrito->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-xs-4 col-md-2">
+                            <label for="distrito">Adicionar</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addDistrito"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+
+                    <div class="text-center" ><h2>Horário de Funcionamento</h2></div>
+                    @if ($equipamento->funcionamentos->count() == false)
+                        <div class="horario">
+                            <div class="row">
+                                <hr>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
+                                        <input type="hidden" name="funcionamento[0]" value="0">
+                                        <input type="checkbox" name="domingo[0]" value="1" /><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                                        <input type="checkbox" name="segunda[0]" value="1"/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                                        <input type="checkbox" name="terca[0]" value="1" /><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                                        <input type="checkbox" name="quarta[0]" value="1" /><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                                        <input type="checkbox" name="quinta[0]" value="1" /><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                                        <input type="checkbox" name="sexta[0]" value="1" /><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                                        <input type="checkbox" name="sabado[0]" value="1" /><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-offset-4 col-md-2">
+                                    <label for="horarioAbertura">Horario de Abertura</label>
+                                    <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="horarioFechamento">Horario de Fechamento</label>
+                                    <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                                 </div>
                             </div>
                         </div>
+                    @else
+                        @foreach($equipamento->funcionamentos()->where('publicado', '=', '1')->get() as $key => $funcionamento)
+                            <div class="horario">
+                                <div class="row">
+                                    <hr>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
+                                            <input type="hidden" name="funcionamento[{{$key}}]" value="{{$funcionamento->id}}">
+                                            <input type="checkbox" name="domingo[{{$key}}]" value="1" {{$funcionamento->domingo == 1 ? "checked" : ""}}/><label for="diasemana07" style="padding:0 10px 0 5px;"> Domingo</label>
+                                            <input type="checkbox" name="segunda[{{$key}}]" value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label for="diasemana01" style="padding:0 10px 0 5px;"> Segunda</label>
+                                            <input type="checkbox" name="terca[{{$key}}]" value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label for="diasemana02"  style="padding:0 10px 0 5px;"> Terça</label>
+                                            <input type="checkbox" name="quarta[{{$key}}]" value="1" {{$funcionamento->quarta == 1 ? "checked" : ""}}/><label for="diasemana03" style="padding:0 10px 0 5px;"> Quarta</label>
+                                            <input type="checkbox" name="quinta[{{$key}}]" value="1" {{$funcionamento->quinta == 1 ? "checked" : ""}}/><label for="diasemana04" style="padding:0 10px 0 5px;"> Quinta</label>
+                                            <input type="checkbox" name="sexta[{{$key}}]" value="1" {{$funcionamento->sexta == 1 ? "checked" : ""}}/><label for="diasemana05" style="padding:0 10px 0 5px;"> Sexta</label>
+                                            <input type="checkbox" name="sabado[{{$key}}]" value="1" {{$funcionamento->sabado == 1 ? "checked" : ""}}/><label for="diasemana06" style="padding:0 10px 0 5px;"> Sábado</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        <div class="row">
-                            <div class="form-group col-md-offset-4 col-md-2">
-                                <label for="horarioAbertura">Horario de Abertura</label>
-                                <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="horarioFechamento">Horario de Fechamento</label>
-                                <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
-                            </div>
+                                <div class="row">
+                                    <div class="form-group col-md-offset-4 col-md-2">
+                                        <label for="horarioAbertura">Horario de Abertura</label>
+                                        <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="horarioFechamento">Horario de Fechamento</label>
+                                        <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
+                                    </div>
 
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+
+                    <hr class="botoes">
+
+                    <div class="row">
+                        <div class="form-group col-md-offset-2 col-md-4">
+                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
                         </div>
                     </div>
-                @endforeach
-            @endif
 
-            <hr class="botoes">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="telecentro">Possui Telecentro?</label>
+                            <select class="form-control" name="telecentro" id="telecentro">
+                                @if (old('telecentro') == "1")
+                                    <option value="0">Não</option>
+                                    <option value="1" selected>Sim</option>
+                                @else
+                                    <option value="0" selected>Não</option>
+                                    <option value="1">Sim</option>
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="nucleobraile">Possui Núcleo Braile?</label>
+                            <select class="form-control" name="nucleobraile" id="nucleobraile">
+                                @if (old('nucleobraile') == "1")
+                                    <option value="0">Não</option>
+                                    <option value="1" selected>Sim</option>
+                                @else
+                                    <option value="0" selected>Não</option>
+                                    <option value="1">Sim</option>
+                                @endif
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="acervoespecializado">Acervo Especializado?</label>
+                            <select class="form-control" name="acervoespecializado" id="acervoespecializado">
+                                @if (old('acervoespecializado') == "1")
+                                    <option value="0">Não</option>
+                                    <option value="1" selected>Sim</option>
+                                @else
+                                    <option value="0" selected>Não</option>
+                                    <option value="1">Sim</option>
+                                @endif
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="form-group col-md-offset-2 col-md-4">
-                    <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
-                </div>
-                <div class="form-group col-md-4">
-                    <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label for="status">Status do Equipamento</label>
+                            <select class="form-control" name="status" id="status">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($status as $stats)
+                                    <option value="{{$stats->id}}">{{$stats->descricao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="telecentro">Possui Telecentro?</label>
-                    <select class="form-control" name="telecentro" id="telecentro">
-                        @if (old('telecentro') == "1")
-                            <option value="0">Não</option>
-                            <option value="1" selected>Sim</option>
-                        @else
-                            <option value="0" selected>Não</option>
-                            <option value="1">Sim</option>
-                        @endif
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="nucleobraile">Possui Núcleo Braile?</label>
-                    <select class="form-control" name="nucleobraile" id="nucleobraile">
-                        @if (old('nucleobraile') == "1")
-                            <option value="0">Não</option>
-                            <option value="1" selected>Sim</option>
-                        @else
-                            <option value="0" selected>Não</option>
-                            <option value="1">Sim</option>
-                        @endif
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="acervoespecializado">Acervo Especializado?</label>
-                    <select class="form-control" name="acervoespecializado" id="acervoespecializado">
-                        @if (old('acervoespecializado') == "1")
-                            <option value="0">Não</option>
-                            <option value="1" selected>Sim</option>
-                        @else
-                            <option value="0" selected>Não</option>
-                            <option value="1">Sim</option>
-                        @endif
-                    </select>
-                </div>
-            </div>
+                        <div class="form-group col-md-4">
+                            <label for="observacao">Observação</label>
+                            <input type="text" class="form-control" name="observacao" id="observacao" value="{{ $equipamento->observacao }}" placeholder disabled>
+                        </div>
 
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="status">Status do Equipamento</label>
-                    <select class="form-control" name="status" id="status">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($status as $stats)
-                            <option value="{{$stats->id}}">{{$stats->descricao}}</option>
-                        @endforeach
-                    </select>
-                </div>
+                        <div class="form-group col-md-3">
+                            <label for="ocorrencia">Adicionar Ocorrência</label>
+                            <button type="button" id="ocorrencia" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                        </div>
 
-                <div class="form-group col-md-4">
-                    <label for="observacao">Observação</label>
-                    <input type="text" class="form-control" name="observacao" id="observacao" value="{{ $equipamento->observacao }}" placeholder disabled>
+                        <div class="form-group col-md-1 text-center">
+                            <label for="ocorrencia">Total</label>
+                            <p id="totalOcorrencia" class="text-info"><b></b></p>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-group col-md-3">
-                    <label for="ocorrencia">Adicionar Ocorrência</label>                    
-                    <button type="button" id="ocorrencia" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
-                </div>
-
-                <div class="form-group col-md-1 text-center">
-                    <label for="ocorrencia">Total</label>                    
-                    
-                    <p id="totalOcorrencia" class="text-info"><b></b></p>
-                </div>
-            </div>
-
-            <div class="row">
-                <hr>
-                <div class="form-group col-md-offset-4 col-md-2">
-                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Atualizar">
-                </div>
-
-                <div class="form-group col-md-2">
-                    <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
+                <div class="box-footer">
+                    <a href="{{route('equipamentos.show', $equipamento->id)}}" class="btn btn-default">
                         Retornar à Detalhes
                     </a>
+                    <input type="submit" class="btn btn-primary pull-right" name="enviar" value="Atualizar">
                 </div>
-
-            </div>
-        </form>
+            </form>
+        </div>
         @include('layouts.equipamento_modal')
         @include('layouts.excluir_confirm')
-
-    </div>
+    </section>
+</div>
 @endsection
-@section('scripts_adicionais')
 @section('scripts_adicionais')
     @include('scripts.cadastrar_ocorrencia')
     <script type="text/javascript" >
