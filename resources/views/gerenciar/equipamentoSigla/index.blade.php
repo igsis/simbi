@@ -30,14 +30,14 @@
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
-						<table id="tabela1" class="table table-bordered table-striped ">
+						<table id="tabela1" class="table table-bordered table-striped">
 							<thead>
-							<tr>
-								<th>Sigla</th>
-								<th>Descrição</th>
-								<th>Roteiro</th>
-								<th>Ações</th>
-							</tr>
+								<tr>
+									<th>Sigla</th>
+									<th>Descrição</th>
+									<th>Roteiro</th>
+									<th>Ações</th>
+								</tr>
 							</thead>
 							<tbody>
 							@foreach($equipamentoSiglas as $equipamentoSigla)
@@ -64,12 +64,12 @@
 							@endforeach
 							</tbody>
 							<tfooter>
-							<tr>
-								<th>Sigla</th>
-								<th>Descrição</th>
-								<th>Roteiro</th>
-								<th>Ações</th>
-							</tr>
+								<tr>
+									<th>Sigla</th>
+									<th>Descrição</th>
+									<th>Roteiro</th>
+									<th>Ações</th>
+								</tr>
 							</tfooter>
 						</table>
 					</div>
