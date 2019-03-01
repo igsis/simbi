@@ -1,6 +1,5 @@
 <?php
-$path = isset($equipamento->detalhe) ? 'equipamentos.atualizaDetalhes'
-    : 'equipamentos.gravaDetalhes';
+$path = isset($equipamento->detalhe) ? 'equipamentos.atualizaDetalhes' : 'equipamentos.gravaDetalhes';
 $pathAtualiza = false;
 if($path == 'equipamentos.atualizaDetalhes')
 {
@@ -8,146 +7,165 @@ if($path == 'equipamentos.atualizaDetalhes')
 }
 ?>
 
-@extends('layouts.master')
+@extends('layouts.master2')
 
 @section('tituloPagina')
     Detalhes Técnicos <small>{{$equipamento->nome}}</small>
 @endsection
 
 @section('conteudo')
+<div class="content-wrapper">
 
-        <form method="POST" action="{{ route($path, $equipamento->id) }}">
-            {{ csrf_field() }}
-            @if($pathAtualiza)
-                <input type="hidden" name="_method" value="PUT">
-            @endif
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1 class="page-header">@yield('tituloPagina')</h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{$equipamento->nome}}</h3>
+            </div>
 
             <div class="row">
-                <div class="form-group col-md-3">
-                    <label for="contratoUso">Contrato de Uso</label>
-                    <select class="form-control" name="contratoUso" id="contratoUso">
-                        <option value="">Selecione...</option>
-                        @foreach($contratos as $contrato)
-                            <option value="{{$contrato->id}}">{{$contrato->contrato_uso}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="utilizacao">Utilização</label>
-                    <select class="form-control" name="utilizacao" id="utilizacao">
-                        <option value="">Selecione...</option>
-                        @foreach($utilizacoes as $utilizacao)
-                            <option value="{{$utilizacao->id}}">{{$utilizacao->utilizacao}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="porte">Porte</label>
-                    <select class="form-control" name="porte" id="porte">
-                        <option value="">Selecione...</option>
-                        @foreach($portes as $porte)
-                            <option value="{{$porte->id}}">{{$porte->porte}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="padrao">Padrão</label>
-                    <select class="form-control" name="padrao" id="padrao">
-                        <option value="">Selecione...</option>
-                        @foreach($padroes as $padrao)
-                            <option value="{{$padrao->id}}">{{$padrao->padrao}}</option>
-                        @endforeach
-                    </select>
+                <div class="col-md-12">
+                    @includeIf('layouts.erros')
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-offset-3 col-md-3">
-                    <label for="pavimento">Pavimentos</label>
-                    <input type="text" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
+
+            <form method="POST" action="{{ route($path, $equipamento->id) }}">
+                {{ csrf_field() }}
+                @if($pathAtualiza)
+                    <input type="hidden" name="_method" value="PUT">
+                @endif
+                <div class="box-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="contratoUso">Contrato de Uso</label>
+                            <select class="form-control" name="contratoUso" id="contratoUso">
+                                <option value="">Selecione...</option>
+                                @foreach($contratos as $contrato)
+                                    <option value="{{$contrato->id}}">{{$contrato->contrato_uso}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="utilizacao">Utilização</label>
+                            <select class="form-control" name="utilizacao" id="utilizacao">
+                                <option value="">Selecione...</option>
+                                @foreach($utilizacoes as $utilizacao)
+                                    <option value="{{$utilizacao->id}}">{{$utilizacao->utilizacao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="porte">Porte</label>
+                            <select class="form-control" name="porte" id="porte">
+                                <option value="">Selecione...</option>
+                                @foreach($portes as $porte)
+                                    <option value="{{$porte->id}}">{{$porte->porte}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="padrao">Padrão</label>
+                            <select class="form-control" name="padrao" id="padrao">
+                                <option value="">Selecione...</option>
+                                @foreach($padroes as $padrao)
+                                    <option value="{{$padrao->id}}">{{$padrao->padrao}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-offset-3 col-md-3">
+                            <label for="pavimento">Pavimentos</label>
+                            <input type="text" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
                                                                                                                                              : old('pavimento') }}">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
-                    <input type="date" class="form-control" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? $equipamento->detalhe->validade_avcb
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
+                            <input type="date" class="form-control" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? $equipamento->detalhe->validade_avcb
                                                                                                                                                 : "old('validate')"}}">
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <div class="centralizado">
-                <h2>
-                    Detalhes de Acessibilidade
-                </h2>
-                <hr>
-            </div>
+                    <div class="centralizado">
+                        <h2>
+                            Detalhes de Acessibilidade
+                        </h2>
+                        <hr>
+                    </div>
 
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label for="acessibilidadeArquitetonica">Acessibilidade Arquitetonica</label>
-                    <select class="form-control" name="acessibilidadeArquitetonica" id="acessibilidadeArquitetonica">
-                        <option value="">Selecione...</option>
-                        @foreach($arquitetonicas as $arquitetonica)
-                            <option value="{{$arquitetonica->id}}">{{$arquitetonica->acessibilidade_arquitetonica}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="banheiros">Possui Banheiros Adaptados?</label>
-                    <select class="form-control" name="banheiros" id="banheiros">
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="acessibilidadeArquitetonica">Acessibilidade Arquitetonica</label>
+                            <select class="form-control" name="acessibilidadeArquitetonica" id="acessibilidadeArquitetonica">
+                                <option value="">Selecione...</option>
+                                @foreach($arquitetonicas as $arquitetonica)
+                                    <option value="{{$arquitetonica->id}}">{{$arquitetonica->acessibilidade_arquitetonica}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="banheiros">Possui Banheiros Adaptados?</label>
+                            <select class="form-control" name="banheiros" id="banheiros">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
 
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="rampas">Possui Rampas de Acesso?</label>
-                    <select class="form-control" name="rampas" id="rampas">
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="elevador">Possui Elevador?</label>
-                    <select class="form-control" name="elevador" id="elevador">
-                        <option selected value="">Selecione...</option>
-                        @foreach ($elevadores as $elevador)
-                            <option value="{{ $elevador->id }}">{{ $elevador->elevador }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="pisoTatil">Possui Piso Tátil?</label>
-                    <select class="form-control" name="pisoTatil" id="pisoTatil">
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="estacionamentoAcessivel">Possui Estacionamento Acessivel?</label>
-                    <select class="form-control" name="estacionamentoAcessivel" id="estacionamentoAcessivel">
-                        <option value="0">Não</option>
-                        <option value="1">Sim</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="qtdVagasAcessiveis">Quantidade de vagas?</label>
-                    <input type="text" class="form-control" name="qtdVagasAcessiveis" id="qtdVagasAcessiveis" value="{{isset($equipamento->detalhe->acessibilidade->quantidade_vagas) ? $equipamento->detalhe->acessibilidade->quantidade_vagas
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="rampas">Possui Rampas de Acesso?</label>
+                            <select class="form-control" name="rampas" id="rampas">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="elevador">Possui Elevador?</label>
+                            <select class="form-control" name="elevador" id="elevador">
+                                <option selected value="">Selecione...</option>
+                                @foreach ($elevadores as $elevador)
+                                    <option value="{{ $elevador->id }}">{{ $elevador->elevador }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="pisoTatil">Possui Piso Tátil?</label>
+                            <select class="form-control" name="pisoTatil" id="pisoTatil">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="estacionamentoAcessivel">Possui Estacionamento Acessivel?</label>
+                            <select class="form-control" name="estacionamentoAcessivel" id="estacionamentoAcessivel">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="qtdVagasAcessiveis">Quantidade de vagas?</label>
+                            <input type="text" class="form-control" name="qtdVagasAcessiveis" id="qtdVagasAcessiveis" value="{{isset($equipamento->detalhe->acessibilidade->quantidade_vagas) ? $equipamento->detalhe->acessibilidade->quantidade_vagas
                                                                                                                                                                                        : old('qtdVagasAcessiveis')}}">
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <hr>
-                <div class="form-group col-md-offset-4 col-md-2">
-                    <a href="{{route('equipamentos.show', $equipamento->id)}}" class="form-control btn btn-warning">
+                <div class="box-footer">
+                    <a href="{{route('equipamentos.show', $equipamento->id)}}" class="btn btn-default">
                         Retornar à Detalhes
                     </a>
+                    <input type="submit" class="btn btn-primary pull-right" name="enviar" value="Salvar">
                 </div>
-                <div class="form-group col-md-2">
-                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Salvar">
-                </div>
-            </div>
-        </form>
-
+            </form>
+        </div>
+    </section>
+</div>
 @endsection
 @section('scripts_adicionais')
     @include('scripts.radio_habilita_input', ['nomeRadio' => 'multiuso', 'idInput' => 'capacidadeMultiuso', 'mensagem' => ''])

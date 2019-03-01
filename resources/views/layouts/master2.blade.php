@@ -15,23 +15,6 @@
         {{-- Include com Menu lateral esquerdo do site <ASIDE> --}}
         @include('layouts.sidebarLateral')
 
-            @if(Session::has('flash_message'))
-                <div class="row" align="center">
-                    <div class="col-md-12">
-                        <div class="box box-success box-solid">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">{!! session('flash_message') !!}</h3>
-                                <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove">
-                                        <i class="fa fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
             {{-- content-wrapper --}}
             @yield('conteudo')
             <!-- /.content-wrapper -->
