@@ -32,7 +32,7 @@ class FrequenciaController extends Controller
     public function index()
     {
         $type = 1;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('frequencia.index', compact('equipamentos', 'type'));
 
     }
