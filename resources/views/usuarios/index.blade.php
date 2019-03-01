@@ -1,10 +1,18 @@
+@if($type == 1)
+    {{$pagina = "Usuários Cadastrados"}}
+@else
+    {{$pagina = "Usuários Desativados"}}
+@endif
+
 @extends('layouts.master2')
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Usuários Cadastrados')
+@section('titulo')
+    {{$pagina}}
+@endsection
 
 
 @section('conteudo')
@@ -23,11 +31,7 @@
         <h1 class="page-header">
             <i class="glyphicon glyphicon-user"></i>
             {{-- Equipamento ativo --}}
-            @if($type == 1)
-                Usuários Cadastrados
-            @else
-                Usuários Desativados
-            @endif
+            <?php echo $pagina ?>
         </h1>
     </section>
 
