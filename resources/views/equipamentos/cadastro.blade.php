@@ -1,13 +1,13 @@
 @extends ('layouts.master2')
 
-@section('tituloPagina','Cadastro de Equipamento')
+@section('titulo','Cadastro de Equipamento')
 
 @section('conteudo')
 <div class="content-wrapper">
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1 class="page-header">@yield('tituloPagina')</h1>
+        <h1 class="page-header"><i class="glyphicon glyphicon-th-large"></i> Cadastro de Equipamento</h1>
     </section>
 
     <!-- Main content -->
