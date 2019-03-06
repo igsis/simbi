@@ -300,7 +300,7 @@ class UserController extends Controller
 
         return redirect()->route('usuarios.index', ['type' => $type])
             ->with('flash_message',
-             'Usuário Excluido com Sucesso.');
+             'Usuário Desativado com Sucesso.');
     }
 
     /**

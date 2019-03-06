@@ -107,8 +107,10 @@
 					@endif
 
 				</div>
-				<a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Equipamento</a>
-				<a href="{{ route('equipamentos.importar') }}" class="btn btn-info"><i class="glyphicon glyphicon-list-alt"></i> Importar do IGSIS</a>
+				@if($type == 1)
+					<a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Equipamento</a>
+					<a href="{{ route('equipamentos.importar') }}" class="btn btn-info"><i class="glyphicon glyphicon-list-alt"></i> Importar do IGSIS</a>
+				@endif
 
 			</div>
 		</div>
