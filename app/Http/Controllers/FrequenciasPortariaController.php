@@ -113,7 +113,7 @@ class FrequenciasPortariaController extends Controller
     public function relatorio()
     {
         $type = 2;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('frequencia.portaria.index', compact('equipamentos', 'type'));
     }
 

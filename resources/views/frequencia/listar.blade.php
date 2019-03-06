@@ -34,7 +34,7 @@
                     <h3 class="box-title">Lista de Eventos</h3>
                 </div>
                 <div class="box-body">
-                    <div class="table-responsive">
+                    <div class="table table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
                             <tr>
