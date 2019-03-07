@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-5 col-sm-10">
+                            <div id="divTipoEvento" class="form-group col-md-5 col-sm-10">
                                 <div class="form-group ">
                                     <label for="email">Tipo Evento</label>
                                     <select name="tipoEvento" id="tipoEvento" class="form-control">
@@ -53,7 +53,7 @@
                                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
                                 </button>
                             </div>
-                            <div class="form-group col-md-5 col-sm-10">
+                            <div id="divProjEspecial" class="form-group col-md-5 col-sm-10">
                                 <div class="form-group ">
                                     <label for="jovem">Projeto Especial</label>
                                     <select name="projetoEspecial" id="projetoEspecial" class="form-control">
@@ -65,8 +65,8 @@
                                 </div>
                             </div>
                             <div class="form-group col-xs-2 col-md-1 col-sm-2">
-                                <label for="addSubAdm">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdm">
+                                <label for="">&emsp;</label>
+                                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addProjEspecial">
                                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
                                 </button>
                             </div>
@@ -83,12 +83,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-2 col-md-1 col-sm-2">
-                                <label for="addSubAdm">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSubAdm">
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
-                                </button>
-                            </div>
                         </div>
                         <div class="form-group hidden">
                             <label for="id">Igsis Evento id</label>
@@ -99,43 +93,65 @@
                 </div>
             </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="addTipoEvento" role="dialog" aria-labelledby="addTipoEvento" aria-hidden="true">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Adicionar novo Tipo de Evento</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Tipo de evento:</label>
-                                <input class="form-control" type="text" name="tipoevento" id="tipoevento">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-success" onclick="insertSecretaria();">Adicionar</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </section>
     </div>
+    @include('layouts.modal',['idModal'=>'addTipoEvento','titulo'=>'Adicionar novo Tipo de Evento','idInput'=>'novoTipoEvento','funcaoJS'=>'insertTipoEvento'])
+    @include('layouts.modal',['idModal'=>'addProjEspecial','titulo'=>'Adicionar novo Projeto Especial','idInput'=>'novoProjEspecial','funcaoJS'=>'insertProjEspecial'])
 
 @endsection
 
 @section('scripts_adicionais')
     <script type="text/javascript">
+        function insertTipoEvento()
+        {
+            let select = document.getElementById("tipoEvento"),
+                div = document.getElementById("divTipoEvento"),
+                i = {{$tipoEvento->count()}},
+                txtVal = document.getElementById("novoTipoEvento").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
+
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i + 1}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
+
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "novoTipoEvento");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+            }
+            $('#addTipoEvento').modal('hide');
+            $("input[id='novoTipoEvento']").val('');
+        }
+        function insertProjEspecial()
+        {
+            let select = document.getElementById("projetoEspecial"),
+                div = document.getElementById("divProjEspecial"),
+                i = {{$tipoEvento->count()}},
+                txtVal = document.getElementById("novoProjEspecial").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
+
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i + 1}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
+
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "novoProjEspecial");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+            }
+            $('#addProjEspecial').modal('hide');
+            $("input[id='novoProjEspecial']").val('');
+        }
 
     </script>
-
-    <script type="text/javascript">
-
-    </script>
-
 @endsection
