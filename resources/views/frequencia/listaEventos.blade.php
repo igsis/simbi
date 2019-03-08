@@ -9,6 +9,7 @@
 
 @section('conteudo')
 
+
     <div class="content-wrapper">
 
         <div class="row">
@@ -36,7 +37,7 @@
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
+                        <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th width="50%">Eventos</th>

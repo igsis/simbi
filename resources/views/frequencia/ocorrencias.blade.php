@@ -38,7 +38,7 @@
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th width="50%">Ocorrências</th>
+                                <th width="50%">Eventos</th>
                                 <th>Data</th>
                                 <th>Hora</th>
                                 <th>Operações</th>
@@ -82,7 +82,7 @@
                             <tfooter>
                                 <thead>
                                 <tr>
-                                    <th width="50%">Ocorrências</th>
+                                    <th width="50%">Eventos</th>
                                     <th>Data</th>
                                     <th>Hora</th>
                                     <th>Operações</th>
