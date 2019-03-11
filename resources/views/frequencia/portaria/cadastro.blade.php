@@ -31,16 +31,13 @@
                         {{ csrf_field() }}
 
                         <div class="row">
-                            <div class="form-group">
-                                <label for="nome">Nome/Nome Social</label>
-                                <input type="text" class="form-control" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
+                            <div class="form-group col-sm-12 col-md-6">
+                                <label for="nome">Quantidade</label>
+                                <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}">
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
+                            <div class="form-group col-sm-12 col-md-6">
                                 <label for="data">Data</label>
-                                <input class="form-control" type="date" name="data">
+                                <input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">
                             </div>
                         </div>
 

@@ -1,110 +1,65 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
-@section('tituloPagina')
-    <i class="glyphicon glyphicon-user"></i> Público Atendido
-    <small>{{$equipamento->nome}}</small>
-@endsection
-
+@section('titulo','Cadastrar Ocorrência')
 @section('conteudo')
 
-    <div class="col-lg-6 col-lg-offset-3">
+    <div class="content-wrapper">
 
-        <form method="POST" action="{{route('frequencia.portaria.gravaCompleto', $equipamento->id)}}">
-            {{ csrf_field() }}
+        <div class="row">
+            <div class="col-xs-12">
+                @includeIf('layouts.erros')
+            </div>
+        </div>
 
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label for="nome">Nome/Nome Social</label>
-                    <input type="text" class="form-control" class="form-control" id="nome" name="nome" value="{{ old('nome') }}">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Público Atendido</h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{ $equipamento->nome }}</h3>
+                </div>
+                <div class="box-body">
+                    <form method="POST" action="{{route('frequencia.portaria.gravaCompleto', $equipamento->id)}}">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="form-group col-md-4 col-sm-12">
+                                <label for="programacaoInterna">Program. interna</label>
+                                <input type="number" class="form-control" name="programacaoInterna" id="programacaoInterna">
+                            </div>
+                            <div class="form-group col-sm-4 col-sm-12">
+                                <label for="programacaoExterna">Program. externa</label>
+                                <input type="number" class="form-control" name="programacaoExterna" id="programacaoExterna">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="total">Total</label>
+                                <input type="text" class="form-control" id="total" name="total" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                        <input class="btn btn-success" type="submit" value="Cadastrar">
+                    </form>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="data">Data</label>
-                    <input class="form-control" type="date" name="data">
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="status">Sexo</label>
-                    <select class="form-control" name="sexo" id="sexo">
-                        <option value="">Selecione...</option>
-                        @foreach ($sexos as $sexo)
-                            @if ($sexo->id == old('sexo'))
-                                <option value="{{$sexo->id}}" selected>{{$sexo->sexo}}</option>
-                            @else
-                                <option value="{{$sexo->id}}">{{$sexo->sexo}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="status">Idade</label>
-                    <select class="form-control" name="idade" id="idade">
-                        <option value="">Selecione...</option>
-                        @foreach ($idades as $idade)
-                            @if ($idade->id == old('idade'))
-                                <option value="{{$idade->id}}" selected>{{$idade->idade}}</option>
-                            @else
-                                <option value="{{$idade->id}}">{{$idade->idade}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="status">Etnia</label>
-                    <select class="form-control" name="etnia" id="etnia">
-                        <option value="">Selecione...</option>
-                        @foreach ($etnias as $etnia)
-                            @if ($etnia->id == old('etnia'))
-                                <option value="{{$etnia->id}}" selected>{{$etnia->etnia}}</option>
-                            @else
-                                <option value="{{$etnia->id}}">{{$etnia->etnia}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="status">Escolaridade</label>
-                    <select class="form-control" name="escolaridade" id="escolaridade">
-                        <option value="">Selecione...</option>
-                        @foreach ($escolaridades as $escolaridade)
-                            @if ($escolaridade->id == old('$escolaridade'))
-                                <option value="{{$escolaridade->id}}" selected>{{$escolaridade->escolaridade}}</option>
-                            @else
-                                <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="status">Deficiencia</label>
-                    <select class="form-control" name="deficiencia" id="deficiencia">
-                        <option value="">Selecione...</option>
-                        @foreach ($deficiencias as $deficiencia)
-                            @if ($deficiencia->id == old('deficiencia'))
-                                <option value="{{$deficiencia->id}}" selected>{{$deficiencia->deficiencia}}</option>
-                            @else
-                                <option value="{{$deficiencia->id}}">{{$deficiencia->deficiencia}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <input class="btn btn-success" type="submit" value="Cadastrar">
-        </form>
-
+        </section>
     </div>
 
 @endsection
 
 @section('scripts_adicionais')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".hora").mask("99:99");
+        });
+    </script>
+
     <script type="text/javascript">
 
     </script>

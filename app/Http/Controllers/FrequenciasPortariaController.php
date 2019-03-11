@@ -59,14 +59,14 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'data'          =>  'required',
-            'nome'          =>  'required'
+            'quantidade'          =>  'required'
         ]);
 
         $user =  Auth::user();
 
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
-            'nome' => $request->nome,
+            'quantidade' => $request->quantidade,
             'equipamento_id' => $id
         ]);
 
@@ -90,7 +90,7 @@ class FrequenciasPortariaController extends Controller
 
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
-            'nome' => $request->nome,
+            'quantidade' => $request->quant,
             'equipamento_id' => $id
         ])->complementoPortaria()->create([
             'idade_id' => $request->idade,
