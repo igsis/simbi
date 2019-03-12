@@ -30,6 +30,19 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <h2 class="page-header">
+                                    Data do evento
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="total">Data</label>
+                                <input type="date" class="form-control" name="data" id="data" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="page-header">
                                     Escolaridade
                                 </h2>
                             </div>
@@ -61,30 +74,30 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label for="0_6Anos">0-6 Anos</label>
-                                <input type="number" class="form-control" name="0_6Anos" id="idade0_6" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <label for="idade0_6">0-6 Anos</label>
+                                <input type="number" class="form-control" name="idade0_6" id="idade0_6" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="7_14Anos">7-14 Anos</label>
-                                <input type="number" class="form-control" name="7_14Anos" id="idade7_14" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <label for="idade7_14">7-14 Anos</label>
+                                <input type="number" class="form-control" name="idade7_14" id="idade7_14" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="14_17Anos">15-17 Anos</label>
-                                <input type="number" class="form-control" name="14_17Anos" id="idade15_17" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <label for="idade15_17">15-17 Anos</label>
+                                <input type="number" class="form-control" name="idade15_17" id="idade15_17" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="18_29Anos">18-29 Anos</label>
-                                <input type="number" class="form-control" name="18_29Anos" id="idade18_29" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <label for="idade18_29">18-29 Anos</label>
+                                <input type="number" class="form-control" name="idade18_29" id="idade18_29" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label for="30_59Anos">30-59 Anos</label>
-                                <input type="number" class="form-control" name="30_59Anos" id="idade30_59" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <label for="idade30_59">30-59 Anos</label>
+                                <input type="number" class="form-control" name="idade30_59" id="idade30_59" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
-                                <label for="60ouMais">60 ou mais</label>
-                                <input type="number" class="form-control" name="60ouMais" id="idade60ouMais" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <label for="idade60ouMais">60 ou mais</label>
+                                <input type="number" class="form-control" name="idade60ouMais" id="idade60ouMais" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="naoInformadoIdade">Não Informado</label>
@@ -155,28 +168,26 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="visual">Visual</label>
                                 <input type="number" class="form-control" name="visual" id="visual" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="auditiva">Auditiva</label>
                                 <input type="number" class="form-control" name="auditiva" id="auditiva" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="motora">Motora</label>
                                 <input type="number" class="form-control" name="motora" id="motora" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="mental">Mental</label>
                                 <input type="number" class="form-control" name="mental" id="mental" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="form-group col-md-4 col-md-offset-4">
+                            <div class="form-group col-md-4">
                                 <label for="total">Total</label>
                                 <input type="number" class="form-control" name="total" id="total" readonly>
                             </div>
