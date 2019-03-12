@@ -29,15 +29,30 @@
                 <div class="box-body">
                     <form method="POST" action="{{route('frequencia.portaria.gravar', $equipamento->id)}}">
                         {{ csrf_field() }}
-
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="page-header">
+                                    Data do Evento
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-6">
+                                <label for="data">Data</label>
+                                <input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="page-header">
+                                    Público Atendido
+                                </h2>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="nome">Quantidade</label>
                                 <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}">
-                            </div>
-                            <div class="form-group col-sm-12 col-md-6">
-                                <label for="data">Data</label>
-                                <input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">
                             </div>
                         </div>
 
