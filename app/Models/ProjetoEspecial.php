@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjetoEspecial extends Model
 {
-    protected $table = 'projeto_especiais';
+    protected $connection = "mysql2";
+    protected $table = 'ig_projeto_especial';
 
     public $timestamps = false;
 
