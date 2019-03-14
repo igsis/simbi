@@ -144,7 +144,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx" value="{{ old('telefone') }}">
+                    <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx" value="{{ isset($equipamentoIgsis->telefone)?$equipamentoIgsis->telefone: old('telefone') }}">
                 </div>
             </div>
 
@@ -154,7 +154,7 @@
             <div class="row">
                 <div class="form-group col-md-2 has-feedback {{ $errors->has('cep') ? ' has-error' : '' }}">
                     <label for="cep">CEP</label>
-                    <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ old('cep') }}">
+                    <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{isset($equipamentoIgsis->cep) ? $equipamentoIgsis->cep : old('cep')}}">
                 </div>
                 <div class="form-group col-md-10">
                     <label for="logradouro">Logradouro</label>

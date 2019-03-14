@@ -59,10 +59,12 @@
 								<td>{{$equipamento->telefone}}</td>
 								<td>{{$equipamento->status->descricao}}</td>
 								<td>
+									@if($type == 1)
 									@hasrole('Administrador')
 									<a href="{{ route('equipamentos.editar', $equipamento->id) }}" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar Equipamento</a>
 									@endhasrole
 									<a href="{{ route('equipamentos.show', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> Mais Detalhes</a>
+									@endif
 									@hasrole('Administrador')
 									@if($equipamento->publicado == 1)
 										<form method="POST" action="{{ route('equipamentos.destroy', $equipamento->id, $type) }}" style="display: inline;">

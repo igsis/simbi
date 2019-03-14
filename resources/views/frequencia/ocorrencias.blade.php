@@ -72,7 +72,7 @@
                                         <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td class="bg-success">
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" disabled class="btn btn-success disabled" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
                                         </td>
                                     </tr>
                                 @endif

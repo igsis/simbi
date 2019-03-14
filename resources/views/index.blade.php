@@ -1,6 +1,9 @@
 
 @extends('layouts.master')
 
+@section('titulo','Início')
+
+
 @section('conteudo')
 
     @if(Auth::guest())

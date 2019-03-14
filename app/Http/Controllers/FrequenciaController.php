@@ -111,7 +111,7 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
 
-        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento'));
+        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento','frequenciasCadastradas'));
     }
 
     public function editarOcorrencia($id)
@@ -235,9 +235,9 @@ class FrequenciaController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('data', 'horario');
+        $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('id','data', 'horario');
 
-        return view('frequencia.listar', compact('equipamento'));
+        return view('frequencia.listar', compact('equipamento','ocorrencia'));
     }
 
     /**
@@ -283,5 +283,24 @@ class FrequenciaController extends Controller
         //$teste= EventosIgsis::all();
 
         dd($eventos);
+    }
+
+    public function editaFrequencia($id){
+
+//        $frequencia = Frequencia::where('evento_ocorrencia_id',$id)->get();
+//        $ocorrencia = EventoOcorrencia::findOrFail($frequencia->evento_ocorrencia_id);
+//
+//        $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
+//
+//        $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
+
+        $frequencia = ['categoriaEvento'=>'Contação de histórias','projetoEspecial'=>'Baú de Histórias','crianca'=>'20','jovem'=>'5','adulto'=>'5','idoso'=>'0','Observacao'=>'Teste'];
+
+        return view('frequencia.editar',compact('frequencia'));
+
+    }
+
+    public function atualizaFrequencia(Request $request, $id){
+
     }
 }

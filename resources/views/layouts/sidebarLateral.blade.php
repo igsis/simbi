@@ -21,7 +21,7 @@
                             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Lista de Usuários</a></li>
+                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Usuários Cadastrados</a></li>
                     @hasrole('Administrador')
                     <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar Usuários</a></li>
                     <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Usuários Desativados</a></li>
@@ -36,10 +36,20 @@
                             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Lista de Equipamentos</a></li>
+                    <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Equipamentos Cadastrados</a></li>
                     <li><a href="{{route('equipamentos.importar')}}">Importar do Igsis</a></li>
                     <li><a href="{{ route('equipamentos.cadastro') }}">Cadastrar Equipamentos</a></li>
                     <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Equipamentos Desativados</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="glyphicon glyphicon-book"></i> <span>Frequência</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('frequencia.index') }}">Inserir Nova Frequência</a></li>
+                    <li><a href="{{ route('frequencia.relatorio') }}">Relatório de Frequencias</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -59,18 +69,8 @@
                     <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>
                 </ul>
             </li>
-
             @endhasanyrole
-            <li class="treeview">
-                <a href="#">
-                    <i class="glyphicon glyphicon-book"></i> <span>Frequência</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ route('frequencia.index') }}">Inserir Nova Frequência</a></li>
-                    <li><a href="{{ route('frequencia.relatorio') }}">Relatório de Frequencias</a></li>
-                </ul>
-            </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->
