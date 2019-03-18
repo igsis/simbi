@@ -7,6 +7,8 @@ if($path == 'equipamentos.atualizaDetalhes')
 }
 ?>
 
+@section('titulo','Cadastro de Detalhes Técnicos')
+
 @extends('layouts.master2')
 
 @section('tituloPagina')
