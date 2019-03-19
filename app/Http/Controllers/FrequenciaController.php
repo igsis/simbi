@@ -163,15 +163,15 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
 
-//        $ocorrenciaIgsis = OcorrenciasIgsis::where([
-//            ['local', ' = ', $equipamento->igsis_id],
-//            ['publicado', ' = ', 1],
-//        ]);
-//
-//        $eventoIgsis = EventosIgsis::where([
-//            ['publicado', ' = ', 1],
-//            ['idEvento', ' = ', $ocorrenciaIgsis->idEvento],
-//        ]);
+        $ocorrenciaIgsis = OcorrenciasIgsis::where([
+            ['local', ' = ', $equipamento->igsis_id],
+            ['publicado', ' = ', 1],
+        ]);
+
+        $eventoIgsis = EventosIgsis::where([
+            ['publicado', ' = ', 1],
+            ['idEvento', ' = ', $ocorrenciaIgsis->idEvento],
+        ]);
 
         return view('frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento'));
     }

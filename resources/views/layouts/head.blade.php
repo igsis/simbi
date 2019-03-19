@@ -52,5 +52,11 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
+    <style>
+        .btn-tabela{
+            margin: 10px 0px 30px 5px;
+        }
+    </style>
+
     @yield('linksAdicionais')
 </head>

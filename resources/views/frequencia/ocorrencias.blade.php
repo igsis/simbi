@@ -33,8 +33,13 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Lista de Ocorrências</h3>
                 </div>
+
                 <div class="box-body">
                     <div class="table-responsive">
+                        <div class="btn-tabela">
+                            <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
+                            <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
+                        </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
@@ -91,8 +96,6 @@
                             </tfooter>
                         </table>
                     </div>
-                    <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
-                    <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
                 </div>
             </div>
         </section>

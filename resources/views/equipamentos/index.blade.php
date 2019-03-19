@@ -41,6 +41,12 @@
 			</div>
 			<div class="box-body">
 				<div class="table-responsive">
+					<div class="btn-tabela">
+						@if($type == 1)
+							<a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Equipamento</a>
+							<a href="{{ route('equipamentos.importar') }}" class="btn btn-info"><i class="glyphicon glyphicon-list-alt"></i> Importar do IGSIS</a>
+						@endif
+					</div>
 					<table id="tabela1" class="table table-bordered table-striped">
 						<thead>
 						<tr>
@@ -109,10 +115,6 @@
 					@endif
 
 				</div>
-				@if($type == 1)
-					<a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Equipamento</a>
-					<a href="{{ route('equipamentos.importar') }}" class="btn btn-info"><i class="glyphicon glyphicon-list-alt"></i> Importar do IGSIS</a>
-				@endif
 
 			</div>
 		</div>

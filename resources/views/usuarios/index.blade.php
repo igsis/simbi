@@ -44,6 +44,13 @@
             </div>
             <div class="box-body">
                 <div class="table-responsive">
+                    <div class="btn-tabela">
+                        @hasrole('Administrador')
+                        @if($type == 1)
+                            <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Usuario</a>
+                        @endif
+                        @endhasrole
+                    </div>
                     <table id="tabela1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -118,11 +125,7 @@
             @endif
 
         </div>
-        @hasrole('Administrador')
-        @if($type == 1)
-            <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Usuario</a>
-        @endif
-        @endhasrole
+
 
         {{--Modal para vincular Equipamentos--}}
         <div class="modal fade" id="vinculaEquipamento" role="dialog" aria-labelledby="vinculaEquipamentoLabel" aria-hidden="true">
