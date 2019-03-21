@@ -59,7 +59,7 @@
                                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td>
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.cadastro', $evento->id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</a>
+                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}')" class="btn btn-success" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
                                             @hasrole('Administrador')
                                             <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
                                                 {{ csrf_field() }}
@@ -100,6 +100,82 @@
             </div>
         </section>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="cadastroFrequencia" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nome do evento</h4>
+                </div>
+                <!-- inicio do form -->
+                <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}">
+                    <div class="modal-body">
+                        <div class="hidden">
+                            <div class="form-group">
+                                <label for="evento_ocorrencia_id">Id da ocorrencia</label>
+                                <input class="form-control" type="text" id="evento_ocorrencia_id" name="evento_ocorrencia_id" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipoEvento">Categoria do Evento</label>
+                            <input type="text" readonly class="form-control" id="nomeEvento" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipoEvento">Projeto Especial</label>
+                            <input type="text" readonly class="form-control" id="nomeProjeto" value="">
+                            <input type="hidden" name="idProjetoEspecial" id="idProjeto" value="">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="email">Criança</label>
+                                    <input class="form-control" type="number" min="0" max="9999" id="crianca" name="crianca" value="" onblur="calcular()" onkeyup="calcular()">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="jovem">Jovem</label>
+                                    <input class="form-control" type="number" min="0" max="9999" id="jovem" name="jovem" value="" onblur="calcular()" onkeyup="calcular()">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="adulto">Adulto</label>
+                                    <input class="form-control" type="number" id="adulto" min="0" max="9999" name="adulto" value="" onblur="calcular()" onkeyup="calcular()">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="idoso">Idoso</label>
+                                    <input class="form-control" type="number" min="0" max="9999" id="idoso" name="idoso" value="" onblur="calcular()" onkeyup="calcular()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="publicoTotal">Publico Total: </label>
+                            <input type="text" class="form-control" readonly min="0" max="9999" name="total" id="publicoTotal" onload="calcular()">
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="observacao">Observação</label>
+                            <input class="form-control" type="text" name="observacao" value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Cadastrar</button>
+                        <!-- fim do form -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
 @endsection
 
 @section('scripts_adicionais')
@@ -125,6 +201,41 @@
             $(this).data('form').submit();
         });
 
+    </script>
+
+    <script type="text/javascript">
+        function calcular() {
+            let crianca = parseInt(document.getElementById('crianca').value, 10);
+            let jovem = parseInt(document.getElementById('jovem').value, 10);
+            let adulto = parseInt(document.getElementById('adulto').value, 10);
+            let idoso = parseInt(document.getElementById('idoso').value, 10);
+
+            crianca = isNaN(crianca) ? 0 : crianca;
+            jovem = isNaN(jovem) ? 0 : jovem;
+            adulto = isNaN(adulto) ? 0 : adulto;
+            idoso = isNaN(idoso) ? 0 : idoso;
+
+            let calcula = crianca + jovem + adulto + idoso;
+            let publico = document.getElementById("publicoTotal");
+
+            publico.value = String(calcula);
+        }
+
+        window.onload = calcular();
+
+    </script>
+
+    <script>
+        function preencherCampos(nomeEvento,nomeProjeto,idProjeto) {
+            let evento = document.querySelector('#nomeEvento');
+            let projeto = document.querySelector('#nomeProjeto');
+            let idProj = document.querySelector('#idProjeto');
+
+            evento.value = nomeEvento;
+            projeto.value = nomeProjeto;
+            idProj.value = idProjeto;
+
+        }
     </script>
 
     @include('scripts.tabelas_admin')

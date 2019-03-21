@@ -98,7 +98,7 @@ class FrequenciaController extends Controller
 
     public function listarOcorrencias($igsis_id)
     {
-        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id')
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id','')
             ->where([
                 ['evento_ocorrencias.igsis_id', $igsis_id],
                 ['evento_ocorrencias.publicado', 1]
@@ -163,17 +163,9 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
 
-        $ocorrenciaIgsis = OcorrenciasIgsis::where([
-            ['local', ' = ', $equipamento->igsis_id],
-            ['publicado', ' = ', 1],
-        ]);
+        $projetoEspecial = ProjetoEspecial::where('idProjetoEspecial',$evento->projeto_especial_id)->firstOrFail();
 
-        $eventoIgsis = EventosIgsis::where([
-            ['publicado', ' = ', 1],
-            ['idEvento', ' = ', $ocorrenciaIgsis->idEvento],
-        ]);
-
-        return view('frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento'));
+        return view('frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento','projetoEspecial'));
     }
 
     /**

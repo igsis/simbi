@@ -48,7 +48,8 @@
 
                         <div class="form-group">
                             <label for="tipoEvento">Projeto Especial</label>
-                            <input type="text" readonly class="form-control" value="{{ $evento->projetoEspecial->projeto_especial }}">
+                            <input type="text" readonly class="form-control" value="{{ $projetoEspecial->projetoEspecial}}">
+                            <input type="hidden" name="idProjetoEspecial" value="{{ $projetoEspecial->idProjetoEspecial  }}">
                         </div>
 
 
@@ -101,18 +102,18 @@
 @section('scripts_adicionais')
     <script type="text/javascript">
         function calcular() {
-            var crianca = parseInt(document.getElementById('crianca').value, 10);
-            var jovem = parseInt(document.getElementById('jovem').value, 10);
-            var adulto = parseInt(document.getElementById('adulto').value, 10);
-            var idoso = parseInt(document.getElementById('idoso').value, 10);
+            let crianca = parseInt(document.getElementById('crianca').value, 10);
+            let jovem = parseInt(document.getElementById('jovem').value, 10);
+            let adulto = parseInt(document.getElementById('adulto').value, 10);
+            let idoso = parseInt(document.getElementById('idoso').value, 10);
 
             crianca = isNaN(crianca) ? 0 : crianca;
             jovem = isNaN(jovem) ? 0 : jovem;
             adulto = isNaN(adulto) ? 0 : adulto;
             idoso = isNaN(idoso) ? 0 : idoso;
 
-            var calcula = crianca + jovem + adulto + idoso;
-            var publico = document.getElementById("publicoTotal");
+            let calcula = crianca + jovem + adulto + idoso;
+            let publico = document.getElementById("publicoTotal");
 
             publico.value = String(calcula);
         }
