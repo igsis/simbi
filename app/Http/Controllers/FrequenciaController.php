@@ -107,6 +107,8 @@ class FrequenciaController extends Controller
             ->orderBy('evento_ocorrencias.data', 'desc')
             ->get();
 
+
+
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();

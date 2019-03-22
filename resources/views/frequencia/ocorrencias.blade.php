@@ -59,7 +59,7 @@
                                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td>
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}')" class="btn btn-success" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
+                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')" class="btn btn-success" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
                                             @hasrole('Administrador')
                                             <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
                                                 {{ csrf_field() }}
@@ -110,7 +110,8 @@
                     <h4 class="modal-title">Nome do evento</h4>
                 </div>
                 <!-- inicio do form -->
-                <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}">
+                <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}" id="form-modal">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="hidden">
                             <div class="form-group">
@@ -134,25 +135,25 @@
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="email">Criança</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="crianca" name="crianca" value="" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" min="0" max="9999" id="crianca" name="crianca" value="{{old('crianca')}}" onblur="calcular()" onkeyup="calcular()">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="jovem">Jovem</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="jovem" name="jovem" value="" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" min="0" max="9999" id="jovem" name="jovem" value="{{old('jovem')}}" onblur="calcular()" onkeyup="calcular()">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="adulto">Adulto</label>
-                                    <input class="form-control" type="number" id="adulto" min="0" max="9999" name="adulto" value="" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" id="adulto" min="0" max="9999" name="adulto" value="{{old('adulto')}}" onblur="calcular()" onkeyup="calcular()">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="idoso">Idoso</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="idoso" name="idoso" value="" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" min="0" max="9999" id="idoso" name="idoso" value="{{old('idoso')}}" onblur="calcular()" onkeyup="calcular()">
                                 </div>
                             </div>
                         </div>
@@ -167,7 +168,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Cadastrar</button>
+                        <button type="button" id="btn-sub" form="form-modal" class="btn btn-success" data-dismiss="modal">Cadastrar</button>
                         <!-- fim do form -->
                     </div>
                 </form>
@@ -226,16 +227,22 @@
     </script>
 
     <script>
-        function preencherCampos(nomeEvento,nomeProjeto,idProjeto) {
-            let evento = document.querySelector('#nomeEvento');
-            let projeto = document.querySelector('#nomeProjeto');
-            let idProj = document.querySelector('#idProjeto');
+        function preencherCampos(nomeEvento,nomeProjeto,idProjeto,idocorrencia) {
 
-            evento.value = nomeEvento;
-            projeto.value = nomeProjeto;
-            idProj.value = idProjeto;
+            document.querySelector('#nomeEvento').value = nomeEvento;
+            document.querySelector('#nomeProjeto').value = nomeProjeto;
+            document.querySelector('#idProjeto').value = idProjeto;
+            document.querySelector('#evento_ocorrencia_id').value = idocorrencia;
 
         }
+
+        let sub = document.querySelector('#btn-sub');
+
+        sub.onclick = function () {
+            document.querySelector('#form-modal').submit();
+        }
+
+
     </script>
 
     @include('scripts.tabelas_admin')
