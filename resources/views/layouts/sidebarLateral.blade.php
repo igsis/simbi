@@ -15,6 +15,18 @@
             @hasanyrole('Coordenador|Administrador')
             <li class="header">Administrativo</li>
             <li class="treeview">
+                <a href="#"><i class="fa fa-address-book-o"></i> Funcionários
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Funcionários Cadastrados</a></li>
+                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar Funcionários</a></li>
+                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Funcionários Desativados</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
                 <a href="#"><i class="fa fa-user"></i> Usuários
                     <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -22,15 +34,13 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Usuários Cadastrados</a></li>
-                    @hasrole('Administrador')
                     <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar Usuários</a></li>
                     <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Usuários Desativados</a></li>
-                    @endhasrole
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="glyphicon glyphicon-th-large"></i> Equipamentos
+                    <i class="fa fa-university"></i> Equipamentos
                     <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -44,7 +54,7 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="glyphicon glyphicon-book"></i> <span>Frequência</span>
+                    <i class="fa fa-book"></i> <span>Frequência</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
