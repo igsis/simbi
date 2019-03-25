@@ -6,9 +6,9 @@
 
 @section('titulo')
     @if($type == 1)
-        {{$pagina = "Usuários Cadastrados"}}
+        {{$pagina = "Funcionários Cadastrados"}}
     @else
-        {{$pagina = "Usuários Desativados"}}
+        {{$pagina = "Funcionários Desativados"}}
     @endif
     {{$pagina}}
 @endsection
@@ -40,7 +40,7 @@
         <!-- Default box -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Pesquisa de Usuário</h3>
+                <h3 class="box-title">Pesquisa de Funcionários</h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
@@ -55,9 +55,7 @@
                         <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Login</th>
                             <th>E-mail</th>
-                            <th>Equipamento(s) Vinculado(s)</th>
                             <th>Cargo</th>
                             <th>Operações</th>
                         </tr>
@@ -66,16 +64,10 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->login }}</td>
                                 <td>{{ $user->email }}</td>
-                                {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
-                                <td>{{ $user->equipamentos->implode('nome', ', ') }}</td>
-                                <td>{{ $user->roles->implode('name', '') }}</td>
                                 <td>
                                     @if($type == 1)
                                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
-
-                                        <a href="{{ route('usuarios.exibeVincular', $user->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-retweet"></i> Vincular Equipamento</a>
                                     @endif
                                     @hasrole('Administrador')
                                     @if($user->publicado == 1)
@@ -106,9 +98,7 @@
                         <tfoot>
                         <tr>
                             <th>Nome</th>
-                            <th>Login</th>
                             <th>E-mail</th>
-                            <th>Equipamento(s) Vinculado(s)</th>
                             <th>Cargo</th>
                             <th>Operações</th>
                         </tr>

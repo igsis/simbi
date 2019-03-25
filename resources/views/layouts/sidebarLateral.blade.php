@@ -21,7 +21,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Funcionários Cadastrados</a></li>
+                    <li><a href="#"> Funcionários Cadastrados</a></li>
                     <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar Funcionários</a></li>
                     <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Funcionários Desativados</a></li>
                 </ul>
