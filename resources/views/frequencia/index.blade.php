@@ -50,14 +50,14 @@
                                             <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
                                             <a href="#" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
                                             @if ($equipamento->portaria == 1)
-                                                <a href="{{route('frequencia.portaria.cadastro', $equipamento->id)}}" class="btn btn-success" style="margin-right: 3px" ><i class="glyphicon glyphicon-plus-sign"></i> Recepção</a>
+                                                <a href="{{route('frequencia.portaria.cadastro', $equipamento->id)}}" class="btn btn-success" style="margin-right: 3px" ><i class="glyphicon glyphicon-plus-sign"></i> Preenchimento Mensal</a>
                                             @else
-                                                <button class="btn btn-success" style="margin-right: 3px" data-toggle="modal" data-target="#cadastroPortariaSimples" onclick="{{route('frequencia.portaria.cadastro', $equipamento->id)}}"><i class="glyphicon glyphicon-plus-sign"></i> Recepção</button>
+                                                <button class="btn btn-success" style="margin-right: 3px" data-toggle="modal" data-target="#cadastroPortariaSimples" onclick="{{route('frequencia.portaria.cadastro', $equipamento->id)}}"><i class="glyphicon glyphicon-plus-sign"></i> Preenchimento Mensal</button>
                                             @endif
                                         @else
                                             <a href="{{ route('frequencia.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
                                             <a href="#" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Evento Externo</a>
-                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Recepção</a>
+                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Mensal</a>
                                         @endif
                                     </td>
                                 </tr>
