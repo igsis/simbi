@@ -8,6 +8,8 @@ class Deficiencia extends Model
 {
     public $timestamps = false;
 
+    protected $table = "deficiencias_complementos";
+
     public function complementoPortaria()
     {
         return $this->hasMany(ComplementoPortaria::class);

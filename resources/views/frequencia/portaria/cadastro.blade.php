@@ -81,13 +81,13 @@
     <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
     <script type="text/javascript">
-        // $(function () {
-        //     $('#data').datepicker({
-        //         autoclose: true,
-        //         defaultDate: "11/1/2019",
-        //         locale: 'pt-br'
-        //     });
-        // });
+        $(function () {
+            $('#data').datepicker({
+                autoclose: true,
+                defaultDate: "11/1/2019",
+                locale: 'pt-br'
+            });
+        });
     </script>
 
     <script>
