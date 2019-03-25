@@ -4,7 +4,7 @@
 	@includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Prefeituras Regionais')
+@section('titulo','Subprefeituras')
 
 @section('conteudo')
 
@@ -19,7 +19,7 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1 class="page-header">
-				<i class="glyphicon glyphicon-cog"></i> Prefeituras Regionais
+				<i class="glyphicon glyphicon-cog"></i> Subprefeituras
 			</h1>
 		</section>
 
@@ -29,7 +29,7 @@
 			<!-- Default box -->
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<h3 class="box-title">Pesquisa de Prefeituras Regionais</h3>
+					<h3 class="box-title">Pesquisa de Subprefeituras</h3>
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
