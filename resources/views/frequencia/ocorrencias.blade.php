@@ -186,6 +186,9 @@
         {
             $message = $(e.relatedTarget).attr('data-message');
             $(this).find('.modal-body p').text($message);
+            if ($("#observacao").length == 0) {
+                $(this).find('.modal-body').append('<div class="form-group"><label for="observacao">Motivo do Cancelamento</label><input type="text" id="observacao" class="form-control" name="observacao"></div> ');
+            }
             $title = $(e.relatedTarget).attr('data-title');
             $(this).find('.modal-title').text($title);
             $message = $(e.relatedTarget).attr('data-footer');
