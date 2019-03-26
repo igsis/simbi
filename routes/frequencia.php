@@ -22,7 +22,7 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::post('/{frequencia}/editar','FrequenciaController@atualizaFrequencia')->name('frequencia.atualizar');
 
-    Route::delete('/{idOcorrencia}/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
+    Route::post('/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
 
 });
 

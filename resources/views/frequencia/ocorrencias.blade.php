@@ -61,12 +61,11 @@
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                                             <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')" class="btn btn-success" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
                                             @hasrole('Administrador')
-                                            <form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover esta ocorrência?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover
+                                            {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
+                                                {{--<input type="hidden" name="_method" value="DELETE">--}}
+                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Cancelar {{$evento->nome_evento}}?" data-message='Desejar realmente cancelar esta ocorrência?' data-footer="Cancelar" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-trash"></i> Cancelar
                                                 </button>
-                                            </form>
+                                            {{--</form>--}}
                                             @endhasrole
                                         </td>
                                     </tr>
@@ -82,7 +81,7 @@
                                     </tr>
                                 @endif
                             @endforeach
-                            @include('layouts.excluir_confirm')
+                            {{--@include('layouts.excluir_confirm')--}}
                             </tbody>
                             <tfooter>
                                 <thead>
@@ -177,6 +176,32 @@
     </div>
     </div>
 
+    <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Excluir?</h4>
+                </div>
+                <form action="{{route('evento.ocorrencia.destroy')}}" id="deletarOcorrencia" method="post">
+                    {{csrf_field()}}
+                    <div class="modal-body">
+                        <p>Confirma?</p>
+                        <div class="form-group">
+                            <label for="observacao">Motivo do Cancelamento</label>
+                            <input type="text" id="observacao" class="form-control" name="observacao">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" id="EventoOcorrenciaId">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-danger" id="confirm">Excluir</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts_adicionais')
@@ -186,17 +211,14 @@
         {
             $message = $(e.relatedTarget).attr('data-message');
             $(this).find('.modal-body p').text($message);
-            if ($("#observacao").length == 0) {
-                $(this).find('.modal-body').append('<div class="form-group"><label for="observacao">Motivo do Cancelamento</label><input type="text" id="observacao" class="form-control" name="observacao"></div> ');
-            }
             $title = $(e.relatedTarget).attr('data-title');
             $(this).find('.modal-title').text($title);
             $message = $(e.relatedTarget).attr('data-footer');
             $(this).find('.modal-footer #confirm ').text($message);
 
             // Pass form reference to modal for submission on yes/ok
-            var form = $(e.relatedTarget).closest('form');
-            $(this).find('.modal-footer #confirm').data('form', form);
+            //  var form = $(e.relatedTarget).closest('form');
+            //  $(this).find('.modal-footer #confirm').data('form', form);
         });
 
         // Form confirm (yes/ok) handler, submits form
@@ -204,6 +226,10 @@
         {
             $(this).data('form').submit();
         });
+
+        function preencherId(id) {
+            document.getElementById('EventoOcorrenciaId').value = id;
+        }
 
     </script>
 
