@@ -246,12 +246,15 @@ class FrequenciaController extends Controller
         //
     }
 
-    public function removeOcorrencia($id)
+    public function removeOcorrencia(Request $request, $id)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
         EventoOcorrencia::findOrFail($id)
-            ->update(['publicado' => 0]);
+            ->update([
+                'publicado' => 0,
+                'observacao' => $request->input('observacao')
+            ]);
 
         return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
             ->with('flash_message',
