@@ -71,12 +71,14 @@
                                     </tr>
                                 @else
                                     <tr class="bg-success">
-                                        <td class="bg-success">{{ $evento->nome_evento }}</td>
+                                        <td class="bg-success">{{ $evento->nome_evento }} <span class="text-center text-red text-bold expirado"></span></td>
                                         <td class="bg-success">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
-                                        <td class="bg-success">
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success" role="button" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
+                                        <td class="bg-success" id="tdEditar">
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px" id="btnEdita"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success" role="button" id="btnEdita" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
+                                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#enviarFrequencia" data-title="{{$evento->nome_evento}}" data-message='Desejar realmente enviar?' data-footer="Enviar" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-send"></i>&nbsp Enviar
+                                            </button>
                                         </td>
                                     </tr>
                                 @endif
@@ -202,10 +204,46 @@
         </div>
     </div>
 
+    <div class="modal fade" id="enviarFrequencia" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Excluir?</h4>
+                </div>
+                <form action="" id="deletarOcorrencia" method="post">
+                    {{csrf_field()}}
+                    <div class="modal-body">
+                        <p>Confirma?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" name="id" id="EventoOcorrenciaId">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-success" id="confirm">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts_adicionais')
     <script type="text/javascript">
+
+        $('#enviarFrequencia').on('show.bs.modal', function (e)
+        {
+            $message = $(e.relatedTarget).attr('data-message');
+            $(this).find('.modal-body p').text($message);
+            $title = $(e.relatedTarget).attr('data-title');
+            $(this).find('.modal-title').text($title);
+            $message = $(e.relatedTarget).attr('data-footer');
+            $(this).find('.modal-footer #confirm ').text($message);
+
+            // Pass form reference to modal for submission on yes/ok
+            //  var form = $(e.relatedTarget).closest('form');
+            //  $(this).find('.modal-footer #confirm').data('form', form);
+        });
 
         $('#confirmDelete').on('show.bs.modal', function (e)
         {
@@ -272,6 +310,25 @@
         }
 
 
+    </script>
+
+    <script>
+        $(document).ready( function() {
+            agora = new Date;
+            if (agora.getDate() > 10){
+                var editar = document.querySelectorAll('#btnEdita');
+                editar.forEach(function (x) {
+                    x.setAttribute("disabled", true);
+                    x.style.pointerEvents = "none";
+                });
+
+            }
+            var span = document.querySelectorAll('span.expirado');
+            span.forEach(function (p) {
+                console.log('teste');
+                p.append(document.createTextNode('(Data de Edição Expirada)'));
+            });
+        });
     </script>
 
     @include('scripts.tabelas_admin')
