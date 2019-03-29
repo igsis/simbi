@@ -70,14 +70,14 @@
                                         </td>
                                     </tr>
                                 @else
-                                    <tr class="bg-success">
+                                    <tr class="bg-success" id="linhaTb">
                                         <td class="bg-success">{{ $evento->nome_evento }} <span class="text-center text-red text-bold expirado"></span></td>
-                                        <td class="bg-success">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                        <td class="bg-success" id="data">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td class="bg-success" id="tdEditar">
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px" id="btnEdita"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                                             <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success" role="button" id="btnEdita" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
-                                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#enviarFrequencia" data-title="{{$evento->nome_evento}}" data-message='Desejar realmente enviar?' data-footer="Enviar" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-send"></i>&nbsp Enviar
+                                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#enviarFrequencia" data-title="{{$evento->nome_evento}}" data-message='Desejar realmente enviar?' data-footer="Enviar" onclick="preencherId('{{$evento->id}}')" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-send"></i>&nbsp Enviar
                                             </button>
                                         </td>
                                     </tr>
@@ -204,20 +204,20 @@
         </div>
     </div>
 
-    <div class="modal fade" id="enviarFrequencia" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal fade" id="enviarFrequencia" role="dialog" aria-labelledby="confirmEnvio" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title">Excluir?</h4>
                 </div>
-                <form action="" id="deletarOcorrencia" method="post">
-                    {{csrf_field()}}
+                <form action="{{route('frequencia.enviarFrequencia')}}" id="deletarOcorrencia" method="post">
+                    {{ csrf_field() }}
                     <div class="modal-body">
                         <p>Confirma?</p>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="id" id="EventoOcorrenciaId">
+                        <input type="hidden" name="id" id="idOcorrencia">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                         <button type="submit" class="btn btn-success" id="confirm">Enviar</button>
                     </div>
@@ -267,6 +267,7 @@
 
         function preencherId(id) {
             document.getElementById('EventoOcorrenciaId').value = id;
+            document.getElementById('idOcorrencia').value = id;
         }
 
     </script>
@@ -313,22 +314,55 @@
     </script>
 
     <script>
-        $(document).ready( function() {
-            agora = new Date;
-            if (agora.getDate() > 10){
-                var editar = document.querySelectorAll('#btnEdita');
-                editar.forEach(function (x) {
-                    x.setAttribute("disabled", true);
-                    x.style.pointerEvents = "none";
-                });
 
+        // $(document).ready( function() {
+        //     agora = new Date;
+        //     if (agora.getDate() > 10){
+        //         var editar = document.querySelectorAll('#btnEdita');
+        //         editar.forEach(function (x) {
+        //             x.setAttribute("disabled", true);
+        //             x.style.pointerEvents = "none";
+        //         });
+        //
+        //         var span = document.querySelectorAll('span.expirado');
+        //         span.forEach(function (p) {
+        //             p.append(document.createTextNode('(Data de Edição Expirada)'));
+        //
+        //         });
+        //
+        //     }
+        //
+        //
+        // });
+
+
+        $('#linhaTb').load(function () {
+            let   data = $('#data').text();
+
+            partesData = data.split('/');
+
+            partesData[1] = parseInt(partesData[1]);
+            partesData[2] = parseInt(partesData[2]);
+
+            let hoje = new Date();
+
+            if(partesData[1] <= (hoje.getMonth()+1)){
+                console.log('Entrou no primeiro');
+                if(hoje.getDate() > 10 && partesData[0] >= hoje.getDate()){
+                    console.log('Data expirada');
+                }else{
+                    console.log('Data preste a expirar')
+                }
+            }else{
+                alert('Data normal');
             }
-            var span = document.querySelectorAll('span.expirado');
-            span.forEach(function (p) {
-                console.log('teste');
-                p.append(document.createTextNode('(Data de Edição Expirada)'));
-            });
+
+
         });
+
+
+
+
     </script>
 
     @include('scripts.tabelas_admin')
