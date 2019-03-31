@@ -336,26 +336,33 @@
         // });
 
 
-        $('#linhaTb').load(function () {
-            let   data = $('#data').text();
+        $(document).ready(function () {
+           var linhaTb = document.querySelectorAll('#linhaTb');
+           var data;
+           var hoje;
+           for(var linha of linhaTb) {
+               data = linha.children[1].textContent;
+               partesData = data.split('/');
 
-            partesData = data.split('/');
+               partesData[1] = parseInt(partesData[1]);
+               partesData[2] = parseInt(partesData[2]);
+               hoje = new Date();
 
-            partesData[1] = parseInt(partesData[1]);
-            partesData[2] = parseInt(partesData[2]);
+               if(partesData[1] <= (hoje.getMonth()+1)){
+                   if(hoje.getDate() > 10 && partesData[0] >= hoje.getDate()){
+                       console.log(linha.children[3]);
+                   }else{
+                       alert('Data preste a expirar')
+                   }
+               }else{
+                   alert('Data normal');
+               }
 
-            let hoje = new Date();
 
-            if(partesData[1] <= (hoje.getMonth()+1)){
-                console.log('Entrou no primeiro');
-                if(hoje.getDate() > 10 && partesData[0] >= hoje.getDate()){
-                    console.log('Data expirada');
-                }else{
-                    console.log('Data preste a expirar')
-                }
-            }else{
-                alert('Data normal');
-            }
+
+
+
+               }
 
 
         });
@@ -364,7 +371,7 @@
 
 
     </script>
-
+    findIndex(checkAdult)
     @include('scripts.tabelas_admin')
 
 @endsection
