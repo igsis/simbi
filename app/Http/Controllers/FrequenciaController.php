@@ -303,13 +303,19 @@ class FrequenciaController extends Controller
 
         EventoOcorrencia::where('id',$request->input('id'))
             ->update([
-               'publicado' => 3
+               'publicado' => 2
             ]);
 
         return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
             ->with('flash_message',
                 'Ocorrência do Enviada com Sucesso.');
 
+    }
+
+    public function frequenciasEnviadas(){
+        $type = 1;
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('frequencia.listarFrequenciaEnviadas', compact('equipamentos', 'type'));
     }
 
 }

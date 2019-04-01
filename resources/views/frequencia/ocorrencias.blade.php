@@ -315,27 +315,6 @@
 
     <script>
 
-        // $(document).ready( function() {
-        //     agora = new Date;
-        //     if (agora.getDate() > 10){
-        //         var editar = document.querySelectorAll('#btnEdita');
-        //         editar.forEach(function (x) {
-        //             x.setAttribute("disabled", true);
-        //             x.style.pointerEvents = "none";
-        //         });
-        //
-        //         var span = document.querySelectorAll('span.expirado');
-        //         span.forEach(function (p) {
-        //             p.append(document.createTextNode('(Data de Edição Expirada)'));
-        //
-        //         });
-        //
-        //     }
-        //
-        //
-        // });
-
-
         $(document).ready(function () {
            var linhaTb = document.querySelectorAll('#linhaTb');
            var data;
@@ -364,9 +343,6 @@
                }
            }
         });
-
-
-
 
     </script>
     findIndex(checkAdult)
