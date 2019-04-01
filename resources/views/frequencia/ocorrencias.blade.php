@@ -75,8 +75,8 @@
                                         <td class="bg-success" id="data">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td class="bg-success" id="tdEditar">
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px" id="btnEdita"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success" role="button" id="btnEdita" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info batata" style="margin-right: 3px" id="btnEdita"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success batata" role="button" id="btnEdita" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
                                             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#enviarFrequencia" data-title="{{$evento->nome_evento}}" data-message='Desejar realmente enviar?' data-footer="Enviar" onclick="preencherId('{{$evento->id}}')" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-send"></i>&nbsp Enviar
                                             </button>
                                         </td>
@@ -340,31 +340,29 @@
            var linhaTb = document.querySelectorAll('#linhaTb');
            var data;
            var hoje;
+           var btns;
+           var span;
            for(var linha of linhaTb) {
                data = linha.children[1].textContent;
                partesData = data.split('/');
-
+               btns = linha.children[3].querySelectorAll('.batata');
+               span = linha.children[0].querySelector('span');
                partesData[1] = parseInt(partesData[1]);
                partesData[2] = parseInt(partesData[2]);
                hoje = new Date();
 
                if(partesData[1] <= (hoje.getMonth()+1)){
-                   if(hoje.getDate() > 10 && partesData[0] >= hoje.getDate()){
-                       console.log(linha.children[3]);
+                   if(hoje.getDate() > 10 && partesData[1] >= hoje.getMonth()+1){
+                        for (var btn of btns){
+                            btn.setAttribute("disabled",true);
+                            btn.style.pointerEvents = "none";
+                        }
+                        span.append(document.createTextNode('(Data de Edição Expirada)'));
                    }else{
-                       alert('Data preste a expirar')
+                       span.append(document.createTextNode('(Data Preste a Expirar)'));
                    }
-               }else{
-                   alert('Data normal');
                }
-
-
-
-
-
-               }
-
-
+           }
         });
 
 
