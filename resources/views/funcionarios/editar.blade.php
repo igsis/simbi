@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 
-@section('tituloPagina', 'Editar Usuario')
+@section('titulo', 'Editar Usuario')
 
 @section('conteudo')
 <div class="content-wrapper">
@@ -139,9 +139,13 @@
                         <div class="form-group col-md-6 has-feedback {{ $errors->has('escolaridade') ? ' has-error' : '' }}">
                             <label for="escolaridade">Nivel de Escolaridade</label>
                             <select class="form-control" name="escolaridade" id="escolaridade">
-                                <option value="">Selecione uma Opção</option>
+                                <option value="">Selecione... </option>
                                 @foreach ($escolaridades as $escolaridade)
-                                    <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                    @if ($escolaridade->id == old('escolaridade'))
+                                        <option value="{{$escolaridade->id}}" selected>{{$escolaridade->escolaridade}}</option>
+                                    @else
+                                        <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

@@ -259,6 +259,7 @@ class UserController extends Controller
                 'funcao_id' => $funcao->id,
                 'secretaria_id' => $secretaria->id,
                 'subordinacao_administrativa_id' => $subAdm->id,
+                'escolaridade_id'=>$request->escolaridade
             ]);
         }
 
@@ -273,7 +274,8 @@ class UserController extends Controller
             $user->roles()->detach();
         }
 
-        return redirect()->back()
+
+        return redirect()->route('usuarios.index', ['type' => '1'])
             ->with('flash_message',
              'Usuário Editado com Sucesso!');
 

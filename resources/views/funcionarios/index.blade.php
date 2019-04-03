@@ -30,7 +30,7 @@
         <h1 class="page-header">
             <i class="glyphicon glyphicon-user"></i>
             {{-- Equipamento ativo --}}
-            <?php echo $pagina ?>
+            {{$pagina}}
         </h1>
     </section>
 
