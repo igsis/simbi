@@ -78,7 +78,7 @@
         </section>
     </div>
     <div class="modal fade" id="cadastroPortariaSimples" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -89,14 +89,7 @@
                     <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Data do Evento
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-12 col-md-6">
+                            <div class="form-group col-sm-12 col-md-10">
                                 <label for="data">Data</label>
                                 <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d">
                                 <input type="text" class="form-control" name="data" id="data">
@@ -104,19 +97,10 @@
                                 <span class="glyphicon glyphicon-calendar"></span>
                                 </div>
                                 </div>
-                                {{--<label for="data">Data</label>--}}
-                                {{--<input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">--}}
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Público Atendido
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-12 col-md-6">
+                            <div class="form-group col-sm-12 col-md-10">
                                 <label for="nome">Quantidade</label>
                                 <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}">
                             </div>

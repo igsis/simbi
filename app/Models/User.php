@@ -31,7 +31,6 @@ class User extends Authenticatable
         'cargo_id',
         'funcao_id',
         'escolaridade_id',
-        'previsao_aposentadoria',
         'secretaria_id',
         'subordinacao_administrativa_id',
         'publicado'

@@ -75,7 +75,6 @@ class UserController extends Controller
             'cargo' => 'required',
             'funcao' => 'required',
             'escolaridade' => 'required',
-            'aposentadoria' => 'required'
         ]);
 
         $user = new User();
@@ -118,7 +117,6 @@ class UserController extends Controller
         $user->secretaria_id = $secretaria->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
         $user->escolaridade_id = $request->escolaridade;
-        $user->previsao_aposentadoria = $request->aposentadoria;
 
         $user->save();
 
@@ -225,7 +223,6 @@ class UserController extends Controller
                 'identificacaoSecretaria'=>'required',
                 'cargo'=>'required',
                 'funcao'=>'required',
-                'aposentadoria' => 'required',
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
@@ -239,7 +236,6 @@ class UserController extends Controller
                 'funcao_id' => $funcao->id,
                 'secretaria_id' => $secretaria->id,
                 'subordinacao_administrativa_id' => $subAdm->id,
-                'previsao_aposentadoria' => $request->aposentadoria,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
@@ -253,7 +249,6 @@ class UserController extends Controller
                 'identificacaoSecretaria'=>'required',
                 'cargo'=>'required',
                 'funcao'=>'required',
-                'aposentadoria' => 'required'
             ]);
 
             $user->update([
@@ -264,7 +259,6 @@ class UserController extends Controller
                 'funcao_id' => $funcao->id,
                 'secretaria_id' => $secretaria->id,
                 'subordinacao_administrativa_id' => $subAdm->id,
-                'previsao_aposentadoria' => $request->aposentadoria,
             ]);
         }
 

@@ -179,16 +179,6 @@
                                     </span>
                                 @endif
                             </div>
-
-                            <div class="form-group col-md-6 has-feedback {{ $errors->has('aposentadoria') ? ' has-error' : '' }}">
-                                <label for="aposentadoria">Previsão de Aposentadoria *</label>
-                                <input type="date" class="form-control" name="aposentadoria" id="aposentadoria" required>
-                                @if ($errors->has('aposentadoria'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('aposentadoria') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
                         </div>
 
                         <div class="row">
