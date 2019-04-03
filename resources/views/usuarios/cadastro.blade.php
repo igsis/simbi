@@ -179,11 +179,7 @@
                                     </span>
                                 @endif
                             </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-12 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-6 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
                                 <label for="roles">Nivel de Acesso *</label>
                                 <select class="form-control" name="roles" id="roles">
                                     <option value="">Selecione uma Opção</option>
@@ -197,6 +193,11 @@
                                     </span>
                                 @endif
                             </div>
+
+                        </div>
+
+                        <div class="row">
+
                         </div>
                     </div>
                 </div>
