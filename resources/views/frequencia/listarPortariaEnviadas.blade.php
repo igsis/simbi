@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Frequência Enviadas')
+@section('titulo','Frequência de Portarias Enviadas')
 
 @section('conteudo')
 
@@ -20,7 +20,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="glyphicon glyphicon-home"></i>
-                Frequência de Equipamentos
+                Frequência de Portarias Enviadas
             </h1>
         </section>
 
@@ -37,7 +37,7 @@
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Nome do Evento</th>
+                                <th>Nome do Equipamento</th>
                                 <th>Operações</th>
                             </tr>
                             </thead>
@@ -47,7 +47,7 @@
                                     <tr>
                                         <td>{{$frequencia->eventoOcorrencia->eventosIgsis->nomeEvento}}</td>
                                         <td>
-                                            <button class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp;Ver dados</button>
+                                            <button class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Ver dados</button>
                                         </td>
                                     </tr>
                                 @endif
@@ -56,7 +56,7 @@
                             <tfooter>
                                 <thead>
                                 <tr>
-                                    <th>Nome do Evento</th>
+                                    <th>Nome do Equipamento</th>
                                     <th>Operações</th>
                                 </tr>
                                 </thead>

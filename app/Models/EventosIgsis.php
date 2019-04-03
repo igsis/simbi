@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class EventosIgsis extends Model
 {
     protected $connection = "mysql2";
-
     protected $table = 'ig_evento';
+    protected $primaryKey = 'idEvento';
 
     public $timestamps = false;
 
@@ -20,12 +20,12 @@ class EventosIgsis extends Model
         'projetoEspecial',
         'nomeEvento',
         'projeto',
-        'memorando',
         'idResponsavel',
         'suplente',
         'autor',
         'nomeGrupo',
         'fichaTecnica',
+        'memorando',
         'faixaEtaria',
         'sinopse',
         'releaseCom',
@@ -47,4 +47,10 @@ class EventosIgsis extends Model
         'ocupacao',
         'statusEvento'
     ];
+
+    public function eventoOcorrencia()
+    {
+        return $this->hasMany(EventoOcorrencia::class,'igsis_evento_id','idEvento');
+    }
+
 }
