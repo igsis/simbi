@@ -119,7 +119,7 @@
                                 <option value="">Selecione...</option>
                                 @foreach ($funcoes as $funcao)
                                     @if ($funcao->id == old('funcao'))
-                                        <option value="{{$funcao->id}}" selected>{{$funcao->sigla}}</option>
+                                        <option value="{{$funcao->id}}" selected>{{$funcao->funcao}}</option>
                                     @else
                                         <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
                                     @endif
@@ -318,7 +318,7 @@
             if (txtVal !== "")
             {
                 newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i}`);
+                newOption.setAttribute("value",`${i + 1}`);
                 select.insertBefore(newOption, select.lastChild);
                 newOption.setAttribute('selected', 'selected');
 
@@ -328,7 +328,7 @@
                 div.insertBefore(newInput, div.lastChild);
             }
             $('#addFuncao').modal('hide');
-            $("input[id='novoCargo']").val('');
+            $("input[id='novaFuncao']").val('');
         }
 
         function insertSubAdm()
