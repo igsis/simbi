@@ -33,6 +33,10 @@
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
+						<div class="btn-tabela">
+							{{-- Add Prefeitura Regional  --}}
+							<button class="btn btn-success" data-toggle="modal" data-target="#prefeituraRegional"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+						</div>
 						<table id="tabela1" class="table table-bordered table-striped">
 							<thead>
 							<tr>
@@ -68,8 +72,7 @@
 							</tfooter>
 						</table>
 					</div>
-					{{-- Add Prefeitura Regional  --}}
-					<button class="btn btn-success" data-toggle="modal" data-target="#prefeituraRegional"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+
 					<!-- Editar Prefeitura Regional -->
 					<div class="modal fade" id="prefeituraRegional" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">

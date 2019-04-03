@@ -33,6 +33,9 @@
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
+						<div class="btn-tabela">
+							<button class="btn btn-success" data-toggle="modal" data-target="#tipoServico"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+						</div>
 						<table id="tabela1" class="table table-bordered table-striped ">
 							<thead>
 							<tr>
@@ -68,8 +71,6 @@
 							</tfooter>
 						</table>
 					</div>
-					<button class="btn btn-success" data-toggle="modal" data-target="#tipoServico"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
-
 					<!-- Editar Serviço -->
 					<div class="modal fade" id="tipoServico" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">

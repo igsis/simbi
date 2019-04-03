@@ -21,9 +21,9 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"> Funcionários Cadastrados</a></li>
-                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar Funcionários</a></li>
-                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Funcionários Desativados</a></li>
+                    <li><a href="#"> Lista</a></li>
+                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar</a></li>
+                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -33,9 +33,9 @@
                             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Usuários Cadastrados</a></li>
-                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar Usuários</a></li>
-                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Usuários Desativados</a></li>
+                    <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Lista</a></li>
+                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar</a></li>
+                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -46,10 +46,10 @@
                             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Equipamentos Cadastrados</a></li>
+                    <li><a href="{{route('equipamentos.index', ['type' => '1'])}}"> Lista</a></li>
                     <li><a href="{{route('equipamentos.importar')}}">Importar do Igsis</a></li>
-                    <li><a href="{{ route('equipamentos.cadastro') }}">Cadastrar Equipamentos</a></li>
-                    <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Equipamentos Desativados</a></li>
+                    <li><a href="{{ route('equipamentos.cadastro') }}">Cadastrar</a></li>
+                    <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Desativados</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -58,9 +58,9 @@
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('frequencia.index') }}">Inserir Nova Frequência</a></li>
-                    <li><a href="{{ route('equipamentos.enviada') }}">Frequências Enviadas</a></li>
-                    <li><a href="{{ route('frequencia.relatorio') }}">Relatório de Frequências</a></li>
+                    <li><a href="{{ route('frequencia.index') }}"> Cadastrar </a></li>
+                    <li><a href="{{ route('equipamentos.enviada') }}"> Enviadas</a></li>
+                    <li><a href="{{ route('frequencia.relatorio') }}">Relatório</a></li>
                 </ul>
             </li>
             <li class="treeview">

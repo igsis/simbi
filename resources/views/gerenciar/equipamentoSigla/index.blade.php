@@ -30,6 +30,9 @@
 				</div>
 				<div class="box-body">
 					<div class="table-responsive">
+						<div class="btn-tabela">
+							<button class="btn btn-success" data-toggle="modal" data-target="#equipamentoSigla"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+						</div>
 						<table id="tabela1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -73,7 +76,6 @@
 							</tfooter>
 						</table>
 					</div>
-					<button class="btn btn-success" data-toggle="modal" data-target="#equipamentoSigla"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
 
 					<!-- Editar Sigla -->
 					<div class="modal fade" id="equipamentoSigla" role="dialog" aria-hidden="true">
