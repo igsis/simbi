@@ -59,7 +59,7 @@
                                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td>
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')" class="btn btn-success" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
+                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')" class="btn btn-success" data-title="{{$evento->nome_evento}}" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
                                             @hasrole('Administrador')
                                             {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
                                                 {{--<input type="hidden" name="_method" value="DELETE">--}}
@@ -301,6 +301,7 @@
             document.querySelector('#nomeProjeto').value = nomeProjeto;
             document.querySelector('#idProjeto').value = idProjeto;
             document.querySelector('#evento_ocorrencia_id').value = idocorrencia;
+            document.querySelector('.modal-title').innerHTML = nomeEvento;
 
         }
 
