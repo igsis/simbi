@@ -4,7 +4,9 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/', 'FrequenciaController@index')->name('frequencia.index');
 
-    Route::get('/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('frequencia.enviada');
+    Route::get('/equipemanetos/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('equipamentos.enviada');
+
+    Route::get('/{idEquipamento}/enviadas','FrequenciaController@listarFrequenciasEnviadas')->name('frequencia.enviada');
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
 

@@ -59,7 +59,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('frequencia.index') }}">Inserir Nova Frequência</a></li>
-                    <li><a href="{{ route('frequencia.enviada') }}">Frequências Enviadas</a></li>
+                    <li><a href="{{ route('equipamentos.enviada') }}">Frequências Enviadas</a></li>
                     <li><a href="{{ route('frequencia.relatorio') }}">Relatório de Frequências</a></li>
                 </ul>
             </li>

@@ -42,16 +42,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($equipamentos as $equipamento)
-                                <tr>
-                                    <td>{{$equipamento->nome}}</td>
-                                    <td>
-                                        <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
-                                        <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias Portaria</a>
-                                        <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de Público</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+{{--                            @foreach($equipamentos as $equipamento)--}}
+{{--                                <tr>--}}
+{{--                                    <td>{{$equipamento->nome}}</td>--}}
+{{--                                    <td>--}}
+{{--                                        <a href="{{route(''), $equipamentos->id }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias Enviadas</a>--}}
+{{--                                    </td>--}}
+{{--                                </tr>--}}
+{{--                            @endforeach--}}
                             </tbody>
                             <tfooter>
                                 <thead>
