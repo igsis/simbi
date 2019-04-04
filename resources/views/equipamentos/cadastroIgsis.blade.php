@@ -4,7 +4,7 @@
     Importar
     @foreach($equipamentoIgsis as $igsis)
         {{ $equipamento = $igsis->sala }}
-        <?php $igsis_id = $igsis->idLocal; ?>
+        {{ $igsis_id = $igsis->idLocal }}
     @endforeach
     do IGSIS
 @endsection

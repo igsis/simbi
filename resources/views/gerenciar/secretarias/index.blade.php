@@ -97,7 +97,7 @@
 							<input type="hidden" name="id">
 							<div class="form-group">
 								<label>Sigla</label>
-								<input class="form-control" type="text" name="sigla">
+								<input class="form-control" type="text" name="sigla" maxlength="6">
 							</div>
 							<div class="form-group">
 								<label for="descricao">Descrição</label>

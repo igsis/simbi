@@ -51,7 +51,7 @@
                             <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($siglas as $sigla)
-                                    <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
+                                    <option value="{{$sigla->id}}" selected>{{$sigla->sigla}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -68,7 +68,13 @@
                             <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($secretarias as $secretaria)
-                                    <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                    @if ($secretaria->publicado == 1)
+                                        @if ($secretaria->id == old('identificacaoSecretaria'))
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
+                                        @else
+                                            <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -449,7 +455,7 @@
                     $('#addSigla').modal('hide');
                     $("#equipamentoSigla").focus();
                     for(let item of data ){
-                        $("#equipamentoSigla").append(`<option value='${item.id}'>${item.sigla}<otion>`);
+                        $("#equipamentoSigla").append(`<option value='${item.id}' selected>${item.sigla}<option>`);
                     }
                 },
                 error: function() {
@@ -483,7 +489,7 @@
                     $('#addSecretaria').modal('hide');
                     $("#identificacaoSecretaria").focus();
                     for(let item of data ){
-                        $("#identificacaoSecretaria").append(`<option value='${item.id}'>${item.sigla}<otion>`);
+                        $("#identificacaoSecretaria").append(`<option value='${item.id}' selected>${item.sigla}<option>`);
                     }
                 },
                 error: function() {

@@ -56,10 +56,12 @@
                             <select class="form-control" name="subordinacaoAdministrativa" id="subordinacaoAdministrativa">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
-                                    @if ($subordinacaoAdministrativa->id == old('subordinacaoAdministrativa'))
-                                        <option value="{{$subordinacaoAdministrativa->id}}" selected>{{$subordinacaoAdministrativa->descricao}}</option>
-                                    @else
-                                        <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                                    @if($subordinacaoAdministrativa->publicado == 1)
+                                        @if ($subordinacaoAdministrativa->id == old('subordinacaoAdministrativa'))
+                                            <option value="{{$subordinacaoAdministrativa->id}}" selected>{{$subordinacaoAdministrativa->descricao}}</option>
+                                        @else
+                                            <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -74,12 +76,14 @@
                         <div id="divSecretaria" class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
                             <label for="identificacaoSecretaria">Identificação da Secretaria</label>
                             <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
-                                <option value="">Selecione uma Opção</option>
+                                <option value="" selected>Selecione uma Opção</option>
                                 @foreach ($secretarias as $secretaria)
-                                    @if ($secretaria->id == old('identificacaoSecretaria'))
-                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
-                                    @else
-                                        <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                    @if ($secretaria->publicado == 1)
+                                        @if ($secretaria->id == old('identificacaoSecretaria'))
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
+                                        @else
+                                            <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -98,10 +102,12 @@
                             <select class="form-control" name="cargo" id="cargo">
                                 <option value="">Selecione...</option>
                                 @foreach ($cargos as $cargo)
-                                    @if ($cargo->id == old('cargo'))
-                                        <option value="{{$cargo->id}}" selected>{{$cargo->cargo}}</option>
-                                    @else
-                                        <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                    @if($cargo->publicado == 1)
+                                        @if ($cargo->id == old('cargo'))
+                                            <option value="{{$cargo->id}}" selected>{{$cargo->cargo}}</option>
+                                        @else
+                                            <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -141,7 +147,13 @@
                             <select class="form-control" name="escolaridade" id="escolaridade">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($escolaridades as $escolaridade)
-                                    <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                    @if($escolaridade->publicado == 1)
+                                        @if ($funcao->id == old('funcao'))
+                                            <option value="{{$escolaridade->id}}" selected>{{$escolaridade->escolaridade}}</option>
+                                        @else
+                                            <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -165,7 +177,13 @@
                             <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
                             <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
                                 @foreach($perguntas as $pergunta)
-                                    <option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
+                                    @if($pergunta->publicado == 1)
+                                        @if ($pergunta->id == old('funcao'))
+                                            <option value="{{$pergunta->id}}" selected>{{$pergunta->pergunta_seguranca}}</option>
+                                        @else
+                                            <option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
