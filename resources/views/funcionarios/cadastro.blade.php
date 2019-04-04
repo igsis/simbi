@@ -278,7 +278,7 @@
             if (txtVal !== "")
             {
                 newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i}`);
+                newOption.setAttribute("value", `${i + 1}`);
                 select.insertBefore(newOption, select.lastChild);
                 newOption.setAttribute('selected', 'selected');
 
