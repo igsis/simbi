@@ -309,7 +309,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->update(['password' => 'simbi@2018']);
-        return redirect()->back()->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
+        return redirect()->route('usuarios.index', [
+            'type' => 1
+        ])->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
     }
 
     /**

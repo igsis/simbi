@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'], function (){
 
             Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento')->name('usuarios.vincular');
 
-            Route::post('/{usuario}/reset', 'UserController@vinculaEquipamento')->name('usuarios.reset');
+            Route::put('/{usuario}/reset', 'UserController@resetSenha')->name('usuarios.reset');
         });
 	});
 
