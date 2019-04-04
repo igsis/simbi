@@ -34,7 +34,7 @@
 				<div class="box-body">
 					<div class="table-responsive">
 						<div class="btn-tabela">
-							{{-- Add Prefeitura Regional  --}}
+							{{-- Add Subprefeitura --}}
 							<button class="btn btn-success" data-toggle="modal" data-target="#prefeituraRegional"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
 						</div>
 						<table id="tabela1" class="table table-bordered table-striped">
@@ -73,7 +73,7 @@
 						</table>
 					</div>
 
-					<!-- Editar Prefeitura Regional -->
+					<!-- Editar Subprefeitura -->
 					<div class="modal fade" id="prefeituraRegional" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
@@ -122,7 +122,7 @@
 		        $(this).find('form').attr('action', `{{route('editPrefeituraRegional', '')}}/${id}`);
 		    }else
 	        {
-	        	$(this).find('.modal-title').text('Adicionar Prefeitura Regional');
+	        	$(this).find('.modal-title').text('Adicionar Subprefeitura');
 	            $(this).find('.modal-footer input').attr('value', 'Adicionar');
 	            $(this).find('form input[name="descricao"]').attr('value', '');
 	            $(this).find('form').attr('action', `{{route('createPrefeituraRegional')}}`);

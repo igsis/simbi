@@ -191,7 +191,7 @@
 
                     <div class="row">
                         <div class="form-group col-xs-8 col-md-4">
-                            <label for="prefeituraRegional">Prefeituras Regionais</label>
+                            <label for="prefeituraRegional">Subprefeitura</label>
                             <select class="form-control" name="prefeituraRegional" id="prefeituraRegional">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach($prefeituraRegionais as $prefeituraRegional)
@@ -550,7 +550,7 @@
                     $("#sucesso").removeAttr("hidden");
                     $("#sucesso").removeClass("alert-danger");
                     $("#sucesso").addClass( "alert-success");
-                    $("#sucesso em").html("Prefeitura Regional inserida com sucesso!");
+                    $("#sucesso em").html("Subprefeitura inserida com sucesso!");
                     $("#prefeituraRegional").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addPrefeituraRegional').modal('hide');
                     $("#prefeituraRegional").focus();
@@ -562,7 +562,7 @@
                     $("#sucesso").removeAttr("hidden");
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass("alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional! Verifique se o campo já foi cadastrado!`);
+                    $("#sucesso em").html(`Erro ao cadastrar Subprefeitura! Verifique se o campo já foi cadastrado!`);
                     $('#addPrefeituraRegional').modal('hide');
                 }
             });

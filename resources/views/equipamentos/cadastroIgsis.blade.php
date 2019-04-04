@@ -233,7 +233,7 @@
 
             <div class="row">
                 <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('prefeituraRegional') ? 'has-error' : ''}}">
-                    <label for="prefeituraRegional">Prefeituras Regionais</label>
+                    <label for="prefeituraRegional">Subprefeitura</label>
                     <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
                         <option value="">Selecione uma Opção</option>
                         @foreach($prefeituraRegionais as $prefeituraRegional)
@@ -246,7 +246,7 @@
                     </select>
                 </div>
 
-                {{-- Add Prefeituras Regionais --}}
+                {{-- Add Subprefeitura --}}
                 <div class="form-group col-xs-4 col-md-2">
                     <label for="prefeituraRegional">Adicionar</label>
                     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
