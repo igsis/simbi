@@ -72,8 +72,11 @@ class EquipamentoController extends Controller
         $equipamentos = EquipamentosIgsis::where([
             ['idInstituicao', '=', 14],
             ['publicado', '=', 1],
-            ['sala', 'LIKE', 'Biblioteca%']
-        ])->orderBy('sala')->get();
+            ['sala', 'LIKE', 'Biblioteca%'],
+        ])
+            ->orWhere('sala','LIKE','Ônibus%')
+            ->orWhere('sala','LIKE','Ponto de Leitura%')
+            ->orderBy('sala')->get();
 
         $cadastrados = Equipamento::all()->pluck('igsis_id')->toArray();
 
