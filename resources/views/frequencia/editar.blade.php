@@ -39,7 +39,7 @@
                         <div class="hidden">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Id da ocorrencia</label>
-                                <input class="form-control" type="text" id="evento_ocorrencia_id" name="evento_ocorrencia_id" value="">
+                                <input class="form-control" type="number" id="evento_ocorrencia_id" name="evento_ocorrencia_id" value="">
                             </div>
                         </div>
 

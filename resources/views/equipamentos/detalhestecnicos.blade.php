@@ -86,7 +86,7 @@ if($path == 'equipamentos.atualizaDetalhes')
                     <div class="row">
                         <div class="form-group col-md-offset-3 col-md-3">
                             <label for="pavimento">Pavimentos</label>
-                            <input type="text" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
+                            <input type="number" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
                                                                                                                                              : old('pavimento') }}">
                         </div>
                         <div class="form-group col-md-3">
@@ -153,7 +153,7 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                         <div class="form-group col-md-2">
                             <label for="qtdVagasAcessiveis">Quantidade de vagas?</label>
-                            <input type="text" class="form-control" name="qtdVagasAcessiveis" id="qtdVagasAcessiveis" value="{{isset($equipamento->detalhe->acessibilidade->quantidade_vagas) ? $equipamento->detalhe->acessibilidade->quantidade_vagas
+                            <input type="number" class="form-control" name="qtdVagasAcessiveis" id="qtdVagasAcessiveis" value="{{isset($equipamento->detalhe->acessibilidade->quantidade_vagas) ? $equipamento->detalhe->acessibilidade->quantidade_vagas
                                                                                                                                                                                        : old('qtdVagasAcessiveis')}}">
                         </div>
                     </div>
