@@ -119,7 +119,7 @@ class EquipamentoController extends Controller
 
     public function createIgsis($igsis_id)
     {
-        $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->get();
+        $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->first();
         $tipoServicos = TipoServico::where('publicado',1)->orderBy('descricao')->get();
         $siglas = EquipamentoSigla::where('publicado',1)->orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::where('publicado',1)->orderBy('descricao')->get();

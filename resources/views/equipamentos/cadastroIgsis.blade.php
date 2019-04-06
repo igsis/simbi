@@ -1,12 +1,13 @@
 @extends ('layouts.master')
 
 @section('tituloPagina')
-    Importar
-    @foreach($equipamentoIgsis as $igsis)
-        {{ $equipamento = $igsis->sala }}
-        {{ $igsis_id = $igsis->idLocal }}
-    @endforeach
-    do IGSIS
+    Importar do IGSIS
+    {{$endereco = explode(',',$equipamentoIgsis->rua)[0]}}
+    {{$numero = explode(',',explode('-',$equipamentoIgsis->rua)[0])[1]}}
+    @if (gettype($numero) != 'integer')
+        {{$numero = ''}}
+    @endif
+    {{$bairro =  explode('-',$equipamentoIgsis->rua)[1]}}
 @endsection
 
 @section ('conteudo')
@@ -18,12 +19,12 @@
 
             <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                 <label for="nome">Nome do Equipamento</label>
-                <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento }}">
+                <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamentoIgsis->sala}}">
             </div>
 
             <div class="hidden">
                 <label for="igisi_id">ID do igsis</label>
-                <input type="text" class="form-control" name="igsis_id" id="igsis_id" value="{{ $igsis_id }}">
+                <input type="text" class="form-control" name="igsis_id" id="igsis_id" value="{{ $equipamentoIgsis->idLocal }}">
             </div>
 
             <div class="row">
@@ -158,14 +159,14 @@
                 </div>
                 <div class="form-group col-md-10">
                     <label for="logradouro">Logradouro</label>
-                    <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{old('logradouro')}}">
+                    <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{isset($endereco)?$endereco:old('logradouro')}}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control" name="numero" id="numero" value="{{old('numero')}}">
+                    <input type="text" class="form-control" name="numero" id="numero" value="{{isset($numero)?$numero:old('numero')}}">
                 </div>
 
                 <div class="form-group col-md-3 has-feedback {{ $errors->has('complemento') ? ' has-error' : '' }}">
@@ -175,17 +176,17 @@
 
                 <div class="form-group col-md-3">
                     <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{old('bairro')}}">
+                    <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{isset($bairro)?$bairro: old('bairro')}}">
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control" name="cidade" id="cidade" readonly value="{{old('cidade')}}">
+                    <input type="text" class="form-control" name="cidade" id="cidade" readonly value="{{isset($equipamentoIgsis->cidade)?$equipamentoIgsis->cidade : old('cidade')}}">
                 </div>
 
                 <div class="form-group col-md-1">
                     <label for="uf">UF</label>
-                    <input type="text" class="form-control" name="uf" id="uf" readonly value="{{old('uf')}}">
+                    <input type="text" class="form-control" name="uf" id="uf" readonly value="{{isset($equipamentoIgsis->estado)?$equipamentoIgsis->estado: old('uf')}}">
                 </div>
             </div>
 
