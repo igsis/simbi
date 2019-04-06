@@ -91,14 +91,14 @@ class EquipamentoController extends Controller
     public function create()
     {
         $tipoServicos = TipoServico::orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::orderBy('sigla')->get();
+        $siglas = EquipamentoSigla::where('publicado',1)->orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
-        $secretarias = Secretaria::orderBy('descricao')->get();
+        $secretarias = Secretaria::where('publicado',1)->orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
-        $distritos = Distrito::orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::where('publicado',1)->orderBy('descricao')->get();
+        $distritos = Distrito::where('publicado',1)->orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
         return view('equipamentos.cadastro',
@@ -120,15 +120,15 @@ class EquipamentoController extends Controller
     public function createIgsis($igsis_id)
     {
         $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->get();
-        $tipoServicos = TipoServico::orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::orderBy('sigla')->get();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        $tipoServicos = TipoServico::where('publicado',1)->orderBy('descricao')->get();
+        $siglas = EquipamentoSigla::where('publicado',1)->orderBy('sigla')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::where('publicado',1)->orderBy('descricao')->get();
         $secretarias = Secretaria::orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
-        $distritos = Distrito::orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::where('publicado',1)->orderBy('descricao')->get();
+        $distritos = Distrito::where('publicado',1)->orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
         return view('equipamentos.cadastroIgsis',
@@ -163,7 +163,7 @@ class EquipamentoController extends Controller
             ]);
 
             TipoServico::create($data);
-            $data = TipoServico::orderBy('descricao')->get();
+            $data = TipoServico::where('publicado',1)->orderBy('descricao')->get();
             return response()->json($data);
         } elseif ($request->has('novaSigla')) {
             $data = $this->validate($request, [
@@ -173,7 +173,7 @@ class EquipamentoController extends Controller
             ]);
 
             EquipamentoSigla::create($data);
-            $data = EquipamentoSigla::orderBy('descricao')->get();
+            $data = EquipamentoSigla::where('publicado',1)->orderBy('descricao')->get();
             return response()->json($data);
         } elseif ($request->has('novaSecretaria')) {
             $data = $this->validate($request, [
