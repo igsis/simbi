@@ -159,7 +159,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">Adicionar Ocorrência</h4>
+            <h4 class="modal-title">Adicionar Nota</h4>
         </div>
         <div class="modal-body">
             <form method="POST" id="addOcorrencia" action="{{route('equipamento.ocorrencia')}}">
@@ -169,10 +169,10 @@
                     <input type="date" class="form-control"  name="data" >
                 </div>
                 <div class="form-group">                    
-                    <input type="text" class="form-control"  name="ocorrencia" placeholder="Ocorrencia">                    
+                    <input type="text" class="form-control"  name="ocorrencia" placeholder="Nota">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control"  name="observacao" placeholder="Observação da Ocorrência">
+                    <input type="text" class="form-control"  name="observacao" placeholder="Observação da notas">
                 </div>
         </div>
         <div class="modal-footer">
