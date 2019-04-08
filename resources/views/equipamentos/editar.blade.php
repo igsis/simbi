@@ -243,11 +243,11 @@
 
                             <div class="row">
                                 <div class="form-group col-md-offset-4 col-md-2">
-                                    <label for="horarioAbertura">Horario de Abertura</label>
+                                    <label for="horarioAbertura">Horário de Abertura</label>
                                     <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="horarioFechamento">Horario de Fechamento</label>
+                                    <label for="horarioFechamento">Horário de Fechamento</label>
                                     <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                                 </div>
                             </div>
@@ -273,11 +273,11 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-offset-4 col-md-2">
-                                        <label for="horarioAbertura">Horario de Abertura</label>
+                                        <label for="horarioAbertura">Horário de Abertura</label>
                                         <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="horarioFechamento">Horario de Fechamento</label>
+                                        <label for="horarioFechamento">Horário de Fechamento</label>
                                         <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
                                     </div>
 
@@ -290,10 +290,10 @@
 
                     <div class="row">
                         <div class="form-group col-md-offset-2 col-md-4">
-                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
+                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horário</a>
                         </div>
                         <div class="form-group col-md-4">
-                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
+                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horário</a>
                         </div>
                     </div>
 
