@@ -25,6 +25,8 @@
 
             Route::put('/formulario' , 'EquipamentoController@editPortaria')->name('equipamentos.editPortaria');
 
+            Route::put('/formulario', 'EquipamentoController@editPortariaLote')->name('equipamentos.editPortariaLote');
+
             Route::post('/novo', 'EquipamentoController@gravaDetalhes')->name('equipamentos.gravaDetalhes');
 
             Route::put('/editar', 'EquipamentoController@atualizaDetalhes')->name('equipamentos.atualizaDetalhes');

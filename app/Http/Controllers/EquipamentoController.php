@@ -750,7 +750,18 @@ class EquipamentoController extends Controller
             $equipamento->update(['portaria' => 1]);
             return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Formulário atualizado para o completo.');
         }
+    }
 
 
+    public function editPortariaLote($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        if ($equipamento->portaria == 1) {
+            $equipamento->update(['portaria' => 0]);
+            return redirect()->route('equipamentos.lote')->with('flash_message', 'Formulário atualizado para o simples.');
+        } else {
+            $equipamento->update(['portaria' => 1]);
+            return redirect()->route('equipamentos.lote')->with('flash_message', 'Formulário atualizado para o completo.');
+        }
     }
 }

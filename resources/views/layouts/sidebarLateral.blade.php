@@ -60,6 +60,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ route('frequencia.index') }}"> Cadastrar </a></li>
                     <li><a href="{{ route('equipamentos.enviada') }}"> Enviadas</a></li>
+                    <li><a href="#"> Não Enviadas</a></li>
                     <li><a href="{{ route('frequencia.relatorio') }}">Relatório</a></li>
                 </ul>
             </li>
@@ -78,6 +79,7 @@
                     <li><a href="{{route('siglaEquipamento')}}">Sigla do Equipamento</a></li>
                     <li><a href="{{route('subordinacaoAdministrativa')}}">Subordinação Administrativa</a></li>
                     <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>
+                    <li><a href="{{ route('equipamentos.lote') }}">Trocar formulário em lote</a></li>
                 </ul>
             </li>
             @endhasanyrole
