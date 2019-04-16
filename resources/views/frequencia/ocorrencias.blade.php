@@ -346,7 +346,7 @@
         });
 
     </script>
-    findIndex(checkAdult)
+    {{--findIndex(checkAdult)--}}
     @include('scripts.tabelas_admin')
 
 @endsection

@@ -22,7 +22,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="hidden-xs"> {{ Auth::user()->name }} </span>&nbsp;&nbsp; <i class="fa fa-angle-down"></i>
+                        <span class="hidden-xs"> {{ Auth::user()->funcionario->nome }} </span>&nbsp;&nbsp; <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
 

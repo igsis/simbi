@@ -22,17 +22,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
         'login',
-        'email',
         'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
         'pergunta_seguranca_id',
         'resposta_seguranca',
-        'cargo_id',
-        'funcao_id',
-        'escolaridade_id',
-        'secretaria_id',
-        'subordinacao_administrativa_id',
+        'funcionario_id',
+        'nivel_acesso_id',
         'publicado'
     ];
 
@@ -58,6 +56,11 @@ class User extends Authenticatable
     public function escolaridade()
     {
         return $this->belongsTo(Escolaridade::class);
+    }
+
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class);
     }
 
     /**

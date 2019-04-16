@@ -13,6 +13,7 @@ use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\ResponsabilidadeTipo;
 use Simbi\Models\Secretaria;
 use Simbi\Models\SubordinacaoAdministrativa;
+use Simbi\Models\Funcionario;
 use Simbi\Models\User;
 use Spatie\Permission\Models\Role;
 
@@ -30,7 +31,7 @@ class UserController extends Controller
     public function index(Request $types)
     {
         $type = $types->type;
-        $users = User::where('publicado', '=', $type)->orderBy('name')->paginate(10);
+        $users = User::where('publicado', '=', $type)->orderBy('id')->paginate(10);
         $equipamentos = Equipamento::all();
         return view('usuarios.index', compact('users', 'equipamentos','type'));
     }
@@ -321,7 +322,6 @@ class UserController extends Controller
      */
     public function ativarUser(Request $request)
     {
-
         User::findOrFail($request->id)
             ->update(['publicado' => 1]);
 

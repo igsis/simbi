@@ -65,9 +65,9 @@
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->funcionario->nome }}</td>
                                 <td>{{ $user->login }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->funcionario->email }}</td>
                                 {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
                                 <td>{{ $user->equipamentos->implode('nome', ', ') }}</td>
                                 <td>{{ $user->roles->implode('name', '') }}</td>
@@ -83,7 +83,7 @@
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="{{ $type }}">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este usuário?'><i class="glyphicon glyphicon-trash"></i> Desativar
+                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->funcionario->nome}}?" data-message='Desejar realmente desativar este usuário?'><i class="glyphicon glyphicon-trash"></i> Desativar
                                             </button>
                                         </form>
                                     @else
@@ -92,7 +92,7 @@
                                             <input type="hidden" name="type" value="{{ $type }}">
                                             <input type="hidden" name="id" value="{{ $user->id }}">
                                             <input type="hidden" name="_method" value="PUT">
-                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuário?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
+                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->funcionario->nome}}?" data-message='Desejar realmente ativar este usuário?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
                                             </button>
                                         </form>
 

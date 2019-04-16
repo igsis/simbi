@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Macrorregiao extends Model
 {
-    protected $table = 'macrorregiao';
+    protected $table = 'macrorregioes';
 
     public function enderecos()
     {
