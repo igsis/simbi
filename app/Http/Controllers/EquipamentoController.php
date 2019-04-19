@@ -71,9 +71,9 @@ class EquipamentoController extends Controller
 
         $equipamentos = EquipamentosIgsis::where([
             ['idInstituicao', '=', 14],
-            ['publicado', '=', 1],
-            ['sala', 'LIKE', 'Biblioteca%'],
+            ['publicado', '=', 1]
         ])
+            ->orWhere('sala', 'LIKE', 'Biblioteca%')
             ->orWhere('sala','LIKE','Ônibus%')
             ->orWhere('sala','LIKE','Ponto de Leitura%')
             ->orderBy('sala')->get();

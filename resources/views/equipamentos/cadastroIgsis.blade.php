@@ -2,12 +2,17 @@
 
 @section('tituloPagina')
     Importar do IGSIS
-    {{$endereco = explode(',',$equipamentoIgsis->rua)[0]}}
-    {{$numero = explode(',',explode('-',$equipamentoIgsis->rua)[0])[1]}}
-    @if (gettype($numero) != 'integer')
+    @if(isset($equipamentoIgsis->rua) && $equipamentoIgsis->rua != NULL)
+        {{$endereco = explode(',',$equipamentoIgsis->rua)[0]}}
+        {{$numero = explode(',',explode('-',$equipamentoIgsis->rua)[0])[1]}}
+        @if (gettype($numero) != 'integer')
+            {{$numero = ''}}
+        @endif
+        {{$bairro =  explode('-',$equipamentoIgsis->rua)[1]}}
+    @else
+        {{$endereco = ''}}
         {{$numero = ''}}
     @endif
-    {{$bairro =  explode('-',$equipamentoIgsis->rua)[1]}}
 @endsection
 
 @section ('conteudo')
