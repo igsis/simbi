@@ -25,8 +25,8 @@ class FrequenciasPortaria extends Model
         return $this->hasOne(ComplementoPortaria::class);
     }
 
-    public function user()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Funcionario::class);
     }
 }

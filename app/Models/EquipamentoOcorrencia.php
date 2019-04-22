@@ -24,8 +24,8 @@ class EquipamentoOcorrencia extends Model
     }
 
 
-    public function user()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Funcionario::class);
     }
 }

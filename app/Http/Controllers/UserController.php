@@ -160,6 +160,7 @@ class UserController extends Controller
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
+//        $funcionario =
 
         return view('usuarios.editar', compact(
             'user',

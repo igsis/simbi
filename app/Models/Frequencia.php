@@ -35,9 +35,9 @@ class Frequencia extends Model
         return $this->belongsTo(ProjetoEspecial::class);
     }
 
-    public function user()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Funcionario::class);
     }
 
 }

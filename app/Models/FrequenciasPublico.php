@@ -28,8 +28,8 @@ class FrequenciasPublico extends Model
         return $this->belongsTo(Equipamento::class);
     }
 
-    public function user()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Funcionario::class);
     }
 }

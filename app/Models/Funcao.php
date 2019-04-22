@@ -12,8 +12,8 @@ class Funcao extends Model
 
     public $timestamps = false;
 
-    public function usuario()
+    public function funcionario()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Funcionario::class);
     }
 }

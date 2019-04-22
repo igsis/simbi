@@ -194,6 +194,8 @@
                             <div class="form-group">
                                 <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
                                 <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
+
+
                                     @foreach($perguntas as $pergunta)
                                         @if($pergunta->publicado == 1)
                                             @if ($pergunta->id == old('funcao'))
@@ -308,9 +310,10 @@
             $('#cargo').val("{{$user->cargo_id}}");
             $('#funcao').val("{{$user->funcao_id}}");
             $('#escolaridade').val("{{$user->escolaridade_id}}");
-
-            @if($user->name == Auth::user()->name)
-            $('#perguntaSeguranca').val("{{$user->perguntaSeguranca->id}}");
+            @if(isset($user->perguntaSeguranca))
+                @if($user->name == Auth::user()->name)
+                $('#perguntaSeguranca').val("{{$user->perguntaSeguranca->id}}");
+                @endif
             @endif
         });
 
