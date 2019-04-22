@@ -21,7 +21,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"> Lista</a></li>
+                    <li><a href="{{route('usuarios.index', ['type' => '1'])}}"> Lista</a></li>
                     <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar</a></li>
                     <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
