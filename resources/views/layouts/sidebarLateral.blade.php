@@ -14,18 +14,18 @@
             </li>
             @hasanyrole('Coordenador|Administrador')
             <li class="header">Administrativo</li>
-            <li class="treeview">
-                <a href="#"><i class="fa fa-address-book-o"></i> Funcionários
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('usuarios.index', ['type' => '1'])}}"> Lista</a></li>
-                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar</a></li>
-                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>
-                </ul>
-            </li>
+{{--            <li class="treeview">--}}
+{{--                <a href="#"><i class="fa fa-address-book-o"></i> Funcionários--}}
+{{--                    <span class="pull-right-container">--}}
+{{--                        <i class="fa fa-angle-left pull-right"></i>--}}
+{{--                    </span>--}}
+{{--                </a>--}}
+{{--                <ul class="treeview-menu">--}}
+{{--                    <li><a href="{{route('usuarios.index', ['type' => '1'])}}"> Lista</a></li>--}}
+{{--                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar</a></li>--}}
+{{--                    <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>--}}
+{{--                </ul>--}}
+{{--            </li>--}}
             <li class="treeview">
                 <a href="#"><i class="fa fa-user"></i> Usuários
                     <span class="pull-right-container">
