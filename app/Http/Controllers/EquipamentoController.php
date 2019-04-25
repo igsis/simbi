@@ -764,4 +764,9 @@ class EquipamentoController extends Controller
             return redirect()->route('equipamentos.lote')->with('flash_message', 'Formulário atualizado para o completo.');
         }
     }
+
+    public function creatCapacidadeEquipamento($id){
+
+    }
+
 }
