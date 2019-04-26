@@ -323,11 +323,9 @@
                 <div class="form-group">
                     <label>Classificação</label>
                     <select class="form-control" id="classificacao">
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
+                        <option>Pequeno</option>
+                        <option>Médio</option>
+                        <option>Grande</option>
                     </select>
                 </div>
             </div>

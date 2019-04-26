@@ -14,6 +14,7 @@ use Simbi\Models\Elevador;
 use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoOcorrencia;
+use Simbi\Models\EquipamentosCapacidade;
 use Simbi\Models\EquipamentoSigla;
 use Simbi\Models\EquipamentosIgsis;
 use Simbi\Models\Funcionamento;
@@ -74,8 +75,8 @@ class EquipamentoController extends Controller
             ['publicado', '=', 1]
         ])
             ->orWhere('sala', 'LIKE', 'Biblioteca%')
-            ->orWhere('sala','LIKE','Ônibus%')
-            ->orWhere('sala','LIKE','Ponto de Leitura%')
+            ->orWhere('sala', 'LIKE', 'Ônibus%')
+            ->orWhere('sala', 'LIKE', 'Ponto de Leitura%')
             ->orderBy('sala')->get();
 
         $cadastrados = Equipamento::all()->pluck('igsis_id')->toArray();
@@ -91,14 +92,14 @@ class EquipamentoController extends Controller
     public function create()
     {
         $tipoServicos = TipoServico::orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::where('publicado',1)->orderBy('sigla')->get();
+        $siglas = EquipamentoSigla::where('publicado', 1)->orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
-        $secretarias = Secretaria::where('publicado',1)->orderBy('descricao')->get();
+        $secretarias = Secretaria::where('publicado', 1)->orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        $prefeituraRegionais = PrefeituraRegional::where('publicado',1)->orderBy('descricao')->get();
-        $distritos = Distrito::where('publicado',1)->orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::where('publicado', 1)->orderBy('descricao')->get();
+        $distritos = Distrito::where('publicado', 1)->orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
         return view('equipamentos.cadastro',
@@ -120,15 +121,15 @@ class EquipamentoController extends Controller
     public function createIgsis($igsis_id)
     {
         $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->first();
-        $tipoServicos = TipoServico::where('publicado',1)->orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::where('publicado',1)->orderBy('sigla')->get();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::where('publicado',1)->orderBy('descricao')->get();
+        $tipoServicos = TipoServico::where('publicado', 1)->orderBy('descricao')->get();
+        $siglas = EquipamentoSigla::where('publicado', 1)->orderBy('sigla')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::where('publicado', 1)->orderBy('descricao')->get();
         $secretarias = Secretaria::orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
         $regioes = Regiao::orderBy('descricao')->get();
         $regionais = Regional::orderBy('descricao')->get();
-        $prefeituraRegionais = PrefeituraRegional::where('publicado',1)->orderBy('descricao')->get();
-        $distritos = Distrito::where('publicado',1)->orderBy('descricao')->get();
+        $prefeituraRegionais = PrefeituraRegional::where('publicado', 1)->orderBy('descricao')->get();
+        $distritos = Distrito::where('publicado', 1)->orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
         return view('equipamentos.cadastroIgsis',
@@ -151,7 +152,7 @@ class EquipamentoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -163,7 +164,7 @@ class EquipamentoController extends Controller
             ]);
 
             TipoServico::create($data);
-            $data = TipoServico::where('publicado',1)->orderBy('descricao')->get();
+            $data = TipoServico::where('publicado', 1)->orderBy('descricao')->get();
             return response()->json($data);
         } elseif ($request->has('novaSigla')) {
             $data = $this->validate($request, [
@@ -173,7 +174,7 @@ class EquipamentoController extends Controller
             ]);
 
             EquipamentoSigla::create($data);
-            $data = EquipamentoSigla::where('publicado',1)->orderBy('descricao')->get();
+            $data = EquipamentoSigla::where('publicado', 1)->orderBy('descricao')->get();
             return response()->json($data);
         } elseif ($request->has('novaSecretaria')) {
             $data = $this->validate($request, [
@@ -298,7 +299,7 @@ class EquipamentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -311,7 +312,7 @@ class EquipamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -345,8 +346,8 @@ class EquipamentoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -448,7 +449,7 @@ class EquipamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $types)
@@ -764,9 +765,4 @@ class EquipamentoController extends Controller
             return redirect()->route('equipamentos.lote')->with('flash_message', 'Formulário atualizado para o completo.');
         }
     }
-
-    public function creatCapacidadeEquipamento($id){
-
-    }
-
 }
