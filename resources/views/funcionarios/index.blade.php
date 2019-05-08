@@ -133,7 +133,8 @@
                                 <div class="checkbox-inline">
                                     <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
                                 </div>
-                        @endforeach
+                            @endforeach
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>

@@ -7,13 +7,25 @@ use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Funcionario;
 use Simbi\Models\User;
+use Session;
+use Auth;
+
+use Simbi\Models\Cargo;
+use Simbi\Models\Escolaridade;
+use Simbi\Models\Funcao;
+use Simbi\Models\PerguntaSeguranca;
+use Simbi\Models\ResponsabilidadeTipo;
+use Simbi\Models\Secretaria;
+use Simbi\Models\SubordinacaoAdministrativa;
+use Spatie\Permission\Models\Role;
+
 
 class FuncionarioController extends Controller
 {
     public function index(Request $types)
     {
         $type = $types->type;
-        $users = Funcionario::where('publicado', '=', $type)->orderBy('id')->paginate(10);
+        $users = Funcionario::where('publicado', '=', $type)->orderBy('id')->all();
         $equipamentos = Equipamento::all();
         return view('funcionarios.index', compact('users', 'equipamentos','type'));
     }
