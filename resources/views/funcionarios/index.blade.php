@@ -55,8 +55,8 @@
                         <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>E-mail</th>
                             <th>Cargo</th>
+                            <th>Função</th>
                             <th>Operações</th>
                         </tr>
                         </thead>
@@ -64,10 +64,11 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->cargo->cargo }}</td>
+                                <td>{{ $user->funcao->funcao }}</td>
                                 <td>
                                     @if($type == 1)
-                                        <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
+                                        <a href="{{ route('funcionarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                                     @endif
                                     @hasrole('Administrador')
                                     @if($user->publicado == 1)
@@ -98,8 +99,8 @@
                         <tfoot>
                         <tr>
                             <th>Nome</th>
-                            <th>E-mail</th>
                             <th>Cargo</th>
+                            <th>Função</th>
                             <th>Operações</th>
                         </tr>
                         </tfoot>
@@ -108,11 +109,11 @@
             </div>
         </div>
         <div class="text-center">
-            @if(isset($dataForm))
-                {!! $users->appends($dataForm)->links() !!}
-            @else
-                {!! $users->links() !!}
-            @endif
+{{--            @if(isset($dataForm))--}}
+{{--                {!! $users->appends($dataForm)->links() !!}--}}
+{{--            @else--}}
+{{--                {!! $users->links() !!}--}}
+{{--            @endif--}}
 
         </div>
 
