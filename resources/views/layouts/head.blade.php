@@ -56,6 +56,10 @@
         .btn-tabela{
             margin: 10px 0px 30px 5px;
         }
+        td:last-child{
+            display: flex;
+            justify-content: center;
+        }
     </style>
 
     @yield('linksAdicionais')

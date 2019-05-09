@@ -63,7 +63,7 @@
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->nome }}</td>
                                 <td>{{ $user->cargo->cargo }}</td>
                                 <td>{{ $user->funcao->funcao }}</td>
                                 <td>

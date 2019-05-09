@@ -14,7 +14,7 @@ class Funcao extends Model
 
     public function funcionario()
     {
-        return $this->belongsTo(Funcionario::class);
+        return $this->hasMany(Funcionario::class);
     }
 
 }

@@ -26,7 +26,7 @@ class Funcionario extends Model
 
     public function cargo()
     {
-        return $this->belongsTo(Cargo::class);
+        return $this->belongsTo(Cargo::class,'cargo_id','id');
     }
 
     public function escolaridade()
@@ -62,7 +62,7 @@ class Funcionario extends Model
 
     public function funcao()
     {
-        return $this->belongsTo(Funcao::class);
+        return $this->belongsTo(Funcao::class,'funcao_id','id');
     }
 
     public function ocorrencia()
