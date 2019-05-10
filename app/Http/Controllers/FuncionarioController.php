@@ -25,7 +25,15 @@ class FuncionarioController extends Controller
     public function index(Request $types)
     {
         $type = $types->type;
-        $users = Funcionario::where('publicado', '=', $type)->orderBy('id')->get();
+        if ($type == 1){
+            $users = Funcionario::where('publicado', '=' ,$type)
+                ->orWhere('publicado', '=' , 2)
+                ->orderBy('id')->get();
+        }else{
+            $users = Funcionario::where('publicado', '=' ,$type)
+                ->orderBy('id')->get();
+        }
+
         $equipamentos = Equipamento::all();
         return view('funcionarios.index', compact('users', 'equipamentos','type'));
     }

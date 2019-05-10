@@ -71,7 +71,12 @@
                                         <a href="{{ route('funcionarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                                     @endif
                                     @hasrole('Administrador')
-                                    @if($user->publicado == 1)
+                                    @if ($user->publicado == 1)
+                                        <a href="{{ route('usuarios.cadastro', $user->id) }}" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuario </a>
+                                    @elseif($user->publicado == 2)
+                                        <a href="{{ route('usuarios.cadastro', $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
+                                    @endif
+                                    @if($user->publicado == 1 || $user->publicado == 2)
                                         <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="{{ $type }}">
