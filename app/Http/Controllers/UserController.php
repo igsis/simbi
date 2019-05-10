@@ -31,7 +31,8 @@ class UserController extends Controller
     public function index(Request $types)
     {
         $type = $types->type;
-        $users = User::where('publicado', '=', $type)->orderBy('id')->paginate(10);
+
+        $users = User::where('publicado', '=', $type)->orWhere()->orderBy('id')->get();
         $equipamentos = Equipamento::all();
         return view('usuarios.index', compact('users', 'equipamentos','type'));
     }
