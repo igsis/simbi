@@ -24,7 +24,7 @@
                     @includeIf('layouts.erros')
                 </div>
             </div>
-            <form method="POST" action="{{ route('usuarios.index') }}">
+            <form method="POST" action="{{ route('funcionarios.index') }}">
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="col-10">

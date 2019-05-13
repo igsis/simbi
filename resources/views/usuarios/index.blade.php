@@ -64,6 +64,7 @@
                         </thead>
                         <tbody>
                         @foreach ($users as $user)
+
                             <tr>
                                 <td>{{ $user->funcionario->nome }}</td>
                                 <td>{{ $user->login }}</td>
@@ -120,8 +121,8 @@
         <div class="text-center">
             @if(isset($dataForm))
                 {!! $users->appends($dataForm)->links() !!}
-            @else
-                {!! $users->links() !!}
+{{--            @else--}}
+{{--                {!! $users->links() !!}--}}
             @endif
 
         </div>

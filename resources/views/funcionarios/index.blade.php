@@ -47,7 +47,7 @@
                     <div class="btn-tabela">
                         @hasrole('Administrador')
                         @if($type == 1)
-                            <a href="{{ route('usuarios.cadastro') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Usuario</a>
+                            <a href="{{ route('funcionarios.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Funcionário</a>
                         @endif
                         @endhasrole
                     </div>

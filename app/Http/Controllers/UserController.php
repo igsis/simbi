@@ -19,10 +19,10 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['isCoord'])->except(['perguntaSeguranca', 'updatePergunta']);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware(['isCoord'])->except(['perguntaSeguranca', 'updatePergunta']);
+//    }
     /**
      * Display a listing of the resource.
      *
@@ -30,9 +30,14 @@ class UserController extends Controller
      */
     public function index(Request $types)
     {
+
         $type = $types->type;
 
-        $users = User::where('publicado', '=', $type)->orWhere()->orderBy('id')->get();
+        $p = 2;
+        $users = User::whereHas('Funcionario', function ($query) use ($p) {
+            $query->where('publicado', '=', $p);
+        })->where('publicado','=',$type)->orderBy('id')->get();
+
         $equipamentos = Equipamento::all();
         return view('usuarios.index', compact('users', 'equipamentos','type'));
     }

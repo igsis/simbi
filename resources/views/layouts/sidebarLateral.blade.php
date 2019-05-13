@@ -22,7 +22,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('funcionarios.index', ['type' => '1'])}}"> Lista</a></li>
-                    <li><a href="{{ route('funcionarios.editar') }}"> Cadastrar</a></li>
+                    <li><a href="{{ route('funcionarios.cadastrar') }}"> Cadastrar</a></li>
                     <li><a href="{{ route('funcionarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
             </li>

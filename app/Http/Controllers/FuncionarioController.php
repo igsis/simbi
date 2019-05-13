@@ -52,4 +52,9 @@ class FuncionarioController extends Controller
         return view('funcionarios.index', compact('users', 'equipamentos','dataForm', 'type'));
 
     }
+
+    public function edit($id)
+    {
+
+    }
 }
