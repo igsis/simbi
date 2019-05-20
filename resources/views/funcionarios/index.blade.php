@@ -74,18 +74,19 @@
                                     @if ($user->publicado == 1)
                                         <a href="{{ route('usuarios.cadastro', $user->id) }}" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuario </a>
                                     @elseif($user->publicado == 2)
-                                        <a href="{{ route('usuarios.cadastro', $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
+                                        <a href="{{ route('usuarios.cadastro' , $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
                                     @endif
                                     @if($user->publicado == 1 || $user->publicado == 2)
-                                        <form method="POST" action="{{ route('usuarios.destroy', $user->id) }}" style="display: inline;">
+                                        <form method="POST" action="{{ route('funcionarios.delete') }}" style="display: inline;">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="{{ $type }}">
+                                            <input type="hidden" name="id" value="{{$user->id}}">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este usuário?'><i class="glyphicon glyphicon-trash"></i> Desativar
+                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este Funcionário?'><i class="glyphicon glyphicon-trash"></i> Desativar
                                             </button>
                                         </form>
                                     @else
-                                        <form method="POST" action="{{ route('ativar.user') }}" style="display: inline;">
+                                        <form method="POST" action="{{ route('funcionarios.ativar') }}" style="display: inline;">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="{{ $type }}">
                                             <input type="hidden" name="id" value="{{ $user->id }}">
@@ -159,6 +160,7 @@
         // Script Msg Excluir Usuario
         $('#confirmDelete').on('show.bs.modal', function (e)
         {
+            $('.modal').addClass('bg-danger');
             $message = $(e.relatedTarget).attr('data-message');
             $(this).find('.modal-body p').text($message);
             $title = $(e.relatedTarget).attr('data-title');

@@ -14,6 +14,9 @@ Route::group(['prefix' => 'funcionarios'], function (){
 
     Route::get('/cadastrar','FuncionarioController@create')->name('funcionarios.cadastrar');
 
+    Route::delete('/delete','FuncionarioController@destroy')->name('funcionarios.delete');
+
+    Route::put('/ativar', 'FuncionarioController@ativar')->name('funcionarios.ativar');
 });
 
 

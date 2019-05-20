@@ -3,6 +3,7 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Funcionario;
@@ -56,5 +57,26 @@ class FuncionarioController extends Controller
     public function edit($id)
     {
 
+    }
+
+    public function destroy(Request $types)
+    {
+        $type = $types->type;
+
+        Funcionario::findOrFail($types->id)
+            ->update(['publicado' => 0]);
+        User::where('funcionario_id','=',$types->id)
+            ->update(array('publicado'=> 0));
+
+        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Desativado com Sucesso.');
+
+    }
+
+    public function ativar(Request $request){
+            $type = $request->type;
+            Funcionario::findOrFail($request->id)
+                ->update(['publicado' => 1]);
+
+            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
     }
 }
