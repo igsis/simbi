@@ -32,14 +32,14 @@ class FrequenciaController extends Controller
     public function index()
     {
         $type = 1;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('frequencia.index', compact('equipamentos', 'type'));
 
     }
 
     public function cadastrarEvento($id){
         $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
-        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
@@ -98,20 +98,22 @@ class FrequenciaController extends Controller
 
     public function listarOcorrencias($igsis_id)
     {
-        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id')
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id','')
             ->where([
                 ['evento_ocorrencias.igsis_id', $igsis_id],
                 ['evento_ocorrencias.publicado', 1]
             ])
             ->distinct('eventos.igsis_evento_id')
             ->orderBy('evento_ocorrencias.data', 'desc')
-            ->paginate(10);
+            ->get();
+
+
 
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
 
-        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento'));
+        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento','frequenciasCadastradas'));
     }
 
     public function editarOcorrencia($id)
@@ -125,7 +127,7 @@ class FrequenciaController extends Controller
 
     public function listaEventos($igisis_id)
     {
-        $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->paginate(10);
+        $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
 
@@ -163,17 +165,9 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
 
-//        $ocorrenciaIgsis = OcorrenciasIgsis::where([
-//            ['local', ' = ', $equipamento->igsis_id],
-//            ['publicado', ' = ', 1],
-//        ]);
-//
-//        $eventoIgsis = EventosIgsis::where([
-//            ['publicado', ' = ', 1],
-//            ['idEvento', ' = ', $ocorrenciaIgsis->idEvento],
-//        ]);
+        $projetoEspecial = ProjetoEspecial::where('idProjetoEspecial',$evento->projeto_especial_id)->firstOrFail();
 
-        return view('frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento'));
+        return view('frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento','projetoEspecial'));
     }
 
     /**
@@ -221,7 +215,7 @@ class FrequenciaController extends Controller
     public function relatorio()
     {
         $type = 2;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('frequencia.index', compact('equipamentos', 'type'));
     }
 
@@ -235,9 +229,9 @@ class FrequenciaController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('data', 'horario');
+        $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('id','data', 'horario');
 
-        return view('frequencia.listar', compact('equipamento'));
+        return view('frequencia.listar', compact('equipamento','ocorrencia'));
     }
 
     /**
@@ -252,12 +246,15 @@ class FrequenciaController extends Controller
         //
     }
 
-    public function removeOcorrencia($id)
+    public function removeOcorrencia(Request $request)
     {
-        $ocorrencia = EventoOcorrencia::findOrFail($id);
+        $ocorrencia = EventoOcorrencia::findOrFail($request->input('id'));
 
-        EventoOcorrencia::findOrFail($id)
-            ->update(['publicado' => 0]);
+        EventoOcorrencia::where('id',$request->input('id'))
+            ->update([
+                'publicado' => 0,
+                'observacao' => $request->observacao
+            ]);
 
         return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
             ->with('flash_message',
@@ -284,4 +281,50 @@ class FrequenciaController extends Controller
 
         dd($eventos);
     }
+
+    public function editaFrequencia($id){
+
+//        $frequencia = Frequencia::where('evento_ocorrencia_id',$id)->get();
+//        $ocorrencia = EventoOcorrencia::findOrFail($frequencia->evento_ocorrencia_id);
+//
+//        $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
+//
+//        $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
+
+        $frequencia = ['categoriaEvento'=>'Contação de histórias','projetoEspecial'=>'Baú de Histórias','crianca'=>'20','jovem'=>'5','adulto'=>'5','idoso'=>'0','Observacao'=>'Teste'];
+
+        return view('frequencia.editar',compact('frequencia'));
+
+    }
+
+    public function enviarFrequencia(Request $request){
+
+        $ocorrencia = EventoOcorrencia::findOrFail($request->input('id'));
+
+        EventoOcorrencia::where('id',$request->input('id'))
+            ->update([
+               'publicado' => 2
+            ]);
+
+        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
+            ->with('flash_message',
+                'Ocorrência do Enviada com Sucesso.');
+
+    }
+
+    public function frequenciasEnviadas(){
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('frequencia.listarEquipamentos', compact('equipamentos'));
+    }
+
+    public function listarFrequenciasEnviadas($id){
+        $frequencias =  Frequencia::where('equipamento_id',$id);
+        return view ('frequencia.listarFrequenciasEnviadas',compact('frequencias'));
+    }
+
+    public function listaEquipamentos(){
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('frequencia.loteEquipamentos', compact('equipamentos'));
+    }
+
 }

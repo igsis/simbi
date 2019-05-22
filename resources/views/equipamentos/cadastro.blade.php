@@ -1,13 +1,13 @@
 @extends ('layouts.master2')
 
-@section('tituloPagina','Cadastro de Equipamento')
+@section('titulo','Cadastro de Equipamento')
 
 @section('conteudo')
 <div class="content-wrapper">
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1 class="page-header">@yield('tituloPagina')</h1>
+        <h1 class="page-header"><i class="glyphicon glyphicon-th-large"></i> Cadastro de Equipamento</h1>
     </section>
 
     <!-- Main content -->
@@ -245,7 +245,7 @@
 
                     <div class="row">
                         <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('prefeituraRegional') ? 'has-error' : ''}}">
-                            <label for="prefeituraRegional">Prefeituras Regionais</label>
+                            <label for="prefeituraRegional">Subprefeitura</label>
                             <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach($prefeituraRegionais as $prefeituraRegional)
@@ -258,7 +258,7 @@
                             </select>
                         </div>
 
-                        {{-- Add Prefeituras Regionais --}}
+                        {{-- Add Subprefeitura --}}
                         <div class="form-group col-xs-4 col-md-2">
                             <label for="prefeituraRegional">Adicionar</label>
                             <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
@@ -284,7 +284,7 @@
                         </div>
                     </div>
 
-                    <div style="text-align: center;"><h2>Horario de Funcionamento</h2></div>
+                    <div style="text-align: center;"><h2>Horário de Funcionamento</h2></div>
 
                     <div class="horario">
                         <div class="row">
@@ -305,11 +305,11 @@
 
                         <div class="row">
                             <div class="form-group col-md-offset-4 col-md-2">
-                                <label for="horarioAbertura">Horario de Abertura</label>
+                                <label for="horarioAbertura">Horário de Abertura</label>
                                 <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="horarioFechamento">Horario de Fechamento</label>
+                                <label for="horarioFechamento">Horário de Fechamento</label>
                                 <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                             </div>
                         </div>
@@ -319,10 +319,10 @@
 
                     <div class="row">
                         <div class="form-group col-md-offset-2 col-md-4">
-                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
+                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horário</a>
                         </div>
                         <div class="form-group col-md-4">
-                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
+                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horário</a>
                         </div>
                     </div>
 

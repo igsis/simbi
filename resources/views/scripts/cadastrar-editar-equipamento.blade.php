@@ -145,7 +145,7 @@
             success: function(data) {
                 $("#prefeituraRegional option").remove();
                 $("#sucesso").removeAttr("hidden");
-                $("#sucesso em").html("Prefeitura Regional inserida com sucesso!");
+                $("#sucesso em").html("Subprefeitura inserida com sucesso!");
                 $("#prefeituraRegional").append(`<option value=''>Selecione uma Opção</option>`);
                 $('#addPrefeituraRegional').modal('hide');
                 for(let item of data ){
@@ -157,7 +157,7 @@
                 $("#sucesso").removeAttr("hidden");
                 $("#sucesso").removeClass( "alert-success");
                 $("#sucesso").addClass( "alert-danger");
-                $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional!`);
+                $("#sucesso em").html(`Erro ao cadastrar Subprefeitura!`);
             }
         });
         return false;

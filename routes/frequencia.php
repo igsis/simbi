@@ -2,11 +2,19 @@
 
 Route::group(['prefix' => 'frequencia'], function(){
 
+    Route::get('/trocar/frequencia', 'FrequenciaController@listaEquipamentos')->name('equipamentos.lote');
+
     Route::get('/', 'FrequenciaController@index')->name('frequencia.index');
+
+    Route::get('/equipemanetos/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('equipamentos.enviada');
+
+    Route::get('/{idEquipamento}/enviadas','FrequenciaController@listarFrequenciasEnviadas')->name('frequencia.enviada');
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
 
     Route::get('/{equipamento_igsis}/ocorrencias', 'FrequenciaController@listarOcorrencias')->name('frequencia.ocorrencias');
+
+    Route::post('/enviar','FrequenciaController@enviarFrequencia')->name('frequencia.enviarFrequencia');
 
     Route::get('/{evento}/editar', 'FrequenciaController@editarOcorrencia')->name('frequencia.editarOcorrencia');
 
@@ -18,7 +26,11 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
 
-    Route::delete('/{idOcorrencia}/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
+    Route::get('/{frequencia}/editarFrequencia','FrequenciaController@editaFrequencia')->name('frequencia.editar');
+
+    Route::post('/{frequencia}/editar','FrequenciaController@atualizaFrequencia')->name('frequencia.atualizar');
+
+    Route::post('/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');
 
 });
 

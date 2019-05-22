@@ -151,9 +151,9 @@ class Equipamento extends Model
         return $this->belongsTo(TipoServico::class);
     }
 
-    public function users()
+    public function funcionario()
     {
-        $this->belongsToMany(User::class);
+        $this->belongsToMany(Funcionario::class);
     }
 
     public function search(Array $data)

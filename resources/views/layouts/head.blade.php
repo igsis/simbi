@@ -5,7 +5,7 @@
         <title>SIMBI | Login</title>
     @endguest
     @auth
-        <title>SIMBI | @yield('tituloPagina')</title>
+        <title>SIMBI | @yield('titulo')</title>
     @endauth
 
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">--}}
@@ -51,6 +51,16 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+        .btn-tabela{
+            margin: 10px 0px 30px 5px;
+        }
+        td:last-child{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 
     @yield('linksAdicionais')
 </head>

@@ -9,6 +9,7 @@ class OcorrenciasIgsis extends Model
     protected $connection = "mysql2";
 
     protected $table = 'ig_ocorrencia';
+    protected $primaryKey = 'idOcorrencia';
 
     public $timestamps = false;
 

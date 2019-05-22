@@ -22,18 +22,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
         'login',
-        'email',
         'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
         'pergunta_seguranca_id',
         'resposta_seguranca',
-        'cargo_id',
-        'funcao_id',
-        'escolaridade_id',
-        'previsao_aposentadoria',
-        'secretaria_id',
-        'subordinacao_administrativa_id',
+        'funcionario_id',
+        'nivel_acesso_id',
         'publicado'
     ];
 
@@ -46,6 +43,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function funcionario()
+    {
+        return $this->belongsTo(Funcionario::class);
+    }
+
+    public function perguntaSeguranca()
+    {
+        return $this->belongsTo(PerguntaSeguranca::class);
+    }
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
@@ -67,7 +73,6 @@ class User extends Authenticatable
      */
     public function equipamentos()
     {
-        /*TODO: Alterar o vincular de geral para cada equipamento, para poder registrar as datas e cargos para cada um*/
         return $this->belongsToMany(Equipamento::class)->using(EquipamentoUser::class);
     }
 
@@ -98,11 +103,6 @@ class User extends Authenticatable
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
 
-    public function perguntaSeguranca()
-    {
-        return $this->belongsTo(PerguntaSeguranca::class);
-    }
-
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
@@ -116,12 +116,13 @@ class User extends Authenticatable
             if (isset($data['login'])) {
                 $query->where('login', $data['login']);
             }
-            
+
             if (isset($data['email'])) {
                 $query->where('email', $data['email']);
             }
 
         });
 
-    } 
+    }
+
 }

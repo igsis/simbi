@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 
-@section('tituloPagina', 'Cadastrar Usuario')
+@section('titulo', 'Cadastrar Usuario')
 
 @section('conteudo')
 <div class="content-wrapper">
@@ -179,20 +179,7 @@
                                     </span>
                                 @endif
                             </div>
-
-                            <div class="form-group col-md-6 has-feedback {{ $errors->has('aposentadoria') ? ' has-error' : '' }}">
-                                <label for="aposentadoria">Previsão de Aposentadoria *</label>
-                                <input type="date" class="form-control" name="aposentadoria" id="aposentadoria" required>
-                                @if ($errors->has('aposentadoria'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('aposentadoria') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-12 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-6 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
                                 <label for="roles">Nivel de Acesso *</label>
                                 <select class="form-control" name="roles" id="roles">
                                     <option value="">Selecione uma Opção</option>
@@ -206,6 +193,11 @@
                                     </span>
                                 @endif
                             </div>
+
+                        </div>
+
+                        <div class="row">
+
                         </div>
                     </div>
                 </div>
@@ -288,7 +280,7 @@
             if (txtVal !== "")
             {
                 newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i}`);
+                newOption.setAttribute("value", `${i + 1}`);
                 select.insertBefore(newOption, select.lastChild);
                 newOption.setAttribute('selected', 'selected');
 

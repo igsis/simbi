@@ -1,4 +1,4 @@
- INSERT INTO `eventos` (`igsis_id`,`nome`,`tipo_evento_id`,`projeto_especial_id`,`publicado`) VALUES
+ INSERT INTO `eventos` (`igsis_evento_id`,`nome_evento`,`tipo_evento_id`,`projeto_especial_id`,`publicado`) VALUES
 	(11778,'Oficina de Capoeira - Biblioteca Menotti Del Picchia ',4,43,1),
 	(11790,'Oficina de Dança Moderna e Improvisação ',4,43,1),
 	(12037,'oficina  A teatralidade no contos de Marcelino Freire nas Bibliotecas',4,43,1),

@@ -1,12 +1,18 @@
 @extends ('layouts.master')
 
 @section('tituloPagina')
-    Importar
-    @foreach($equipamentoIgsis as $igsis)
-        {{ $equipamento = $igsis->sala }}
-        <?php $igsis_id = $igsis->idLocal; ?>
-    @endforeach
-    do IGSIS
+    Importar do IGSIS
+    @if(isset($equipamentoIgsis->rua) && $equipamentoIgsis->rua != NULL)
+        {{$endereco = explode(',',$equipamentoIgsis->rua)[0]}}
+        {{$numero = explode(',',explode('-',$equipamentoIgsis->rua)[0])[1]}}
+        @if (gettype($numero) != 'integer')
+            {{$numero = ''}}
+        @endif
+        {{$bairro =  explode('-',$equipamentoIgsis->rua)[1]}}
+    @else
+        {{$endereco = ''}}
+        {{$numero = ''}}
+    @endif
 @endsection
 
 @section ('conteudo')
@@ -18,12 +24,12 @@
 
             <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                 <label for="nome">Nome do Equipamento</label>
-                <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamento }}">
+                <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamentoIgsis->sala}}">
             </div>
 
             <div class="hidden">
                 <label for="igisi_id">ID do igsis</label>
-                <input type="text" class="form-control" name="igsis_id" id="igsis_id" value="{{ $igsis_id }}">
+                <input type="text" class="form-control" name="igsis_id" id="igsis_id" value="{{ $equipamentoIgsis->idLocal }}">
             </div>
 
             <div class="row">
@@ -144,7 +150,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000" placeholder="(11) xxxx-xxxx" value="{{ old('telefone') }}">
+                    <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 00000-0000" placeholder="(11) xxxx-xxxx" value="{{ isset($equipamentoIgsis->telefone)?$equipamentoIgsis->telefone: old('telefone') }}">
                 </div>
             </div>
 
@@ -154,18 +160,18 @@
             <div class="row">
                 <div class="form-group col-md-2 has-feedback {{ $errors->has('cep') ? ' has-error' : '' }}">
                     <label for="cep">CEP</label>
-                    <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{ old('cep') }}">
+                    <input type="text" class="form-control" name="cep" id="cep" data-mask="00000-000" placeholder="xxxxx-xxx" value="{{isset($equipamentoIgsis->cep) ? $equipamentoIgsis->cep : old('cep')}}">
                 </div>
                 <div class="form-group col-md-10">
                     <label for="logradouro">Logradouro</label>
-                    <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{old('logradouro')}}">
+                    <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{isset($endereco)?$endereco:old('logradouro')}}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control" name="numero" id="numero" value="{{old('numero')}}">
+                    <input type="text" class="form-control" name="numero" id="numero" value="{{isset($numero)?$numero:old('numero')}}">
                 </div>
 
                 <div class="form-group col-md-3 has-feedback {{ $errors->has('complemento') ? ' has-error' : '' }}">
@@ -175,17 +181,17 @@
 
                 <div class="form-group col-md-3">
                     <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{old('bairro')}}">
+                    <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{isset($bairro)?$bairro: old('bairro')}}">
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control" name="cidade" id="cidade" readonly value="{{old('cidade')}}">
+                    <input type="text" class="form-control" name="cidade" id="cidade" readonly value="{{isset($equipamentoIgsis->cidade)?$equipamentoIgsis->cidade : old('cidade')}}">
                 </div>
 
                 <div class="form-group col-md-1">
                     <label for="uf">UF</label>
-                    <input type="text" class="form-control" name="uf" id="uf" readonly value="{{old('uf')}}">
+                    <input type="text" class="form-control" name="uf" id="uf" readonly value="{{isset($equipamentoIgsis->estado)?$equipamentoIgsis->estado: old('uf')}}">
                 </div>
             </div>
 
@@ -233,7 +239,7 @@
 
             <div class="row">
                 <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('prefeituraRegional') ? 'has-error' : ''}}">
-                    <label for="prefeituraRegional">Prefeituras Regionais</label>
+                    <label for="prefeituraRegional">Subprefeitura</label>
                     <select name="prefeituraRegional" id="prefeituraRegional" class="form-control">
                         <option value="">Selecione uma Opção</option>
                         @foreach($prefeituraRegionais as $prefeituraRegional)
@@ -246,7 +252,7 @@
                     </select>
                 </div>
 
-                {{-- Add Prefeituras Regionais --}}
+                {{-- Add Subprefeitura --}}
                 <div class="form-group col-xs-4 col-md-2">
                     <label for="prefeituraRegional">Adicionar</label>
                     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addPrefeituraRegional"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
@@ -272,7 +278,7 @@
                 </div>
             </div>
 
-            <div style="text-align: center;"><h2>Horario de Funcionamento</h2></div>
+            <div style="text-align: center;"><h2>Horário de Funcionamento</h2></div>
 
             <div class="horario">
                 <div class="row">
@@ -293,11 +299,11 @@
 
                 <div class="row">
                     <div class="form-group col-md-offset-4 col-md-2">
-                        <label for="horarioAbertura">Horario de Abertura</label>
+                        <label for="horarioAbertura">Horário de Abertura</label>
                         <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="horarioFechamento">Horario de Fechamento</label>
+                        <label for="horarioFechamento">Horário de Fechamento</label>
                         <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                     </div>
                 </div>
@@ -307,10 +313,10 @@
 
             <div class="row">
                 <div class="form-group col-md-offset-2 col-md-4">
-                    <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
+                    <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horário</a>
                 </div>
                 <div class="form-group col-md-4">
-                    <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
+                    <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horário</a>
                 </div>
             </div>
 

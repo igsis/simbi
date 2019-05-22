@@ -11,14 +11,14 @@ class DistritoController extends Controller
 {
     public function index()
     {
-    	$distritos = Distrito::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
+    	$distritos = Distrito::where('publicado', '=', '1')->orderBy('descricao')->get();
     	
     	return view('gerenciar.distritos.index', compact('distritos'));
     }
 
     public function disabled()
     {
-    	$distritos = Distrito::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
+    	$distritos = Distrito::where('publicado', '=', '0')->orderBy('descricao')->get();
     	
     	return view('gerenciar.distritos.disabled', compact('distritos'));
     }
@@ -76,7 +76,7 @@ class DistritoController extends Controller
     {
         $dataForm = $request->all();
 
-        $distritos = $distrito->search($dataForm)->orderBy('descricao')->paginate(10);
+        $distritos = $distrito->search($dataForm)->orderBy('descricao')->get();
 
         if ($dataForm['publicado'] == 1) 
         {

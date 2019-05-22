@@ -10,13 +10,13 @@ use Simbi\Models\PrefeituraRegional;
 class PrefeituraRegionalController extends Controller
 {
     public function index(){
-    	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
+    	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '1')->orderBy('descricao')->get();
 
     	return view('gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
     }
 
     public function disabled(){
-    	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
+    	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '0')->orderBy('descricao')->get();
 
     	return view('gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
     }
@@ -30,7 +30,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegional')
             ->with('flash_message',
-            'Prefeitura Regional Inserida com sucesso!');
+            'Subprefeitura Inserida com sucesso!');
         
     }
 
@@ -48,7 +48,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegional')
             ->with('flash_message',
-            'Prefeitura Regional Editada com Sucesso!');
+            'Subprefeitura Editada com Sucesso!');
 
     }
 
@@ -72,7 +72,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegional')
             ->with('flash_message',
-            'Prefeitura Regional Desativada com Sucesso!');
+            'Subprefeitura Desativada com Sucesso!');
     }
 
     public function toActivate($id)
@@ -82,14 +82,14 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegionalDisabled')
             ->with('flash_message',
-            'Prefeitura Regional Ativado com Sucesso!');
+            'Subprefeitura Ativado com Sucesso!');
     }
 
     public function search(Request $request, PrefeituraRegional $prefeituraRegional)
     {
         $dataForm = $request->all();
 
-        $prefeiturasRegionais = $prefeituraRegional->search($dataForm)->orderBy('descricao')->paginate(10);
+        $prefeiturasRegionais = $prefeituraRegional->search($dataForm)->orderBy('descricao')->get();
 
         if ($dataForm['publicado'] == 1) 
         {

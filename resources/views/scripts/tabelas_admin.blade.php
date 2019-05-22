@@ -23,7 +23,8 @@
                 "info": "Mostrando _START_ para _END_ de _TOTAL_ Dados",
                 "search":"Procurar: ",
                 "lengthMenu": "Quantidade mostrada por página _MENU_ ",
-                "zeroRecords": "Nenhum registro encontrado"
+                "zeroRecords": "Nenhum registro encontrado",
+                "infoEmpty": " "
             }
         })
     })

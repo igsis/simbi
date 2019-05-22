@@ -11,7 +11,7 @@ class TipoServicoController extends Controller
 {
     public function index()
     {
-    	$tipoServicos = TipoServico::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
+    	$tipoServicos = TipoServico::where('publicado', '=', '1')->orderBy('descricao')->get();
     	
     	return view('gerenciar.tipoServico.index', compact('tipoServicos'));
 
@@ -19,7 +19,7 @@ class TipoServicoController extends Controller
 
     public function disabled()
     {
-    	$tipoServicos = TipoServico::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
+    	$tipoServicos = TipoServico::where('publicado', '=', '0')->orderBy('descricao')->get();
     	
     	return view('gerenciar.tipoServico.disabled', compact('tipoServicos'));
 
@@ -91,7 +91,7 @@ class TipoServicoController extends Controller
     {
         $dataForm = $request->all();
 
-        $tipoServicos = $tipoServico->search($dataForm)->orderBy('descricao')->paginate(10);
+        $tipoServicos = $tipoServico->search($dataForm)->orderBy('descricao')->get();
 
         if ($dataForm['publicado'] == 1) 
         {

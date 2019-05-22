@@ -6,7 +6,7 @@
                 <h4 class="modal-title">{{$titulo}}</h4>
             </div>
             <div class="modal-body">
-                <label>Adicionar novo</label>
+                <label>{{isset($label)?$label:'Adicionar novo'}}</label>
                 <input class="form-control" type="text" name="novo" id="{{$idInput}}">
             </div>
             <div class="modal-footer">

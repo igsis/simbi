@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Frequencia extends Model
 {
-    protected $table = 'frequencia';
-
     public $timestamps = false;
 
     protected $fillable = [
@@ -29,7 +27,7 @@ class Frequencia extends Model
 
     public function eventoOcorrencia()
     {
-        return $this->hasMany(EventoOcorrencia::class);
+        return $this->belongsTo(EventoOcorrencia::class);
     }
 
     public function projetoEspecial()
@@ -37,9 +35,9 @@ class Frequencia extends Model
         return $this->belongsTo(ProjetoEspecial::class);
     }
 
-    public function user()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Funcionario::class);
     }
 
 }

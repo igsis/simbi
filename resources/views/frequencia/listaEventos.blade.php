@@ -1,56 +1,87 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
-@section('tituloPagina')
-    <i class="glyphicon glyphicon-th-list"></i>
-    Eventos Cadastrados
-    <small>{{ $equipamento->nome }}</small>
+@section('linksAdicionais')
+    @includeIf('links.tabelas_AdminLTE')
 @endsection
+
+@section('titulo','Eventos Cadastrados')
+
 
 @section('conteudo')
 
-    <div class="panel-heading">Pagina {{$eventos->currentPage()}} de {{$eventos->lastPage()}}</div>
-    <hr>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th width="50%">Eventos</th>
-                <th>Tipo do Evento</th>
-                <th>Operações</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($eventos as $evento)
-                    <tr>
-                        <td>{{ $evento->nome_evento }}</td>
-                        <td>{{ $evento->tipoEvento->tipo_evento }}</td>
-                        <td>
-                            {{--<a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>--}}
-                            <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id]) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
-                            {{--@hasrole('Administrador')--}}
-                            {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
-                                {{--{{ csrf_field() }}--}}
-                                {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                {{--<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover--}}
-                                {{--</button>--}}
-                            {{--</form>--}}
-                            {{--@endhasrole--}}
-                        </td>
-                    </tr>
-            @endforeach
-            @include('layouts.excluir_confirm')
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
-        @if(isset($dataForm))
-            {!! $eventos->appends($dataForm)->links() !!}
-        @else
-            {!! $eventos->links() !!}
-        @endif
+
+    <div class="content-wrapper">
+
+        <div class="row">
+            <div class="col-xs-12">
+                @includeIf('layouts.erros')
+            </div>
+        </div>
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1 class="page-header">
+                <i class="glyphicon glyphicon-th-list"></i>
+                Eventos Cadastrados
+                <small>{{ $equipamento->nome }}</small>
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Pesquisa de eventos</h3>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table id="tabela1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="50%">Eventos</th>
+                                    <th>Tipo do Evento</th>
+                                    <th>Operações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($eventos as $evento)
+                                <tr>
+                                    <td>{{ $evento->nome_evento }}</td>
+                                    <td>{{ $evento->tipoEvento->tipo_evento }}</td>
+                                    <td>
+                                        {{--<a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>--}}
+                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id]) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
+                                        {{--@hasrole('Administrador')--}}
+                                        {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
+                                        {{--{{ csrf_field() }}--}}
+                                        {{--<input type="hidden" name="_method" value="DELETE">--}}
+                                        {{--<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover--}}
+                                        {{--</button>--}}
+                                        {{--</form>--}}
+                                        {{--@endhasrole--}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @include('layouts.excluir_confirm')
+                            </tbody>
+                            <tfooter>
+                                <tr>
+                                    <th width="50%">Eventos</th>
+                                    <th>Tipo do Evento</th>
+                                    <th>Operações</th>
+                                </tr>
+                            </tfooter>
+                        </table>
+                    </div>
+                    <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar de Ocorrências</a>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar de Ocorrências</a>
+
 @endsection
 
 @section('scripts_adicionais')
@@ -77,5 +108,7 @@
         });
 
     </script>
+
+    @include('scripts.tabelas_admin')
 
 @endsection

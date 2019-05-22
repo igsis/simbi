@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('tituloPagina')
-	<i class="glyphicon glyphicon-cog"></i> Prefeituras Regionais
+	<i class="glyphicon glyphicon-cog"></i> Subprefeitura
 @endsection
 @section('conteudo')
 
@@ -45,7 +45,7 @@
 		</table>
 	</div>
 
-	<!-- Editar Prefeitura Regional -->
+	<!-- Editar Subprefeitura -->
 	<div class="modal fade" id="prefeituraRegional" role="dialog" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">

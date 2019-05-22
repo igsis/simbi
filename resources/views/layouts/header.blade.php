@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{url('/home')}}" class="logo">
+    <a href="{{url('/')}}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>SB</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -16,11 +16,13 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-
+                <li class="menu">
+                    <a href="#">Ajuda</a>
+                </li>
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="hidden-xs"><i class="fa fa-gears"></i> {{ Auth::user()->name }}</span>
+                        <span class="hidden-xs"> {{ Auth::user()->funcionario->nome }} </span>&nbsp;&nbsp; <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
 

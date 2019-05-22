@@ -11,6 +11,9 @@
 @section('conteudo')
 
 	{{-- <div class="panel-heading">Página {{ $subordinacaoAdministrativas->currentPage() }} de {{ $subordinacaoAdministrativas->lastPage() }}</div> --}}
+	<div class="btn-tabela">
+		<button class="btn btn-success" data-toggle="modal" data-target="#subordinacaoAdministrativa"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+	</div>
 
 	<table id="tabela1" class="table table-bordered table-striped">
 		<thead>
@@ -46,7 +49,6 @@
 		</tr>
 		</tfoot>
 	</table>
-	<button class="btn btn-success" data-toggle="modal" data-target="#subordinacaoAdministrativa"><i class="glyphicon glyphicon-plus"></i> Adicionar</button> 	
 	<!-- Editar Sub. Administrativa -->
 	<div class="modal fade" id="subordinacaoAdministrativa" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">

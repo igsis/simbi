@@ -11,7 +11,7 @@ class FrequenciasPortaria extends Model
     protected $fillable = [
         'user_id',
         'equipamento_id',
-        'nome',
+        'quantidade',
         'data'
     ];
 
@@ -25,8 +25,8 @@ class FrequenciasPortaria extends Model
         return $this->hasOne(ComplementoPortaria::class);
     }
 
-    public function user()
+    public function funcionario()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Funcionario::class);
     }
 }

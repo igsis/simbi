@@ -51,7 +51,7 @@
                             <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($siglas as $sigla)
-                                    <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
+                                    <option value="{{$sigla->id}}" selected>{{$sigla->sigla}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -68,7 +68,13 @@
                             <select class="form-control" name="identificacaoSecretaria" id="identificacaoSecretaria">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($secretarias as $secretaria)
-                                    <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                    @if ($secretaria->publicado == 1)
+                                        @if ($secretaria->id == old('identificacaoSecretaria'))
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
+                                        @else
+                                            <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -185,7 +191,7 @@
 
                     <div class="row">
                         <div class="form-group col-xs-8 col-md-4">
-                            <label for="prefeituraRegional">Prefeituras Regionais</label>
+                            <label for="prefeituraRegional">Subprefeitura</label>
                             <select class="form-control" name="prefeituraRegional" id="prefeituraRegional">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach($prefeituraRegionais as $prefeituraRegional)
@@ -237,11 +243,11 @@
 
                             <div class="row">
                                 <div class="form-group col-md-offset-4 col-md-2">
-                                    <label for="horarioAbertura">Horario de Abertura</label>
+                                    <label for="horarioAbertura">Horário de Abertura</label>
                                     <input type="text" class="form-control" name="horarioAbertura[0]" id="horarioAbertura" data-mask="00:00">
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="horarioFechamento">Horario de Fechamento</label>
+                                    <label for="horarioFechamento">Horário de Fechamento</label>
                                     <input type="text" class="form-control" name="horarioFechamento[0]" id="horarioFechamento" data-mask="00:00">
                                 </div>
                             </div>
@@ -267,11 +273,11 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-offset-4 col-md-2">
-                                        <label for="horarioAbertura">Horario de Abertura</label>
+                                        <label for="horarioAbertura">Horário de Abertura</label>
                                         <input type="text" class="form-control" name="horarioAbertura[{{$key}}]" id="horarioAbertura" data-mask="00:00" value="{{$funcionamento->hora_inicial}}">
                                     </div>
                                     <div class="form-group col-md-2">
-                                        <label for="horarioFechamento">Horario de Fechamento</label>
+                                        <label for="horarioFechamento">Horário de Fechamento</label>
                                         <input type="text" class="form-control" name="horarioFechamento[{{$key}}]" id="horarioFechamento" data-mask="00:00" value="{{$funcionamento->hora_final}}">
                                     </div>
 
@@ -284,10 +290,10 @@
 
                     <div class="row">
                         <div class="form-group col-md-offset-2 col-md-4">
-                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horario</a>
+                            <a class="btn btn-info btn-block" href="#void" id="addInput">Adicionar Novo Horário</a>
                         </div>
                         <div class="form-group col-md-4">
-                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horario</a>
+                            <a class="btn btn-info btn-block" href="#void" id="remInput">Remover Ultimo Horário</a>
                         </div>
                     </div>
 
@@ -347,7 +353,7 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                            <label for="ocorrencia">Adicionar Ocorrência</label>
+                            <label for="ocorrencia">Adicionar Nota</label>
                             <button type="button" id="ocorrencia" class="btn btn-info btn-block" data-toggle="modal" data-id="{{$equipamento->id}}" data-target="#addOcorrencia"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                         </div>
 
@@ -449,7 +455,7 @@
                     $('#addSigla').modal('hide');
                     $("#equipamentoSigla").focus();
                     for(let item of data ){
-                        $("#equipamentoSigla").append(`<option value='${item.id}'>${item.sigla}<otion>`);
+                        $("#equipamentoSigla").append(`<option value='${item.id}' selected>${item.sigla}<option>`);
                     }
                 },
                 error: function() {
@@ -483,7 +489,7 @@
                     $('#addSecretaria').modal('hide');
                     $("#identificacaoSecretaria").focus();
                     for(let item of data ){
-                        $("#identificacaoSecretaria").append(`<option value='${item.id}'>${item.sigla}<otion>`);
+                        $("#identificacaoSecretaria").append(`<option value='${item.id}' selected>${item.sigla}<option>`);
                     }
                 },
                 error: function() {
@@ -544,7 +550,7 @@
                     $("#sucesso").removeAttr("hidden");
                     $("#sucesso").removeClass("alert-danger");
                     $("#sucesso").addClass( "alert-success");
-                    $("#sucesso em").html("Prefeitura Regional inserida com sucesso!");
+                    $("#sucesso em").html("Subprefeitura inserida com sucesso!");
                     $("#prefeituraRegional").append(`<option value=''>Selecione uma Opção</option>`);
                     $('#addPrefeituraRegional').modal('hide');
                     $("#prefeituraRegional").focus();
@@ -556,7 +562,7 @@
                     $("#sucesso").removeAttr("hidden");
                     $("#sucesso").removeClass("alert-success");
                     $("#sucesso").addClass("alert-danger");
-                    $("#sucesso em").html(`Erro ao cadastrar Prefeitura Regional! Verifique se o campo já foi cadastrado!`);
+                    $("#sucesso em").html(`Erro ao cadastrar Subprefeitura! Verifique se o campo já foi cadastrado!`);
                     $('#addPrefeituraRegional').modal('hide');
                 }
             });

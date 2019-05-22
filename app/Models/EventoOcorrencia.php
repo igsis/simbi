@@ -13,11 +13,17 @@ class EventoOcorrencia extends Model
         'igsis_id',
         'data',
         'horario',
-        'publicado'
+        'publicado',
+        'observacao'
     ];
 
     public function frequencia()
     {
-        return $this->belongsTo(Frequencia::class);
+        return $this->hasMany(Frequencia::class);
+    }
+
+    public function eventosIgsis()
+    {
+        return $this->belongsTo(EventosIgsis::class,'igsis_evento_id','idEvento');
     }
 }

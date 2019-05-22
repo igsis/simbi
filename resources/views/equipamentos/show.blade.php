@@ -1,5 +1,7 @@
 @extends ('layouts.master2')
 
+@section('titulo','Detalhes')
+
 @section('tituloPagina')
     Detalhes <small>{{$equipamento->nome}}</small>
 @endsection

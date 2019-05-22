@@ -59,14 +59,14 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'data'          =>  'required',
-            'nome'          =>  'required'
+            'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
 
         $user =  Auth::user();
 
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
-            'nome' => $request->nome,
+            'quantidade' => $request->quantidade,
             'equipamento_id' => $id
         ]);
 
@@ -77,20 +77,39 @@ class FrequenciasPortariaController extends Controller
     public function gravaPortariaCompleta(Request $request, $id)
     {
         $this->validate($request, [
-            'data'          =>  'required',
-            'nome'          =>  'required',
-            'idade'         =>  'required',
-            'sexo'          =>  'required',
-            'etnia'         =>  'required',
-            'escolaridade'  =>  'required',
-            'deficiencia'   =>  'required'
+            'data'     =>  'required',
+            'fundamental'       =>  'required|integer|between: 0, 9999',
+            'medio'         =>  'required|integer|between: 0, 9999',
+            'superior'        =>  'required|integer|between: 0, 9999',
+            'naoInformadoEscolaridade'         =>  'required|integer|between: 0, 9999',
+            'idade0_6'         =>  'required|integer|between: 0, 99999',
+            'idade7_14'         =>  'required|integer|between: 0, 99999',
+            'idade15_17'         =>  'required|integer|between: 0, 99999',
+            'idade18_29'         =>  'required|integer|between: 0, 99999',
+            'idade30_59'         =>  'required|integer|between: 0, 99999',
+            'idade60ouMais'         =>  'required|integer|between: 0, 99999',
+            'naoInformadoIdade'         =>  'required|integer|between: 0, 99999',
+            'amarela'         =>  'required|integer|between: 0, 99999',
+            'branca'         =>  'required|integer|between: 0, 99999',
+            'indigena'         =>  'required|integer|between: 0, 99999',
+            'parda'         =>  'required|integer|between: 0, 99999',
+            'preta'         =>  'required|integer|between: 0, 99999',
+            'naoInformadoCor'         =>  'required|integer|between: 0, 99999',
+            'feminino'         =>  'required|integer|between: 0, 99999',
+            'masculino'         =>  'required|integer|between: 0, 99999',
+            'naoInformadoSexo'         =>  'required|integer|between: 0, 99999',
+            'visual'         =>  'required|integer|between: 0, 99999',
+            'auditiva'         =>  'required|integer|between: 0, 99999',
+            'motora'         =>  'required|integer|between: 0, 99999',
+            'mental'         =>  'required|integer|between: 0, 99999',
+            'total'         =>  'required|integer|between: 0, 99999'
         ]);
 
         $user =  Auth::user();
 
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
-            'nome' => $request->nome,
+            'quantidade' => $request->total,
             'equipamento_id' => $id
         ])->complementoPortaria()->create([
             'idade_id' => $request->idade,
@@ -113,7 +132,7 @@ class FrequenciasPortariaController extends Controller
     public function relatorio()
     {
         $type = 2;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->paginate(10);
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('frequencia.portaria.index', compact('equipamentos', 'type'));
     }
 

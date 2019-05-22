@@ -11,9 +11,9 @@ class Cargo extends Model
     protected $fillable = ['cargo',
         'publicado'];
 
-    public function usuario()
+    public function funcionario()
     {
-        return $this->hasOne(User::class);
+        return $this->hasMany(Funcionario::class);
     }
 
     public function search(Array $data)

@@ -80,7 +80,7 @@
                 </th>
                 <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addCapacidade">Adicionar</button>
                     @endhasanyrole
                 </td>
             </tr>
@@ -109,7 +109,7 @@
                 </th>
                 <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addAuditorio">Adicionar</button>
                     @endhasanyrole
                 </td>
             </tr>
@@ -134,7 +134,7 @@
                 </th>
                 <th style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addEstacionamento">Adicionar</button>
                     @endhasanyrole
                 </th>
             </tr>
@@ -160,7 +160,7 @@
                 </th>
                 <th style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addPraca">Adicionar</button>
                     @endhasanyrole
                 </th>
             </tr>
@@ -185,7 +185,7 @@
                 </th>
                 <th style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addSalaEstudoGrupo">Adicionar</button>
                     @endhasanyrole
                 </th>
             </tr>
@@ -210,7 +210,7 @@
                 </th>
                 <th style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addSalaEstudoIndivitual">Adicionar</button>
                     @endhasanyrole
                 </th>
             </tr>
@@ -235,7 +235,7 @@
                 </th>
                 <th style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addSalaInfantil">Adicionar</button>
                     @endhasanyrole
                 </th>
             </tr>
@@ -260,7 +260,7 @@
                 </th>
                 <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addSalaMulti">Adicionar</button>
                     @endhasanyrole
                 </td>
             </tr>
@@ -289,7 +289,7 @@
                 </th>
                 <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
-                    <a href="#" class="btn btn-success">Adicionar</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addTeatro">Adicionar</button>
                     @endhasanyrole
                 </td>
             </tr>
@@ -297,3 +297,96 @@
         </tbody>
     </table>
 </div>
+
+
+@include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Capacidade do Equipamento'])
+
+@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Estacionamento'])
+
+@include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo'])
+
+@include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala de Estudo Individual'])
+
+@include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala Infantil'])
+
+@include('layouts.modal',['idModal'=>'addSalaMulti','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala Multiuso'])
+
+
+<div class="modal fade" id="addPraca" role="dialog" aria-labelledby="addPracaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Adicionar Auditório</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Classificação</label>
+                    <select class="form-control" id="classificacao">
+                        <option>Pequeno</option>
+                        <option>Médio</option>
+                        <option>Grande</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" onclick="">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addAuditorio" role="dialog" aria-labelledby="addAuditorioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Adicionar Auditório</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input class="form-control" type="text" name="nome" id="nome">
+                </div>
+                <div class="form-group">
+                    <label>Capacidade</label>
+                    <input class="form-control" type="number" name="capacidade" id="capacidade">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" onclick="">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addTeatro" role="dialog" aria-labelledby="addTeatroLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Adicionar Teatro</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input class="form-control" type="text" name="nome" id="nome">
+                </div>
+                <div class="form-group">
+                    <label>Capacidade</label>
+                    <input class="form-control" type="number" name="capacidade" id="capacidade">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" onclick="">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

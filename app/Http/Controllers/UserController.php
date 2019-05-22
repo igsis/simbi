@@ -13,15 +13,16 @@ use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\ResponsabilidadeTipo;
 use Simbi\Models\Secretaria;
 use Simbi\Models\SubordinacaoAdministrativa;
+use Simbi\Models\Funcionario;
 use Simbi\Models\User;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['isCoord'])->except(['perguntaSeguranca', 'updatePergunta']);
-    }
+//    public function __construct()
+//    {
+//        $this->middleware(['isCoord'])->except(['perguntaSeguranca', 'updatePergunta']);
+//    }
     /**
      * Display a listing of the resource.
      *
@@ -29,8 +30,14 @@ class UserController extends Controller
      */
     public function index(Request $types)
     {
+
         $type = $types->type;
-        $users = User::where('publicado', '=', $type)->orderBy('name')->paginate(10);
+
+        $p = 2;
+        $users = User::whereHas('Funcionario', function ($query) use ($p) {
+            $query->where('publicado', '=', $p);
+        })->where('publicado','=',$type)->orderBy('id')->get();
+
         $equipamentos = Equipamento::all();
         return view('usuarios.index', compact('users', 'equipamentos','type'));
     }
@@ -75,7 +82,6 @@ class UserController extends Controller
             'cargo' => 'required',
             'funcao' => 'required',
             'escolaridade' => 'required',
-            'aposentadoria' => 'required'
         ]);
 
         $user = new User();
@@ -118,7 +124,6 @@ class UserController extends Controller
         $user->secretaria_id = $secretaria->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
         $user->escolaridade_id = $request->escolaridade;
-        $user->previsao_aposentadoria = $request->aposentadoria;
 
         $user->save();
 
@@ -161,6 +166,7 @@ class UserController extends Controller
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
+//        $funcionario =
 
         return view('usuarios.editar', compact(
             'user',
@@ -225,7 +231,6 @@ class UserController extends Controller
                 'identificacaoSecretaria'=>'required',
                 'cargo'=>'required',
                 'funcao'=>'required',
-                'aposentadoria' => 'required',
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
@@ -239,7 +244,6 @@ class UserController extends Controller
                 'funcao_id' => $funcao->id,
                 'secretaria_id' => $secretaria->id,
                 'subordinacao_administrativa_id' => $subAdm->id,
-                'previsao_aposentadoria' => $request->aposentadoria,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
@@ -253,7 +257,6 @@ class UserController extends Controller
                 'identificacaoSecretaria'=>'required',
                 'cargo'=>'required',
                 'funcao'=>'required',
-                'aposentadoria' => 'required'
             ]);
 
             $user->update([
@@ -264,7 +267,7 @@ class UserController extends Controller
                 'funcao_id' => $funcao->id,
                 'secretaria_id' => $secretaria->id,
                 'subordinacao_administrativa_id' => $subAdm->id,
-                'previsao_aposentadoria' => $request->aposentadoria,
+                'escolaridade_id'=>$request->escolaridade
             ]);
         }
 
@@ -279,7 +282,8 @@ class UserController extends Controller
             $user->roles()->detach();
         }
 
-        return redirect()->back()
+
+        return redirect()->route('usuarios.index', ['type' => '1'])
             ->with('flash_message',
              'Usuário Editado com Sucesso!');
 
@@ -300,7 +304,7 @@ class UserController extends Controller
 
         return redirect()->route('usuarios.index', ['type' => $type])
             ->with('flash_message',
-             'Usuário Excluido com Sucesso.');
+             'Usuário Desativado com Sucesso.');
     }
 
     /**
@@ -313,7 +317,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $user->update(['password' => 'simbi@2018']);
-        return redirect()->back()->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
+        return redirect()->route('usuarios.index', [
+            'type' => 1
+        ])->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
     }
 
     /**
@@ -323,7 +329,6 @@ class UserController extends Controller
      */
     public function ativarUser(Request $request)
     {
-
         User::findOrFail($request->id)
             ->update(['publicado' => 1]);
 

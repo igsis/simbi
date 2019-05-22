@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Regional extends Model
 {
-    protected $table = 'regional';
+    protected $table = 'regionais';
 
     public function enderecos()
     {

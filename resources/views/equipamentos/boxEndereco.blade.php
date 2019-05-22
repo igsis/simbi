@@ -35,7 +35,7 @@
             <td>{{$equipamento->endereco->estado}}</td>
         </tr>
         <tr>
-            <th width="30%">Prefeitura Regional:</th>
+            <th width="30%">Subprefeitura:</th>
             <td>{{$equipamento->endereco->prefeituraRegional->descricao}}</td>
         </tr>
         <tr>
