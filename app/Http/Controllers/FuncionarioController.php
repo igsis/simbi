@@ -80,7 +80,67 @@ class FuncionarioController extends Controller
             return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
     }
 
-    public function tornarUsuario(Request $request){
+    public function store(Request $request){
+        $this->validate($request, [
+            'name'  =>'required',
+            'login' =>'required|max:7|unique:users',
+            'email' =>'required|email|unique:users',
+            'subordinacaoAdministrativa' => 'required',
+            'identificacaoSecretaria' => 'required',
+            'cargo' => 'required',
+            'funcao' => 'required',
+            'escolaridade' => 'required',
+        ]);
 
+        $user = new User();
+
+        $cargo = Cargo::findOrNew($request->cargo);
+        if (!($cargo->exists))
+        {
+            $cargo->cargo = $request->novoCargo;
+            $cargo->save();
+        }
+
+        $funcao = Funcao::findOrNew($request->funcao);
+        if (!($funcao->exists))
+        {
+            $funcao->funcao = $request->novaFuncao;
+            $funcao->save();
+        }
+
+        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
+        if (!($subAdm->exists))
+        {
+            $subAdm->descricao = $request->novaSubAdm;
+            $subAdm->save();
+        }
+
+        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+        if (!($secretaria->exists))
+        {
+            $secretaria->sigla = $request->siglaSecretaria;
+            $secretaria->descricao = $request->descricaoSecretaria;
+            $secretaria->save();
+        }
+
+        $user->name = $request->name;
+        $user->login = $request->login;
+        $user->email = $request->email;
+        $user->password = 'simbi@2019';
+        $user->cargo_id = $cargo->id;
+        $user->funcao_id = $funcao->id;
+        $user->secretaria_id = $secretaria->id;
+        $user->subordinacao_administrativa_id = $subAdm->id;
+        $user->escolaridade_id = $request->escolaridade;
+
+        $user->save();
+
+        $roles = $request['roles'];
+
+        if (isset($roles))
+        {
+            $role_r = Role::where('id', '=', $roles)->firstorFail();
+            $user->assignRole($role_r);
+        }
     }
 }

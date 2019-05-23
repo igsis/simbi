@@ -26,12 +26,13 @@
             </div>
             <form method="POST" action="{{ route('usuarios.index') }}">
                 {{ csrf_field() }}
+                <input type="hidden" value="{{$funcionario->id}}" name="id_funcionario" id="id_funconario">
                 <div class="box-body">
                     <div class="col-10">
                         <div class="row">
-                            <div class="form-group col-md-7 has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-6 has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Nome *</label>
-                                <input class="form-control" type="text" name="name" id="name" @isset($funcionario->nome) {{ $funcionario->nome }} @endisset required>
+                                <input class="form-control" type="text" name="name" id="name" value="@isset($funcionario->nome) {{ $funcionario->nome }} @endisset @empty($funcionario->nome) {{old('name')}} @endempty" required>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -39,7 +40,7 @@
                                 @endif
                             </div>
 
-                            <div class="form-group col-md-5 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-6 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
                                 <label for="login">Login *</label>
                                 <input class="form-control" type="text" name="login" id="login" maxlength="7"  required>
                                 @if ($errors->has('login'))
@@ -52,15 +53,16 @@
                         <div class="row">
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">E-mail *</label>
-                                <input class="form-control" type="email" name="email" id="email" value="@isset($funcionario->email) {{ $funcionario->email }} @endisset" required>
+                                <input class="form-control" type="email" name="email" id="email" value="@isset($funcionario->email) {{ $funcionario->email }} @endisset @empty($funcionario->email) {{old('email')}} @endempty" required>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group col-md-6">
-
+                            <div class="form-group col-md-6 has-feedback">
+                                <label for="">Senha:</label>
+                                <p>simbi@2019</p>
                             </div>
                         </div>
                         <div class="row">
