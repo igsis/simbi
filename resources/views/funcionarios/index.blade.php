@@ -72,7 +72,10 @@
                                     @endif
                                     @hasrole('Administrador')
                                     @if ($user->publicado == 1)
-                                        <a href="{{ route('usuarios.cadastro', $user->id) }}" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuario </a>
+                                        <form method="get" action="{{ route('usuarios.cadastro') }}">
+                                            <input type="hidden" name="id" value="{{ $user->id  }}">
+                                            <button type="submit" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuario </button>
+                                        </form>
                                     @elseif($user->publicado == 2)
                                         <a href="{{ route('usuarios.cadastro' , $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
                                     @endif

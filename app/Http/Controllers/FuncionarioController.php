@@ -79,4 +79,8 @@ class FuncionarioController extends Controller
 
             return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
     }
+
+    public function tornarUsuario(Request $request){
+
+    }
 }

@@ -47,8 +47,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+
+        $funcionario = Funcionario::FindOrFail($request->id);
+
         $roles = Role::all();
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
@@ -61,7 +64,8 @@ class UserController extends Controller
             'subordinacoesAdministrativas',
             'escolaridades',
             'cargos',
-            'funcoes'
+            'funcoes',
+            'funcionario'
             ));
     }
 
