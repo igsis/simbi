@@ -78,18 +78,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'  =>'required',
-            'login' =>'required|max:7|unique:users',
-            'email' =>'required|email|unique:users',
+            'login' =>'required|max:7|unique:users'
         ]);
 
         $user = new User();
 
-
-        $user->name = $request->name;
         $user->login = $request->login;
-        $user->email = $request->email;
         $user->password = 'simbi@2019';
+        $user->funcionario_id = $request->id_funcionario;
 
         if ($user->save()) {
 
