@@ -56,6 +56,25 @@ class FuncionarioController extends Controller
 
     public function edit($id)
     {
+        $user = Funcionario::findOrFail($id);
+        $roles = Role::get();
+        $perguntas = PerguntaSeguranca::all();
+        $secretarias = Secretaria::orderBy('descricao')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        $cargos = Cargo::orderBy('cargo')->get();
+        $funcoes = Funcao::orderBy('funcao')->get();
+        $escolaridades = Escolaridade::all();
+
+        return view('funcionarios.editar', compact(
+            'user',
+            'roles',
+            'perguntas',
+            'secretarias',
+            'subordinacoesAdministrativas',
+            'escolaridades',
+            'cargos',
+            'funcoes'
+        ));
 
     }
 
@@ -142,5 +161,27 @@ class FuncionarioController extends Controller
             $role_r = Role::where('id', '=', $roles)->firstorFail();
             $user->assignRole($role_r);
         }
+    }
+
+    public function create(Request $request)
+    {
+
+        $funcionario = Funcionario::FindOrFail($request->id);
+
+        $roles = Role::all();
+        $secretarias = Secretaria::orderBy('descricao')->get();
+        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
+        $escolaridades = Escolaridade::all();
+        $cargos = Cargo::orderBy('cargo')->get();
+        $funcoes = Funcao::orderBy('funcao')->get();
+        return view('usuarios.cadastro', compact(
+            'roles',
+            'secretarias',
+            'subordinacoesAdministrativas',
+            'escolaridades',
+            'cargos',
+            'funcoes',
+            'funcionario'
+        ));
     }
 }

@@ -10,7 +10,7 @@ Route::group(['prefix' => 'funcionarios'], function (){
 
     Route::get('/', 'FuncionarioController@index')->name('funcionarios.index');
 
-    Route::get('/editar','FuncionarioController@edit')->name('funcionarios.editar');
+    Route::get('/editar/{id}','FuncionarioController@edit')->name('funcionarios.editar');
 
     Route::get('/cadastrar','FuncionarioController@create')->name('funcionarios.cadastrar');
 
