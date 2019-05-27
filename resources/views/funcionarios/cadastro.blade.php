@@ -14,26 +14,141 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="form-group col-md-6 has-feedback {{ $errors->has('escolaridade') ? ' has-error' : '' }}">
-            <label for="escolaridade">Nivel de Escolaridade</label>
-            <select class="form-control" name="escolaridade" id="escolaridade">
-                <option value="">Selecione uma Opção</option>
-                @foreach ($escolaridades as $escolaridade)
-                    @if ($escolaridade->id == old('escolaridade') || $escolaridade->id == $user->escolaridade_id)
-                        <option value="{{$escolaridade->id}}"
-                                selected>{{$escolaridade->escolaridade}}</option>
-                    @else
-                        <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
-                    @endif
-                @endforeach
-            </select>
+        <div class="box box-primary">
+            <form method="POST" action="{{ url('/funcionarios/') }}" accept-charset="UTF-8">
+                {{ csrf_field() }}
+                <div class="box-body">
+                    <div class="row">
+                        <div class="form-group col-md-12 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
+                            <label for="name">Nome</label>
+                            <input class="form-control" type="text" name="nome" id="nome">
+                        </div>
+
+                        <div class="form-group col-md-12 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email">E-mail</label>
+                            <input class="form-control" type="email" name="email" id="email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="divSubAdm"
+                             class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}">
+                            <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
+                            <select class="form-control" name="subordinacaoAdministrativa"
+                                    id="subordinacaoAdministrativa">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
+                                    @if($subordinacaoAdministrativa->publicado == 1)
+                                        <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-2 col-md-1">
+                            <label for="addSubAdm">&emsp;</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                    data-target="#addSubAdm">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                            </button>
+                        </div>
+
+                        <div id="divSecretaria"
+                             class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
+                            <label for="identificacaoSecretaria">Identificação da Secretaria</label>
+                            <select class="form-control" name="identificacaoSecretaria"
+                                    id="identificacaoSecretaria">
+                                <option value="" selected>Selecione uma Opção</option>
+                                @foreach ($secretarias as $secretaria)
+                                    @if ($secretaria->publicado == 1)
+                                        <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-2 col-md-1">
+                            <label for="addSecretaria">&emsp;</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                    data-target="#addSecretaria">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="divCargo"
+                             class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
+                            <label for="cargo">Cargo</label>
+                            <select class="form-control" name="cargo" id="cargo">
+                                <option value="">Selecione...</option>
+                                @foreach ($cargos as $cargo)
+                                    @if($cargo->publicado == 1)
+                                        <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-2 col-md-1">
+                            <label for="addCargo">&emsp;</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                    data-target="#addCargo">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                            </button>
+                        </div>
+
+                        <div id="divFuncao"
+                             class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
+                            <label for="funcao">Função</label>
+                            <select class="form-control" name="funcao" id="funcao">
+                                <option value="">Selecione...</option>
+                                @foreach ($funcoes as $funcao)
+                                    @if($funcao->publicado == 1)
+                                        <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-2 col-md-1">
+                            <label for="addFunção">&emsp;</label>
+                            <button type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                    data-target="#addFuncao">
+                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-6 has-feedback {{ $errors->has('escolaridade') ? ' has-error' : '' }}">
+                            <label for="escolaridade">Nivel de Escolaridade</label>
+                            <select class="form-control" name="escolaridade" id="escolaridade">
+                                <option value="">Selecione uma Opção</option>
+                                @foreach ($escolaridades as $escolaridade)
+                                    <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+{{--                        <div class="form-group col-md-6 has-feedback {{ $errors->has('lotacao') ? ' has-error' : '' }}">--}}
+{{--                            <label for="escolaridade">Lotação</label>--}}
+{{--                            <input class="form-control" type="text" name="lotacao">--}}
+{{--                        </div>--}}
+                    </div>
+
+                    <div class="form-group col-md-12">
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <a class="btn btn-default" href="{{ route('funcionarios.index', ['type' => '1']) }}">Voltar</a>
+                    <input class="btn btn-primary pull-right" type="submit" value="Adicionar">
+                </div>
+            </form>
         </div>
+        @include('layouts.excluir_confirm')
 
         @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
         @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
         @include('layouts.modal', ['idModal' => 'addSubAdm', 'titulo' => 'Adicionar nova Sub. Administrativa', 'idInput' => 'novaSubAdm', 'funcaoJS' => 'insertSubAdm'])
 
-        <div class="modal fade" id="addSecretaria" role="dialog" aria-labelledby="addSecretariaLabel" aria-hidden="true">
+        <div class="modal fade" id="addSecretaria" role="dialog" aria-labelledby="addSecretariaLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -43,11 +158,13 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Sigla:</label>
-                            <input class="form-control" type="text" name="secretariaSigla" id="secretariaSigla" maxlength="6">
+                            <input class="form-control" type="text" name="secretariaSigla" id="secretariaSigla"
+                                   maxlength="6">
                         </div>
                         <div class="form-group">
                             <label>Descrição:</label>
-                            <input class="form-control" type="text" name="secretariaDescricao" id="secretariaDescricao">
+                            <input class="form-control" type="text" name="secretariaDescricao"
+                                   id="secretariaDescricao">
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -102,16 +102,15 @@ class FuncionarioController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'name'  =>'required',
-            'login' =>'required|max:7|unique:users',
             'email' =>'required|email|unique:users',
             'subordinacaoAdministrativa' => 'required',
             'identificacaoSecretaria' => 'required',
             'cargo' => 'required',
             'funcao' => 'required',
-            'escolaridade' => 'required',
+            'escolaridade' => 'required'
         ]);
 
-        $user = new User();
+        $user = new Funcionario();
 
         $cargo = Cargo::findOrNew($request->cargo);
         if (!($cargo->exists))
@@ -154,19 +153,19 @@ class FuncionarioController extends Controller
 
         $user->save();
 
-        $roles = $request['roles'];
-
-        if (isset($roles))
-        {
-            $role_r = Role::where('id', '=', $roles)->firstorFail();
-            $user->assignRole($role_r);
-        }
+//        $roles = $request['roles'];
+//
+//        if (isset($roles))
+//        {
+//            $role_r = Role::where('id', '=', $roles)->firstorFail();
+//            $user->assignRole($role_r);
+//        }
     }
 
     public function create(Request $request)
     {
 
-        $funcionario = Funcionario::FindOrFail($request->id);
+//        $funcionario = Funcionario::FindOrFail($request->id);
 
         $roles = Role::all();
         $secretarias = Secretaria::orderBy('descricao')->get();
@@ -174,7 +173,7 @@ class FuncionarioController extends Controller
         $escolaridades = Escolaridade::all();
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
-        return view('usuarios.cadastro', compact(
+        return view('funcionarios.cadastro', compact(
             'roles',
             'secretarias',
             'subordinacoesAdministrativas',
@@ -183,5 +182,6 @@ class FuncionarioController extends Controller
             'funcoes',
             'funcionario'
         ));
+
     }
 }

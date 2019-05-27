@@ -85,4 +85,9 @@ class CargoController extends Controller
             return view('gerenciar.cargos.disabled', compact('cargos'));
         }
     }
+
+    public function cargosJson(){
+        $cargos = Cargo::all();
+        return json_decode($cargos);
+    }
 }
