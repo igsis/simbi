@@ -101,8 +101,8 @@ class FuncionarioController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'name'  =>'required',
-            'email' =>'required|email|unique:users',
+            'nome'  =>'required',
+            'email' =>'required|email|unique:funcionarios',
             'subordinacaoAdministrativa' => 'required',
             'identificacaoSecretaria' => 'required',
             'cargo' => 'required',
@@ -141,25 +141,19 @@ class FuncionarioController extends Controller
             $secretaria->save();
         }
 
-        $user->name = $request->name;
-        $user->login = $request->login;
-        $user->email = $request->email;
-        $user->password = 'simbi@2019';
+        $user->nome = $request->input('nome');
+        $user->email = $request->input('email');
         $user->cargo_id = $cargo->id;
         $user->funcao_id = $funcao->id;
         $user->secretaria_id = $secretaria->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
         $user->escolaridade_id = $request->escolaridade;
 
-        $user->save();
+        if($user->save()){
+            return redirect()->route('funcionarios.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
+        }
+        return view('funcionarios.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
 
-//        $roles = $request['roles'];
-//
-//        if (isset($roles))
-//        {
-//            $role_r = Role::where('id', '=', $roles)->firstorFail();
-//            $user->assignRole($role_r);
-//        }
     }
 
     public function create(Request $request)

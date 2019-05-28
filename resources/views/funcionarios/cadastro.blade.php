@@ -15,7 +15,7 @@
 
         <!-- Default box -->
         <div class="box box-primary">
-            <form method="POST" action="{{ url('/funcionarios/') }}" accept-charset="UTF-8">
+            <form method="POST" action="{{ route('funcionarios.cadastra') }}" accept-charset="UTF-8">
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="row">
