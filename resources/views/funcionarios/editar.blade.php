@@ -137,7 +137,7 @@
                                 <option value="">Selecione...</option>
                                 @foreach ($funcoes as $funcao)
                                     @if ($funcao->id == old('funcao') || $funcao->id == $user->funcao_id)
-                                        <option value="{{$funcao->id}}" selected>{{$funcao->sigla}}</option>
+                                        <option value="{{$funcao->id}}" selected>{{$funcao->funcao}}</option>
                                     @else
                                         <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
                                     @endif
@@ -169,10 +169,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-6 has-feedback {{ $errors->has('lotacao') ? ' has-error' : '' }}">
-                            <label for="escolaridade">Lotação</label>
-                            <input class="form-control" type="text" name="lotacao" value="@isset($user->lotacao) @endisset">
-                        </div>
+{{--                        <div class="form-group col-md-6 has-feedback {{ $errors->has('lotacao') ? ' has-error' : '' }}">--}}
+{{--                            <label for="escolaridade">Lotação</label>--}}
+{{--                            <input class="form-control" type="text" name="lotacao" value="@isset($user->lotacao) @endisset">--}}
+{{--                        </div>--}}
                     </div>
                     @endhasanyrole
 
@@ -225,150 +225,150 @@
 @section('scripts_adicionais')
 <!-- Script Msg Resetar Senha -->
     <script type="text/javascript" defer>
-        // $('#confirmDelete').on('show.bs.modal', function (e)
-        // {
-        //     let $message = $(e.relatedTarget).attr('data-message');
-        //     $(this).find('.modal-body p').text($message);
-        //     let $title = $(e.relatedTarget).attr('data-title');
-        //     $(this).find('.modal-title').text($title);
-        //     let $button = $(e.relatedTarget).attr('data-button');
-        //     $(this).find('.modal-footer #confirm').text($button);
-        //
-        //     // Pass form reference to modal for submission on yes/ok
-        //     var form = $(e.relatedTarget).closest('form');
-        //     $(this).find('.modal-footer #confirm').data('form', form);
-        // });
-        //
-        // // Form confirm (yes/ok) handler, submits form
-        // $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
-        // {
-        //     $(this).data('form').submit();
-        // });
+         $('#confirmDelete').on('show.bs.modal', function (e)
+         {
+             let $message = $(e.relatedTarget).attr('data-message');
+             $(this).find('.modal-body p').text($message);
+             let $title = $(e.relatedTarget).attr('data-title');
+             $(this).find('.modal-title').text($title);
+             let $button = $(e.relatedTarget).attr('data-button');
+             $(this).find('.modal-footer #confirm').text($button);
 
-        {{--$(document).ready(function () {--}}
-        {{--    $('input:radio[name="roles"][value={{$user->roles->first()->id}}]').attr('checked', true);--}}
+             // Pass form reference to modal for submission on yes/ok
+             var form = $(e.relatedTarget).closest('form');
+             $(this).find('.modal-footer #confirm').data('form', form);
+         });
 
-        {{--    $('#identificacaoSecretaria').val("{{$user->secretaria_id}}");--}}
-        {{--    $('#subordinacaoAdministrativa').val("{{$user->subordinacao_administrativa_id}}");--}}
-        {{--    $('#cargo').val("{{$user->cargo_id}}");--}}
-        {{--    $('#funcao').val("{{$user->funcao_id}}");--}}
-        {{--    $('#escolaridade').val("{{$user->escolaridade_id}}");--}}
+          //Form confirm (yes/ok) handler, submits form
+         $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
+         {
+             $(this).data('form').submit();
+         });
 
-        {{--    @if($user->name == Auth::user()->name)--}}
-        {{--        $('#perguntaSeguranca').val("{{$user->perguntaSeguranca->id}}");--}}
-        {{--    @endif--}}
-        {{--});--}}
+        $(document).ready(function () {
+            {{--$('input:radio[name="roles"][value={{$user->roles->first()->id}}]').attr('checked', true);--}}
 
-        {{--function insertCargo()--}}
-        {{--{--}}
-        {{--    let select = document.getElementById("cargo"),--}}
-        {{--        div = document.getElementById("divCargo"),--}}
-        {{--        i = {{$cargos->count()}},--}}
-        {{--        txtVal = document.getElementById("novoCargo").value,--}}
-        {{--        newOption = document.createElement("OPTION"),--}}
-        {{--        newInput = document.createElement("INPUT"),--}}
-        {{--        newOptionVal = document.createTextNode(txtVal);--}}
+            $('#identificacaoSecretaria').val("{{$user->secretaria_id}}");
+            $('#subordinacaoAdministrativa').val("{{$user->subordinacao_administrativa_id}}");
+            $('#cargo').val("{{$user->cargo_id}}");
+            $('#funcao').val("{{$user->funcao_id}}");
+            $('#escolaridade').val("{{$user->escolaridade_id}}");
 
-        {{--    if (txtVal !== "")--}}
-        {{--    {--}}
-        {{--        newOption.appendChild(newOptionVal);--}}
-        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
-        {{--        select.insertBefore(newOption, select.lastChild);--}}
-        {{--        newOption.setAttribute('selected', 'selected');--}}
+{{--            @if($user->name == Auth::user()->name)--}}
+{{--                $('#perguntaSeguranca').val("{{$user->perguntaSeguranca->id}}");--}}
+{{--            @endif--}}
+        });
 
-        {{--        newInput.setAttribute("type", "hidden");--}}
-        {{--        newInput.setAttribute("name", "novoCargo");--}}
-        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
-        {{--        div.insertBefore(newInput, div.lastChild);--}}
-        {{--    }--}}
-        {{--    $('#addCargo').modal('hide');--}}
-        {{--    $("input[id='novoCargo']").val('');--}}
-        {{--}--}}
+        function insertCargo()
+        {
+            let select = document.getElementById("cargo"),
+                div = document.getElementById("divCargo"),
+                i = {{$cargos->count()}},
+                txtVal = document.getElementById("novoCargo").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
 
-        {{--function insertFuncao()--}}
-        {{--{--}}
-        {{--    let select = document.getElementById("funcao"),--}}
-        {{--        div = document.getElementById("divFuncao"),--}}
-        {{--        i = {{$funcoes->count()}},--}}
-        {{--        txtVal = document.getElementById("novaFuncao").value,--}}
-        {{--        newOption = document.createElement("OPTION"),--}}
-        {{--        newInput = document.createElement("INPUT"),--}}
-        {{--        newOptionVal = document.createTextNode(txtVal);--}}
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i + 1}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
 
-        {{--    if (txtVal !== "")--}}
-        {{--    {--}}
-        {{--        newOption.appendChild(newOptionVal);--}}
-        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
-        {{--        select.insertBefore(newOption, select.lastChild);--}}
-        {{--        newOption.setAttribute('selected', 'selected');--}}
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "novoCargo");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+            }
+            $('#addCargo').modal('hide');
+            $("input[id='novoCargo']").val('');
+        }
 
-        {{--        newInput.setAttribute("type", "hidden");--}}
-        {{--        newInput.setAttribute("name", "novaFuncao");--}}
-        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
-        {{--        div.insertBefore(newInput, div.lastChild);--}}
-        {{--    }--}}
-        {{--    $('#addFuncao').modal('hide');--}}
-        {{--    $("input[id='novaFuncao']").val('');--}}
-        {{--}--}}
+        function insertFuncao()
+        {
+            let select = document.getElementById("funcao"),
+                div = document.getElementById("divFuncao"),
+                i = {{$funcoes->count()}},
+                txtVal = document.getElementById("novaFuncao").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
 
-        {{--function insertSubAdm()--}}
-        {{--{--}}
-        {{--    let select = document.getElementById("subordinacaoAdministrativa"),--}}
-        {{--        div = document.getElementById("divSubAdm"),--}}
-        {{--        i = {{$subordinacoesAdministrativas->count()}},--}}
-        {{--        txtVal = document.getElementById("novaSubAdm").value,--}}
-        {{--        newOption = document.createElement("OPTION"),--}}
-        {{--        newInput = document.createElement("INPUT"),--}}
-        {{--        newOptionVal = document.createTextNode(txtVal);--}}
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i + 1}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
 
-        {{--    if (txtVal !== "")--}}
-        {{--    {--}}
-        {{--        newOption.appendChild(newOptionVal);--}}
-        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
-        {{--        select.insertBefore(newOption, select.lastChild);--}}
-        {{--        newOption.setAttribute('selected', 'selected');--}}
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "novaFuncao");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+            }
+            $('#addFuncao').modal('hide');
+            $("input[id='novaFuncao']").val('');
+        }
 
-        {{--        newInput.setAttribute("type", "hidden");--}}
-        {{--        newInput.setAttribute("name", "novaSubAdm");--}}
-        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
-        {{--        div.insertBefore(newInput, div.lastChild);--}}
-        {{--    }--}}
-        {{--    $('#addSubAdm').modal('hide');--}}
-        {{--    $("input[id='novaSubAdm']").val('');--}}
-        {{--}--}}
+        function insertSubAdm()
+        {
+            let select = document.getElementById("subordinacaoAdministrativa"),
+                div = document.getElementById("divSubAdm"),
+                i = {{$subordinacoesAdministrativas->count()}},
+                txtVal = document.getElementById("novaSubAdm").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal);
 
-        {{--function insertSecretaria()--}}
-        {{--{--}}
-        {{--    let select = document.getElementById("identificacaoSecretaria"),--}}
-        {{--        div = document.getElementById("divSecretaria"),--}}
-        {{--        i = {{$secretarias->count()}},--}}
-        {{--        txtVal = document.getElementById("secretariaSigla").value,--}}
-        {{--        txtVal2 = document.getElementById("secretariaDescricao").value,--}}
-        {{--        newOption = document.createElement("OPTION"),--}}
-        {{--        newInput = document.createElement("INPUT"),--}}
-        {{--        newInput2 = document.createElement("INPUT"),--}}
-        {{--        newOptionVal = document.createTextNode(txtVal),--}}
-        {{--        newOptionVal2 = document.createTextNode(txtVal2);--}}
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i + 1}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
 
-        {{--    if (txtVal !== "")--}}
-        {{--    {--}}
-        {{--        newOption.appendChild(newOptionVal);--}}
-        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
-        {{--        select.insertBefore(newOption, select.lastChild);--}}
-        {{--        newOption.setAttribute('selected', 'selected');--}}
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "novaSubAdm");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+            }
+            $('#addSubAdm').modal('hide');
+            $("input[id='novaSubAdm']").val('');
+        }
 
-        {{--        newInput.setAttribute("type", "hidden");--}}
-        {{--        newInput.setAttribute("name", "siglaSecretaria");--}}
-        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
-        {{--        div.insertBefore(newInput, div.lastChild);--}}
+        function insertSecretaria()
+        {
+            let select = document.getElementById("identificacaoSecretaria"),
+                div = document.getElementById("divSecretaria"),
+                i = {{$secretarias->count()}},
+                txtVal = document.getElementById("secretariaSigla").value,
+                txtVal2 = document.getElementById("secretariaDescricao").value,
+                newOption = document.createElement("OPTION"),
+                newInput = document.createElement("INPUT"),
+                newInput2 = document.createElement("INPUT"),
+                newOptionVal = document.createTextNode(txtVal),
+                newOptionVal2 = document.createTextNode(txtVal2);
 
-        {{--        newInput2.setAttribute("type", "hidden");--}}
-        {{--        newInput2.setAttribute("name", "descricaoSecretaria");--}}
-        {{--        newInput2.setAttribute("value", newOptionVal2.textContent);--}}
-        {{--        div.insertBefore(newInput2, div.lastChild);--}}
-        {{--    }--}}
-        {{--    $('#addSecretaria').modal('hide');--}}
-        {{--    $("input[id='novaSecretaria']").val('');--}}
+            if (txtVal !== "")
+            {
+                newOption.appendChild(newOptionVal);
+                newOption.setAttribute("value", `${i + 1}`);
+                select.insertBefore(newOption, select.lastChild);
+                newOption.setAttribute('selected', 'selected');
+
+                newInput.setAttribute("type", "hidden");
+                newInput.setAttribute("name", "siglaSecretaria");
+                newInput.setAttribute("value", newOptionVal.textContent);
+                div.insertBefore(newInput, div.lastChild);
+
+                newInput2.setAttribute("type", "hidden");
+                newInput2.setAttribute("name", "descricaoSecretaria");
+                newInput2.setAttribute("value", newOptionVal2.textContent);
+                div.insertBefore(newInput2, div.lastChild);
+            }
+            $('#addSecretaria').modal('hide');
+            $("input[id='novaSecretaria']").val('');
         }
     </script>
 @endsection
