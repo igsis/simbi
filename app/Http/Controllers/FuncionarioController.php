@@ -161,14 +161,12 @@ class FuncionarioController extends Controller
 
 //        $funcionario = Funcionario::FindOrFail($request->id);
 
-        $roles = Role::all();
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $escolaridades = Escolaridade::all();
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
         return view('funcionarios.cadastro', compact(
-            'roles',
             'secretarias',
             'subordinacoesAdministrativas',
             'escolaridades',
@@ -176,6 +174,68 @@ class FuncionarioController extends Controller
             'funcoes',
             'funcionario'
         ));
+
+    }
+
+    public function update(Request $request, $id){
+
+        $funcionario = Funcionario::findOrFail($id);
+
+        $this->validate($request, [
+            'name'  =>'required',
+            'email' =>'required|email',
+            'subordinacaoAdministrativa' => 'required',
+            'identificacaoSecretaria' => 'required',
+            'cargo' => 'required',
+            'funcao' => 'required',
+            'escolaridade' => 'required'
+        ]);
+
+
+
+        $cargo = Cargo::findOrNew($request->cargo);
+        if (!($cargo->exists))
+        {
+            $cargo->cargo = $request->novoCargo;
+            $cargo->save();
+        }
+
+        $funcao = Funcao::findOrNew($request->funcao);
+        if (!($funcao->exists))
+        {
+            $funcao->funcao = $request->novaFuncao;
+            $funcao->save();
+        }
+
+        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
+        if (!($subAdm->exists))
+        {
+            $subAdm->descricao = $request->novaSubAdm;
+            $subAdm->save();
+        }
+
+        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+        if (!($secretaria->exists))
+        {
+            $secretaria->sigla = $request->siglaSecretaria;
+            $secretaria->descricao = $request->descricaoSecretaria;
+            $secretaria->save();
+        }
+
+        $funcionario->nome = $request->input('name');
+        $funcionario->email = $request->input('email');
+        $funcionario->cargo_id = $cargo->id;
+        $funcionario->funcao_id = $funcao->id;
+        $funcionario->secretaria_id = $secretaria->id;
+        $funcionario->subordinacao_administrativa_id = $subAdm->id;
+        $funcionario->escolaridade_id = $request->escolaridade;
+
+
+        if($funcionario->save()){
+            return redirect()->route('funcionarios.index', ['type' => '1'])
+                ->with('flash_message',
+                    'Funcionario Editado com Sucesso!');
+        }
 
     }
 }

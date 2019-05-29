@@ -238,17 +238,6 @@ class UserController extends Controller
             ]);
         }
 
-        $roles = $request['roles'];
-
-        if ($roles != 0)
-        {
-            $user->roles()->sync($roles);
-        }
-        else
-        {
-            $user->roles()->detach();
-        }
-
 
         return redirect()->route('usuarios.index', ['type' => '1'])
             ->with('flash_message',

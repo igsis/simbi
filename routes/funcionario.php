@@ -21,5 +21,8 @@ Route::group(['prefix' => 'funcionarios'], function (){
 
 Route::post('/funcionarios/','FuncionarioController@store')->name('funcionarios.cadastra');
 
+Route::put('/funcionarios/editar/{id}', 'FuncionarioController@update')->name('funcionario.atualizar');
+
+
 
 Route::any('funcionario-search', 'FuncionarioController@searchFuncionario')->name('search-funcionario');

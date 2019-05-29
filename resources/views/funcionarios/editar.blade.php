@@ -17,22 +17,8 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">{{$user->name}}</h3>
-                <div class="box-tools">
-                    @if($user->name != Auth::user()->name)
-                        <form id="resetSenha" method="POST" action="{{route('usuarios.reset', $user->id)}}"
-                              accept-charset="UTF-8">
-                            {{ csrf_field() }}
-                            {{method_field('PUT')}}
-                            <button class="btn btn-danger pull-right" type="button" data-toggle="modal"
-                                    data-target="#confirmDelete" data-title="Resetar a Senha?"
-                                    data-message='Desejar realmente resetar a senha deste usuário? Senha: simbi@2018'
-                                    data-button="Resetar Senha">Resetar Senha
-                            </button>
-                        </form>
-                    @endif
-                </div>
             </div>
-            <form method="POST" action="{{ url('usuarios', [$user->id]) }}" accept-charset="UTF-8">
+            <form method="POST" action="{{ route('funcionario.atualizar', $user->id) }}" accept-charset="UTF-8">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PUT">
 
