@@ -2,17 +2,6 @@
 
 @section('tituloPagina')
     Importar do IGSIS
-    @if(isset($equipamentoIgsis->rua) && $equipamentoIgsis->rua != NULL)
-        {{$endereco = explode(',',$equipamentoIgsis->rua)[0]}}
-        {{$numero = explode(',',explode('-',$equipamentoIgsis->rua)[0])[1]}}
-        @if (gettype($numero) != 'integer')
-            {{$numero = ''}}
-        @endif
-        {{$bairro =  explode('-',$equipamentoIgsis->rua)[1]}}
-    @else
-        {{$endereco = ''}}
-        {{$numero = ''}}
-    @endif
 @endsection
 
 @section ('conteudo')
@@ -164,24 +153,24 @@
                 </div>
                 <div class="form-group col-md-10">
                     <label for="logradouro">Logradouro</label>
-                    <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{isset($endereco)?$endereco:old('logradouro')}}">
+                    <input type="text" class="form-control" name="logradouro" id="logradouro" readonly value="{{isset($equipamentoIgsis->logradouro)?$equipamentoIgsis->logradouro:old('logradouro')}}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-2 has-feedback {{ $errors->has('numero') ? ' has-error' : '' }}">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control" name="numero" id="numero" value="{{isset($numero)?$numero:old('numero')}}">
+                    <input type="text" class="form-control" name="numero" id="numero" value="{{isset($equipamentoIgsis->numero)?$equipamentoIgsis->numero:old('numero')}}">
                 </div>
 
                 <div class="form-group col-md-3 has-feedback {{ $errors->has('complemento') ? ' has-error' : '' }}">
                     <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control" name="complemento" id="complemento" value="{{old('complemento')}}">
+                    <input type="text" class="form-control" name="complemento" id="complemento" value="{{isset($equipamentoIgsis->complemento)?$equipamentoIgsis->complemento:old('complemento')}}">
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{isset($bairro)?$bairro: old('bairro')}}">
+                    <input type="text" class="form-control" name="bairro" id="bairro" readonly value="{{isset($equipamentoIgsis->bairro)?$equipamentoIgsis->bairro: old('bairro')}}">
                 </div>
 
                 <div class="form-group col-md-3">

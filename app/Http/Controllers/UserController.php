@@ -133,7 +133,8 @@ class UserController extends Controller
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
-//        $funcionario =
+
+
 
         return view('usuarios.editar', compact(
             'user',
@@ -157,60 +158,25 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
-        $cargo = Cargo::findOrNew($request->cargo);
-        if (!($cargo->exists))
-        {
-            $cargo->cargo = $request->novoCargo;
-            $cargo->save();
-        }
-
-        /** @var Funcao $funcao */
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
-        {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
-        }
-
-        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
-        if (!($subAdm->exists))
-        {
-            $subAdm->descricao = $request->novaSubAdm;
-            $subAdm->save();
-        }
-
-        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
-        if (!($secretaria->exists))
-        {
-            $secretaria->sigla = $request->siglaSecretaria;
-            $secretaria->descricao = $request->descricaoSecretaria;
-            $secretaria->save();
-        }
+        $funcionario = Funcionario::findOrFail($user->funcionario_id);
 
         if ($request->filled('password'))
         {
             $this->validate($request, [
-                'name'=>'required',
-                'email'=>'required|email|unique:users,email,'.$id,
+                'email'=>'required|email|unique:funcionarios,email',
                 'password'=>'required|min:6|confirmed',
-                'subordinacaoAdministrativa'=>'required',
-                'identificacaoSecretaria'=>'required',
-                'cargo'=>'required',
-                'funcao'=>'required',
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
 
-            $user->update([
-                'name'=> $request->name,
-                'login'=> $request->login,
+            $funcionario->update([
+                'nome'=>$request->name,
                 'email'=> $request->email,
+            ]);
+
+            $user->update([
+                'login'=> $request->login,
                 'password'=> $request->password,
-                'cargo_id' => $cargo->id,
-                'funcao_id' => $funcao->id,
-                'secretaria_id' => $secretaria->id,
-                'subordinacao_administrativa_id' => $subAdm->id,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
@@ -218,23 +184,18 @@ class UserController extends Controller
         else
         {
             $this->validate($request, [
-                'name'=>'required',
-                'email'=>'required|email|unique:users,email,'.$id,
-                'subordinacaoAdministrativa'=>'required',
-                'identificacaoSecretaria'=>'required',
-                'cargo'=>'required',
-                'funcao'=>'required',
+                'email'=>'required|email|unique:funcionarios,email',
+            ]);
+
+            $funcionario->update([
+                'nome'=>$request->name,
+                'email'=> $request->email,
             ]);
 
             $user->update([
-                'name'=> $request->name,
                 'login'=> $request->login,
-                'email'=> $request->email,
-                'cargo_id' => $cargo->id,
-                'funcao_id' => $funcao->id,
-                'secretaria_id' => $secretaria->id,
-                'subordinacao_administrativa_id' => $subAdm->id,
-                'escolaridade_id'=>$request->escolaridade
+                'pergunta_seguranca_id'=> $request->perguntaSeguranca,
+                'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
         }
 
