@@ -9,6 +9,7 @@ use Simbi\Models\Cargo;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Escolaridade;
 use Simbi\Models\Funcao;
+use Simbi\Models\NivelAcesso;
 use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\ResponsabilidadeTipo;
 use Simbi\Models\Secretaria;
@@ -53,18 +54,12 @@ class UserController extends Controller
         $funcionario = Funcionario::FindOrFail($request->id);
 
         $roles = Role::all();
-        $secretarias = Secretaria::orderBy('descricao')->get();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
-        $escolaridades = Escolaridade::all();
-        $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
+
+        $nivelAcessos = NivelAcesso::all();
         return view('usuarios.cadastro', compact(
             'roles',
             'secretarias',
-            'subordinacoesAdministrativas',
-            'escolaridades',
-            'cargos',
-            'funcoes',
+            'nivelAcessos',
             'funcionario'
             ));
     }
@@ -78,31 +73,24 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'login' =>'required|max:7|unique:users'
+            'login' =>'required|max:7|unique:users',
+            'nivelAcessos'=> 'required'
         ]);
 
         $user = new User();
 
-        $user->login = $request->login;
+        $user->login = $request->input('login');
         $user->password = 'simbi@2019';
-        $user->funcionario_id = $request->id_funcionario;
+        $user->funcionario_id = $request->input('id_funcionario');
+        $user->nivel_acesso_id = $request->input('nivelAcessos');
 
         if ($user->save()) {
 
             Funcionario::where('id','=',$request->id_funcionario)
                 ->update(['publicado'=>2]);
 
-            $roles = $request['roles'];
-
-            if (isset($roles)) {
-                $role_r = Role::where('id', '=', $roles)->firstorFail();
-                $user->assignRole($role_r);
-            }
-
             return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
                 'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2019');
-        }else{
-
         }
     }
 

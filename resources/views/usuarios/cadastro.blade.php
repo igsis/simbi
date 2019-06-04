@@ -66,17 +66,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6 has-feedback {{ $errors->has('roles') ? ' has-error' : '' }}">
-                                <label for="roles">Nivel de Acesso *</label>
-                                <select class="form-control" name="roles" id="roles">
+                            <div class="form-group col-md-6 has-feedback {{ $errors->has('nivelAcessos') ? ' has-error' : '' }}">
+                                <label for="nivelAcessos">Nivel de Acesso *</label>
+                                <select class="form-control" name="nivelAcessos" id="nivel">
                                     <option value="">Selecione uma Opção</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @foreach ($nivelAcessos as $nivelAcesso)
+                                        <option value="{{$nivelAcesso->id}}">{{$nivelAcesso->nivel_acesso}}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('roles'))
+                                @if ($errors->has('nivelAcessos'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('roles') }}</strong>
+                                        <strong>{{ $errors->first('nivelAcessos') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -128,116 +128,116 @@
 @endsection
 @section('scripts_adicionais')
     <script>
-        function insertCargo()
-        {
-            let select = document.getElementById("cargo"),
-                div = document.getElementById("divCargo"),
-                i = {{$cargos->count()}},
-                txtVal = document.getElementById("novoCargo").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal);
+        {{--function insertCargo()--}}
+        {{--{--}}
+        {{--    let select = document.getElementById("cargo"),--}}
+        {{--        div = document.getElementById("divCargo"),--}}
+        {{--        i = {{$cargos->count()}},--}}
+        {{--        txtVal = document.getElementById("novoCargo").value,--}}
+        {{--        newOption = document.createElement("OPTION"),--}}
+        {{--        newInput = document.createElement("INPUT"),--}}
+        {{--        newOptionVal = document.createTextNode(txtVal);--}}
 
-            if (txtVal !== "")
-            {
-                newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i + 1}`);
-                select.insertBefore(newOption, select.lastChild);
-                newOption.setAttribute('selected', 'selected');
+        {{--    if (txtVal !== "")--}}
+        {{--    {--}}
+        {{--        newOption.appendChild(newOptionVal);--}}
+        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
+        {{--        select.insertBefore(newOption, select.lastChild);--}}
+        {{--        newOption.setAttribute('selected', 'selected');--}}
 
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "novoCargo");
-                newInput.setAttribute("value", newOptionVal.textContent);
-                div.insertBefore(newInput, div.lastChild);
-            }
-            $('#addCargo').modal('hide');
-            $("input[id='novoCargo']").val('');
-        }
+        {{--        newInput.setAttribute("type", "hidden");--}}
+        {{--        newInput.setAttribute("name", "novoCargo");--}}
+        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
+        {{--        div.insertBefore(newInput, div.lastChild);--}}
+        {{--    }--}}
+        {{--    $('#addCargo').modal('hide');--}}
+        {{--    $("input[id='novoCargo']").val('');--}}
+        {{--}--}}
 
-        function insertFuncao()
-        {
-            let select = document.getElementById("funcao"),
-                div = document.getElementById("divFuncao"),
-                i = {{$funcoes->count()}},
-                txtVal = document.getElementById("novaFuncao").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal);
+        {{--function insertFuncao()--}}
+        {{--{--}}
+        {{--    let select = document.getElementById("funcao"),--}}
+        {{--        div = document.getElementById("divFuncao"),--}}
+        {{--        i = {{$funcoes->count()}},--}}
+        {{--        txtVal = document.getElementById("novaFuncao").value,--}}
+        {{--        newOption = document.createElement("OPTION"),--}}
+        {{--        newInput = document.createElement("INPUT"),--}}
+        {{--        newOptionVal = document.createTextNode(txtVal);--}}
 
-            if (txtVal !== "")
-            {
-                newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i + 1}`);
-                select.insertBefore(newOption, select.lastChild);
-                newOption.setAttribute('selected', 'selected');
+        {{--    if (txtVal !== "")--}}
+        {{--    {--}}
+        {{--        newOption.appendChild(newOptionVal);--}}
+        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
+        {{--        select.insertBefore(newOption, select.lastChild);--}}
+        {{--        newOption.setAttribute('selected', 'selected');--}}
 
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "novaFuncao");
-                newInput.setAttribute("value", newOptionVal.textContent);
-                div.insertBefore(newInput, div.lastChild);
-            }
-            $('#addFuncao').modal('hide');
-            $("input[id='novoCargo']").val('');
-        }
+        {{--        newInput.setAttribute("type", "hidden");--}}
+        {{--        newInput.setAttribute("name", "novaFuncao");--}}
+        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
+        {{--        div.insertBefore(newInput, div.lastChild);--}}
+        {{--    }--}}
+        {{--    $('#addFuncao').modal('hide');--}}
+        {{--    $("input[id='novoCargo']").val('');--}}
+        {{--}--}}
 
-        function insertSubAdm()
-        {
-            let select = document.getElementById("subordinacaoAdministrativa"),
-                div = document.getElementById("divSubAdm"),
-                i = {{$subordinacoesAdministrativas->count()}},
-                txtVal = document.getElementById("novaSubAdm").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal);
+        {{--function insertSubAdm()--}}
+        {{--{--}}
+        {{--    let select = document.getElementById("subordinacaoAdministrativa"),--}}
+        {{--        div = document.getElementById("divSubAdm"),--}}
+        {{--        i = {{$subordinacoesAdministrativas->count()}},--}}
+        {{--        txtVal = document.getElementById("novaSubAdm").value,--}}
+        {{--        newOption = document.createElement("OPTION"),--}}
+        {{--        newInput = document.createElement("INPUT"),--}}
+        {{--        newOptionVal = document.createTextNode(txtVal);--}}
 
-            if (txtVal !== "")
-            {
-                newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i + 1}`);
-                select.insertBefore(newOption, select.lastChild);
-                newOption.setAttribute('selected', 'selected');
+        {{--    if (txtVal !== "")--}}
+        {{--    {--}}
+        {{--        newOption.appendChild(newOptionVal);--}}
+        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
+        {{--        select.insertBefore(newOption, select.lastChild);--}}
+        {{--        newOption.setAttribute('selected', 'selected');--}}
 
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "novaSubAdm");
-                newInput.setAttribute("value", newOptionVal.textContent);
-                div.insertBefore(newInput, div.lastChild);
-            }
-            $('#addSubAdm').modal('hide');
-            $("input[id='novaSubAdm']").val('');
-        }
+        {{--        newInput.setAttribute("type", "hidden");--}}
+        {{--        newInput.setAttribute("name", "novaSubAdm");--}}
+        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
+        {{--        div.insertBefore(newInput, div.lastChild);--}}
+        {{--    }--}}
+        {{--    $('#addSubAdm').modal('hide');--}}
+        {{--    $("input[id='novaSubAdm']").val('');--}}
+        {{--}--}}
 
-        function insertSecretaria()
-        {
-            let select = document.getElementById("identificacaoSecretaria"),
-                div = document.getElementById("divSecretaria"),
-                i = {{$secretarias->count()}},
-                txtVal = document.getElementById("secretariaSigla").value,
-                txtVal2 = document.getElementById("secretariaDescricao").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newInput2 = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal),
-                newOptionVal2 = document.createTextNode(txtVal2);
+        {{--function insertSecretaria()--}}
+        {{--{--}}
+        {{--    let select = document.getElementById("identificacaoSecretaria"),--}}
+        {{--        div = document.getElementById("divSecretaria"),--}}
+        {{--        i = {{$secretarias->count()}},--}}
+        {{--        txtVal = document.getElementById("secretariaSigla").value,--}}
+        {{--        txtVal2 = document.getElementById("secretariaDescricao").value,--}}
+        {{--        newOption = document.createElement("OPTION"),--}}
+        {{--        newInput = document.createElement("INPUT"),--}}
+        {{--        newInput2 = document.createElement("INPUT"),--}}
+        {{--        newOptionVal = document.createTextNode(txtVal),--}}
+        {{--        newOptionVal2 = document.createTextNode(txtVal2);--}}
 
-            if (txtVal !== "")
-            {
-                newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i + 1}`);
-                select.insertBefore(newOption, select.lastChild);
-                newOption.setAttribute('selected', 'selected');
+        {{--    if (txtVal !== "")--}}
+        {{--    {--}}
+        {{--        newOption.appendChild(newOptionVal);--}}
+        {{--        newOption.setAttribute("value", `${i + 1}`);--}}
+        {{--        select.insertBefore(newOption, select.lastChild);--}}
+        {{--        newOption.setAttribute('selected', 'selected');--}}
 
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "descricaoSecretaria");
-                newInput.setAttribute("value", newOptionVal.textContent);
-                div.insertBefore(newInput, div.lastChild);
+        {{--        newInput.setAttribute("type", "hidden");--}}
+        {{--        newInput.setAttribute("name", "descricaoSecretaria");--}}
+        {{--        newInput.setAttribute("value", newOptionVal.textContent);--}}
+        {{--        div.insertBefore(newInput, div.lastChild);--}}
 
-                newInput2.setAttribute("type", "hidden");
-                newInput2.setAttribute("name", "siglaSecretaria");
-                newInput2.setAttribute("value", newOptionVal2.textContent);
-                div.insertBefore(newInput2, div.lastChild);
-            }
-            $('#addSecretaria').modal('hide');
-            $("input[id='novaSecretaria']").val('');
-        }
+        {{--        newInput2.setAttribute("type", "hidden");--}}
+        {{--        newInput2.setAttribute("name", "siglaSecretaria");--}}
+        {{--        newInput2.setAttribute("value", newOptionVal2.textContent);--}}
+        {{--        div.insertBefore(newInput2, div.lastChild);--}}
+        {{--    }--}}
+        {{--    $('#addSecretaria').modal('hide');--}}
+        {{--    $("input[id='novaSecretaria']").val('');--}}
+        {{--}--}}
     </script>
 @endsection
