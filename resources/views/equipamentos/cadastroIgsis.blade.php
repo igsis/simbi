@@ -41,23 +41,9 @@
                     <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                 </div>
 
-                <div class="form-group col-xs-8 col-md-4 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
+                <div class="form-group col-xs-12 col-md-6 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
                     <label for="equipamentoSigla">Sigla do Equipamento</label>
-                    <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
-                        <option value="">Selecione uma Opção</option>
-                        @foreach ($siglas as $sigla)
-                            @if ($sigla->id == old('equipamentoSigla'))
-                                <option value="{{$sigla->id}}" selected>{{$sigla->sigla}}</option>
-                            @else
-                                <option value="{{$sigla->id}}">{{$sigla->sigla}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group col-xs-4 col-md-2">
-                    <label for="equipamentoSigla">Adicionar</label>
-                    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                    <input class="form-control" name="equipamentoSigla" id="equipamentoSigla">
                 </div>
             </div>
 

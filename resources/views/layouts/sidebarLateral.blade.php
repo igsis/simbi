@@ -75,7 +75,6 @@
                     <li><a href="{{route('distrito')}}">Distrito</a></li>
                     <li><a href="{{route('secretaria')}}">Indentificação da Secretaria</a></li>
                     <li><a href="{{route('prefeituraRegional')}}">Subprefeituras</a></li>
-                    <li><a href="{{route('siglaEquipamento')}}">Sigla do Equipamento</a></li>
                     <li><a href="{{route('subordinacaoAdministrativa')}}">Subordinação Administrativa</a></li>
                     <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>
                     <li><a href="{{ route('equipamentos.lote') }}">Trocar formulário em lote</a></li>
