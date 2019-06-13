@@ -12,7 +12,7 @@
                     @foreach ($equipamento->ocorrencias as $ocorrencia)
                         <div class="list-group-item">
                             <strong>{{ date('d/m/Y', strtotime($ocorrencia->data)) }}</strong><br>
-                            <label>Usuário: </label> {{$ocorrencia->user->name}}<br>
+                            <label>Usuário: </label> {{ $ocorrencia->user->funcionario->nome }}<br>
                             <label>Ocorrência: </label> {{$ocorrencia->ocorrencia}}<br>
                             <label>Observação: </label> {{$ocorrencia->observacao}}
                         </div>

@@ -89,8 +89,9 @@ class Funcionario extends Model
             }
 
         });
-
     }
+
+
 
     public function users()
     {

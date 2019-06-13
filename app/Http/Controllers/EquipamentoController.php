@@ -27,6 +27,7 @@ use Simbi\Models\Secretaria;
 use Simbi\Models\Status;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\TipoServico;
+use Simbi\Models\User;
 use Simbi\Models\Utilizacao;
 
 
