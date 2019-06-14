@@ -1,7 +1,7 @@
     <!-- jQuery 3 -->
     <script src="{{asset('AdminLTE/bower_components/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap 3.3.7 -->
-    {{--<script src="{{asset('AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>--}}
+    <script src="{{asset('AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
     <script src="{{asset('AdminLTE/bower_components/fastclick/lib/fastclick.js')}}"></script>
     <!-- AdminLTE App -->
@@ -16,7 +16,7 @@
     <!-- ChartJS -->
     <script src="{{asset('AdminLTE/bower_components/chart.js/Chart.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{asset('AdminLTE/dist/js/pages/dashboard2.js')}}"></script>
+    <script src="{{asset('AdminLTE/dist/js/pages/dashboard.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('AdminLTE/dist/js/demo.js')}}"></script>
     <script src="{{asset('AdminLTE/plugins/iCheck/icheck.min.js')}}"></script>
@@ -25,10 +25,6 @@
     <script src="{{asset('js/bootstrap.js')}}"></script>
     <script src="{{asset('js/jquery.mask.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
-
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
     @yield('scripts_adicionais')

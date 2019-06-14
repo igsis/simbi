@@ -15,7 +15,7 @@
             @hasanyrole('Coordenador|Administrador')
             <li class="header">Administrativo</li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-address-book-o"></i> Funcionários
+                <a href="#"><i class="fa fa-address-book-o"></i> <span>Funcionários</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -27,7 +27,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-user"></i> Usuários
+                <a href="#"><i class="fa fa-user"></i><span>Usuários</span>
                     <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -39,10 +39,8 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-university"></i> Equipamentos
-                    <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    <i class="fa fa-university"></i> <span>Equipamentos</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('equipamentos.index', ['type' => '1'])}}"> Lista</a></li>
@@ -65,10 +63,8 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-cogs"></i> Gerenciar
-                    <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    <i class="fa fa-cogs"></i> <span>Gerenciar</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('cargo')}}">Cargo</a></li>
