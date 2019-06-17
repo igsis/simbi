@@ -299,9 +299,9 @@
 </div>
 
 
-@include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Capacidade do Equipamento'])
+@include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Capacidade do Equipamento','actionForm'=>'equipamentos.gravaCapacidade','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Estacionamento'])
+@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade do Estacionamento','idInput'=>'','funcaoJS'=>'','label'=>'Estacionamento'])
 
 @include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo'])
 
@@ -387,6 +387,11 @@
     </div>
 </div>
 
-<script>
+<script defer>
+
+    //Alteração type input do modal capacidade
+    let txtCapacidade = document.querySelector("#txtCapacidade");
+    txtCapacidade.type = "number";
+
 
 </script>

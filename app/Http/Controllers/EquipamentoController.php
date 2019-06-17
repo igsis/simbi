@@ -579,9 +579,11 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::find($id);
 
-        $equipamento->capacidade()->create([]);
+        $equipamento->equipamentoCapacidade()->create([
+            'capacidade'=> $request->novo
+        ]);
 
-        return redirect();
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Capacidade cadastrada com sucesso');
     }
 
     public function criaArea($id)
