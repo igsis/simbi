@@ -8,7 +8,13 @@ class Auditorio extends Model
 {
     public $timestamps = false;
 
-    public function capacidade()
+    protected $fillable = [
+        'equipamento_id',
+        'nome',
+        'capacidade'
+    ];
+
+    public function equipamento()
     {
         return $this->belongsTo(Equipamento::class);
     }

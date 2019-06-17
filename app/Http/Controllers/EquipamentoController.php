@@ -586,6 +586,18 @@ class EquipamentoController extends Controller
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Capacidade cadastrada com sucesso');
     }
 
+    public function gravaAuditorio(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->auditorio()->create([
+            'nome'=>$request->input('nome'),
+            'capacidade'=>$request->input('capacidade')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
+    }
+
     public function criaArea($id)
     {
         $equipamento = Equipamento::find($id);
