@@ -42,6 +42,8 @@
 
         Route::post('/{equipamento}/capacidadeAuditorio','EquipamentoController@gravaAuditorio')->name('equipamentos.gravaAuditorio');
 
+        Route::post('/{equipamento}/gravarEstacionamento','EquipamentoController@gravaEstacionamento')->name('equipamentos.gravaEstacionamento');
+
         Route::group(['prefix' => 'area/{equipamento}'], function(){
             Route::get('/', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
 

@@ -301,15 +301,15 @@
 
 @include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Capacidade do Equipamento','actionForm'=>'equipamentos.gravaCapacidade','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade do Estacionamento','idInput'=>'','funcaoJS'=>'','label'=>'Estacionamento'])
+@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade do Estacionamento','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Estacionamento','actionForm'=>'equipamentos.gravaEstacionamento','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo'])
+@include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo'])
 
-@include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala de Estudo Individual'])
+@include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudo Individual'])
 
-@include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala Infantil'])
+@include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Infantil'])
 
-@include('layouts.modal',['idModal'=>'addSalaMulti','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala Multiuso'])
+@include('layouts.modal',['idModal'=>'addSalaMulti','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Multiuso'])
 
 
 <div class="modal fade" id="addPraca" role="dialog" aria-labelledby="addPracaLabel" aria-hidden="true">
@@ -393,8 +393,10 @@
 <script defer>
 
     //Alteração type input do modal capacidade
-    let txtCapacidade = document.querySelector("#txtCapacidade");
-    txtCapacidade.type = "number";
+    let txtCapacidade = document.querySelectorAll("#txtCapacidade");
 
+    for(let x=0;x<txtCapacidade.length;x++){
+        txtCapacidade[x].type = 'number';
+    }
 
 </script>
