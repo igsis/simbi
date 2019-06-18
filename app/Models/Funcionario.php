@@ -26,7 +26,7 @@ class Funcionario extends Model
 
     public function cargo()
     {
-        return $this->belongsTo(Cargo::class,'cargo_id','id');
+        return $this->belongsTo(Cargo::class);
     }
 
     public function escolaridade()
@@ -89,8 +89,9 @@ class Funcionario extends Model
             }
 
         });
-
     }
+
+
 
     public function users()
     {

@@ -46,19 +46,9 @@
                             <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addServico"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
                         </div>
 
-                        <div class="form-group col-xs-8 col-md-4">
+                        <div class="form-group col-xs-12 col-md-6 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
                             <label for="equipamentoSigla">Sigla do Equipamento</label>
-                            <select class="form-control" name="equipamentoSigla" id="equipamentoSigla">
-                                <option value="">Selecione uma Opção</option>
-                                @foreach ($siglas as $sigla)
-                                    <option value="{{$sigla->id}}" selected>{{$sigla->sigla}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group col-xs-4 col-md-2">
-                            <label for="equipamentoSigla">Adicionar</label>
-                            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addSigla"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+                            <input class="form-control" name="equipamentoSigla" id="equipamentoSigla" value="{{ $equipamento->equipamento_sigla }}">
                         </div>
                     </div>
                     <div class="row">
@@ -726,7 +716,7 @@
         $(document).ready(function () {
             $('input:radio[name="tematico"][value={{$equipamento->tematico}}]').attr('checked', true);
             $('#tipoServico').val("{{$equipamento->tipoServico->id}}");
-            $('#equipamentoSigla').val("{{$equipamento->equipamentoSigla->id}}");
+            $('#equipamentoSigla').val("{{$equipamento->equipamento_sigla}}");
             $('#identificacaoSecretaria').val("{{$equipamento->secretaria->id}}");
             $('#subordinacaoAdministrativa').val("{{$equipamento->subordinacaoAdministrativa->id}}");
             $('#macrorregiao').val("{{$equipamento->endereco->macrorregiao->id}}");

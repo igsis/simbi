@@ -15,7 +15,7 @@
             @hasanyrole('Coordenador|Administrador')
             <li class="header">Administrativo</li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-address-book-o"></i> Funcionários
+                <a href="#"><i class="fa fa-address-book-o"></i> <span>Funcionários</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -27,23 +27,20 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-user"></i> Usuários
+                <a href="#"><i class="fa fa-user"></i><span>Usuários</span>
                     <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Lista</a></li>
-                    <li><a href="{{ route('usuarios.cadastro') }}"> Cadastrar</a></li>
                     <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-university"></i> Equipamentos
-                    <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    <i class="fa fa-university"></i> <span>Equipamentos</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('equipamentos.index', ['type' => '1'])}}"> Lista</a></li>
@@ -66,17 +63,14 @@
             </li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-cogs"></i> Gerenciar
-                    <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                    <i class="fa fa-cogs"></i> <span>Gerenciar</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('cargo')}}">Cargo</a></li>
                     <li><a href="{{route('distrito')}}">Distrito</a></li>
                     <li><a href="{{route('secretaria')}}">Indentificação da Secretaria</a></li>
                     <li><a href="{{route('prefeituraRegional')}}">Subprefeituras</a></li>
-                    <li><a href="{{route('siglaEquipamento')}}">Sigla do Equipamento</a></li>
                     <li><a href="{{route('subordinacaoAdministrativa')}}">Subordinação Administrativa</a></li>
                     <li><a href="{{route('tipoServico')}}">Tipo de Serviço</a></li>
                     <li><a href="{{ route('equipamentos.lote') }}">Trocar formulário em lote</a></li>

@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <th width="30%">Sigla do Equipamento:</th>
-            <td>{{$equipamento->equipamentoSigla->sigla}}</td>
+            <td>{{$equipamento->equipamento_sigla}}</td>
         </tr>
         <tr>
             <th width="30%">Telefone:</th>

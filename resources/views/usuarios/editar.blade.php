@@ -7,7 +7,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}</h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar {{--$funcionario->nome--}}</h1>
         </section>
 
         <!-- Main content -->
@@ -16,9 +16,9 @@
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{$user->name}}</h3>
+                    <h3 class="box-title">{{--$funcionario->nome--}}</h3>
                     <div class="box-tools">
-                        @if($user->name != Auth::user()->name)
+{{--                        @if($user->name != Auth::user()->name)--}}
                             <form id="resetSenha" method="POST" action="{{route('usuarios.reset', $user->id)}}"
                                   accept-charset="UTF-8">
                                 {{ csrf_field() }}
@@ -29,7 +29,7 @@
                                         data-button="Resetar Senha">Resetar Senha
                                 </button>
                             </form>
-                        @endif
+{{--                        @endif--}}
                     </div>
                 </div>
                 <form method="POST" action="{{ url('usuarios', [$user->id]) }}" accept-charset="UTF-8">
@@ -38,9 +38,9 @@
 
                     <div class="box-body">
                         <div class="row">
-                            <div class="form-group col-md-7 has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
+                            <div class="form-group col-md-7 has-feedback {{-- $errors->has('name') ? ' has-error' : '' --}}">
                                 <label for="name">Nome</label>
-                                <input class="form-control" type="text" name="name" id="name" value="{{$user->name}}">
+                                <input class="form-control" type="text" name="name" id="name" value="{{$user->funcionario->nome}}" readonly>
                             </div>
 
                             <div class="form-group col-md-5 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
@@ -52,133 +52,11 @@
                             <div class="form-group col-md-12 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">E-mail</label>
                                 <input class="form-control" type="email" name="email" id="email"
-                                       value="{{$user->email}}">
+                                       value="{{$user->funcionario->email}}">
                             </div>
                         </div>
 
-                        @hasanyrole('Administrador|Coordenador')
-                        <div class="row">
-                            <div id="divSubAdm"
-                                 class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('subordinacaoAdministrativa') ? ' has-error' : '' }}">
-                                <label for="subordinacaoAdministrativa">Subordinação Administrativa</label>
-                                <select class="form-control" name="subordinacaoAdministrativa"
-                                        id="subordinacaoAdministrativa">
-                                    <option value="">Selecione uma Opção</option>
-                                    @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
-                                        @if($subordinacaoAdministrativa->publicado == 1)
-                                            @if ($subordinacaoAdministrativa->id == old('subordinacaoAdministrativa'))
-                                                <option value="{{$subordinacaoAdministrativa->id}}"
-                                                        selected>{{$subordinacaoAdministrativa->descricao}}</option>
-                                            @else
-                                                <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-xs-2 col-md-1">
-                                <label for="addSubAdm">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal"
-                                        data-target="#addSubAdm">
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
-                                </button>
-                            </div>
-
-                            <div id="divSecretaria"
-                                 class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('identificacaoSecretaria') ? ' has-error' : '' }}">
-                                <label for="identificacaoSecretaria">Identificação da Secretaria</label>
-                                <select class="form-control" name="identificacaoSecretaria"
-                                        id="identificacaoSecretaria">
-                                    <option value="" selected>Selecione uma Opção</option>
-                                    @foreach ($secretarias as $secretaria)
-                                        @if ($secretaria->publicado == 1)
-                                            @if ($secretaria->id == old('identificacaoSecretaria'))
-                                                <option value="{{$secretaria->id}}"
-                                                        selected>{{$secretaria->sigla}}</option>
-                                            @else
-                                                <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-xs-2 col-md-1">
-                                <label for="addSecretaria">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal"
-                                        data-target="#addSecretaria">
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div id="divCargo"
-                                 class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
-                                <label for="cargo">Cargo</label>
-                                <select class="form-control" name="cargo" id="cargo">
-                                    <option value="">Selecione...</option>
-                                    @foreach ($cargos as $cargo)
-                                        @if($cargo->publicado == 1)
-                                            @if ($cargo->id == old('cargo'))
-                                                <option value="{{$cargo->id}}" selected>{{$cargo->cargo}}</option>
-                                            @else
-                                                <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-xs-2 col-md-1">
-                                <label for="addCargo">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal"
-                                        data-target="#addCargo">
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
-                                </button>
-                            </div>
-
-                            <div id="divFuncao"
-                                 class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">
-                                <label for="funcao">Função</label>
-                                <select class="form-control" name="funcao" id="funcao">
-                                    <option value="">Selecione...</option>
-                                    @foreach ($funcoes as $funcao)
-                                        @if ($funcao->id == old('funcao'))
-                                            <option value="{{$funcao->id}}" selected>{{$funcao->sigla}}</option>
-                                        @else
-                                            <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group col-xs-2 col-md-1">
-                                <label for="addFunção">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal"
-                                        data-target="#addFuncao">
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="form-group col-md-6 has-feedback {{ $errors->has('escolaridade') ? ' has-error' : '' }}">
-                                <label for="escolaridade">Nivel de Escolaridade</label>
-                                <select class="form-control" name="escolaridade" id="escolaridade">
-                                    <option value="">Selecione uma Opção</option>
-                                    @foreach ($escolaridades as $escolaridade)
-                                        @if ($escolaridade->id == old('escolaridade'))
-                                            <option value="{{$escolaridade->id}}"
-                                                    selected>{{$escolaridade->escolaridade}}</option>
-                                        @else
-                                            <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @endhasanyrole
-
-                        @if($user->name == Auth::user()->name)
+{{--                        @if($user->name == Auth::user()->name)--}}
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="password">Senha</label><br>
@@ -195,16 +73,15 @@
                                 <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
                                 <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
 
+                                    <option value="" ></option>
 
                                     @foreach($perguntas as $pergunta)
-                                        @if($pergunta->publicado == 1)
-                                            @if ($pergunta->id == old('funcao'))
+                                            @if ($pergunta->id == old('funcao') || $pergunta->id == $user->pergunta_seguranca_id)
                                                 <option value="{{$pergunta->id}}"
                                                         selected>{{$pergunta->pergunta_seguranca}}</option>
                                             @else
                                                 <option value="{{$pergunta->id}}">{{$pergunta->pergunta_seguranca}}</option>
                                             @endif
-                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -214,7 +91,7 @@
                                 <input class="form-control" name="respostaSeguranca" type="text"
                                        value="{{$user->resposta_seguranca}}">
                             </div>
-                        @endif
+{{--                        @endif--}}
 
                         <h5><b>Nível de Acesso</b></h5>
 
@@ -244,39 +121,7 @@
                     </div>
                 </form>
             </div>
-            @include('layouts.excluir_confirm')
 
-            @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
-            @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
-            @include('layouts.modal', ['idModal' => 'addSubAdm', 'titulo' => 'Adicionar nova Sub. Administrativa', 'idInput' => 'novaSubAdm', 'funcaoJS' => 'insertSubAdm'])
-
-            <div class="modal fade" id="addSecretaria" role="dialog" aria-labelledby="addSecretariaLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Adicionar nova Secretaria</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Sigla:</label>
-                                <input class="form-control" type="text" name="secretariaSigla" id="secretariaSigla"
-                                       maxlength="6">
-                            </div>
-                            <div class="form-group">
-                                <label>Descrição:</label>
-                                <input class="form-control" type="text" name="secretariaDescricao"
-                                       id="secretariaDescricao">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button class="btn btn-success" onclick="insertSecretaria();">Adicionar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
     </div>
 @endsection

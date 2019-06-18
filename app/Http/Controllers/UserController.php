@@ -9,6 +9,7 @@ use Simbi\Models\Cargo;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Escolaridade;
 use Simbi\Models\Funcao;
+use Simbi\Models\NivelAcesso;
 use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\ResponsabilidadeTipo;
 use Simbi\Models\Secretaria;
@@ -47,21 +48,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+
+        $funcionario = Funcionario::FindOrFail($request->id);
+
         $roles = Role::all();
-        $secretarias = Secretaria::orderBy('descricao')->get();
-        $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
-        $escolaridades = Escolaridade::all();
-        $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
+
+        $nivelAcessos = NivelAcesso::all();
         return view('usuarios.cadastro', compact(
             'roles',
             'secretarias',
-            'subordinacoesAdministrativas',
-            'escolaridades',
-            'cargos',
-            'funcoes'
+            'nivelAcessos',
+            'funcionario'
             ));
     }
 
@@ -74,69 +73,25 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'  =>'required',
             'login' =>'required|max:7|unique:users',
-            'email' =>'required|email|unique:users',
-            'subordinacaoAdministrativa' => 'required',
-            'identificacaoSecretaria' => 'required',
-            'cargo' => 'required',
-            'funcao' => 'required',
-            'escolaridade' => 'required',
+            'nivelAcessos'=> 'required'
         ]);
 
         $user = new User();
 
-        $cargo = Cargo::findOrNew($request->cargo);
-        if (!($cargo->exists))
-        {
-            $cargo->cargo = $request->novoCargo;
-            $cargo->save();
+        $user->login = $request->input('login');
+        $user->password = 'simbi@2019';
+        $user->funcionario_id = $request->input('id_funcionario');
+        $user->nivel_acesso_id = $request->input('nivelAcessos');
+
+        if ($user->save()) {
+
+            Funcionario::where('id','=',$request->id_funcionario)
+                ->update(['publicado'=>2]);
+
+            return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
+                'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2019');
         }
-
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
-        {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
-        }
-
-        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
-        if (!($subAdm->exists))
-        {
-            $subAdm->descricao = $request->novaSubAdm;
-            $subAdm->save();
-        }
-
-        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
-        if (!($secretaria->exists))
-        {
-            $secretaria->sigla = $request->siglaSecretaria;
-            $secretaria->descricao = $request->descricaoSecretaria;
-            $secretaria->save();
-        }
-
-        $user->name = $request->name;
-        $user->login = $request->login;
-        $user->email = $request->email;
-        $user->password = 'simbi@2018';
-        $user->cargo_id = $cargo->id;
-        $user->funcao_id = $funcao->id;
-        $user->secretaria_id = $secretaria->id;
-        $user->subordinacao_administrativa_id = $subAdm->id;
-        $user->escolaridade_id = $request->escolaridade;
-
-        $user->save();
-
-        $roles = $request['roles'];
-
-        if (isset($roles))
-        {
-             $role_r = Role::where('id', '=', $roles)->firstorFail();
-                $user->assignRole($role_r);
-        }
-
-        return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
-            'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2018');
     }
 
     /**
@@ -166,7 +121,8 @@ class UserController extends Controller
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
-//        $funcionario =
+
+
 
         return view('usuarios.editar', compact(
             'user',
@@ -190,60 +146,25 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
-        $cargo = Cargo::findOrNew($request->cargo);
-        if (!($cargo->exists))
-        {
-            $cargo->cargo = $request->novoCargo;
-            $cargo->save();
-        }
-
-        /** @var Funcao $funcao */
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
-        {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
-        }
-
-        $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
-        if (!($subAdm->exists))
-        {
-            $subAdm->descricao = $request->novaSubAdm;
-            $subAdm->save();
-        }
-
-        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
-        if (!($secretaria->exists))
-        {
-            $secretaria->sigla = $request->siglaSecretaria;
-            $secretaria->descricao = $request->descricaoSecretaria;
-            $secretaria->save();
-        }
+        $funcionario = Funcionario::findOrFail($user->funcionario_id);
 
         if ($request->filled('password'))
         {
             $this->validate($request, [
-                'name'=>'required',
-                'email'=>'required|email|unique:users,email,'.$id,
+                'email'=>'required|email|unique:funcionarios,email',
                 'password'=>'required|min:6|confirmed',
-                'subordinacaoAdministrativa'=>'required',
-                'identificacaoSecretaria'=>'required',
-                'cargo'=>'required',
-                'funcao'=>'required',
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
 
-            $user->update([
-                'name'=> $request->name,
-                'login'=> $request->login,
+            $funcionario->update([
+                'nome'=>$request->name,
                 'email'=> $request->email,
+            ]);
+
+            $user->update([
+                'login'=> $request->login,
                 'password'=> $request->password,
-                'cargo_id' => $cargo->id,
-                'funcao_id' => $funcao->id,
-                'secretaria_id' => $secretaria->id,
-                'subordinacao_administrativa_id' => $subAdm->id,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
@@ -251,35 +172,19 @@ class UserController extends Controller
         else
         {
             $this->validate($request, [
-                'name'=>'required',
-                'email'=>'required|email|unique:users,email,'.$id,
-                'subordinacaoAdministrativa'=>'required',
-                'identificacaoSecretaria'=>'required',
-                'cargo'=>'required',
-                'funcao'=>'required',
+                'email'=>'required|email|unique:funcionarios,email',
+            ]);
+
+            $funcionario->update([
+                'nome'=>$request->name,
+                'email'=> $request->email,
             ]);
 
             $user->update([
-                'name'=> $request->name,
                 'login'=> $request->login,
-                'email'=> $request->email,
-                'cargo_id' => $cargo->id,
-                'funcao_id' => $funcao->id,
-                'secretaria_id' => $secretaria->id,
-                'subordinacao_administrativa_id' => $subAdm->id,
-                'escolaridade_id'=>$request->escolaridade
+                'pergunta_seguranca_id'=> $request->perguntaSeguranca,
+                'resposta_seguranca'=> $request->respostaSeguranca,
             ]);
-        }
-
-        $roles = $request['roles'];
-
-        if ($roles != 0)
-        {
-            $user->roles()->sync($roles);
-        }
-        else
-        {
-            $user->roles()->detach();
         }
 
 

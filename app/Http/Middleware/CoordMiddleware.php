@@ -45,10 +45,10 @@ class CoordMiddleware
                 }
             }
             
-            if (!Auth::user()->hasPermissionTo('Coordenador')) //If user does //not have this permission
-            {
-                abort('401');
-            }
+//            if (!Auth::user()->hasPermissionTo('Coordenador')) //If user does //not have this permission
+//            {
+//                abort('401');
+//            }
 
         }
         return $next($request);

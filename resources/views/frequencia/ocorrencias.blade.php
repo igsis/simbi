@@ -63,7 +63,7 @@
                                             @hasrole('Administrador')
                                             {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
                                                 {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Cancelar {{$evento->nome_evento}}?" data-message='Desejar realmente cancelar esta ocorrência?' data-footer="Cancelar" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-trash"></i> Cancelar
+                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Cancelar {{$evento->nome_evento}}?" data-message='Desejar realmente cancelar esta ocorrência?' data-footer="Confirmar" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-trash"></i> Cancelar
                                                 </button>
                                             {{--</form>--}}
                                             @endhasrole
@@ -196,7 +196,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="hidden" name="id" id="EventoOcorrenciaId">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
                         <button type="submit" class="btn btn-danger" id="confirm">Excluir</button>
                     </div>
                 </form>

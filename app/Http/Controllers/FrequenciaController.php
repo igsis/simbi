@@ -318,7 +318,10 @@ class FrequenciaController extends Controller
     }
 
     public function listarFrequenciasEnviadas($id){
-        $frequencias =  Frequencia::where('equipamento_id',$id);
+        $frequencias =  Frequencia::where([
+                                    ['equipamento_id',$id],
+                                    ['publicado',2]
+        ]);
         return view ('frequencia.listarFrequenciasEnviadas',compact('frequencias'));
     }
 

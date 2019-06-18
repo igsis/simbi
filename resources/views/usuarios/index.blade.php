@@ -30,7 +30,7 @@
         <h1 class="page-header">
             <i class="glyphicon glyphicon-user"></i>
             {{-- Equipamento ativo --}}
-            <?php echo $pagina ?>
+            {{ $pagina }}
         </h1>
     </section>
 
@@ -71,7 +71,7 @@
                                 <td>{{ $user->funcionario->email }}</td>
                                 {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
                                 <td>{{ $user->equipamentos->implode('nome', ', ') }}</td>
-                                <td>{{ $user->roles->implode('name', '') }}</td>
+                                <td>{{ $user->nivelAcesso->nivel_acesso }}</td>
                                 <td>
                                     @if($type == 1)
                                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>

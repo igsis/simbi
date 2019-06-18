@@ -43,6 +43,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function nivelAcesso()
+    {
+        return $this->belongsTo(NivelAcesso::class);
+    }
     public function funcionario()
     {
         return $this->belongsTo(Funcionario::class);
@@ -124,5 +128,4 @@ class User extends Authenticatable
         });
 
     }
-
 }

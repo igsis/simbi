@@ -14,7 +14,7 @@ class Equipamento extends Model
 	    'igsis_id',
 		'nome',
         'tipo_servico_id',
-        'equipamento_sigla_id',
+        'equipamento_sigla',
         'secretaria_id',
         'subordinacao_administrativa_id',
         'tematico',
@@ -53,11 +53,6 @@ class Equipamento extends Model
     {
         return $this->hasOne(EquipamentosCapacidade::class);
     }
-
-	public function equipamentoSigla()
-	{
-		return $this->belongsTo(EquipamentoSigla::class);
-	}
 
     public function equipamentoIgsis()
     {

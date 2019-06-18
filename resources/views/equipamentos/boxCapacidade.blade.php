@@ -299,9 +299,9 @@
 </div>
 
 
-@include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Capacidade do Equipamento'])
+@include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Capacidade do Equipamento','actionForm'=>'equipamentos.gravaCapacidade','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Estacionamento'])
+@include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade do Estacionamento','idInput'=>'','funcaoJS'=>'','label'=>'Estacionamento'])
 
 @include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo'])
 
@@ -344,20 +344,23 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Adicionar Auditório</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input class="form-control" type="text" name="nome" id="nome">
+            <form action="{{route('equipamentos.gravaAuditorio',$equipamento->id)}}" method="POST">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" name="nome" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label>Capacidade</label>
+                        <input class="form-control" type="number" name="capacidade" id="capacidade">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Capacidade</label>
-                    <input class="form-control" type="number" name="capacidade" id="capacidade">
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" type="submit" onclick="">Adicionar</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-success" onclick="">Adicionar</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
@@ -387,6 +390,11 @@
     </div>
 </div>
 
-<script>
+<script defer>
+
+    //Alteração type input do modal capacidade
+    let txtCapacidade = document.querySelector("#txtCapacidade");
+    txtCapacidade.type = "number";
+
 
 </script>

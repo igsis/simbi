@@ -15,7 +15,6 @@ use Simbi\Models\Endereco;
 use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoOcorrencia;
 use Simbi\Models\EquipamentosCapacidade;
-use Simbi\Models\EquipamentoSigla;
 use Simbi\Models\EquipamentosIgsis;
 use Simbi\Models\Funcionamento;
 use Simbi\Models\Macrorregiao;
@@ -28,6 +27,7 @@ use Simbi\Models\Secretaria;
 use Simbi\Models\Status;
 use Simbi\Models\SubordinacaoAdministrativa;
 use Simbi\Models\TipoServico;
+use Simbi\Models\User;
 use Simbi\Models\Utilizacao;
 
 
@@ -48,7 +48,6 @@ class EquipamentoController extends Controller
     {
         $type = $types->type;
         $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->paginate(10);
-        $siglas = EquipamentoSigla::all();
         return view('equipamentos.index', compact('siglas', 'equipamentos', 'type'));
     }
 
@@ -92,7 +91,6 @@ class EquipamentoController extends Controller
     public function create()
     {
         $tipoServicos = TipoServico::orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::where('publicado', 1)->orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $secretarias = Secretaria::where('publicado', 1)->orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
@@ -122,7 +120,6 @@ class EquipamentoController extends Controller
     {
         $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->first();
         $tipoServicos = TipoServico::where('publicado', 1)->orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::where('publicado', 1)->orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::where('publicado', 1)->orderBy('descricao')->get();
         $secretarias = Secretaria::orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
@@ -166,16 +163,6 @@ class EquipamentoController extends Controller
             TipoServico::create($data);
             $data = TipoServico::where('publicado', 1)->orderBy('descricao')->get();
             return response()->json($data);
-        } elseif ($request->has('novaSigla')) {
-            $data = $this->validate($request, [
-                'sigla' => 'required|max:6|unique:equipamento_siglas',
-                'descricao' => 'required',
-                'roteiro' => 'nullable'
-            ]);
-
-            EquipamentoSigla::create($data);
-            $data = EquipamentoSigla::where('publicado', 1)->orderBy('descricao')->get();
-            return response()->json($data);
         } elseif ($request->has('novaSecretaria')) {
             $data = $this->validate($request, [
                 'sigla' => 'required|max:6|unique:secretarias',
@@ -217,7 +204,7 @@ class EquipamentoController extends Controller
                 'nome' => 'required|unique:equipamentos',
                 'igsis_id' => 'nullable',
                 'tipoServico' => 'required',
-                'equipamentoSigla' => 'required',
+                'equipamentoSigla' => 'required|max:6',
                 'identificacaoSecretaria' => 'required',
                 'subordinacaoAdministrativa' => 'required',
                 'tematico' => 'nullable',
@@ -263,7 +250,7 @@ class EquipamentoController extends Controller
                     'nome' => $request->nome,
                     'igsis_id' => $request->igsis_id,
                     'tipo_servico_id' => $request->tipoServico,
-                    'equipamento_sigla_id' => $request->equipamentoSigla,
+                    'equipamento_sigla' => $request->equipamentoSigla,
                     'secretaria_id' => $request->identificacaoSecretaria,
                     'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
                     'tematico' => $request->tematico,
@@ -319,7 +306,6 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
         $tipoServicos = TipoServico::orderBy('descricao')->get();
-        $siglas = EquipamentoSigla::orderBy('sigla')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $secretarias = Secretaria::orderBy('descricao')->get();
         $macrorregioes = Macrorregiao::orderBy('descricao')->get();
@@ -331,7 +317,6 @@ class EquipamentoController extends Controller
         return view('equipamentos.editar', compact(
             'equipamento',
             'tipoServicos',
-            'siglas',
             'subordinacoesAdministrativas',
             'secretarias',
             'macrorregioes',
@@ -388,7 +373,7 @@ class EquipamentoController extends Controller
         $equipamento->update([
             'nome' => $request->nome,
             'tipo_servico_id' => $request->tipoServico,
-            'equipamento_sigla_id' => $request->equipamentoSigla,
+            'equipamento_sigla' => $request->equipamentoSigla,
             'secretaria_id' => $request->identificacaoSecretaria,
             'subordinacao_administrativa_id' => $request->subordinacaoAdministrativa,
             'tematico' => $request->tematico,
@@ -594,9 +579,23 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::find($id);
 
-        $equipamento->capacidade()->create([]);
+        $equipamento->equipamentoCapacidade()->create([
+            'capacidade'=> $request->novo
+        ]);
 
-        return redirect();
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Capacidade cadastrada com sucesso');
+    }
+
+    public function gravaAuditorio(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->auditorio()->create([
+            'nome'=>$request->input('nome'),
+            'capacidade'=>$request->input('capacidade')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
     }
 
     public function criaArea($id)

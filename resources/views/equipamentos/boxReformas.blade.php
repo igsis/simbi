@@ -18,7 +18,7 @@
                             <label>Inicio da Reforma: </label> {{ date('d/m/Y', strtotime($reforma->inicio_reforma)) }} <br>
                             <label>Fim da Reforma : </label> {{ date('d/m/Y', strtotime($reforma->termino_reforma)) }} <br>
                             <label>Descrição da Reforma</label> {{ $reforma->descricao }} <br>
-                            <label>Usuário: </label> {{ $reforma->user->name  }}
+                            <label>Usuário: </label> {{ $reforma->user->funcionario->nome  }}
                         </div>
                     @endforeach
                 </td>
