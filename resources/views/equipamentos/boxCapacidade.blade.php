@@ -319,20 +319,20 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Adicionar Auditório</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Classificação</label>
-                    <select class="form-control" id="classificacao">
-                        <option>Pequeno</option>
-                        <option>Médio</option>
-                        <option>Grande</option>
-                    </select>
+            <form action="{{ route('equipamentos.gravaPraca',$equipamento->id) }}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Classificação</label>
+                        <select class="form-control" id="classificacao" name="classificacao">
+                            <option value=""></option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-success" onclick="">Adicionar</button>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" type="submit" onclick="">Adicionar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -390,13 +390,31 @@
     </div>
 </div>
 
-<script defer>
+@section('scripts_adicionais')
+    <script>
 
-    //Alteração type input do modal capacidade
-    let txtCapacidade = document.querySelectorAll("#txtCapacidade");
+        //Alteração type input do modal capacidade
+        let txtCapacidade = document.querySelectorAll("#txtCapacidade");
 
-    for(let x=0;x<txtCapacidade.length;x++){
-        txtCapacidade[x].type = 'number';
-    }
+        for(let x=0;x<txtCapacidade.length;x++){
+            txtCapacidade[x].type = 'number';
+        }
 
-</script>
+        //Carregar classificação
+        function carregarClassificacao() {
+            $.getJSON('{{url('/api/classificacao')}}', function (data) {
+                for (let x=0;x<data.length;x++){
+                    opcao = '<option value="'+ data[x].id +'">'+ data[x].classificacao +'</option>';
+
+                    $('#classificacao').append(opcao);
+
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            carregarClassificacao();
+        });
+
+    </script>
+@endsection
