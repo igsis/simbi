@@ -16,6 +16,6 @@ class Classificacao extends Model
 
     public function praca()
     {
-        return $this->hasOne(Praca::class,'');
+        return $this->hasOne(Praca::class);
     }
 }
