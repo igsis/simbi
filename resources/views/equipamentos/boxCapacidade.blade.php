@@ -373,20 +373,22 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Adicionar Teatro</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Nome</label>
-                    <input class="form-control" type="text" name="nome" id="nome">
+            <form action="{{route('equipamentos.gravaTeatro',$equipamento->id)}}" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" name="nome" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label>Capacidade</label>
+                        <input class="form-control" type="number" name="capacidade" id="capacidade">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Capacidade</label>
-                    <input class="form-control" type="number" name="capacidade" id="capacidade">
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" type="submit" onclick="">Adicionar</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-success" onclick="">Adicionar</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
