@@ -7,9 +7,9 @@
             <div role="tabpanel">
                 <ul class="nav nav-tabs">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle label-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white">
-                            Editar <span class="caret"></span>
-                        </a>
+{{--                        <a href="#" class="dropdown-toggle label-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white">--}}
+{{--                            Editar <span class="caret"></span>--}}
+{{--                        </a>--}}
                         <ul class="dropdown-menu">
                             @if (isset($equipamento->equipamentoCapacidade))
                                 <li><a href="#">Capacidade do Equipamento</a></li>
