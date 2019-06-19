@@ -303,9 +303,9 @@
 
 @include('layouts.modal',['idModal'=>'addEstacionamento','titulo'=>'Adicionar Capacidade do Estacionamento','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Estacionamento','actionForm'=>'equipamentos.gravaEstacionamento','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo'])
+@include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudos em Grupo','actionForm'=>'equipamentos.gravaEstudoGrupo','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudo Individual'])
+@include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudo Individual','actionForm'=>'equipamentos.gravaEstudoIndividual','equipamentoId'=>$equipamento->id])
 
 @include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Infantil'])
 

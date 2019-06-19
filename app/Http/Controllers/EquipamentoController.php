@@ -624,6 +624,28 @@ class EquipamentoController extends Controller
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Praça cadastrada com sucesso');
     }
 
+    public function gravaEstudoGrupo(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->estudoGrupo()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+    }
+
+    public function gravaEstudoIndividual(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->estudoIndividual()->create([
+            'quantidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+    }
+
     public function criaArea($id)
     {
         $equipamento = Equipamento::find($id);
