@@ -20,6 +20,7 @@ use Simbi\Models\Funcionamento;
 use Simbi\Models\Macrorregiao;
 use Simbi\Models\Padrao;
 use Simbi\Models\Porte;
+use Simbi\Models\Praca;
 use Simbi\Models\PrefeituraRegional;
 use Simbi\Models\Regiao;
 use Simbi\Models\Regional;
@@ -613,9 +614,12 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::findOrFail($id);
 
-        $equipamento->praca()->create([
-            'praca_classificacao_id'=>$request->input('classificacao')
-        ]);
+        $praca = new Praca();
+
+        $praca->equipamento_id = $equipamento->id;
+        $praca->praca_classificacao_id = $request->input('classificacao');
+
+        $praca->save();
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Praça cadastrada com sucesso');
     }

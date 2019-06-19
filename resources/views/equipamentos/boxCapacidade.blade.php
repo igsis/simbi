@@ -319,7 +319,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Adicionar Auditório</h4>
             </div>
-            <form action="{{ route('equipamentos.gravaPraca',$equipamento->id) }}" method="post">
+            <form action="{{ route('equipamentos.gravaPraca',$equipamento->id) }}" method="POST">
+                {{ csrf_field() }}
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Classificação</label>
