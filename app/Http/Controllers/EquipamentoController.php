@@ -646,6 +646,28 @@ class EquipamentoController extends Controller
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
     }
 
+    public function gravaSalaInfantil(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->infantil()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala infantil cadastrada com sucesso');
+    }
+
+    public function gravaSalaMultiuso(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->multiuso()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala Multiuso cadastrada com sucesso');
+    }
+
     public function criaArea($id)
     {
         $equipamento = Equipamento::find($id);

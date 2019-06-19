@@ -307,9 +307,9 @@
 
 @include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala de Estudo Individual','actionForm'=>'equipamentos.gravaEstudoIndividual','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Infantil'])
+@include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Infantil','actionForm'=>'equipamentos.gravaSalaInfantil','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaMulti','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Multiuso'])
+@include('layouts.modal',['idModal'=>'addSalaMulti','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Sala Multiuso','actionForm'=>'equipamentos.gravaSalaMultiuso','equipamentoId'=>$equipamento->id])
 
 
 <div class="modal fade" id="addPraca" role="dialog" aria-labelledby="addPracaLabel" aria-hidden="true">

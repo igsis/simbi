@@ -50,6 +50,10 @@
 
         Route::post('/{equipamento}/gravaSalaEstudoIndividual','EquipamentoController@gravaEstudoIndividual')->name('equipamentos.gravaEstudoIndividual');
 
+        Route::post('/{equipamento}/gravaSalaInfantil','EquipamentoController@gravaSalaInfantil')->name('equipamentos.gravaSalaInfantil');
+
+        Route::post('/{equipamento}/gravaSalaMultiuso','EquipamentoController@gravaSalaMultiuso')->name('equipamentos.gravaSalaMultiuso');
+
         Route::group(['prefix' => 'area/{equipamento}'], function(){
             Route::get('/', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
 
