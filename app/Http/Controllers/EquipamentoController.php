@@ -677,7 +677,7 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('capacidade')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Teatro cadastrada com sucesso');
     }
 
     public function criaArea($id)

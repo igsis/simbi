@@ -376,6 +376,7 @@
             <form action="{{route('equipamentos.gravaTeatro',$equipamento->id)}}" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
+                        {{ csrf_field() }}
                         <label>Nome</label>
                         <input class="form-control" type="text" name="nome" id="nome">
                     </div>
