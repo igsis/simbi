@@ -353,17 +353,25 @@
                 let dataFreq = $(linha).children('.dataFrequencia').text();
                 let data = dataFreq.split('/');
 
-                if (mes > data[1] ) {
+                if(data[1] == 12){
+                    if (ano > data[2] && dia <= 10){
+                        $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
+                    } else if (ano > data[2] && dia >= 10) {
+                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrencia)</span>').css('margin-right: 15px');
+                        let btn = $(linha).find('.desabilitar');
+                        btn.attr('disabled',true);
+                    }
+                } else if (mes > data[1] ) {
                     if (dia <= 10){
                         $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
-                    }else if(dia > 10){
+                    } else if(dia > 10){
                         $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrencia)</span>').css('margin-right: 15px');
                         let btn = $(linha).find('.desabilitar');
 
                         btn.attr('disabled',true);
 
                     }
-                }else if(mes < data[1]){
+                } else if(mes < data[1]){
                     $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrencia)</span>').css('margin-right: 15px');
                     $(linha).children('td').removeClass('bg-success');
                     $(linha).removeClass('bg-success').addClass('bg-danger');
