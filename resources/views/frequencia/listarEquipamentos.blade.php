@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>{{$equipamento->nome}}</td>
                                     <td>
-                                        <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
+                                        <a href="@if($type == 2){{ route('frequencia.enviada', $equipamento->id) }}@else {{ route('frequencia.ocorrencias', $equipamento->igsis_id) }} @endif" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
                                         <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias Portaria</a>
                                         <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de Público</a>
                                     </td>

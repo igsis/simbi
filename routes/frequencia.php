@@ -14,7 +14,7 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/{equipamento_igsis}/ocorrencias', 'FrequenciaController@listarOcorrencias')->name('frequencia.ocorrencias');
 
-    Route::post('/enviar','FrequenciaController@enviarFrequencia')->name('frequencia.enviarFrequencia');
+    Route::get('/enviar','FrequenciaController@enviarFrequencia')->name('frequencia.enviarFrequencia');
 
     Route::get('/{evento}/editar', 'FrequenciaController@editarOcorrencia')->name('frequencia.editarOcorrencia');
 
