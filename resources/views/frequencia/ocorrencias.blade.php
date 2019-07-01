@@ -354,29 +354,36 @@
                 let data = dataFreq.split('/');
 
                 if(data[1] == 12){
-                    if (ano > data[2] && dia <= 10){
+                    if (ano < data[2] && dia <= 10){
                         $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
                     } else if (ano > data[2] && dia >= 10) {
-                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrencia)</span>').css('margin-right: 15px');
+                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
                         let btn = $(linha).find('.desabilitar');
                         btn.attr('disabled',true);
                     }
-                } else if (mes > data[1] ) {
-                    if (dia <= 10){
-                        $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
-                    } else if(dia > 10){
-                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrencia)</span>').css('margin-right: 15px');
+                } else
+                 if (data[1] < mes) {
+                    if(data[1] == parseInt(mes)-1){
+                        if (dia <= 10){
+                            $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
+                        }else{
+                            $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
+                            let btn = $(linha).find('.desabilitar');
+                            btn.attr('disabled',true);
+                        }
+                    }else {
+                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
                         let btn = $(linha).find('.desabilitar');
-
                         btn.attr('disabled',true);
-
+                        $(linha).children('td').removeClass('bg-success');
                     }
-                } else if(mes < data[1]){
-                    $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrencia)</span>').css('margin-right: 15px');
-                    $(linha).children('td').removeClass('bg-success');
-                    $(linha).removeClass('bg-success').addClass('bg-danger');
-
                 }
+                //  else {
+                //     $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
+                //     $(linha).children('td').removeClass('bg-success');
+                //     $(linha).removeClass('bg-success').addClass('bg-danger');
+                //
+                // }
             }
         });
 
