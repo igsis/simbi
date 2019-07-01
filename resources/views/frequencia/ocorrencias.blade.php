@@ -16,7 +16,14 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bolder;
-            border-top: none;
+            margin: 0;
+        }
+
+        .evento td:nth-child(4){
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
         }
 
 
