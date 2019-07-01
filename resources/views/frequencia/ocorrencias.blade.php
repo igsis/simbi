@@ -374,6 +374,8 @@
                     }else {
                         $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
                         let btn = $(linha).find('.desabilitar');
+                        let ancora = $(linha).find('a');
+                        ancora.removeAttr('href','');
                         btn.attr('disabled',true);
                         $(linha).children('td').removeClass('bg-success');
                     }
