@@ -27,4 +27,15 @@
     <script src="{{asset('js/scripts.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
+
+    <script defer>
+        function arrumar() {
+            let body = document.querySelector('body');
+            let divModal = document.querySelector('.modal-backdrop');
+            body.removeChild(divModal);
+            body.style.paddingRight = '0px';
+
+        }
+    </script>
+
     @yield('scripts_adicionais')

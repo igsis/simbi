@@ -60,6 +60,9 @@
             display: flex;
             justify-content: center;
         }
+        .modal-open {
+            padding-right: 0px !important;
+        }
     </style>
 
     @yield('linksAdicionais')
