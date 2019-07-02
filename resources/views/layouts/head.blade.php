@@ -60,7 +60,7 @@
             display: flex;
             justify-content: center;
         }
-        .modal-open {
+        #tira-padding {
             padding-right: 0px !important;
         }
     </style>

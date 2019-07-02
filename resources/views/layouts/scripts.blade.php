@@ -28,11 +28,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
 
-    <script defer>
+    <script>
         function arrumar() {
             let body = document.querySelector('body');
             let divModal = document.querySelector('.modal-backdrop');
             body.removeChild(divModal);
+            body.setAttribute('id','tira-padding');
             body.style.paddingRight = '0px';
 
         }
