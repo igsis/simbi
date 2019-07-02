@@ -19,7 +19,7 @@
                         <button class="btn btn-success" type="submit">Adicionar</button>
                     </form>
                 @else
-                    <button class="btn btn-success" onclick="{{$funcaoJS}}();">Adicionar</button>
+                    <button class="btn btn-success" onclick="{{$funcaoJS}}(); arrumar();">Adicionar</button>
                 @endif
             </div>
         </div>
