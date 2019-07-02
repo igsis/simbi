@@ -43,7 +43,7 @@
                             </thead>
                             <tbody>
                             @foreach($frequencias as $frequencia)
-                                @if ($frequencia->eventoOcorrencia->data != "null" && $frequencia->eventoOcorrencia->publicado == 2)
+                                @if ($frequencia->eventoOcorrencia->data != "null" && $frequencia->eventoOcorrencia->publicado == $type)
                                     <tr>
                                         <td>{{$frequencia->eventoOcorrencia->eventosIgsis->nomeEvento}}</td>
                                         <td>

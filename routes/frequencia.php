@@ -8,8 +8,6 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/equipemanetos/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('frequencias.enviadas');
 
-    Route::get('/equipemanetos/naoEnviadas', 'FrequenciaController@frequenciasNaoEnviadas')->name('frequencias.naoEnviadas');
-
     Route::get('/{idEquipamento}/enviadas','FrequenciaController@listarFrequenciasEnviadas')->name('frequencia.enviada');
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
