@@ -56,8 +56,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('frequencia.index') }}"> Cadastrar </a></li>
-                    <li><a href="{{ route('equipamentos.enviada') }}"> Enviadas</a></li>
-                    <li><a href="#"> Não Enviadas</a></li>
+                    <li><a href="{{ route('frequencias.enviadas') }}"> Enviadas</a></li>
+                    <li><a href="{{ route('frequencias.naoEnviadas') }}"> Não Enviadas</a></li>
                     <li><a href="{{ route('frequencia.relatorio') }}">Relatório</a></li>
                 </ul>
             </li>
