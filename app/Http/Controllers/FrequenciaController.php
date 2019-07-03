@@ -318,10 +318,9 @@ class FrequenciaController extends Controller
         return view('frequencia.listarEquipamentos', compact('equipamentos','type'));
     }
 
-    public function listarFrequenciasEnviadas($id,Request $types){
-        $type = $types->type;
-        $frequencias =  Frequencia::where(['equipamento_id',$id])->get();
-        return view ('frequencia.listarFrequenciasEnviadas',compact('frequencias','type'));
+    public function listarFrequenciasEnviadas($id){
+        $frequencias =  Frequencia::where('equipamento_id',$id)->get();
+        return view ('frequencia.listarFrequenciasEnviadas',compact('frequencias'));
     }
 
     public function listaEquipamentos(){
