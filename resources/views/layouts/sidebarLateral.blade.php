@@ -49,15 +49,21 @@
                     <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Desativados</a></li>
                 </ul>
             </li>
+
+            <li>
+                <a href="{{ route('frequencia.index') }}">
+                    <i class="fa fa-calendar-o"></i> <span>Eventos</span>
+                </a>
+            </li>
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-book"></i> <span>Frequência</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('frequencia.index') }}"> Cadastrar </a></li>
+                    <li><a href="{{ route('frequencias.enviadas',['type'=>'1']) }}"> Cadastrar</a></li>
                     <li><a href="{{ route('frequencias.enviadas',['type'=>'2']) }}"> Enviadas</a></li>
-                    <li><a href="{{ route('frequencias.enviadas',['type'=>'1']) }}"> Não Enviadas</a></li>
                     <li><a href="{{ route('frequencia.relatorio') }}">Relatório</a></li>
                 </ul>
             </li>
