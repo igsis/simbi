@@ -53,7 +53,6 @@
 
         <!-- Main content -->
         <section class="content">
-            <blockquote>{{ dump($type) }}</blockquote>
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
