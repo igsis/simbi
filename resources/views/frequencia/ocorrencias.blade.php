@@ -62,10 +62,8 @@
                 <div class="box-body">
                     <div class="table-responsive">
                         <div class="btn-tabela">
-                            <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i
-                                        class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
                             <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i
-                                        class="glyphicon glyphicon-list"></i> Listar Eventos</a>
+                                        class="glyphicon glyphicon-list"></i> Adicionar Ocorrências</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
@@ -84,31 +82,31 @@
                                         <td>{{ $evento->nome_evento }}</td>
                                         <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                                            <td>
-                                                <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
-                                                   class="btn btn-info desabilitar" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-edit"></i> Editar</a>
-                                                <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')"
-                                                        class="btn btn-success" data-title="{{$evento->nome_evento}}"
-                                                        data-toggle="modal" data-target="#cadastroFrequencia"
-                                                        style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-plus-sign"></i> Frequência
-                                                </button>
-                                                @hasrole('Administrador')
-                                                {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
-                                                {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                                <button class="btn btn-danger desabilitar" type="button"
-                                                        data-toggle="modal"
-                                                        data-target="#confirmDelete"
-                                                        data-title="Cancelar {{$evento->nome_evento}}?"
-                                                        data-message='Desejar realmente cancelar esta ocorrência?'
-                                                        data-footer="Confirmar"
-                                                        onclick="preencherId('{{$evento->id}}')"><i
-                                                            class="glyphicon glyphicon-trash"></i> Cancelar
-                                                </button>
-                                                {{--</form>--}}
-                                                @endhasrole
-                                            </td>
+                                        <td>
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
+                                               class="btn btn-info desabilitar" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')"
+                                                    class="btn btn-success" data-title="{{$evento->nome_evento}}"
+                                                    data-toggle="modal" data-target="#cadastroFrequencia"
+                                                    style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-plus-sign"></i> Frequência
+                                            </button>
+                                            @hasrole('Administrador')
+                                            {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
+                                            {{--<input type="hidden" name="_method" value="DELETE">--}}
+                                            <button class="btn btn-danger desabilitar" type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#confirmDelete"
+                                                    data-title="Cancelar {{$evento->nome_evento}}?"
+                                                    data-message='Desejar realmente cancelar esta ocorrência?'
+                                                    data-footer="Confirmar"
+                                                    onclick="preencherId('{{$evento->id}}')"><i
+                                                        class="glyphicon glyphicon-trash"></i> Cancelar
+                                            </button>
+                                            {{--</form>--}}
+                                            @endhasrole
+                                        </td>
                                     </tr>
                                 @else
                                     <tr class="bg-success evento enviado">

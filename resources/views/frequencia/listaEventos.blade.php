@@ -81,8 +81,7 @@
                             </tfooter>
                         </table>
                     </div>
-                    <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success"><i
-                                class="glyphicon glyphicon-list"></i> Listar de Ocorrências</a>
+
                 </div>
             </div>
         </section>
