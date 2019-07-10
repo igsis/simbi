@@ -63,7 +63,7 @@
                     <div class="table-responsive">
                         <div class="btn-tabela">
                             <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i
-                                        class="glyphicon glyphicon-list"></i> Adicionar Ocorrências</a>
+                                        class="glyphicon glyphicon-plus"></i> Adicionar Ocorrências</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
