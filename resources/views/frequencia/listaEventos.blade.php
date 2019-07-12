@@ -37,13 +37,17 @@
                 </div>
                 <div class="box-body">
                     <div class="table-responsive">
+                        <div class="btn-tabela">
+                            <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar
+                                Evento</a>
+                        </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
-                                    <th width="50%">Eventos</th>
-                                    <th>Tipo do Evento</th>
-                                    <th>Operações</th>
-                                </tr>
+                            <tr>
+                                <th width="50%">Eventos</th>
+                                <th>Tipo do Evento</th>
+                                <th>Operações</th>
+                            </tr>
                             </thead>
                             <tbody>
                             @foreach($eventos as $evento)
@@ -52,7 +56,9 @@
                                     <td>{{ $evento->tipoEvento->tipo_evento }}</td>
                                     <td>
                                         {{--<a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>--}}
-                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id]) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
+                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id]) }}"
+                                           class="btn btn-success" style="margin-right: 3px"><i
+                                                    class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
                                         {{--@hasrole('Administrador')--}}
                                         {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
                                         {{--{{ csrf_field() }}--}}
@@ -75,7 +81,7 @@
                             </tfooter>
                         </table>
                     </div>
-                    <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar de Ocorrências</a>
+
                 </div>
             </div>
         </section>
@@ -87,8 +93,7 @@
 @section('scripts_adicionais')
     <script type="text/javascript">
 
-        $('#confirmDelete').on('show.bs.modal', function (e)
-        {
+        $('#confirmDelete').on('show.bs.modal', function (e) {
             $message = $(e.relatedTarget).attr('data-message');
             $(this).find('.modal-body p').text($message);
             $title = $(e.relatedTarget).attr('data-title');
@@ -102,8 +107,7 @@
         });
 
         // Form confirm (yes/ok) handler, submits form
-        $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
-        {
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
             $(this).data('form').submit();
         });
 

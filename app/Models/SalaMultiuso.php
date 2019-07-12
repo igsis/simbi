@@ -8,6 +8,10 @@ class SalaMultiuso extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+      'capacidade'
+    ];
+
     public function capacidade()
     {
         return $this->belongsTo(Equipamento::class);

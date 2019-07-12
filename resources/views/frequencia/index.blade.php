@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Frequência nos Equipamentos')
+@section('titulo','Eventos nos Equipamentos')
 
 @section('conteudo')
 
@@ -20,7 +20,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="glyphicon glyphicon-home"></i>
-                Frequência nos Equipamentos
+                Eventos nos Equipamentos
             </h1>
         </section>
 
@@ -47,17 +47,32 @@
                                     <td>{{$equipamento->nome}}</td>
                                     <td>
                                         @if($type == 1)
-                                            <a href="{{ route('frequencia.ocorrencias', $equipamento->igsis_id) }}" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
-                                            <a href="#" class="btn btn-success" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
+                                            <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}"
+                                               class="btn btn-success" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
+                                            <a href="#" class="btn btn-success" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
                                             @if ($equipamento->portaria == 1)
-                                                <a href="{{route('frequencia.portaria.cadastro', $equipamento->id)}}" class="btn btn-success" style="margin-right: 3px" ><i class="glyphicon glyphicon-plus-sign"></i> Preenchimento Mensal</a>
+                                                <a href="{{route('frequencia.portaria.cadastro', $equipamento->id)}}"
+                                                   class="btn btn-success" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-plus-sign"></i> Preenchimento
+                                                    Mensal</a>
                                             @else
-                                                <button class="btn btn-success" style="margin-right: 3px" data-toggle="modal" data-target="#cadastroPortariaSimples" onclick="{{route('frequencia.portaria.cadastro', $equipamento->id)}}"><i class="glyphicon glyphicon-plus-sign"></i> Preenchimento Mensal</button>
+                                                <button class="btn btn-success" style="margin-right: 3px"
+                                                        data-toggle="modal" data-target="#cadastroPortariaSimples"
+                                                        onclick="{{route('frequencia.portaria.cadastro', $equipamento->id)}}">
+                                                    <i class="glyphicon glyphicon-plus-sign"></i> Preenchimento Mensal
+                                                </button>
                                             @endif
                                         @else
-                                            <a href="{{ route('frequencia.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
-                                            <a href="#" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Evento Externo</a>
-                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}" class="btn btn-warning" style="margin-right: 3px"><i class="glyphicon glyphicon-stats"></i> Frequência Mensal</a>
+                                            <a href="{{ route('frequencia.listar', $equipamento->id) }}"
+                                               class="btn btn-warning" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
+                                            <a href="#" class="btn btn-warning" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-stats"></i> Frequência Evento Externo</a>
+                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
+                                               class="btn btn-warning" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-stats"></i> Frequência Mensal</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -65,10 +80,10 @@
                             </tbody>
                             <tfooter>
                                 <thead>
-                                    <tr>
-                                        <th>Nome do Equipamento</th>
-                                        <th width="60%">Operações</th>
-                                    </tr>
+                                <tr>
+                                    <th>Nome do Equipamento</th>
+                                    <th width="60%">Operações</th>
+                                </tr>
                                 </thead>
                             </tfooter>
                         </table>
@@ -85,24 +100,26 @@
                     <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Público Atendido</h4>
                 </div>
                 <!-- inicio do form -->
-                <form  method="post">
+                <form method="post">
                     <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-10">
                                 <label for="data">Data</label>
-                                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d">
-                                <input type="text" class="form-control" name="data" id="data">
-                                <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                                </div>
+                                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                                     data-date-end-date="0d">
+                                    <input type="text" class="form-control" name="data" id="data">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-10">
                                 <label for="nome">Quantidade</label>
-                                <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}">
+                                <input type="number" class="form-control" id="quantidade" name="quantidade"
+                                       value="{{ old('quantidade') }}">
                             </div>
                         </div>
                     </div>

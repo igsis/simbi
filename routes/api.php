@@ -17,5 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/classificacao',function (){
+   $class = \Simbi\Models\Classificacao::all();
+   return json_encode($class);
+});
 
 Route::get('/cargos','CargoController@cargosJson');

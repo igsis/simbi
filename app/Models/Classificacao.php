@@ -10,6 +10,10 @@ class Classificacao extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'classificacao'
+    ];
+
     public function praca()
     {
         return $this->hasOne(Praca::class);
