@@ -42,6 +42,20 @@
 
         Route::post('/{equipamento}/capacidadeAuditorio','EquipamentoController@gravaAuditorio')->name('equipamentos.gravaAuditorio');
 
+        Route::post('/{equipamento}/gravarEstacionamento','EquipamentoController@gravaEstacionamento')->name('equipamentos.gravaEstacionamento');
+
+        Route::post('/{equipamento}/gravaPraca','EquipamentoController@gravaPraca')->name('equipamentos.gravaPraca');
+
+        Route::post('/{equipamento}/gravaSalaEstudoGrupo','EquipamentoController@gravaEstudoGrupo')->name('equipamentos.gravaEstudoGrupo');
+
+        Route::post('/{equipamento}/gravaSalaEstudoIndividual','EquipamentoController@gravaEstudoIndividual')->name('equipamentos.gravaEstudoIndividual');
+
+        Route::post('/{equipamento}/gravaSalaInfantil','EquipamentoController@gravaSalaInfantil')->name('equipamentos.gravaSalaInfantil');
+
+        Route::post('/{equipamento}/gravaSalaMultiuso','EquipamentoController@gravaSalaMultiuso')->name('equipamentos.gravaSalaMultiuso');
+
+        Route::post('/{equipamento}/gravaTeatro','EquipamentoController@gravaTeatro')->name('equipamentos.gravaTeatro');
+
         Route::group(['prefix' => 'area/{equipamento}'], function(){
             Route::get('/', 'EquipamentoController@criaArea')->name('equipamentos.criaArea');
 

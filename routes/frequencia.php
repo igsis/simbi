@@ -6,13 +6,13 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/', 'FrequenciaController@index')->name('frequencia.index');
 
-    Route::get('/equipemanetos/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('equipamentos.enviada');
+    Route::get('/equipemanetos/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('frequencias.enviadas');
 
     Route::get('/{idEquipamento}/enviadas','FrequenciaController@listarFrequenciasEnviadas')->name('frequencia.enviada');
 
     Route::get('/relatorio', 'FrequenciaController@relatorio')->name('frequencia.relatorio');
 
-    Route::get('/{equipamento_igsis}/ocorrencias', 'FrequenciaController@listarOcorrencias')->name('frequencia.ocorrencias');
+    Route::get('/{equipamento_igsis}/ocorrencias/{type}', 'FrequenciaController@listarOcorrencias')->name('frequencia.ocorrencias');
 
     Route::post('/enviar','FrequenciaController@enviarFrequencia')->name('frequencia.enviarFrequencia');
 

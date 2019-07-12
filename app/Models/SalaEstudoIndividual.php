@@ -10,6 +10,10 @@ class SalaEstudoIndividual extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+      'quantidade'
+    ];
+
     public function capacidade()
     {
         return $this->belongsTo(Equipamento::class);

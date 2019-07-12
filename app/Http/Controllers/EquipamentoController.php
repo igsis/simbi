@@ -20,6 +20,7 @@ use Simbi\Models\Funcionamento;
 use Simbi\Models\Macrorregiao;
 use Simbi\Models\Padrao;
 use Simbi\Models\Porte;
+use Simbi\Models\Praca;
 use Simbi\Models\PrefeituraRegional;
 use Simbi\Models\Regiao;
 use Simbi\Models\Regional;
@@ -596,6 +597,87 @@ class EquipamentoController extends Controller
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
+    }
+
+    public function gravaEstacionamento(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->estacionamento()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Estacionamento cadastrada com sucesso');
+    }
+
+    public function gravaPraca(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $praca = new Praca();
+
+        $praca->equipamento_id = $equipamento->id;
+        $praca->praca_classificacao_id = $request->input('classificacao');
+
+        $praca->save();
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Praça cadastrada com sucesso');
+    }
+
+    public function gravaEstudoGrupo(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->estudoGrupo()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+    }
+
+    public function gravaEstudoIndividual(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->estudoIndividual()->create([
+            'quantidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+    }
+
+    public function gravaSalaInfantil(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->infantil()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala infantil cadastrada com sucesso');
+    }
+
+    public function gravaSalaMultiuso(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->multiuso()->create([
+            'capacidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala Multiuso cadastrada com sucesso');
+    }
+
+    public function gravaTeatro(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->teatro()->create([
+            'nome'=>$request->input('nome'),
+            'capacidade'=>$request->input('capacidade')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Teatro cadastrada com sucesso');
     }
 
     public function criaArea($id)

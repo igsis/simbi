@@ -60,6 +60,9 @@
             display: flex;
             justify-content: center;
         }
+        #tira-padding {
+            padding-right: 0px !important;
+        }
     </style>
 
     @yield('linksAdicionais')

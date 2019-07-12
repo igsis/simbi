@@ -2,6 +2,32 @@
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
+    <style>
+        .expirado {
+            color: red;
+        }
+
+        .quaseExpirado {
+            color: darkorange;
+        }
+
+        .evento td:first-child {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bolder;
+            margin: 0;
+        }
+
+        .evento td:nth-child(4) {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+        }
+
+
+    </style>
 @endsection
 
 @section('titulo','Ocorrências de Eventos')
@@ -27,7 +53,6 @@
 
         <!-- Main content -->
         <section class="content">
-
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -37,8 +62,8 @@
                 <div class="box-body">
                     <div class="table-responsive">
                         <div class="btn-tabela">
-                            <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Evento</a>
-                            <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-list"></i> Listar Eventos</a>
+                            <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}" class="btn btn-success"><i
+                                        class="glyphicon glyphicon-plus"></i> Adicionar Ocorrências</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
@@ -53,31 +78,57 @@
                             @foreach($eventos as $evento)
                                 <input type="hidden" value="{{ $igsis_id = $evento->igsis_id }}">
                                 @if(!(in_array($evento->id, $frequenciasCadastradas)))
-                                    <tr>
+                                    <tr class="evento">
                                         <td>{{ $evento->nome_evento }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                        <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td>
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')" class="btn btn-success" data-title="{{$evento->nome_evento}}" data-toggle="modal" data-target="#cadastroFrequencia" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Frequência</button>
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
+                                               class="btn btn-info desabilitar" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')"
+                                                    class="btn btn-success" data-title="{{$evento->nome_evento}}"
+                                                    data-toggle="modal" data-target="#cadastroFrequencia"
+                                                    style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-plus-sign"></i> Frequência
+                                            </button>
                                             @hasrole('Administrador')
                                             {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
-                                                {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Cancelar {{$evento->nome_evento}}?" data-message='Desejar realmente cancelar esta ocorrência?' data-footer="Confirmar" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-trash"></i> Cancelar
-                                                </button>
+                                            {{--<input type="hidden" name="_method" value="DELETE">--}}
+                                            <button class="btn btn-danger desabilitar" type="button"
+                                                    data-toggle="modal"
+                                                    data-target="#confirmDelete"
+                                                    data-title="Cancelar {{$evento->nome_evento}}?"
+                                                    data-message='Desejar realmente cancelar esta ocorrência?'
+                                                    data-footer="Confirmar"
+                                                    onclick="preencherId('{{$evento->id}}')"><i
+                                                        class="glyphicon glyphicon-trash"></i> Cancelar
+                                            </button>
                                             {{--</form>--}}
                                             @endhasrole
                                         </td>
                                     </tr>
                                 @else
-                                    <tr class="bg-success" id="linhaTb">
-                                        <td class="bg-success">{{ $evento->nome_evento }} <span class="text-center text-red text-bold expirado"></span></td>
-                                        <td class="bg-success" id="data">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                    <tr class="bg-success evento enviado">
+                                        <td class="bg-success">{{ $evento->nome_evento }} <span
+                                                    class="text-center text-red text-bold expirado"></span></td>
+                                        <td class="bg-success dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td class="bg-success" id="tdEditar">
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info batata" style="margin-right: 3px" id="btnEdita"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}" class="btn btn-success batata" role="button" id="btnEdita" aria-disabled="true" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Frequencia</a>
-                                            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#enviarFrequencia" data-title="{{$evento->nome_evento}}" data-message='Desejar realmente enviar?' data-footer="Enviar" onclick="preencherId('{{$evento->id}}')" onclick="preencherId('{{$evento->id}}')"><i class="glyphicon glyphicon-send"></i>&nbsp Enviar
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
+                                               class="btn btn-info desabilitar" style="margin-right: 3px" id="btnEdita"><i
+                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}"
+                                               class="btn btn-success" role="button" id="btnEdita" aria-disabled="true"
+                                               style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i>
+                                                Editar Frequencia</a>
+                                            <button class="btn btn-primary" type="button" data-toggle="modal"
+                                                    data-target="#enviarFrequencia"
+                                                    data-title="{{$evento->nome_evento}}"
+                                                    data-message='Desejar realmente enviar?' data-footer="Enviar"
+                                                    onclick="preencherId('{{$evento->id}}')"
+                                                    onclick="preencherId('{{$evento->id}}')"><i
+                                                        class="glyphicon glyphicon-send"></i>&nbsp Enviar
                                             </button>
                                         </td>
                                     </tr>
@@ -117,7 +168,8 @@
                         <div class="hidden">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Id da ocorrencia</label>
-                                <input class="form-control" type="text" id="evento_ocorrencia_id" name="evento_ocorrencia_id" value="">
+                                <input class="form-control" type="text" id="evento_ocorrencia_id"
+                                       name="evento_ocorrencia_id" value="">
                             </div>
                         </div>
 
@@ -136,31 +188,38 @@
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="email">Criança</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="crianca" name="crianca" value="{{old('crianca')}}" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" min="0" max="9999" id="crianca"
+                                           name="crianca" value="{{old('crianca')}}" onblur="calcular()"
+                                           onkeyup="calcular()">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="jovem">Jovem</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="jovem" name="jovem" value="{{old('jovem')}}" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" min="0" max="9999" id="jovem" name="jovem"
+                                           value="{{old('jovem')}}" onblur="calcular()" onkeyup="calcular()">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="adulto">Adulto</label>
-                                    <input class="form-control" type="number" id="adulto" min="0" max="9999" name="adulto" value="{{old('adulto')}}" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" id="adulto" min="0" max="9999"
+                                           name="adulto" value="{{old('adulto')}}" onblur="calcular()"
+                                           onkeyup="calcular()">
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
                                     <label for="idoso">Idoso</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="idoso" name="idoso" value="{{old('idoso')}}" onblur="calcular()" onkeyup="calcular()">
+                                    <input class="form-control" type="number" min="0" max="9999" id="idoso" name="idoso"
+                                           value="{{old('idoso')}}" onblur="calcular()" onkeyup="calcular()">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="publicoTotal">Publico Total: </label>
-                            <input type="text" class="form-control" readonly min="0" max="9999" name="total" id="publicoTotal" onload="calcular()">
+                            <input type="text" class="form-control" readonly min="0" max="9999" name="total"
+                                   id="publicoTotal" onload="calcular()">
                         </div>
 
                         <div class="form-group ">
@@ -169,7 +228,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btn-sub" form="form-modal" class="btn btn-success" data-dismiss="modal">Cadastrar</button>
+                        <button type="button" id="btn-sub" form="form-modal" class="btn btn-success"
+                                data-dismiss="modal">Cadastrar
+                        </button>
                         <!-- fim do form -->
                     </div>
                 </form>
@@ -231,8 +292,7 @@
 @section('scripts_adicionais')
     <script type="text/javascript">
 
-        $('#enviarFrequencia').on('show.bs.modal', function (e)
-        {
+        $('#enviarFrequencia').on('show.bs.modal', function (e) {
             $message = $(e.relatedTarget).attr('data-message');
             $(this).find('.modal-body p').text($message);
             $title = $(e.relatedTarget).attr('data-title');
@@ -245,8 +305,7 @@
             //  $(this).find('.modal-footer #confirm').data('form', form);
         });
 
-        $('#confirmDelete').on('show.bs.modal', function (e)
-        {
+        $('#confirmDelete').on('show.bs.modal', function (e) {
             $message = $(e.relatedTarget).attr('data-message');
             $(this).find('.modal-body p').text($message);
             $title = $(e.relatedTarget).attr('data-title');
@@ -260,8 +319,7 @@
         });
 
         // Form confirm (yes/ok) handler, submits form
-        $('#confirmDelete').find('.modal-footer #confirm').on('click', function()
-        {
+        $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
             $(this).data('form').submit();
         });
 
@@ -295,7 +353,7 @@
     </script>
 
     <script>
-        function preencherCampos(nomeEvento,nomeProjeto,idProjeto,idocorrencia) {
+        function preencherCampos(nomeEvento, nomeProjeto, idProjeto, idocorrencia) {
 
             document.querySelector('#nomeEvento').value = nomeEvento;
             document.querySelector('#nomeProjeto').value = nomeProjeto;
@@ -317,32 +375,55 @@
     <script>
 
         $(document).ready(function () {
-           var linhaTb = document.querySelectorAll('#linhaTb');
-           var data;
-           var hoje;
-           var btns;
-           var span;
-           for(var linha of linhaTb) {
-               data = linha.children[1].textContent;
-               partesData = data.split('/');
-               btns = linha.children[3].querySelectorAll('.batata');
-               span = linha.children[0].querySelector('span');
-               partesData[1] = parseInt(partesData[1]);
-               partesData[2] = parseInt(partesData[2]);
-               hoje = new Date();
 
-               if(partesData[1] <= (hoje.getMonth()+1)){
-                   if(hoje.getDate() > 10 && partesData[1] >= hoje.getMonth()+1){
-                        for (var btn of btns){
-                            btn.setAttribute("disabled",true);
-                            btn.style.pointerEvents = "none";
+            let linhaTb = document.querySelectorAll('.evento');
+
+            let dataHoje = new Date();
+            let dia = dataHoje.getDate().toString();
+            let mes = (dataHoje.getMonth() + 1).toString();
+            let ano = dataHoje.getFullYear().toString();
+
+            if (dia.length == 1) dia = "0" + dia;
+            if (mes.length == 1) mes = "0" + mes;
+
+            for (let linha of linhaTb) {
+
+                let dataFreq = $(linha).children('.dataFrequencia').text();
+                let data = dataFreq.split('/');
+
+                if (data[1] == 12) {
+                    if (ano < data[2] && dia <= 10) {
+                        $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
+                    } else if (ano > data[2] && dia >= 10) {
+                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
+                        let btn = $(linha).find('.desabilitar');
+                        btn.attr('disabled', true);
+                    }
+                } else if (data[1] < mes) {
+                    if (data[1] == parseInt(mes) - 1) {
+                        if (dia <= 10) {
+                            $(linha).children('td:first-child').append('<span class="quaseExpirado">Data quase expirando</span>');
+                        } else {
+                            $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
+                            let btn = $(linha).find('.desabilitar');
+                            btn.attr('disabled', true);
                         }
-                        span.append(document.createTextNode('(Data de Edição Expirada)'));
-                   }else{
-                       span.append(document.createTextNode('(Data Preste a Expirar)'));
-                   }
-               }
-           }
+                    } else {
+                        $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
+                        let btn = $(linha).find('.desabilitar');
+                        let ancora = $(linha).find('a');
+                        ancora.removeAttr('href', '');
+                        btn.attr('disabled', true);
+                        $(linha).children('td').removeClass('bg-success');
+                    }
+                }
+                //  else {
+                //     $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
+                //     $(linha).children('td').removeClass('bg-success');
+                //     $(linha).removeClass('bg-success').addClass('bg-danger');
+                //
+                // }
+            }
         });
 
     </script>

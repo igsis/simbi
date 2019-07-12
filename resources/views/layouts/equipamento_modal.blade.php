@@ -15,7 +15,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-success" name="novoServico" value="Adicionar">
+          <input type="submit" class="btn btn-success" onclick="arrumar()" name="novoServico" value="Adicionar">
         </div>
           </form>
       </div>
@@ -48,7 +48,7 @@
        </div>
        <div class="modal-footer">
          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-         <input type="submit" class="btn btn-success" name="novaSigla" value="Adicionar">
+         <input type="submit" class="btn btn-success" name="novaSigla" onclick="arrumar()" value="Adicionar">
        </div>
          </form>
      </div>
@@ -77,7 +77,7 @@
        </div>
        <div class="modal-footer">
          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-         <input type="submit" class="btn btn-success" name="novaSecretaria" value="Adicionar">
+         <input type="submit" class="btn btn-success" name="novaSecretaria" onclick="arrumar()" value="Adicionar">
        </div>
          </form>
      </div>
@@ -100,7 +100,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-success" name="novaSubordinacaoAdministrativa" value="Adicionar">
+          <input type="submit" class="btn btn-success" name="novaSubordinacaoAdministrativa" onclick="arrumar()" value="Adicionar">
         </div>
           </form>
       </div>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <input type="submit" class="btn btn-success" name="novaPrefeituraRegional" value="Adicionar">
+                    <input type="submit" class="btn btn-success" name="novaPrefeituraRegional" onclick="arrumar()" value="Adicionar">
                 </div>
                 </form>
             </div>
@@ -146,7 +146,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <input type="submit" class="btn btn-success" name="novoDistrito" value="Adicionar">
+                    <input type="submit" class="btn btn-success" name="novoDistrito" value="Adicionar" onclick="arrumar()">
                 </div>
                 </form>
             </div>
@@ -177,7 +177,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-success"  value="Adicionar">
+          <input type="submit" class="btn btn-success"  value="Adicionar" onclick="arrumar()">
       </div>
   </form>
 </div>
