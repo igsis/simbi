@@ -303,26 +303,26 @@
                                     <hr>
                                     <div class="form-group">
                                         <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
-                                            <input type="hidden" name="funcionamento[0]">
-                                            <input type="checkbox" name="domingo[0]" value="1"/><label for="diasemana07"
+                                            <input type="hidden" name="funcionamento[]">
+                                            <input type="checkbox" name="domingo[]" value="1"/><label for="diasemana07"
                                                                                                        style="padding:0 10px 0 5px;">
                                                 Domingo</label>
-                                            <input type="checkbox" name="segunda[0]" value="1"/><label for="diasemana01"
+                                            <input type="checkbox" name="segunda[]" value="1"/><label for="diasemana01"
                                                                                                        style="padding:0 10px 0 5px;">
                                                 Segunda</label>
-                                            <input type="checkbox" name="terca[0]" value="1"/><label for="diasemana02"
+                                            <input type="checkbox" name="terca[]" value="1"/><label for="diasemana02"
                                                                                                      style="padding:0 10px 0 5px;">
                                                 Terça</label>
-                                            <input type="checkbox" name="quarta[0]" value="1"/><label for="diasemana03"
+                                            <input type="checkbox" name="quarta[]" value="1"/><label for="diasemana03"
                                                                                                       style="padding:0 10px 0 5px;">
                                                 Quarta</label>
-                                            <input type="checkbox" name="quinta[0]" value="1"/><label for="diasemana04"
+                                            <input type="checkbox" name="quinta[]" value="1"/><label for="diasemana04"
                                                                                                       style="padding:0 10px 0 5px;">
                                                 Quinta</label>
-                                            <input type="checkbox" name="sexta[0]" value="1"/><label for="diasemana05"
+                                            <input type="checkbox" name="sexta[]" value="1"/><label for="diasemana05"
                                                                                                      style="padding:0 10px 0 5px;">
                                                 Sexta</label>
-                                            <input type="checkbox" name="sabado[0]" value="1"/><label for="diasemana06"
+                                            <input type="checkbox" name="sabado[]" value="1"/><label for="diasemana06"
                                                                                                       style="padding:0 10px 0 5px;">
                                                 Sábado</label>
                                         </div>
@@ -332,12 +332,12 @@
                                 <div class="row">
                                     <div class="form-group col-md-offset-4 col-md-2">
                                         <label for="horarioAbertura">Horário de Abertura</label>
-                                        <input type="text" class="form-control" name="horarioAbertura[0]"
+                                        <input type="text" class="form-control" name="horarioAbertura[]"
                                                id="horarioAbertura" data-mask="00:00">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="horarioFechamento">Horário de Fechamento</label>
-                                        <input type="text" class="form-control" name="horarioFechamento[0]"
+                                        <input type="text" class="form-control" name="horarioFechamento[]"
                                                id="horarioFechamento" data-mask="00:00">
                                     </div>
                                 </div>
