@@ -23,3 +23,9 @@ Route::get('/classificacao',function (){
 });
 
 Route::get('/cargos','CargoController@cargosJson');
+
+Route::get('/funcionamentos',function (){
+    $funcionamento = \Simbi\Models\Funcionamento::all();
+
+    return json_decode($funcionamento);
+})->name('api.funcionamentos');
