@@ -476,5 +476,26 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+           $('#tipoServico').change(function () {
+              var horarios = $('.horarios').html();
 
+              if ($(this).val() == 4){
+                  if (document.querySelector('.horarios')){
+
+                  }
+                  else{
+
+                  }
+
+              }
+              else{
+                alert('Qualquer outro');
+              }
+
+
+           });
+        });
+    </script>
 @endsection
