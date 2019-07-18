@@ -134,7 +134,6 @@ class EquipamentoController extends Controller
             compact(
                 'equipamentoIgsis',
                 'tipoServicos',
-                'siglas',
                 'secretarias',
                 'subordinacoesAdministrativas',
                 'macrorregioes',
