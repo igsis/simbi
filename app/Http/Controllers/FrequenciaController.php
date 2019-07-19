@@ -93,7 +93,7 @@ class FrequenciaController extends Controller
             'horario' => $request->hora
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', $igsis_id)->with('flash_message',
+        return redirect()->route('frequencia.ocorrencias', [$igsis_id,1])->with('flash_message',
             'Ocorrência Inserida Com Sucesso!');
     }
 
@@ -256,7 +256,7 @@ class FrequenciaController extends Controller
                 'observacao' => $request->observacao
             ]);
 
-        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
+        return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
             ->with('flash_message',
                 'Ocorrência do Evento Excluido com Sucesso.');
     }

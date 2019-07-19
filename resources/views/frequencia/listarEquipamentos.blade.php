@@ -2,6 +2,8 @@
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+
 @endsection
 
 @section('titulo','Frequência Enviadas')
@@ -42,16 +44,53 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($equipamentos as $equipamento)
-                                <tr>
-                                    <td>{{$equipamento->nome}}</td>
-                                    <td>
-                                        <a href="@if($type == 1) {{ route('frequencia.ocorrencias', [$equipamento->igsis_id,1]) }} @else {{ route('frequencia.ocorrencias', [$equipamento->igsis_id,2]) }} @endif" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
-                                        <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias Portaria</a>
-                                        <a href="{{ route('frequencia.enviada', $equipamento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de Público</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            @if($type == 1)
+                                @foreach($equipamentos as $equipamento)
+                                    <tr>
+                                        <td>{{$equipamento->nome}}</td>
+                                        <td>
+                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->igsis_id,1]) }}"
+                                               class="btn btn-info" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
+                                            @if($equipamento->portaria == 0)
+                                                <button type="button" data-toggle="modal"
+                                                        data-target="#cadastroPortariaSimples"
+                                                        data-title="Cadastro de Portaria"
+                                                        class="btn btn-info" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
+                                                    Portaria
+                                                </button>
+                                            @else
+                                                <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
+                                                   class="btn btn-info" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
+                                                    Portaria</a>
+                                            @endif
+                                            <a href="#" class="btn btn-info" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de
+                                                Público</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach($equipamentos as $equipamento)
+                                    <tr>
+                                        <td>{{$equipamento->nome}}</td>
+                                        <td>
+                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->igsis_id,2]) }}"
+                                               class="btn btn-info" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
+                                            <a href="{{ route('frequencia.portaria.lista') }}"
+                                               class="btn btn-info" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
+                                                Portaria</a>
+                                            <a href="#" class="btn btn-info" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de
+                                                Público</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                             <tfooter>
                                 <thead>
@@ -75,7 +114,7 @@
                     <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Público Atendido</h4>
                 </div>
                 <!-- inicio do form -->
-                <form  method="post">
+                <form method="post">
                     <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="row">
@@ -88,8 +127,9 @@
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="data">Data</label>
-                                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-end-date="0d">
-                                    <input type="text" class="form-control" name="data" id="data">
+                                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                                     data-date-end-date="0d">
+                                    <input type="text" class="form-control" name="data" id="calendario">
                                     <div class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </div>
@@ -108,7 +148,8 @@
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="nome">Quantidade</label>
-                                <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ old('quantidade') }}">
+                                <input type="number" class="form-control" id="quantidade" name="quantidade"
+                                       value="{{ old('quantidade') }}">
                             </div>
                         </div>
                     </div>
@@ -125,15 +166,7 @@
 
 @section('scripts_adicionais')
     <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-    <script type="text/javascript" defer>
-        $(function () {
-            $('#data').datepicker({
-                autoclose: true,
-                defaultDate: "11/1/2019",
-                locale: 'pt-br'
-            });
-        });
-    </script>
+    
     @include('scripts.tabelas_admin')
 
 @endsection

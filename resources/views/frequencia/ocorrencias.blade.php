@@ -187,7 +187,7 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <div class="form-group ">
-                                    <label for="email">Criança</label>
+                                    <label for="crianca">Criança</label>
                                     <input class="form-control" type="number" min="0" max="9999" id="crianca"
                                            name="crianca" value="{{old('crianca')}}" onblur="calcular()"
                                            onkeyup="calcular()">
