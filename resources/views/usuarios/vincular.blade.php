@@ -70,7 +70,6 @@
     <script>
         $(function() {
             $( ".calendario" ).datepicker({
-                dataFormat: 'dd/mm/yyyy',
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
                 dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -78,6 +77,7 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
             });
             $('.calendario').datepicker("option","showAnim","blind");
+            $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
     </script>
 @endsection
