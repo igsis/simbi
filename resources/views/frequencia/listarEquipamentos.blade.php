@@ -2,8 +2,7 @@
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 
 @section('titulo','Frequência Enviadas')
@@ -127,15 +126,7 @@
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="data">Data</label>
-                                <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
-                                     data-date-end-date="0d">
-                                    <input type="text" class="form-control" name="data" id="calendario">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </div>
-                                </div>
-                                {{--<label for="data">Data</label>--}}
-                                {{--<input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">--}}
+                                <input type="text" class="form-control" id="calendario">
                             </div>
                         </div>
                         <div class="row">
@@ -165,8 +156,22 @@
 @endsection
 
 @section('scripts_adicionais')
-    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-    
+{{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
     @include('scripts.tabelas_admin')
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            let data = new Date();
+            $('#calendario').datepicker("option","showAnim","blind");
+            $( "#calendario" ).datepicker({
+                dataFormat: 'dd/mm/yyyy',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+            });
+        });
+    </script>
 @endsection
