@@ -49,7 +49,7 @@ class EquipamentoController extends Controller
     {
         $type = $types->type;
         $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->paginate(10);
-        return view('equipamentos.index', compact('siglas', 'equipamentos', 'type'));
+        return view('equipamentos.index', compact( 'equipamentos', 'type'));
     }
 
 
@@ -104,7 +104,6 @@ class EquipamentoController extends Controller
         return view('equipamentos.cadastro',
             compact(
                 'tipoServicos',
-                'siglas',
                 'secretarias',
                 'subordinacoesAdministrativas',
                 'macrorregioes',
@@ -134,7 +133,6 @@ class EquipamentoController extends Controller
             compact(
                 'equipamentoIgsis',
                 'tipoServicos',
-                'siglas',
                 'secretarias',
                 'subordinacoesAdministrativas',
                 'macrorregioes',
