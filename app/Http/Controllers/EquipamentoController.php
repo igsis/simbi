@@ -832,6 +832,23 @@ class EquipamentoController extends Controller
         }
     }
 
+    public function alterarFormulario(){
+        $equipamentos = Equipamento::where('publicado',1)
+                                    ->where('portaria',1)
+                                    ->get()->count();
+
+        if($equipamentos != 0){
+            Equipamento::where('publicado',1)
+                ->orWhere('publicado',0)
+                ->update(['portaria'=>0]);
+        }else{
+            Equipamento::where('publicado',0)
+                ->orWhere('publicado',0)
+                ->update(['portaria'=>1]);
+        }
+
+
+    }
 
     public function editPortariaLote($id)
     {

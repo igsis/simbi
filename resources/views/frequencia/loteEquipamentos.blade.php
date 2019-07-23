@@ -48,39 +48,39 @@
                                     <td>{{$equipamento->nome}}</td>
                                     @if ($equipamento->portaria == 1)
                                         <td>Formulário Completo</td>
-                                        <td>
-                                            <form method="POST"
-                                                  action="{{ route('equipamentos.editPortariaLote', $equipamento->id) }}">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{ $equipamento->id }}">
-                                                <input type="hidden" name="_method" class="form-control" value="PUT">
-                                                <button class="btn btn-primary btn-block" type="button"
-                                                        data-toggle="modal"
-                                                        data-target="#confirmTroca" data-title="Formulário"
-                                                        data-message='Deseja Trocar o Formulário para o modelo Simples?'
-                                                        data-footer="Trocar"><span
-                                                            class="glyphicon glyphicon-tag"> </span> Trocar Formulário
-                                                </button>
-                                            </form>
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            <form method="POST"--}}
+{{--                                                  action="{{ route('equipamentos.editPortariaLote', $equipamento->id) }}">--}}
+{{--                                                {{ csrf_field() }}--}}
+{{--                                                <input type="hidden" name="id" value="{{ $equipamento->id }}">--}}
+{{--                                                <input type="hidden" name="_method" class="form-control" value="PUT">--}}
+{{--                                                <button class="btn btn-primary btn-block" type="button"--}}
+{{--                                                        data-toggle="modal"--}}
+{{--                                                        data-target="#confirmTroca" data-title="Formulário"--}}
+{{--                                                        data-message='Deseja Trocar o Formulário para o modelo Simples?'--}}
+{{--                                                        data-footer="Trocar"><span--}}
+{{--                                                            class="glyphicon glyphicon-tag"> </span> Trocar Formulário--}}
+{{--                                                </button>--}}
+{{--                                            </form>--}}
+{{--                                        </td>--}}
                                     @else
                                         <td>Formulário Simples</td>
 
-                                        <td>
-                                            <form method="POST"
-                                                  action="{{ route('equipamentos.editPortariaLote', $equipamento->id) }}">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name="id" value="{{ $equipamento->id }}">
-                                                <input type="hidden" name="_method" value="PUT">
-                                                <button class="btn btn-primary btn-block" type="button"
-                                                        data-toggle="modal" data-target="#confirmTroca"
-                                                        data-title="Formulário"
-                                                        data-message='Deseja Trocar o Formulário para o modelo Completo?'
-                                                        data-footer="Trocar"><span
-                                                            class="glyphicon glyphicon-tag"> </span> Trocar Formulário
-                                                </button>
-                                            </form>
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            <form method="POST"--}}
+{{--                                                  action="{{ route('equipamentos.editPortariaLote', $equipamento->id) }}">--}}
+{{--                                                {{ csrf_field() }}--}}
+{{--                                                <input type="hidden" name="id" value="{{ $equipamento->id }}">--}}
+{{--                                                <input type="hidden" name="_method" value="PUT">--}}
+{{--                                                <button class="btn btn-primary btn-block" type="button"--}}
+{{--                                                        data-toggle="modal" data-target="#confirmTroca"--}}
+{{--                                                        data-title="Formulário"--}}
+{{--                                                        data-message='Deseja Trocar o Formulário para o modelo Completo?'--}}
+{{--                                                        data-footer="Trocar"><span--}}
+{{--                                                            class="glyphicon glyphicon-tag"> </span> Trocar Formulário--}}
+{{--                                                </button>--}}
+{{--                                            </form>--}}
+{{--                                        </td>--}}
                                     @endif
                                 </tr>
                             @endforeach
