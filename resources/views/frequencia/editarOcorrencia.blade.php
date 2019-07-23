@@ -42,8 +42,8 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <div class="form-group ">
-                                    <label for="email">Data</label>
-                                    <input class="form-control" type="date" name="data" value="{{$ocorrencia->data}}" onblur="arrumaData()">
+                                    <label for="data">Data</label>
+                                    <input class="form-control calendario" type="text" name="data" value="{{$ocorrencia->data}}" onblur="arrumaData()">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -118,5 +118,23 @@
         //
         // });
     </script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( ".calendario" ).datepicker({
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+            });
+            $('.calendario').datepicker("option","showAnim","blind");
+            $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
+        });
+    </script>
+@endsection
 
+@section('linksAdicionais')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection

@@ -166,7 +166,7 @@
               {{csrf_field()}}    
                 <input type="hidden" class="form-control"  name="idEquipamento">                
                 <div class="form-group">
-                    <input type="date" class="form-control"  name="data" >
+                    <input type="text" class="form-control calendario"  name="data" >
                 </div>
                 <div class="form-group">                    
                     <input type="text" class="form-control"  name="ocorrencia" placeholder="Nota">
