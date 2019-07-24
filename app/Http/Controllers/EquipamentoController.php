@@ -48,28 +48,14 @@ class EquipamentoController extends Controller
     public function index(Request $types)
     {
         $type = $types->type;
-        $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->paginate(10);
-        return view('equipamentos.index', compact( 'equipamentos', 'type'));
+        $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->get();
+        $count = count(Equipamento::where('portaria', 1)->get());
+        return view('equipamentos.index', compact( 'equipamentos', 'type','count'));
     }
 
 
     public function importarEquipamentos()
     {
-//        $igsis = EquipamentosIgsis::where([
-//            ['idInstituicao', '=', 14],
-//            ['publicado', '=', 1],
-//        ])->pluck('idLocal')->toArray();
-//
-//        $simbi = Equipamento::all()->pluck('igsis_id')->toArray();
-//
-//        foreach ($igsis as $id){
-//            if (!(in_array($id, $simbi))){
-//                $equipamentos[] = EquipamentosIgsis::where('idLocal', '=', $id);
-//            }
-//        }
-//
-//        $equipamentos = $equipamentos->orderBy('sala')->paginate(10);
-
         $equipamentos = EquipamentosIgsis::where([
             ['idInstituicao', '=', 14],
             ['publicado', '=', 1]
@@ -833,21 +819,26 @@ class EquipamentoController extends Controller
     }
 
     public function alterarFormulario(){
-        $equipamentos = Equipamento::where('publicado',1)
-                                    ->where('portaria',1)
-                                    ->get()->count();
-
+        $equipamentos = Equipamento::where([
+            ['publicado',1],
+            ['portaria',1]
+        ])->get()->count();
+        $types = ['type'=>'1'];
         if($equipamentos != 0){
             Equipamento::where('publicado',1)
                 ->orWhere('publicado',0)
                 ->update(['portaria'=>0]);
+            return redirect()->route('equipamentos.index', ['type' => 1])
+                ->with('flash_message',
+                    'Formulário atualizado para Simples.');
         }else{
-            Equipamento::where('publicado',0)
+            Equipamento::where('publicado',1)
                 ->orWhere('publicado',0)
                 ->update(['portaria'=>1]);
+            return redirect()->route('equipamentos.index', ['type' => 1])
+                ->with('flash_message',
+                    'Formulário atualizado para Completo.');
         }
-
-
     }
 
     public function editPortariaLote($id)
