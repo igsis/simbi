@@ -276,7 +276,7 @@ class UserController extends Controller
 
         $type = $request->types;
 
-        $users = $user->search($dataForm)->orderBy('name')->paginate(10);
+        $users = $user->search($dataForm)->orderBy('name')->get();
 
         $equipamentos = Equipamento::all();
 
@@ -312,9 +312,13 @@ class UserController extends Controller
 
             foreach ($equipamentos as $id)
             {
+                $dataF = $request->dataFim;
+                $dataI = $request->dataInicio;
+                $dataF = date("Y-m-d",strtotime($dataF));
+                $dataI = date("Y-m-d",strtotime($dataI));
                 $pivotData = [
-                    'data_inicio'               =>  $request->dataInicio,
-                    'data_fim'                  =>  $request->dataFim,
+                    'data_inicio'               =>  $dataI,
+                    'data_fim'                  =>  $dataF,
                     'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
                 ];
                 $syncData[$id] = $pivotData;

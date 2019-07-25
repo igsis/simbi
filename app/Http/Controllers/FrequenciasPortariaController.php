@@ -61,11 +61,13 @@ class FrequenciasPortariaController extends Controller
             'data'          =>  'required',
             'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
+        $data = $request->data;
+        $data = date("Y-m-d",strtotime($data));
 
         $user =  Auth::user();
 
         $user->frequenciasPortarias()->create([
-            'data' => $request->data,
+            'data' => $data,
             'quantidade' => $request->quantidade,
             'equipamento_id' => $id
         ]);
@@ -107,8 +109,12 @@ class FrequenciasPortariaController extends Controller
 
         $user =  Auth::user();
 
+        $dataV = $request->data;
+        $data = date("Y-m-d",strtotime($dataV));
+
+
         $user->frequenciasPortarias()->create([
-            'data' => $request->data,
+            'data' => $data,
             'quantidade' => $request->total,
             'equipamento_id' => $id
         ])->complementoPortaria()->create([

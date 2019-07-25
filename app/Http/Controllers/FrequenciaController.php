@@ -85,11 +85,13 @@ class FrequenciaController extends Controller
             'data' => 'required',
             'hora' => 'required'
         ]);
+        $data = $request->data;
+        $data = date("Y-m-d",strtotime($data));
 
         EventoOcorrencia::create([
             'igsis_evento_id' => $igsis_evento_id,
             'igsis_id' => $igsis_id,
-            'data' => $request->data,
+            'data' => $data,
             'horario' => $request->hora
         ]);
 
@@ -142,9 +144,11 @@ class FrequenciaController extends Controller
             'data' => 'required',
             'hora' => 'required'
         ]);
+        $data = $request->data;
+        $data = date("Y-m-d",strtotime($data));
 
         $ocorrencia->update([
-            'data' => $request->data,
+            'data' => $data,
             'horario' => $request->hora
         ]);
 
