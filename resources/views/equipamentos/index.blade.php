@@ -27,7 +27,7 @@
         <section class="content-header">
             <h1 class="page-header"><i class="glyphicon glyphicon-home"></i>
                 {{-- Equipamento ativo --}}
-                <?= $pagina ?>
+                {{ $pagina }}
             </h1>
         </section>
 
@@ -45,7 +45,7 @@
                             @if($type == 1)
                                 <a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success"><i
                                             class="glyphicon glyphicon-plus"></i> &nbsp; Adicionar Equipamento</a>
-                                <a href="{{ route('equipamentos.importar') }}" class="btn btn-info"><i
+                                <a href="{{ route('equipamentos.importar') }}" class="btn bg-purple"><i
                                             class="glyphicon glyphicon-list-alt"></i> &nbsp; Importar do IGSIS</a>
                                 <button class="btn bg-navy" type="button" data-toggle="modal"
                                         data-target="#confirmTroca" data-title="Formulário"
