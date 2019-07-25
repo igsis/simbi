@@ -12,13 +12,13 @@
 
         <p class="text-muted text-center">Ativado</p>
 
-        <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="id" value="{{ $equipamento->id }}">
-            <input type="hidden" name="_method" class="form-control" value="PUT">
-            <button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Simples?' data-footer="Trocar"> Trocar Formulário
-            </button>
-        </form>
+{{--        <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}">--}}
+{{--            {{ csrf_field() }}--}}
+{{--            <input type="hidden" name="id" value="{{ $equipamento->id }}">--}}
+{{--            <input type="hidden" name="_method" class="form-control" value="PUT">--}}
+{{--            <button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Simples?' data-footer="Trocar"> Trocar Formulário--}}
+{{--            </button>--}}
+{{--        </form>--}}
 
     @else
 
@@ -26,13 +26,13 @@
 
         <p class="text-muted text-center">Ativado</p>
 
-        <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="id" value="{{ $equipamento->id }}">
-            <input type="hidden" name="_method" value="PUT">
-            <button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Completo?' data-footer="Trocar"> Trocar Formulário
-            </button>
-        </form>
+{{--        <form method="POST" action="{{ route('equipamentos.editPortaria', $equipamento->id) }}">--}}
+{{--            {{ csrf_field() }}--}}
+{{--            <input type="hidden" name="id" value="{{ $equipamento->id }}">--}}
+{{--            <input type="hidden" name="_method" value="PUT">--}}
+{{--            <button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#confirmTroca" data-title="Formulário" data-message='Deseja Trocar o Formulário para o modelo Completo?' data-footer="Trocar"> Trocar Formulário--}}
+{{--            </button>--}}
+{{--        </form>--}}
     @endif
 @endsection
 
@@ -103,24 +103,24 @@
 
     </section>
 
-    <div class="modal fade" id="confirmTroca" role="dialog" aria-labelledby="confirmTrocaLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><p>Formulário</p></h4>
-                </div>
-                <div class="modal-body">
-                    <p>Confirma?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" id="confirm">Trocar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--    <div class="modal fade" id="confirmTroca" role="dialog" aria-labelledby="confirmTrocaLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
+{{--                    <h4 class="modal-title"><p>Formulário</p></h4>--}}
+{{--                </div>--}}
+{{--                <div class="modal-body">--}}
+{{--                    <p>Confirma?</p>--}}
+{{--                </div>--}}
+{{--                <div class="modal-footer">--}}
+{{--                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>--}}
+{{--                    <button type="button" class="btn btn-success" id="confirm">Trocar</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 @endsection
 
 @section('scripts_adicionais')
