@@ -467,9 +467,11 @@ class EquipamentoController extends Controller
             'utilizacao' => 'required',
             'porte' => 'required',
             'padrao' => 'required',
-            'pavimento' => 'required|numeric',
-            'validade' => 'date'
+            'pavimento' => 'required|numeric'
         ]);
+
+        $data = $request->validade;
+        $dataValidade = date("Y-m-d",strtotime($data));
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
@@ -495,7 +497,7 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id->id,
-            'validade_avcb' => $request->validade
+            'validade_avcb' => $dataValidade
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
@@ -513,6 +515,9 @@ class EquipamentoController extends Controller
             'pavimento' => 'required|numeric',
             'validade' => 'date'
         ]);
+
+        $data = $request->validade;
+        $dataValidade = date("Y-m-d",strtotime($data));
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
@@ -539,7 +544,7 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id,
-            'validade_avcb' => $request->validade
+            'validade_avcb' => $dataValidade
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');

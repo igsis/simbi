@@ -94,8 +94,8 @@
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </div>
                                 </div>
-                                {{--<label for="data">Data</label>--}}
-                                {{--<input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">--}}
+                                <label for="data">Data</label>
+                                <input class="form-control" type="date" name="data" id="data" value="{{old('data')}}">
                             </div>
                         </div>
                         <div class="row">

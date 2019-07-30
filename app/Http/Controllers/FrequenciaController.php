@@ -85,11 +85,13 @@ class FrequenciaController extends Controller
             'data' => 'required',
             'hora' => 'required'
         ]);
+        $data = $request->data;
+        $data = date("Y-m-d",strtotime($data));
 
         EventoOcorrencia::create([
             'igsis_evento_id' => $igsis_evento_id,
             'igsis_id' => $igsis_id,
-            'data' => $request->data,
+            'data' => $data,
             'horario' => $request->hora
         ]);
 
@@ -127,11 +129,16 @@ class FrequenciaController extends Controller
 
     public function listaEventos($igisis_id)
     {
+        $eventosIgsis = EventosIgsis::where([
+            ['publicado',1],
+            ['idInstituicao',14],
+            ['dataEnvio','>=','2019-06-01']
+        ])->orderBy('nomeEvento')->get();
         $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
 
-        return view('frequencia.listaEventos', compact('eventos', 'equipamento'));
+        return view('frequencia.listaEventos', compact('eventos', 'equipamento','eventosIgsis'));
     }
 
     public function uploadOcorrencia(Request $request, $id)
@@ -142,9 +149,11 @@ class FrequenciaController extends Controller
             'data' => 'required',
             'hora' => 'required'
         ]);
+        $data = $request->data;
+        $data = date("Y-m-d",strtotime($data));
 
         $ocorrencia->update([
-            'data' => $request->data,
+            'data' => $data,
             'horario' => $request->hora
         ]);
 
