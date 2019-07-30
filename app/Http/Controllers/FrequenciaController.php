@@ -129,11 +129,16 @@ class FrequenciaController extends Controller
 
     public function listaEventos($igisis_id)
     {
+        $eventosIgsis = EventosIgsis::where([
+            ['publicado',1],
+            ['idInstituicao',14],
+            ['dataEnvio','>=','2019-06-01']
+        ])->orderBy('nomeEvento')->get();
         $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
 
-        return view('frequencia.listaEventos', compact('eventos', 'equipamento'));
+        return view('frequencia.listaEventos', compact('eventos', 'equipamento','eventosIgsis'));
     }
 
     public function uploadOcorrencia(Request $request, $id)

@@ -4,7 +4,6 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Simbi\Models\EventosIgsis;
-use Symfony\Component\EventDispatcher\Event;
 
 class TipoEventoIgsis extends Model
 {

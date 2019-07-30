@@ -3,7 +3,7 @@
 namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Simbi\TipoEventoIgsis;
+use Simbi\Models\TipoEventoIgsis;
 
 class EventosIgsis extends Model
 {
