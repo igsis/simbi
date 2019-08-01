@@ -147,28 +147,32 @@
         </section>
     </div>
     @if($type == 1)
-        <div class="modal fade modal-danger" id="confirmTroca" role="dialog" aria-labelledby="confirmTrocaLabel"
+        <div class="modal fade" id="confirmTroca" role="dialog" aria-labelledby="confirmTrocaLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title"><p>Alterar para Formulário {{ $count > 0 ? 'Completo' : 'Simples'}}?</p>
+                        <h4 class="modal-title"><p>Alterar para Formulário</p>
                         </h4>
                     </div>
-                    <div class="modal-body">
-
-                        <p>Desejá mesmo alterar o Formulário de todos equipamentos
-                            para {{ $count > 0 ? 'Completo' : 'Simples'}}?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <form action="{{route('equipamento.altPortaria')}}" method="post">
-                            {{csrf_field()}}
+                    <form action="{{route('equipamento.altPortaria')}}" method="post">
+                        {{csrf_field()}}
+                        <div class="modal-body">
+                            <p>Selecione quais equipamentos irão trocar o tipo de Formulário:</p>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="biblioteca" value="1">Bibliotecas CSMB
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="onibus" value="1">Ônibus Biblioteca
+                            </label>
+                        </div>
+                        <div class="modal-footer">
                             <input type="hidden" name="_method" value="PUT">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-success" id="confirm">Trocar</button>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

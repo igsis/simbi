@@ -823,27 +823,74 @@ class EquipamentoController extends Controller
         }
     }
 
-    public function alterarFormulario(){
-        $equipamentos = Equipamento::where([
-            ['publicado',1],
-            ['portaria',1]
-        ])->get()->count();
-        $types = ['type'=>'1'];
-        if($equipamentos != 0){
-            Equipamento::where('publicado',1)
-                ->orWhere('publicado',0)
-                ->update(['portaria'=>0]);
-            return redirect()->route('equipamentos.index', ['type' => 1])
-                ->with('flash_message',
-                    'Formulário atualizado para Simples.');
-        }else{
-            Equipamento::where('publicado',1)
-                ->orWhere('publicado',0)
-                ->update(['portaria'=>1]);
-            return redirect()->route('equipamentos.index', ['type' => 1])
-                ->with('flash_message',
-                    'Formulário atualizado para Completo.');
+    public function alterarFormulario(Request $request){
+
+        $biblioteca = $request->biblioteca;
+        $onibus = $request->onibus;
+
+        if ($biblioteca && $onibus){
+            $equipamentos = Equipamento::where([
+                ['publicado',1],
+                ['portaria',1]
+            ])->get()->count();
+            $types = ['type'=>'1'];
+            if($equipamentos != 0){
+                Equipamento::where('publicado',1)
+                    ->orWhere('publicado',0)
+                    ->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])
+                    ->with('flash_message','Atualizado Formulário');
+            }else{
+                Equipamento::where('publicado',1)
+                    ->orWhere('publicado',0)
+                    ->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])
+                    ->with('flash_message','Atualizado Formulário');
+            }
+        }elseif ($biblioteca){
+            $equipamentos = Equipamento::where([
+                ['tipo_servico_id',1],
+                ['portaria',1]
+            ])
+                ->orWhere('tipo_servico_id',2)
+                ->orWhere('tipo_servico_id',3)
+                ->orWhere('tipo_servico_id',5)->get()->count();
+            if ($equipamentos != 0){
+                Equipamento::where('tipo_servico_id',1)
+                    ->orWhere('tipo_servico_id',2)
+                    ->orWhere('tipo_servico_id',3)
+                    ->orWhere('tipo_servico_id',5)
+                    ->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])
+                    ->with('flash_message','Atualizado Formulário');
+            }else{
+                Equipamento::where('tipo_servico_id',1)
+                    ->orWhere('tipo_servico_id',2)
+                    ->orWhere('tipo_servico_id',3)
+                    ->orWhere('tipo_servico_id',5)
+                    ->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])
+                    ->with('flash_message','Atualizado Formulário');
+            }
+        }elseif($onibus){
+            $equipamentos = Equipamento::where([
+                ['tipo_servico_id',4],
+                ['portaria',1]
+            ])->get()->count();
+            if ($equipamentos != 0){
+                Equipamento::where('tipo_servico_id',4)
+                    ->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])
+                    ->with('flash_message','Atualizado Formulário');
+            }else{
+                Equipamento::where('tipo_servico_id',4)
+                    ->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])
+                    ->with('flash_message','Atualizado Formulário');
+            }
         }
+        return redirect()->route('equipamentos.index', ['type' => 1])
+            ->with('flash_message_danger','Selecione um tipo de equipamento');
     }
 
     public function editPortariaLote($id)
