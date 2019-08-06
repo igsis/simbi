@@ -153,16 +153,23 @@ class UserController extends Controller
         if ($request->filled('password'))
         {
             $this->validate($request, [
-                'email'=>'required|email|unique:funcionarios,email',
+                'email'=>'required|email',
                 'password'=>'required|min:6|confirmed',
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
-
-            $funcionario->update([
-                'nome'=>$request->name,
-                'email'=> $request->email,
-            ]);
+            if ($request->email == $funcionario->email){
+                $funcionario->update([
+                    'nome'=>$request->name,
+                    'email'=> $request->email,
+                ]);
+            }
+            else{
+                $funcionario->update([
+                    'nome'=>$request->name,
+                    'email'=> $request->email,
+                ]);
+            }
 
             $user->update([
                 'login'=> $request->login,
