@@ -841,11 +841,11 @@ class EquipamentoController extends Controller
         }elseif ($biblioteca){
             if ($tipoForm == 'on'){
                 Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Biblioteca para Formulário Completo.');
             }
             else{
                 Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Biblioteca para Formulário Simples.');
             }
         }elseif($onibus){
             if ($tipoForm == 'on'){
@@ -854,7 +854,7 @@ class EquipamentoController extends Controller
             }
             else{
                 Equipamento::where('tipo_servico_id',4)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Simples.');
             }
         }
         return redirect()->route('equipamentos.index', ['type' => 1])
