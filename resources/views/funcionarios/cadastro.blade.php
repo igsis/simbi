@@ -21,12 +21,12 @@
                     <div class="row">
                         <div class="form-group col-md-12 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                             <label for="name">Nome</label>
-                            <input class="form-control" type="text" name="nome" id="nome">
+                            <input class="form-control" type="text" name="nome" id="nome" value="{{old('nome')}}">
                         </div>
 
                         <div class="form-group col-md-12 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">E-mail</label>
-                            <input class="form-control" type="email" name="email" id="email">
+                            <input class="form-control" type="email" name="email" id="email" value="{{old('email')}}">
                         </div>
                     </div>
                     <div class="row">

@@ -32,14 +32,14 @@ class UserController extends Controller
      */
     public function index(Request $types)
     {
-
         $type = $types->type;
-        $users = [];
-        $funcionarios = Funcionario::where('publicado',2)->get();
-        foreach ($funcionarios as $funcionario){
-            foreach ($funcionario->users()->where('publicado',1)->get() as $user){
-                array_push($users,$user);
-            }
+        if ($type == 1){
+            $users = User::where('publicado', '=' ,$type)
+                ->orWhere('publicado', '=' , 2)
+                ->orderBy('id')->get();
+        }else{
+            $users = User::where('publicado', '=' ,$type)
+                ->orderBy('id')->get();
         }
 
         $equipamentos = Equipamento::orderBy('nome')->get();
