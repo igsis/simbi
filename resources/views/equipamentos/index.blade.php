@@ -2,6 +2,7 @@
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 @endsection
 
 @section('titulo')
@@ -51,7 +52,7 @@
                                         data-target="#confirmTroca" data-title="Formulário"
                                         data-message='Deseja Trocar o Formulário para o modelo Completo?'
                                         data-footer="Trocar"><i
-                                            class="fa fa-exchange"></i> &nbsp; Trocar Formulário
+                                            class="fa fa-exchange" id="botaomaluco"></i> &nbsp; Trocar Formulário
                                 </button>
                             @endif
                         </div>
@@ -159,13 +160,22 @@
                     <form action="{{route('equipamento.altPortaria')}}" method="post">
                         {{csrf_field()}}
                         <div class="modal-body">
-                            <p>Selecione quais equipamentos irão trocar o tipo de Formulário:</p>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="biblioteca" value="1">Bibliotecas CSMB
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="onibus" value="1">Ônibus Biblioteca
-                            </label>
+                            <div class="form-group">
+                                <p>Selecione quais equipamentos irão trocar o tipo de Formulário:</p>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="biblioteca" id="biblioteca" value="1">Bibliotecas CSMB
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="onibus" id="onibus" value="1">Ônibus Biblioteca
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <p>Selecione o tipo de Formulário:</p>
+                                <input name="tipoForm" type="checkbox" checked data-toggle="toggle" data-on="Completo"
+                                       data-off="Simples" data-onstyle="info" data-offstyle="primary" data-width="150">
+                            </div>
+
+
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="_method" value="PUT">
@@ -182,6 +192,9 @@
 @endsection
 
 @section('scripts_adicionais')
+
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
     <script type="text/javascript">
         // Script Msg Excluir Equipamento
         $('#confirmDelete').on('show.bs.modal', function (e) {
@@ -201,7 +214,12 @@
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
             $(this).data('form').submit();
         });
-
+        $(function () {
+            $('#toggle-btn').bootstrapToggle({
+                on: 'Enabled',
+                off: 'Disabled'
+            });
+        });
     </script>
     @includeIf('scripts.tabelas_admin')
 @endsection

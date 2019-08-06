@@ -827,66 +827,34 @@ class EquipamentoController extends Controller
 
         $biblioteca = $request->biblioteca;
         $onibus = $request->onibus;
+        $tipoForm = $request->tipoForm;
 
         if ($biblioteca && $onibus){
-            $equipamentos = Equipamento::where([
-                ['publicado',1],
-                ['portaria',1]
-            ])->get()->count();
-            $types = ['type'=>'1'];
-            if($equipamentos != 0){
-                Equipamento::where('publicado',1)
-                    ->orWhere('publicado',0)
-                    ->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])
-                    ->with('flash_message','Atualizado Formulário');
-            }else{
-                Equipamento::where('publicado',1)
-                    ->orWhere('publicado',0)
-                    ->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])
-                    ->with('flash_message','Atualizado Formulário');
+            if ($tipoForm == 'on'){
+                Equipamento::where('publicado',1)->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+            }
+            else{
+                Equipamento::where('publicado',1)->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
             }
         }elseif ($biblioteca){
-            $equipamentos = Equipamento::where([
-                ['tipo_servico_id',1],
-                ['portaria',1]
-            ])
-                ->orWhere('tipo_servico_id',2)
-                ->orWhere('tipo_servico_id',3)
-                ->orWhere('tipo_servico_id',5)->get()->count();
-            if ($equipamentos != 0){
-                Equipamento::where('tipo_servico_id',1)
-                    ->orWhere('tipo_servico_id',2)
-                    ->orWhere('tipo_servico_id',3)
-                    ->orWhere('tipo_servico_id',5)
-                    ->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])
-                    ->with('flash_message','Atualizado Formulário');
-            }else{
-                Equipamento::where('tipo_servico_id',1)
-                    ->orWhere('tipo_servico_id',2)
-                    ->orWhere('tipo_servico_id',3)
-                    ->orWhere('tipo_servico_id',5)
-                    ->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])
-                    ->with('flash_message','Atualizado Formulário');
+            if ($tipoForm == 'on'){
+                Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+            }
+            else{
+                Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
             }
         }elseif($onibus){
-            $equipamentos = Equipamento::where([
-                ['tipo_servico_id',4],
-                ['portaria',1]
-            ])->get()->count();
-            if ($equipamentos != 0){
-                Equipamento::where('tipo_servico_id',4)
-                    ->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])
-                    ->with('flash_message','Atualizado Formulário');
-            }else{
-                Equipamento::where('tipo_servico_id',4)
-                    ->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])
-                    ->with('flash_message','Atualizado Formulário');
+            if ($tipoForm == 'on'){
+                Equipamento::where('tipo_servico_id',4)->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Completo.');
+            }
+            else{
+                Equipamento::where('tipo_servico_id',4)->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
             }
         }
         return redirect()->route('equipamentos.index', ['type' => 1])
