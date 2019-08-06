@@ -55,7 +55,8 @@
                                                 <button type="button" data-toggle="modal"
                                                         data-target="#cadastroPortariaSimples"
                                                         data-title="Cadastro de Portaria"
-                                                        class="btn btn-info" style="margin-right: 3px"><i
+                                                        class="btn btn-info" style="margin-right: 3px"
+                                                        onclick="setarIdEquipamento({{ $equipamento->id }})"><i
                                                             class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
                                                     Portaria
                                                 </button>
@@ -79,7 +80,7 @@
                                             <a href="{{ route('frequencia.ocorrencias', [$equipamento->igsis_id,2]) }}"
                                                class="btn btn-info" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
-                                            <a href="{{ route('frequencia.portaria.lista') }}"
+                                            <a href="#"
                                                class="btn btn-info" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
                                                 Portaria</a>
@@ -113,7 +114,7 @@
                     <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Público Atendido</h4>
                 </div>
                 <!-- inicio do form -->
-                <form method="post">
+                <form action="{{route('frequencia.portaria.gravar')}}" method="post" autocomplete="off">
                     <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="row">
@@ -126,7 +127,7 @@
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="data">Data</label>
-                                <input type="text" class="form-control" id="calendario">
+                                <input type="text" class="form-control" id="calendario" name="data" autocomplete="off" maxlength="10">
                             </div>
                         </div>
                         <div class="row">
@@ -140,13 +141,14 @@
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="nome">Quantidade</label>
                                 <input type="number" class="form-control" id="quantidade" name="quantidade"
-                                       value="{{ old('quantidade') }}">
+                                       value="">
                             </div>
                         </div>
+                        <input type="hidden" name="id" id="idEquipamento" value="">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <input class="btn btn-success" type="submit" value="Cadastrar">
+                        <input class="btn btn-success" id="submitForm" type="submit" value="Cadastrar">
                     </div>
                 </form>
             </div>
@@ -156,22 +158,39 @@
 @endsection
 
 @section('scripts_adicionais')
-{{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
     @include('scripts.tabelas_admin')
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $(function() {
+        $(function () {
             let data = new Date();
-            $('#calendario').datepicker("option","showAnim","blind");
-            $( "#calendario" ).datepicker({
-                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+            $('#calendario').datepicker("option", "showAnim", "blind");
+            $("#calendario").datepicker({
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
             });
-            $('#calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
+            $('#calendario').datepicker("option", "dateFormat", "dd/mm/yy");
         });
+
+        $('#submitForm').click(function () {
+           let data = $('#calendario').val();
+           let nData = data.split('/');
+           let novaData = nData[2]+'-'+nData[1]+'-'+nData[0];
+
+           $('#calendario').val(novaData);
+
+        });
+    </script>
+
+    <script>
+        function setarIdEquipamento(id) {
+            let idEquipamento = document.querySelector('#idEquipamento');
+
+            idEquipamento.value = id;
+        }
     </script>
 @endsection

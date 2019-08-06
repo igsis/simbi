@@ -55,9 +55,10 @@ class FrequenciasPortariaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $this->validate($request, [
+            'id' => 'required',
             'data'          =>  'required',
             'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
@@ -67,10 +68,10 @@ class FrequenciasPortariaController extends Controller
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
             'quantidade' => $request->quantidade,
-            'equipamento_id' => $id
+            'equipamento_id' => $request->id
         ]);
 
-        return redirect()->route('frequencia.portaria.index')->with('flash_message',
+        return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
             'Frequência Inserida Com Sucesso!');
     }
 
@@ -107,8 +108,12 @@ class FrequenciasPortariaController extends Controller
 
         $user =  Auth::user();
 
+        $dataV = $request->data;
+        $data = date("Y-m-d",strtotime($dataV));
+
+
         $user->frequenciasPortarias()->create([
-            'data' => $request->data,
+            'data' => $data,
             'quantidade' => $request->total,
             'equipamento_id' => $id
         ])->complementoPortaria()->create([

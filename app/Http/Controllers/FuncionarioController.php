@@ -156,23 +156,20 @@ class FuncionarioController extends Controller
 
     }
 
-    public function create(Request $request)
+    public function create()
     {
-
-//        $funcionario = Funcionario::FindOrFail($request->id);
-
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $escolaridades = Escolaridade::all();
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
+
         return view('funcionarios.cadastro', compact(
             'secretarias',
             'subordinacoesAdministrativas',
             'escolaridades',
             'cargos',
-            'funcoes',
-            'funcionario'
+            'funcoes'
         ));
 
     }

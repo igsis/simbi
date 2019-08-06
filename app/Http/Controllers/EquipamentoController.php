@@ -48,28 +48,14 @@ class EquipamentoController extends Controller
     public function index(Request $types)
     {
         $type = $types->type;
-        $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->paginate(10);
-        return view('equipamentos.index', compact( 'equipamentos', 'type'));
+        $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->get();
+        $count = count(Equipamento::where('portaria', 1)->get());
+        return view('equipamentos.index', compact( 'equipamentos', 'type','count'));
     }
 
 
     public function importarEquipamentos()
     {
-//        $igsis = EquipamentosIgsis::where([
-//            ['idInstituicao', '=', 14],
-//            ['publicado', '=', 1],
-//        ])->pluck('idLocal')->toArray();
-//
-//        $simbi = Equipamento::all()->pluck('igsis_id')->toArray();
-//
-//        foreach ($igsis as $id){
-//            if (!(in_array($id, $simbi))){
-//                $equipamentos[] = EquipamentosIgsis::where('idLocal', '=', $id);
-//            }
-//        }
-//
-//        $equipamentos = $equipamentos->orderBy('sala')->paginate(10);
-
         $equipamentos = EquipamentosIgsis::where([
             ['idInstituicao', '=', 14],
             ['publicado', '=', 1]
@@ -481,9 +467,11 @@ class EquipamentoController extends Controller
             'utilizacao' => 'required',
             'porte' => 'required',
             'padrao' => 'required',
-            'pavimento' => 'required|numeric',
-            'validade' => 'date'
+            'pavimento' => 'required|numeric'
         ]);
+
+        $data = $request->validade;
+        $dataValidade = date("Y-m-d",strtotime($data));
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
@@ -509,7 +497,7 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id->id,
-            'validade_avcb' => $request->validade
+            'validade_avcb' => $dataValidade
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
@@ -527,6 +515,9 @@ class EquipamentoController extends Controller
             'pavimento' => 'required|numeric',
             'validade' => 'date'
         ]);
+
+        $data = $request->validade;
+        $dataValidade = date("Y-m-d",strtotime($data));
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
@@ -553,7 +544,7 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id,
-            'validade_avcb' => $request->validade
+            'validade_avcb' => $dataValidade
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');
@@ -832,6 +823,43 @@ class EquipamentoController extends Controller
         }
     }
 
+    public function alterarFormulario(Request $request){
+
+        $biblioteca = $request->biblioteca;
+        $onibus = $request->onibus;
+        $tipoForm = $request->tipoForm;
+
+        if ($biblioteca && $onibus){
+            if ($tipoForm == 'on'){
+                Equipamento::where('publicado',1)->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+            }
+            else{
+                Equipamento::where('publicado',1)->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+            }
+        }elseif ($biblioteca){
+            if ($tipoForm == 'on'){
+                Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+            }
+            else{
+                Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+            }
+        }elseif($onibus){
+            if ($tipoForm == 'on'){
+                Equipamento::where('tipo_servico_id',4)->update(['portaria'=>1]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Completo.');
+            }
+            else{
+                Equipamento::where('tipo_servico_id',4)->update(['portaria'=>0]);
+                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+            }
+        }
+        return redirect()->route('equipamentos.index', ['type' => 1])
+            ->with('flash_message_danger','Selecione um tipo de equipamento');
+    }
 
     public function editPortariaLote($id)
     {

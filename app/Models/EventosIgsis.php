@@ -3,6 +3,7 @@
 namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Simbi\Models\TipoEventoIgsis;
 
 class EventosIgsis extends Model
 {
@@ -51,6 +52,10 @@ class EventosIgsis extends Model
     public function eventoOcorrencia()
     {
         return $this->hasMany(EventoOcorrencia::class,'igsis_evento_id','idEvento');
+    }
+
+    public function tipoEventoIgsis(){
+        return $this->belongsTo(TipoEventoIgsis::class,'ig_tipo_evento_idTipoEvento','idTipoEvento');
     }
 
 }

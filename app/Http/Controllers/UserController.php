@@ -9,6 +9,7 @@ use Simbi\Models\Cargo;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Escolaridade;
 use Simbi\Models\Funcao;
+use Simbi\Models\Funcionamento;
 use Simbi\Models\NivelAcesso;
 use Simbi\Models\PerguntaSeguranca;
 use Simbi\Models\ResponsabilidadeTipo;
@@ -33,13 +34,15 @@ class UserController extends Controller
     {
 
         $type = $types->type;
+        $users = [];
+        $funcionarios = Funcionario::where('publicado',2)->get();
+        foreach ($funcionarios as $funcionario){
+            foreach ($funcionario->users()->where('publicado',1)->get() as $user){
+                array_push($users,$user);
+            }
+        }
 
-        $p = 2;
-        $users = User::whereHas('Funcionario', function ($query) use ($p) {
-            $query->where('publicado', '=', $p);
-        })->where('publicado','=',$type)->orderBy('id')->get();
-
-        $equipamentos = Equipamento::all();
+        $equipamentos = Equipamento::orderBy('nome')->get();
         return view('usuarios.index', compact('users', 'equipamentos','type'));
     }
 
@@ -58,7 +61,6 @@ class UserController extends Controller
         $nivelAcessos = NivelAcesso::all();
         return view('usuarios.cadastro', compact(
             'roles',
-            'secretarias',
             'nivelAcessos',
             'funcionario'
             ));
@@ -274,7 +276,7 @@ class UserController extends Controller
 
         $type = $request->types;
 
-        $users = $user->search($dataForm)->orderBy('name')->paginate(10);
+        $users = $user->search($dataForm)->orderBy('name')->get();
 
         $equipamentos = Equipamento::all();
 
@@ -310,9 +312,13 @@ class UserController extends Controller
 
             foreach ($equipamentos as $id)
             {
+                $dataF = $request->dataFim;
+                $dataI = $request->dataInicio;
+                $dataF = date("Y-m-d",strtotime($dataF));
+                $dataI = date("Y-m-d",strtotime($dataI));
                 $pivotData = [
-                    'data_inicio'               =>  $request->dataInicio,
-                    'data_fim'                  =>  $request->dataFim,
+                    'data_inicio'               =>  $dataI,
+                    'data_fim'                  =>  $dataF,
                     'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
                 ];
                 $syncData[$id] = $pivotData;

@@ -77,5 +77,6 @@
             Route::get('/{equipamento}', 'EquipamentoController@countOcorrencias')->name('ocorrencias.count');
         });
 
-
     });
+
+    Route::put('/equipamentos','EquipamentoController@alterarFormulario')->name('equipamento.altPortaria');
