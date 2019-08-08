@@ -734,16 +734,23 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::find($id);
         $user = Auth::user();
 
-        $data = $this->validate($request, [
-            'inicioReforma' => 'required',
-            'terminoReforma' => 'nullable|after:inicioReforma',
+        $this->validate($request, [
+            'inicioReforma' => 'required|after:terminoReforma',
+            'terminoReforma' => 'nullable',
             'descricaoReforma' => 'required'
         ]);
 
+        $dtInicio = $request->inicioReforma;
+        $dataInicio = date("Y-m-d",strtotime($dtInicio));
+
+        $dtTermino = $request->terminoReforma;
+        $dataTermino = explode('/', $dtTermino);
+        $data = $dataTermino[2].'-'.$dataTermino[1].'-'.$dataTermino[0];
+
         $equipamento->reformas()->create([
             'user_id' => $user->id,
-            'inicio_reforma' => $request->inicioReforma,
-            'termino_reforma' => $request->terminoReforma,
+            'inicio_reforma' => $dataInicio,
+            'termino_reforma' => $data,
             'descricao' => $request->descricaoReforma
         ]);
 
