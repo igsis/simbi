@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Nome do Evento</label>
-                                <input class="form-control" type="text" id="nome" name="nome">
+                                <input class="form-control" type="text" id="nome" name="nome" value="{{old('nome')}}">
                             </div>
                         </div>
 

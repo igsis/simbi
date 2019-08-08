@@ -475,6 +475,7 @@ class EquipamentoController extends Controller
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
+            'elevador' => 'required',
             'qtdVagasAcessiveis' => 'nullable'
         ]);
 

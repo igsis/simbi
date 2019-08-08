@@ -85,8 +85,10 @@ class FrequenciaController extends Controller
             'data' => 'required',
             'hora' => 'required'
         ]);
-        $data = $request->data;
-        $data = date("Y-m-d",strtotime($data));
+
+        $dataFormulario= $request->data;
+        $dtFormat = explode('/', $dataFormulario);
+        $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
         EventoOcorrencia::create([
             'igsis_evento_id' => $igsis_evento_id,
@@ -143,6 +145,7 @@ class FrequenciaController extends Controller
 
     public function uploadOcorrencia(Request $request, $id)
     {
+
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
         $this->validate($request, [

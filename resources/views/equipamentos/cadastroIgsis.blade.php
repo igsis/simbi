@@ -45,7 +45,7 @@
 
             <div class="form-group col-xs-12 col-md-6 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
                 <label for="equipamentoSigla">Sigla do Equipamento</label>
-                <input class="form-control" name="equipamentoSigla" id="equipamentoSigla">
+                <input class="form-control" name="equipamentoSigla" id="equipamentoSigla" value="{{old('equipamentoSigla')}}">
             </div>
         </div>
 
