@@ -36,16 +36,17 @@
 
                         <div class="form-group">
                             <label for="tipoEvento">Categoria do Evento</label>
-                            <input type="text" readonly class="form-control" value="{{ $evento->tipoEvento->tipo_evento }}">
+                            <input type="text" readonly class="form-control" value="{{ $evento->tipoEvento->tipo_evento }}" >
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <div class="form-group ">
                                     <label for="data">Data</label>
-                                    <input class="form-control calendario" type="text" name="data" value="{{$ocorrencia->data}}" onblur="arrumaData()">
+                                    <input class="form-control calendario" type="text" name="data" value="{{$ocorrencia->data}}"  autocomplete="off" onblur="arrumaData()">
                                 </div>
                             </div>
+
                             <div class="form-group col-md-6">
                                 <div class="form-group ">
                                     <label for="login">Hora</label>

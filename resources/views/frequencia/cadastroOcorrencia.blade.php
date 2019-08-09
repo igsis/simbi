@@ -41,7 +41,7 @@
                             <div class="form-group col-md-6">
                                 <div class="form-group ">
                                     <label for="data">Data</label>
-                                    <input class="form-control calendario" type="text" name="data" value="{{ old('data') }}" onblur="arrumaData()">
+                                    <input class="form-control calendario" type="text" name="data" value="{{ old('data') }}" autocomplete="off" onblur="arrumaData()">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
