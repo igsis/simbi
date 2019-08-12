@@ -55,7 +55,7 @@
                                     <td>{{ $evento->nome_evento }}</td>
                                     <td>{{ $evento->tipoEvento->tipo_evento }}</td>
                                     <td>
-                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id]) }}"
+                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id,$evento->id]) }}"
                                            class="btn btn-success" style="margin-right: 3px"><i
                                                     class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
                                     </td>
@@ -66,7 +66,7 @@
                                     <td>{{ $eventosIg->nomeEvento }}</td>
                                     <td>{{ $eventosIg->tipoEventoIgsis->tipoEvento }}</td>
                                     <td>
-                                        <a href="#"
+                                        <a href="{{ route('eventos.cadastro.ocorrencia',[$equipamento->igsis_id,$eventosIg->idEvento]) }}"
                                            class="btn btn-success" style="margin-right: 3px"><i
                                                     class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
                                     </td>

@@ -69,15 +69,15 @@ class FrequenciaController extends Controller
 
     }
 
-    public function cadastrarOcorrencia($igsis_id, $evento_igsis)
+    public function cadastrarOcorrencia($igsis_id, $evento_id)
     {
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
-        $evento = Evento::findOrFail($evento_igsis);
+        $evento = Evento::findOrFail($evento_id);
 
         return view('frequencia.cadastroOcorrencia', compact('equipamento', 'evento'));
     }
 
-    public function gravaOcorrencia($igsis_id, $evento_igsis=null, Request $request)
+    public function gravaOcorrencia($igsis_id, $evento_id, Request $request)
     {
         $this->validate($request, [
             'data' => 'required',
@@ -89,7 +89,7 @@ class FrequenciaController extends Controller
         $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
         EventoOcorrencia::create([
-            'igsis_evento_id' => $evento_igsis,
+            'igsis_evento_id' => $evento_id,
             'igsis_id' => $igsis_id,
             'data' => $data,
             'horario' => $request->hora
