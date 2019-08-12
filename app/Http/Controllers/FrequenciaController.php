@@ -153,14 +153,15 @@ class FrequenciaController extends Controller
             'hora' => 'required'
         ]);
         $data = $request->data;
-        $data = date("Y-m-d",strtotime($data));
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
         $ocorrencia->update([
             'data' => $data,
-            'horario' => $request->hora
+           'horario' => $request->hora
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
+       return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
             ->with('flash_message', 'Ocorrência do Evento editada com sucesso!');
     }
 
