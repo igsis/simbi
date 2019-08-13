@@ -194,7 +194,7 @@ class EquipamentoController extends Controller
                 'subordinacaoAdministrativa' => 'required',
                 'tematico' => 'nullable',
                 'nome_tematica' => 'nullable',
-                'telefone' => 'nullable|max:15',
+                'telefone' => 'required|max:15',
                 'telecentro' => 'required',
                 'acervoespecializado' => 'required',
                 'nucleobraile' => 'required',
@@ -213,7 +213,11 @@ class EquipamentoController extends Controller
                 'macrorregiao' => 'required',
                 'regiao' => 'required',
                 'regional' => 'required',
-                'observacao' => 'nullable'
+                'observacao' => 'nullable',
+
+                //Para a tabela funcionamento
+                'horarioAbertura' => 'required',
+                'horarioFechamento' => 'required'
             ]);
 
             $endereco = new Endereco();
@@ -333,7 +337,7 @@ class EquipamentoController extends Controller
             'subordinacaoAdministrativa' => 'required',
             'tematico' => 'nullable',
             'nome_tematica' => 'nullable',
-            'telefone' => 'nullable|max:15',
+            'telefone' => 'required|max:15',
             'telecentro' => 'required',
             'acervoespecializado' => 'required',
             'nucleobraile' => 'required',
@@ -352,7 +356,11 @@ class EquipamentoController extends Controller
             'distrito' => 'nullable',
             'macrorregiao' => 'nullable',
             'regiao' => 'nullable',
-            'regional' => 'nullable'
+            'regional' => 'nullable',
+
+            //Para a tabela funcionamento
+            'horarioAbertura' => 'required',
+            'horarioFechamento' => 'required'
         ]);
 
         $equipamento->update([
@@ -476,7 +484,7 @@ class EquipamentoController extends Controller
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
             'elevador' => 'required',
-            'qtdVagasAcessiveis' => 'nullable'
+            'qtdVagasAcessiveis' => 'required'
         ]);
 
         $acessibilidade = new Acessibilidade();

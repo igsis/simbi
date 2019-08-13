@@ -3,6 +3,7 @@
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 
 @section('titulo','Eventos Culturais')
@@ -30,6 +31,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ $evento->nome_evento }}</h3>
                 </div>
+
                 <div class="box-body">
                     <form method="POST" action="{{route('frequencia.updateOcorrencia', $ocorrencia->id)}}">
                         {{ csrf_field() }}
@@ -43,7 +45,7 @@
                             <div class="form-group col-md-6">
                                 <div class="form-group ">
                                     <label for="data">Data</label>
-                                    <input class="form-control calendario" type="text" name="data" value="{{$ocorrencia->data}}"  autocomplete="off" onblur="arrumaData()">
+                                    <input class="form-control calendario" type="text" name="data" value="{{date('m/d/Y', strtotime($ocorrencia->data))}}"  autocomplete="off" onblur="arrumaData()">
                                 </div>
                             </div>
 
@@ -134,8 +136,4 @@
             $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
     </script>
-@endsection
-
-@section('linksAdicionais')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
