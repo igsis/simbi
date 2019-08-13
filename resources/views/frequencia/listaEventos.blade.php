@@ -40,6 +40,8 @@
                         <div class="btn-tabela">
                             <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar
                                 Evento</a>
+                            <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}"  class="btn bg-purple"><i
+                                        class="glyphicon glyphicon-list-alt"></i> &nbsp;&nbsp;Importar Evento do IGSIS</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
@@ -56,17 +58,6 @@
                                     <td>{{ $evento->tipoEvento->tipo_evento }}</td>
                                     <td>
                                         <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id,$evento->id]) }}"
-                                           class="btn btn-success" style="margin-right: 3px"><i
-                                                    class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            @foreach($eventosIgsis as $eventosIg)
-                                <tr>
-                                    <td>{{ $eventosIg->nomeEvento }}</td>
-                                    <td>{{ $eventosIg->tipoEventoIgsis->tipoEvento }}</td>
-                                    <td>
-                                        <a href="{{ route('eventos.cadastro.ocorrencia',[$equipamento->igsis_id,$eventosIg->idEvento]) }}"
                                            class="btn btn-success" style="margin-right: 3px"><i
                                                     class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
                                     </td>
