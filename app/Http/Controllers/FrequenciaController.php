@@ -46,7 +46,7 @@ class FrequenciaController extends Controller
 
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
-        return view('frequencia.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
     }
 
     public function gravarEvento(Request $request, $igsis_id)
@@ -139,7 +139,43 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
 
-        return view('frequencia.listaEventos', compact('eventos', 'equipamento','eventosIgsis'));
+        return view('evento.listaEventos', compact('eventos', 'equipamento','eventosIgsis'));
+    }
+
+    public function editarEvento($igsis_id, $evento_id)
+    {
+        $eventos = Evento::FindOrFail($evento_id);
+        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+        $projetoEspecial = ProjetoEspecial::orderBy('projetoEspecial')->get();
+        $tipoEvento = TipoEvento::orderBy('tipo_evento')->get();
+        $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
+        $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
+
+        return view('evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+    }
+
+    public function updateEvento (Request $request, $evento_id)
+    {
+        $this->validate($request, [
+            'nome' => 'required',
+            'tipoEvento' => 'required',
+            'projetoEspecial' => 'required',
+            'contratacao' => 'required'
+
+        ]);
+
+        dd($evento_id);
+//        $evento = Evento::findOrFail($evento_id);
+//
+//        $evento->update([
+//            'igsis_evento_id' => $request->igsis_evento_id,
+//            'nome_evento' => $request->nome,
+//            'tipo_evento_id' => $request->tipoEvento,
+//            'projeto_especial_id' => $request->projetoEspecial,
+//            'contratacao_forma_id' => $request->contratacao
+//        ]);
+
+        //return redirect()->back()->with('flash_message', 'Equipamento Editado com Sucesso!');
     }
 
     public function uploadOcorrencia(Request $request, $id)
