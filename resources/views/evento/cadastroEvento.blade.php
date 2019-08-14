@@ -25,7 +25,7 @@
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{route('eventos.gravar', $equipamento->igsis_id) }}">
+                    <form method="POST" action="{{route('eventos.gravar', [$equipamento->igsis_id]) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -83,10 +83,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group hidden">
-                            <label for="id">Igsis Evento id</label>
-                            <input type="text" name="igsis_evento_id" id="igsis_evento_id" value="{{ $igsis_evento_id + 1}}">
                         </div>
                         <button class="btn btn-success"> Cadastrar</button>
                     </form>

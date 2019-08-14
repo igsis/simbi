@@ -58,28 +58,26 @@ class FrequenciaController extends Controller
             'contratacao' => 'required'
         ]);
 
-        Evento::create([
+         $evento = Evento::create([
             'igsis_evento_id' => $request->igsis_evento_id,
             'nome_evento' => $request->nome,
             'tipo_evento_id' => $request->tipoEvento,
             'projeto_especial_id' => $request->projetoEspecial,
             'contratacao_forma_id' => $request->contratacao
         ]);
+        return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento->id]);
 
-        $evento_igsis = $request->igsis_evento_id;
-
-        return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento_igsis]);
     }
 
-    public function cadastrarOcorrencia($igsis_id, $igsis_evento_id)
+    public function cadastrarOcorrencia($igsis_id, $evento_id)
     {
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
-        $evento = Evento::where('igsis_evento_id', $igsis_evento_id)->firstOrFail();
+        $evento = Evento::findOrFail($evento_id);
 
         return view('frequencia.cadastroOcorrencia', compact('equipamento', 'evento'));
     }
 
-    public function gravaOcorrencia($igsis_id, $igsis_evento_id, Request $request)
+    public function gravaOcorrencia($igsis_id, $evento_id, Request $request)
     {
         $this->validate($request, [
             'data' => 'required',
@@ -91,7 +89,7 @@ class FrequenciaController extends Controller
         $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
         EventoOcorrencia::create([
-            'igsis_evento_id' => $igsis_evento_id,
+            'igsis_evento_id' => $evento_id,
             'igsis_id' => $igsis_id,
             'data' => $data,
             'horario' => $request->hora
@@ -103,7 +101,8 @@ class FrequenciaController extends Controller
 
     public function listarOcorrencias($igsis_id, $type)
     {
-        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id', '')
+
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.id', '')
             ->where([
                 ['evento_ocorrencias.igsis_id', $igsis_id],
                 ['evento_ocorrencias.publicado', $type]
