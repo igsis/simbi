@@ -356,7 +356,11 @@ class EquipamentoController extends Controller
             'distrito' => 'nullable',
             'macrorregiao' => 'nullable',
             'regiao' => 'nullable',
-            'regional' => 'nullable'
+            'regional' => 'nullable',
+
+            //Para a tabela funcionamento
+            'horarioAbertura' => 'required',
+            'horarioFechamento' => 'required'
         ]);
 
         $equipamento->update([

@@ -333,12 +333,12 @@
                                     <div class="form-group col-md-offset-4 col-md-2">
                                         <label for="horarioAbertura">Horário de Abertura</label>
                                         <input type="text" class="form-control" name="horarioAbertura[]"
-                                               id="horarioAbertura" data-mask="00:00" required>
+                                               id="horarioAbertura" data-mask="00:00">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="horarioFechamento">Horário de Fechamento</label>
                                         <input type="text" class="form-control" name="horarioFechamento[]"
-                                               id="horarioFechamento" data-mask="00:00" required>
+                                               id="horarioFechamento" data-mask="00:00">
                                     </div>
                                 </div>
                             </div>

@@ -57,12 +57,12 @@
                             </div>
                         </div>
 
-{{--                        <div class="form-group">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="diaSemana">Dia da semana</label>--}}
-{{--                                <input type="text" readonly class="form-control" name="diaSemana" id="diaSemana" value="{{ ucwords(strftime('%A', strtotime($ocorrencia->data))) }}">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="diaSemana">Dia da semana</label>
+                                <input type="text" readonly class="form-control" name="diaSemana" id="diaSemana" value="{{ ucwords(strftime('%A', strtotime($ocorrencia->data))) }}">
+                            </div>
+                        </div>
 
                         <button class="btn btn-success" >Atualizar</button>
                     </form>
