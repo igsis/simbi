@@ -10,6 +10,10 @@ Route::group(['prefix' => '{equipamento_igsis}/eventos'], function (){
 
     Route::get('/eventos/importarIgsis', 'EventoController@importarIgsis')->name('evento.importar');
 
+    Route::get('/editar/{id}', 'EventoController@edit')->name('eventos.editar');
+
+    Route::post('/editar/{id}', 'EventoController@update')->name('eventos.update');
+
 });
 
 

@@ -91,9 +91,17 @@ class EventoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit ($igsis_id, $id)
     {
+        $eventos = Evento::FindOrFail($id);
+        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+        $projetoEspecial = ProjetoEspecial::orderBy('projetoEspecial')->get();
+        $tipoEvento = TipoEvento::orderBy('tipo_evento')->get();
+        $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
+        $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
+
+        return view('evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
     }
 
     /**
@@ -103,9 +111,27 @@ class EventoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update (Request $request, $igsis_id, $id)
     {
-        //
+        $this->validate($request, [
+            'nome' => 'required',
+            'tipoEvento' => 'required',
+            'projetoEspecial' => 'required',
+            'contratacao' => 'required'
+
+        ]);
+
+        $evento = Evento::findOrFail($id);
+
+        $evento->update([
+            'igsis_evento_id' => $request->igsis_evento_id,
+            'nome_evento' => $request->nome,
+            'tipo_evento_id' => $request->tipoEvento,
+            'projeto_especial_id' => $request->projetoEspecial,
+            'contratacao_forma_id' => $request->contratacao
+        ]);
+
+        return redirect()->back()->with('flash_message', 'Equipamento Editado com Sucesso!');
     }
 
     /**
