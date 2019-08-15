@@ -50,7 +50,7 @@
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ request()->routeIs('evento*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-calendar-o"></i> <span>Eventos</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>

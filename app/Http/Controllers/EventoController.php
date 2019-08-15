@@ -118,4 +118,16 @@ class EventoController extends Controller
     {
 
     }
+
+    public function importarIgsis($equipamento_igsis = null){
+
+        dd($equipamento_igsis);
+
+        $eventos = EventosIgsis::where([
+            ['publicado',1],
+            ['idInstituicao',14]
+        ])->get();
+
+        return view('evento.importarIgsis',compact('eventos'));
+    }
 }

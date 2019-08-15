@@ -8,4 +8,8 @@ Route::group(['prefix' => '{equipamento_igsis}/eventos'], function (){
 
     Route::get('/', 'EventoController@index')->name('eventos.listar');
 
+    Route::get('/eventos/importarIgsis', 'EventoController@importarIgsis')->name('evento.importar');
+
 });
+
+
