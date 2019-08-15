@@ -40,7 +40,7 @@
                         <div class="btn-tabela">
                             <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar
                                 Evento</a>
-                            <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}"  class="btn bg-purple"><i
+                            <a href="{{ route('evento.importar') }}"  class="btn bg-purple"><i
                                         class="glyphicon glyphicon-list-alt"></i> &nbsp;&nbsp;Importar Evento do IGSIS</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
@@ -57,8 +57,6 @@
                                     <td>{{ $evento->nome_evento }}</td>
                                     <td>{{ $evento->tipoEvento->tipo_evento }}</td>
                                     <td>
-                                        <a href="{{ route('eventos.editar', [$equipamento->igsis_id,$evento->id]) }}"
-                                           class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar Evento</a> &nbsp &nbsp;
                                         <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id,$evento->id]) }}"
                                            class="btn btn-success" style="margin-right: 3px"><i
                                                     class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>

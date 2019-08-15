@@ -34,16 +34,7 @@ Route::group(['prefix' => 'frequencia'], function(){
 
 });
 
-Route::group(['prefix' => '{equipamento_igsis}/eventos'], function (){
-    Route::get('/cadastro', 'FrequenciaController@cadastrarEvento')->name('eventos.cadastro');
-
-    Route::post('/cadastro', 'FrequenciaController@gravarEvento')->name('eventos.gravar');
-
-    Route::get('/', 'FrequenciaController@listaEventos')->name('eventos.listar');
-
-    Route::get('/editar/{evento_id}', 'FrequenciaController@editarEvento')->name('eventos.editar');
-
-    Route::post('/editar', 'FrequenciaController@updateEvento')->name('eventos.update');
+Route::group(['prefix' => '{equipamento_igsis}/ocorrencia'], function (){
 
     Route::get('/cadastro/ocorrencia/{evento_id}', 'FrequenciaController@cadastrarOcorrencia')->name('eventos.cadastro.ocorrencia');
 
