@@ -119,15 +119,27 @@ class EventoController extends Controller
 
     }
 
-    public function importarIgsis($equipamento_igsis = null){
-
-        dd($equipamento_igsis);
+    public function importarIgsis($idEquipamento){
 
         $eventos = EventosIgsis::where([
             ['publicado',1],
-            ['idInstituicao',14]
-        ])->get();
+            ['idInstituicao',14],
+            ['nomeEvento','not like','%[CANCELADO]%'],
+        ])
+            ->whereYear('dataEnvio','>=','2019')
+            ->orderBy('nomeEvento','desc')
+            ->get();
 
-        return view('evento.importarIgsis',compact('eventos'));
+        $cadastrados = Evento::all()->pluck('igsis_evento_id')->toArray();
+
+        return view('evento.importarIgsis',compact('eventos','cadastrados','idEquipamento'));
+    }
+
+    public function cadastroImportacao($equipamento_igsis,$igsis_id){
+
+    }
+
+    public function gravarImportacao($equipamento_igsis,$igsis_id){
+
     }
 }
