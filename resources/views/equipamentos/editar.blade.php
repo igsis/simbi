@@ -8,6 +8,12 @@
 @section ('conteudo')
     <div class="content-wrapper">
 
+        <div class="row">
+            <div class="col-xs-12">
+                @includeIf('layouts.erros')
+            </div>
+        </div>
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 class="page-header">@yield('tituloPagina')</h1>

@@ -41,7 +41,11 @@
                                     <select name="tipoEvento" id="tipoEvento" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($tipoEvento as $evento)
-                                            <option value="{{ $evento->id }}">{{ $evento->tipo_evento }}</option>
+                                            @if ($evento->id == old('tipoEvento') || $evento->id == $eventos->tipo_evento_id)
+                                                <option value="{{ $evento->id }}" selected>{{ $evento->tipo_evento }}</option>
+                                            @else
+                                                <option value="{{ $evento->id }}">{{ $evento->tipo_evento }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -58,7 +62,11 @@
                                     <select name="projetoEspecial" id="projetoEspecial" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($projetoEspecial as $projeto)
-                                            <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                            @if($projeto->idProjetoEspecial == old('projetoEspecial') || $eventos->projeto_especial_id == $projeto->idProjetoEspecial))
+                                                <option value=" {{ $projeto->idProjetoEspecial }} " selected    >{{ $projeto->projetoEspecial }}</option>
+                                            @else
+                                                <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -77,7 +85,7 @@
                                     <select name="contratacao" id="contratacao" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($contratacao as $contrata)
-                                            @if ($contrata->id == old('contratacao'))
+                                            @if ($contrata->id == old('contratacao') || $eventos->contratacao_forma_id == $contrata->id)
                                                 <option value="{{$contrata->id}}" selected>{{$contrata->forma_contratacao}}</option>
                                             @else
                                                 <option value="{{$contrata->id}}">{{$contrata->forma_contratacao}}</option>

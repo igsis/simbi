@@ -131,7 +131,7 @@ class EventoController extends Controller
             'contratacao_forma_id' => $request->contratacao
         ]);
 
-        return redirect()->back()->with('flash_message', 'Equipamento Editado com Sucesso!');
+        return redirect()->back()->with('flash_message', 'Evento Editado com Sucesso!');
     }
 
     /**

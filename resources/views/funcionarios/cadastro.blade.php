@@ -112,12 +112,10 @@
                             <select class="form-control" name="funcao" id="funcao">
                                 <option value="">Selecione...</option>
                                 @foreach ($funcoes as $funcao)
-                                    @if($funcao->publicado == 1)
-                                        @if ($funcao->id == old('funcao'))
-                                             <option value="{{$funcao->id}}" selected>{{$funcao->funcao}}</option>
-                                        @else
+                                    @if ($funcao->id == old('funcao'))
+                                        <option value="{{$funcao->id}}" selected>{{$funcao->funcao}}</option>
+                                    @else
                                             <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
-                                        @endif
                                     @endif
                                 @endforeach
                             </select>
