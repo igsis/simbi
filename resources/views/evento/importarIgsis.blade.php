@@ -47,10 +47,10 @@
                                     <td>{{ $evento->nomeEvento }}</td>
                                     @if(!(in_array($evento->idEvento, $cadastrados)))
                                         <td>
-                                            <button class="btn btn-success">
+                                            <a href="{{ route('evento.importar.cadastro', [$idEquipamento,$evento->idEvento]) }}" class="btn btn-success">
                                                 <i class="glyphicon glyphicon-plus"></i>
                                                 Importar Evento
-                                            </button>
+                                            </a>
                                         </td>
                                     @else
                                         <td>

@@ -25,13 +25,14 @@
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{route('eventos.gravar', [$equipamento->igsis_id]) }}">
+                    <form method="POST" action="{{-- route('eventos.gravar', [$equipamento->igsis_id]) --}}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Nome do Evento</label>
-                                <input class="form-control" type="text" id="nome" name="nome" value="{{old('nome')}}">
+                                <input class="form-control" type="text" id="nome" name="nome"
+                                       value="{{$evento->nomeEvento}}">
                             </div>
                         </div>
 
@@ -49,7 +50,8 @@
                             </div>
                             <div class="form-group col-xs-2 col-md-1 col-sm-2">
                                 <label for="">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addTipoEvento">
+                                <button type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                        data-target="#addTipoEvento">
                                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
                                 </button>
                             </div>
@@ -59,14 +61,19 @@
                                     <select name="projetoEspecial" id="projetoEspecial" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($projetoEspecial as $projeto)
-                                            <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                            @if($evento->projetoEspecial == $projeto->idProjetoEspecial)
+                                                <option value=" {{ $projeto->idProjetoEspecial }}" checked>{{ $projeto->projetoEspecial }}</option>
+                                            @else
+                                                <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-xs-2 col-md-1 col-sm-2">
                                 <label for="">&emsp;</label>
-                                <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#addProjEspecial">
+                                <button type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                        data-target="#addProjEspecial">
                                     <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>
                                 </button>
                             </div>
@@ -98,8 +105,7 @@
 
 @section('scripts_adicionais')
     <script type="text/javascript">
-        function insertTipoEvento()
-        {
+        function insertTipoEvento() {
             let select = document.getElementById("tipoEvento"),
                 div = document.getElementById("divTipoEvento"),
                 i = {{$tipoEvento->count()}},
@@ -108,8 +114,7 @@
                 newInput = document.createElement("INPUT"),
                 newOptionVal = document.createTextNode(txtVal);
 
-            if (txtVal !== "")
-            {
+            if (txtVal !== "") {
                 newOption.appendChild(newOptionVal);
                 newOption.setAttribute("value", `${i + 1}`);
                 select.insertBefore(newOption, select.lastChild);
@@ -123,8 +128,8 @@
             $('#addTipoEvento').modal('hide');
             $("input[id='novoTipoEvento']").val('');
         }
-        function insertProjEspecial()
-        {
+
+        function insertProjEspecial() {
             let select = document.getElementById("projetoEspecial"),
                 div = document.getElementById("divProjEspecial"),
                 i = {{$tipoEvento->count()}},
@@ -133,8 +138,7 @@
                 newInput = document.createElement("INPUT"),
                 newOptionVal = document.createTextNode(txtVal);
 
-            if (txtVal !== "")
-            {
+            if (txtVal !== "") {
                 newOption.appendChild(newOptionVal);
                 newOption.setAttribute("value", `${i + 1}`);
                 select.insertBefore(newOption, select.lastChild);

@@ -136,7 +136,17 @@ class EventoController extends Controller
     }
 
     public function cadastroImportacao($equipamento_igsis,$igsis_id){
+        $evento =  EventosIgsis::findOrFail($igsis_id);
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
+        $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
+        $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
+        return view('evento.cadastroEventoIgsis',compact(
+            'evento',
+            'projetoEspecial',
+            'tipoEvento',
+            'contratacao'
+        ));
     }
 
     public function gravarImportacao($equipamento_igsis,$igsis_id){
