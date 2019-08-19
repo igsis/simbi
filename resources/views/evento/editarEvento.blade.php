@@ -14,7 +14,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-flag"></i> Cadastrar Evento <br></h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-flag"></i> Editar Evento <br></h1>
         </section>
 
         <!-- Main content -->
@@ -25,13 +25,12 @@
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{route('eventos.gravar', [$equipamento->igsis_id]) }}">
+                    <form method="POST" action="{{route('eventos.update', [$equipamento->igsis_id, $eventos->id]) }}">
                         {{ csrf_field() }}
-
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Nome do Evento</label>
-                                <input class="form-control" type="text" id="nome" name="nome" value="{{old('nome')}}">
+                                <input class="form-control" type="text" id="nome" name="nome" value="{{$eventos->nome_evento}}">
                             </div>
                         </div>
 
@@ -42,12 +41,12 @@
                                     <select name="tipoEvento" id="tipoEvento" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($tipoEvento as $evento)
-                                            @if ($evento->id == old('tipoEvento'))
+                                            @if ($evento->id == old('tipoEvento') || $evento->id == $eventos->tipo_evento_id)
                                                 <option value="{{ $evento->id }}" selected>{{ $evento->tipo_evento }}</option>
                                             @else
                                                 <option value="{{ $evento->id }}">{{ $evento->tipo_evento }}</option>
                                             @endif
-                                                @endforeach
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -63,7 +62,11 @@
                                     <select name="projetoEspecial" id="projetoEspecial" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($projetoEspecial as $projeto)
-                                            <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                            @if($projeto->idProjetoEspecial == old('projetoEspecial') || $eventos->projeto_especial_id == $projeto->idProjetoEspecial))
+                                                <option value=" {{ $projeto->idProjetoEspecial }} " selected    >{{ $projeto->projetoEspecial }}</option>
+                                            @else
+                                                <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -82,10 +85,10 @@
                                     <select name="contratacao" id="contratacao" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($contratacao as $contrata)
-                                            @if ($contrata->id == old('contratacao'))
-                                                <option value="{{ $contrata->id }}">{{ $contrata->forma_contratacao }}</option>
+                                            @if ($contrata->id == old('contratacao') || $eventos->contratacao_forma_id == $contrata->id)
+                                                <option value="{{$contrata->id}}" selected>{{$contrata->forma_contratacao}}</option>
                                             @else
-                                                <option value="{{ $contrata->id }}" selected>{{ $contrata->forma_contratacao }}</option>
+                                                <option value="{{$contrata->id}}">{{$contrata->forma_contratacao}}</option>
                                             @endif
                                         @endforeach
                                     </select>
