@@ -10,7 +10,7 @@
 @endsection
 @section('conteudo')
 
-        <form method="POST" action="{{ route('equipamentos.gravaReforma', $equipamento->id) }}">
+        <form method="POST" action="{{ route('equipamentos.gravaReforma', $equipamento->id) }}" autocomplete="off">
             {{ csrf_field() }}
 
             <div class="row form-group">

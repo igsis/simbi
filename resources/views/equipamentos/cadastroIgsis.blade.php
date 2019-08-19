@@ -8,7 +8,7 @@
 
     <div id="sucesso" hidden class="alert "><em></em></div>
 
-    <form method="POST" action="{{ route('equipamentos.index') }}">
+    <form method="POST" action="{{ route('equipamentos.index') }}" autocomplete="off">
         {{ csrf_field() }}
 
         <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">

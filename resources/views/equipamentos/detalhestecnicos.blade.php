@@ -38,7 +38,7 @@ if($path == 'equipamentos.atualizaDetalhes')
                 </div>
             </div>
 
-            <form method="POST" action="{{ route($path, $equipamento->id) }}">
+            <form method="POST" action="{{ route($path, $equipamento->id) }}" autocomplete="off">
                 {{ csrf_field() }}
                 @if($pathAtualiza)
                     <input type="hidden" name="_method" value="PUT">

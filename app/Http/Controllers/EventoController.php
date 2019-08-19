@@ -21,15 +21,15 @@ class EventoController extends Controller
     public function index($igisis_id)
     {
         $eventosIgsis = EventosIgsis::where([
-            ['publicado',1],
-            ['idInstituicao',14],
-            ['dataEnvio','>=','2019-06-01']
+            ['publicado', 1],
+            ['idInstituicao', 14],
+            ['dataEnvio', '>=', '2019-06-01']
         ])->orderBy('nomeEvento')->get();
         $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
 
-        return view('evento.listaEventos', compact('eventos', 'equipamento','eventosIgsis'));
+        return view('evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
     }
 
     /**
@@ -145,15 +145,55 @@ class EventoController extends Controller
 
     }
 
-    public function importarIgsis($equipamento_igsis = null){
-
-        dd($equipamento_igsis);
+    public function importarIgsis($idEquipamento)
+    {
 
         $eventos = EventosIgsis::where([
-            ['publicado',1],
-            ['idInstituicao',14]
-        ])->get();
+            ['publicado', 1],
+            ['idInstituicao', 14],
+            ['nomeEvento', 'not like', '%[CANCELADO]%'],
+        ])
+            ->whereYear('dataEnvio', '>=', '2019')
+            ->orderBy('nomeEvento', 'desc')
+            ->get();
 
-        return view('evento.importarIgsis',compact('eventos'));
+        $cadastrados = Evento::all()->pluck('igsis_evento_id')->toArray();
+
+        return view('evento.importarIgsis', compact('eventos', 'cadastrados', 'idEquipamento'));
+    }
+
+    public function cadastroImportacao($equipamento_igsis, $igsis_id)
+    {
+        $evento = EventosIgsis::findOrFail($igsis_id);
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
+        $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
+        $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
+
+        return view('evento.cadastroEventoIgsis', compact(
+            'evento',
+            'projetoEspecial',
+            'tipoEvento',
+            'contratacao',
+            'equipamento_igsis'
+        ));
+    }
+
+    public function gravarImportacao(Request $request, $igsis_id)
+    {
+        $this->validate($request, [
+            'nome' => 'required',
+            'tipoEvento' => 'required',
+            'projetoEspecial' => 'required',
+            'contratacao' => 'required'
+        ]);
+
+        $evento = Evento::create([
+            'igsis_evento_id' => $request->igsis_evento_id,
+            'nome_evento' => $request->nome,
+            'tipo_evento_id' => $request->tipoEvento,
+            'projeto_especial_id' => $request->projetoEspecial,
+            'contratacao_forma_id' => $request->contratacao
+        ]);
+        return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento->id]);
     }
 }

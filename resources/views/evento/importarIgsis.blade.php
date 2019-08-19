@@ -36,18 +36,29 @@
                     <div class="table-responsive">
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
-                                    <th width="50%">Eventos</th>
-                                    <th>Operações</th>
-                                </tr>
+                            <tr>
+                                <th width="50%">Eventos</th>
+                                <th>Operações</th>
+                            </tr>
                             </thead>
                             <tbody>
                             @foreach($eventos as $evento)
                                 <tr>
                                     <td>{{ $evento->nomeEvento }}</td>
-                                    <td>
-                                        <button class="btn btn-primary">Importar Evento</button>
-                                    </td>
+                                    @if(!(in_array($evento->idEvento, $cadastrados)))
+                                        <td>
+                                            <a href="{{ route('evento.importar.cadastro', [$idEquipamento,$evento->idEvento]) }}" class="btn btn-success">
+                                                <i class="glyphicon glyphicon-plus"></i>
+                                                Importar Evento
+                                            </a>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <button class="btn btn-primary">
+                                                Evento já foi importado
+                                            </button>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             @include('layouts.excluir_confirm')

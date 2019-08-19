@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('equipamentos.index') }}">
+                <form method="POST" action="{{ route('equipamentos.index') }}" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
