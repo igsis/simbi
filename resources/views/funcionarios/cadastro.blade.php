@@ -5,6 +5,12 @@
 @section('conteudo')
 <div class="content-wrapper">
 
+    <div class="row">
+        <div class="col-xs-12">
+            @includeIf('layouts.erros')
+        </div>
+    </div>
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1 class="page-header"><i class="fa fa-address-book-o"></i> Cadastrar Funcionário</h1>
@@ -297,12 +303,12 @@
                 newOption.setAttribute('selected', 'selected');
 
                 newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "descricaoSecretaria");
+                newInput.setAttribute("name", "siglaSecretaria");
                 newInput.setAttribute("value", newOptionVal.textContent);
                 div.insertBefore(newInput, div.lastChild);
 
                 newInput2.setAttribute("type", "hidden");
-                newInput2.setAttribute("name", "siglaSecretaria");
+                newInput2.setAttribute("name", "descricaoSecretaria");
                 newInput2.setAttribute("value", newOptionVal2.textContent);
                 div.insertBefore(newInput2, div.lastChild);
             }
