@@ -18,7 +18,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">{{$user->name}}</h3>
             </div>
-            <form method="POST" action="{{ route('funcionario.atualizar', $user->id) }}" accept-charset="UTF-8" autocomplete="off">
+            <form method="POST" action="{{ route('funcionario.atualizar', $user->id) }}" accept-charset="UTF-8">
                 {{ csrf_field() }}
                 <input type="hidden" name="_method" value="PUT">
 

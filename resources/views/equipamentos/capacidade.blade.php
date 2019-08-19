@@ -7,7 +7,7 @@
 
 @section('conteudo')
 
-        <form method="POST" action="{{ route('equipamentos.gravaCapacidade', $equipamento->id) }}" autocomplete="off">
+        <form method="POST" action="{{ route('equipamentos.gravaCapacidade', $equipamento->id) }}">
             {{ csrf_field() }}
 
             <div class="row">

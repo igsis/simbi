@@ -102,7 +102,6 @@
         </div>
 
     </section>
-</div>
 
 {{--    <div class="modal fade" id="confirmTroca" role="dialog" aria-labelledby="confirmTrocaLabel" aria-hidden="true">--}}
 {{--        <div class="modal-dialog">--}}

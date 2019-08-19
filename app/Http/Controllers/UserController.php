@@ -32,14 +32,14 @@ class UserController extends Controller
      */
     public function index(Request $types)
     {
+
         $type = $types->type;
-        if ($type == 1){
-            $users = User::where('publicado', '=' ,$type)
-                ->orWhere('publicado', '=' , 2)
-                ->orderBy('id')->get();
-        }else{
-            $users = User::where('publicado', '=' ,$type)
-                ->orderBy('id')->get();
+        $users = [];
+        $funcionarios = Funcionario::where('publicado',2)->get();
+        foreach ($funcionarios as $funcionario){
+            foreach ($funcionario->users()->where('publicado',1)->get() as $user){
+                array_push($users,$user);
+            }
         }
 
         $equipamentos = Equipamento::orderBy('nome')->get();
@@ -153,23 +153,16 @@ class UserController extends Controller
         if ($request->filled('password'))
         {
             $this->validate($request, [
-                'email'=>'required|email',
+                'email'=>'required|email|unique:funcionarios,email',
                 'password'=>'required|min:6|confirmed',
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
-            if ($request->email == $funcionario->email){
-                $funcionario->update([
-                    'nome'=>$request->name,
-                    'email'=> $request->email,
-                ]);
-            }
-            else{
-                $funcionario->update([
-                    'nome'=>$request->name,
-                    'email'=> $request->email,
-                ]);
-            }
+
+            $funcionario->update([
+                'nome'=>$request->name,
+                'email'=> $request->email,
+            ]);
 
             $user->update([
                 'login'=> $request->login,

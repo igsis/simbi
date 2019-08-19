@@ -25,13 +25,13 @@
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{route('eventos.gravar', [$equipamento->igsis_id]) }}">
+                    <form method="POST" action="{{route('eventos.gravar', $equipamento->igsis_id) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Nome do Evento</label>
-                                <input class="form-control" type="text" id="nome" name="nome" value="{{old('nome')}}">
+                                <input class="form-control" type="text" id="nome" name="nome">
                             </div>
                         </div>
 
@@ -42,12 +42,8 @@
                                     <select name="tipoEvento" id="tipoEvento" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($tipoEvento as $evento)
-                                            @if ($evento->id == old('tipoEvento'))
-                                                <option value="{{ $evento->id }}" selected>{{ $evento->tipo_evento }}</option>
-                                            @else
-                                                <option value="{{ $evento->id }}">{{ $evento->tipo_evento }}</option>
-                                            @endif
-                                                @endforeach
+                                            <option value="{{ $evento->id }}">{{ $evento->tipo_evento }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -82,15 +78,15 @@
                                     <select name="contratacao" id="contratacao" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($contratacao as $contrata)
-                                            @if ($contrata->id == old('contratacao'))
-                                                <option value="{{ $contrata->id }}">{{ $contrata->forma_contratacao }}</option>
-                                            @else
-                                                <option value="{{ $contrata->id }}" selected>{{ $contrata->forma_contratacao }}</option>
-                                            @endif
+                                            <option value="{{ $contrata->id }}">{{ $contrata->forma_contratacao }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group hidden">
+                            <label for="id">Igsis Evento id</label>
+                            <input type="text" name="igsis_evento_id" id="igsis_evento_id" value="{{ $igsis_evento_id + 1}}">
                         </div>
                         <button class="btn btn-success"> Cadastrar</button>
                     </form>
