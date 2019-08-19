@@ -14,8 +14,6 @@ Route::group(['prefix' => '{equipamento_igsis}/eventos'], function (){
 
        Route::get('/{igsis_id}','EventoController@cadastroImportacao')->name('evento.importar.cadastro');
 
-       Route::post('/{igsis_id}','EventoController@gravarImportacao')->name('evento.importar.gravar');
-
     });
 
 });

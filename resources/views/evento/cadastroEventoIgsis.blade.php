@@ -25,7 +25,7 @@
                 <div class="box-header with-border">
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{-- route('eventos.gravar', [$equipamento->igsis_id]) --}}">
+                    <form method="POST" action="{{ route('eventos.gravar',[$equipamento_igsis]) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
