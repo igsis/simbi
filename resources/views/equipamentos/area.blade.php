@@ -9,7 +9,7 @@
 
 @section('conteudo')
 
-        <form method="POST" action="{{ route($path, $equipamento->id) }}">
+        <form method="POST" action="{{ route($path, $equipamento->id) }}" autocomplete="off">
             {{ csrf_field() }}
             
             <div class="row">

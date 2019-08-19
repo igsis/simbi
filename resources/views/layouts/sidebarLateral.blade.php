@@ -14,7 +14,7 @@
             </li>
             @hasanyrole('Coordenador|Administrador')
             <li class="header">Administrativo</li>
-            <li class="treeview">
+            <li class="treeview {{ request()->routeIs('funcionarios*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-address-book-o"></i> <span>Funcionários</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -26,7 +26,7 @@
                     <li><a href="{{ route('funcionarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->routeIs('usuarios*') ? 'active' : '' }}">
                 <a href="#"><i class="fa fa-user"></i><span>Usuários</span>
                     <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
@@ -37,7 +37,7 @@
                     <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Desativados</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->routeIs('equipamentos*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-university"></i> <span>Equipamentos</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -50,13 +50,18 @@
                 </ul>
             </li>
 
-            <li>
-                <a href="{{ route('frequencia.index') }}">
+            <li class="treeview {{ request()->routeIs('evento*') ? 'active' : '' }}">
+                <a href="#">
                     <i class="fa fa-calendar-o"></i> <span>Eventos</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('frequencia.index') }}">Lista</a></li>
+                    <li><a href="#">Cadastro</a></li>
+                </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ request()->routeIs('frequencia*') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-book"></i> <span>Frequência</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
@@ -67,7 +72,7 @@
                     <li><a href="{{ route('frequencia.relatorio') }}">Relatório</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{ request()->routeIs('gerenciar') ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-cogs"></i> <span>Gerenciar</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>

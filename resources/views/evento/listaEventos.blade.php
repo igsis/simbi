@@ -40,6 +40,8 @@
                         <div class="btn-tabela">
                             <a href="{{ route('eventos.cadastro', $equipamento->igsis_id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar
                                 Evento</a>
+                            <a href="{{ route('evento.importar', $equipamento->igsis_id) }}"  class="btn bg-purple"><i
+                                        class="glyphicon glyphicon-list-alt"></i> &nbsp;&nbsp;Importar Evento do IGSIS</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
@@ -55,38 +57,11 @@
                                     <td>{{ $evento->nome_evento }}</td>
                                     <td>{{ $evento->tipoEvento->tipo_evento }}</td>
                                     <td>
-                                        {{--<a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>--}}
-                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id]) }}"
+                                        <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id,$evento->id]) }}"
                                            class="btn btn-success" style="margin-right: 3px"><i
-                                                    class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
-                                        {{--@hasrole('Administrador')--}}
-                                        {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
-                                        {{--{{ csrf_field() }}--}}
-                                        {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                        {{--<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover--}}
-                                        {{--</button>--}}
-                                        {{--</form>--}}
-                                        {{--@endhasrole--}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            @foreach($eventosIgsis as $eventosIg)
-                                <tr>
-                                    <td>{{ $eventosIg->nomeEvento }}</td>
-                                    <td>{{ $eventosIg->tipoEventoIgsis->tipoEvento }}</td>
-                                    <td>
-                                        {{--<a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}" class="btn btn-info" style="margin-right: 3px"><i class="glyphicon glyphicon-edit"></i> Editar</a>--}}
-                                        <a href="#{{-- route('eventos.cadastro.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id]) --}}"
-                                           class="btn btn-success" style="margin-right: 3px"><i
-                                                    class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>
-                                        {{--@hasrole('Administrador')--}}
-                                        {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
-                                        {{--{{ csrf_field() }}--}}
-                                        {{--<input type="hidden" name="_method" value="DELETE">--}}
-                                        {{--<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Remover {{$evento->nome_evento}}?" data-message='Desejar realmente remover este Evento?' data-footer="Remover"><i class="glyphicon glyphicon-trash"></i> Remover--}}
-                                        {{--</button>--}}
-                                        {{--</form>--}}
-                                        {{--@endhasrole--}}
+                                                    class="glyphicon glyphicon-plus-sign"></i> Ocorrência</a>&nbsp &nbsp;
+                                        <a href="{{ route('eventos.editar', [$equipamento->igsis_id,$evento->id]) }}"
+                                           class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i> Editar Evento</a>
                                     </td>
                                 </tr>
                             @endforeach

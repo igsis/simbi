@@ -194,7 +194,7 @@ class EquipamentoController extends Controller
                 'subordinacaoAdministrativa' => 'required',
                 'tematico' => 'nullable',
                 'nome_tematica' => 'nullable',
-                'telefone' => 'nullable|max:15',
+                'telefone' => 'required|max:15',
                 'telecentro' => 'required',
                 'acervoespecializado' => 'required',
                 'nucleobraile' => 'required',
@@ -213,7 +213,11 @@ class EquipamentoController extends Controller
                 'macrorregiao' => 'required',
                 'regiao' => 'required',
                 'regional' => 'required',
-                'observacao' => 'nullable'
+                'observacao' => 'nullable',
+
+                //Para a tabela funcionamento
+                'horarioAbertura' => 'required',
+                'horarioFechamento' => 'required'
             ]);
 
             $endereco = new Endereco();
@@ -333,7 +337,7 @@ class EquipamentoController extends Controller
             'subordinacaoAdministrativa' => 'required',
             'tematico' => 'nullable',
             'nome_tematica' => 'nullable',
-            'telefone' => 'nullable|max:15',
+            'telefone' => 'required|max:15',
             'telecentro' => 'required',
             'acervoespecializado' => 'required',
             'nucleobraile' => 'required',
@@ -352,7 +356,11 @@ class EquipamentoController extends Controller
             'distrito' => 'nullable',
             'macrorregiao' => 'nullable',
             'regiao' => 'nullable',
-            'regional' => 'nullable'
+            'regional' => 'nullable',
+
+            //Para a tabela funcionamento
+            'horarioAbertura' => 'required',
+            'horarioFechamento' => 'required'
         ]);
 
         $equipamento->update([
@@ -475,7 +483,8 @@ class EquipamentoController extends Controller
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
-            'qtdVagasAcessiveis' => 'nullable'
+            'elevador' => 'required',
+            'qtdVagasAcessiveis' => 'required'
         ]);
 
         $acessibilidade = new Acessibilidade();
@@ -734,16 +743,23 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::find($id);
         $user = Auth::user();
 
-        $data = $this->validate($request, [
-            'inicioReforma' => 'required',
-            'terminoReforma' => 'nullable|after:inicioReforma',
+        $this->validate($request, [
+            'inicioReforma' => 'required|after:terminoReforma',
+            'terminoReforma' => 'nullable',
             'descricaoReforma' => 'required'
         ]);
 
+        $dtInicio = $request->inicioReforma;
+        $dataInicio = date("Y-m-d",strtotime($dtInicio));
+
+        $dtTermino = $request->terminoReforma;
+        $dataTermino = explode('/', $dtTermino);
+        $data = $dataTermino[2].'-'.$dataTermino[1].'-'.$dataTermino[0];
+
         $equipamento->reformas()->create([
             'user_id' => $user->id,
-            'inicio_reforma' => $request->inicioReforma,
-            'termino_reforma' => $request->terminoReforma,
+            'inicio_reforma' => $dataInicio,
+            'termino_reforma' => $data,
             'descricao' => $request->descricaoReforma
         ]);
 

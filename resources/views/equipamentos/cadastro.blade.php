@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('equipamentos.index') }}">
+                <form method="POST" action="{{ route('equipamentos.index') }}" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
@@ -65,7 +65,7 @@
 
                             <div class="form-group col-xs-12 col-md-6 has-feedback {{ $errors->has('equipamentoSigla') ? ' has-error' : '' }}">
                                 <label for="equipamentoSigla">Sigla do Equipamento</label>
-                                <input class="form-control" name="equipamentoSigla" id="equipamentoSigla">
+                                <input class="form-control" name="equipamentoSigla" id="equipamentoSigla" value="{{old('equipamentoSigla')}}">
                             </div>
                         </div>
 
@@ -333,12 +333,12 @@
                                     <div class="form-group col-md-offset-4 col-md-2">
                                         <label for="horarioAbertura">Horário de Abertura</label>
                                         <input type="text" class="form-control" name="horarioAbertura[]"
-                                               id="horarioAbertura" data-mask="00:00">
+                                               id="horarioAbertura" data-mask="00:00" required>
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="horarioFechamento">Horário de Fechamento</label>
                                         <input type="text" class="form-control" name="horarioFechamento[]"
-                                               id="horarioFechamento" data-mask="00:00">
+                                               id="horarioFechamento" data-mask="00:00" required>
                                     </div>
                                 </div>
                             </div>
