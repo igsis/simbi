@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label for="total">Data</label>
-                                <input type="text" class="form-control calendario" name="data" id="data" >
+                                <input type="text" class="form-control calendario" name="data" id="data" value="{{old('data')}}">
                             </div>
                         </div>
                         <div class="row">
@@ -50,19 +50,19 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="fundamental">Fundamental</label>
-                                <input type="number" class="form-control" name="fundamental" id="fundamental" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="fundamental" id="fundamental" value="{{old('fundamental')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="medio">Médio</label>
-                                <input type="number" class="form-control" name="medio" id="medio" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="medio" id="medio" value="{{old('medio')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="fundamental">Superior</label>
-                                <input type="number" class="form-control" name="superior" id="superior" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="superior" id="superior" value="{{old('superior')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="naoInformadoEscolaridade">Não Informado</label>
-                                <input type="number" class="form-control" name="naoInformadoEscolaridade" id="naoInformadoEscolaridade" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="naoInformadoEscolaridade" id="naoInformadoEscolaridade" value="{{old('naoInformadoEscolaridade')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
@@ -75,33 +75,33 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="idade0_6">0-6 Anos</label>
-                                <input type="number" class="form-control" name="idade0_6" id="idade0_6" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="idade0_6" id="idade0_6" value="{{old('idade0_6')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="idade7_14">7-14 Anos</label>
-                                <input type="number" class="form-control" name="idade7_14" id="idade7_14" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="idade7_14" id="idade7_14" value="{{old('idade7_14')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="idade15_17">15-17 Anos</label>
-                                <input type="number" class="form-control" name="idade15_17" id="idade15_17" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="idade15_17" id="idade15_17" value="{{old('idade15_17')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="idade18_29">18-29 Anos</label>
-                                <input type="number" class="form-control" name="idade18_29" id="idade18_29" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="idade18_29" id="idade18_29" value="{{old('idade18_29')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="idade30_59">30-59 Anos</label>
-                                <input type="number" class="form-control" name="idade30_59" id="idade30_59" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="idade30_59" id="idade30_59" value="{{old('idade30_59')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="idade60ouMais">60 ou mais</label>
-                                <input type="number" class="form-control" name="idade60ouMais" id="idade60ouMais" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="idade60ouMais" id="idade60ouMais" value="{{old('idade60ouMais')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="naoInformadoIdade">Não Informado</label>
-                                <input type="number" class="form-control" name="naoInformadoIdade" id="naoInformadoIdade" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="naoInformadoIdade" id="naoInformadoIdade" value="{{old('naoInformadoIdade')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
@@ -114,29 +114,29 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="amarela">Amarela</label>
-                                <input type="number" class="form-control" name="amarela" id="amarela" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="amarela" id="amarela" value="{{old('amarela')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="branca">Branca</label>
-                                <input type="number" class="form-control" name="branca" id="branca" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="branca" id="branca" value="{{old('branca')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="indigena">Indígena</label>
-                                <input type="number" class="form-control" name="indigena" id="indigena" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="indigena" id="indigena" value="{{old('indigena')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="parda">Parda</label>
-                                <input type="number" class="form-control" name="parda" id="parda" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="parda" id="parda" value="{{old('parda')}}"  onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="preta">Preta</label>
-                                <input type="number" class="form-control" name="preta" id="preta" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="preta" id="preta" value="{{old('preta')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="naoInformadoCor">Não Informado</label>
-                                <input type="number" class="form-control" name="naoInformadoCor" id="naoInformadoCor" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="naoInformadoCor" id="naoInformadoCor" value="{{old('naoInformadoCor')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
@@ -149,15 +149,15 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="feminino">Feminino</label>
-                                <input type="number" class="form-control" name="feminino" id="feminino" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="feminino" id="feminino" value="{{old('feminino')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="masculino">Masculino</label>
-                                <input type="number" class="form-control" name="masculino" id="masculino" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="masculino" id="masculino" value="{{old('masculino')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="naoInformadoSexo">Não Informado</label>
-                                <input type="number" class="form-control" name="naoInformadoSexo" id="naoInformadoSexo" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="naoInformadoSexo" id="naoInformadoSexo" value="{{old('naoInformadoSexo')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <div class="row">
@@ -170,19 +170,19 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label for="visual">Visual</label>
-                                <input type="number" class="form-control" name="visual" id="visual" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="visual" id="visual" value="{{old('visual')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="auditiva">Auditiva</label>
-                                <input type="number" class="form-control" name="auditiva" id="auditiva" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="auditiva" id="auditiva" value="{{old('auditiva')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="motora">Motora</label>
-                                <input type="number" class="form-control" name="motora" id="motora" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="motora" id="motora" value="{{old('motora')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="mental">Mental</label>
-                                <input type="number" class="form-control" name="mental" id="mental" onblur="caculoTotal()" onkeyup="caculoTotal()">
+                                <input type="number" class="form-control" name="mental" id="mental" value="{{old('mental')}}" onblur="caculoTotal()" onkeyup="caculoTotal()">
                             </div>
                         </div>
                         <hr>

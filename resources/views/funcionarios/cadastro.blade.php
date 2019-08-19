@@ -15,18 +15,18 @@
 
         <!-- Default box -->
         <div class="box box-primary">
-            <form method="POST" action="{{ route('funcionarios.cadastra') }}" accept-charset="UTF-8">
+                <form method="POST" action="{{ route('funcionarios.cadastra') }}" accept-charset="UTF-8" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="box-body">
                     <div class="row">
                         <div class="form-group col-md-12 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                             <label for="name">Nome</label>
-                            <input class="form-control" type="text" name="nome" id="nome">
+                            <input class="form-control" type="text" name="nome" id="nome" value="{{old('nome')}}">
                         </div>
 
                         <div class="form-group col-md-12 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">E-mail</label>
-                            <input class="form-control" type="email" name="email" id="email">
+                            <input class="form-control" type="email" name="email" id="email" value="{{old('email')}}">
                         </div>
                     </div>
                     <div class="row">
@@ -38,7 +38,11 @@
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($subordinacoesAdministrativas as $subordinacaoAdministrativa)
                                     @if($subordinacaoAdministrativa->publicado == 1)
-                                        <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                                        @if ($subordinacaoAdministrativa->id == old('subordinacaoAdministrativa'))
+                                        <option value="{{$subordinacaoAdministrativa->id}}" selected>{{$subordinacaoAdministrativa->descricao}}</option>
+                                        @else
+                                            <option value="{{$subordinacaoAdministrativa->id}}">{{$subordinacaoAdministrativa->descricao}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -59,7 +63,11 @@
                                 <option value="" selected>Selecione uma Opção</option>
                                 @foreach ($secretarias as $secretaria)
                                     @if ($secretaria->publicado == 1)
-                                        <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
+                                        @if ($secretaria->id == old('identificacaoSecretaria'))
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
+                                        @else
+                                            <option value="{{$secretaria->id}}" >{{$secretaria->sigla}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -81,7 +89,11 @@
                                 <option value="">Selecione...</option>
                                 @foreach ($cargos as $cargo)
                                     @if($cargo->publicado == 1)
-                                        <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                        @if ($cargo->id == old('cargo'))
+                                            <option value="{{$cargo->id}}" selected>{{$cargo->cargo}}</option>
+                                        @else
+                                            <option value="{{$cargo->id}}">{{$cargo->cargo}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>
@@ -100,8 +112,10 @@
                             <select class="form-control" name="funcao" id="funcao">
                                 <option value="">Selecione...</option>
                                 @foreach ($funcoes as $funcao)
-                                    @if($funcao->publicado == 1)
-                                        <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
+                                    @if ($funcao->id == old('funcao'))
+                                        <option value="{{$funcao->id}}" selected>{{$funcao->funcao}}</option>
+                                    @else
+                                            <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -122,7 +136,11 @@
                             <select class="form-control" name="escolaridade" id="escolaridade">
                                 <option value="">Selecione uma Opção</option>
                                 @foreach ($escolaridades as $escolaridade)
-                                    <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                    @if ($escolaridade->id == old('escolaridade'))
+                                         <option value="{{$escolaridade->id}}" selected>{{$escolaridade->escolaridade}}</option>
+                                    @else
+                                        <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -169,7 +187,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-success" onclick="insertSecretaria();">Adicionar</button>
+                        <button class="btn btn-success" onclick="insertSecretaria();arrumar();">Adicionar</button>
                     </div>
                 </div>
             </div>
@@ -178,6 +196,7 @@
 </div>
 @endsection
 @section('scripts_adicionais')
+    @include('scripts.insere_ajax')
     <script>
         function insertCargo()
         {

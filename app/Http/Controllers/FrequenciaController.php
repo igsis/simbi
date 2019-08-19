@@ -37,6 +37,7 @@ class FrequenciaController extends Controller
 
     }
 
+<<<<<<< HEAD
     public function cadastrarEvento($id)
     {
         $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
@@ -72,26 +73,30 @@ class FrequenciaController extends Controller
             'Evento inserida com sucesso!');
 //        return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento_igsis]);
     }
+=======
+>>>>>>> master
 
-    public function cadastrarOcorrencia($igsis_id, $igsis_evento_id)
+    public function cadastrarOcorrencia($igsis_id, $evento_id)
     {
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
-        $evento = Evento::where('igsis_evento_id', $igsis_evento_id)->firstOrFail();
+        $evento = Evento::findOrFail($evento_id);
 
         return view('frequencia.cadastroOcorrencia', compact('equipamento', 'evento'));
     }
 
-    public function gravaOcorrencia($igsis_id, $igsis_evento_id, Request $request)
+    public function gravaOcorrencia($igsis_id, $evento_id, Request $request)
     {
         $this->validate($request, [
             'data' => 'required',
             'hora' => 'required'
         ]);
-        $data = $request->data;
-        $data = date("Y-m-d",strtotime($data));
+
+        $dataFormulario= $request->data;
+        $dtFormat = explode('/', $dataFormulario);
+        $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
         EventoOcorrencia::create([
-            'igsis_evento_id' => $igsis_evento_id,
+            'igsis_evento_id' => $evento_id,
             'igsis_id' => $igsis_id,
             'data' => $data,
             'horario' => $request->hora
@@ -103,7 +108,8 @@ class FrequenciaController extends Controller
 
     public function listarOcorrencias($igsis_id, $type)
     {
-        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.igsis_evento_id', '')
+
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.id', '')
             ->where([
                 ['evento_ocorrencias.igsis_id', $igsis_id],
                 ['evento_ocorrencias.publicado', $type]
@@ -129,22 +135,9 @@ class FrequenciaController extends Controller
         return view('frequencia.editarOcorrencia', compact('ocorrencia', 'evento'));
     }
 
-    public function listaEventos($igisis_id)
-    {
-        $eventosIgsis = EventosIgsis::where([
-            ['publicado',1],
-            ['idInstituicao',14],
-            ['dataEnvio','>=','2019-06-01']
-        ])->orderBy('nomeEvento')->get();
-        $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
-
-        $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
-
-        return view('frequencia.listaEventos', compact('eventos', 'equipamento','eventosIgsis'));
-    }
-
     public function uploadOcorrencia(Request $request, $id)
     {
+
         $ocorrencia = EventoOcorrencia::findOrFail($id);
 
         $this->validate($request, [
@@ -152,14 +145,15 @@ class FrequenciaController extends Controller
             'hora' => 'required'
         ]);
         $data = $request->data;
-        $data = date("Y-m-d",strtotime($data));
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
         $ocorrencia->update([
             'data' => $data,
-            'horario' => $request->hora
+           'horario' => $request->hora
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
+       return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
             ->with('flash_message', 'Ocorrência do Evento editada com sucesso!');
     }
 
