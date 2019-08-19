@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{$equipamento->nome}}</h3>
                 </div>
-                <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}">
+                <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <input type="hidden" name="_method" value="PUT">
