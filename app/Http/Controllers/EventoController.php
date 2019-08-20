@@ -131,7 +131,7 @@ class EventoController extends Controller
             'contratacao_forma_id' => $request->contratacao
         ]);
 
-        return redirect()->back()->with('flash_message', 'Evento Editado com Sucesso!');
+        return redirect()->route('eventos.listar', compact('igsis_id'))->with('flash_message', 'Evento Editado com Sucesso!');
     }
 
     /**
