@@ -51,7 +51,11 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="contratoUso" id="contratoUso">
                                 <option value="">Selecione...</option>
                                 @foreach($contratos as $contrato)
-                                    <option value="{{$contrato->id}}">{{$contrato->contrato_uso}}</option>
+                                    @if ($contrato->id == old('contratoUso'))
+                                        <option value="{{$contrato->id}}" selected>{{$contrato->contrato_uso}}</option>
+                                     @else
+                                        <option value="{{$contrato->id}}">{{$contrato->contrato_uso}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -60,7 +64,11 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="utilizacao" id="utilizacao">
                                 <option value="">Selecione...</option>
                                 @foreach($utilizacoes as $utilizacao)
-                                    <option value="{{$utilizacao->id}}">{{$utilizacao->utilizacao}}</option>
+                                    @if ($utilizacao->id == old('utilizacao'))
+                                        <option value="{{$utilizacao->id}}" selected>{{$utilizacao->utilizacao}}</option>
+                                    @else
+                                        <option value="{{$utilizacao->id}}">{{$utilizacao->utilizacao}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -69,7 +77,12 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="porte" id="porte">
                                 <option value="">Selecione...</option>
                                 @foreach($portes as $porte)
-                                    <option value="{{$porte->id}}">{{$porte->porte}}</option>
+                                    @if ($porte->id == old('porte'))
+                                        <option value="{{$porte->id}}" selected>{{$porte->porte}}</option>
+                                    @else
+                                        <option value="{{$porte->id}}">{{$porte->porte}}</option>
+                                    @endif
+
                                 @endforeach
                             </select>
                         </div>
@@ -78,7 +91,12 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="padrao" id="padrao">
                                 <option value="">Selecione...</option>
                                 @foreach($padroes as $padrao)
-                                    <option value="{{$padrao->id}}">{{$padrao->padrao}}</option>
+                                    @if ($padrao->id == old('padrao'))
+                                        <option value="{{$padrao->id}}" selected>{{$padrao->padrao}}</option>
+                                    @else
+                                        <option value="{{$padrao->id}}">{{$padrao->padrao}}</option>
+                                    @endif
+
                                 @endforeach
                             </select>
                         </div>
@@ -109,6 +127,11 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="acessibilidadeArquitetonica" id="acessibilidadeArquitetonica">
                                 <option value="">Selecione...</option>
                                 @foreach($arquitetonicas as $arquitetonica)
+                                    @if ($arquitetonica->id == old('acessibilidadeArquitetonica'))
+                                        <option value="{{$arquitetonica->id}}" selected>{{$arquitetonica->acessibilidade_arquitetonica}}</option>
+                                    @else
+                                        <option value="{{$arquitetonica->id}}">{{$arquitetonica->acessibilidade_arquitetonica}}</option>
+                                    @endif
                                     <option value="{{$arquitetonica->id}}">{{$arquitetonica->acessibilidade_arquitetonica}}</option>
                                 @endforeach
                             </select>
@@ -133,7 +156,11 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="elevador" id="elevador">
                                 <option selected value="">Selecione...</option>
                                 @foreach ($elevadores as $elevador)
-                                    <option value="{{ $elevador->id }}">{{ $elevador->elevador }}</option>
+                                    @if ($elevador->id == old('elevador'))
+                                        <option value="{{ $elevador->id }}" selected>{{ $elevador->elevador }}</option>
+                                    @else
+                                        <option value="{{ $elevador->id }}">{{ $elevador->elevador }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
