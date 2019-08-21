@@ -26,6 +26,10 @@
             flex-direction: row;
         }
 
+        #enviado{
+            background-color: rgba(186,255,207,.2);
+        }
+
 
     </style>
 @endsection
@@ -93,8 +97,6 @@
                                                         class="glyphicon glyphicon-plus-sign"></i> Frequência
                                             </button>
                                             @hasrole('Administrador')
-                                            {{--<form method="POST" action="{{ route('evento.ocorrencia.destroy', $evento->id) }}" style="display: inline;">--}}
-                                            {{--<input type="hidden" name="_method" value="DELETE">--}}
                                             <button class="btn btn-danger desabilitar" type="button"
                                                     data-toggle="modal"
                                                     data-target="#confirmDelete"
@@ -104,37 +106,21 @@
                                                     onclick="preencherId('{{$evento->id}}')"><i
                                                         class="glyphicon glyphicon-trash"></i> Cancelar
                                             </button>
-                                            {{--</form>--}}
                                             @endhasrole
                                         </td>
                                     </tr>
                                 @else
-                                    <tr class="bg-success evento enviado">
-                                        <td class="bg-success">{{ $evento->nome_evento }} <span
+                                    <tr class="evento" id="enviado">
+                                        <td>{{ $evento->nome_evento }} <span
                                                     class="text-center text-red text-bold expirado"></span></td>
-                                        <td class="bg-success dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                                        <td class="bg-success">{{ date('H:i', strtotime($evento->horario)) }}</td>
-                                        <td class="bg-success" id="tdEditar">
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
-                                               class="btn btn-info desabilitar" style="margin-right: 3px" id="btnEdita"><i
-                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}"
-                                               class="btn btn-success" role="button" id="btnEdita" aria-disabled="true"
-                                               style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i>
-                                                Editar Frequencia</a>
-                                            <button class="btn btn-primary" type="button" data-toggle="modal"
-                                                    data-target="#enviarFrequencia"
-                                                    data-title="{{$evento->nome_evento}}"
-                                                    data-message='Desejar realmente enviar?' data-footer="Enviar"
-                                                    onclick="preencherId('{{$evento->id}}')"
-                                                    onclick="preencherId('{{$evento->id}}')"><i
-                                                        class="glyphicon glyphicon-send"></i>&nbsp Enviar
-                                            </button>
+                                        <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                                        <td id="tdEditar">
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
-                            {{--@include('layouts.excluir_confirm')--}}
+                            @include('layouts.excluir_confirm')
                             </tbody>
                             <tfooter>
                                 <thead>
@@ -237,7 +223,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -277,6 +262,8 @@
                     <div class="modal-body">
                         <p>Confirma?</p>
                     </div>
+                    <input type="hidden" name="equipamento_igsis" value="{{$igsis_id}}">
+                    <input type="hidden" name="type" value="{{ $type }}">
                     <div class="modal-footer">
                         <input type="hidden" name="id" id="idOcorrencia">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

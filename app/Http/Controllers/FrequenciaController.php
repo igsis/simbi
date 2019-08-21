@@ -117,13 +117,13 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
 
-        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type'));
+        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type','igsis_id'));
     }
 
     public function editarOcorrencia($id)
     {
-        $ocorrencia = EventoOcorrencia::findOrFail($id);
 
+        $ocorrencia = EventoOcorrencia::findOrFail($id);
         $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
 
         return view('frequencia.editarOcorrencia', compact('ocorrencia', 'evento'));
@@ -213,12 +213,12 @@ class FrequenciaController extends Controller
             'equipamento_id' => $id
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)->with('flash_message',
+        return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id, 1])->with('flash_message',
             'Frequência Inserida Com Sucesso!');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.v
      *
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -295,7 +295,7 @@ class FrequenciaController extends Controller
 
     public function editaFrequencia($id)
     {
-
+        dd($id);
 //        $frequencia = Frequencia::where('evento_ocorrencia_id',$id)->get();
 //        $ocorrencia = EventoOcorrencia::findOrFail($frequencia->evento_ocorrencia_id);
 //
@@ -319,7 +319,10 @@ class FrequenciaController extends Controller
                 'publicado' => 2
             ]);
 
-        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
+        $equipamento_igsis = $request->equipamento_igsis;
+        $type = $request->type;
+
+        return redirect()->route('frequencia.ocorrencias', [$equipamento_igsis,$type])
             ->with('flash_message',
                 'Ocorrência do Enviada com Sucesso.');
 

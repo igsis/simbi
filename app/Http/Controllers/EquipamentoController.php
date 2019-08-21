@@ -470,8 +470,9 @@ class EquipamentoController extends Controller
             'pavimento' => 'required|numeric'
         ]);
 
-        $data = $request->validade;
-        $dataValidade = date("Y-m-d",strtotime($data));
+        $dt = $request->validade;
+        $data = explode('/', $dt);
+        $dataValidade = $data[2].'-'.$data[1].'-'.$data[0];
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',
