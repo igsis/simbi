@@ -18,10 +18,8 @@
             <div class="content-wrapper">
 
                 @if(Session::has('flash_message'))
-                    <div style="margin: 15px;">
-                        <div class="col-md-12 col-sm-12 center-block" style="margin-top: 15px">
-                            <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
-                        </div>
+                    <div class="col-md-12 col-sm-12 center-block" style="margin-top: 15px">
+                        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
                     </div>
                 @endif
                 <div class="row">

@@ -27,7 +27,7 @@
                     <h3 class="box-title">{{ $equipamento->nome }}</h3>
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{route('eventos.grava.ocorrencia', [$equipamento->igsis_id, $evento->id])}}">
+                    <form method="POST" action="{{route('eventos.grava.ocorrencia', [$equipamento->igsis_id, $evento->igsis_evento_id])}}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -41,7 +41,7 @@
                             <div class="form-group col-md-6">
                                 <div class="form-group ">
                                     <label for="data">Data</label>
-                                    <input class="form-control calendario" type="text" name="data" value="{{ old('data') }}" autocomplete="off" onblur="arrumaData()">
+                                    <input class="form-control calendario" type="text" name="data" value="{{ old('data') }}" onblur="arrumaData()">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
