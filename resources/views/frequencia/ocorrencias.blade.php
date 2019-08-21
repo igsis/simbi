@@ -237,7 +237,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
