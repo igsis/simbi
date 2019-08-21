@@ -85,7 +85,7 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
 
-        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type'));
+        return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type','igsis_id'));
     }
 
     public function editarOcorrencia($id)
@@ -275,7 +275,10 @@ class FrequenciaController extends Controller
                 'publicado' => 2
             ]);
 
-        return redirect()->route('frequencia.ocorrencias', $ocorrencia->igsis_id)
+        $equipamento_igsis = $request->equipamento_igsis;
+        $type = $request->type;
+
+        return redirect()->route('frequencia.ocorrencias', [$equipamento_igsis,$type])
             ->with('flash_message',
                 'Ocorrência do Enviada com Sucesso.');
 
