@@ -10,17 +10,17 @@
 @endsection
 @section('conteudo')
 
-        <form method="POST" action="{{ route('equipamentos.gravaReforma', $equipamento->id) }}">
+        <form method="POST" action="{{ route('equipamentos.gravaReforma', $equipamento->id) }}" autocomplete="off">
             {{ csrf_field() }}
 
             <div class="row form-group">
                 <div class="col-md-offset-3 col-md-3">
                     <label for="inicioReforma">Início da Reforma</label>
-                    <input class="form-control calendario" type="text" name="inicioReforma" id="inicioReforma">
+                    <input class="form-control calendario" type="text" name="inicioReforma" id="inicioReforma" autocomplete="off">
                 </div>
                 <div class="col-md-3">
                     <label for="terminoReforma">Término da Reforma</label>
-                    <input class="form-control calendario" type="text" name="terminoReforma" id="terminoReforma">
+                    <input class="form-control calendario" type="text" name="terminoReforma" id="terminoReforma" autocomplete="off">
                 </div>
             </div>
 

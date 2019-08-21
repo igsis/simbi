@@ -52,10 +52,10 @@
                                                         class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
                                             <a href="#" class="btn btn-success" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
-                                                <a href="{{--route('frequencia.portaria.cadastro', $equipamento->id)--}}"
-                                                   class="btn btn-success" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-plus-sign"></i> Preenchimento
-                                                    Mensal</a>
+                                            <a href="{{--route('frequencia.portaria.cadastro', $equipamento->id)--}}"
+                                               class="btn btn-success" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-plus-sign"></i> Preenchimento
+                                                Mensal</a>
                                         @else
                                             <a href="{{ route('frequencia.listar', $equipamento->id) }}"
                                                class="btn btn-warning" style="margin-right: 3px"><i

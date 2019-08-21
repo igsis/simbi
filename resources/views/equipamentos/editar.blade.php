@@ -8,6 +8,12 @@
 @section ('conteudo')
     <div class="content-wrapper">
 
+        <div class="row">
+            <div class="col-xs-12">
+                @includeIf('layouts.erros')
+            </div>
+        </div>
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 class="page-header">@yield('tituloPagina')</h1>
@@ -21,7 +27,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{$equipamento->nome}}</h3>
                 </div>
-                <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}">
+                <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <input type="hidden" name="_method" value="PUT">
@@ -269,12 +275,12 @@
                                         <div class="form-group col-md-offset-4 col-md-2">
                                             <label for="horarioAbertura">Horário de Abertura</label>
                                             <input type="text" class="form-control" name="horarioAbertura[0]"
-                                                   id="horarioAbertura" data-mask="00:00">
+                                                   id="horarioAbertura" data-mask="00:00" required>
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="horarioFechamento">Horário de Fechamento</label>
                                             <input type="text" class="form-control" name="horarioFechamento[0]"
-                                                   id="horarioFechamento" data-mask="00:00">
+                                                   id="horarioFechamento" data-mask="00:00" required>
                                         </div>
                                     </div>
                                 </div>
