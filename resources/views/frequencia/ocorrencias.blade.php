@@ -116,6 +116,21 @@
                                         <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
                                         <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
                                         <td id="tdEditar">
+                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
+                                               class="btn btn-info desabilitar" style="margin-right: 3px" id="btnEdita"><i
+                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
+                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}"
+                                               class="btn btn-success" role="button" id="btnEdita" aria-disabled="true"
+                                               style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i>
+                                                Editar Frequencia</a>
+                                            <button class="btn btn-primary" type="button" data-toggle="modal"
+                                                    data-target="#enviarFrequencia"
+                                                    data-title="{{$evento->nome_evento}}"
+                                                    data-message='Desejar realmente enviar?' data-footer="Enviar"
+                                                    onclick="preencherId('{{$evento->id}}')"
+                                                    onclick="preencherId('{{$evento->id}}')"><i
+                                                        class="glyphicon glyphicon-send"></i>&nbsp Enviar
+                                            </button>
                                         </td>
                                     </tr>
                                 @endif
