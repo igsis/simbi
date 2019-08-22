@@ -27,7 +27,7 @@
                     <h3 class="box-title">{{ $equipamento->nome }}</h3>
                 </div>
                 <div class="box-body">
-                    <form method="POST" action="{{route('eventos.grava.ocorrencia', [$equipamento->igsis_id, $evento->id])}}">
+                    <form method="POST" action="{{route('eventos.grava.ocorrencia', [$equipamento->id, $evento->id])}}">
                         {{ csrf_field() }}
 
                         <div class="form-group">

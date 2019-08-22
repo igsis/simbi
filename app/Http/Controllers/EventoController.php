@@ -18,7 +18,7 @@ class EventoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($igisis_id)
+    public function index($equipamento_id)
     {
         $eventosIgsis = EventosIgsis::where([
             ['publicado', 1],
@@ -27,7 +27,7 @@ class EventoController extends Controller
         ])->orderBy('nomeEvento')->get();
         $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
-        $equipamento = Equipamento::where('igsis_id', $igisis_id)->firstOrFail();
+        $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
 
         return view('evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
     }
@@ -37,9 +37,9 @@ class EventoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create($equipamento_id)
     {
-        $equipamento = Equipamento::where('igsis_id', $id)->firstOrFail();
+        $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
         $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
@@ -57,6 +57,7 @@ class EventoController extends Controller
      */
     public function store(Request $request, $igsis_id)
     {
+
         $this->validate($request, [
             'nome' => 'required',
             'tipoEvento' => 'required',
@@ -91,10 +92,10 @@ class EventoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit ($igsis_id, $id)
+    public function edit ($equipamento_id, $id)
     {
         $eventos = Evento::FindOrFail($id);
-        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+        $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
         $projetoEspecial = ProjetoEspecial::orderBy('projetoEspecial')->get();
         $tipoEvento = TipoEvento::orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
@@ -111,8 +112,9 @@ class EventoController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update (Request $request, $igsis_id, $id)
+    public function update (Request $request, $equipamento_id, $id)
     {
+
         $this->validate($request, [
             'nome' => 'required',
             'tipoEvento' => 'required',
@@ -131,7 +133,7 @@ class EventoController extends Controller
             'contratacao_forma_id' => $request->contratacao
         ]);
 
-        return redirect()->route('eventos.listar', compact('igsis_id'))->with('flash_message', 'Evento Editado com Sucesso!');
+        return redirect()->route('eventos.listar', compact('equipamento_id'))->with('flash_message', 'Evento Editado com Sucesso!');
     }
 
     /**

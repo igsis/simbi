@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>{{$equipamento->nome}}</td>
                                         <td>
-                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->igsis_id,1]) }}"
+                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
                                                class="btn btn-info" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
                                             @if($equipamento->portaria == 0)
@@ -77,7 +77,7 @@
                                     <tr>
                                         <td>{{$equipamento->nome}}</td>
                                         <td>
-                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->igsis_id,2]) }}"
+                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,2]) }}"
                                                class="btn btn-info" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
                                             <a href="#"
