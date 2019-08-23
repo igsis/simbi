@@ -36,6 +36,12 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('AdminLTE/dist/js/demo.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+{{--Script de Mascara--}}
+<script src="{{asset('js/jquery.mask.js')}}"></script>
+
+<script src="{{asset('js/scripts.js')}}"></script>
+
+<script src="{{asset('js/bootstrap.js')}}"></script>
 
 
 <script>
