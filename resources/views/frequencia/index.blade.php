@@ -47,7 +47,7 @@
                                     <td>{{$equipamento->nome}}</td>
                                     <td>
                                         @if($type == 1)
-                                            <a href="{{ route('eventos.listar', $equipamento->igsis_id) }}"
+                                            <a href="{{ route('eventos.listar', $equipamento->id) }}"
                                                class="btn btn-success" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
                                             <a href="#" class="btn btn-success" style="margin-right: 3px"><i

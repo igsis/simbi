@@ -38,16 +38,17 @@ class FrequenciaController extends Controller
     }
 
 
-    public function cadastrarOcorrencia($igsis_id, $evento_id)
+    public function cadastrarOcorrencia($equipamento_id, $evento_id)
     {
-        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+        $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
         $evento = Evento::findOrFail($evento_id);
 
         return view('frequencia.cadastroOcorrencia', compact('equipamento', 'evento'));
     }
 
-    public function gravaOcorrencia($igsis_id, $evento_id, Request $request)
+    public function gravaOcorrencia($equipamento_id, $evento_id, Request $request)
     {
+
         $this->validate($request, [
             'data' => 'required',
             'hora' => 'required'
@@ -59,17 +60,18 @@ class FrequenciaController extends Controller
 
         EventoOcorrencia::create([
             'igsis_evento_id' => $evento_id,
-            'igsis_id' => $igsis_id,
+            'igsis_id' => $equipamento_id,
             'data' => $data,
             'horario' => $request->hora
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', [$igsis_id,1])->with('flash_message',
+        return redirect()->route('frequencia.ocorrencias', [$equipamento_id,1])->with('flash_message',
             'Ocorrência Inserida Com Sucesso!');
     }
 
     public function listarOcorrencias($igsis_id, $type)
     {
+
 
         $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.id', '')
             ->where([
@@ -83,14 +85,13 @@ class FrequenciaController extends Controller
 
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
-        $equipamento = Equipamento::where('igsis_id', $igsis_id)->firstOrFail();
+        $equipamento = Equipamento::where('id', $igsis_id)->firstOrFail();
 
         return view('frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type','igsis_id'));
     }
 
     public function editarOcorrencia($id)
     {
-
         $ocorrencia = EventoOcorrencia::findOrFail($id);
         $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
 
@@ -145,6 +146,7 @@ class FrequenciaController extends Controller
      */
     public function store(Request $request, $id)
     {
+
         $this->validate($request, [
             'evento_ocorrencia_id' => 'required',
             'crianca' => 'required|integer|between: 0, 9999',
@@ -169,7 +171,7 @@ class FrequenciaController extends Controller
             'equipamento_id' => $id
         ]);
 
-        return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id, 1])->with('flash_message',
+        return redirect()->route('frequencia.ocorrencias', [$id, 1])->with('flash_message',
             'Frequência Inserida Com Sucesso!');
     }
 
