@@ -41,8 +41,8 @@
 
 <script src="{{asset('js/scripts.js')}}"></script>
 
-<script src="{{asset('js/bootstrap.js')}}"></script>
-
+{{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
+    
 
 <script>
     function arrumar() {
