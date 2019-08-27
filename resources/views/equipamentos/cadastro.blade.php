@@ -297,10 +297,10 @@
                         </div>
 
                         <div style="text-align: center;"><h2>Horário de Funcionamento</h2></div>
+                        <hr>
                         <div class="horarios">
                             <div class="horario">
                                 <div class="row">
-                                    <hr>
                                     <div class="form-group">
                                         <div class="col-md-offset-3 col-md-8" style="padding-bottom: 15px">
                                             <input type="hidden" name="funcionamento[]">

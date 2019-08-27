@@ -13,7 +13,7 @@
 			<h2>Bem Vindo ao SIMBI</h2>
 			<h3>Sistema de Indicadores das Bibliotecas Públicas Municipais</h3>
 		</div>
-		<hr style="opacity: 0.2">
+		<hr>
 		<?php $faltaFrequencia = 0; ?>
 		@if($ocorrencias != null || $frequenciasCadastradas != null)
 			@foreach($ocorrencias as $ocorrencia)
@@ -43,6 +43,6 @@
 			@endif
 		@endif
 
-		<hr style="opacity: 0.2">
+		<hr>
 	@endif
 @endsection
