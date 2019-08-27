@@ -42,7 +42,7 @@
 
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
                                 <label for="login">Login *</label>
-                                <input class="form-control" type="text" name="login" id="login" maxlength="7"  required>
+                                <input class="form-control" type="text" name="login" id="login" value="{{old('login')}}" maxlength="7"  required>
                                 @if ($errors->has('login'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('login') }}</strong>

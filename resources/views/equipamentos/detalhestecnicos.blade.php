@@ -109,7 +109,7 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                         <div class="form-group col-md-3">
                             <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
-                            <input type="text" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? $equipamento->detalhe->validade_avcb
+                            <input type="text" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
                                                                                                                                                 : "old('validate')"}}">
                         </div>
                     </div>
@@ -132,7 +132,6 @@ if($path == 'equipamentos.atualizaDetalhes')
                                     @else
                                         <option value="{{$arquitetonica->id}}">{{$arquitetonica->acessibilidade_arquitetonica}}</option>
                                     @endif
-                                    <option value="{{$arquitetonica->id}}">{{$arquitetonica->acessibilidade_arquitetonica}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -141,7 +140,6 @@ if($path == 'equipamentos.atualizaDetalhes')
                             <select class="form-control" name="banheiros" id="banheiros">
                                 <option value="0">Não</option>
                                 <option value="1">Sim</option>
-
                             </select>
                         </div>
                         <div class="form-group col-md-3">

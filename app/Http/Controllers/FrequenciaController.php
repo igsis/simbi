@@ -93,7 +93,7 @@ class FrequenciaController extends Controller
     public function editarOcorrencia($id)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
-        $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
+        $evento = Evento::where('id', $ocorrencia->igsis_evento_id)->firstOrFail();
 
         return view('frequencia.editarOcorrencia', compact('ocorrencia', 'evento'));
     }
