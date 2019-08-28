@@ -28,6 +28,11 @@
                     <form method="POST" action="{{ route('eventos.gravar',[$equipamento_igsis]) }}">
                         {{ csrf_field() }}
 
+                        <div class="hidden">
+                            <label for="igisi_id">ID do evento igsis</label>
+                            <input type="text" class="form-control" name="igsis_evento_id" id="igsis_evento_id" value="{{$evento->idEvento}}">
+                        </div>
+
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Nome do Evento</label>
