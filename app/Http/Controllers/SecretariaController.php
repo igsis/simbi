@@ -32,8 +32,7 @@ class SecretariaController extends Controller
 
         Secretaria::create($data);
 
-        return redirect()->route('secretaria')
-            ->with('flash_message','Secretaria Inserida com sucesso!');
+        return redirect()->back()->with('flash_message','Secretaria Inserida com sucesso!');
     }
 
     public function update(Request $request, $id)

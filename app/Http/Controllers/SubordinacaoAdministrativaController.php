@@ -31,8 +31,7 @@ class SubordinacaoAdministrativaController extends Controller
 
         SubordinacaoAdministrativa::create($data);
 
-        return redirect()->route('subordinacaoAdministrativa')
-            ->with('flash_message','Subordinacao Administrativa Inserida com sucesso');
+        return redirect()->back() ->with('flash_message','Subordinacao Administrativa Inserida com sucesso');
         
     }
 

@@ -63,7 +63,6 @@
 						<input type="hidden" name="id">
 						<label>Descrição</label>
 						<input class="form-control" type="text" name="descricao">
-					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						<input type="submit" class="btn btn-success" name="novaSubordinacaoAdministrativa" value="Adicionar">

@@ -32,7 +32,7 @@ class CargoController extends Controller
 
         Cargo::create($data);
 
-        return redirect()->route('cargo')
+        return redirect()->back()
             ->with('flash_message', 'Cargo Inserido com sucesso!');
     }
 
