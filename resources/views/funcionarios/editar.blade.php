@@ -191,6 +191,7 @@
                         <h4 class="modal-title">Adicionar nova Secretaria</h4>
                     </div>
                     <form action="{{route('createSecretaria')}}"  method="POST">
+                        {{csrf_field()}}
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Sigla:</label>
