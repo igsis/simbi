@@ -114,4 +114,5 @@ Route::group(['prefix' => 'gerenciar'], function(){
       Route::post('/search' , 'EquipamentoSiglaController@search')->name('searchSiglaEquipamento');
   });
 
+    Route::post('/' , 'FuncaoController@create')->name('createFuncao');
 });

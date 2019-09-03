@@ -103,12 +103,12 @@
 								<label for="descricao">Descrição</label>
 								<input class="form-control" type="text" name="descricao">
 							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<input type="submit" class="btn btn-success" name="novaSecretaria" value="Adicionar">
+							</div>
+						</form>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						<input type="submit" class="btn btn-success" name="novaSecretaria" value="Adicionar">
-					</div>
-					</form>
 				</div>
 			</div>
 		</div>

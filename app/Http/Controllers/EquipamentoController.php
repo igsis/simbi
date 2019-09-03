@@ -253,7 +253,7 @@ class EquipamentoController extends Controller
                 ])->id;
 
             $funcionamento = new Funcionamento();
-            foreach ($request->input('funcionamento') as $key => $value)
+            foreach ($request->input('funcionamento') as $key => $value) {
                 $funcionamento->create([
                     'domingo' => $request->input("domingo.{$key}", '0'),
                     'segunda' => $request->input("segunda.{$key}", '0'),
@@ -266,6 +266,7 @@ class EquipamentoController extends Controller
                     'hora_final' => $request->input("horarioFechamento.{$key}"),
                     'equipamento_id' => $id
                 ]);
+            }
         }
         return redirect()->route('equipamentos.criaDetalhes', $id)->with('flash_message',
             'Equipamento inserido com sucesso');
@@ -523,11 +524,12 @@ class EquipamentoController extends Controller
             'porte' => 'required',
             'padrao' => 'required',
             'pavimento' => 'required|numeric',
-            'validade' => 'date'
+            'validade' => 'required'
         ]);
 
-        $data = $request->validade;
-        $dataValidade = date("Y-m-d",strtotime($data));
+        $dt = $request->validade;
+        $data = explode('/', $dt);
+        $dataValidade = $data[2].'-'.$data[1].'-'.$data[0];
 
         $this->validate($request, [
             'acessibilidadeArquitetonica' => 'required',

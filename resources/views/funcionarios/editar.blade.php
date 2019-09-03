@@ -10,6 +10,11 @@
         <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}</h1>
     </section>
 
+    <div class="row">
+        <div class="col-xs-12">
+            @includeIf('layouts.erros')
+        </div>
+    </div>
     <!-- Main content -->
     <section class="content">
 
@@ -173,9 +178,9 @@
         </div>
         @include('layouts.excluir_confirm')
 
-        @include('layouts.modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
-        @include('layouts.modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
-        @include('layouts.modal', ['idModal' => 'addSubAdm', 'titulo' => 'Adicionar nova Sub. Administrativa', 'idInput' => 'novaSubAdm', 'funcaoJS' => 'insertSubAdm'])
+        @include('layouts.funcionario_modal', ['idModal' => 'addCargo', 'titulo' => 'Adicionar novo Cargo', 'actionForm' => 'createCargo', 'nameModal' => 'cargo', 'equipamentoId' => '0', 'idInput' => 'novoCargo', 'funcaoJS' => 'insertCargo'])
+        @include('layouts.funcionario_modal', ['idModal' => 'addFuncao', 'titulo' => 'Adicionar nova Função', 'actionForm' => 'createFuncao', 'nameModal' => 'funcao', 'equipamentoId' => '0', 'idInput' => 'novaFuncao', 'funcaoJS' => 'insertFuncao'])
+        @include('layouts.funcionario_modal', ['idModal' => 'addSubAdm', 'titulo' => 'Adicionar nova Sub. Administrativa', 'actionForm' => 'createSubordinacaoAdministrativa', 'nameModal' => 'descricao', 'equipamentoId' => '0', 'idInput' => 'novaSubAdm', 'funcaoJS' => 'insertSubAdm'])
 
         <div class="modal fade" id="addSecretaria" role="dialog" aria-labelledby="addSecretariaLabel"
              aria-hidden="true">
@@ -185,22 +190,25 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Adicionar nova Secretaria</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Sigla:</label>
-                            <input class="form-control" type="text" name="secretariaSigla" id="secretariaSigla"
-                                   maxlength="6">
+                    <form action="{{route('createSecretaria')}}"  method="POST">
+                        {{csrf_field()}}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Sigla:</label>
+                                <input class="form-control" type="text" name="sigla" id="secretariaSigla"
+                                       maxlength="6">
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição:</label>
+                                <input class="form-control" type="text" name="descricao"
+                                       id="secretariaDescricao">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Descrição:</label>
-                            <input class="form-control" type="text" name="secretariaDescricao"
-                                   id="secretariaDescricao">
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button class="btn btn-success" onclick="insertSecretaria(); arrumar();">Adicionar</button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-success" onclick="insertSecretaria();">Adicionar</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
