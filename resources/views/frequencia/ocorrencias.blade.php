@@ -26,8 +26,8 @@
             flex-direction: row;
         }
 
-        #enviado{
-            background-color: rgba(186,255,207,.2);
+        #enviado {
+            background-color: rgba(186, 255, 207, .2);
         }
 
 
@@ -41,7 +41,7 @@
     <div class="content-wrapper">
 
         <div class="row">
-            <div class="col-xs-12">
+            <div id="mensagem" class="col-xs-12">
                 @includeIf('layouts.erros')
             </div>
         </div>
@@ -90,9 +90,8 @@
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
                                                class="btn btn-info desabilitar" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick="preencherCampos('{{ $evento->nome_evento }}','{{$evento->projetoEspecial->projetoEspecial}}', '{{ $evento->projetoEspecial->idProjetoEspecial }}','{{ $evento->id }}')"
-                                                    class="btn btn-success" data-title="{{$evento->nome_evento}}"
-                                                    data-toggle="modal" data-target="#cadastroFrequencia"
+                                            <button onclick='preencherCampos("{{ $evento->nome_evento }}","{{$evento->projetoEspecial->projetoEspecial}}", "{{ $evento->projetoEspecial->idProjetoEspecial }}","{{ $evento->id }}")'
+                                                    class="btn btn-success"
                                                     style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-plus-sign"></i> Frequência
                                             </button>
@@ -119,10 +118,13 @@
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
                                                class="btn btn-info desabilitar" style="margin-right: 3px" id="btnEdita"><i
                                                         class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <a href="{{ route('frequencia.editar', $frequenciasCadastradas) }}"
-                                               class="btn btn-success" role="button" id="btnEdita" aria-disabled="true"
-                                               style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i>
-                                                Editar Frequencia</a>
+                                            <button onclick='editarFrequencia("{{$evento->projetoEspecial->projetoEspecial}}","{{ $evento->id }}")'
+                                                    class="btn btn-success" role="button" id="btnEdita"
+                                                    aria-disabled="true"
+                                                    style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-plus-sign"></i>
+                                                Editar Frequencia
+                                            </button>
                                             <button class="btn btn-primary" type="button" data-toggle="modal"
                                                     data-target="#enviarFrequencia"
                                                     data-title="{{$evento->nome_evento}}"
@@ -154,91 +156,7 @@
         </section>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="cadastroFrequencia" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Nome do evento</h4>
-                </div>
-                <!-- inicio do form -->
-                <form method="POST" action="{{route('frequencia.gravar', $equipamento->id)}}" id="form-modal">
-                    {{ csrf_field() }}
-                    <div class="modal-body">
-                        <div class="hidden">
-                            <div class="form-group">
-                                <label for="evento_ocorrencia_id">Id da ocorrencia</label>
-                                <input class="form-control" type="text" id="evento_ocorrencia_id"
-                                       name="evento_ocorrencia_id" value="">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tipoEvento">Categoria do Evento</label>
-                            <input type="text" readonly class="form-control" id="nomeEvento" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tipoEvento">Projeto Especial</label>
-                            <input type="text" readonly class="form-control" id="nomeProjeto" value="">
-                            <input type="hidden" name="idProjetoEspecial" id="idProjeto" value="">
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-3">
-                                <div class="form-group ">
-                                    <label for="crianca">Criança</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="crianca"
-                                           name="crianca" value="{{old('crianca')}}" onblur="calcular()"
-                                           onkeyup="calcular()">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <div class="form-group ">
-                                    <label for="jovem">Jovem</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="jovem" name="jovem"
-                                           value="{{old('jovem')}}" onblur="calcular()" onkeyup="calcular()">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <div class="form-group ">
-                                    <label for="adulto">Adulto</label>
-                                    <input class="form-control" type="number" id="adulto" min="0" max="9999"
-                                           name="adulto" value="{{old('adulto')}}" onblur="calcular()"
-                                           onkeyup="calcular()">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-3">
-                                <div class="form-group ">
-                                    <label for="idoso">Idoso</label>
-                                    <input class="form-control" type="number" min="0" max="9999" id="idoso" name="idoso"
-                                           value="{{old('idoso')}}" onblur="calcular()" onkeyup="calcular()">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="publicoTotal">Publico Total: </label>
-                            <input type="text" class="form-control" readonly min="0" max="9999" name="total"
-                                   id="publicoTotal" onload="calcular()">
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="observacao">Observação</label>
-                            <input class="form-control" type="text" name="observacao" value="">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="btn-sub" form="form-modal" class="btn btn-success"
-                                data-dismiss="modal">Cadastrar
-                        </button>
-                        <!-- fim do form -->
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+    <!-- Modal confirmação para deletar -->
     <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -265,6 +183,7 @@
         </div>
     </div>
 
+
     <div class="modal fade" id="enviarFrequencia" role="dialog" aria-labelledby="confirmEnvio" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -289,10 +208,188 @@
         </div>
     </div>
 
+    <div class="modal fade" id="dlgFrequencia" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nome do evento</h4>
+                </div>
+                <!-- inicio do form -->
+                <form id="formFrequencia" name="formulario">
+                    {{csrf_field()}}
+                    <div class="modal-body">
+                        <div class="hidden">
+                            <div class="form-group">
+                                <input type="text" id="id">
+                                <label for="evento_ocorrencia_id">Id da ocorrencia</label>
+                                <input class="form-control" type="text" id="eventoOcorrenciaId"
+                                       name="evento_ocorrencia_id">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipoEvento">Nome do Evento</label>
+                            <input type="text" readonly class="form-control" id="nome_evento">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipoEvento">Projeto Especial</label>
+                            <input type="text" readonly class="form-control" id="nome_Projeto" value="">
+                            <input type="hidden" name="idProjetoEspecial" id="id_Projeto" value="">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="crianca">Criança</label>
+                                    <input class="form-control" type="number" min="0" max="9999" id="qtdCrianca"
+                                           name="crianca" value="{{old('crianca')}}" onkeyup="calcular()"
+                                           onkeyup="calcular()">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="jovem">Jovem</label>
+                                    <input class="form-control" type="number" min="0" max="9999" id="qtdJovem"
+                                           name="jovem"
+                                           value="{{old('jovem')}}" onblur="calcular()" onkeyup="calcular()">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="adulto">Adulto</label>
+                                    <input class="form-control" type="number" id="qtdAdulto" min="0" max="9999"
+                                           name="adulto" value="{{old('adulto')}}" onkeyup="calcular()"
+                                           onkeyup="calcular()">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-group ">
+                                    <label for="idoso">Idoso</label>
+                                    <input class="form-control" type="number" min="0" max="9999" id="qtdIdoso"
+                                           name="idoso"
+                                           value="{{old('idoso')}}" onblur="calcular()" onkeyup="calcular()">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="publicoTotal">Publico Total: </label>
+                            <input type="text" class="form-control" readonly min="0" max="9999" name="total"
+                                   id="qtdPublicoTotal" onload="calcular()">
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="observacao">Observação</label>
+                            <input class="form-control" type="text" id="observacao" name="observacao" value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </div>
+                </form>
+                <!-- fim do frm -->
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts_adicionais')
     <script type="text/javascript">
+
+        $.ajaxSetup({
+            headers: {
+                'X-CRSF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
+        function limparCampos() {
+            $('#id').val('')
+            $('#eventoOcorrenciaId').val('')
+            $('#nome_evento').val('')
+            $('#id_Projeto').val('')
+            $('#qtdCrianca').val('')
+            $('#qtdJovem').val('')
+            $('#qtdAdulto').val('')
+            $('#qtdIdoso').val('')
+            $('#qtdPublicoTotal').val('')
+        }
+
+        function editarFrequencia(projetoEspecial, id) {
+            limparCampos();
+            let formulario = document.querySelector('#formFrequencia');
+            formulario.removeAttribute('method');
+            formulario.action = ''
+            //editar isso depois quando subir para o servidor
+            $.getJSON('/simbi/api/editarFrequencia/' + id, function (data) {
+                $('#eventoOcorrenciaId').val(data[0].evento_ocorrencia_id);
+                $('#nome_evento').val(data[2].nome_evento);
+                $('#nome_Projeto').val(projetoEspecial);
+                $('#id_Projeto').val(data[2].projeto_especial_id);
+                $('#qtdCrianca').val(data[0].crianca)
+                $('#qtdJovem').val(data[0].jovem)
+                $('#qtdAdulto').val(data[0].adulto)
+                $('#qtdIdoso').val(data[0].idoso)
+                $('#observacao').val(data[0].observacao)
+                $('#qtdPublicoTotal').val(data[0].total)
+                $('#id').val(data[0].id)
+                $('#dlgFrequencia').modal('show');
+            });
+        }
+
+        function salvarFrequencia() {
+            let freq = {
+                id: $('#id').val(),
+                crianca: $('#qtdCrianca').val(),
+                jovem: $('#qtdJovem').val(),
+                adulto: $('#qtdAdulto').val(),
+                idoso: $('#qtdIdoso').val(),
+                total: $('#qtdPublicoTotal').val(),
+                observacao: $('#observacao').val()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '/simbi/api/salvarFrequencia/' + freq.id,
+                context: this,
+                data: freq,
+                success: function (data) {
+                    console.log('Salvo OK');
+                    $('#mensagem').append('<div class="row" align="center">\n' +
+                        '        <div class="col-md-12">\n' +
+                        '            <div class="box box-success box-solid">\n' +
+                        '                <div class="box-header with-border">\n' +
+                        '                    <h3 class="box-title">Ocorrencia atualizada com Sucesso</h3>\n' +
+                        '                    <div class="box-tools pull-right">\n' +
+                        '                        <button type="button" class="btn btn-box-tool" data-widget="remove">\n' +
+                        '                            <i class="fa fa-times"></i>\n' +
+                        '                        </button>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '            </div>\n' +
+                        '        </div>\n' +
+                        '    </div>')
+
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+
+        }
+
+        $('#formFrequencia').submit(function (event) {
+            event.preventDefault();
+            if ($('#id').val() != '') {
+                salvarFrequencia()
+                $('#dlgFrequencia').modal('hide')
+            } else {
+                let formulario = document.querySelector('#formFrequencia');
+                formulario.submit()
+            }
+        });
+
 
         $('#enviarFrequencia').on('show.bs.modal', function (e) {
             $message = $(e.relatedTarget).attr('data-message');
@@ -302,9 +399,6 @@
             $message = $(e.relatedTarget).attr('data-footer');
             $(this).find('.modal-footer #confirm ').text($message);
 
-            // Pass form reference to modal for submission on yes/ok
-            //  var form = $(e.relatedTarget).closest('form');
-            //  $(this).find('.modal-footer #confirm').data('form', form);
         });
 
         $('#confirmDelete').on('show.bs.modal', function (e) {
@@ -314,13 +408,8 @@
             $(this).find('.modal-title').text($title);
             $message = $(e.relatedTarget).attr('data-footer');
             $(this).find('.modal-footer #confirm ').text($message);
-
-            // Pass form reference to modal for submission on yes/ok
-            //  var form = $(e.relatedTarget).closest('form');
-            //  $(this).find('.modal-footer #confirm').data('form', form);
         });
 
-        // Form confirm (yes/ok) handler, submits form
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
             $(this).data('form').submit();
         });
@@ -330,14 +419,12 @@
             document.getElementById('idOcorrencia').value = id;
         }
 
-    </script>
 
-    <script type="text/javascript">
         function calcular() {
-            let crianca = parseInt(document.getElementById('crianca').value, 10);
-            let jovem = parseInt(document.getElementById('jovem').value, 10);
-            let adulto = parseInt(document.getElementById('adulto').value, 10);
-            let idoso = parseInt(document.getElementById('idoso').value, 10);
+            let crianca = parseInt(document.getElementById('qtdCrianca').value, 10);
+            let jovem = parseInt(document.getElementById('qtdJovem').value, 10);
+            let adulto = parseInt(document.getElementById('qtdAdulto').value, 10);
+            let idoso = parseInt(document.getElementById('qtdIdoso').value, 10);
 
             crianca = isNaN(crianca) ? 0 : crianca;
             jovem = isNaN(jovem) ? 0 : jovem;
@@ -345,23 +432,25 @@
             idoso = isNaN(idoso) ? 0 : idoso;
 
             let calcula = crianca + jovem + adulto + idoso;
-            let publico = document.getElementById("publicoTotal");
+            let publico = document.getElementById("qtdPublicoTotal");
 
             publico.value = String(calcula);
         }
 
         window.onload = calcular();
 
-    </script>
-
-    <script>
         function preencherCampos(nomeEvento, nomeProjeto, idProjeto, idocorrencia) {
-
-            document.querySelector('#nomeEvento').value = nomeEvento;
-            document.querySelector('#nomeProjeto').value = nomeProjeto;
-            document.querySelector('#idProjeto').value = idProjeto;
-            document.querySelector('#evento_ocorrencia_id').value = idocorrencia;
+            limparCampos();
+            let formulario = document.querySelector('#formFrequencia');
+            formulario.action = '{{route('frequencia.gravar',$equipamento->id)}}';
+            formulario.setAttribute('method', 'POST')
+            document.querySelector('#nome_evento').value = nomeEvento;
+            document.querySelector('#nome_Projeto').value = nomeProjeto;
+            document.querySelector('#id_Projeto').value = idProjeto;
+            document.querySelector('#eventoOcorrenciaId').value = idocorrencia;
             document.querySelector('.modal-title').innerHTML = nomeEvento;
+
+            $('#dlgFrequencia').modal('show');
 
         }
 
@@ -371,10 +460,6 @@
             document.querySelector('#form-modal').submit();
         }
 
-
-    </script>
-
-    <script>
 
         $(document).ready(function () {
 
@@ -419,17 +504,10 @@
                         $(linha).children('td').removeClass('bg-success');
                     }
                 }
-                //  else {
-                //     $(linha).children('td:first-child').append('<span class="expirado">Data Expirada (Envie a ocorrência)</span>').css('margin-right: 15px');
-                //     $(linha).children('td').removeClass('bg-success');
-                //     $(linha).removeClass('bg-success').addClass('bg-danger');
-                //
-                // }
             }
         });
 
     </script>
-    {{--findIndex(checkAdult)--}}
     @include('scripts.tabelas_admin')
 
 @endsection

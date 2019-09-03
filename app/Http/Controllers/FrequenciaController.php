@@ -146,7 +146,6 @@ class FrequenciaController extends Controller
      */
     public function store(Request $request, $id)
     {
-
         $this->validate($request, [
             'evento_ocorrencia_id' => 'required',
             'crianca' => 'required|integer|between: 0, 9999',
@@ -160,7 +159,8 @@ class FrequenciaController extends Controller
 
         $ocorrencia = EventoOcorrencia::findOrFail($request->evento_ocorrencia_id);
 
-        $user->frequencias()->create([
+        $user->frequencias()->create
+        ([
             'evento_ocorrencia_id' => $request->evento_ocorrencia_id,
             'crianca' => $request->crianca,
             'jovem' => $request->jovem,
@@ -238,32 +238,6 @@ class FrequenciaController extends Controller
      */
     public function destroy($id)
     {
-
-    }
-
-    public function importarEventos()
-    {
-        $idEvento = 170;
-        $eventos = EventosIgsis::where('idEvento', $idEvento);
-
-        //$teste= EventosIgsis::all();
-
-        dd($eventos);
-    }
-
-    public function editaFrequencia($id)
-    {
-        dd($id);
-//        $frequencia = Frequencia::where('evento_ocorrencia_id',$id)->get();
-//        $ocorrencia = EventoOcorrencia::findOrFail($frequencia->evento_ocorrencia_id);
-//
-//        $evento = Evento::where('igsis_evento_id', $ocorrencia->igsis_evento_id)->firstOrFail();
-//
-//        $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
-
-        $frequencia = ['categoriaEvento' => 'Contação de histórias', 'projetoEspecial' => 'Baú de Histórias', 'crianca' => '20', 'jovem' => '5', 'adulto' => '5', 'idoso' => '0', 'Observacao' => 'Teste'];
-
-        return view('frequencia.editar', compact('frequencia'));
 
     }
 
