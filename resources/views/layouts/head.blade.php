@@ -67,6 +67,9 @@
         hr{
             opacity: 0.2;
         }
+        .ui-datepicker-calendar {
+            display: none;
+        }
     </style>
 
     @yield('linksAdicionais')

@@ -94,7 +94,7 @@
                                                     class="btn btn-success" data-title="{{$evento->nome_evento}}"
                                                     data-toggle="modal" data-target="#cadastroFrequencia"
                                                     style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-plus-sign"></i> Frequência
+                                                        class="glyphicon glyphicon-plus-sign"></i> Público
                                             </button>
                                             @hasrole('Administrador')
                                             <button class="btn btn-danger desabilitar" type="button"
