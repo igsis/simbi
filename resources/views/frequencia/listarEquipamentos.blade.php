@@ -5,6 +5,14 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 
+@section('scripts_css')
+    <style>
+        .ui-datepicker-calendar {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('titulo','Frequência Enviadas')
 
 @section('conteudo')
@@ -123,7 +131,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
-                                <label for="data">Data</label>
+                                <label for="data">Mês</label>
                                 <input type="text" class="form-control" id="calendario" name="data" autocomplete="off" maxlength="10">
                             </div>
                         </div>
@@ -168,8 +176,10 @@
                 changeMonth: true,
                 changeYear: true,
                 showButtonPanel: true,
+                currentText: 'Atual',
+                closeText : "Selecionar",
                 onClose: function(dateText, inst) {
-                    
+
                     function isDonePressed(){
                         return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
                     }
@@ -205,11 +215,10 @@
         });
 
         $('#submitForm').click(function () {
-           let data = $('#calendario').val();
-           let nData = data.split('/');
-           let novaData = nData[1]+'-'+nData[0];
-
-           $('#calendario').val(novaData);
+            let data = $('#calendario').val();
+            let nData = data.split('/');
+            let novaData = nData[1]+'-'+nData[0];
+            $('#calendario').val(novaData);
 
         });
 

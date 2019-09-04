@@ -1,5 +1,13 @@
 @extends('layouts.master2')
 
+@section('scripts_css')
+    <style>
+        .ui-datepicker-calendar {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('titulo','Cadastrar Ocorrência')
 @section('conteudo')
 
@@ -36,8 +44,8 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label for="total">Data</label>
-                                <input type="text" class="form-control calendario" name="data" id="data" value="{{old('data')}}">
+                                <label for="total">Mês</label>
+                                <input type="text" class="form-control calendario" name="data" id="data" value="{{old('data')}}" autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
@@ -287,16 +295,33 @@
 
     </script>
 
-@endsection
-
-@section('scripts_adicionais')
     {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
     @include('scripts.tabelas_admin')
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script>
         $(function() {
             $( ".calendario" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                currentText: 'Atual',
+                closeText : "Selecionar",
+                onClose: function(dateText, inst) {
+
+                    function isDonePressed(){
+                        return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+                    }
+
+                    if (isDonePressed()){
+                        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                        $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+
+                        $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+                    }
+                },
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
                 dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -304,7 +329,7 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
             });
             $('.calendario').datepicker("option","showAnim","blind");
-            $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
+            $('.calendario').datepicker( "option", "dateFormat", "MM/yy");
         });
     </script>
 @endsection
