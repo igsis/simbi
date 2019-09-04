@@ -19,8 +19,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 class="page-header">
-                <i class="glyphicon glyphicon-home"></i>
-                Frequência de Equipamentos
+                <i class="fa fa-users"></i>
+                Público de Eventos em Equipamentos
             </h1>
         </section>
 
@@ -49,24 +49,22 @@
                                         <td>{{$equipamento->nome}}</td>
                                         <td>
                                             <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
-                                               class="btn btn-info" style="margin-right: 3px"><i
+                                               class="btn bg-navy" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
                                             @if($equipamento->portaria == 0)
                                                 <button type="button" data-toggle="modal"
                                                         data-target="#cadastroPortariaSimples"
                                                         data-title="Cadastro de Portaria"
-                                                        class="btn btn-info" style="margin-right: 3px"
+                                                        class="btn bg-light-blue" style="margin-right: 3px"
                                                         onclick="setarIdEquipamento({{ $equipamento->id }})"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
-                                                    Portaria
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Recepção
                                                 </button>
                                             @else
                                                 <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
-                                                   class="btn btn-info" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
-                                                    Portaria</a>
+                                                   class="btn bg-light-blue" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Recepção</a>
                                             @endif
-                                            <a href="#" class="btn btn-info" style="margin-right: 3px"><i
+                                            <a href="#" class="btn bg-olive" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de
                                                 Público</a>
                                         </td>
@@ -78,13 +76,12 @@
                                         <td>{{$equipamento->nome}}</td>
                                         <td>
                                             <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,2]) }}"
-                                               class="btn btn-info" style="margin-right: 3px"><i
+                                               class="btn bg-navy" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
                                             <a href="#"
-                                               class="btn btn-info" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias
-                                                Portaria</a>
-                                            <a href="#" class="btn btn-info" style="margin-right: 3px"><i
+                                               class="btn bg-light-blue" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Recepção</a>
+                                            <a href="#" class="btn bg-olive" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de
                                                 Público</a>
                                         </td>

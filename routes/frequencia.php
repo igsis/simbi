@@ -26,8 +26,6 @@ Route::group(['prefix' => 'frequencia'], function(){
 
     Route::get('/{equipamento}/listar', 'FrequenciaController@listar')->name('frequencia.listar');
 
-    Route::get('/{frequencia}/editarFrequencia','FrequenciaController@editaFrequencia')->name('frequencia.editar');
-
     Route::post('/{frequencia}/editar','FrequenciaController@atualizaFrequencia')->name('frequencia.atualizar');
 
     Route::post('/remover', 'FrequenciaController@removeOcorrencia')->name('evento.ocorrencia.destroy');

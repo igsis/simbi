@@ -63,7 +63,7 @@
 
             <li class="treeview {{ request()->routeIs('frequencia*') ? 'active' : '' }}">
                 <a href="#">
-                    <i class="fa fa-book"></i> <span>Frequência</span>
+                    <i class="fa fa-book"></i> <span>Público de Eventos</span>
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
