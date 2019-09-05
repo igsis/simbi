@@ -64,8 +64,7 @@
                                                         data-target="#cadastroPortariaSimples"
                                                         data-title="Cadastro de Portaria"
                                                         class="btn bg-light-blue" style="margin-right: 3px"
-                                                        onclick="setarIdEquipamento({{ $equipamento->id }})"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Recepção
+                                                        onclick="setarIdEquipamento({{ $equipamento->id }})">&nbsp; Publico de Recepção
                                                 </button>
                                             @else
                                                 <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
