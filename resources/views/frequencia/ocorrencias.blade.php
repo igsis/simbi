@@ -93,7 +93,7 @@
                                             <button onclick='preencherCampos("{{ $evento->nome_evento }}","{{$evento->projetoEspecial->projetoEspecial}}", "{{ $evento->projetoEspecial->idProjetoEspecial }}","{{ $evento->id }}")'
                                                     class="btn btn-success"
                                                     style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-plus-sign"></i> Frequência
+                                                        class="glyphicon glyphicon-plus-sign"></i> Público
                                             </button>
                                             @hasrole('Administrador')
                                             <button class="btn btn-danger desabilitar" type="button"

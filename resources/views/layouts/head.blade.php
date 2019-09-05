@@ -67,6 +67,7 @@
         hr{
             opacity: 0.2;
         }
+
     </style>
 
     @yield('linksAdicionais')

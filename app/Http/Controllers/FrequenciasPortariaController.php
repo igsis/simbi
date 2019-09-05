@@ -57,6 +57,7 @@ class FrequenciasPortariaController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->data);
         $this->validate($request, [
             'id' => 'required',
             'data'          =>  'required',
