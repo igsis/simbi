@@ -137,6 +137,24 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <h2 class="page-header">
+                                    Período
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <input type="radio" name="periodo" value="seg_sex"> Segunda à Sexta
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="radio" name="periodo" value="sab"> Sábado
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="radio" name="periodo" value="dom"> Domingo
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="page-header">
                                     Público Atendido
                                 </h2>
                             </div>
@@ -210,13 +228,13 @@
                 monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                 monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
             });
-            $('#calendario').datepicker("option", "dateFormat", "MM/yy");
+            $('#calendario').datepicker("option", "dateFormat", "mm/yy");
         });
 
         $('#submitForm').click(function () {
             let data = $('#calendario').val();
             let nData = data.split('/');
-            let novaData = nData[1]+'-'+nData[0];
+            let novaData = nData[1]+'-'+nData[0]+'-01';
             $('#calendario').val(novaData);
 
         });

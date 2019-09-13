@@ -51,6 +51,24 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <h2 class="page-header">
+                                    Período
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="form-group col-md-3">
+                                    <input type="radio" name="periodo" value="seg_sex"> Segunda à Sexta
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <input type="radio" name="periodo" value="sab"> Sábado
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <input type="radio" name="periodo" value="dom"> Domingo
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="page-header">
                                     Escolaridade
                                 </h2>
                             </div>
@@ -329,7 +347,7 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
             });
             $('.calendario').datepicker("option","showAnim","blind");
-            $('.calendario').datepicker( "option", "dateFormat", "MM/yy");
+            $('.calendario').datepicker( "option", "dateFormat", "mm/yy");
         });
     </script>
 @endsection
