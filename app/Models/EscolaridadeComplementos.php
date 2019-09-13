@@ -1,21 +1,21 @@
 <?php
 
-namespace Simbi\Models;
+namespace Simbi;
 
 use Illuminate\Database\Eloquent\Model;
+use Simbi\Models\ComplementoPortaria;
+use Simbi\Models\Equipamento;
 
-class Idade extends Model
+class EscolaridadeComplementos extends Model
 {
-
     public $timestamps = false;
 
+    protected $table = 'escolaridade_complementos';
+
     protected $fillable = [
-        '0_6anos',
-        '7_14anos',
-        '15_17anos',
-        '18_29anos',
-        '30_59anos',
-        '60_mais_anos',
+        'fundamental',
+        'medio',
+        'superior',
         'semInformacao'
     ];
 
