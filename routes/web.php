@@ -2,6 +2,8 @@
 
 Route::get('/', 'IndexController@index')->middleware('auth');
 
+Route::get('/gerencial', 'IndexController@gerencialIndex')->middleware('auth');
+
 Route::get('home', 'IndexController@index')->middleware('primeiroLogin');
 
 
