@@ -50,7 +50,7 @@ class EquipamentoController extends Controller
         $type = $types->type;
         $equipamentos = Equipamento::where('publicado', '=', $types->type)->orderBy('nome')->get();
         $count = count(Equipamento::where('portaria', 1)->get());
-        return view('equipamentos.index', compact( 'equipamentos', 'type','count'));
+        return view('gerencial.equipamentos.index', compact( 'equipamentos', 'type','count'));
     }
 
 
@@ -67,7 +67,7 @@ class EquipamentoController extends Controller
 
         $cadastrados = Equipamento::all()->pluck('igsis_id')->toArray();
 
-        return view('equipamentos.importarIgsis', compact('equipamentos', 'cadastrados'));
+        return view('gerencial.equipamentos.importarIgsis', compact('equipamentos', 'cadastrados'));
     }
 
     /**
@@ -87,7 +87,7 @@ class EquipamentoController extends Controller
         $distritos = Distrito::where('publicado', 1)->orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
-        return view('equipamentos.cadastro',
+        return view('gerencial.equipamentos.cadastro',
             compact(
                 'tipoServicos',
                 'secretarias',
@@ -115,7 +115,7 @@ class EquipamentoController extends Controller
         $distritos = Distrito::where('publicado', 1)->orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
 
-        return view('equipamentos.cadastroIgsis',
+        return view('gerencial.equipamentos.cadastroIgsis',
             compact(
                 'equipamentoIgsis',
                 'tipoServicos',
@@ -283,7 +283,7 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        return view('equipamentos.show', compact('equipamento'));
+        return view('gerencial.equipamentos.show', compact('equipamento'));
     }
 
     /**
@@ -304,7 +304,7 @@ class EquipamentoController extends Controller
         $prefeituraRegionais = PrefeituraRegional::orderBy('descricao')->get();
         $distritos = Distrito::orderBy('descricao')->get();
         $status = Status::orderBy('descricao')->get();
-        return view('equipamentos.editar', compact(
+        return view('gerencial.equipamentos.editar', compact(
             'equipamento',
             'tipoServicos',
             'subordinacoesAdministrativas',
@@ -455,7 +455,7 @@ class EquipamentoController extends Controller
         $elevadores = Elevador::all();
         $pracaClassificacoes = Classificacao::all();
 
-        return view('equipamentos.detalhestecnicos', compact(
+        return view('gerencial.equipamentos.detalhestecnicos', compact(
             'equipamento',
             'contratos',
             'utilizacoes',
@@ -569,7 +569,7 @@ class EquipamentoController extends Controller
 
         $pracaClassificacoes = Classificacao::all();
 
-        return view('equipamentos.capacidade', compact(
+        return view('gerencial.equipamentos.capacidade', compact(
             'equipamento',
             'pracaClassificacoes'
         ));
@@ -685,7 +685,7 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::find($id);
 
-        return view('equipamentos.area', compact('equipamento'));
+        return view('gerencial.equipamentos.area', compact('equipamento'));
     }
 
     public function gravaArea(Request $request, $id)
@@ -791,7 +791,7 @@ class EquipamentoController extends Controller
 
         $equipamentos = $equipamento->search($dataForm)->orderBy('nome')->paginate(10);
 
-        return view('equipamentos.index', compact('dataForm', 'equipamentos', 'siglas', 'type'));
+        return view('gerencial.equipamentos.index', compact('dataForm', 'equipamentos', 'siglas', 'type'));
     }
 
     public function equipamentoOcorrencia(Request $request)

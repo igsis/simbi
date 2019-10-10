@@ -36,7 +36,7 @@ class FuncionarioController extends Controller
         }
 
         $equipamentos = Equipamento::all();
-        return view('funcionarios.index', compact('users', 'equipamentos','type'));
+        return view('gerencial.pessoas.index', compact('users', 'equipamentos','type'));
     }
 
     // Filtro de Usuários Ativados
@@ -50,7 +50,7 @@ class FuncionarioController extends Controller
 
         $equipamentos = Equipamento::all();
 
-        return view('funcionarios.index', compact('users', 'equipamentos','dataForm', 'type'));
+        return view('gerencial.pessoas.index', compact('users', 'equipamentos','dataForm', 'type'));
 
     }
 
@@ -65,7 +65,7 @@ class FuncionarioController extends Controller
         $funcoes = Funcao::orderBy('funcao')->get();
         $escolaridades = Escolaridade::all();
 
-        return view('funcionarios.editar', compact(
+        return view('gerencial.pessoas.editar', compact(
             'user',
             'roles',
             'perguntas',
@@ -87,7 +87,7 @@ class FuncionarioController extends Controller
         User::where('funcionario_id','=',$types->id)
             ->update(array('publicado'=> 0));
 
-        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Desativado com Sucesso.');
+        return redirect()->route('gerencial.pessoas.index',['type'=>$type])->with('flash_message','Funcionário Desativado com Sucesso.');
 
     }
 
@@ -96,7 +96,7 @@ class FuncionarioController extends Controller
             Funcionario::findOrFail($request->id)
                 ->update(['publicado' => 1]);
 
-            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
+            return redirect()->route('gerencial.pessoas.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
     }
 
     public function store(Request $request){
@@ -150,9 +150,9 @@ class FuncionarioController extends Controller
         $user->escolaridade_id = $request->escolaridade;
 
         if($user->save()){
-            return redirect()->route('funcionarios.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
+            return redirect()->route('gerencial.pessoas.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
         }
-        return view('funcionarios.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
+        return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
 
     }
 
@@ -164,7 +164,7 @@ class FuncionarioController extends Controller
         $cargos = Cargo::orderBy('cargo')->get();
         $funcoes = Funcao::orderBy('funcao')->get();
 
-        return view('funcionarios.cadastro', compact(
+        return view('gerencial.pessoas.cadastro', compact(
             'secretarias',
             'subordinacoesAdministrativas',
             'escolaridades',
@@ -229,7 +229,7 @@ class FuncionarioController extends Controller
 
 
         if($funcionario->save()){
-            return redirect()->route('funcionarios.index', ['type' => '1'])
+            return redirect()->route('gerencial.pessoas.index', ['type' => '1'])
                 ->with('flash_message',
                     'Funcionario Editado com Sucesso!');
         }

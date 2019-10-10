@@ -6,9 +6,9 @@
 
 @section('titulo')
     @if($type == 1)
-        {{$pagina = "Funcionários Cadastrados"}}
+        {{$pagina = "Pessoas Cadastradas"}}
     @else
-        {{$pagina = "Funcionários Desativados"}}
+        {{$pagina = "Pessoas Desativadas"}}
     @endif
     {{$pagina}}
 @endsection
@@ -40,14 +40,14 @@
         <!-- Default box -->
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Pesquisa de Funcionários</h3>
+                <h3 class="box-title">Lista de Pessoas</h3>
             </div>
             <div class="box-body">
                 <div class="table-responsive">
                     <div class="btn-tabela">
                         @hasrole('Administrador')
                         @if($type == 1)
-                            <a href="{{ route('funcionarios.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Funcionário</a>
+                            <a href="{{ route('funcionarios.cadastrar') }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar Pessoa</a>
                         @endif
                         @endhasrole
                     </div>
@@ -85,7 +85,7 @@
                                             <input type="hidden" name="type" value="{{ $type }}">
                                             <input type="hidden" name="id" value="{{$user->id}}">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este Funcionário?'><i class="glyphicon glyphicon-trash"></i> Desativar
+                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este Pessoa?'><i class="glyphicon glyphicon-trash"></i> Desativar
                                             </button>
                                         </form>
                                     @else

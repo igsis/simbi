@@ -76,25 +76,25 @@
                     </ul>
                     <div class="tab-content">
                         <!-- boxDados.blade.php -->
-                    @include('equipamentos.boxDados')
+                    @include('gerencial.equipamentos.boxDados')
 
                     <!-- boxEndereco.blade.php -->
-                    @include('equipamentos.boxEndereco')
+                    @include('gerencial.equipamentos.boxEndereco')
 
                     <!-- boxDados.blade.php -->
-                    @include('equipamentos.boxOcorrencias')
+                    @include('gerencial.equipamentos.boxOcorrencias')
 
                     <!-- boxReformas.blade.php -->
-                    @include('equipamentos.boxReformas')
+                    @include('gerencial.equipamentos.boxReformas')
 
                     <!-- boxReformas.blade.php -->
-                    @include('equipamentos.boxDetalhesTecnicos')
+                    @include('gerencial.equipamentos.boxDetalhesTecnicos')
 
                     <!-- boxReformas.blade.php -->
-                    @include('equipamentos.boxCapacidade')
+                    @include('gerencial.equipamentos.boxCapacidade')
 
                     <!-- boxReformas.blade.php -->
-                        @include('equipamentos.boxArea')
+                        @include('gerencial.equipamentos.boxArea')
 
                     </div>
                 </div>

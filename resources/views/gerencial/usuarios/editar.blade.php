@@ -32,7 +32,7 @@
 {{--                        @endif--}}
                     </div>
                 </div>
-                <form method="POST" action="{{ url('usuarios', [$user->id]) }}" accept-charset="UTF-8">
+                <form method="POST" action="{{ url('gerencial/usuarios', [$user->id]) }}" accept-charset="UTF-8">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="PUT">
 

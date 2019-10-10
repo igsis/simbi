@@ -20,7 +20,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar evento</h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar Ocorrência de Evento</h1>
         </section>
 
         <!-- Main content -->

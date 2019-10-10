@@ -12,14 +12,14 @@ class CargoController extends Controller
     {
         $cargos = Cargo::where('publicado', '=', '1')->orderBy('cargo')->paginate(10);
 
-        return view('gerenciar.cargos.index', compact('cargos'));
+        return view('gerencial.gerenciar.cargos.index', compact('cargos'));
     }
 
     public function disabled()
     {
         $cargos = Cargo::where('publicado', '=', '0')->orderBy('cargo')->paginate(10);
 
-        return view('gerenciar.cargos.disabled', compact('cargos'));
+        return view('gerencial.gerenciar.cargos.disabled', compact('cargos'));
     }
 
 
@@ -79,10 +79,10 @@ class CargoController extends Controller
 
         if ($dataForm['publicado'] == 1)
         {
-            return view('gerenciar.cargos.index', compact('cargos'));
+            return view('gerencial.gerenciar.cargos.index', compact('cargos'));
         }else
         {
-            return view('gerenciar.cargos.disabled', compact('cargos'));
+            return view('gerencial.gerenciar.cargos.disabled', compact('cargos'));
         }
     }
 

@@ -43,7 +43,7 @@ class UserController extends Controller
         }
 
         $equipamentos = Equipamento::orderBy('nome')->get();
-        return view('usuarios.index', compact('users', 'equipamentos','type'));
+        return view('gerencial.usuarios.index', compact('users', 'equipamentos','type'));
     }
 
     /**
@@ -59,7 +59,7 @@ class UserController extends Controller
         $roles = Role::all();
 
         $nivelAcessos = NivelAcesso::all();
-        return view('usuarios.cadastro', compact(
+        return view('gerencial.usuarios.cadastro', compact(
             'roles',
             'nivelAcessos',
             'funcionario'
@@ -126,7 +126,7 @@ class UserController extends Controller
 
 
 
-        return view('usuarios.editar', compact(
+        return view('gerencial.usuarios.editar', compact(
             'user',
             'roles',
             'perguntas',
@@ -181,7 +181,7 @@ class UserController extends Controller
         else
         {
             $this->validate($request, [
-                'email'=>'required|email|unique:funcionarios,email',
+                'email' => 'required|email|unique:funcionarios,email,'.$funcionario->id,
             ]);
 
             $funcionario->update([
@@ -287,7 +287,7 @@ class UserController extends Controller
 
         $equipamentos = Equipamento::all();
 
-        return view('usuarios.index', compact('users', 'equipamentos','dataForm', 'type'));
+        return view('gerencial.usuarios.index', compact('users', 'equipamentos','dataForm', 'type'));
 
     }
 
@@ -297,7 +297,7 @@ class UserController extends Controller
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
 
-        return view('usuarios.vincular', compact('user', 'equipamentos', 'cargos'));
+        return view('gerencial.usuarios.vincular', compact('user', 'equipamentos', 'cargos'));
     }
 
     public function vinculaEquipamento(Request $request, $id)
