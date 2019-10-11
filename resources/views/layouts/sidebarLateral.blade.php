@@ -69,18 +69,14 @@
             @else
                 {{--       ÁREA FREQUENCIA         --}}
                 <li class="header">Frequência</li>
-                <li class="treeview {{ request()->routeIs('evento*') ? 'active' : '' }}">
+                <li>
                     <a href="#">
                         <i class="fa fa-calendar-o"></i> <span>Eventos</span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ route('frequencia.index') }}">Lista</a></li>
-                        <li><a href="#">Cadastrar</a></li>
-                    </ul>
                 </li>
 
-                <li class="treeview {{ request()->routeIs('frequencia*') ? 'active' : '' }}">
+                <li class="treeview {{ request()->routeIs('') ? 'active' : '' }}">
                     <a href="#">
                         <i class="fa fa-users"></i> <span>Público</span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>

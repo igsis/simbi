@@ -28,7 +28,11 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="fa fa-users"></i>
-                Público de Eventos em Equipamentos
+                @if($type == 1)
+                    Público de Eventos em Equipamentos
+                @else
+                    Ocorrência de Eventos em Equipamentos
+                @endif
             </h1>
         </section>
 
@@ -58,22 +62,20 @@
                                         <td>
                                             <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
                                                class="btn bg-navy" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Evento</a>
                                             @if($equipamento->portaria == 0)
                                                 <button type="button" data-toggle="modal"
                                                         data-target="#cadastroPortariaSimples"
                                                         data-title="Cadastro de Portaria"
                                                         class="btn bg-light-blue" style="margin-right: 3px"
-                                                        onclick="setarIdEquipamento({{ $equipamento->id }})">&nbsp; Publico de Recepção
+                                                        onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
                                                 </button>
                                             @else
                                                 <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
                                                    class="btn bg-light-blue" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Recepção</a>
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção</a>
                                             @endif
-                                            <a href="#" class="btn bg-olive" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de
-                                                Público</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -84,13 +86,7 @@
                                         <td>
                                             <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,2]) }}"
                                                class="btn bg-navy" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias</a>
-                                            <a href="#"
-                                               class="btn bg-light-blue" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Recepção</a>
-                                            <a href="#" class="btn bg-olive" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Frequencias de
-                                                Público</a>
+                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
                                         </td>
                                     </tr>
                                 @endforeach
