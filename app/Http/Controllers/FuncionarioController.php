@@ -35,7 +35,7 @@ class FuncionarioController extends Controller
                 ->orderBy('id')->get();
         }
 
-        $equipamentos = Equipamento::all();
+        $equipamentos = Equipamento::orderBy('nome')->get();
         return view('gerencial.pessoas.index', compact('users', 'equipamentos','type'));
     }
 

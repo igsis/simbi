@@ -29,7 +29,7 @@ class EventoController extends Controller
 
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
 
-        return view('evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
+        return view('frequencia.evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
     }
 
     /**
@@ -46,7 +46,7 @@ class EventoController extends Controller
 
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
-        return view('evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('frequencia.evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
     }
 
     /**
@@ -102,7 +102,7 @@ class EventoController extends Controller
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
 
-        return view('evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('frequencia.evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
     }
 
     /**
@@ -161,7 +161,7 @@ class EventoController extends Controller
 
         $cadastrados = Evento::all()->pluck('igsis_evento_id')->toArray();
 
-        return view('evento.importarIgsis', compact('eventos', 'cadastrados', 'idEquipamento'));
+        return view('frequencia.evento.importarIgsis', compact('eventos', 'cadastrados', 'idEquipamento'));
     }
 
     public function cadastroImportacao($equipamento_igsis, $igsis_id)
@@ -171,7 +171,7 @@ class EventoController extends Controller
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
-        return view('evento.cadastroEventoIgsis', compact(
+        return view('frequencia.evento.cadastroEventoIgsis', compact(
             'evento',
             'projetoEspecial',
             'tipoEvento',

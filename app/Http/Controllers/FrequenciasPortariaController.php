@@ -27,7 +27,7 @@ class FrequenciasPortariaController extends Controller
     public function create($id)
     {
         $equipamento = Equipamento::findOrFail($id);
-        return view('frequencia.portaria.cadastro', compact('equipamento'));
+        return view('frequencia.frequencia.portaria.cadastro', compact('equipamento'));
     }
 
     public function criaPortariaCompleta($id)
@@ -39,7 +39,7 @@ class FrequenciasPortariaController extends Controller
         $sexos = Sexo::all();
         $deficiencias = Deficiencia::all();
 
-        return view('frequencia.portaria.cadastroCompleto', compact(
+        return view('frequencia.frequencia.portaria.cadastroCompleto', compact(
             'equipamento',
             'etnias',
             'idades',
@@ -138,7 +138,7 @@ class FrequenciasPortariaController extends Controller
     {
         $type = 2;
         $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
-        return view('frequencia.portaria.index', compact('equipamentos', 'type'));
+        return view('frequencia.frequencia.portaria.index', compact('equipamentos', 'type'));
     }
 
     /**
@@ -150,7 +150,7 @@ class FrequenciasPortariaController extends Controller
     public function listar($id)
     {
         $equipamento = Equipamento::findOrFail($id);
-        return view('frequencia.portaria.listar', compact('equipamento'));
+        return view('frequencia.frequencia.portaria.listar', compact('equipamento'));
     }
 
     /**

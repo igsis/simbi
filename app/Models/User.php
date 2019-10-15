@@ -4,6 +4,7 @@ namespace Simbi\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Simbi\Models\EquipamentoFuncionario;
 use Spatie\Permission\Traits\HasRoles;
 
 /*TODO: Alterar o delete com "publicado = 0" para Soft Delete
@@ -77,7 +78,7 @@ class User extends Authenticatable
      */
     public function equipamentos()
     {
-        return $this->belongsToMany(Equipamento::class)->using(EquipamentoUser::class);
+        return $this->belongsToMany(Equipamento::class)->using(EquipamentoFuncionario::class);
     }
 
     public function frequencias()

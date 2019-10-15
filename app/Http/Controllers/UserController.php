@@ -273,7 +273,7 @@ class UserController extends Controller
             'resposta_seguranca' => $request->respostaSeguranca
         ]);
 
-        return redirect('home');
+        return redirect()->route('funcionarios.index', ['type' => '1']);
     }
 
     // Filtro de Usuários Ativados

@@ -17,14 +17,17 @@ Route::group(['middleware' => 'auth'], function (){
 		Route::any('ativar-user','UserController@ativarUser')->name('ativar.user');
 
         Route::group(['prefix' => 'usuarios'], function() {
-            Route::any('/search', 'UserController@searchUser')->name('search-user');
+            Route::group(['prefix' => 'usuarios'], function() {
+                Route::any('/search', 'UserController@searchUser')->name('search-user');
 
-            Route::get('/{usuario}/vincular', 'UserController@exibeVincular')->name('usuarios.exibeVincular');
+                Route::get('/{usuario}/vincular', 'UserController@exibeVincular')->name('usuarios.exibeVincular');
 
-            Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento')->name('usuarios.vincular');
+                Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento')->name('usuarios.vincular');
 
-            Route::put('/{usuario}/reset', 'UserController@resetSenha')->name('usuarios.reset');
+                Route::put('/{usuario}/reset', 'UserController@resetSenha')->name('usuarios.reset');
+            });
         });
+
 	});
 
 });

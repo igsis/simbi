@@ -144,5 +144,4 @@
             $(this).data('form').submit();
         });
     </script>
-
 @endsection
