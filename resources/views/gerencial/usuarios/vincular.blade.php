@@ -20,7 +20,7 @@
                 <div class="well">
                     @foreach($equipamentos as $equipamento)
                         <div class="checkbox-inline">
-                            <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "checked" : "" }}>{{$equipamento->nome}}</label>
+                            <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}">{{$equipamento->nome}}</label>
                         </div>
                     @endforeach
                 </div>

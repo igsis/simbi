@@ -5,60 +5,47 @@
 @endsection
 
 @section('conteudo')
-
-    <div class="col-lg-8 col-lg-offset-2">
-
-        <form method="POST" action="{{ route('usuarios.vincular', $user->id) }}" accept-charset="UTF-8">
+    <form method="POST" action="{{ route('pessoas.vincular', $user->id) }}" accept-charset="UTF-8">
             {{ csrf_field() }}
+        <div class="vinculos">
+            <div class="vinculo">
+                <div class="row">
+                    <div class="form-group col-md-7 has-feedback">
+                        <label for="cargo">Biblioteca</label>
+                        <select class="form-control" name="equipamento[]" id="">
+                            <option value="">Selecione...</option>
+                            @foreach ($equipamentos as $equipamento)
+                                @if($equipamento->publicado == 1)
+                                    @if ($equipamento->id == old('equipamento[]'))
+                                        <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}>{{$equipamento->nome}}</option>
+                                    @else
+                                        <option value="{{$equipamento->id}}">{{$equipamento->nome}}</option>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
 
-            <div class="row">
-                <label>Equipamentos vinculados:</label>
-                <div class="well">
-                    @foreach($equipamentos as $equipamento)
-                        <div class="checkbox-inline">
-                            <label><input type="checkbox" name="equipamento[]" value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "checked" : "" }}>{{$equipamento->nome}}</label>
-                        </div>
-                    @endforeach
+                    <div class="form-group col-md-5">
+                        <label for="responsabilidadeTipo">Responsabilidade:</label>
+                        <select class="form-control" name="responsabilidadeTipo" id="cargo">
+                            <option value="">Selecione...</option>
+                            @foreach($cargos as $cargo)
+                                <option value="{{$cargo->id}}">{{$cargo->responsabilidade_tipo}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-offset-3 col-md-3">
-                    <label for="dataInicio">Data de Inicio:</label>
-                    <input type="text" class="form-control calendario" name="dataInicio" id="dataInicio">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="dataFim">Data de Término:</label>
-                    <input type="text" class="form-control calendario" name="dataFim" id="dataFim" value="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-offset-4 col-md-4">
-                    <label for="responsabilidadeTipo">Cargo:</label>
-                    <select class="form-control" name="responsabilidadeTipo" id="cargo">
-                        <option value="">Selecione...</option>
-                        @foreach($cargos as $cargo)
-
-                            <option value="{{$cargo->id}}">{{$cargo->responsabilidade_tipo}}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <hr>
-                <div class="form-group col-md-offset-4 col-md-2">
-                    <a href="{{route('usuarios.index', ['type' => 1])}}" class="form-control btn btn-warning">
-                        Voltar
-                    </a>
-                </div>
-                <div class="form-group col-md-2">
-                    <input type="submit" class="form-control btn btn-primary" name="enviar" value="Vincular">
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-success" type="submit">Cadastrar</a>
+            <a class="btn btn-primary pull-right" href="#void" id="addInput"> Adicionar outro Equipamento</a>
+        </div>
+    </form>
 @endsection
 @section('scripts_adicionais')
+    @include('scripts.adicionar_equipamento')
     {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
     @include('scripts.tabelas_admin')
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

@@ -70,11 +70,6 @@
                                 <td>
                                     @if($type == 1)
                                         <a href="{{ route('funcionarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
-
-                                        <a href="{{ route('usuarios.exibeVincular', $user->id) }}"
-                                           class="btn btn-warning" style="margin-right: 3px"><i
-                                                    class="glyphicon glyphicon-retweet"></i> Editar
-                                            Equipamento</a>
                                     @endif
                                     @hasrole('Administrador')
                                     @if ($user->publicado == 1)
@@ -85,6 +80,9 @@
                                     @elseif($user->publicado == 2)
                                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
                                     @endif
+                                        <a href="{{ route('pessoas.exibeVincular', $user->id) }}"
+                                           class="btn btn-warning" style="margin-right: 3px"><i
+                                                    class="glyphicon glyphicon-retweet"></i> Editar Vínculo</a>
                                     @if($user->publicado == 1 || $user->publicado == 2)
                                         <form method="POST" action="{{ route('funcionarios.delete') }}" style="display: inline;">
                                             {{ csrf_field() }}

@@ -106,8 +106,7 @@ class FuncionarioController extends Controller
             'subordinacaoAdministrativa' => 'required',
             'identificacaoSecretaria' => 'required',
             'cargo' => 'required',
-            'funcao' => 'required',
-            'escolaridade' => 'required'
+            'RF' => 'required'
         ]);
 
         $user = new Funcionario();
@@ -234,5 +233,45 @@ class FuncionarioController extends Controller
                     'Funcionario Editado com Sucesso!');
         }
 
+    }
+
+    public function exibeVincular($id)
+    {
+        $user = Funcionario::findOrFail($id);
+        $equipamentos = Equipamento::all();
+        $cargos = ResponsabilidadeTipo::all();
+
+        return view('gerencial.pessoas.vincular', compact('user', 'equipamentos', 'cargos'));
+    }
+
+    public function vinculaEquipamento(Request $request, $id)
+    {
+        /** @var User $usuario */
+        $usuario = Funcionario::findOrFail($id);
+        $equipamentos = $request['equipamento'];
+
+        $this->validate($request, [
+            'responsabilidadeTipo'  =>  'required_with:equipamento'
+        ]);
+
+        $syncData = [];
+
+        if ($equipamentos != 0)
+        {
+
+            foreach ($equipamentos as $id)
+            {
+                $pivotData = [
+                    'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
+                ];
+                $syncData[$id] = $pivotData;
+            }
+        }
+
+        $usuario->equipamentos()->sync($syncData);
+
+        return redirect()->route('funcionarios.index', ['type' => 1])
+            ->with('flash_message',
+                'Equipamentos Vinculados com sucesso.');
     }
 }

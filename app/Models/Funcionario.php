@@ -13,8 +13,8 @@ class Funcionario extends Model
         'nome',
         'email',
         'cargo_id',
-        'funcao_id',
-        'escolaridade_id',
+//        'funcao_id',
+//        'escolaridade_id',
         'subordinacao_adminstrativa_id',
         'secretaria_id',
         'publicado'

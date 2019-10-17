@@ -50,7 +50,6 @@
                                 <th>Nome</th>
                                 <th>Login</th>
                                 <th>E-mail</th>
-                                <th>Equipamento(s) Vinculado(s)</th>
                                 <th>Cargo</th>
                                 <th>Operações</th>
                             </tr>
@@ -62,18 +61,13 @@
                                     <td>{{ $user->login }}</td>
                                     <td>{{ $user->funcionario->email }}</td>
                                     {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
-                                    <td>{{ $user->equipamentos->implode('nome', ', ') }}</td>
+
                                     <td>{{ $user->nivelAcesso->nivel_acesso }}</td>
                                     <td>
                                         @if($type == 1)
                                             <a href="{{ route('usuarios.editar', $user->id) }}"
                                                class="btn btn-info pull-left" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-pencil"></i> Editar</a>
-
-                                            <a href="{{ route('usuarios.exibeVincular', $user->id) }}"
-                                               class="btn btn-warning" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-retweet"></i> Vincular
-                                                Equipamento</a>
                                         @endif
                                         @hasrole('Administrador')
                                         @if($user->publicado == 1)
@@ -117,7 +111,6 @@
                                 <th>Nome</th>
                                 <th>Login</th>
                                 <th>E-mail</th>
-                                <th>Equipamento(s) Vinculado(s)</th>
                                 <th>Cargo</th>
                                 <th>Operações</th>
                             </tr>
