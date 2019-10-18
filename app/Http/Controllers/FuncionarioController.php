@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Redirect;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Funcionario;
+use Simbi\Models\FuncionarioAdicionais;
 use Simbi\Models\User;
 use Session;
 use Auth;
@@ -87,26 +88,25 @@ class FuncionarioController extends Controller
         User::where('funcionario_id','=',$types->id)
             ->update(array('publicado'=> 0));
 
-        return redirect()->route('gerencial.pessoas.index',['type'=>$type])->with('flash_message','Funcionário Desativado com Sucesso.');
+        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Desativado com Sucesso.');
 
     }
 
-    public function ativar(Request $request){
+    public function ativar(Request $request)
+    {
             $type = $request->type;
             Funcionario::findOrFail($request->id)
                 ->update(['publicado' => 1]);
 
-            return redirect()->route('gerencial.pessoas.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
+            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
     }
 
     public function store(Request $request){
         $this->validate($request, [
             'nome'  =>'required',
-            'email' =>'required|email|unique:funcionarios',
-            'subordinacaoAdministrativa' => 'required',
-            'identificacaoSecretaria' => 'required',
-            'cargo' => 'required',
-            'RF' => 'required'
+            'RF' => 'required|unique:funcionarios',
+            'subordinacaoAdministrativa' => 'required', //lotacao
+            'cargo' => 'required'
         ]);
 
         $user = new Funcionario();
@@ -118,38 +118,49 @@ class FuncionarioController extends Controller
             $cargo->save();
         }
 
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
-        {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
-        }
-
         $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
         if (!($subAdm->exists))
-        {
+            {
             $subAdm->descricao = $request->novaSubAdm;
             $subAdm->save();
         }
 
-        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
-        if (!($secretaria->exists))
+        $tipoPessoa = $request->tipoPessoa;
+
+        if ($tipoPessoa == 1)
         {
-            $secretaria->sigla = $request->siglaSecretaria;
-            $secretaria->descricao = $request->descricaoSecretaria;
-            $secretaria->save();
+            $adicionais = new FuncionarioAdicionais();
+            if(isset($request->aposenta))
+            {
+                $this->validate($request, ['dataAposentadoria' => 'required']);
+            }
+            else
+            {
+
+            }
+        }
+        else //convocado
+        {
+            $this->validate($request, ['identificacaoSecretaria' => 'required']);
+            $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+            if (!($secretaria->exists))
+            {
+                $secretaria->sigla = $request->siglaSecretaria;
+                $secretaria->descricao = $request->descricaoSecretaria;
+                $secretaria->save();
+            }
+            $user->secretaria_id = $secretaria->id;
         }
 
         $user->nome = $request->input('nome');
-        $user->email = $request->input('email');
+        $user->RF = $request->RF;
+        $user->tipo_pessoa = $tipoPessoa;
         $user->cargo_id = $cargo->id;
-        $user->funcao_id = $funcao->id;
-        $user->secretaria_id = $secretaria->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
-        $user->escolaridade_id = $request->escolaridade;
+
 
         if($user->save()){
-            return redirect()->route('gerencial.pessoas.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
+            return redirect()->route('funcionarios.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
         }
         return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
 
@@ -161,14 +172,12 @@ class FuncionarioController extends Controller
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $escolaridades = Escolaridade::all();
         $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
 
         return view('gerencial.pessoas.cadastro', compact(
             'secretarias',
             'subordinacoesAdministrativas',
             'escolaridades',
-            'cargos',
-            'funcoes'
+            'cargos'
         ));
 
     }
@@ -228,7 +237,7 @@ class FuncionarioController extends Controller
 
 
         if($funcionario->save()){
-            return redirect()->route('gerencial.pessoas.index', ['type' => '1'])
+            return redirect()->route('funcionarios.index', ['type' => '1'])
                 ->with('flash_message',
                     'Funcionario Editado com Sucesso!');
         }

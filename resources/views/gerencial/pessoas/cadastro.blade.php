@@ -27,20 +27,20 @@
                     <div class="row">
                         <div class="form-group col-md-2">
                             <label>
-                                <input type="radio" name="funcionarioConvocado" id="funcionarioConvocado" value="funcionario" checked> Funcionário
+                                <input type="radio" name="tipoPessoa" id="tipoPessoa" value="1" checked> Funcionário
                             </label>
                         </div>
                         <div class="form-group col-md-2">
                             <label>
-                                <input type="radio" name="funcionarioConvocado" id="funcionarioConvoado" value="convocado"> Convocado
+                                <input type="radio" name="tipoPessoa" id="tipoPessoa" value="2"> Convocado
                             </label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('registroFuncional') ? ' has-error' : '' }}">
+                        <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                             <label for="name">Registro Funcional</label>
-                            <input class="form-control" type="text" name="registroFuncional" id="registroFuncional" value="{{old('registroFuncional')}}">
+                            <input class="form-control" type="text" name="RF" id="RF" value="{{old('RF')}}">
                         </div>
                     </div>
                     <div class="row">
@@ -99,35 +99,12 @@
                             </button>
                         </div>
 
-                        <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
+                        <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
                             <label for="name">Vínculo</label>
-                            <input class="form-control" type="text" name="nome" id="nome" value="{{old('nome')}}">
+                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}">
                         </div>
                     </div>
 
-                    {{--                    <div class="row">--}}
-                    {{--                        <div id="divFuncao"--}}
-                    {{--                             class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('funcao') ? ' has-error' : '' }}">--}}
-                    {{--                            <label for="funcao">Função</label>--}}
-                    {{--                            <select class="form-control" name="funcao" id="funcao">--}}
-                    {{--                                <option value="">Selecione...</option>--}}
-                    {{--                                @foreach ($funcoes as $funcao)--}}
-                    {{--                                    @if ($funcao->id == old('funcao'))--}}
-                    {{--                                        <option value="{{$funcao->id}}" selected>{{$funcao->funcao}}</option>--}}
-                    {{--                                    @else--}}
-                    {{--                                            <option value="{{$funcao->id}}">{{$funcao->funcao}}</option>--}}
-                    {{--                                    @endif--}}
-                    {{--                                @endforeach--}}
-                    {{--                            </select>--}}
-                    {{--                        </div>--}}
-                    {{--                        <div class="form-group col-xs-2 col-md-1">--}}
-                    {{--                            <label for="addFunção">&emsp;</label>--}}
-                    {{--                            <button type="button" class="btn btn-info btn-block" data-toggle="modal"--}}
-                    {{--                                    data-target="#addFuncao">--}}
-                    {{--                                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"/>--}}
-                    {{--                            </button>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
                     <div id="divFuncionario">
                         <label class="checkbox-inline">
                             <input type="checkbox" name="aposenta" id="aposenta" value="1">Pode Aposentar
@@ -173,25 +150,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--                                        <div class="row">--}}
-                    {{--                            <label for="escolaridade">Nivel de Escolaridade</label>--}}
-                    {{--                            <select class="form-control" name="escolaridade" id="escolaridade">--}}
-                    {{--                                <option value="">Selecione uma Opção</option>--}}
-                    {{--                                @foreach ($escolaridades as $escolaridade)--}}
-                    {{--                                    @if ($escolaridade->id == old('escolaridade'))--}}
-                    {{--                                         <option value="{{$escolaridade->id}}" selected>{{$escolaridade->escolaridade}}</option>--}}
-                    {{--                                    @else--}}
-                    {{--                                        <option value="{{$escolaridade->id}}">{{$escolaridade->escolaridade}}</option>--}}
-                    {{--                                    @endif--}}
-                    {{--                                @endforeach--}}
-                    {{--                            </select>--}}
-                    {{--                        </div>--}}
-                    {{--                        <div class="form-group col-md-6 has-feedback {{ $errors->has('lotacao') ? ' has-error' : '' }}">--}}
-                    {{--                            <label for="escolaridade">Lotação</label>--}}
-                    {{--                            <input class="form-control" type="text" name="lotacao">--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-                    {{--                </div>--}}
+
                 </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{ route('funcionarios.index', ['type' => '1']) }}">Voltar</a>
@@ -268,32 +227,6 @@
             $("input[id='novoCargo']").val('');
         }
 
-        function insertFuncao()
-        {
-            let select = document.getElementById("funcao"),
-                div = document.getElementById("divFuncao"),
-                i = {{$funcoes->count()}},
-                txtVal = document.getElementById("novaFuncao").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal);
-
-            if (txtVal !== "")
-            {
-                newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i + 1}`);
-                select.insertBefore(newOption, select.lastChild);
-                newOption.setAttribute('selected', 'selected');
-
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "novaFuncao");
-                newInput.setAttribute("value", newOptionVal.textContent);
-                div.insertBefore(newInput, div.lastChild);
-            }
-            $('#addFuncao').modal('hide');
-            $("input[id='novoCargo']").val('');
-        }
-
         function insertSubAdm()
         {
             let select = document.getElementById("subordinacaoAdministrativa"),
@@ -356,9 +289,9 @@
         //FUNCAO PARA ESCONDER E APRESENTAR CAMPOS
         $(document).ready(function(){
             $("#divConvocado").hide();
-            $("input[name$='funcionarioConvocado']").click(function(){
+            $("input[name$='tipoPessoa']").click(function(){
                 var test = $(this).val();
-                if (test == 'convocado') {
+                if (test == '2') {
                     $("#divFuncionario").hide();
                     $("#divConvocado").show();
                 }else{
