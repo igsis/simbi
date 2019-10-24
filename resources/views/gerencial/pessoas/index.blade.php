@@ -80,10 +80,10 @@
                                     @elseif($user->publicado == 2)
                                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
                                     @endif
-                                        <a href="{{ route('pessoas.exibeVincular', $user->id) }}"
-                                           class="btn btn-warning" style="margin-right: 3px"><i
-                                                    class="glyphicon glyphicon-retweet"></i> Editar Vínculo</a>
                                     @if($user->publicado == 1 || $user->publicado == 2)
+                                            <a href="{{ route('pessoas.exibeVincular', $user->id) }}"
+                                               class="btn btn-warning" style="margin-right: 3px"><i
+                                                        class="glyphicon glyphicon-retweet"></i> Editar Vínculo</a>
                                         <form method="POST" action="{{ route('funcionarios.delete') }}" style="display: inline;">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="{{ $type }}">

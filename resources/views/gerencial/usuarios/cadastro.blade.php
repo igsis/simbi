@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">E-mail *</label>
-                                <input class="form-control" type="email" name="email" id="email" value="@isset($funcionario->email) {{ $funcionario->email }} @endisset @empty($funcionario->email) {{old('email')}} @endempty" required>
+                                <input class="form-control" type="email" name="email" id="email" value="{{old('email')}}" required>
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>

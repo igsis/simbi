@@ -92,10 +92,13 @@ class Funcionario extends Model
         });
     }
 
-
-
     public function users()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function FuncionarioAdicionais()
+    {
+        return $this->hasMany(FuncionarioAdicionais::class);
     }
 }

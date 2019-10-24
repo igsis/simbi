@@ -1,5 +1,9 @@
 @extends('layouts.master2')
 
+@section('linksAdicionais')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endsection
+
 @section('titulo', 'Cadastrar Funcionário')
 
 @section('conteudo')
@@ -40,14 +44,14 @@
                     <div class="row">
                         <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                             <label for="name">Registro Funcional</label>
-                            <input class="form-control" type="text" name="RF" id="RF" value="{{old('RF')}}">
-                        </div>
+                        <input class="form-control" type="text" name="RF" id="RF" maxlength="7" value="{{old('RF')}}">
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
-                            <label for="name">Nome</label>
-                            <input class="form-control" type="text" name="nome" id="nome" value="{{old('nome')}}">
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
+                        <label for="name">Nome</label>
+                        <input class="form-control" type="text" name="nome" id="nome" value="{{old('nome')}}">
+                    </div>
 
                         <div id="divCargo"
                              class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
@@ -107,13 +111,13 @@
 
                     <div id="divFuncionario">
                         <label class="checkbox-inline">
-                            <input type="checkbox" name="aposenta" id="aposenta" value="1">Pode Aposentar
+                            <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(!this.checked)"/>Pode Aposentar
                         </label>
 
                         <div class="row">
                             <div class="form-group col-md-6"><br>
                                 <label for="data">Data da Aposentadoria</label>
-                                <input class="form-control calendario" type="text" name="dataAposentadoria" value="{{ old('dataAposentadoria') }}" autocomplete="off">
+                                <input class="form-control calendario" type="text" name="dataAposentadoria" value="{{old('dataAposentadoria')}}" id="dataAposentadoria" autocomplete="off">
                             </div>
                             <div class="form-group col-md-12 has-feedback {{ $errors->has('observacao') ? ' has-error' : '' }}">
                                 <label for="name">Observação</label>
@@ -300,5 +304,28 @@
                 }
             });
         });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $( ".calendario" ).datepicker({
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+            });
+            $('.calendario').datepicker("option","showAnim","blind");
+            $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
+        });
+    </script>
+
+    <script type="text/javascript">
+        function desabilitar(selecionado) {
+            document.getElementById('dataAposentadoria').disabled = selecionado
+
+        }
     </script>
 @endsection

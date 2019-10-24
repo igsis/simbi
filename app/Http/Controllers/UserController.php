@@ -76,12 +76,14 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'login' =>'required|max:7|unique:users',
+            'email' =>'required|email|unique:users',
             'nivelAcessos'=> 'required'
         ]);
 
         $user = new User();
 
         $user->login = $request->input('login');
+        $user->email = $request->email;
         $user->password = 'simbi@2019';
         $user->funcionario_id = $request->input('id_funcionario');
         $user->nivel_acesso_id = $request->input('nivelAcessos');
@@ -121,10 +123,6 @@ class UserController extends Controller
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
-        $escolaridades = Escolaridade::all();
-
-
 
         return view('gerencial.usuarios.editar', compact(
             'user',
@@ -132,9 +130,7 @@ class UserController extends Controller
             'perguntas',
             'secretarias',
             'subordinacoesAdministrativas',
-            'escolaridades',
-            'cargos',
-            'funcoes'
+            'cargos'
         ));
     }
 
@@ -181,7 +177,7 @@ class UserController extends Controller
         else
         {
             $this->validate($request, [
-                'email' => 'required|email|unique:funcionarios,email,'.$funcionario->id,
+                'email' => 'required|email|unique:users,email,'.$funcionario->id,
             ]);
 
             $funcionario->update([
