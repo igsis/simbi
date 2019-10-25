@@ -12,7 +12,7 @@
 
     <div class="col-lg-8 col-lg-offset-2">
 
-        <form method="POST" action="{{ route('usuarios.vincular', $user->id) }}" accept-charset="UTF-8">
+        <form method="POST" action="{{ route('pessoas.vincular', $user->id) }}" accept-charset="UTF-8">
             {{ csrf_field() }}
 
             <div class="row">
@@ -41,7 +41,6 @@
                     <select class="form-control" name="responsabilidadeTipo" id="cargo">
                         <option value="">Selecione...</option>
                         @foreach($cargos as $cargo)
-
                             <option value="{{$cargo->id}}">{{$cargo->responsabilidade_tipo}}</option>
                         @endforeach
                     </select>

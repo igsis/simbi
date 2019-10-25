@@ -32,7 +32,7 @@
 {{--                        @endif--}}
                     </div>
                 </div>
-                <form method="POST" action="{{ url('gerencial/usuarios', [$user->id]) }}" accept-charset="UTF-8">
+                <form method="POST" action="{{route('usuario.atualizar', $user->id)}}" accept-charset="UTF-8">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="PUT">
 
@@ -183,30 +183,6 @@
                 div.insertBefore(newInput, div.lastChild);
             }
             $('#addCargo').modal('hide');
-            $("input[id='novoCargo']").val('');
-        }
-
-        function insertFuncao() {
-            let select = document.getElementById("funcao"),
-                div = document.getElementById("divFuncao"),
-                i = {{$funcoes->count()}},
-                txtVal = document.getElementById("novaFuncao").value,
-                newOption = document.createElement("OPTION"),
-                newInput = document.createElement("INPUT"),
-                newOptionVal = document.createTextNode(txtVal);
-
-            if (txtVal !== "") {
-                newOption.appendChild(newOptionVal);
-                newOption.setAttribute("value", `${i + 1}`);
-                select.insertBefore(newOption, select.lastChild);
-                newOption.setAttribute('selected', 'selected');
-
-                newInput.setAttribute("type", "hidden");
-                newInput.setAttribute("name", "novaFuncao");
-                newInput.setAttribute("value", newOptionVal.textContent);
-                div.insertBefore(newInput, div.lastChild);
-            }
-            $('#addFuncao').modal('hide');
             $("input[id='novoCargo']").val('');
         }
 

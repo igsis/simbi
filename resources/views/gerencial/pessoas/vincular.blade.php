@@ -1,12 +1,16 @@
 @extends('layouts.master')
 
+@section('linksAdicionais')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endsection
+
 @section('tituloPagina')
     <i class="glyphicon glyphicon-user"></i> Vincular Equipamento: {{$user->name}}
 @endsection
 
 @section('conteudo')
     <form method="POST" action="{{ route('pessoas.vincular', $user->id) }}" accept-charset="UTF-8">
-            {{ csrf_field() }}
+        {{ csrf_field() }}
         <div class="vinculos">
             <div class="vinculo">
                 <div class="row">
@@ -17,7 +21,7 @@
                             @foreach ($equipamentos as $equipamento)
                                 @if($equipamento->publicado == 1)
                                     @if ($equipamento->id == old('equipamento[]'))
-                                        <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}>{{$equipamento->nome}}</option>
+                                        <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}> {{$equipamento->nome}} </option>
                                     @else
                                         <option value="{{$equipamento->id}}">{{$equipamento->nome}}</option>
                                     @endif
@@ -39,11 +43,12 @@
             </div>
         </div>
         <div class="box-footer">
-            <a class="btn btn-success" type="submit">Cadastrar</a>
+            <button class="btn btn-success" type="submit">Cadastrar</button>
             <a class="btn btn-primary pull-right" href="#void" id="addInput"> Adicionar outro Equipamento</a>
         </div>
     </form>
 @endsection
+
 @section('scripts_adicionais')
     @include('scripts.adicionar_equipamento')
     {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
@@ -65,6 +70,3 @@
     </script>
 @endsection
 
-@section('linksAdicionais')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-@endsection

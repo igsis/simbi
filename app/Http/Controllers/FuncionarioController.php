@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
+use Simbi\Models\EquipamentoFuncionario;
 use Simbi\Models\Funcionario;
 use Simbi\Models\FuncionarioAdicionais;
 use Simbi\Models\User;
@@ -264,8 +265,9 @@ class FuncionarioController extends Controller
         $user = Funcionario::findOrFail($id);
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
+        $equipamento_funcionario = EquipamentoFuncionario::where('funcionario_id', $id)->get();
 
-        return view('gerencial.usuarios.vincular', compact('user', 'equipamentos', 'cargos'));
+        return view('gerencial.pessoas.vincular', compact('user', 'equipamentos', 'cargos', 'equipamento_funcionario'));
     }
 
     public function vinculaEquipamento(Request $request, $id)
