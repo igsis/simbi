@@ -32,6 +32,12 @@ class EventoController extends Controller
         return view('frequencia.evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
     }
 
+    public function inicio()
+    {
+        $type = 1;
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('frequencia.evento.index', compact('equipamentos', 'type'));
+    }
     /**
      * Show the form for creating a new resource.
      *

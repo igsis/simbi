@@ -35,7 +35,6 @@ class FrequenciasPortariaController extends Controller
         $equipamento = Equipamento::find($id);
         $etnias = Etnia::all();
         $idades = Idade::all();
-        $escolaridades = Escolaridade::all();
         $sexos = Sexo::all();
         $deficiencias = Deficiencia::all();
 
@@ -43,7 +42,6 @@ class FrequenciasPortariaController extends Controller
             'equipamento',
             'etnias',
             'idades',
-            'escolaridades',
             'sexos',
             'deficiencias'
         ));

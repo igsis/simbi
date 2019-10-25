@@ -21,7 +21,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Público Atendido</h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Cadastro de Público de Recepção Completo</h1>
         </section>
 
         <!-- Main content -->
@@ -44,7 +44,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label for="total">Mês</label>
+                                <label for="total">Dia</label>
                                 <input type="text" class="form-control calendario" name="data" id="data" value="{{old('data')}}" autocomplete="off">
                             </div>
                         </div>

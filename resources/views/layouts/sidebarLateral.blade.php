@@ -70,7 +70,7 @@
                 {{--       ÁREA FREQUENCIA         --}}
                 <li class="header">Frequência</li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('eventos.index')}}">
                         <i class="fa fa-calendar-o"></i> <span>Eventos</span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>

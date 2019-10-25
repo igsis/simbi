@@ -59,7 +59,7 @@
                                 <tr>
                                     <td>{{ $user->funcionario->nome }}</td>
                                     <td>{{ $user->login }}</td>
-                                    <td>{{ $user->funcionario->email }}</td>
+                                    <td>{{ $user->email }}</td>
                                     {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
 
                                     <td>{{ $user->nivelAcesso->nivel_acesso }}</td>
