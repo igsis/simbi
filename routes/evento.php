@@ -1,7 +1,7 @@
 <?php
-Route::group(['prefix' => 'frequencia/'], function (){
+Route::group(['prefix' => 'frequencia'], function (){
 
-    Route::get('/', 'EventoController@inicio')->name('eventos.index');
+    Route::get('/evento', 'EventoController@inicio')->name('eventos.index');
 
     Route::group(['prefix' => '{equipamento_igsis}/eventos'], function (){
 

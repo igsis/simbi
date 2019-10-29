@@ -265,9 +265,9 @@ class FuncionarioController extends Controller
         $user = Funcionario::findOrFail($id);
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
-        $equipamento_funcionario = EquipamentoFuncionario::where('funcionario_id', $id)->get();
+        $equipamentoCargos = EquipamentoFuncionario::all();
 
-        return view('gerencial.pessoas.vincular', compact('user', 'equipamentos', 'cargos', 'equipamento_funcionario'));
+        return view('gerencial.pessoas.vincular', compact('user', 'equipamentos', 'cargos', 'equipamentoCargos'));
     }
 
     public function vinculaEquipamento(Request $request, $id)
@@ -275,20 +275,21 @@ class FuncionarioController extends Controller
         /** @var User $usuario */
         $usuario = Funcionario::findOrFail($id);
         $equipamentos = $request['equipamento'];
+        $cargos = $request['responsabilidadeTipo'];
 
-        $this->validate($request, [
-            'responsabilidadeTipo'  =>  'required_with:equipamento'
-        ]);
+//        $this->validate($request, [
+//            'responsabilidadeTipo'  =>  'required_with:equipamento'
+//        ]);
 
         $syncData = [];
 
         if ($equipamentos != 0)
         {
 
-            foreach ($equipamentos as $id)
+            foreach (array_combine($equipamentos, $cargos) as $id => $cargo)
             {
                 $pivotData = [
-                    'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
+                    'responsabilidade_tipo_id'  =>  $cargo
                 ];
                 $syncData[$id] = $pivotData;
             }

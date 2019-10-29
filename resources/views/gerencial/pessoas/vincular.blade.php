@@ -20,25 +20,21 @@
                             <option value="">Selecione...</option>
                             @foreach ($equipamentos as $equipamento)
                                 @if($equipamento->publicado == 1)
-                                    @if ($equipamento->id == old('equipamento[]'))
-                                        <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}> {{$equipamento->nome}} </option>
-                                    @else
-                                        <option value="{{$equipamento->id}}">{{$equipamento->nome}}</option>
-                                    @endif
+                                    <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}> {{$equipamento->nome}} </option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
-
                     <div class="form-group col-md-5">
                         <label for="responsabilidadeTipo">Responsabilidade:</label>
-                        <select class="form-control" name="responsabilidadeTipo" id="cargo">
+                        <select class="form-control" name="responsabilidadeTipo[]" id="cargo">
                             <option value="">Selecione...</option>
                             @foreach($cargos as $cargo)
-                                <option value="{{$cargo->id}}">{{$cargo->responsabilidade_tipo}}</option>
+                                <option value="{{$cargo->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}>{{$cargo->responsabilidade_tipo}}</option>
                             @endforeach
                         </select>
                     </div>
+
                 </div>
             </div>
         </div>

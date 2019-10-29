@@ -24,7 +24,7 @@
 
                 '                <div class="form-group col-md-5">\n' +
                 '                    <label for="responsabilidadeTipo">Responsabilidade:</label>\n' +
-                '                    <select class="form-control" name="responsabilidadeTipo" id="cargo">\n' +
+                '                    <select class="form-control" name="responsabilidadeTipo[]" id="cargo">\n' +
                 '                        <option value="">Selecione...</option>\n' +
                 '                        @foreach($cargos as $cargo)\n' +
                 '                            <option value="{{$cargo->id}}">{{$cargo->responsabilidade_tipo}}</option>\n' +
