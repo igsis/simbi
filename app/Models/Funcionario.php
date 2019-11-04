@@ -99,6 +99,6 @@ class Funcionario extends Model
 
     public function FuncionarioAdicionais()
     {
-        return $this->hasMany(FuncionarioAdicionais::class);
+        return $this->hasOne(FuncionarioAdicionais::class);
     }
 }

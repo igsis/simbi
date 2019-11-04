@@ -105,7 +105,7 @@
 
                         <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
                             <label for="name">Vínculo</label>
-                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}">
+                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1">
                         </div>
                     </div>
 

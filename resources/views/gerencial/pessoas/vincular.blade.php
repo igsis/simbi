@@ -5,7 +5,7 @@
 @endsection
 
 @section('tituloPagina')
-    <i class="glyphicon glyphicon-user"></i> Vincular Equipamento: {{$user->name}}
+    <i class="glyphicon glyphicon-user"></i> Vincular Equipamento: {{$user->nome}}
 @endsection
 
 @section('conteudo')
@@ -25,12 +25,13 @@
                             @endforeach
                         </select>
                     </div>
+
                     <div class="form-group col-md-5">
                         <label for="responsabilidadeTipo">Responsabilidade:</label>
                         <select class="form-control" name="responsabilidadeTipo[]" id="cargo">
                             <option value="">Selecione...</option>
                             @foreach($cargos as $cargo)
-                                <option value="{{$cargo->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}>{{$cargo->responsabilidade_tipo}}</option>
+                                <option value="{{$cargo->id}}" {{ in_array($cargo->id, $user->equipamentos()->pluck('responsabilidade_tipo_id')->toArray()) ? "selected" : "" }}>{{$cargo->responsabilidade_tipo}}</option>
                             @endforeach
                         </select>
                     </div>

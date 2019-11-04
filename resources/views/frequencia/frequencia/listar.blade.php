@@ -65,7 +65,7 @@
                                     <td colspan="4">Observação: {{$frequencia->observacao}}</td>
                                 </tr>
                                 @endforeach
-                                </tr>
+
                                 @else
                                     <tr>
                                         <th colspan="2" class="text-center">Não há frequência cadastradas</th>

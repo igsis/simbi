@@ -29,4 +29,9 @@ class EquipamentoFuncionario extends Pivot
         return $this->belongsTo(Funcionario::class);
     }
 
+    public function equipamentos()
+    {
+        return $this->hasMany(Equipamento::class, 'id', 'equipamento_id');
+    }
+
 }

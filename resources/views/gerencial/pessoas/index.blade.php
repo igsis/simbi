@@ -55,6 +55,7 @@
                         <thead>
                         <tr>
                             <th>Nome</th>
+                            <th>RF</th>
                             <th>Cargo</th>
                             <th>Equipamento(s) Vinculado(s)</th>
                             <th>Operações</th>
@@ -64,10 +65,10 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->nome }}</td>
+                                <td>{{ $user->RF }}</td>
                                 <td>{{ $user->cargo->cargo }}</td>
-
                                 <td> {{ $user->equipamentos->implode('nome', ', ') }}<td>
-                                <td>
+
                                     @if($type == 1)
                                         <a href="{{ route('funcionarios.editar', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Editar</a>
                                     @endif
@@ -112,6 +113,7 @@
                         <tfoot>
                         <tr>
                             <th>Nome</th>
+                            <th>RF</th>
                             <th>Cargo</th>
                             <th>Equipamento(s) Vinculado(s)</th>
                             <th>Operações</th>

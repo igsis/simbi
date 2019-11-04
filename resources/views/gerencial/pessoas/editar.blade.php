@@ -97,24 +97,24 @@
 
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
                                 <label for="name">Vínculo</label>
-                                <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}">
+                                <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{$user->vinculo}}" maxlength="1">
                             </div>
                         </div>
 
                         @if($user->tipo_pessoa == 1)
                             <div id="divFuncionario">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(this.checked)"/>Pode Aposentar
+                                    <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(!this.checked)" @isset($user->FuncionarioAdicionais->aposenta) {{$user->FuncionarioAdicionais->aposenta == 1 ? "checked" : ""}} @endisset/>Pode Aposentar
                                 </label>
                             </div>
                                 <div class="row">
                                     <div class="form-group col-md-6"><br>
                                         <label for="data">Data da Aposentadoria</label>
-                                        <input class="form-control calendario" type="text" name="dataAposentadoria" value="" id="dataAposentadoria"  autocomplete="off">
+                                        <input class="form-control calendario" type="text" name="dataAposentadoria" value="@isset($user->FuncionarioAdicionais->data_aposentadoria) {{ date('d/m/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria)) }}  @endisset" id="dataAposentadoria">
                                     </div>
-                                    <div class="form-group col-md-12 has-feedback {{ $errors->has('observacao') ? ' has-error' : '' }}">
+                                    <div class="form-group col-md-12 has-feedback">
                                         <label for="name">Observação</label>
-                                        <input class="form-control" type="text" name="observacao" id="observacao" value="{{old('observacao')}}">
+                                        <input class="form-control" type="text" name="observacao" id="observacao" value="@isset($user->FuncionarioAdicionais->observacao) {{ $user->FuncionarioAdicionais->observacao }} @endisset">
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,6 @@
 
                         @endif
                         @endhasanyrole
-                    </div>
                     <div class="box-footer">
                         <a class="btn btn-default" href="{{ route('funcionarios.index', ['type' => '1']) }}">Voltar</a>
                         <input class="btn btn-primary pull-right" type="submit" value="Editar">
@@ -192,7 +191,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
     </div>
 

@@ -17,8 +17,4 @@ class FuncionarioAdicionais extends Model
         'observacao'
     ];
 
-    public function funcionario()
-    {
-        return $this->belongsTo(Funcionario::class);
-    }
 }

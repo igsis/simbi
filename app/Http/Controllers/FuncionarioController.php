@@ -64,7 +64,6 @@ class FuncionarioController extends Controller
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $cargos = Cargo::orderBy('cargo')->get();
-        //$adicionais = FuncionarioAdicionais::findOrFail($id);
 
         return view('gerencial.pessoas.editar', compact(
             'user',
@@ -73,7 +72,6 @@ class FuncionarioController extends Controller
             'secretarias',
             'subordinacoesAdministrativas',
             'cargos'
- //           'adicionais'
         ));
 
     }
@@ -104,6 +102,7 @@ class FuncionarioController extends Controller
         $this->validate($request, [
             'nome'  =>'required',
             'RF' => 'required|unique:funcionarios',
+            'vinculo' => 'required',
             'subordinacaoAdministrativa' => 'required', //lotacao
             'cargo' => 'required'
         ]);
@@ -159,6 +158,7 @@ class FuncionarioController extends Controller
 
         $user->nome = $request->input('nome');
         $user->RF = $request->RF;
+        $user->vinculo = $request->vinculo;
         $user->tipo_pessoa = $tipoPessoa;
         $user->cargo_id = $cargo->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
@@ -168,7 +168,7 @@ class FuncionarioController extends Controller
                 $adicionais->funcionario_id = $user->id;
                 $adicionais->save();
             }
-            return redirect()->route('funcionarios.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
+            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Funcionário Cadastrado com Sucesso.');
         }
         return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
 
@@ -194,6 +194,8 @@ class FuncionarioController extends Controller
 
         $this->validate($request, [
             'nome'  =>'required',
+            'RF' => 'required',
+            'vinculo' => 'required',
             'subordinacaoAdministrativa' => 'required',
             'cargo' => 'required'
         ]);
@@ -219,7 +221,7 @@ class FuncionarioController extends Controller
         $tipoPessoa = $funcionario->tipo_pessoa;
         if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
-            $adicionais =FuncionarioAdicionais::findOrNew($id);
+            $adicionais = FuncionarioAdicionais::findOrNew($id);
             if(isset($aposenta))
             {
                 $this->validate($request, ['dataAposentadoria' => 'required']);
@@ -265,9 +267,8 @@ class FuncionarioController extends Controller
         $user = Funcionario::findOrFail($id);
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
-        $equipamentoCargos = EquipamentoFuncionario::all();
 
-        return view('gerencial.pessoas.vincular', compact('user', 'equipamentos', 'cargos', 'equipamentoCargos'));
+        return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos'));
     }
 
     public function vinculaEquipamento(Request $request, $id)
