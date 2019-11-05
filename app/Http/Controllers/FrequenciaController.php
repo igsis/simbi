@@ -90,6 +90,26 @@ class FrequenciaController extends Controller
         return view('frequencia.frequencia.ocorrencias', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type','igsis_id'));
     }
 
+    public function listarOcorrenciasEnviadas($igsis_id, $type)
+    {
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.id', '')
+            ->join('frequencias', 'frequencias.evento_ocorrencia_id', 'evento_ocorrencias.id', '')
+            ->where([
+                ['evento_ocorrencias.igsis_id', $igsis_id],
+                ['evento_ocorrencias.publicado', $type]
+            ])
+            ->distinct('eventos.igsis_evento_id')
+            ->orderBy('evento_ocorrencias.data', 'desc')
+            ->get();
+
+        $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
+
+        $equipamento = Equipamento::where('id', $igsis_id)->firstOrFail();
+
+        return view('frequencia.frequencia.ocorrenciasEnviadas', compact('eventos', 'frequenciasCadastradas', 'equipamento', 'frequenciasCadastradas', 'type','igsis_id'));
+    }
+
+
     public function editarOcorrencia($id)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($id);
@@ -248,6 +268,7 @@ class FrequenciaController extends Controller
 
         EventoOcorrencia::where('id', $request->input('id'))
             ->update([
+                'data_envio' => date("Y-m-d"),
                 'publicado' => 2
             ]);
 

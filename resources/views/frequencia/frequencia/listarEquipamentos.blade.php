@@ -84,7 +84,7 @@
                                     <tr>
                                         <td>{{$equipamento->nome}}</td>
                                         <td>
-                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,2]) }}"
+                                            <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
                                                class="btn bg-navy" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
                                         </td>
