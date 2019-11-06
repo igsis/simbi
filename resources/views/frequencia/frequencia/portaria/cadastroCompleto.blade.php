@@ -35,37 +35,20 @@
                 <div class="box-body">
                     <form method="POST" action="{{route('frequencia.portaria.gravaCompleto', $equipamento->id)}}">
                         {{ csrf_field() }}
+
                         <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Data do evento
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="total">Dia</label>
+                            <div class="form-group col-md-4" >
+                                <label for="total">Data</label>
                                 <input type="text" class="form-control calendario" name="data" id="data" value="{{old('data')}}" autocomplete="off">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Período
-                                </h2>
+                            <div class="form-group col-md-6" >
+                                <label for="data">Período</label> <br>
+                                <input type="radio" name="periodo" value="1"> Segunda à Sexta &nbsp;&nbsp;
+                                <input type="radio" name="periodo" value="2"> Sábado &nbsp;&nbsp;
+                                <input type="radio" name="periodo" value="3"> Domingo
                             </div>
                         </div>
-                        <div class="row">
-                                <div class="form-group col-md-3">
-                                    <input type="radio" name="periodo" value="seg_sex"> Segunda à Sexta
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <input type="radio" name="periodo" value="sab"> Sábado
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <input type="radio" name="periodo" value="dom"> Domingo
-                                </div>
-                        </div>
+
                         <div class="row">
                             <div class="col-xs-12">
                                 <h2 class="page-header">
@@ -224,7 +207,6 @@
             </div>
         </section>
     </div>
-
 @endsection
 
 @section('scripts_adicionais')

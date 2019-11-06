@@ -10,12 +10,12 @@ class Idade extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        '0_6anos',
-        '7_14anos',
-        '15_17anos',
-        '18_29anos',
-        '30_59anos',
-        '60_mais_anos',
+        'anos0_6',
+        'anos7_14',
+        'anos15_17',
+        'anos18_29',
+        'anos30_59',
+        'mais60anos',
         'semInformacao'
     ];
 

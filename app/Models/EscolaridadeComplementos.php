@@ -1,6 +1,6 @@
 <?php
 
-namespace Simbi;
+namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Simbi\Models\ComplementoPortaria;
