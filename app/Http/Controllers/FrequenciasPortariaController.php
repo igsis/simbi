@@ -65,6 +65,7 @@ class FrequenciasPortariaController extends Controller
 
         $user->frequenciasPortarias()->create([
             'data' => $request->data,
+            'periodo'=> $request->periodo,
             'quantidade' => $request->quantidade,
             'equipamento_id' => $request->id
         ]);

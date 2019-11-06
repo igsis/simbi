@@ -11,6 +11,7 @@ class FrequenciasPortaria extends Model
     protected $fillable = [
         'user_id',
         'equipamento_id',
+        'periodo',
         'quantidade',
         'data'
     ];

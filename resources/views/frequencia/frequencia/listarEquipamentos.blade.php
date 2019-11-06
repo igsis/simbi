@@ -29,7 +29,7 @@
             <h1 class="page-header">
                 <i class="fa fa-users"></i>
                 @if($type == 1)
-                    Público de Eventos em Equipamentos
+                    Público em Equipamentos
                 @else
                     Ocorrência de Eventos em Equipamentos
                 @endif
@@ -111,52 +111,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Público Atendido</h4>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Cadastro de Público de Recepção Simples</h4>
                 </div>
                 <!-- inicio do form -->
                 <form action="{{route('frequencia.portaria.gravar')}}" method="post" autocomplete="off">
                     <div class="modal-body">
                         {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Data do Evento
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-12 col-md-6">
-                                <label for="data">Mês</label>
+                            <div class="form-group col-md-4" >
+                                <label for="data">Data</label>
                                 <input type="text" class="form-control" id="calendario" name="data" autocomplete="off" maxlength="10">
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Período
-                                </h2>
+                            <div class="form-group col-md-6" >
+                                <label for="data">Período</label> <br>
+                                    <input type="radio" name="periodo" value="1"> Segunda à Sexta &nbsp;&nbsp;
+                                    <input type="radio" name="periodo" value="2"> Sábado &nbsp;&nbsp;
+                                    <input type="radio" name="periodo" value="3"> Domingo
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="form-group col-md-3">
-                                <input type="radio" name="periodo" value="seg_sex"> Segunda à Sexta
-                            </div>
-                            <div class="form-group col-md-3">
-                                <input type="radio" name="periodo" value="sab"> Sábado
-                            </div>
-                            <div class="form-group col-md-3">
-                                <input type="radio" name="periodo" value="dom"> Domingo
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h2 class="page-header">
-                                    Público Atendido
-                                </h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-12 col-md-6">
+                            <div class="form-group col-md-6">
                                 <label for="nome">Quantidade</label>
                                 <input type="number" class="form-control" id="quantidade" name="quantidade"
                                        value="">
