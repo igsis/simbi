@@ -5,14 +5,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 
-@section('scripts_css')
-    <style>
-        .ui-datepicker-calendar {
-            display: none;
-        }
-    </style>
-@endsection
-
 @section('titulo','Frequência Enviadas')
 
 @section('conteudo')
@@ -30,8 +22,10 @@
                 <i class="fa fa-users"></i>
                 @if($type == 1)
                     Público em Equipamentos
-                @else
+                @elseif($type == 2)
                     Ocorrência de Eventos em Equipamentos
+                @else
+                    Público de Recepção em Equipamentos
                 @endif
             </h1>
         </section>
@@ -79,7 +73,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @else
+                            @elseif($type == 2)
                                 @foreach($equipamentos as $equipamento)
                                     <tr>
                                         <td>{{$equipamento->nome}}</td>
@@ -87,6 +81,17 @@
                                             <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
                                                class="btn bg-navy" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                @foreach($equipamentos as $equipamento)
+                                    <tr>
+                                        <td>{{$equipamento->nome}}</td>
+                                        <td>
+                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
+                                               class="btn btn-info pull-right" style="margin-right: 3px"><i
+                                                        class="fa fa-users"></i> &nbsp; Público de Recepção</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -160,38 +165,6 @@
             let data = new Date();
             $('#calendario').datepicker("option", "showAnim", "blind");
             $("#calendario").datepicker({
-                dateFormat: "mm/yy",
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                currentText: 'Atual',
-                closeText : "Selecionar",
-                onClose: function(dateText, inst) {
-
-                    function isDonePressed(){
-                        return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
-                    }
-
-                    if (isDonePressed()){
-                        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                        $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
-
-                        $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
-                    }
-                },
-                beforeShow : function(input, inst) {
-
-                    inst.dpDiv.addClass('month_year_datepicker')
-
-                    if ((datestr = $(this).val()).length > 0) {
-                        year = datestr.substring(datestr.length-4, datestr.length);
-                        month = datestr.substring(0, 2);
-                        $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
-                        $(this).datepicker('setDate', new Date(year, month-1, 1));
-                        $(".ui-datepicker-calendar").hide();
-                    }
-                },
 
                 dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
                 dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
@@ -199,15 +172,7 @@
                 monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                 monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
             });
-            $('#calendario').datepicker("option", "dateFormat", "mm/yy");
-        });
-
-        $('#submitForm').click(function () {
-            let data = $('#calendario').val();
-            let nData = data.split('/');
-            let novaData = nData[1]+'-'+nData[0]+'-01';
-            $('#calendario').val(novaData);
-
+            $('#calendario').datepicker("option", "dateFormat", "dd/mm/yy");
         });
 
     </script>

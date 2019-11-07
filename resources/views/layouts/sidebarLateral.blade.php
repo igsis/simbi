@@ -92,7 +92,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ route('frequencias.enviadas',['type'=>'2']) }}">Ocorrencia de eventos</a></li>
-                        <li><a href="#">Publico de Recepção</a></li>
+                        <li><a href="{{ route('frequencias.enviadas',['type'=>'3']) }}">Publico de Recepção</a></li>
                     </ul>
                 </li>
                 <li class="treeview {{ request()->routeIs('gerenciar*') ? 'active' : '' }}">

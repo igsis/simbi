@@ -1,12 +1,10 @@
-@include('layouts.br')
 @extends('layouts.master2')
-
+@include('layouts.br')
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Público Atendido')
-
+@section('titulo','Público de Recepção')
 
 @section('conteudo')
 
@@ -20,35 +18,40 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header">Público Atendido</h1>
+            <h1 class="page-header">
+                <i class="fa fa-users"></i>
+                Público de Recepção
+                <small>{{ $equipamento->nome }}</small>
+            </h1>
         </section>
-
         <!-- Main content -->
         <section class="content">
 
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Lista de publico atendido</h3>
+                    <h3 class="box-title">Lista de Público de Recepção</h3>
                 </div>
                 <div class="box-body">
                     <table id="tabela1" class="table table-bordered table-striped">
-                        <tbody>
+                        <thead>
                         @if ($equipamento->frequenciasPortarias->count() != 0)
                             <tr>
-                                <th colspan="4" class="text-center">Portaria</th>
+                                <th>Data</th>
+                                <th>Dia da Semana</th>
+                                <th>Total</th>
+                                <th>Data Envio</th>
                             </tr>
-                            <tr>
+                        </thead>
+                        <tbody>
                             @foreach ($equipamento->frequenciasPortarias as $frequencia)
-                                <tr>
-                                    <th>Data: {{ date('d/m/Y', strtotime($frequencia->data)) }}</th>
-                                    <th>{{ ucwords(strftime('%A', strtotime($frequencia->data))) }}</th>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><strong>Nome: </strong>{{$frequencia->nome}}</td>
+                                <tr align="center">
+                                    <td>{{ date('d/m/Y', strtotime($frequencia->data)) }}</td>
+                                    <td>{{ ucwords(strftime('%A', strtotime($frequencia->data))) }}</td>
+                                    <td>{{ $frequencia->quantidade }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($frequencia->data_envio))  }}</td>
                                 </tr>
                                 @endforeach
-                                </tr>
                                 @else
                                     <tr>
                                         <th colspan="2" class="text-center">Não há frequência cadastradas</th>
@@ -56,8 +59,9 @@
                                 @endif
                         </tbody>
                     </table>
-                    <div class="form-group col-md-offset-4 col-md-4">
-                        <a href="{{route('frequencia.relatorio')}}" class="form-control btn btn-warning">
+
+                    <div class="form-group col-md-offset-4 col-md-3">
+                        <a href="{{ route('frequencias.enviadas',['type'=>'3']) }}" class="form-control btn btn-warning">
                             Retornar à Lista de Equipamentos
                         </a>
                     </div>
