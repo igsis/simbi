@@ -13,7 +13,8 @@ class FrequenciasPortaria extends Model
         'equipamento_id',
         'periodo',
         'quantidade',
-        'data'
+        'data',
+        'data_envio'
     ];
 
     public function equipamento()

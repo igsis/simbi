@@ -1,14 +1,7 @@
 @extends('layouts.master2')
 
-@section('scripts_css')
-    <style>
-        .ui-datepicker-calendar {
-            display: none;
-        }
-    </style>
-@endsection
-
 @section('titulo','Cadastrar Ocorrência')
+
 @section('conteudo')
 
     <div class="content-wrapper">
@@ -303,25 +296,6 @@
     <script>
         $(function() {
             $( ".calendario" ).datepicker({
-                changeMonth: true,
-                changeYear: true,
-                showButtonPanel: true,
-                currentText: 'Atual',
-                closeText : "Selecionar",
-                onClose: function(dateText, inst) {
-
-                    function isDonePressed(){
-                        return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
-                    }
-
-                    if (isDonePressed()){
-                        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                        $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
-
-                        $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
-                    }
-                },
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
                 dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -329,7 +303,7 @@
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
             });
             $('.calendario').datepicker("option","showAnim","blind");
-            $('.calendario').datepicker( "option", "dateFormat", "mm/yy");
+            $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
     </script>
 @endsection

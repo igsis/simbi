@@ -60,17 +60,23 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'id' => 'required',
+            'periodo' => 'required',
             'data'          =>  'required',
             'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
 
         $user =  Auth::user();
 
+        $data = $request->data;
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
+
         $user->frequenciasPortarias()->create([
-            'data' => $request->data,
+            'data' => $data,
             'periodo'=> $request->periodo,
             'quantidade' => $request->quantidade,
-            'equipamento_id' => $request->id
+            'equipamento_id' => $request->id,
+            'data_envio' => date("Y-m-d")
         ]);
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
@@ -113,7 +119,7 @@ class FrequenciasPortariaController extends Controller
 
         $data = $request->data;
         $dt = explode('/', $data);
-        $data = $dt[1].'-'.$dt[0].'-01';
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
         $frequenciaPortaria = new FrequenciasPortaria();
         $complementoPortaria = new ComplementoPortaria();
@@ -128,6 +134,7 @@ class FrequenciasPortariaController extends Controller
         $frequenciaPortaria->periodo = $request->periodo;
         $frequenciaPortaria->quantidade = $request->total;
         $frequenciaPortaria->equipamento_id = $id;
+        $frequenciaPortaria->data_envio = date("Y-m-d");
         $frequenciaPortaria->save();
 
         $idades->anos0_6 = $request->idade0_6;
