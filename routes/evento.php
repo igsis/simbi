@@ -1,5 +1,5 @@
 <?php
-Route::group(['prefix' => 'frequencia'], function (){
+Route::group(['prefix' => 'eventos'], function (){
 
     Route::get('/evento', 'EventoController@inicio')->name('eventos.index');
 
@@ -13,9 +13,9 @@ Route::group(['prefix' => 'frequencia'], function (){
 
         Route::group(['prefix' => '/importarIgsis'],function (){
 
-            Route::get('/', 'EventoController@importarIgsis')->name('evento.importar');
+            Route::get('/', 'EventoController@importarIgsis')->name('eventos.importar');
 
-            Route::get('/{igsis_id}','EventoController@cadastroImportacao')->name('evento.importar.cadastro');
+            Route::get('/{igsis_id}','EventoController@cadastroImportacao')->name('eventos.importar.cadastro');
 
         });
 

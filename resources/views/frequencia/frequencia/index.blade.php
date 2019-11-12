@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Eventos nos Equipamentos')
+@section('titulo','Frequência de Público nos Equipamentos')
 
 @section('conteudo')
 
@@ -20,7 +20,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="glyphicon glyphicon-home"></i>
-                Eventos nos Equipamentos
+                Frequência de Público nos Equipamentos
             </h1>
         </section>
 
@@ -60,11 +60,6 @@
                                             <a href="{{ route('frequencia.listar', $equipamento->id) }}"
                                                class="btn btn-warning" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
-                                            <a href="#" class="btn btn-warning" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-stats"></i> Frequência Evento Externo</a>
-                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
-                                               class="btn btn-warning" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-stats"></i> Frequência Mensal</a>
                                         @endif
                                     </td>
                                 </tr>
