@@ -49,8 +49,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Login</th>
-                                <th>E-mail</th>
-                                <th>Cargo</th>
+                                <th>Nível de Acesso</th>
                                 <th>Operações</th>
                             </tr>
                             </thead>
@@ -59,10 +58,7 @@
                                 <tr>
                                     <td>{{ $user->funcionario->nome }}</td>
                                     <td>{{ $user->login }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    {{--TODO: Exibir equipamentos vinculados e cargo em cada equipamento. Ex: Biblioteca X (Coordenador)--}}
-
-                                    <td>{{ $user->nivelAcesso->nivel_acesso }}</td>
+                                    <td>{{$user->nivelAcesso->nivel_acesso}}</td>
                                     <td>
                                         @if($type == 1)
                                             <a href="{{ route('usuarios.editar', $user->id) }}"
@@ -110,8 +106,7 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>Login</th>
-                                <th>E-mail</th>
-                                <th>Cargo</th>
+                                <th>Nível de Acesso</th>
                                 <th>Operações</th>
                             </tr>
                             </tfoot>

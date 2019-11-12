@@ -154,41 +154,28 @@ class UserController extends Controller
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
-            if ($request->email == $funcionario->email){
-                $funcionario->update([
-                    'nome'=>$request->name,
-                    'email'=> $request->email,
-                ]);
-            }
-            else{
-                $funcionario->update([
-                    'nome'=>$request->name,
-                    'email'=> $request->email,
-                ]);
-            }
 
             $user->update([
                 'login'=> $request->login,
+                'email'=> $request->email,
                 'password'=> $request->password,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
+                'nivel_acesso_id' => $request->roles,
             ]);
         }
         else
         {
             $this->validate($request, [
-                'email' => 'required|email|unique:users,email,'.$funcionario->id,
-            ]);
-
-            $funcionario->update([
-                'nome'=>$request->name,
-                'email'=> $request->email,
+                'email' => 'required|email|unique:users,email,'.$user->id,
             ]);
 
             $user->update([
                 'login'=> $request->login,
+                'email'=> $request->email,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
+                'nivel_acesso_id' => $request->roles,
             ]);
         }
 

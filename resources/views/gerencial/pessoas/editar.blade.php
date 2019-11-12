@@ -110,7 +110,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-6"><br>
                                         <label for="data">Data da Aposentadoria</label>
-                                        <input class="form-control calendario" type="text" name="dataAposentadoria" value="@isset($user->FuncionarioAdicionais->data_aposentadoria) {{ date('d/m/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria)) }}  @endisset" id="dataAposentadoria">
+                                        <input class="form-control calendario" type="text" name="dataAposentadoria" value="@isset($user->FuncionarioAdicionais->data_aposentadoria) {{date('d/m/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria))}} @endisset" id="dataAposentadoria">
                                     </div>
                                     <div class="form-group col-md-12 has-feedback">
                                         <label for="name">Observação</label>
@@ -322,6 +322,13 @@
         }
     </script>
 
+
+    <script type="text/javascript">
+        function desabilitar(selecionado) {
+            document.getElementById('dataAposentadoria').disabled = selecionado;
+        }
+    </script>
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
@@ -336,10 +343,5 @@
             $('.calendario').datepicker("option","showAnim","blind");
             $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
-    </script>
-    <script type="text/javascript">
-        function desabilitar(selecionado) {
-            document.getElementById('dataAposentadoria').disabled = selecionado;
-        }
     </script>
 @endsection

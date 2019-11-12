@@ -7,16 +7,22 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar {{--$funcionario->nome--}}</h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar Usuário <small>{{$user->login}}</small></h1>
         </section>
 
         <!-- Main content -->
         <section class="content">
 
+            <div class="row">
+                <div class="col-xs-12">
+                    @includeIf('layouts.erros')
+                </div>
+            </div>
+
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{--$funcionario->nome--}}</h3>
+                    <h3 class="box-title">Dados do usuário</h3>
                     <div class="box-tools">
 {{--                        @if($user->name != Auth::user()->name)--}}
                             <form id="resetSenha" method="POST" action="{{route('usuarios.reset', $user->id)}}"
@@ -52,11 +58,13 @@
                             <div class="form-group col-md-12 has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">E-mail</label>
                                 <input class="form-control" type="email" name="email" id="email"
-                                       value="{{$user->funcionario->email}}">
+                                       value="{{$user->email}}">
                             </div>
                         </div>
 
 {{--                        @if($user->name == Auth::user()->name)--}}
+                            <h4>Alterar Senha</h4>
+                            <hr>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="password">Senha</label><br>
@@ -68,9 +76,10 @@
                                     <input class="form-control" name="password_confirmation" type="password" value="">
                                 </div>
                             </div>
+                        <hr>
+                        <h4>Pergunta de Segurança</h4>
 
                             <div class="form-group">
-                                <label for="perguntaSeguranca">Pergunta de Segurança</label><br>
                                 <select class="form-control" name="perguntaSeguranca" id="perguntaSeguranca">
 
                                     <option value="" ></option>
@@ -93,22 +102,22 @@
                             </div>
 {{--                        @endif--}}
 
-                        <h5><b>Nível de Acesso</b></h5>
+                        <h4>Nível de Acesso</h4>
 
                         <div class='form-group'>
                             @if(!(Auth::user()->hasrole('Funcionario')))
                                 @hasrole('Administrador')
-                                <input type="radio" value="1" name="roles">
+                                <input type="radio" value="1" name="roles" {{$user->nivel_acesso_id == 1 ? "checked" : ""}}>
                                 <label for="Administrador">Administrador</label><br>
                                 @endhasrole
 
                                 @hasrole('Administrador|Coordenador')
-                                <input type="radio" value="2" name="roles">
+                                <input type="radio" value="2" name="roles" {{$user->nivel_acesso_id == 2 ? "checked" : ""}}>
                                 <label for="Coordenador">Coordenador</label><br>
                                 @endhasrole
                             @endif
 
-                            <input type="radio" value="3" name="roles">
+                            <input type="radio" value="3" name="roles" {{$user->nivel_acesso_id == 3 ? "checked" : ""}}>
                             <label for="Funcionario">Funcionário</label><br>
                         </div>
 
@@ -148,7 +157,7 @@
         });
 
         $(document).ready(function () {
-            $('input:radio[name="roles"][value={{$user->roles->first()->id}}]').attr('checked', true);
+            {{--$('input:radio[name="roles"][value={{$user->roles->first()->id}}]').attr('checked', true);--}}
 
             $('#identificacaoSecretaria').val("{{$user->secretaria_id}}");
             $('#subordinacaoAdministrativa').val("{{$user->subordinacao_administrativa_id}}");

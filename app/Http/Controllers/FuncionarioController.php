@@ -168,7 +168,7 @@ class FuncionarioController extends Controller
                 $adicionais->funcionario_id = $user->id;
                 $adicionais->save();
             }
-            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Funcionário Cadastrado com Sucesso.');
+            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Pessoa Cadastrado com Sucesso.');
         }
         return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
 
@@ -194,7 +194,7 @@ class FuncionarioController extends Controller
 
         $this->validate($request, [
             'nome'  =>'required',
-            'RF' => 'required',
+            'RF' => 'required|unique:funcionarios,RF,'.$funcionario->id,
             'vinculo' => 'required',
             'subordinacaoAdministrativa' => 'required',
             'cargo' => 'required'
@@ -219,9 +219,11 @@ class FuncionarioController extends Controller
 
 
         $tipoPessoa = $funcionario->tipo_pessoa;
+        $aposenta = $request->aposenta;
+        $observacao = $request->observacao;
+
         if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
-            $adicionais = FuncionarioAdicionais::findOrNew($id);
             if(isset($aposenta))
             {
                 $this->validate($request, ['dataAposentadoria' => 'required']);
@@ -229,12 +231,20 @@ class FuncionarioController extends Controller
                 $dtFormat = explode('/', $data);
                 $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
-                $adicionais->aposenta = 1;
-                $adicionais->data_aposentadoria = $data;
+                $funcionario->FuncionarioAdicionais->update([
+                    'aposenta' => 1,
+                    'data_aposentadoria' => $data
+                ]);
             }
-            $adicionais->observacao = $observacao;
+            else
+            {
+                $funcionario->FuncionarioAdicionais->delete();
+            }
+            $funcionario->FuncionarioAdicionais->update([
+                'observacao' => $observacao
+            ]);
+
             $funcionario->secretaria_id = 1;
-            $adicionais->save();
         }
         elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
         {
@@ -257,7 +267,7 @@ class FuncionarioController extends Controller
         if($funcionario->save()){
             return redirect()->route('funcionarios.index', ['type' => '1'])
                 ->with('flash_message',
-                    'Funcionario Editado com Sucesso!');
+                    'Pessoa Editada com Sucesso!');
         }
 
     }
@@ -278,9 +288,9 @@ class FuncionarioController extends Controller
         $equipamentos = $request['equipamento'];
         $cargos = $request['responsabilidadeTipo'];
 
-//        $this->validate($request, [
-//            'responsabilidadeTipo'  =>  'required_with:equipamento'
-//        ]);
+        $this->validate($request, [
+            'responsabilidadeTipo[]'  =>  'required_with:equipamento'
+        ]);
 
         $syncData = [];
 
