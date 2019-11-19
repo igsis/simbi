@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Simbi\Models\Equipamento;
 use Simbi\Models\Evento;
 use Simbi\Models\EventoOcorrencia;
 use Simbi\Models\Frequencia;
+use Simbi\Models\FrequenciasPortaria;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,4 +61,8 @@ Route::post('/salvarFrequencia/{id}', function (Request $request, $id) {
 
     return response('Frequencia não encontrada', 404);
 });
+
+Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $idPeriodo){
+    return Response::json($idPeriodo);
+})->name('api.relatorioCompleto');
 

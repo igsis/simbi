@@ -13,6 +13,7 @@ use Simbi\Models\EventoOcorrencia;
 use Simbi\Models\EventosIgsis;
 use Auth;
 use Simbi\Models\Frequencia;
+use Simbi\Models\FrequenciasPortaria;
 use Simbi\Models\OcorrenciasIgsis;
 use Simbi\Models\ProjetoEspecial;
 use Simbi\Models\TipoEvento;
@@ -218,9 +219,13 @@ class FrequenciaController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
+        $frequencias = Frequencia::all();
+
+        $frequenciaPortaria = FrequenciasPortaria::where('equipamento_id', $id);
+
         $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('id', 'data', 'horario');
 
-        return view('frequencia.frequencia.listar', compact('equipamento', 'ocorrencia'));
+        return view('frequencia.frequencia.listar', compact('equipamento', 'ocorrencia', 'frequencias'));
     }
 
     /**
@@ -255,6 +260,7 @@ class FrequenciaController extends Controller
      *
      * @param int $id
      * @return \Illuminate\Http\Response
+     *
      */
     public function destroy($id)
     {
@@ -263,7 +269,6 @@ class FrequenciaController extends Controller
 
     public function enviarFrequencia(Request $request)
     {
-
         $ocorrencia = EventoOcorrencia::findOrFail($request->input('id'));
 
         EventoOcorrencia::where('id', $request->input('id'))
