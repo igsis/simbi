@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 
-@section('titulo', 'Cadastrar Usuario')
+@section('titulo', 'Cadastrar Usuário')
 
 @section('conteudo')
 <div class="content-wrapper">
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Nome *</label>
-                                <input class="form-control" type="text" name="name" id="name" value="@isset($funcionario->nome) {{ $funcionario->nome }} @endisset @empty($funcionario->nome) {{old('name')}} @endempty" required>
+                                <input class="form-control" type="text" name="name" id="name" value="@isset($funcionario->nome) {{ $funcionario->nome }} @endisset @empty($funcionario->nome) {{old('name')}} @endempty" readonly>
                                 @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -42,7 +42,7 @@
 
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('login') ? ' has-error' : '' }}">
                                 <label for="login">Login *</label>
-                                <input class="form-control" type="text" name="login" id="login" value="{{old('login')}}" maxlength="7"  required>
+                                <input class="form-control" type="text" name="login" id="login" value="{{$login}}" maxlength="7"  readonly>
                                 @if ($errors->has('login'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('login') }}</strong>

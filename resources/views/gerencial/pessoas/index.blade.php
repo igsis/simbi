@@ -76,7 +76,7 @@
                                     @if ($user->publicado == 1)
                                         <form method="get" action="{{ route('usuarios.cadastro') }}">
                                             <input type="hidden" name="id" value="{{ $user->id  }}">
-                                            <button type="submit" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuario </button>
+                                            <button type="submit" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuário </button>
                                         </form>
                                     @elseif($user->publicado == 2)
                                         <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
@@ -90,7 +90,7 @@
                                             <input type="hidden" name="type" value="{{ $type }}">
                                             <input type="hidden" name="id" value="{{$user->id}}">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar este Pessoa?'><i class="glyphicon glyphicon-trash"></i> Desativar
+                                            <button class="btn btn-danger" data-footer="Desativar" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Desativar {{$user->name}}?" data-message='Desejar realmente desativar esta Pessoa?'><i class="glyphicon glyphicon-trash"></i> Desativar
                                             </button>
                                         </form>
                                     @else
@@ -99,7 +99,7 @@
                                             <input type="hidden" name="type" value="{{ $type }}">
                                             <input type="hidden" name="id" value="{{ $user->id }}">
                                             <input type="hidden" name="_method" value="PUT">
-                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar este usuário?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
+                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Ativar {{$user->name}}?" data-message='Desejar realmente ativar esta pessoa?' data-footer="Ativar"><i class="glyphicon glyphicon-ok"></i> Ativar
                                             </button>
                                         </form>
 

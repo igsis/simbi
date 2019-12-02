@@ -26,11 +26,7 @@ Route::group(['middleware' => 'auth'], function (){
 
                 Route::put('/{usuario}/reset', 'UserController@resetSenha')->name('usuarios.reset');
             });
-            Route::group(['prefix' => 'pessoas'], function() {
-                Route::get('/{usuario}/vincular', 'FuncionarioController@exibeVincular')->name('pessoas.exibeVincular');
 
-                Route::post('/{usuario}/vincular', 'FuncionarioController@vinculaEquipamento')->name('pessoas.vincular');
-            });
         });
 
 	});

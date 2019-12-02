@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                             <label for="name">Registro Funcional</label>
-                        <input class="form-control" type="text" name="RF" id="RF" maxlength="7" value="{{old('RF')}}">
+                        <input class="form-control" type="text" name="RF" id="RF" data-mask="000.000" maxlength="6" value="{{old('RF')}}">
                     </div>
                 </div>
                 <div class="row">
@@ -105,7 +105,7 @@
 
                         <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
                             <label for="name">Vínculo</label>
-                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1">
+                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1" data-mask="0">
                         </div>
                     </div>
 

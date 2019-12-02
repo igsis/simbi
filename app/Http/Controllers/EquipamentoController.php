@@ -777,7 +777,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $request->type])
             ->with('flash_message',
-                'Usuario Ativado com Sucesso.');
+                'Usuário Ativado com Sucesso.');
     }
 
     // Filtro de Equipamentos

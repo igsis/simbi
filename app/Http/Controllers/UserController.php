@@ -55,14 +55,19 @@ class UserController extends Controller
     {
 
         $funcionario = Funcionario::FindOrFail($request->id);
+        $RF = trim($funcionario->RF);
+        $RF = str_replace(".", "", $RF);
+        $login = 'd'.$RF;
 
         $roles = Role::all();
 
         $nivelAcessos = NivelAcesso::all();
+
         return view('gerencial.usuarios.cadastro', compact(
             'roles',
             'nivelAcessos',
-            'funcionario'
+            'funcionario',
+            'login'
             ));
     }
 
@@ -72,6 +77,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -94,7 +100,7 @@ class UserController extends Controller
                 ->update(['publicado'=>2]);
 
             return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
-                'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2019');
+                'Usuário Adicionado com Sucesso! Senha padrão: simbi@2019');
         }
     }
 
@@ -213,10 +219,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->update(['password' => 'simbi@2018']);
+        $user->update(['password' => 'simbi@2019']);
         return redirect()->route('usuarios.index', [
             'type' => 1
-        ])->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
+        ])->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2019');
     }
 
     /**

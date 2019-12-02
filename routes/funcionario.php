@@ -18,7 +18,12 @@ Route::group(['prefix' => 'gerencial'], function (){
         Route::delete('/delete','FuncionarioController@destroy')->name('funcionarios.delete');
 
         Route::put('/ativar', 'FuncionarioController@ativar')->name('funcionarios.ativar');
+
+        Route::get('/{usuario}/vincular', 'FuncionarioController@exibeVincular')->name('pessoas.exibeVincular');
+
+        Route::post('/{usuario}/vincular', 'FuncionarioController@vinculaEquipamento')->name('pessoas.vincular');
     });
+
 
     Route::post('/funcionarios/','FuncionarioController@store')->name('funcionarios.cadastra');
 

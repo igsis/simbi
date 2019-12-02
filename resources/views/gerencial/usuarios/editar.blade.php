@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 
-@section('tituloPagina', 'Editar Usuario')
+@section('tituloPagina', 'Editar Usuário')
 
 @section('conteudo')
     <div class="content-wrapper">
@@ -24,18 +24,18 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Dados do usuário</h3>
                     <div class="box-tools">
-{{--                        @if($user->name != Auth::user()->name)--}}
+                        @if($user->name == Auth::user()->name)
                             <form id="resetSenha" method="POST" action="{{route('usuarios.reset', $user->id)}}"
                                   accept-charset="UTF-8">
                                 {{ csrf_field() }}
                                 {{method_field('PUT')}}
-                                <button class="btn btn-danger pull-right" type="button" data-toggle="modal"
+                                <button class="btn btn-danger pull-right" type="submit" data-toggle="modal"
                                         data-target="#confirmDelete" data-title="Resetar a Senha?"
                                         data-message='Desejar realmente resetar a senha deste usuário? Senha: simbi@2018'
                                         data-button="Resetar Senha">Resetar Senha
                                 </button>
                             </form>
-{{--                        @endif--}}
+                        @endif
                     </div>
                 </div>
                 <form method="POST" action="{{route('usuario.atualizar', $user->id)}}" accept-charset="UTF-8">
