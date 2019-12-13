@@ -38,33 +38,10 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    <button onclick="AddTableRow()" type="button">Adicionar Produto</button>
+{{--                    <button onclick="AddTableRow()" type="button">Adicionar Produto</button>--}}
                     <div class="table table-responsive">
                         <table class="table table-bordered table-striped" id="tabela">
-                            @if ($equipamento->frequencias->count() != 0)
-                                <thead>
-                                <tr>
-                                    <th colspan="4" class="text-center"> </th>
-                                </tr>
 
-                                <tr>
-                                    <th>Público de Recepção</th>
-                                    <th>Publico de Evento Interno</th>
-                                    <th>Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>100</td>
-                                    <td>100</td>
-                                    <td>200</td>
-                                </tr>
-                                </tbody>
-                            @else
-                                <tr>
-                                    <th colspan="2" class="text-center">Não há frequência cadastradas</th>
-                                </tr>
-                            @endif
                         </table>
                     </div>
                     <div class="form-group col-md-offset-4 col-md-4">
@@ -81,20 +58,61 @@
 
 @section('scripts_adicionais')
     @include('scripts.tabelas_admin')
+
     <script>
         $(document).ready(function(){
-            var id = {{$equipamento->id}};
-            $("input[name='periodo']").change(function(){
-                var idPeriodo = $("input[name='periodo']:checked").val();
-                $.getJSON('/simbi/api/' + id + '/relatorioCompleto/' + idPeriodo, function (equipamento) {
+            PreencherTabela();
 
+            function PreencherTabela() {
+                var id = {{$equipamento->id}};
+                var idPeriodo = $("input[name='periodo']:checked").val();
+                $.getJSON('/simbi/api/' + id + '/relatorioCompleto/' + idPeriodo, function (frequencias) {
+                    $( "tr" ).remove(); //limpar tabela
+                    if (frequencias.length <1){
+                        var cols = "";
+                        cols += '<thead>';
+                        cols += '<tr>';
+                        cols += '<th colspan="4" class="text-center">Sem registros neste período</th>';
+                        cols += '</tr>';
+                        $("#tabela").append(cols);
+                    }
+                    else{
+                        $.each(frequencias, function(key, value){
+                            var cols = "";
+                            var soma = parseInt(value.quantidade) + parseInt(value.total);
+                            cols += '<thead>';
+                            cols += '<tr>';
+                            cols += '<th colspan="4" class="text-center">'+value.mes.toUpperCase()+'-'+value.ano+'</th>';
+                            cols += '</tr>';
+                            cols += '<tr>';
+                            cols += '<th> Público de Recepção</th>';
+                            cols += '<th>Público de Evento Interno</th>';
+                            cols += '<th>Total</th>';
+                            cols += '</tr>';
+                            cols += '</thead>';
+                            //body
+                            cols += '<tr>';
+                            cols += '<td>'+value.quantidade+'</td>';
+                            cols += '<td>'+value.total+'</td>';
+                            cols += '<td>'+soma+'</td>';
+                            cols += '</tr>';
+
+                            $("#tabela").append(cols);
+
+                        })
+                    }
+;
                 });
+            }
+
+            $("input[name='periodo']").change(function(){
+                PreencherTabela();
             });
         });
 
     </script>
 
-    <script>
+    <!--<script>
         (function($) {
             AddTableRow = function() {
                 var newRow = $("<tr>");
@@ -108,6 +126,6 @@
                 $("#tabela").append(newRow);
             };
         })(jQuery);
-    </script>
+    </script>-->
 
 @endsection

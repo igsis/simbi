@@ -15,6 +15,7 @@ class EventoOcorrencia extends Model
         'horario',
         'data_envio',
         'publicado',
+        'periodo',
         'observacao'
     ];
 

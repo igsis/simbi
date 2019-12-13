@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                             <label for="name">Registro Funcional</label>
-                        <input class="form-control" type="text" name="RF" id="RF" data-mask="000.000" maxlength="6" value="{{old('RF')}}">
+                        <input class="form-control" type="text" name="RF" id="RF" data-mask="0000000" maxlength="6" value="{{old('RF')}}">
                     </div>
                 </div>
                 <div class="row">
@@ -325,7 +325,6 @@
     <script type="text/javascript">
         function desabilitar(selecionado) {
             document.getElementById('dataAposentadoria').disabled = selecionado
-
         }
     </script>
 @endsection

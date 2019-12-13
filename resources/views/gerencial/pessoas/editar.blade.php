@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                                 <label for="name">Registro Funcional</label>
-                                <input class="form-control" type="text" name="RF" id="RF" maxlength="6" value="{{$user->RF}}" data-mask="000.000">
+                                <input class="form-control" type="text" name="RF" id="RF" maxlength="6" value="{{$user->RF}}" data-mask="0000000">
                             </div>
                         </div>
                         <div class="row">

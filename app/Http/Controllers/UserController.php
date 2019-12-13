@@ -57,8 +57,8 @@ class UserController extends Controller
         $funcionario = Funcionario::FindOrFail($request->id);
         $RF = trim($funcionario->RF);
         $RF = str_replace(".", "", $RF);
+        $RF = substr($RF,0,6);
         $login = 'd'.$RF;
-
         $roles = Role::all();
 
         $nivelAcessos = NivelAcesso::all();

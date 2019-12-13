@@ -3,6 +3,7 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use phpDocumentor\Reflection\Types\Compound;
 use Simbi\Http\Controllers\Controller;
@@ -59,11 +60,26 @@ class FrequenciaController extends Controller
         $dtFormat = explode('/', $dataFormulario);
         $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
+
+        //Obter período da ocorrência
+        //1- Segunda à Sexta
+        //2-Sábado
+        //3-Domingo
+        $unixTimestamp = strtotime($data);
+        $dia = date("w", $unixTimestamp);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
         EventoOcorrencia::create([
             'igsis_evento_id' => $evento_id,
             'igsis_id' => $equipamento_id,
             'data' => $data,
-            'horario' => $request->hora
+            'horario' => $request->hora,
+            'periodo' => $periodo
         ]);
 
         return redirect()->route('frequencia.ocorrencias', [$equipamento_id,1])->with('flash_message',
@@ -72,7 +88,6 @@ class FrequenciaController extends Controller
 
     public function listarOcorrencias($igsis_id, $type)
     {
-
 
         $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.id', '')
             ->where([
@@ -132,9 +147,23 @@ class FrequenciaController extends Controller
         $dt = explode('/', $data);
         $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
+        //Obter período da ocorrência
+        //1- Segunda à Sexta
+        //2-Sábado
+        //3-Domingo
+        $unixTimestamp = strtotime($data);
+        $dia = date("w", $unixTimestamp);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
         $ocorrencia->update([
             'data' => $data,
-           'horario' => $request->hora
+            'horario' => $request->hora,
+            'periodo' => $periodo
         ]);
 
        return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
@@ -219,13 +248,29 @@ class FrequenciaController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        $frequencias = Frequencia::all();
-
-        $frequenciaPortaria = FrequenciasPortaria::where('equipamento_id', $id);
-
         $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('id', 'data', 'horario');
 
-        return view('frequencia.frequencia.listar', compact('equipamento', 'ocorrencia', 'frequencias'));
+        $frequencias = Frequencia::join('evento_ocorrencias as o', 'o.id', 'frequencias.evento_ocorrencia_id', '')
+            ->join('frequencias_portarias as fp', 'fp.equipamento_id', 'frequencias.equipamento_id')
+            ->selectRaw('sum(fp.quantidade) quantidade, sum(frequencias.total) total, year(o.data) ano, monthname(o.data) mes')
+            ->where([
+                ['o.publicado', 2],
+                ['fp.equipamento_id', $id]
+            ])
+            ->groupby('ano','mes')->orderBy('o.data')
+            ->get();
+
+        $frequenciaPortarias = FrequenciasPortaria::selectRaw('sum(quantidade) as quantidade, YEAR(data) ano, MONTHNAME(data) mes')
+            ->groupBy('ano','mes')->orderBy('data', 'desc')
+            ->get();
+
+//        $frequencias = Frequencia::join('evento_ocorrencias as o', 'o.id', 'frequencias.evento_ocorrencia_id', '')
+//            ->where('o.publicado', 2)
+//            ->selectRaw('sum(total) total, year(o.data) ano, monthname(o.data) mes')
+//            ->groupby('ano','mes')->orderBy('data')
+//            ->get();
+
+        return view('frequencia.frequencia.listar', compact('equipamento', 'frequencias', 'ocorrencia', 'frequenciaPortarias'));
     }
 
     /**
@@ -283,7 +328,6 @@ class FrequenciaController extends Controller
         return redirect()->route('frequencia.ocorrencias', [$equipamento_igsis,$type])
             ->with('flash_message',
                 'Ocorrência do Enviada com Sucesso.');
-
     }
 
     public function frequenciasEnviadas(Request $types)

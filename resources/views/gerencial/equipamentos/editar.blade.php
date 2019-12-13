@@ -27,7 +27,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{$equipamento->nome}}</h3>
                 </div>
-                <form method="POST" action="{{ url('equipamentos', [$equipamento->id]) }}" autocomplete="off">
+                <form method="POST" action="{{ url('gerencial/equipamentos', [$equipamento->id]) }}" autocomplete="off">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <input type="hidden" name="_method" value="PUT">
@@ -300,7 +300,7 @@
                                                     <input type="checkbox" name="segunda[{{$key}}]"
                                                            value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label
                                                             for="diasemana01" style="padding:0 10px 0 5px;">
-                                                        Segunda</label>
+                                                        dataAposentadoria' => 'required'                    Segunda</label>
                                                     <input type="checkbox" name="terca[{{$key}}]"
                                                            value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label
                                                             for="diasemana02" style="padding:0 10px 0 5px;">

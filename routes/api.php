@@ -62,7 +62,19 @@ Route::post('/salvarFrequencia/{id}', function (Request $request, $id) {
     return response('Frequencia não encontrada', 404);
 });
 
-Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $idPeriodo){
-    return Response::json($idPeriodo);
+Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $periodo){
+    $frequencias = Frequencia::join('evento_ocorrencias as o', 'o.id', 'frequencias.evento_ocorrencia_id', '')
+        ->join('frequencias_portarias as fp', 'fp.equipamento_id', 'frequencias.equipamento_id')
+        ->selectRaw('sum(fp.quantidade) quantidade, sum(frequencias.total) total, year(o.data) ano, monthname(o.data) mes')
+        ->where([
+            ['o.publicado', 2],
+            ['fp.equipamento_id', $id],
+            ['o.periodo', $periodo],
+            ['fp.periodo', $periodo]
+        ])
+        ->groupby('ano','mes')->orderBy('o.data', 'desc')
+        ->get();
+
+    return Response::json($frequencias);
 })->name('api.relatorioCompleto');
 

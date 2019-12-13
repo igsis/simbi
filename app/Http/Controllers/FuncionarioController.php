@@ -289,7 +289,7 @@ class FuncionarioController extends Controller
         $cargos = $request['responsabilidadeTipo'];
 
         $this->validate($request, [
-            'responsabilidadeTipo[]'  =>  'required_with:equipamento'
+            'responsabilidadeTipo'  =>  'required_with:equipamento'
         ]);
 
         $syncData = [];
