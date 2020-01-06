@@ -37,8 +37,8 @@
                         <input type="radio" name="periodo" value="3"> Domingo
                     </h3>
                 </div>
+
                 <div class="box-body">
-{{--                    <button onclick="AddTableRow()" type="button">Adicionar Produto</button>--}}
                     <div class="table table-responsive">
                         <table class="table table-bordered table-striped" id="tabela">
 
@@ -79,10 +79,22 @@
                     else{
                         $.each(frequencias, function(key, value){
                             var cols = "";
-                            var soma = parseInt(value.quantidade) + parseInt(value.total);
+                            var soma;
+                            var quantidade = value.quantidade;
+                            var total = value.total;
+                            var mes = value.mes;
+                            var ano = value.ano;
+
+                            if (quantidade == null) quantidade = 0;
+                            if (total == null) total = 0;
+                            if (mes == null) mes = value.mesf;
+                            if (ano == null) ano = value.anof;
+
+                            soma = parseInt(quantidade) + parseInt(total);
+
                             cols += '<thead>';
                             cols += '<tr>';
-                            cols += '<th colspan="4" class="text-center">'+value.mes.toUpperCase()+'-'+value.ano+'</th>';
+                            cols += '<th colspan="4" class="text-center">'+mes.toUpperCase()+'-'+ano+'</th>';
                             cols += '</tr>';
                             cols += '<tr>';
                             cols += '<th> Público de Recepção</th>';
@@ -92,16 +104,14 @@
                             cols += '</thead>';
                             //body
                             cols += '<tr>';
-                            cols += '<td>'+value.quantidade+'</td>';
-                            cols += '<td>'+value.total+'</td>';
+                            cols += '<td>'+quantidade+'</td>';
+                            cols += '<td>'+total+'</td>';
                             cols += '<td>'+soma+'</td>';
                             cols += '</tr>';
-
                             $("#tabela").append(cols);
 
                         })
-                    }
-;
+                    };
                 });
             }
 
@@ -111,21 +121,4 @@
         });
 
     </script>
-
-    <!--<script>
-        (function($) {
-            AddTableRow = function() {
-                var newRow = $("<tr>");
-                var cols = "";
-
-                cols += '<td>&nbsp;</td>';
-                cols += '<td>&nbsp;</td>';
-                cols += '<td>&nbsp;</td>';
-
-                newRow.append(cols);
-                $("#tabela").append(newRow);
-            };
-        })(jQuery);
-    </script>-->
-
 @endsection

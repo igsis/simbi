@@ -63,17 +63,16 @@ Route::post('/salvarFrequencia/{id}', function (Request $request, $id) {
 });
 
 Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $periodo){
-    $frequencias = Frequencia::join('evento_ocorrencias as o', 'o.id', 'frequencias.evento_ocorrencia_id', '')
-        ->join('frequencias_portarias as fp', 'fp.equipamento_id', 'frequencias.equipamento_id')
-        ->selectRaw('sum(fp.quantidade) quantidade, sum(frequencias.total) total, year(o.data) ano, monthname(o.data) mes')
-        ->where([
-            ['o.publicado', 2],
-            ['fp.equipamento_id', $id],
-            ['o.periodo', $periodo],
-            ['fp.periodo', $periodo]
-        ])
-        ->groupby('ano','mes')->orderBy('o.data', 'desc')
-        ->get();
+    $frequencias = DB::select('
+        select * from
+            (select sum(quantidade) quantidade, monthname(data) mes, year(data) ano from frequencias_portarias where equipamento_id = ? and periodo = ? group by ano, mes) fp
+                right join (select sum(total) total, monthname(o.data) mesf, year(o.data) anof from frequencias fr inner join evento_ocorrencias o on o.id = fr.evento_ocorrencia_id where publicado = 2 and equipamento_id = ? and periodo = ? group by anof, mesf) f on fp.mes = f.mesf and fp.ano = f.anof
+        union 
+            select * from
+            (select sum(quantidade) quantidade, monthname(data) mes, year(data) ano from frequencias_portarias where equipamento_id = ? and periodo = ? group by ano, mes) fp
+            left join (select sum(total) total, monthname(o.data) mesf, year(o.data) anof from frequencias fr inner join evento_ocorrencias o on o.id = fr.evento_ocorrencia_id where publicado = 2 and equipamento_id = ? and periodo = ? group by anof, mesf) f on fp.mes = f.mesf and fp.ano = f.anof
+            order by ano, mes, anof desc;
+    ', [$id, $periodo, $id, $periodo, $id, $periodo, $id, $periodo]);
 
     return Response::json($frequencias);
 })->name('api.relatorioCompleto');

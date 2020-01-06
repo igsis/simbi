@@ -248,29 +248,7 @@ class FrequenciaController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        $ocorrencia = EventoOcorrencia::where('igsis_id', $equipamento->igsis_id)->pluck('id', 'data', 'horario');
-
-        $frequencias = Frequencia::join('evento_ocorrencias as o', 'o.id', 'frequencias.evento_ocorrencia_id', '')
-            ->join('frequencias_portarias as fp', 'fp.equipamento_id', 'frequencias.equipamento_id')
-            ->selectRaw('sum(fp.quantidade) quantidade, sum(frequencias.total) total, year(o.data) ano, monthname(o.data) mes')
-            ->where([
-                ['o.publicado', 2],
-                ['fp.equipamento_id', $id]
-            ])
-            ->groupby('ano','mes')->orderBy('o.data')
-            ->get();
-
-        $frequenciaPortarias = FrequenciasPortaria::selectRaw('sum(quantidade) as quantidade, YEAR(data) ano, MONTHNAME(data) mes')
-            ->groupBy('ano','mes')->orderBy('data', 'desc')
-            ->get();
-
-//        $frequencias = Frequencia::join('evento_ocorrencias as o', 'o.id', 'frequencias.evento_ocorrencia_id', '')
-//            ->where('o.publicado', 2)
-//            ->selectRaw('sum(total) total, year(o.data) ano, monthname(o.data) mes')
-//            ->groupby('ano','mes')->orderBy('data')
-//            ->get();
-
-        return view('frequencia.frequencia.listar', compact('equipamento', 'frequencias', 'ocorrencia', 'frequenciaPortarias'));
+        return view('frequencia.frequencia.listar', compact('equipamento'));
     }
 
     /**
