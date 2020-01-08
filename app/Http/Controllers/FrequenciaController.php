@@ -183,7 +183,7 @@ class FrequenciaController extends Controller
 
         $equipamento = Equipamento::where('igsis_id', $ocorrencia->igsis_id)->firstOrFail();
 
-        $projetoEspecial = ProjetoEspecial::where('idProjetoEspecial', $evento->projeto_especial_id)->firstOrFail();
+        $projetoEspecial = ProjetoEspecial::where('id', $evento->projeto_especial_id)->firstOrFail();
 
         return view('frequencia.frequencia.cadastro', compact('equipamento', 'ocorrencia', 'evento', 'projetoEspecial'));
     }

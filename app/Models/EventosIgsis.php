@@ -8,43 +8,16 @@ use Simbi\Models\TipoEventoIgsis;
 class EventosIgsis extends Model
 {
     protected $connection = "mysql2";
-    protected $table = 'ig_evento';
-    protected $primaryKey = 'idEvento';
+    protected $table = 'eventos';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
 
     protected $fillable = [
-      'idEvento',
-        'ig_produtor_idProdutor',
-        'ig_tipo_evento_idTipoEvento',
-        'ig_programa_idPrograma',
-        'projetoEspecial',
-        'nomeEvento',
-        'projeto',
-        'idResponsavel',
-        'suplente',
-        'autor',
-        'nomeGrupo',
-        'fichaTecnica',
-        'memorando',
-        'faixaEtaria',
-        'sinopse',
-        'releaseCom',
-        'parecerArtistico',
-        'confirmaFinanca',
-        'confirmaDiretoria',
-        'confirmaComunicacao',
-        'confirmaDocumentacao',
-        'confirmaProducao',
-        'numeroProcesso',
-        'publicado',
-        'idUsuario',
-        'ig_modalidade_IdModalidade',
-        'linksCom',
-        'subEvento',
-        'dataEnvio',
-        'justificativa',
-        'idInstituicao',
+        'id',
+        'nome_evento',
+        'projeto_especial_id',
+        'instituicao_id',
         'ocupacao',
         'statusEvento'
     ];

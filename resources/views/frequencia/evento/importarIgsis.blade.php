@@ -44,10 +44,10 @@
                             <tbody>
                             @foreach($eventos as $evento)
                                 <tr>
-                                    <td>{{ $evento->nomeEvento }}</td>
-                                    @if(!(in_array($evento->idEvento, $cadastrados)))
+                                    <td>{{ $evento->nome_evento }}</td>
+                                    @if(!(in_array($evento->id, $cadastrados)))
                                         <td>
-                                            <a href="{{ route('eventos.importar.cadastro', [$idEquipamento,$evento->idEvento]) }}" class="btn btn-success">
+                                            <a href="{{ route('eventos.importar.cadastro', [$idEquipamento,$evento->id]) }}" class="btn btn-success">
                                                 <i class="glyphicon glyphicon-plus"></i>
                                                 Importar Evento
                                             </a>

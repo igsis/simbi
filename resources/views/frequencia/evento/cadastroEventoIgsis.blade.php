@@ -29,15 +29,15 @@
                         {{ csrf_field() }}
 
                         <div class="hidden">
-                            <label for="igisi_id">ID do evento igsis</label>
-                            <input type="text" class="form-control" name="igsis_evento_id" id="igsis_evento_id" value="{{$evento->idEvento}}">
+                            <label for="igisi_id">ID do evento Siscontrat</label>
+                            <input type="text" class="form-control" name="igsis_evento_id" id="igsis_evento_id" value="{{$evento->id}}">
                         </div>
 
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="evento_ocorrencia_id">Nome do Evento</label>
                                 <input class="form-control" type="text" id="nome" name="nome"
-                                       value="{{$evento->nomeEvento}}">
+                                       value="{{$evento->nome_evento}}">
                             </div>
                         </div>
 
@@ -66,10 +66,10 @@
                                     <select name="projetoEspecial" id="projetoEspecial" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($projetoEspecial as $projeto)
-                                            @if($evento->projetoEspecial == $projeto->idProjetoEspecial)
-                                                <option value=" {{ $projeto->idProjetoEspecial }}" checked>{{ $projeto->projetoEspecial }}</option>
+                                            @if($evento->projetoEspecial == $projeto->id)
+                                                <option value=" {{ $projeto->id }}" checked>{{ $projeto->projeto_especial }}</option>
                                             @else
-                                                <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                                <option value=" {{ $projeto->id }}">{{ $projeto->projeto_especial }}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -111,7 +111,7 @@
 @section('scripts_adicionais')
     <script type="text/javascript">
         function insertTipoEvento() {
-            let select = document.getElementById("tipoEvento"),
+            let select = document.getElementById("NtipoEvento"),
                 div = document.getElementById("divTipoEvento"),
                 i = {{$tipoEvento->count()}},
                 txtVal = document.getElementById("novoTipoEvento").value,

@@ -90,7 +90,7 @@
                                             <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
                                                class="btn btn-info desabilitar" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick='preencherCampos("{{ $evento->nome_evento }}","{{$evento->projetoEspecial->projetoEspecial}}", "{{ $evento->projetoEspecial->idProjetoEspecial }}","{{ $evento->id }}")'
+                                            <button onclick='preencherCampos("{{ $evento->nome_evento }}","{{$evento->projetoEspecial->projeto_especial}}", "{{ $evento->projetoEspecial->id }}","{{ $evento->id }}")'
                                                     class="btn btn-success"
                                                     style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-plus-sign"></i> Frequência

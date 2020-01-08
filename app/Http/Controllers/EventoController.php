@@ -21,10 +21,8 @@ class EventoController extends Controller
     public function index($equipamento_id)
     {
         $eventosIgsis = EventosIgsis::where([
-            ['publicado', 1],
-            ['idInstituicao', 14],
-            ['dataEnvio', '>=', '2019-06-01']
-        ])->orderBy('nomeEvento')->get();
+            ['publicado', 1]
+        ])->orderBy('nome_evento')->get();
         $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
@@ -46,7 +44,7 @@ class EventoController extends Controller
     public function create($equipamento_id)
     {
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
-        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
@@ -157,12 +155,9 @@ class EventoController extends Controller
     {
 
         $eventos = EventosIgsis::where([
-            ['publicado', 1],
-            ['idInstituicao', 14],
-            ['nomeEvento', 'not like', '%[CANCELADO]%'],
+            ['publicado', 1]
         ])
-            ->whereYear('dataEnvio', '>=', '2019')
-            ->orderBy('nomeEvento', 'desc')
+            ->orderBy('nome_evento', 'desc')
             ->get();
 
         $cadastrados = Evento::all()->pluck('igsis_evento_id')->toArray();
@@ -173,7 +168,7 @@ class EventoController extends Controller
     public function cadastroImportacao($equipamento_igsis, $igsis_id)
     {
         $evento = EventosIgsis::findOrFail($igsis_id);
-        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 

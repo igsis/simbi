@@ -48,8 +48,8 @@
 
                         <div class="form-group">
                             <label for="tipoEvento">Projeto Especial</label>
-                            <input type="text" readonly class="form-control" value="{{ $projetoEspecial->projetoEspecial}}">
-                            <input type="hidden" name="idProjetoEspecial" value="{{ $projetoEspecial->idProjetoEspecial  }}">
+                            <input type="text" readonly class="form-control" value="{{ $projetoEspecial->projeto_especial}}">
+                            <input type="hidden" name="idProjetoEspecial" value="{{ $projetoEspecial->id  }}">
                         </div>
 
 

@@ -62,10 +62,10 @@
                                     <select name="projetoEspecial" id="projetoEspecial" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($projetoEspecial as $projeto)
-                                            @if($projeto->idProjetoEspecial == old('projetoEspecial') || $eventos->projeto_especial_id == $projeto->idProjetoEspecial))
-                                                <option value=" {{ $projeto->idProjetoEspecial }} " selected    >{{ $projeto->projetoEspecial }}</option>
+                                            @if($projeto->id == old('projetoEspecial') || $eventos->projeto_especial_id == $projeto->id))
+                                                <option value=" {{ $projeto->id }} " selected    >{{ $projeto->projeto_especial }}</option>
                                             @else
-                                                <option value=" {{ $projeto->idProjetoEspecial }}">{{ $projeto->projetoEspecial }}</option>
+                                                <option value=" {{ $projeto->id }}">{{ $projeto->projeto_especial }}</option>
                                             @endif
                                         @endforeach
                                     </select>
