@@ -45,18 +45,18 @@
                             </thead>
                             <tbody>
                             @foreach($equipamentos as $equipamento)
-                                @if (!(in_array($equipamento->idLocal, $cadastrados)))
+                                @if (!(in_array($equipamento->id, $cadastrados)))
                                     <tr>
-                                        <td>{{$equipamento->sala}}</td>
+                                        <td>{{$equipamento->local}}</td>
                                         <td>
                                             @hasrole('Administrador')
-                                            <a href="{{ route('equipamentos.cadastro,importe', $equipamento->idLocal) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Importar Equipamento</a>
+                                            <a href="{{ route('equipamentos.cadastro,importe', $equipamento->id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Importar Equipamento</a>
                                             @endhasrole
                                         </td>
                                     </tr>
                                 @else
                                     <tr class="bg-success">
-                                        <td class="bg-success">{{$equipamento->sala}} </td>
+                                        <td class="bg-success">{{$equipamento->local}} </td>
                                         <td class="bg-success">
                                             @hasrole('Administrador')
                                             <a href="{{ route('equipamentos.index', ['type'=>1]) }}" class="btn btn-info"><i class="glyphicon glyphicon-eye-open"></i> Lista de Equipamentos</a>

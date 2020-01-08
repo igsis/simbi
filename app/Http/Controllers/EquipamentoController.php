@@ -57,13 +57,13 @@ class EquipamentoController extends Controller
     public function importarEquipamentos()
     {
         $equipamentos = EquipamentosIgsis::where([
-            ['idInstituicao', '=', 14],
+            ['instituicao_id', '=', 4],
             ['publicado', '=', 1]
         ])
-            ->orWhere('sala', 'LIKE', 'Biblioteca%')
-            ->orWhere('sala', 'LIKE', 'Ônibus%')
-            ->orWhere('sala', 'LIKE', 'Ponto de Leitura%')
-            ->orderBy('sala')->get();
+            ->orWhere('local', 'LIKE', 'Biblioteca%')
+            ->orWhere('local', 'LIKE', 'Ônibus%')
+            ->orWhere('local', 'LIKE', 'Ponto de Leitura%')
+            ->orderBy('local')->get();
 
         $cadastrados = Equipamento::all()->pluck('igsis_id')->toArray();
 
@@ -104,7 +104,7 @@ class EquipamentoController extends Controller
 
     public function createIgsis($igsis_id)
     {
-        $equipamentoIgsis = EquipamentosIgsis::where('idLocal', '=', $igsis_id)->first();
+        $equipamentoIgsis = EquipamentosIgsis::where('id', '=', $igsis_id)->first();
         $tipoServicos = TipoServico::where('publicado', 1)->orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::where('publicado', 1)->orderBy('descricao')->get();
         $secretarias = Secretaria::orderBy('descricao')->get();

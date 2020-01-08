@@ -13,13 +13,13 @@
 
         <div class="form-group has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
             <label for="nome">Nome do Equipamento</label>
-            <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamentoIgsis->sala}}">
+            <input type="text" class="form-control" name="nome" id="nome" value="{{ $equipamentoIgsis->local}}">
         </div>
 
         <div class="hidden">
-            <label for="igisi_id">ID do igsis</label>
+            <label for="igisi_id">ID do Siscontrat</label>
             <input type="text" class="form-control" name="igsis_id" id="igsis_id"
-                   value="{{ $equipamentoIgsis->idLocal }}">
+                   value="{{ $equipamentoIgsis->id }}">
         </div>
 
         <div class="row">
@@ -181,7 +181,7 @@
             <div class="form-group col-md-1">
                 <label for="uf">UF</label>
                 <input type="text" class="form-control" name="uf" id="uf" readonly
-                       value="{{isset($equipamentoIgsis->estado)?$equipamentoIgsis->estado: old('uf')}}">
+                       value="{{isset($equipamentoIgsis->uf)?$equipamentoIgsis->uf: old('uf')}}">
             </div>
         </div>
 

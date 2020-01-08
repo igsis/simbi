@@ -8,20 +8,19 @@ class EquipamentosIgsis extends Model
 {
     protected $connection = "mysql2";
 
-    protected $table = 'ig_local';
+    protected $table = 'locais';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'idLocal',
-        'sala',
-        'lotacao',
-        'idInstituicao',
+        'id',
+        'local',
+        'instituicao_id',
         'publicado',
         'rider',
         'rua',
         'cidade',
-        'estado',
+        'uf',
         'cep',
         'pais',
         'telefone',
