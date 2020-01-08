@@ -50,51 +50,69 @@
                             </thead>
                             <tbody>
                             @if($type == 1)
-                                @foreach($equipamentos as $equipamento)
+                                @if ($equipamentos->count() != 0)
+                                    @foreach($equipamentos as $equipamento)
+                                        <tr>
+                                            <td>{{$equipamento->nome}}</td>
+                                            <td>
+                                                <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
+                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Evento</a>
+                                                @if($equipamento->portaria == 0)
+                                                    <button type="button" data-toggle="modal"
+                                                            data-target="#cadastroPortariaSimples"
+                                                            data-title="Cadastro de Portaria"
+                                                            class="btn bg-light-blue" style="margin-right: 3px"
+                                                            onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
+                                                                class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
+                                                    </button>
+                                                @else
+                                                    <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
+                                                       class="btn bg-light-blue" style="margin-right: 3px"><i
+                                                                class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$equipamento->nome}}</td>
-                                        <td>
-                                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
-                                               class="btn bg-navy" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Evento</a>
-                                            @if($equipamento->portaria == 0)
-                                                <button type="button" data-toggle="modal"
-                                                        data-target="#cadastroPortariaSimples"
-                                                        data-title="Cadastro de Portaria"
-                                                        class="btn bg-light-blue" style="margin-right: 3px"
-                                                        onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
-                                                </button>
-                                            @else
-                                                <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
-                                                   class="btn bg-light-blue" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção</a>
-                                            @endif
-                                        </td>
+                                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
                                     </tr>
-                                @endforeach
+                                @endif
                             @elseif($type == 2)
-                                @foreach($equipamentos as $equipamento)
+                                @if ($equipamentos->count() != 0)
+                                    @foreach($equipamentos as $equipamento)
+                                        <tr>
+                                            <td>{{$equipamento->nome}}</td>
+                                            <td>
+                                                <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
+                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$equipamento->nome}}</td>
-                                        <td>
-                                            <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
-                                               class="btn bg-navy" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
-                                        </td>
+                                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
                                     </tr>
-                                @endforeach
+                                @endif
                             @else
-                                @foreach($equipamentos as $equipamento)
+                                @if ($equipamentos->count() != 0)
+                                    @foreach($equipamentos as $equipamento)
+                                        <tr>
+                                            <td>{{$equipamento->nome}}</td>
+                                            <td>
+                                                <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
+                                                   class="btn btn-info pull-right" style="margin-right: 3px"><i
+                                                            class="fa fa-users"></i> &nbsp; Público de Recepção</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{$equipamento->nome}}</td>
-                                        <td>
-                                            <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
-                                               class="btn btn-info pull-right" style="margin-right: 3px"><i
-                                                        class="fa fa-users"></i> &nbsp; Público de Recepção</a>
-                                        </td>
+                                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
                                     </tr>
-                                @endforeach
+                                @endif
                             @endif
                             </tbody>
                             <tfooter>

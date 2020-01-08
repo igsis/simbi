@@ -323,13 +323,6 @@
         }
     </script>
 
-
-    <script type="text/javascript">
-        function desabilitar(selecionado) {
-            document.getElementById('dataAposentadoria').disabled = selecionado;
-        }
-    </script>
-
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
@@ -345,4 +338,13 @@
             $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
     </script>
+
+
+    <script type="text/javascript">
+        function desabilitar(selecionado) {
+            document.getElementById('dataAposentadoria').disabled = selecionado;
+            dataAposentadoria.value = "";
+        }
+    </script>
+
 @endsection
