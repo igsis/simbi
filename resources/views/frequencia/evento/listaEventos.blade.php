@@ -41,7 +41,7 @@
                             <a href="{{ route('eventos.cadastro', $equipamento->id) }}" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Adicionar
                                 Evento</a>
                             <a href="{{ route('eventos.importar', $equipamento->id) }}"  class="btn bg-purple"><i
-                                        class="glyphicon glyphicon-list-alt"></i> &nbsp;&nbsp;Importar Evento do IGSIS</a>
+                                        class="glyphicon glyphicon-list-alt"></i> &nbsp;&nbsp;Importar Evento do Siscontrat</a>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>

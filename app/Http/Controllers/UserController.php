@@ -90,7 +90,7 @@ class UserController extends Controller
 
         $user->login = $request->input('login');
         $user->email = $request->email;
-        $user->password = 'simbi@2019';
+        $user->password = 'simbi@2020';
         $user->funcionario_id = $request->input('id_funcionario');
         $user->nivel_acesso_id = $request->input('nivelAcessos');
 
@@ -100,7 +100,7 @@ class UserController extends Controller
                 ->update(['publicado'=>2]);
 
             return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
-                'Usuário Adicionado com Sucesso! Senha padrão: simbi@2019');
+                'Usuário Adicionado com Sucesso! Senha padrão: simbi@2020');
         }
     }
 

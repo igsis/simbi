@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Importar Eventos do Igsis')
+@section('titulo','Importar Eventos do Siscontrat')
 
 @section('conteudo')
     <div class="content-wrapper">

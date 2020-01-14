@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section('tituloPagina')
-    Importar do IGSIS
+    Importar do Siscontrat
 @endsection
 
 @section ('conteudo')

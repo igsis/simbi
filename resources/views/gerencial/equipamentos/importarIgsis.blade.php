@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Importar Equipamentos IGSIS')
+@section('titulo','Importar Equipamentos Siscontrat')
 
 @section('conteudo')
 
@@ -22,7 +22,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="glyphicon glyphicon-home"></i>
-                Importar Equipamentos IGSIS
+                Importar Equipamentos Siscontrat
             </h1>
         </section>
 
