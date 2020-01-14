@@ -222,8 +222,11 @@ class FuncionarioController extends Controller
         $aposenta = $request->aposenta;
         $observacao = $request->observacao;
 
+
         if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
+            $adicionais = FuncionarioAdicionais::updateOrCreate(['funcionario_id' => $funcionario->id]);
+
             if(isset($aposenta))
             {
                 $this->validate($request, ['dataAposentadoria' => 'required']);
@@ -231,18 +234,10 @@ class FuncionarioController extends Controller
                 $dtFormat = explode('/', $data);
                 $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
-                $funcionario->FuncionarioAdicionais->update([
-                    'aposenta' => 1,
-                    'data_aposentadoria' => $data
-                ]);
+                $adicionais->aposenta = 1;
+                $adicionais->data_aposentadoria = $data;
             }
-            else
-            {
-                $funcionario->FuncionarioAdicionais->delete();
-            }
-            $funcionario->FuncionarioAdicionais->update([
-                'observacao' => $observacao
-            ]);
+            $adicionais->observacao = $observacao;
 
             $funcionario->secretaria_id = 1;
         }
@@ -258,18 +253,25 @@ class FuncionarioController extends Controller
             }
             $funcionario->secretaria_id = $secretaria->id;
         }
+        else
+        {
+            $funcionario->FuncionarioAdicionais->delete();
+        }
 
         $funcionario->nome = $request->input('nome');
         $funcionario->RF = $request->RF;
         $funcionario->cargo_id = $cargo->id;
         $funcionario->subordinacao_administrativa_id = $subAdm->id;
 
+        if(isset($adicionais)) {
+            $adicionais->funcionario_id = $funcionario->id;
+            $adicionais->save();
+        }
         if($funcionario->save()){
             return redirect()->route('funcionarios.index', ['type' => '1'])
                 ->with('flash_message',
                     'Pessoa Editada com Sucesso!');
         }
-
     }
 
     public function exibeVincular($id)

@@ -300,7 +300,7 @@
                                                     <input type="checkbox" name="segunda[{{$key}}]"
                                                            value="1"{{$funcionamento->segunda == 1 ? "checked" : ""}}/><label
                                                             for="diasemana01" style="padding:0 10px 0 5px;">
-                                                        dataAposentadoria' => 'required'                    Segunda</label>
+                                                        Segunda</label>
                                                     <input type="checkbox" name="terca[{{$key}}]"
                                                            value="1" {{$funcionamento->terca == 1 ? "checked" : ""}}/><label
                                                             for="diasemana02" style="padding:0 10px 0 5px;">

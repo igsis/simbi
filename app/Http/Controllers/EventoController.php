@@ -100,7 +100,7 @@ class EventoController extends Controller
     {
         $eventos = Evento::FindOrFail($id);
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
-        $projetoEspecial = ProjetoEspecial::orderBy('projetoEspecial')->get();
+        $projetoEspecial = ProjetoEspecial::orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
