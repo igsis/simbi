@@ -738,7 +738,7 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::find($id);
 
-        return view('equipamentos.reforma', compact('equipamento'));
+        return view('gerencial.equipamentos.reforma', compact('equipamento'));
     }
 
     public function gravaReforma(Request $request, $id)

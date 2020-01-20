@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 
-@section('titulo','Cadastrar Ocorrência')
+@section('titulo','Editar Evento')
 
 @section('conteudo')
 
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success"> Cadastrar</button>
+                        <button class="btn btn-success"> Editar</button>
                     </form>
                 </div>
             </div>

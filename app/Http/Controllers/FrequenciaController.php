@@ -53,7 +53,7 @@ class FrequenciaController extends Controller
 
         $this->validate($request, [
             'data' => 'required',
-            'hora' => 'required'
+            'hora' => 'required|date_format:H:i'
         ]);
 
         $dataFormulario= $request->data;
@@ -141,7 +141,7 @@ class FrequenciaController extends Controller
 
         $this->validate($request, [
             'data' => 'required',
-            'hora' => 'required'
+            'hora' => 'required|date_format:H:i'
         ]);
         $data = $request->data;
         $dt = explode('/', $data);

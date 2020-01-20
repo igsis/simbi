@@ -280,6 +280,7 @@ class FuncionarioController extends Controller
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
 
+
         return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos'));
     }
 
@@ -298,13 +299,14 @@ class FuncionarioController extends Controller
 
         if ($equipamentos != 0)
         {
-
             foreach (array_combine($equipamentos, $cargos) as $id => $cargo)
             {
-                $pivotData = [
-                    'responsabilidade_tipo_id'  =>  $cargo
-                ];
-                $syncData[$id] = $pivotData;
+                if($id != "" || $cargo != ""){
+                    $pivotData = [
+                        'responsabilidade_tipo_id'  =>  $cargo
+                    ];
+                    $syncData[$id] = $pivotData;
+                }
             }
         }
 

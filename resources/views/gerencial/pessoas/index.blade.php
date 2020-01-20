@@ -79,7 +79,7 @@
                                             <button type="submit" class="btn btn-success pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Tornar Usuário </button>
                                         </form>
                                     @elseif($user->publicado == 2)
-                                        <a href="{{ route('usuarios.editar', $user->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
+                                        <a href="{{ route('usuarios.editar', $user->users->id) }}" class="btn btn-primary pull-left" style="margin-right: 3px"><i class="glyphicon glyphicon-plus-sign"></i> Editar Usuário </a>
                                     @endif
                                     @if($user->publicado == 1 || $user->publicado == 2)
                                             <a href="{{ route('pessoas.exibeVincular', $user->id) }}"
