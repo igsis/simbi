@@ -102,8 +102,8 @@
 
         </section>
     </div>
-    @include('layouts.modal',['idModal'=>'addTipoEvento','titulo'=>'Adicionar novo Tipo de Evento','idInput'=>'novoTipoEvento','funcaoJS'=>'insertTipoEvento'])
-    @include('layouts.modal',['idModal'=>'addProjEspecial','titulo'=>'Adicionar novo Projeto Especial','idInput'=>'novoProjEspecial','funcaoJS'=>'insertProjEspecial'])
+    @include('layouts.funcionario_modal', ['idModal' => 'addTipoEvento', 'titulo' => 'Adicionar novo Tipo de Evento', 'actionForm' => 'createTipoEvento', 'nameModal' => 'tipo_evento', 'equipamentoId' => '0', 'idInput' => 'novoTipoEvento', 'funcaoJS' => 'insertTipoEvento'])
+    @include('layouts.funcionario_modal', ['idModal' => 'addProjEspecial', 'titulo' => 'Adicionar novo Projeto Especial', 'actionForm' => 'createProjetoEspecial', 'nameModal' => 'projeto_especial', 'equipamentoId' => '0', 'idInput' => 'novoProjetoEspecial', 'funcaoJS' => 'insertProjEspecial'])
 
 @endsection
 

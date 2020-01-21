@@ -151,7 +151,7 @@ class EventoController extends Controller
 
     }
 
-    public function importarIgsis($idEquipamento)
+    public function importarSiscontrat($idEquipamento)
     {
 
         $eventos = EventosIgsis::where([
@@ -198,5 +198,29 @@ class EventoController extends Controller
             'contratacao_forma_id' => $request->contratacao
         ]);
         return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento->id]);
+    }
+
+    public function createTipoEvento(Request $request)
+    {
+        $data = $this->validate($request, [
+            'tipo_evento'=>'required|unique:tipo_eventos'
+        ]);
+
+        TipoEvento::create($data);
+
+        return redirect()->back()
+            ->with('flash_message', 'Tipo Evento Inserido com sucesso!');
+    }
+
+    public function createProjetoEspecial(Request $request)
+    {
+        $data = $this->validate($request, [
+            'projeto_especial'=>'required|unique:projeto_especiais'
+        ]);
+
+        ProjetoEspecial::create($data);
+
+        return redirect()->back()
+            ->with('flash_message', 'Projeto Especial Inserido com sucesso!');
     }
 }

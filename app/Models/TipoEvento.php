@@ -8,6 +8,10 @@ class TipoEvento extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'tipo_evento'
+    ];
+
     public function eventos()
     {
         return $this->hasMany(Evento::class);

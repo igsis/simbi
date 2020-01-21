@@ -11,9 +11,9 @@ Route::group(['prefix' => 'eventos'], function (){
 
         Route::get('/', 'EventoController@index')->name('eventos.listar');
 
-        Route::group(['prefix' => '/importarIgsis'],function (){
+        Route::group(['prefix' => '/importarSiscontrat'],function (){
 
-            Route::get('/', 'EventoController@importarIgsis')->name('eventos.importar');
+            Route::get('/', 'EventoController@importarSiscontrat')->name('eventos.importar');
 
             Route::get('/{igsis_id}','EventoController@cadastroImportacao')->name('eventos.importar.cadastro');
 
@@ -22,6 +22,10 @@ Route::group(['prefix' => 'eventos'], function (){
         Route::get('/editar/{id}', 'EventoController@edit')->name('eventos.editar');
 
         Route::post('/editar/{id}', 'EventoController@update')->name('eventos.update');
+
+        Route::post('/TipoEvento', 'EventoController@createTipoEvento')->name('createTipoEvento');
+
+        Route::post('/ProjetoEspecial', 'EventoController@createProjetoEspecial')->name('createProjetoEspecial');
 
     });
 });

@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjetoEspecial extends Model
 {
-    protected $connection = "mysql2";
     protected $table = 'projeto_especiais';
-    protected $primaryKey = 'id';
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'projeto_especial'
+    ];
+
     public function evento()
     {
-        return $this->hasMany(Evento::class, 'projeto_especial_id', 'id');
+        return $this->hasMany(Evento::class);
     }
 }

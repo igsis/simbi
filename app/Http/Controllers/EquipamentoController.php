@@ -577,9 +577,7 @@ class EquipamentoController extends Controller
 
     public function gravaCapacidade(Request $request, $id)
     {
-        /*TODO: Adaptar à nova modelagem*/
-
-        $equipamento = Equipamento::find($id);
+        $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->equipamentoCapacidade()->create([
             'capacidade'=> $request->novo
