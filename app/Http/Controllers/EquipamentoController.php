@@ -16,6 +16,7 @@ use Simbi\Models\Equipamento;
 use Simbi\Models\EquipamentoOcorrencia;
 use Simbi\Models\EquipamentosCapacidade;
 use Simbi\Models\EquipamentosIgsis;
+use Simbi\Models\Evento;
 use Simbi\Models\Funcionamento;
 use Simbi\Models\Macrorregiao;
 use Simbi\Models\Padrao;
@@ -283,7 +284,17 @@ class EquipamentoController extends Controller
     {
         $equipamento = Equipamento::findOrFail($id);
 
-        return view('gerencial.equipamentos.show', compact('equipamento'));
+        $eventos = Evento::join('evento_ocorrencias', 'evento_ocorrencias.igsis_evento_id', 'eventos.id', '')
+            ->join('frequencias', 'frequencias.evento_ocorrencia_id', 'evento_ocorrencias.id', '')
+            ->where([
+                ['evento_ocorrencias.igsis_id', $id],
+                ['evento_ocorrencias.publicado', 2]
+            ])
+            ->distinct('eventos.igsis_evento_id')
+            ->orderBy('evento_ocorrencias.data', 'desc')
+            ->get();
+
+        return view('gerencial.equipamentos.show', compact('equipamento', 'eventos'));
     }
 
     /**
