@@ -21,17 +21,21 @@ class EventoController extends Controller
     public function index($equipamento_id)
     {
         $eventosIgsis = EventosIgsis::where([
-            ['publicado', 1],
-            ['idInstituicao', 14],
-            ['dataEnvio', '>=', '2019-06-01']
-        ])->orderBy('nomeEvento')->get();
+            ['publicado', 1]
+        ])->orderBy('nome_evento')->get();
         $eventos = Evento::where('publicado', 1)->orderBy('nome_evento')->get();
 
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
 
-        return view('evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
+        return view('frequencia.evento.listaEventos', compact('eventos', 'equipamento', 'eventosIgsis'));
     }
 
+    public function inicio()
+    {
+        $type = 1;
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('frequencia.evento.index', compact('equipamentos', 'type'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -40,13 +44,13 @@ class EventoController extends Controller
     public function create($equipamento_id)
     {
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
-        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
-        return view('evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('frequencia.evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
     }
 
     /**
@@ -96,13 +100,13 @@ class EventoController extends Controller
     {
         $eventos = Evento::FindOrFail($id);
         $equipamento = Equipamento::where('id', $equipamento_id)->firstOrFail();
-        $projetoEspecial = ProjetoEspecial::orderBy('projetoEspecial')->get();
+        $projetoEspecial = ProjetoEspecial::orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
 
-        return view('evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('frequencia.evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
     }
 
     /**
@@ -147,31 +151,28 @@ class EventoController extends Controller
 
     }
 
-    public function importarIgsis($idEquipamento)
+    public function importarSiscontrat($idEquipamento)
     {
 
         $eventos = EventosIgsis::where([
-            ['publicado', 1],
-            ['idInstituicao', 14],
-            ['nomeEvento', 'not like', '%[CANCELADO]%'],
+            ['publicado', 1]
         ])
-            ->whereYear('dataEnvio', '>=', '2019')
-            ->orderBy('nomeEvento', 'desc')
+            ->orderBy('nome_evento', 'desc')
             ->get();
 
         $cadastrados = Evento::all()->pluck('igsis_evento_id')->toArray();
 
-        return view('evento.importarIgsis', compact('eventos', 'cadastrados', 'idEquipamento'));
+        return view('frequencia.evento.importarIgsis', compact('eventos', 'cadastrados', 'idEquipamento'));
     }
 
     public function cadastroImportacao($equipamento_igsis, $igsis_id)
     {
         $evento = EventosIgsis::findOrFail($igsis_id);
-        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projetoEspecial')->get();
+        $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
 
-        return view('evento.cadastroEventoIgsis', compact(
+        return view('frequencia.evento.cadastroEventoIgsis', compact(
             'evento',
             'projetoEspecial',
             'tipoEvento',
@@ -197,5 +198,29 @@ class EventoController extends Controller
             'contratacao_forma_id' => $request->contratacao
         ]);
         return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento->id]);
+    }
+
+    public function createTipoEvento(Request $request)
+    {
+        $data = $this->validate($request, [
+            'tipo_evento'=>'required|unique:tipo_eventos'
+        ]);
+
+        TipoEvento::create($data);
+
+        return redirect()->back()
+            ->with('flash_message', 'Tipo Evento Inserido com sucesso!');
+    }
+
+    public function createProjetoEspecial(Request $request)
+    {
+        $data = $this->validate($request, [
+            'projeto_especial'=>'required|unique:projeto_especiais'
+        ]);
+
+        ProjetoEspecial::create($data);
+
+        return redirect()->back()
+            ->with('flash_message', 'Projeto Especial Inserido com sucesso!');
     }
 }

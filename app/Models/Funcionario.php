@@ -3,6 +3,7 @@
 namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Simbi\Models\EquipamentoFuncionario;
 
 class Funcionario extends Model
 {
@@ -12,8 +13,6 @@ class Funcionario extends Model
         'nome',
         'email',
         'cargo_id',
-        'funcao_id',
-        'escolaridade_id',
         'subordinacao_adminstrativa_id',
         'secretaria_id',
         'publicado'
@@ -40,7 +39,7 @@ class Funcionario extends Model
      */
     public function equipamentos()
     {
-        return $this->belongsToMany(Equipamento::class)->using(EquipamentoUser::class);
+        return $this->belongsToMany(Equipamento::class)->using(EquipamentoFuncionario::class);
     }
 
     public function frequencias()
@@ -70,6 +69,8 @@ class Funcionario extends Model
         return $this->hasMany(EquipamentoOcorrencia::class);
     }
 
+
+
     public function search(Array $data)
     {
         return $this->where(function ($query) use($data)
@@ -91,10 +92,13 @@ class Funcionario extends Model
         });
     }
 
-
-
     public function users()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function FuncionarioAdicionais()
+    {
+        return $this->hasOne(FuncionarioAdicionais::class);
     }
 }

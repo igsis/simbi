@@ -13,7 +13,9 @@ class EventoOcorrencia extends Model
         'igsis_id',
         'data',
         'horario',
+        'data_envio',
         'publicado',
+        'periodo',
         'observacao'
     ];
 

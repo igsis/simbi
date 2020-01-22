@@ -1,10 +1,12 @@
 @extends('layouts.master')
 
 @section('conteudo')
+	<center>
+		<h3><i class='glyphicon glyphicon-lock'></i> Cadastrar Pergunta de Segurança </h3>	<hr>
+	</center>
 
 	<div class='col-lg-4 col-lg-offset-4'>
-	    <h1><i class='glyphicon glyphicon-lock'></i> Cadastrar Pergunta de Segurança </h1>
-	    <hr>
+
 
 	    <form method="POST" action="{{ route('seguranca') }}">
 	    	{{ csrf_field() }}

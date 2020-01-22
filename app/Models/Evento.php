@@ -28,7 +28,7 @@ class Evento extends Model
     }
 
     public function projetoEspecial(){
-        return $this->belongsTo(ProjetoEspecial::class, 'projeto_especial_id', 'idProjetoEspecial');
+        return $this->belongsTo(ProjetoEspecial::class, 'projeto_especial_id', 'id');
     }
 
     public function eventoOcorrencia(){

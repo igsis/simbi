@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Simbi\Http\Controllers\Controller;
 use Simbi\Models\Equipamento;
+use Simbi\Models\EquipamentoFuncionario;
 use Simbi\Models\Funcionario;
+use Simbi\Models\FuncionarioAdicionais;
 use Simbi\Models\User;
 use Session;
 use Auth;
@@ -35,8 +37,8 @@ class FuncionarioController extends Controller
                 ->orderBy('id')->get();
         }
 
-        $equipamentos = Equipamento::all();
-        return view('funcionarios.index', compact('users', 'equipamentos','type'));
+        $equipamentos = Equipamento::orderBy('nome')->get();
+        return view('gerencial.pessoas.index', compact('users', 'equipamentos','type'));
     }
 
     // Filtro de Usuários Ativados
@@ -50,7 +52,7 @@ class FuncionarioController extends Controller
 
         $equipamentos = Equipamento::all();
 
-        return view('funcionarios.index', compact('users', 'equipamentos','dataForm', 'type'));
+        return view('gerencial.pessoas.index', compact('users', 'equipamentos','dataForm', 'type'));
 
     }
 
@@ -62,18 +64,14 @@ class FuncionarioController extends Controller
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
-        $escolaridades = Escolaridade::all();
 
-        return view('funcionarios.editar', compact(
+        return view('gerencial.pessoas.editar', compact(
             'user',
             'roles',
             'perguntas',
             'secretarias',
             'subordinacoesAdministrativas',
-            'escolaridades',
-            'cargos',
-            'funcoes'
+            'cargos'
         ));
 
     }
@@ -87,27 +85,26 @@ class FuncionarioController extends Controller
         User::where('funcionario_id','=',$types->id)
             ->update(array('publicado'=> 0));
 
-        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Desativado com Sucesso.');
+        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Desativado com Sucesso.');
 
     }
 
-    public function ativar(Request $request){
+    public function ativar(Request $request)
+    {
             $type = $request->type;
             Funcionario::findOrFail($request->id)
                 ->update(['publicado' => 1]);
-
-            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Funcionário Ativado com Sucesso.');
+            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message',' Ativado com Sucesso.');
     }
 
     public function store(Request $request){
+
         $this->validate($request, [
             'nome'  =>'required',
-            'email' =>'required|email|unique:funcionarios',
-            'subordinacaoAdministrativa' => 'required',
-            'identificacaoSecretaria' => 'required',
-            'cargo' => 'required',
-            'funcao' => 'required',
-            'escolaridade' => 'required'
+            'RF' => 'required|unique:funcionarios',
+            'vinculo' => 'required',
+            'subordinacaoAdministrativa' => 'required', //lotacao
+            'cargo' => 'required'
         ]);
 
         $user = new Funcionario();
@@ -119,40 +116,61 @@ class FuncionarioController extends Controller
             $cargo->save();
         }
 
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
-        {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
-        }
-
         $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
         if (!($subAdm->exists))
-        {
+            {
             $subAdm->descricao = $request->novaSubAdm;
             $subAdm->save();
         }
 
-        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
-        if (!($secretaria->exists))
+        $tipoPessoa = $request->tipoPessoa;
+        $aposenta = $request->aposenta;
+        $observacao = $request->observacao;
+
+        if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
-            $secretaria->sigla = $request->siglaSecretaria;
-            $secretaria->descricao = $request->descricaoSecretaria;
-            $secretaria->save();
+            $adicionais = new FuncionarioAdicionais();
+            if(isset($aposenta))
+            {
+                $this->validate($request, ['dataAposentadoria' => 'required']);
+                $data = $request->dataAposentadoria;
+                $dtFormat = explode('/', $data);
+                $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
+
+                $adicionais->aposenta = 1;
+                $adicionais->data_aposentadoria = $data;
+            }
+            $adicionais->observacao = $observacao;
+            $user->secretaria_id = 1;
+        }
+        elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
+        {
+            $this->validate($request, ['identificacaoSecretaria' => 'required']);
+            $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+            if (!($secretaria->exists))
+            {
+                $secretaria->sigla = $request->siglaSecretaria;
+                $secretaria->descricao = $request->descricaoSecretaria;
+                $secretaria->save();
+            }
+            $user->secretaria_id = $secretaria->id;
         }
 
         $user->nome = $request->input('nome');
-        $user->email = $request->input('email');
+        $user->RF = $request->RF;
+        $user->vinculo = $request->vinculo;
+        $user->tipo_pessoa = $tipoPessoa;
         $user->cargo_id = $cargo->id;
-        $user->funcao_id = $funcao->id;
-        $user->secretaria_id = $secretaria->id;
         $user->subordinacao_administrativa_id = $subAdm->id;
-        $user->escolaridade_id = $request->escolaridade;
 
         if($user->save()){
-            return redirect()->route('funcionarios.index',['type'=>1])->with('flash_message','Funcionário Cadastrado com Sucesso.');
+            if(isset($adicionais)) {
+                $adicionais->funcionario_id = $user->id;
+                $adicionais->save();
+            }
+            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Pessoa Cadastrado com Sucesso.');
         }
-        return view('funcionarios.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
+        return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
 
     }
 
@@ -160,16 +178,12 @@ class FuncionarioController extends Controller
     {
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
-        $escolaridades = Escolaridade::all();
         $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
 
-        return view('funcionarios.cadastro', compact(
+        return view('gerencial.pessoas.cadastro', compact(
             'secretarias',
             'subordinacoesAdministrativas',
-            'escolaridades',
-            'cargos',
-            'funcoes'
+            'cargos'
         ));
 
     }
@@ -179,13 +193,11 @@ class FuncionarioController extends Controller
         $funcionario = Funcionario::findOrFail($id);
 
         $this->validate($request, [
-            'name'  =>'required',
-            'email' =>'required|email',
+            'nome'  =>'required',
+            'RF' => 'required|unique:funcionarios,RF,'.$funcionario->id,
+            'vinculo' => 'required',
             'subordinacaoAdministrativa' => 'required',
-            'identificacaoSecretaria' => 'required',
-            'cargo' => 'required',
-            'funcao' => 'required',
-            'escolaridade' => 'required'
+            'cargo' => 'required'
         ]);
 
 
@@ -197,12 +209,6 @@ class FuncionarioController extends Controller
             $cargo->save();
         }
 
-        $funcao = Funcao::findOrNew($request->funcao);
-        if (!($funcao->exists))
-        {
-            $funcao->funcao = $request->novaFuncao;
-            $funcao->save();
-        }
 
         $subAdm = SubordinacaoAdministrativa::findOrNew($request->subordinacaoAdministrativa);
         if (!($subAdm->exists))
@@ -211,28 +217,103 @@ class FuncionarioController extends Controller
             $subAdm->save();
         }
 
-        $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
-        if (!($secretaria->exists))
+
+        $tipoPessoa = $funcionario->tipo_pessoa;
+        $aposenta = $request->aposenta;
+        $observacao = $request->observacao;
+
+
+        if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
-            $secretaria->sigla = $request->siglaSecretaria;
-            $secretaria->descricao = $request->descricaoSecretaria;
-            $secretaria->save();
+            $adicionais = FuncionarioAdicionais::updateOrCreate(['funcionario_id' => $funcionario->id]);
+
+            if(isset($aposenta))
+            {
+                $this->validate($request, ['dataAposentadoria' => 'required']);
+                $data = $request->dataAposentadoria;
+                $dtFormat = explode('/', $data);
+                $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
+
+                $adicionais->aposenta = 1;
+                $adicionais->data_aposentadoria = $data;
+            }
+            $adicionais->observacao = $observacao;
+
+            $funcionario->secretaria_id = 1;
+        }
+        elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
+        {
+            $this->validate($request, ['identificacaoSecretaria' => 'required']);
+            $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
+            if (!($secretaria->exists))
+            {
+                $secretaria->sigla = $request->siglaSecretaria;
+                $secretaria->descricao = $request->descricaoSecretaria;
+                $secretaria->save();
+            }
+            $funcionario->secretaria_id = $secretaria->id;
+        }
+        else
+        {
+            $funcionario->FuncionarioAdicionais->delete();
         }
 
-        $funcionario->nome = $request->input('name');
-        $funcionario->email = $request->input('email');
+        $funcionario->nome = $request->input('nome');
+        $funcionario->RF = $request->RF;
         $funcionario->cargo_id = $cargo->id;
-        $funcionario->funcao_id = $funcao->id;
-        $funcionario->secretaria_id = $secretaria->id;
         $funcionario->subordinacao_administrativa_id = $subAdm->id;
-        $funcionario->escolaridade_id = $request->escolaridade;
 
-
+        if(isset($adicionais)) {
+            $adicionais->funcionario_id = $funcionario->id;
+            $adicionais->save();
+        }
         if($funcionario->save()){
             return redirect()->route('funcionarios.index', ['type' => '1'])
                 ->with('flash_message',
-                    'Funcionario Editado com Sucesso!');
+                    'Pessoa Editada com Sucesso!');
+        }
+    }
+
+    public function exibeVincular($id)
+    {
+        $user = Funcionario::findOrFail($id);
+        $equipamentos = Equipamento::all();
+        $cargos = ResponsabilidadeTipo::all();
+
+
+        return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos'));
+    }
+
+    public function vinculaEquipamento(Request $request, $id)
+    {
+        /** @var User $usuario */
+        $usuario = Funcionario::findOrFail($id);
+        $equipamentos = $request['equipamento'];
+        $cargos = $request['responsabilidadeTipo'];
+
+        $this->validate($request, [
+            'responsabilidadeTipo'  =>  'required_with:equipamento'
+        ]);
+
+        $syncData = [];
+
+        if ($equipamentos != 0)
+        {
+            foreach (array_combine($equipamentos, $cargos) as $id => $cargo)
+            {
+                if($id != "" || $cargo != ""){
+                    $pivotData = [
+                        'responsabilidade_tipo_id'  =>  $cargo
+                    ];
+                    $syncData[$id] = $pivotData;
+                }
+            }
         }
 
+        $usuario->equipamentos()->sync($syncData);
+
+        return redirect()->route('funcionarios.index', ['type' => 1])
+            ->with('flash_message',
+                'Equipamentos Vinculados com sucesso.');
     }
 }

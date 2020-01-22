@@ -13,14 +13,14 @@ class SubordinacaoAdministrativaController extends Controller
     {
     	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
+    	return view('gerencial.gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
     }
 
     public function disabled()
     {
     	$subordinacaoAdministrativas = SubordinacaoAdministrativa::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.subordinacaoAdministrativa.disabled', compact('subordinacaoAdministrativas'));
+    	return view('gerencial.gerenciar.subordinacaoAdministrativa.disabled', compact('subordinacaoAdministrativas'));
     }
 
     public function create(Request $request)
@@ -31,7 +31,7 @@ class SubordinacaoAdministrativaController extends Controller
 
         SubordinacaoAdministrativa::create($data);
 
-        return redirect()->back() ->with('flash_message','Subordinacao Administrativa Inserida com sucesso');
+        return redirect()->back() ->with('flash_message','Lotação inserida com sucesso');
         
     }
 
@@ -91,10 +91,10 @@ class SubordinacaoAdministrativaController extends Controller
 
         if ($dataForm['publicado'] == 1) 
         {
-            return view('gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
+            return view('gerencial.gerenciar.subordinacaoAdministrativa.index', compact('subordinacaoAdministrativas'));
         }else
         {   
-            return view('gerenciar.subordinacaoAdministrativa.disabled', compact('subordinacaoAdministrativas'));
+            return view('gerencial.gerenciar.subordinacaoAdministrativa.disabled', compact('subordinacaoAdministrativas'));
         }
     }  
 }

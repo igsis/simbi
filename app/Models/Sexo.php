@@ -10,6 +10,12 @@ class Sexo extends Model
 
     protected $table = "sexo_complementos";
 
+    protected $fillable = [
+        'masculino',
+        'feminino',
+        'semInformacao',
+        ];
+
     public function complementoPortaria()
     {
         return $this->hasMany(ComplementoPortaria::class);
