@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section('tituloPagina')
-    Importar do Siscontrat
+    Importar do SisContrat
 @endsection
 
 @section ('conteudo')
@@ -17,7 +17,7 @@
         </div>
 
         <div class="hidden">
-            <label for="igisi_id">ID do Siscontrat</label>
+            <label for="igisi_id">ID do SisContrat</label>
             <input type="text" class="form-control" name="igsis_id" id="igsis_id"
                    value="{{ $equipamentoIgsis->id }}">
         </div>

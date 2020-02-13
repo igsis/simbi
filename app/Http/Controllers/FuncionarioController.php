@@ -253,7 +253,7 @@ class FuncionarioController extends Controller
             }
             $funcionario->secretaria_id = $secretaria->id;
         }
-        else
+        elseif (($funcionario->FuncionarioAdicionais) != null) //caso não haja nenhum registro adicional na tabela
         {
             $funcionario->FuncionarioAdicionais->delete();
         }

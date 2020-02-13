@@ -47,7 +47,7 @@
                                 <a href="{{ route('equipamentos.cadastro') }}" class="btn btn-success"><i
                                             class="glyphicon glyphicon-plus"></i> &nbsp; Adicionar Equipamento</a>
                                 <a href="{{ route('equipamentos.importar') }}" class="btn bg-purple"><i
-                                            class="glyphicon glyphicon-list-alt"></i> &nbsp; Importar do Siscontrat</a>
+                                            class="glyphicon glyphicon-list-alt"></i> &nbsp; Importar do SisContrat</a>
                                 <button class="btn bg-navy" type="button" data-toggle="modal"
                                         data-target="#confirmTroca" data-title="Formulário"
                                         data-message='Deseja Trocar o Formulário para o modelo Completo?'

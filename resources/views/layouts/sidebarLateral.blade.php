@@ -46,7 +46,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('equipamentos.index', ['type' => '1'])}}"> Lista</a></li>
-                        <li><a href="{{route('equipamentos.importar')}}">Importar do Siscontrat</a></li>
+                        <li><a href="{{route('equipamentos.importar')}}">Importar do SisContrat</a></li>
                         <li><a href="{{ route('equipamentos.cadastro') }}">Cadastrar</a></li>
                         <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Desativados</a></li>
                     </ul>

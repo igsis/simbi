@@ -29,7 +29,7 @@
                         {{ csrf_field() }}
 
                         <div class="hidden">
-                            <label for="igisi_id">ID do evento Siscontrat</label>
+                            <label for="igisi_id">ID do evento SisContrat</label>
                             <input type="text" class="form-control" name="igsis_evento_id" id="igsis_evento_id" value="{{$evento->id}}">
                         </div>
 

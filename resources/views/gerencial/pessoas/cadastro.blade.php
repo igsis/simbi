@@ -17,7 +17,7 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1 class="page-header"><i class="fa fa-address-book-o"></i> Cadastrar de Pessoas</h1>
+        <h1 class="page-header"><i class="fa fa-address-book-o"></i> Cadastro de Pessoas</h1>
     </section>
 
     <!-- Main content -->
