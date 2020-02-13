@@ -21,7 +21,7 @@ class EquipamentoFuncionario extends Pivot
 
     public function responsabilidadeTipo()
     {
-        return $this->belongsTo(ResponsabilidadeTipo::class);
+        return $this->hasMany(ResponsabilidadeTipo::class, 'id', 'responsabilidade_tipo_id');
     }
 
     public function user()
