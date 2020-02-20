@@ -66,6 +66,58 @@
                         <li><a href="{{ route('equipamentos.lote') }}">Trocar formulário em lote</a></li>
                     </ul>
                 </li>
+
+            @elseif (request()->is('acervo*'))
+                {{--       ÁREA ACERVO         --}}
+                <li class="header">Acervo</li>
+                <li class="treeview {{ request()->routeIs('consulta*') ? 'active' : '' }}">
+                    <a href="#"><i class="glyphicon glyphicon-list-alt"></i><span>Consulta</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('consulta.index')}}"> Inserir</a></li>
+                        <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Relatório</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview {{ request()->routeIs('emprestimo*') ? 'active' : '' }}">
+                    <a href="#"><i class="fa fa-book"></i><span>Empréstimo</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Inserir</a></li>
+                        <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Relatório</a></li>
+                    </ul>
+
+                </li>
+
+                <li class="treeview {{ request()->routeIs('bibliotecas*') ? 'active' : '' }}">
+                    <a href="#"><i class="fa fa-institution"></i><span>Bibliotecas Temáticas</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Inserir</a></li>
+                        <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Relatório</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview {{ request()->routeIs('matricula*') ? 'active' : '' }}">
+                    <a href="#"><i class="fa fa-file-text"></i><span>Matrícula</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Inserir</a></li>
+                        <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Relatório</a></li>
+                    </ul>
+                </li>
             @else
                 {{--       ÁREA FREQUENCIA         --}}
                 <li class="header">Frequência</li>

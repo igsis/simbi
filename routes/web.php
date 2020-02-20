@@ -6,6 +6,8 @@ Route::get('/gerencial', 'IndexController@gerencialIndex')->middleware('auth');
 
 Route::get('/frequencia', 'IndexController@frequenciaIndex')->middleware('auth');
 
+Route::get('/acervo', 'IndexController@acervoIndex')->middleware('auth');
+
 Route::get('home', 'IndexController@index')->middleware('primeiroLogin');
 
 

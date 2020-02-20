@@ -86,7 +86,6 @@ class FuncionarioController extends Controller
             ->update(array('publicado'=> 0));
 
         return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Desativado com Sucesso.');
-
     }
 
     public function ativar(Request $request)
@@ -94,6 +93,10 @@ class FuncionarioController extends Controller
             $type = $request->type;
             Funcionario::findOrFail($request->id)
                 ->update(['publicado' => 1]);
+
+            $usuario = User::findOrFail('funcionario_id','=',$request->id);
+            $usuario->update(array('publicado'=> 1));
+
             return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message',' Ativado com Sucesso.');
     }
 
@@ -103,7 +106,7 @@ class FuncionarioController extends Controller
             'nome'  =>'required',
             'RF' => 'required|unique:funcionarios',
             'vinculo' => 'required',
-            'subordinacaoAdministrativa' => 'required', //lotacao
+            'subordinacaoAdministrativa' => 'required', //lotação
             'cargo' => 'required'
         ]);
 
