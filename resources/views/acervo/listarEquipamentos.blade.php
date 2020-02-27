@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Eventos nos Equipamentos')
+@section('titulo','Acervo')
 
 @section('conteudo')
 
@@ -21,9 +21,9 @@
             <h1 class="page-header">
                 <i class="fa fa-users"></i>
                 @if($type == 1)
-                    Consulta em Equipamentos
+                    Consulta por Equipamentos
                 @elseif($type == 2)
-                    Empréstimo em Equipamentos
+                    Empréstimo por Equipamentos
                 @else
                     Bibliotecas Temáticas em Equipamentos
                 @endif
@@ -48,28 +48,27 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if($type == 1)
                                 @if ($equipamentos->count() != 0)
                                     @foreach($equipamentos as $equipamento)
                                         <tr>
                                             <td>{{$equipamento->nome}}</td>
                                             <td>
-                                                <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
-                                                   class="btn bg-navy" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Evento</a>
-                                                @if($equipamento->portaria == 0)
-                                                    <button type="button" data-toggle="modal"
-                                                            data-target="#cadastroPortariaSimples"
-                                                            data-title="Cadastro de Portaria"
-                                                            class="btn bg-light-blue" style="margin-right: 3px"
-                                                            onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
-                                                                class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
-                                                    </button>
-                                                @else
-                                                    <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
-                                                       class="btn bg-light-blue" style="margin-right: 3px"><i
-                                                                class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção</a>
-                                                @endif
+                                            @if($type == 1) <!---Consulta--->
+                                                <a href="{{ route('consulta.inserir', [$equipamento->id]) }}"
+                                                       class="btn bg-purple" style="margin-right: 3px"><i
+                                                                class="fa fa-pencil-square-o"></i> &nbsp;Registrar Consulta</a>
+                                            @elseif($type == 1.2)
+                                                    <a href="{{ route('consulta.relatorio', [$equipamento->id]) }}"
+                                                       class="btn bg-navy" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Editar</a>
+                                                    <a href="{{ route('consulta.relatorio', [$equipamento->id,1]) }}"
+                                                       class="btn bg-navy" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Remover</a>
+                                            @elseif($type == 1.3)
+                                                    <a href="{{ route('consulta.relatorio', [$equipamento->id,1]) }}"
+                                                       class="btn bg-navy" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+                                            @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -78,41 +77,6 @@
                                         <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
                                     </tr>
                                 @endif
-                            @elseif($type == 2)
-                                @if ($equipamentos->count() != 0)
-                                    @foreach($equipamentos as $equipamento)
-                                        <tr>
-                                            <td>{{$equipamento->nome}}</td>
-                                            <td>
-                                                <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
-                                                   class="btn bg-navy" style="margin-right: 3px"><i
-                                                            class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
-                                    </tr>
-                                @endif
-                            @else
-                                @if ($equipamentos->count() != 0)
-                                    @foreach($equipamentos as $equipamento)
-                                        <tr>
-                                            <td>{{$equipamento->nome}}</td>
-                                            <td>
-                                                <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
-                                                   class="btn btn-info pull-right" style="margin-right: 3px"><i
-                                                            class="fa fa-users"></i> &nbsp; Público de Recepção</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
-                                    </tr>
-                                @endif
-                            @endif
                             </tbody>
                             <tfooter>
                                 <thead>

@@ -8,10 +8,15 @@ use Simbi\Models\Equipamento;
 
 class ConsultaController extends Controller
 {
-    public function index(Request $types)
+    public function index(Request $type)
     {
-        $type = $types->type;
+        $type = $type->type;
         $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
         return view('acervo.listarEquipamentos', compact('equipamentos', 'type'));
+    }
+
+    public function create($id) {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('acervo.consulta.cadastroConsulta', compact('equipamento'));
     }
 }
