@@ -19,11 +19,11 @@
 
 @section('conteudo')
 
-    <form method="POST" action="" autocomplete="off">
+    <form method="POST" action="{{ route('consulta.gravar', $equipamento->id) }}" autocomplete="off">
         {{ csrf_field() }}
 
         <div class="row">
-            <div class="form-group col-md-offset-3 col-md-3" >
+            <div class="form-group col-md-offset-3 col-md-3">
                 <label for="data">Mês - Ano</label>
                 <input type="text" class="form-control" id="calendario" name="data" autocomplete="off" maxlength="10">
             </div>
@@ -79,8 +79,8 @@
 
         <div class="row">
             <div class="form-group col-md-offset-3 col-md-3">
-                <label for="revista">Total</label>
-                <input type="number" class="form-control" name="total" id="total" onload="calcular()" disabled>
+                <label for="total">Total</label>
+                <input type="number" class="form-control" name="total" id="total" readonly onload="calcular()">
             </div>
         </div>
 

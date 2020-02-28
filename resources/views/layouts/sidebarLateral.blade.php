@@ -77,9 +77,8 @@
                             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('consulta.index',['type'=>'1'])}}"> Inserir</a></li>
-                        <li><a href="{{ route('consulta.index',['type'=>'1.2'])}}"> Registros</a></li>
-                        <li><a href="{{ route('consulta.index', ['type' => '1.3']) }}"> Relatório</a></li>
+                        <li><a href="{{ route('consulta.index',['type'=>'1'])}}"> Registros</a></li>
+                        <li><a href="{{ route('consulta.index',['type'=>'1.2'])}}"> Relatório</a></li>
                     </ul>
                 </li>
 

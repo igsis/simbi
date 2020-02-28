@@ -6,10 +6,10 @@ Route::group(['prefix' => 'acervo'], function (){
 
         Route::get('/equipamentos', 'ConsultaController@index')->name('consulta.index');
         Route::get('/registrar/{id}', 'ConsultaController@create')->name('consulta.inserir');
-        Route::get('/gravar', 'ConsultaController@store')->name('consulta.gravar');
-        Route::get('/relatorio', 'ConsultaController@show')->name('consulta.relatorio');
-        Route::get('/registros', 'ConsultaController@show')->name('consulta.registros');
+        Route::post('/gravar/{id}', 'ConsultaController@store')->name('consulta.gravar');
+        Route::get('/registros/{id}', 'ConsultaController@show')->name('consulta.registros');
         Route::get('/editar', 'ConsultaController@edit')->name('consulta.editar');
+        Route::get('/relatorio/{id}', 'ConsultaController@show')->name('consulta.relatorio');
         Route::get('/update', 'ConsultaController@update')->name('consulta.alterar');
     });
 

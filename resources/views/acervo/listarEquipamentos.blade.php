@@ -57,14 +57,10 @@
                                                 <a href="{{ route('consulta.inserir', [$equipamento->id]) }}"
                                                        class="btn bg-purple" style="margin-right: 3px"><i
                                                                 class="fa fa-pencil-square-o"></i> &nbsp;Registrar Consulta</a>
+                                                <a href="{{ route('consulta.registros', [$equipamento->id]) }}"
+                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                            class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
                                             @elseif($type == 1.2)
-                                                    <a href="{{ route('consulta.relatorio', [$equipamento->id]) }}"
-                                                       class="btn bg-navy" style="margin-right: 3px"><i
-                                                                class="fa fa-list"></i> &nbsp;Editar</a>
-                                                    <a href="{{ route('consulta.relatorio', [$equipamento->id,1]) }}"
-                                                       class="btn bg-navy" style="margin-right: 3px"><i
-                                                                class="fa fa-list"></i> &nbsp;Remover</a>
-                                            @elseif($type == 1.3)
                                                     <a href="{{ route('consulta.relatorio', [$equipamento->id,1]) }}"
                                                        class="btn bg-navy" style="margin-right: 3px"><i
                                                                 class="fa fa-list"></i> &nbsp;Relatório </a>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Simbi;
+namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Simbi\Models\Equipamento;
@@ -17,6 +17,7 @@ class Consulta extends Model
         'revista',
         'suportes',
         'total',
+        'periodo',
         'data',
         'data_envio',
         'equipamento_id',
