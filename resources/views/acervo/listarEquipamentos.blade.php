@@ -19,9 +19,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 class="page-header">
-                <i class="fa fa-users"></i>
+                <i class="fa  fa-list"></i>
                 @if($type == 1)
                     Consulta por Equipamentos
+                @elseif($type == 1.2)
+                    Relatório por Equipamentos
                 @elseif($type == 2)
                     Empréstimo por Equipamentos
                 @else
@@ -61,7 +63,7 @@
                                                    class="btn bg-navy" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
                                             @elseif($type == 1.2)
-                                                    <a href="{{ route('consulta.relatorio', [$equipamento->id,1]) }}"
+                                                    <a href="{{ route('consulta.relatorio', $equipamento->id) }}"
                                                        class="btn bg-navy" style="margin-right: 3px"><i
                                                                 class="fa fa-list"></i> &nbsp;Relatório </a>
                                             @endif

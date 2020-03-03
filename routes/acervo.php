@@ -11,7 +11,7 @@ Route::group(['prefix' => 'acervo'], function (){
         Route::get('/{idEquipamento}/editar/{id}', 'ConsultaController@edit')->name('consulta.editar');
         Route::post('/{id}/alterar/{idConsulta}', 'ConsultaController@update')->name('consulta.update');
         Route::get('/{id}/remover/{idConsulta}', 'ConsultaController@destroy')->name('consulta.delete');
-        Route::get('/relatorio/{id}', 'ConsultaController@show')->name('consulta.relatorio');
+        Route::get('/relatorio/{id}', 'ConsultaController@relatorio')->name('consulta.relatorio');
     });
 
     Route::group(['prefix' => 'emprestimo'], function (){

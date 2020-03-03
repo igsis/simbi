@@ -77,3 +77,13 @@ Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $periodo){
     return Response::json($frequencias);
 })->name('api.relatorioCompleto');
 
+Route::get('/{id}/relatorioConsulta/{idPeriodo}', function($id, $periodo){
+
+    $consultas = DB::select('select sum(audio_visual) audio_visual, sum(jornal) jornal, sum(livro) livro, 
+                            sum(manga) manga, sum(revista) revista, sum(suportes) suportes , sum(total) total,
+                            monthname(data) mes, year(data) ano from consultas 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($consultas);
+})->name('api.relatorioConsulta');

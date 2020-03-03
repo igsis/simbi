@@ -122,4 +122,11 @@ class ConsultaController extends Controller
         return redirect()->route('consulta.relatorio', $id)
             ->with('flash_message', 'Registro de Consulta excluído com sucesso!');
     }
+
+    public function relatorio ($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+
+        return view('acervo.consulta.relatorio', compact('equipamento'));
+    }
 }
