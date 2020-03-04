@@ -22,12 +22,10 @@
                 <i class="fa  fa-list"></i>
                 @if($type == 1)
                     Consulta por Equipamentos
-                @elseif($type == 1.2)
-                    Relatório por Equipamentos
                 @elseif($type == 2)
                     Empréstimo por Equipamentos
                 @else
-                    Bibliotecas Temáticas em Equipamentos
+                    Relatório por Equipamentos
                 @endif
             </h1>
         </section>
@@ -62,8 +60,22 @@
                                                 <a href="{{ route('consulta.registros', [$equipamento->id]) }}"
                                                    class="btn bg-navy" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
+
                                             @elseif($type == 1.2)
                                                     <a href="{{ route('consulta.relatorio', $equipamento->id) }}"
+                                                       class="btn bg-navy" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+
+                                            @elseif($type == 2) <!---Emprestimo--->
+                                                <a href="{{ route('emprestimo.inserir', [$equipamento->id]) }}"
+                                                   class="btn bg-purple" style="margin-right: 3px"><i
+                                                            class="fa fa-pencil-square-o"></i> &nbsp;Registrar Consulta</a>
+                                                <a href="{{ route('emprestimo.registros', [$equipamento->id]) }}"
+                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                            class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
+
+                                                @elseif($type == 2.2)
+                                                    <a href="{{ route('emprestimo.relatorio', $equipamento->id) }}"
                                                        class="btn bg-navy" style="margin-right: 3px"><i
                                                                 class="fa fa-list"></i> &nbsp;Relatório </a>
                                             @endif
