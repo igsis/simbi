@@ -19,6 +19,8 @@ Route::group(['prefix' => 'acervo'], function (){
         Route::get('/registrar/{id}', 'EmprestimoController@create')->name('emprestimo.inserir');
         Route::post('/gravar/{id}', 'EmprestimoController@store')->name('emprestimo.gravar');
         Route::get('/registros/{id}', 'EmprestimoController@show')->name('emprestimo.registros');
+        Route::get('/relatorio/{id}', 'EmprestimoController@relatorio')->name('emprestimo.relatorio');
+
     });
 
     Route::group(['prefix' => 'bibliotecas'], function (){
