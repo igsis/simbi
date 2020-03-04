@@ -85,12 +85,7 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-offset-4 col-md-2">
-                <a href="" class="form-control btn btn-default">
-                    Retornar à Detalhes
-                </a>
-            </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-offset-5 col-md-2">
                 <input type="submit" class="form-control btn btn-primary" name="enviar" value="Salvar">
             </div>
         </div>

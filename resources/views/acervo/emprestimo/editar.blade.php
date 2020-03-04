@@ -9,23 +9,23 @@
     </style>
 @endsection
 
-@section('titulo','Consulta')
+@section('titulo','Empréstimo')
 
 @section('tituloPagina')
     <i class="fa fa-pencil-square-o"></i>
-    Registrar Consulta <small>{{$equipamento->nome}}</small>
+    Registrar Empréstimo <small>{{$equipamento->nome}}</small>
 @endsection
 
 
 @section('conteudo')
 
-    <form method="POST" action="{{ route('consulta.update', [$equipamento->id, $consulta->id]) }}" autocomplete="off">
+    <form method="POST" action="{{ route('emprestimo.update', [$equipamento->id, $emprestimo->id]) }}" autocomplete="off">
         {{ csrf_field() }}
 
         <div class="row">
             <div class="form-group col-md-offset-3 col-md-3">
                 <label for="data">Mês - Ano</label>
-                <input type="text" class="form-control" id="calendario" name="data" value="{{ date('m/d/Y', strtotime($consulta->data)) }}" autocomplete="off" maxlength="10">
+                <input type="text" class="form-control" id="calendario" name="data" value="{{ date('m/d/Y', strtotime($emprestimo->data)) }}" autocomplete="off" maxlength="10">
             </div>
             <div class="form-group col-md-4">
                 <label>Período</label>
@@ -42,12 +42,12 @@
             <div class="form-group col-md-offset-3 col-md-3">
                 <label for="livro">Livro</label>
                 <input type="number" class="form-control" name="livro" id="livro"
-                       value="{{ $consulta->livro }}" onblur="calcular()" onkeyup="calcular()">
+                       value="{{ $emprestimo->livro }}" onblur="calcular()" onkeyup="calcular()">
             </div>
             <div class="form-group col-md-3">
                 <label for="audioVisual">Audio-visual</label>
                 <input type="number" class="form-control" name="audioVisual" id="audioVisual"
-                       value="{{ $consulta->audio_visual }}" onblur="calcular()" onkeyup="calcular()">
+                       value="{{ $emprestimo->audio_visual }}" onblur="calcular()" onkeyup="calcular()">
             </div>
         </div>
 
@@ -55,30 +55,23 @@
             <div class="form-group col-md-offset-3 col-md-3">
                 <label for="manga">Mangá</label>
                 <input type="number" class="form-control" name="manga" id="manga"
-                       value="{{ $consulta->manga }}" onblur="calcular()" onkeyup="calcular()">
+                       value="{{ $emprestimo->manga }}" onblur="calcular()" onkeyup="calcular()">
             </div>
             <div class="form-group col-md-3">
-                <label for="jornal">Jornal</label>
-                <input type="number" class="form-control" name="jornal" id="jornal"
-                       value="{{ $consulta->jornal }}" onblur="calcular()" onkeyup="calcular()">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-offset-3 col-md-3">
                 <label for="revista">Revista</label>
                 <input type="number" class="form-control" name="revista" id="revista"
-                       value="{{ $consulta->revista }}" onblur="calcular()" onkeyup="calcular()">
-            </div>
-            <div class="form-group col-md-3">
-                <label for="suportes">Suportes</label>
-                <input type="number" class="form-control" name="suportes" id="suportes"
-                       value="{{ $consulta->suportes }}" onblur="calcular()" onkeyup="calcular()">
+                       value="{{ $emprestimo->revista }}" onblur="calcular()" onkeyup="calcular()">
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-offset-3 col-md-3">
+                <label for="suportes">Suportes</label>
+                <input type="number" class="form-control" name="suportes" id="suportes"
+                       value="{{ $emprestimo->suportes }}" onblur="calcular()" onkeyup="calcular()">
+            </div>
+
+            <div class="form-group col-md-3">
                 <label for="total">Total</label>
                 <input type="number" class="form-control" name="total" id="total" readonly onload="calcular()">
             </div>
@@ -100,7 +93,6 @@
             let audioVisual = parseInt(document.getElementById('audioVisual').value, 10);
             let manga = parseInt(document.getElementById('manga').value, 10);
             let revista = parseInt(document.getElementById('revista').value, 10);
-            let jornal = parseInt(document.getElementById('jornal').value, 10);
             let suportes = parseInt(document.getElementById('suportes').value, 10);
 
 
@@ -108,10 +100,9 @@
             audioVisual = isNaN(audioVisual) ? 0 : audioVisual;
             manga = isNaN(manga) ? 0 : manga;
             revista = isNaN(revista) ? 0 : revista;
-            jornal = isNaN(jornal) ? 0 : jornal;
             suportes = isNaN(suportes) ? 0 : suportes;
 
-            let soma = livro + audioVisual + manga + revista + jornal + suportes;
+            let soma = livro + audioVisual + manga + revista + suportes;
             let total = document.getElementById("total");
 
             total.value = String(soma);

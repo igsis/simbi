@@ -20,6 +20,9 @@ Route::group(['prefix' => 'acervo'], function (){
         Route::post('/gravar/{id}', 'EmprestimoController@store')->name('emprestimo.gravar');
         Route::get('/registros/{id}', 'EmprestimoController@show')->name('emprestimo.registros');
         Route::get('/relatorio/{id}', 'EmprestimoController@relatorio')->name('emprestimo.relatorio');
+        Route::get('/{idEquipamento}/editar/{id}', 'EmprestimoController@edit')->name('emprestimo.editar');
+        Route::post('/{id}/alterar/{idEmprestimo}', 'EmprestimoController@update')->name('emprestimo.update');
+        Route::get('/{id}/remover/{idEmprestimo}', 'EmprestimoController@destroy')->name('emprestimo.delete');
 
     });
 

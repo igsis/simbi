@@ -4,7 +4,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Consulta')
+@section('titulo','Empréstimo')
 
 @section('conteudo')
 
@@ -20,7 +20,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="glyphicon glyphicon-th-list"></i>
-                Consultas <small>{{$equipamentos->nome}}</small>
+                Empréstimos <small>{{$equipamentos->nome}}</small>
             </h1>
         </section>
 
@@ -41,7 +41,6 @@
                                 <th>Livro</th>
                                 <th>Audio-Visual</th>
                                 <th>Mangá</th>
-                                <th>Jornal</th>
                                 <th>Revista</th>
                                 <th>Suportes</th>
                                 <th>Data de envio</th>
@@ -50,21 +49,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($consultas as $consulta)
+                            @foreach($emprestimos as $emprestimo)
                                 <tr>
-                                    <td>{{$consulta->mes}}- {{$consulta->ano}}</td>
-                                    <td>{{$consulta->livro}}</td>
-                                    <td>{{$consulta->audio_visual}}</td>
-                                    <td>{{$consulta->manga}}</td>
-                                    <td>{{$consulta->jornal}}</td>
-                                    <td>{{$consulta->revista}}</td>
-                                    <td>{{$consulta->suportes}}</td>
-                                    <td>{{ date('d/m/Y', strtotime($consulta->data_envio)) }}</td>
+                                    <td>{{$emprestimo->mes}}- {{$emprestimo->ano}}</td>
+                                    <td>{{$emprestimo->livro}}</td>
+                                    <td>{{$emprestimo->audio_visual}}</td>
+                                    <td>{{$emprestimo->manga}}</td>
+                                    <td>{{$emprestimo->revista}}</td>
+                                    <td>{{$emprestimo->suportes}}</td>
+                                    <td>{{ date('d/m/Y', strtotime($emprestimo->data_envio)) }}</td>
                                     <td>
-                                        <a href="{{ route('consulta.editar', [$equipamentos->id, $consulta->id]) }}"
+                                        <a href="{{ route('emprestimo.editar', [$equipamentos->id, $emprestimo->id]) }}"
                                            class="btn btn-info" style="margin-right: 3px"><i
                                                     class="glyphicon glyphicon-plus-sign"></i> Editar</a>
-                                        <form method="get" action="{{ route('consulta.delete', [$equipamentos->id, $consulta->id]) }}" style="display: inline;">
+                                        <form method="get" action="{{ route('emprestimo.delete', [$equipamentos->id, $emprestimo->id]) }}" style="display: inline;">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="">
                                             <input type="hidden" name="id" value="">
@@ -86,7 +84,6 @@
                                     <th>Livro</th>
                                     <th>Audio-Visual</th>
                                     <th>Mangá</th>
-                                    <th>Jornal</th>
                                     <th>Revista</th>
                                     <th>Suportes</th>
                                     <th>Data de envio</th>
