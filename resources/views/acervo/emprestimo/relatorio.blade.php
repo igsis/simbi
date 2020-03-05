@@ -5,7 +5,7 @@
     @includeIf('links.tabelas_AdminLTE')
 @endsection
 
-@section('titulo','Relatório de Consultas')
+@section('titulo','Relatório de Empréstimos')
 
 @section('conteudo')
 
@@ -21,7 +21,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="glyphicon glyphicon-th-list"></i>
-                Relatório de Consultas
+                Relatório de Empréstimos
                 <small>{{ $equipamento->nome }}</small></h1>
         </section>
 
@@ -61,9 +61,9 @@
             function PreencherTabela() {
                 var id = {{$equipamento->id}};
                 var idPeriodo = $("input[name='periodo']:checked").val();
-                $.getJSON('/simbi/api/' + id + '/relatorioConsulta/' + idPeriodo, function (consultas) {
+                $.getJSON('/simbi/api/' + id + '/relatorioEmprestimo/' + idPeriodo, function (emprestimos) {
                     $( "tr" ).remove(); //limpar tabela
-                    if (consultas.length <1){
+                    if (emprestimos.length <1){
                         var cols = "";
                         cols += '<thead>';
                         cols += '<tr>';
@@ -72,7 +72,7 @@
                         $("#tabela").append(cols);
                     }
                     else{
-                        $.each(consultas, function(key, value){
+                        $.each(emprestimos, function(key, value){
                             var cols = "";
 
                             cols += '<thead>';
@@ -82,7 +82,6 @@
                             cols += '<th>Livro</th>';
                             cols += '<th>Audio-visual</th>';
                             cols += '<th>Mangá</th>';
-                            cols += '<th>Jornal</th>';
                             cols += '<th>Revista</th>';
                             cols += '<th>Suportes</th>';
                             cols += '<th>Total</th>';
@@ -93,7 +92,6 @@
                             cols += '<td>'+value.livro+'</td>';
                             cols += '<td>'+value.audio_visual+'</td>';
                             cols += '<td>'+value.manga+'</td>';
-                            cols += '<td>'+value.jornal+'</td>';
                             cols += '<td>'+value.revista+'</td>';
                             cols += '<td>'+value.suportes+'</td>';
                             cols += '<td> <b>'+value.total+'</b></td>';

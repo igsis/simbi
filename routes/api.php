@@ -87,3 +87,15 @@ Route::get('/{id}/relatorioConsulta/{idPeriodo}', function($id, $periodo){
                                 order by data desc;', [$periodo, $id]);
     return Response::json($consultas);
 })->name('api.relatorioConsulta');
+
+
+Route::get('/{id}/relatorioEmprestimo/{idPeriodo}', function($id, $periodo){
+
+    $emprestimos = DB::select('select sum(audio_visual) audio_visual, sum(livro) livro, 
+                            sum(manga) manga, sum(revista) revista, sum(suportes) suportes , sum(total) total,
+                            monthname(data) mes, year(data) ano from emprestimos 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($emprestimos);
+})->name('api.relatorioEmprestimo');

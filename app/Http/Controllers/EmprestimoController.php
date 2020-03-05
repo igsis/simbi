@@ -119,4 +119,11 @@ class EmprestimoController extends Controller
         return redirect()->route('emprestimo.relatorio', $id)
             ->with('flash_message', 'Registro de Empréstimo excluído com sucesso!');
     }
+
+    public function relatorio ($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+
+        return view('acervo.emprestimo.relatorio', compact('equipamento'));
+    }
 }
