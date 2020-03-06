@@ -27,7 +27,8 @@ Route::group(['prefix' => 'acervo'], function (){
     });
 
     Route::group(['prefix' => 'bibliotecas'], function (){
-        //Route::get('/evento', 'EventoController@inicio')->name('eventos.index');
+        Route::get('/equipamentos', 'BibliotecasTematicasController@index')->name('bibliotecas.index');
+        Route::get('/relatorio/{id}', 'EmprestimoController@relatorio')->name('bibliotecas.relatorio');
     });
 
     Route::group(['prefix' => 'matricula'], function (){

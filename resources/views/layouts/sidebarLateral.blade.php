@@ -89,8 +89,8 @@
                             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('emprestimo.index',['type'=>'2']) }}"> Inserir</a></li>
-                        <li><a href="{{ route('emprestimo.index',['type'=>'2.2']) }}"> Relatório</a></li>
+                        <li><a href="{{ route('emprestimo.index',['type'=>'2']) }}"> Registros</a></li>
+                        <li><a href="{{ route('emprestimo.index',['type'=>'2.1']) }}"> Relatório</a></li>
                     </ul>
 
                 </li>
@@ -102,8 +102,8 @@
                             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('usuarios.index', ['type' => '1']) }}"> Inserir</a></li>
-                        <li><a href="{{ route('usuarios.index', ['type' => '0']) }}"> Relatório</a></li>
+                        <li><a href="{{ route('bibliotecas.index', ['type' => '3']) }}"> Registros</a></li>
+                        <li><a href="{{ route('bibliotecas.relatorio', ['type' => '3.1']) }}"> Relatório</a></li>
                     </ul>
                 </li>
 

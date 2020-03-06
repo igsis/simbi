@@ -24,6 +24,8 @@
                     Consulta por Equipamentos
                 @elseif($type == 2)
                     Empréstimo por Equipamentos
+                @elseif($type == 3)
+                    Bibliotecas Temáticas por Equipamentos
                 @else
                     Relatório por Equipamentos
                 @endif
@@ -74,10 +76,23 @@
                                                    class="btn bg-navy" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
 
-                                                @elseif($type == 2.2)
+                                                @elseif($type == 2.1)
                                                     <a href="{{ route('emprestimo.relatorio', $equipamento->id) }}"
                                                        class="btn bg-navy" style="margin-right: 3px"><i
                                                                 class="fa fa-list"></i> &nbsp;Relatório </a>
+
+                                                @elseif($type == 3) <!---Bibliotecas Temáticas--->
+{{--                                                <a href="{{ route('bibliotecas.inserir', [$equipamento->id]) }}"--}}
+{{--                                                   class="btn bg-purple" style="margin-right: 3px"><i--}}
+{{--                                                            class="fa fa-pencil-square-o"></i> &nbsp;Registrar Biblioteca Temática</a>--}}
+{{--                                                <a href="{{ route('bibliotecas.registros', [$equipamento->id]) }}"--}}
+{{--                                                   class="btn bg-navy" style="margin-right: 3px"><i--}}
+{{--                                                            class="fa fa-list"></i> &nbsp;Visualizar Registros</a>--}}
+
+{{--                                                @elseif($type == 3.1)--}}
+{{--                                                    <a href="{{ route('bibliotecas.relatorio', $equipamento->id) }}"--}}
+{{--                                                       class="btn bg-navy" style="margin-right: 3px"><i--}}
+{{--                                                                class="fa fa-list"></i> &nbsp;Relatório </a>--}}
                                             @endif
                                             </td>
                                         </tr>
