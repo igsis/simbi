@@ -82,12 +82,12 @@
                                                                 class="fa fa-list"></i> &nbsp;Relatório </a>
 
                                                 @elseif($type == 3) <!---Bibliotecas Temáticas--->
-{{--                                                <a href="{{ route('bibliotecas.inserir', [$equipamento->id]) }}"--}}
-{{--                                                   class="btn bg-purple" style="margin-right: 3px"><i--}}
-{{--                                                            class="fa fa-pencil-square-o"></i> &nbsp;Registrar Biblioteca Temática</a>--}}
-{{--                                                <a href="{{ route('bibliotecas.registros', [$equipamento->id]) }}"--}}
-{{--                                                   class="btn bg-navy" style="margin-right: 3px"><i--}}
-{{--                                                            class="fa fa-list"></i> &nbsp;Visualizar Registros</a>--}}
+                                                <a href="{{ route('bibliotecas.inserir', [$equipamento->id]) }}"
+                                                   class="btn bg-purple" style="margin-right: 3px"><i
+                                                            class="fa fa-pencil-square-o"></i> &nbsp;Registrar Biblioteca Temática</a>
+                                                <a href="{{ route('bibliotecas.registros', [$equipamento->id]) }}"
+                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                            class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
 
 {{--                                                @elseif($type == 3.1)--}}
 {{--                                                    <a href="{{ route('bibliotecas.relatorio', $equipamento->id) }}"--}}
