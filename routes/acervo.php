@@ -28,7 +28,7 @@ Route::group(['prefix' => 'acervo'], function (){
 
     Route::group(['prefix' => 'bibliotecas'], function (){
         Route::get('/equipamentos', 'BibliotecasTematicasController@index')->name('bibliotecas.index');
-        Route::get('/relatorio/{id}', 'BibliotecasTematicasControllerr@relatorio')->name('bibliotecas.relatorio');
+        Route::get('/relatorio/{id}', 'BibliotecasTematicasController@relatorio')->name('bibliotecas.relatorio');
         Route::get('/registrar/{id}', 'BibliotecasTematicasController@create')->name('bibliotecas.inserir');
         Route::post('/gravar/{id}', 'BibliotecasTematicasController@store')->name('bibliotecas.gravar');
         Route::get('/registros/{id}', 'BibliotecasTematicasController@show')->name('bibliotecas.registros');

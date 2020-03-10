@@ -99,3 +99,14 @@ Route::get('/{id}/relatorioEmprestimo/{idPeriodo}', function($id, $periodo){
                                 order by data desc;', [$periodo, $id]);
     return Response::json($emprestimos);
 })->name('api.relatorioEmprestimo');
+
+Route::get('/{id}/relatorioBibliotecas/{idPeriodo}', function($id, $periodo){
+
+    $bibliotecas = DB::select('select sum(acervo) acervo, sum(frequencia_secao) frequencia_secao, 
+                            sum(consulta) consulta, sum(emprestimo) emprestimo, sum(total) total,
+                            monthname(data) mes, year(data) ano from bibliotecas_tematicas 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($bibliotecas);
+})->name('api.relatorioEmprestimo');

@@ -51,7 +51,7 @@ class BibliotecasTematicasController extends Controller
             'equipamento_id' => $id
         ]);
 
-        return redirect()->route('consulta.relatorio', $id)
+        return redirect()->route('bibliotecas.relatorio', $id)
             ->with('flash_message', 'Registro de Biblioteca Temática realizado com sucesso!');
     }
 
@@ -98,7 +98,7 @@ class BibliotecasTematicasController extends Controller
             'equipamento_id' => $id
         ]);
 
-        return redirect()->route('consulta.relatorio', $id)
+        return redirect()->route('bibliotecas.relatorio', $id)
             ->with('flash_message', 'Registro de Bibliotecas Temáticas alterado com sucesso!');
     }
 
@@ -109,7 +109,14 @@ class BibliotecasTematicasController extends Controller
                 'publicado' => 0
             ]);
 
-        return redirect()->route('consulta.relatorio', $id)
+        return redirect()->route('bibliotecas.relatorio', $id)
             ->with('flash_message', 'Registro de Bibliotecas Temáticas excluído com sucesso!');
+    }
+
+    public function relatorio ($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+
+        return view('acervo.bibliotecas_tematicas.relatorio', compact('equipamento'));
     }
 }
