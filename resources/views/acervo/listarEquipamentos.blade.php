@@ -19,7 +19,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 class="page-header">
-                <i class="fa  fa-list"></i>
+                <i class="fa fa-university"></i>
                 @if($type == 1)
                     Consulta por Equipamentos
                 @elseif($type == 2)
@@ -67,47 +67,47 @@
 
                                             @elseif($type == 1.2)
                                                     <a href="{{ route('consulta.relatorio', $equipamento->id) }}"
-                                                       class="btn bg-navy" style="margin-right: 3px"><i
-                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+                                                       class="btn bg-olive" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório de Consultas </a>
 
                                             @elseif($type == 2) <!---Emprestimo--->
                                                 <a href="{{ route('emprestimo.inserir', [$equipamento->id]) }}"
-                                                   class="btn bg-purple" style="margin-right: 3px"><i
+                                                   class="btn btn-primary" style="margin-right: 3px"><i
                                                             class="fa fa-pencil-square-o"></i> &nbsp;Registrar Consulta</a>
                                                 <a href="{{ route('emprestimo.registros', [$equipamento->id]) }}"
-                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                   class="btn btn-success" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
 
                                                 @elseif($type == 2.1)
                                                     <a href="{{ route('emprestimo.relatorio', $equipamento->id) }}"
-                                                       class="btn bg-navy" style="margin-right: 3px"><i
-                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+                                                       class="btn bg-success" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório de Empréstimos </a>
 
                                                 @elseif($type == 3) <!---Bibliotecas Temáticas--->
                                                 <a href="{{ route('bibliotecas.inserir', [$equipamento->id]) }}"
-                                                   class="btn bg-purple" style="margin-right: 3px"><i
+                                                   class="btn btn-primary" style="margin-right: 3px"><i
                                                             class="fa fa-pencil-square-o"></i> &nbsp;Registrar Biblioteca Temática</a>
                                                 <a href="{{ route('bibliotecas.registros', [$equipamento->id]) }}"
-                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                   class="btn btn-info" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
 
                                                 @elseif($type == 3.1)
                                                     <a href="{{ route('bibliotecas.relatorio', $equipamento->id) }}"
-                                                       class="btn bg-navy" style="margin-right: 3px"><i
-                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+                                                       class="btn bg-danger" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório de Bibliotecas Temáticas</a>
 
                                                 @elseif($type == 4) <!---Matrícula--->
                                                 <a href="{{ route('matricula.inserir', [$equipamento->id]) }}"
                                                    class="btn bg-purple" style="margin-right: 3px"><i
                                                             class="fa fa-pencil-square-o"></i> &nbsp;Registrar Matrícula</a>
                                                 <a href="{{ route('matricula.registros', [$equipamento->id]) }}"
-                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                   class="btn bg-maroon" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
 
                                                 @elseif($type == 4.1)
                                                     <a href="{{ route('matricula.relatorio', $equipamento->id) }}"
-                                                       class="btn bg-navy" style="margin-right: 3px"><i
-                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+                                                       class="btn bg-olive" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório de Matrículas</a>
                                             @endif
                                             </td>
                                         </tr>

@@ -56,7 +56,7 @@ class EmprestimoController extends Controller
         ]);
 
         return redirect()->route('emprestimo.relatorio', $id)
-            ->with('flash_message', 'Registro de Emprestimo realizado com sucesso!');
+            ->with('flash_message', 'Registro de Empréstimo realizado com sucesso!');
     }
 
     public function edit ($idEquipamento, $idEmprestimo)
