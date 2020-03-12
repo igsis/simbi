@@ -23,7 +23,6 @@ Route::group(['prefix' => 'acervo'], function (){
         Route::get('/{idEquipamento}/editar/{id}', 'EmprestimoController@edit')->name('emprestimo.editar');
         Route::post('/{id}/alterar/{idEmprestimo}', 'EmprestimoController@update')->name('emprestimo.update');
         Route::get('/{id}/remover/{idEmprestimo}', 'EmprestimoController@destroy')->name('emprestimo.delete');
-
     });
 
     Route::group(['prefix' => 'bibliotecas'], function (){
@@ -35,11 +34,17 @@ Route::group(['prefix' => 'acervo'], function (){
         Route::get('/{idEquipamento}/editar/{id}', 'BibliotecasTematicasController@edit')->name('bibliotecas.editar');
         Route::post('/{id}/alterar/{idBiblioteca}', 'BibliotecasTematicasController@update')->name('bibliotecas.update');
         Route::get('/{id}/remover/{idBiblioteca}', 'BibliotecasTematicasController@destroy')->name('bibliotecas.delete');
-
     });
 
     Route::group(['prefix' => 'matricula'], function (){
-        //Route::get('/evento', 'EventoController@inicio')->name('eventos.index');
+        Route::get('/equipamentos', 'MatriculaController@index')->name('matricula.index');
+        Route::get('/relatorio/{id}', 'MatriculaController@relatorio')->name('matricula.relatorio');
+        Route::get('/registrar/{id}', 'MatriculaController@create')->name('matricula.inserir');
+        Route::post('/gravar/{id}', 'MatriculaController@store')->name('matricula.gravar');
+        Route::get('/registros/{id}', 'MatriculaController@show')->name('matricula.registros');
+        Route::get('/{idEquipamento}/editar/{id}', 'MatriculaController@edit')->name('matricula.editar');
+        Route::post('/{id}/alterar/{idMatricula}', 'MatriculaController@update')->name('matricula.update');
+        Route::get('/{id}/remover/{idMatricula}', 'MatriculaController@destroy')->name('matricula.delete');
     });
 
 });

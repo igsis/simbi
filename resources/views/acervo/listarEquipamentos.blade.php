@@ -26,6 +26,8 @@
                     Empréstimo por Equipamentos
                 @elseif($type == 3)
                     Bibliotecas Temáticas por Equipamentos
+                @elseif($type == 4)
+                    Matrículas por Equipamentos
                 @else
                     Relatório por Equipamentos
                 @endif
@@ -89,10 +91,23 @@
                                                    class="btn bg-navy" style="margin-right: 3px"><i
                                                             class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
 
-{{--                                                @elseif($type == 3.1)--}}
-{{--                                                    <a href="{{ route('bibliotecas.relatorio', $equipamento->id) }}"--}}
-{{--                                                       class="btn bg-navy" style="margin-right: 3px"><i--}}
-{{--                                                                class="fa fa-list"></i> &nbsp;Relatório </a>--}}
+                                                @elseif($type == 3.1)
+                                                    <a href="{{ route('bibliotecas.relatorio', $equipamento->id) }}"
+                                                       class="btn bg-navy" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
+
+                                                @elseif($type == 4) <!---Matrícula--->
+                                                <a href="{{ route('matricula.inserir', [$equipamento->id]) }}"
+                                                   class="btn bg-purple" style="margin-right: 3px"><i
+                                                            class="fa fa-pencil-square-o"></i> &nbsp;Registrar Matrícula</a>
+                                                <a href="{{ route('matricula.registros', [$equipamento->id]) }}"
+                                                   class="btn bg-navy" style="margin-right: 3px"><i
+                                                            class="fa fa-list"></i> &nbsp;Visualizar Registros</a>
+
+                                                @elseif($type == 4.1)
+                                                    <a href="{{ route('matricula.relatorio', $equipamento->id) }}"
+                                                       class="btn bg-navy" style="margin-right: 3px"><i
+                                                                class="fa fa-list"></i> &nbsp;Relatório </a>
                                             @endif
                                             </td>
                                         </tr>

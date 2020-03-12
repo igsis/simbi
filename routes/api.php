@@ -109,4 +109,14 @@ Route::get('/{id}/relatorioBibliotecas/{idPeriodo}', function($id, $periodo){
                                 group by ano, mes
                                 order by data desc;', [$periodo, $id]);
     return Response::json($bibliotecas);
-})->name('api.relatorioEmprestimo');
+})->name('api.relatorioBibliotecas');
+
+Route::get('/{id}/relatorioMatriculas/{idPeriodo}', function($id, $periodo){
+
+    $matricula = DB::select('select sum(nova) nova, sum(renovacao) renovacao, 
+                            sum(total) total, monthname(data) mes, year(data) ano from matriculas 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($matricula);
+})->name('api.relatorioMatriculas');
