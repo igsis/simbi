@@ -53,6 +53,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>RF</th>
+                            <th>Categoria</th>
                             <th>Cargo</th>
                             <th>Equipamento(s) Vinculado(s)</th>
                             <th>Operações</th>
@@ -63,6 +64,7 @@
                             <tr>
                                 <td>{{ $user->nome }}</td>
                                 <td>{{ $user->RF }}</td>
+                                <td>{{ $user->tipo_pessoa == 1 ? 'Funcionário' : 'Convocado' }}</td>
                                 <td>{{ $user->cargo->cargo }}</td>
                                 <td> {{ $user->equipamentos->implode('nome', ', ') }}<td>
 
@@ -111,6 +113,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>RF</th>
+                            <th>Categoria</th>
                             <th>Cargo</th>
                             <th>Equipamento(s) Vinculado(s)</th>
                             <th>Operações</th>

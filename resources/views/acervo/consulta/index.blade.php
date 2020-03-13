@@ -52,7 +52,7 @@
                             <tbody>
                             @foreach($consultas as $consulta)
                                 <tr>
-                                    <td>{{$consulta->mes}}- {{$consulta->ano}}</td>
+                                    <td>{{strtoupper($consulta->mes)}}- {{$consulta->ano}}</td>
                                     <td>{{$consulta->livro}}</td>
                                     <td>{{$consulta->audio_visual}}</td>
                                     <td>{{$consulta->manga}}</td>

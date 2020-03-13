@@ -50,7 +50,7 @@
                             <tbody>
                             @foreach($bibliotecas as $biblioteca)
                                 <tr>
-                                    <td>{{$biblioteca->mes}}- {{$biblioteca->ano}}</td>
+                                    <td>{{strtoupper($biblioteca->mes)}}- {{$biblioteca->ano}}</td>
                                     <td>{{$biblioteca->acervo}}</td>
                                     <td>{{$biblioteca->frequencia_secao}}</td>
                                     <td>{{$biblioteca->consulta}}</td>

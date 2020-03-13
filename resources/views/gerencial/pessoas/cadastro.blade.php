@@ -42,10 +42,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
+                        <div class="form-group col-xs-7 col-md-6 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                             <label for="name">Registro Funcional</label>
                         <input class="form-control" type="text" name="RF" id="RF" data-mask="0000000" maxlength="6" value="{{old('RF')}}">
                     </div>
+                        <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
+                            <label for="name">Vínculo</label>
+                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1" data-mask="0">
+                        </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
@@ -55,7 +59,7 @@
 
                         <div id="divCargo"
                              class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
-                            <label for="cargo">Cargo</label>
+                            <label for="cargo">Cargo/Função</label>
                             <select class="form-control" name="cargo" id="cargo">
                                 <option value="">Selecione...</option>
                                 @foreach ($cargos as $cargo)
@@ -103,10 +107,6 @@
                             </button>
                         </div>
 
-                        <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
-                            <label for="name">Vínculo</label>
-                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1" data-mask="0">
-                        </div>
                     </div>
 
                     <div id="divFuncionario">
@@ -116,7 +116,7 @@
 
                         <div class="row">
                             <div class="form-group col-md-6"><br>
-                                <label for="data">Data da Aposentadoria</label>
+                                <label for="data">Previsão para aposentadoria</label>
                                 <input class="form-control calendario" type="text" name="dataAposentadoria" value="{{old('dataAposentadoria')}}" id="dataAposentadoria" disabled autocomplete="off">
                             </div>
                             <div class="form-group col-md-12 has-feedback {{ $errors->has('observacao') ? ' has-error' : '' }}">

@@ -51,7 +51,7 @@
                             <tbody>
                             @foreach($emprestimos as $emprestimo)
                                 <tr>
-                                    <td>{{$emprestimo->mes}}- {{$emprestimo->ano}}</td>
+                                    <td>{{strtoupper($emprestimo->mes)}}- {{$emprestimo->ano}}</td>
                                     <td>{{$emprestimo->livro}}</td>
                                     <td>{{$emprestimo->audio_visual}}</td>
                                     <td>{{$emprestimo->manga}}</td>
