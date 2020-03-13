@@ -1,9 +1,10 @@
 <?php
+Route::group(['prefix' => 'gerencial'], function (){
     Route::resource('equipamentos', 'EquipamentoController', [
         'names' => [
             'edit' => 'equipamentos.editar',
             'create' => 'equipamentos.cadastro',
-    ]]);
+        ]]);
 
     Route::any('ativar-equipamento','EquipamentoController@ativarEquipamento')->name('ativar.equipamento');
 
@@ -80,3 +81,5 @@
     });
 
     Route::put('/equipamentos','EquipamentoController@alterarFormulario')->name('equipamento.altPortaria');
+});
+

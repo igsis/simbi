@@ -7,7 +7,7 @@ use Simbi\Models\EventosIgsis;
 
 class TipoEventoIgsis extends Model
 {
-    protected $connection = "mysql2";
+    protected $connection = 'mysql2';
     protected $table = 'ig_tipo_evento';
     protected $primaryKey = 'idTipoEvento';
 

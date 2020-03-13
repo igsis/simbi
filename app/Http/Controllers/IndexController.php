@@ -10,11 +10,36 @@ class IndexController extends Controller
 {
     public function index()
     {
+        return view('index');
+    }
+
+    public function gerencialIndex()
+    {
         $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
 
         $ocorrencias = EventoOcorrencia::all();
 
         //return view('teste');
-        return view('index', compact('frequenciasCadastradas', 'ocorrencias'));
+        return view('gerencial.index', compact('frequenciasCadastradas', 'ocorrencias'));
+    }
+
+    public function frequenciaIndex()
+    {
+        $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
+
+        $ocorrencias = EventoOcorrencia::all();
+
+        //return view('teste');
+        return view('gerencial.index', compact('frequenciasCadastradas', 'ocorrencias'));
+    }
+
+    public function acervoIndex()
+    {
+        $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
+
+        $ocorrencias = EventoOcorrencia::all();
+
+        //return view('teste');
+        return view('gerencial.index', compact('frequenciasCadastradas', 'ocorrencias'));
     }
 }

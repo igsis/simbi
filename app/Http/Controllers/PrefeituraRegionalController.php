@@ -12,13 +12,13 @@ class PrefeituraRegionalController extends Controller
     public function index(){
     	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '1')->orderBy('descricao')->get();
 
-    	return view('gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
+    	return view('gerencial.gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
     }
 
     public function disabled(){
     	$prefeiturasRegionais = PrefeituraRegional::where('publicado', '=', '0')->orderBy('descricao')->get();
 
-    	return view('gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
+    	return view('gerencial.gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
     }
 
     public function create(Request $request){
@@ -93,10 +93,10 @@ class PrefeituraRegionalController extends Controller
 
         if ($dataForm['publicado'] == 1) 
         {
-            return view('gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
+            return view('gerencial.gerenciar.prefeiturasRegionais.index', compact('prefeiturasRegionais'));
         }else
         {   
-            return view('gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
+            return view('gerencial.gerenciar.prefeiturasRegionais.disabled', compact('prefeiturasRegionais'));
         }
     }
 }

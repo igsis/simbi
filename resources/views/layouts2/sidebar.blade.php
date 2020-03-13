@@ -43,7 +43,7 @@
                         Equipamentos</a>
                     <ul class="collapse list-unstyled" id="equipSubmenu">
                         <li><a href="{{route('equipamentos.index', ['type' => '1'])}}">Lista de Equipamentos</a></li>
-                        <li><a href="{{route('equipamentos.importar')}}">Importar do Igsis</a></li>
+                        <li><a href="{{route('equipamentos.importar')}}">Importar do SisContrat</a></li>
                         <li><a href="{{ route('equipamentos.cadastro') }}"><i class="fas fa-users"></i>Cadastrar Equipamentos</a></li>
                         <li><a href="{{route('equipamentos.index', ['type' => '0'])}}">Equipamentos Desativados</a></li>
                     </ul>

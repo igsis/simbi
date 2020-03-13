@@ -13,7 +13,7 @@ class TipoServicoController extends Controller
     {
     	$tipoServicos = TipoServico::where('publicado', '=', '1')->orderBy('descricao')->get();
     	
-    	return view('gerenciar.tipoServico.index', compact('tipoServicos'));
+    	return view('gerencial.gerenciar.tipoServico.index', compact('tipoServicos'));
 
     }
 
@@ -21,7 +21,7 @@ class TipoServicoController extends Controller
     {
     	$tipoServicos = TipoServico::where('publicado', '=', '0')->orderBy('descricao')->get();
     	
-    	return view('gerenciar.tipoServico.disabled', compact('tipoServicos'));
+    	return view('gerencial.gerenciar.tipoServico.disabled', compact('tipoServicos'));
 
     }
 
@@ -95,10 +95,10 @@ class TipoServicoController extends Controller
 
         if ($dataForm['publicado'] == 1) 
         {
-            return view('gerenciar.tipoServico.index', compact('tipoServicos'));
+            return view('gerencial.gerenciar.tipoServico.index', compact('tipoServicos'));
         }else
         {   
-            return view('gerenciar.tipoServico.disabled', compact('tipoServicos'));
+            return view('gerencial.gerenciar.tipoServico.disabled', compact('tipoServicos'));
         }
     }
 }

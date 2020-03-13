@@ -13,14 +13,14 @@ class SecretariaController extends Controller
     {
     	$secretarias = Secretaria::where('publicado', '=', '1')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.secretarias.index', compact('secretarias'));
+    	return view('gerencial.gerenciar.secretarias.index', compact('secretarias'));
     }
 
     public function disabled()
     {
     	$secretarias = Secretaria::where('publicado', '=', '0')->orderBy('descricao')->paginate(10);
 
-    	return view('gerenciar.secretarias.disabled', compact('secretarias'));
+    	return view('gerencial.gerenciar.secretarias.disabled', compact('secretarias'));
     }
 
     public function create(Request $request)
@@ -32,8 +32,7 @@ class SecretariaController extends Controller
 
         Secretaria::create($data);
 
-        return redirect()->route('secretaria')
-            ->with('flash_message','Secretaria Inserida com sucesso!');
+        return redirect()->back()->with('flash_message','Secretaria Inserida com sucesso!');
     }
 
     public function update(Request $request, $id)
@@ -98,10 +97,10 @@ class SecretariaController extends Controller
 
         if ($dataForm['publicado'] == 1) 
         {
-            return view('gerenciar.secretarias.index', compact('secretarias'));
+            return view('gerencial.gerenciar.secretarias.index', compact('secretarias'));
         }else
         {   
-            return view('gerenciar.secretarias.disabled', compact('secretarias'));
+            return view('gerencial.gerenciar.secretarias.disabled', compact('secretarias'));
         }
     }
 }

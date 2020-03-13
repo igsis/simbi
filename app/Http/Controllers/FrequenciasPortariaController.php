@@ -3,11 +3,14 @@
 namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Simbi\Models\ComplementoPortaria;
 use Simbi\Models\Deficiencia;
 use Simbi\Models\Equipamento;
 use Auth;
 use Simbi\Models\Escolaridade;
+use Simbi\Models\EscolaridadeComplementos;
 use Simbi\Models\Etnia;
+use Simbi\Models\FrequenciasPortaria;
 use Simbi\Models\Idade;
 use Simbi\Models\Sexo;
 
@@ -27,7 +30,7 @@ class FrequenciasPortariaController extends Controller
     public function create($id)
     {
         $equipamento = Equipamento::findOrFail($id);
-        return view('frequencia.portaria.cadastro', compact('equipamento'));
+        return view('frequencia.frequencia.portaria.cadastro', compact('equipamento'));
     }
 
     public function criaPortariaCompleta($id)
@@ -35,15 +38,13 @@ class FrequenciasPortariaController extends Controller
         $equipamento = Equipamento::find($id);
         $etnias = Etnia::all();
         $idades = Idade::all();
-        $escolaridades = Escolaridade::all();
         $sexos = Sexo::all();
         $deficiencias = Deficiencia::all();
 
-        return view('frequencia.portaria.cadastroCompleto', compact(
+        return view('frequencia.frequencia.portaria.cadastroCompleto', compact(
             'equipamento',
             'etnias',
             'idades',
-            'escolaridades',
             'sexos',
             'deficiencias'
         ));
@@ -59,16 +60,23 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'id' => 'required',
+            'periodo' => 'required',
             'data'          =>  'required',
             'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
 
         $user =  Auth::user();
 
+        $data = $request->data;
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
+
         $user->frequenciasPortarias()->create([
-            'data' => $request->data,
+            'data' => $data,
+            'periodo'=> $request->periodo,
             'quantidade' => $request->quantidade,
-            'equipamento_id' => $request->id
+            'equipamento_id' => $request->id,
+            'data_envio' => date("Y-m-d")
         ]);
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
@@ -79,6 +87,7 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'data'     =>  'required',
+            'periodo'     =>  'required',
             'fundamental'       =>  'required|integer|between: 0, 9999',
             'medio'         =>  'required|integer|between: 0, 9999',
             'superior'        =>  'required|integer|between: 0, 9999',
@@ -108,23 +117,69 @@ class FrequenciasPortariaController extends Controller
 
         $user =  Auth::user();
 
-        $dataV = $request->data;
-        $data = date("Y-m-d",strtotime($dataV));
+        $data = $request->data;
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
+        $frequenciaPortaria = new FrequenciasPortaria();
+        $complementoPortaria = new ComplementoPortaria();
+        $idades = new Idade();
+        $etinias = new Etnia();
+        $deficiencias = new Deficiencia();
+        $sexos = new Sexo();
+        $escolaridades = new EscolaridadeComplementos();
 
-        $user->frequenciasPortarias()->create([
-            'data' => $data,
-            'quantidade' => $request->total,
-            'equipamento_id' => $id
-        ])->complementoPortaria()->create([
-            'idade_id' => $request->idade,
-            'sexo_id'  => $request->sexo,
-            'etnia_id' => $request->etnia,
-            'escolaridade_id' => $request->escolaridade,
-            'deficiencia_id' => $request->deficiencia
-        ]);
+        $frequenciaPortaria->user_id = $user->id;
+        $frequenciaPortaria->data = $data;
+        $frequenciaPortaria->periodo = $request->periodo;
+        $frequenciaPortaria->quantidade = $request->total;
+        $frequenciaPortaria->equipamento_id = $id;
+        $frequenciaPortaria->data_envio = date("Y-m-d");
+        $frequenciaPortaria->save();
 
-        return redirect()->route('frequencia.portaria.index')->with('flash_message',
+        $idades->anos0_6 = $request->idade0_6;
+        $idades->anos7_14 = $request->idade7_14;
+        $idades->anos15_17 = $request->idade15_17;
+        $idades->anos18_29 = $request->idade18_29;
+        $idades->anos30_59 = $request->idade30_59;
+        $idades->mais60anos = $request->idade60ouMais;
+        $idades->semInformacao = $request->naoInformadoIdade;
+        $idades->save();
+
+        $sexos->masculino = $request->masculino;
+        $sexos->feminino = $request->feminino;
+        $sexos->semInformacao = $request->naoInformadoSexo;
+        $sexos->save();
+
+        $etinias->amarela = $request->amarela;
+        $etinias->branca = $request->branca;
+        $etinias->indigena = $request->indigena;
+        $etinias->parda = $request->parda;
+        $etinias->preta = $request->preta;
+        $etinias->semInformacao = $request->naoInformadoCor;
+        $etinias->save();
+
+        $deficiencias->visual = $request->visual;
+        $deficiencias->auditiva = $request->auditiva;
+        $deficiencias->motora = $request->motora;
+        $deficiencias->mental = $request->mental;
+        $deficiencias->save();
+
+        $escolaridades->fundamental = $request->fundamental;
+        $escolaridades->medio = $request->medio;
+        $escolaridades->superior = $request->superior;
+        $escolaridades->semInformacao = $request->naoInformadoEscolaridade;
+        $escolaridades->save();
+
+        $complementoPortaria->frequencias_portaria_id = $frequenciaPortaria->id;
+        $complementoPortaria->idades_id = $idades->id;
+        $complementoPortaria->etnias_id = $etinias->id;
+        $complementoPortaria->deficiencias_id = $deficiencias->id;
+        $complementoPortaria->sexos_id = $sexos->id;
+        $complementoPortaria->escolaridades_id = $escolaridades->id;
+        $complementoPortaria->save();
+
+        return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
             'Frequência Inserida Com Sucesso!');
     }
 
@@ -138,7 +193,7 @@ class FrequenciasPortariaController extends Controller
     {
         $type = 2;
         $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
-        return view('frequencia.portaria.index', compact('equipamentos', 'type'));
+        return view('frequencia.frequencia.portaria.index', compact('equipamentos', 'type'));
     }
 
     /**
@@ -150,7 +205,7 @@ class FrequenciasPortariaController extends Controller
     public function listar($id)
     {
         $equipamento = Equipamento::findOrFail($id);
-        return view('frequencia.portaria.listar', compact('equipamento'));
+        return view('frequencia.frequencia.portaria.listar', compact('equipamento'));
     }
 
     /**

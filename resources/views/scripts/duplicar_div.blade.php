@@ -58,12 +58,12 @@
                 '                                    <div class="form-group col-md-offset-4 col-md-2">\n' +
                 '                                        <label for="horarioAbertura">Horário de Abertura</label>\n' +
                 '                                        <input type="text" class="form-control" name="horarioAbertura[]"\n' +
-                '                                               id="horarioAbertura" data-mask="00:00">\n' +
+                '                                               id="horarioAbertura" data-mask="00:00" required>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="form-group col-md-2">\n' +
                 '                                        <label for="horarioFechamento">Horário de Fechamento</label>\n' +
                 '                                        <input type="text" class="form-control" name="horarioFechamento[]"\n' +
-                '                                               id="horarioFechamento" data-mask="00:00">\n' +
+                '                                               id="horarioFechamento" data-mask="00:00" required>\n' +
                 '                                    </div>\n' +
                 '                                </div>\n' +
                 '                            <a class="row">\n' +

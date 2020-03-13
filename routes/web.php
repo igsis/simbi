@@ -2,6 +2,12 @@
 
 Route::get('/', 'IndexController@index')->middleware('auth');
 
+Route::get('/gerencial', 'IndexController@gerencialIndex')->middleware('auth');
+
+Route::get('/frequencia', 'IndexController@frequenciaIndex')->middleware('auth');
+
+Route::get('/acervo', 'IndexController@acervoIndex')->middleware('auth');
+
 Route::get('home', 'IndexController@index')->middleware('primeiroLogin');
 
 
@@ -14,15 +20,17 @@ Route::group(['middleware' => 'auth'], function (){
 
 		Route::any('ativar-user','UserController@ativarUser')->name('ativar.user');
 
-        Route::group(['prefix' => 'usuarios'], function() {
-            Route::any('/search', 'UserController@searchUser')->name('search-user');
+        Route::group(['prefix' => 'gerencial/'], function() {
 
-            Route::get('/{usuario}/vincular', 'UserController@exibeVincular')->name('usuarios.exibeVincular');
+            Route::group(['prefix' => 'usuarios'], function() {
 
-            Route::post('/{usuario}/vincular', 'UserController@vinculaEquipamento')->name('usuarios.vincular');
+                Route::any('/search', 'UserController@searchUser')->name('search-user');
 
-            Route::put('/{usuario}/reset', 'UserController@resetSenha')->name('usuarios.reset');
+                Route::put('/{usuario}/reset', 'UserController@resetSenha')->name('usuarios.reset');
+            });
+
         });
+
 	});
 
 });

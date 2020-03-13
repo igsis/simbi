@@ -1,48 +1,59 @@
+@extends('layouts.index')
 
-@extends('layouts.master')
+@section('linksAdicionais')
+    <style type="text/css">
+        a:link{
+            text-decoration:none;
+            color:black;
+        }
 
-@section('titulo','Início')
+        a:visited{
+            text-decoration:none;
+            color:black;
+        }
 
+        a:hover{
+            text-decoration:none;
+            color:black;
+        }
+
+        a:active{
+            text-decoration:none;
+            color:black;
+        }
+
+        .margem{
+            margin-top: 200px;
+        }
+    </style>
+@endsection
 
 @section('conteudo')
 
-    @if(Auth::guest())
-		@include('auth.login')
-    @else
-		<div style="text-align: center;">
-			<h2>Bem Vindo ao SIMBI</h2>
-			<h3>Sistema de Indicadores das Bibliotecas Públicas Municipais</h3>
-		</div>
-		<hr>
-		<?php $faltaFrequencia = 0; ?>
-		@if($ocorrencias != null || $frequenciasCadastradas != null)
-			@foreach($ocorrencias as $ocorrencia)
-				@if(!(in_array($ocorrencia->id, $frequenciasCadastradas)) && $ocorrencia->publicado == 1)
-					<?php
-						$dataOcorrencia = strtotime($ocorrencia->data);
-						$diaHoje = strtotime(date('Y-m-d'));
+    <div class="margem">
+        <div class="login-logo margin-top">
+            <a href="{{url('/')}}"><b>SIMBI</b></a>
+        </div>
+        <div class="row">
+            <center>
+                <div class="form-group col-md-4">
+                    <a href="{{url('/gerencial')}}"><i class="fa fa-users fa-5x" aria-hidden="true"></i>
+                        <h3>Gerencial</h3>
+                    </a>
+                </div>
 
-						$res = $dataOcorrencia - $diaHoje;
+                <div class="form-group col-md-4">
+                    <a href="{{url('/frequencia')}}"><i class="fa fa-calendar fa-5x" aria-hidden="true" ></i>
+                        <h3>Frequência</h3>
+                    </a>
+                </div>
 
-						$res = $res / 86400;
-
-						if($res < 0){
-							$faltaFrequencia = 1;
-						}
-					?>
-				@endif
-			@endforeach
-			@if($faltaFrequencia == 1)
-				<div class="alert alert-danger" role="alert">
-					Existem <strong> frequências </strong> a serem adicionadas.
-				</div>
-			@else
-				<div class="alert alert-success" role="alert">
-					Todas as <strong> frequências </strong> estão em dia!
-				</div>
-			@endif
-		@endif
-
-		<hr>
-	@endif
+                <div class="form-group col-md-4">
+                    <a href="{{url('/acervo')}}"><i class="glyphicon glyphicon-book fa-5x"></i>
+                        <h3>Acervo</h3>
+                    </a>
+                </div>
+            </center>
+        </div>
+    </div>
 @endsection

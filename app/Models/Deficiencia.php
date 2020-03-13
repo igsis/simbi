@@ -10,6 +10,13 @@ class Deficiencia extends Model
 
     protected $table = "deficiencias_complementos";
 
+    protected $fillable = [
+        'visual',
+        'auditiva',
+        'motora',
+        'mental'
+    ];
+
     public function complementoPortaria()
     {
         return $this->hasMany(ComplementoPortaria::class);

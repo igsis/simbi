@@ -10,6 +10,15 @@ class Etnia extends Model
 
     protected $table = 'etnias_complementos';
 
+    protected $fillable = [
+        'amarela',
+        'branca',
+        'indigena',
+        'parda',
+        'preta',
+        'semInformacao'
+    ];
+
     public function complementoPortaria()
     {
         return $this->hasMany(ComplementoPortaria::class);

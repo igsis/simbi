@@ -43,7 +43,7 @@ class UserController extends Controller
         }
 
         $equipamentos = Equipamento::orderBy('nome')->get();
-        return view('usuarios.index', compact('users', 'equipamentos','type'));
+        return view('gerencial.usuarios.index', compact('users', 'equipamentos','type'));
     }
 
     /**
@@ -55,14 +55,19 @@ class UserController extends Controller
     {
 
         $funcionario = Funcionario::FindOrFail($request->id);
-
+        $RF = trim($funcionario->RF);
+        $RF = str_replace(".", "", $RF);
+        $RF = substr($RF,0,6);
+        $login = 'd'.$RF;
         $roles = Role::all();
 
         $nivelAcessos = NivelAcesso::all();
-        return view('usuarios.cadastro', compact(
+
+        return view('gerencial.usuarios.cadastro', compact(
             'roles',
             'nivelAcessos',
-            'funcionario'
+            'funcionario',
+            'login'
             ));
     }
 
@@ -72,17 +77,20 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $this->validate($request, [
             'login' =>'required|max:7|unique:users',
+            'email' =>'required|email|unique:users',
             'nivelAcessos'=> 'required'
         ]);
 
         $user = new User();
 
         $user->login = $request->input('login');
-        $user->password = 'simbi@2019';
+        $user->email = $request->email;
+        $user->password = 'simbi@2020';
         $user->funcionario_id = $request->input('id_funcionario');
         $user->nivel_acesso_id = $request->input('nivelAcessos');
 
@@ -92,7 +100,7 @@ class UserController extends Controller
                 ->update(['publicado'=>2]);
 
             return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
-                'Usuário Adicionado com Sucesso!  Senha padrão: simbi@2019');
+                'Usuário Adicionado com Sucesso! Senha padrão: simbi@2020');
         }
     }
 
@@ -121,20 +129,14 @@ class UserController extends Controller
         $secretarias = Secretaria::orderBy('descricao')->get();
         $subordinacoesAdministrativas = SubordinacaoAdministrativa::orderBy('descricao')->get();
         $cargos = Cargo::orderBy('cargo')->get();
-        $funcoes = Funcao::orderBy('funcao')->get();
-        $escolaridades = Escolaridade::all();
 
-
-
-        return view('usuarios.editar', compact(
+        return view('gerencial.usuarios.editar', compact(
             'user',
             'roles',
             'perguntas',
             'secretarias',
             'subordinacoesAdministrativas',
-            'escolaridades',
-            'cargos',
-            'funcoes'
+            'cargos'
         ));
     }
 
@@ -158,41 +160,28 @@ class UserController extends Controller
                 'perguntaSeguranca'=>'required',
                 'respostaSeguranca'=>'required'
             ]);
-            if ($request->email == $funcionario->email){
-                $funcionario->update([
-                    'nome'=>$request->name,
-                    'email'=> $request->email,
-                ]);
-            }
-            else{
-                $funcionario->update([
-                    'nome'=>$request->name,
-                    'email'=> $request->email,
-                ]);
-            }
 
             $user->update([
                 'login'=> $request->login,
+                'email'=> $request->email,
                 'password'=> $request->password,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
+                'nivel_acesso_id' => $request->roles,
             ]);
         }
         else
         {
             $this->validate($request, [
-                'email'=>'required|email|unique:funcionarios,email',
-            ]);
-
-            $funcionario->update([
-                'nome'=>$request->name,
-                'email'=> $request->email,
+                'email' => 'required|email|unique:users,email,'.$user->id,
             ]);
 
             $user->update([
                 'login'=> $request->login,
+                'email'=> $request->email,
                 'pergunta_seguranca_id'=> $request->perguntaSeguranca,
                 'resposta_seguranca'=> $request->respostaSeguranca,
+                'nivel_acesso_id' => $request->roles,
             ]);
         }
 
@@ -230,10 +219,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->update(['password' => 'simbi@2018']);
+        $user->update(['password' => 'simbi@2020']);
         return redirect()->route('usuarios.index', [
             'type' => 1
-        ])->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2018');
+        ])->with('flash_message', 'Senha Resetada! Senha padrão: simbi@2020');
     }
 
     /**
@@ -273,7 +262,7 @@ class UserController extends Controller
             'resposta_seguranca' => $request->respostaSeguranca
         ]);
 
-        return redirect('home');
+        return redirect()->route('funcionarios.index', ['type' => '1']);
     }
 
     // Filtro de Usuários Ativados
@@ -287,55 +276,8 @@ class UserController extends Controller
 
         $equipamentos = Equipamento::all();
 
-        return view('usuarios.index', compact('users', 'equipamentos','dataForm', 'type'));
+        return view('gerencial.usuarios.index', compact('users', 'equipamentos','dataForm', 'type'));
 
     }
 
-    public function exibeVincular($id)
-    {
-        $user = User::findOrFail($id);
-        $equipamentos = Equipamento::all();
-        $cargos = ResponsabilidadeTipo::all();
-
-        return view('usuarios.vincular', compact('user', 'equipamentos', 'cargos'));
-    }
-
-    public function vinculaEquipamento(Request $request, $id)
-    {
-        /** @var User $usuario */
-        $usuario = User::findOrFail($id);
-        $equipamentos = $request['equipamento'];
-
-        $this->validate($request, [
-            'dataInicio'            =>  'required_with:equipamento',
-            'dataFim'               =>  'required_with:equipamento',
-            'responsabilidadeTipo'  =>  'required_with:equipamento'
-        ]);
-
-        $syncData = [];
-
-        if ($equipamentos != 0)
-        {
-
-            foreach ($equipamentos as $id)
-            {
-                $dataF = $request->dataFim;
-                $dataI = $request->dataInicio;
-                $dataF = date("Y-m-d",strtotime($dataF));
-                $dataI = date("Y-m-d",strtotime($dataI));
-                $pivotData = [
-                    'data_inicio'               =>  $dataI,
-                    'data_fim'                  =>  $dataF,
-                    'responsabilidade_tipo_id'  =>  $request->responsabilidadeTipo
-                ];
-                $syncData[$id] = $pivotData;
-            }
-        }
-
-        $usuario->equipamentos()->sync($syncData);
-
-        return redirect()->route('usuarios.index', ['type' => 1])
-            ->with('flash_message',
-                'Equipamentos Vinculados com sucesso.');
-    }
 }

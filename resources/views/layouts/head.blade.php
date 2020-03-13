@@ -63,6 +63,11 @@
         #tira-padding {
             padding-right: 0px !important;
         }
+
+        hr{
+            opacity: 0.2;
+        }
+
     </style>
 
     @yield('linksAdicionais')
