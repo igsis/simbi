@@ -85,7 +85,7 @@ class FuncionarioController extends Controller
         User::where('funcionario_id','=',$types->id)
             ->update(array('publicado'=> 0));
 
-        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Desativado com Sucesso.');
+        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Desativado com sucesso.');
     }
 
     public function ativar(Request $request)
@@ -97,7 +97,7 @@ class FuncionarioController extends Controller
             $usuario = User::findOrFail('funcionario_id','=',$request->id);
             $usuario->update(array('publicado'=> 1));
 
-            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message',' Ativado com Sucesso.');
+            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message',' Ativado com sucesso.');
     }
 
     public function store(Request $request){
@@ -146,7 +146,7 @@ class FuncionarioController extends Controller
             $adicionais->observacao = $observacao;
             $user->secretaria_id = 1;
         }
-        elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
+        elseif  ($tipoPessoa == 2 || $tipoPessoa == 3) //tipoPessoa Convocado ou Estagiário
         {
             $this->validate($request, ['identificacaoSecretaria' => 'required']);
             $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
@@ -171,9 +171,9 @@ class FuncionarioController extends Controller
                 $adicionais->funcionario_id = $user->id;
                 $adicionais->save();
             }
-            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Pessoa Cadastrado com Sucesso.');
+            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Pessoa cadastrado com sucesso.');
         }
-        return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
+        return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionário');
 
     }
 
@@ -244,7 +244,7 @@ class FuncionarioController extends Controller
 
             $funcionario->secretaria_id = 1;
         }
-        elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
+        elseif  ($tipoPessoa == 2 || $tipoPessoa == 3) //tipoPessoa Convocado ou Estagiário
         {
             $this->validate($request, ['identificacaoSecretaria' => 'required']);
             $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
@@ -273,7 +273,7 @@ class FuncionarioController extends Controller
         if($funcionario->save()){
             return redirect()->route('funcionarios.index', ['type' => '1'])
                 ->with('flash_message',
-                    'Pessoa Editada com Sucesso!');
+                    'Pessoa editada com sucesso!');
         }
     }
 
@@ -317,6 +317,6 @@ class FuncionarioController extends Controller
 
         return redirect()->route('funcionarios.index', ['type' => 1])
             ->with('flash_message',
-                'Equipamentos Vinculados com sucesso.');
+                'Equipamentos vinculados com sucesso.');
     }
 }

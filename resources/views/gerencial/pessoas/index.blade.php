@@ -64,7 +64,15 @@
                             <tr>
                                 <td>{{ $user->nome }}</td>
                                 <td>{{ $user->RF }}</td>
-                                <td>{{ $user->tipo_pessoa == 1 ? 'Funcionário' : 'Convocado' }}</td>
+                                <td>
+                                    @if($user->tipo_pessoa == 1)
+                                        Funcionário
+                                    @elseif( $user->tipo_pessoa == 2)
+                                        Convocado
+                                    @else
+                                        Estagiário
+                                    @endif
+                                </td>
                                 <td>{{ $user->cargo->cargo }}</td>
                                 <td> {{ $user->equipamentos->implode('nome', ', ') }}<td>
 

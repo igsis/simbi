@@ -32,11 +32,17 @@
                         <div class="form-group col-md-2">
                             <label>
                                 <input type="radio" name="tipoPessoa" id="tipoPessoa" value="1" checked> Funcionário
+
                             </label>
                         </div>
                         <div class="form-group col-md-2">
                             <label>
                                 <input type="radio" name="tipoPessoa" id="tipoPessoa" value="2"> Convocado
+                            </label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>
+                                <input type="radio" name="tipoPessoa" id="tipoPessoa" value="3"> Estagiário
                             </label>
                         </div>
                     </div>
@@ -293,14 +299,25 @@
         //FUNCAO PARA ESCONDER E APRESENTAR CAMPOS
         $(document).ready(function(){
             $("#divConvocado").hide();
+            let vinculo = document.querySelector('#vinculo');
             $("input[name$='tipoPessoa']").click(function(){
-                var test = $(this).val();
-                if (test == '2') {
+                var tipo = $(this).val();
+                if (tipo == '1') {
+                    vinculo.value = '';
+                    vinculo.readOnly = false;
+                    $("#divFuncionario").show();
+                    $("#divConvocado").hide();
+                }
+                else if (tipo =='2') {
+                    vinculo.value = '';
+                    vinculo.readOnly = false;
                     $("#divFuncionario").hide();
                     $("#divConvocado").show();
                 }else{
-                    $("#divFuncionario").show();
-                    $("#divConvocado").hide();
+                    vinculo.value = 0;
+                    vinculo.readOnly = true;
+                    $("#divFuncionario").hide();
+                    $("#divConvocado").show();
                 }
             });
         });

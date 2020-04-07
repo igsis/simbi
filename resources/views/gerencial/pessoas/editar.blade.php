@@ -12,7 +12,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}</h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Edição de pessoa</h1>
         </section>
 
         <div class="row">
@@ -26,7 +26,15 @@
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{$user->name}}</h3>
+                    <h3 class="box-title">
+                    @if($user->tipo_pessoa == 1)
+                        Funcionário: {{$user->nome}}
+                    @elseif( $user->tipo_pessoa == 2)
+                        Convocado: {{$user->nome}}
+                    @else
+                        Estagiário: {{$user->nome}}
+                    @endif
+                    </h3>
                 </div>
                 <form method="POST" action="{{ route('funcionario.atualizar', $user->id) }}" accept-charset="UTF-8" autocomplete="off">
                     {{ csrf_field() }}
@@ -40,9 +48,12 @@
                             </div>
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
                                 <label for="name">Vínculo</label>
-                                <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{$user->vinculo}}" maxlength="1" data-mask="0">
+                                <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{$user->vinculo}}" maxlength="1" data-mask="0"  {{ ($user->tipo_pessoa == 3) ? 'readonly' : "" }}>
+
+
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                                 <label for="name">Nome</label>
