@@ -2,8 +2,6 @@
 
 Route::group(['prefix' => 'frequencia'], function(){
 
-    Route::get('/trocar/frequencia', 'FrequenciaController@listaEquipamentos')->name('equipamentos.lote');
-
     Route::get('/equipamentos/enviadas', 'FrequenciaController@frequenciasEnviadas')->name('frequencias.enviadas');
 
     Route::get('/{idEquipamento}/enviadas','FrequenciaController@listarFrequenciasEnviadas')->name('frequencia.enviada');

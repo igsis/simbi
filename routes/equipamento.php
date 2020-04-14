@@ -10,6 +10,8 @@ Route::group(['prefix' => 'gerencial'], function (){
 
     Route::any('equipamentos-search', 'EquipamentoController@searchEquipamento')->name('search-equipamento');
 
+    Route::get('/trocar', 'EquipamentoController@listaTrocaEquipamentos')->name('equipamentos.lote');
+
     Route::group(['prefix' => 'importar/equipamentos'], function(){
 
         Route::get('/', 'EquipamentoController@importarEquipamentos')->name('equipamentos.importar');

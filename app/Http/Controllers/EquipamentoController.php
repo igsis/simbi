@@ -486,7 +486,6 @@ class EquipamentoController extends Controller
             'contratoUso' => 'required',
             'utilizacao' => 'required',
             'porte' => 'required',
-            'padrao' => 'required',
             'pavimento' => 'required|numeric'
         ]);
 
@@ -860,33 +859,32 @@ class EquipamentoController extends Controller
         if ($biblioteca && $onibus){
             if ($tipoForm == 'on'){
                 Equipamento::where('publicado',1)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+                return redirect()->back()->with('flash_message', 'Alterado para Formulário Completo.');
             }
             else{
                 Equipamento::where('publicado',1)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+                return redirect()->back()->with('flash_message', 'Alterado para Formulário Simples.');
             }
         }elseif ($biblioteca){
             if ($tipoForm == 'on'){
                 Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Biblioteca para Formulário Completo.');
+                return redirect()->back()->with('flash_message', '  Alterado Biblioteca para Formulário Completo.');
             }
             else{
                 Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Biblioteca para Formulário Simples.');
+                return redirect()->back()->with('flash_message', 'Alterado Biblioteca para Formulário Simples.');
             }
         }elseif($onibus){
             if ($tipoForm == 'on'){
                 Equipamento::where('tipo_servico_id',4)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Completo.');
+                return redirect()->back()->with('flash_message', 'Alterado Ônibus para Formulário Completo.');
             }
             else{
                 Equipamento::where('tipo_servico_id',4)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Simples.');
+                return redirect()->back()->with('flash_message', 'Alterado Ônibus para Formulário Simples.');
             }
         }
-        return redirect()->route('equipamentos.index', ['type' => 1])
-            ->with('flash_message_danger','Selecione um tipo de equipamento');
+        return redirect()->back()->with('flash_message_danger','Selecione um tipo de equipamento');
     }
 
     public function editPortariaLote($id)
@@ -900,4 +898,11 @@ class EquipamentoController extends Controller
             return redirect()->route('equipamentos.lote')->with('flash_message', 'Formulário atualizado para o completo.');
         }
     }
+
+    public function listaTrocaEquipamentos()
+    {
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('gerencial.gerenciar.loteEquipamentos', compact('equipamentos'));
+    }
+
 }

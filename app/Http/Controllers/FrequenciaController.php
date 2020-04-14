@@ -321,10 +321,4 @@ class FrequenciaController extends Controller
         return view('frequencia.frequencia.listarFrequenciasEnviadas', compact('frequencias'));
     }
 
-    public function listaEquipamentos()
-    {
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
-        return view('frequencia.frequencia.loteEquipamentos', compact('equipamentos'));
-    }
-
 }
