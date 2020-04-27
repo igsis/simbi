@@ -4,14 +4,14 @@ namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Estacionamento extends Model
+class SalaComum extends Model
 {
+    protected $table = 'sala_comuns';
+
     public $timestamps = false;
 
     protected $fillable = [
-        'equipamento_id',
-        'interno',
-        'externo'
+        'quantidade'
     ];
 
     public function capacidade()

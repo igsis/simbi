@@ -10,6 +10,7 @@ class Praca extends Model
 
     protected $fillable = [
         'equipamento_id',
+        'praca',
         'praca_classificacao_id'
     ];
 

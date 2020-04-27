@@ -53,7 +53,11 @@ Route::group(['prefix' => 'gerencial'], function (){
 
         Route::post('/{equipamento}/gravaSalaEstudoIndividual','EquipamentoController@gravaEstudoIndividual')->name('equipamentos.gravaEstudoIndividual');
 
+        Route::post('/{equipamento}/gravaSalaComun','EquipamentoController@gravaSalaComum')->name('equipamentos.gravaSalaComum');
+
         Route::post('/{equipamento}/gravaSalaInfantil','EquipamentoController@gravaSalaInfantil')->name('equipamentos.gravaSalaInfantil');
+
+        Route::post('/{equipamento}/gravaTelecentro','EquipamentoController@gravaTelecentro')->name('equipamentos.gravaTelecentro');
 
         Route::post('/{equipamento}/gravaSalaMultiuso','EquipamentoController@gravaSalaMultiuso')->name('equipamentos.gravaSalaMultiuso');
 

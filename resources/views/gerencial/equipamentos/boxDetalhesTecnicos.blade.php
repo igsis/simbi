@@ -113,4 +113,73 @@
         @endif
         </tbody>
     </table>
+
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th colspan="2" class="text-center">Área Externa</th>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th colspan="2" class="text-center">Estacionamento</th>
+        </tr>
+        @if (isset($equipamento->estacionamento))
+            <tr>
+                <th class="text-center" width="50%">Vagas internas: </th>
+                <td class="text-center">{{ $equipamento->estacionamento->interno }}</td>
+            </tr>
+            <tr>
+                <th class="text-center" width="50%">Vagas externas: </th>
+                <td class="text-center">{{ $equipamento->estacionamento->externo }}</td>
+            </tr>
+        @else
+            <tr>
+                <th class="text-center" style="border: none;">
+                    Sem dados cadastrados
+                </th>
+                <th style="border: none;">
+                    @hasanyrole('Coordenador|Administrador')
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addEstacionamento">Adicionar</button>
+                    @endhasanyrole
+                </th>
+            </tr>
+        @endif
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th colspan="2" class="text-center">Praça</th>
+        </tr>
+        @if (isset($equipamento->praca))
+            <tr>
+                <th class="text-center" width="50%">Situado em praça: </th>
+                {{-- TODO : Verificar relacionamento da praça --}}
+                <td class="text-center">{{ $equipamento->praca->praca == 1 ? 'Sim' : 'Não'}}</td>
+            </tr>
+
+            <tr>
+                <th class="text-center" width="50%">Classificação: </th>
+                {{-- TODO : Verificar relacionamento da praça --}}
+                <td class="text-center">{{ $equipamento->praca->classificacao->classificacao }}</td>
+            </tr>
+        @else
+            <tr>
+                <th class="text-center" style="border: none;">
+                    Sem dados cadastrados
+                </th>
+                <th style="border: none;">
+                    @hasanyrole('Coordenador|Administrador')
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addPraca">Adicionar</button>
+                    @endhasanyrole
+                </th>
+            </tr>
+        @endif
+        </tbody>
+    </table>
 </div>

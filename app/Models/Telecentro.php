@@ -3,15 +3,14 @@
 namespace Simbi\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Simbi\Models\Equipamento;
 
-class Estacionamento extends Model
+class Telecentro extends Model
 {
     public $timestamps = false;
 
     protected $fillable = [
-        'equipamento_id',
-        'interno',
-        'externo'
+        'quantidade'
     ];
 
     public function capacidade()

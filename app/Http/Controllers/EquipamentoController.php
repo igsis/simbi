@@ -294,6 +294,7 @@ class EquipamentoController extends Controller
             ->orderBy('evento_ocorrencias.data', 'desc')
             ->get();
 
+
         return view('gerencial.equipamentos.show', compact('equipamento', 'eventos'));
     }
 
@@ -613,7 +614,8 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->estacionamento()->create([
-            'capacidade'=>$request->input('novo')
+            'interno'=>$request->input('interno'),
+            'externo'=>$request->input('externo')
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Estacionamento cadastrada com sucesso');
@@ -626,6 +628,7 @@ class EquipamentoController extends Controller
         $praca = new Praca();
 
         $praca->equipamento_id = $equipamento->id;
+        $praca->praca = $request->input('praca');
         $praca->praca_classificacao_id = $request->input('classificacao');
 
         $praca->save();
@@ -641,7 +644,7 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('novo')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de estudo cadastrada com sucesso');
     }
 
     public function gravaEstudoIndividual(Request $request, $id){
@@ -652,7 +655,29 @@ class EquipamentoController extends Controller
             'quantidade'=>$request->input('novo')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de estudo cadastrada com sucesso');
+    }
+
+    public function gravaSalaComum(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->salaComum()->create([
+            'quantidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de uso comum cadastrado com sucesso');
+    }
+
+    public function gravaTelecentro(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->telecentro()->create([
+            'quantidade'=>$request->input('novo')
+        ]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Telecentro/DigiLab cadastrado com sucesso');
     }
 
     public function gravaSalaInfantil(Request $request, $id){
@@ -663,7 +688,7 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('novo')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala infantil cadastrada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço infantil cadastrada com sucesso');
     }
 
     public function gravaSalaMultiuso(Request $request, $id){
@@ -674,7 +699,7 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('novo')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala Multiuso cadastrada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço Multiuso cadastrada com sucesso');
     }
 
     public function gravaTeatro(Request $request, $id){
