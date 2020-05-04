@@ -31,10 +31,12 @@
                 <th width="30%">Porte:</th>
                 <td>{{ $equipamento->detalhe->porte->porte }}</td>
             </tr>
+            @if(isset($equipamento->detalhe->padrao->padrao))
             <tr>
                 <th width="30%">Padrão:</th>
                 <td>{{ $equipamento->detalhe->padrao->padrao }}</td>
             </tr>
+            @endif
             <tr>
                 <th width="30%">Pavimentos:</th>
                 <td>{{ $equipamento->detalhe->pavimento }}</td>

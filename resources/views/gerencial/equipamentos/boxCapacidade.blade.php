@@ -125,35 +125,6 @@
     <table class="table table-bordered">
         <tbody>
         <tr>
-            <th colspan="2" class="text-center">Espaços de uso comum</th>
-        </tr>
-        @if (isset($equipamento->auditorio))
-            <tr>
-                <th class="text-center" width="50%">Nome: </th>
-                <td class="text-center">{{ $equipamento->auditorio->nome }}</td>
-            </tr>
-            <tr>
-                <th class="text-center">Capacidade: </th>
-                <td class="text-center">{{ $equipamento->auditorio->capacidade }}</td>
-            </tr>
-        @else
-            <tr>
-                <th class="text-center" style="border: none;">
-                    Sem dados cadastrados
-                </th>
-                <td style="border: none;">
-                    @hasanyrole('Coordenador|Administrador')
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addAuditorio">Adicionar</button>
-                    @endhasanyrole
-                </td>
-            </tr>
-        @endif
-        </tbody>
-    </table>
-
-    <table class="table table-bordered">
-        <tbody>
-        <tr>
             <th colspan="2" class="text-center">Espaço de uso comum</th>
         </tr>
         @if (isset($equipamento->salaComum))
@@ -161,6 +132,10 @@
                 <th class="text-center" width="50%">Capacidade: </th>
                 <td class="text-center">{{ $equipamento->salaComum->quantidade }}</td>
             </tr>
+            @if (isset($equipamento->salaComum->especificacao))
+                <th class="text-center" width="50%">Especificação: </th>
+                <td class="text-center">{{ $equipamento->salaComum->especificacao }}</td>
+            @endif
         @else
             <tr>
                 <th class="text-center" style="border: none;">
@@ -186,6 +161,10 @@
                 <th class="text-center" width="50%">Capacidade: </th>
                 <td class="text-center">{{ $equipamento->estudoGrupo->capacidade }}</td>
             </tr>
+            @if (isset($equipamento->estudoGrupo->especificacao))
+                <th class="text-center" width="50%">Especificação: </th>
+                <td class="text-center">{{ $equipamento->estudoGrupo->especificacao }}</td>
+            @endif
         @else
             <tr>
                 <th class="text-center" style="border: none;">
@@ -211,6 +190,10 @@
                 <th class="text-center" width="50%">Quantidade: </th>
                 <td class="text-center">{{ $equipamento->estudoIndividual->quantidade }}</td>
             </tr>
+            @if (isset($equipamento->estudoIndividual->especificacao))
+                <th class="text-center" width="50%">Especificação: </th>
+                <td class="text-center">{{ $equipamento->estudoIndividual->especificacao }}</td>
+            @endif
         @else
             <tr>
                 <th class="text-center" style="border: none;">
@@ -236,6 +219,10 @@
                 <th class="text-center" width="50%">Capacidade: </th>
                 <td class="text-center">{{ $equipamento->infantil->capacidade }}</td>
             </tr>
+            @if (isset($equipamento->infantil->especificacao))
+                <th class="text-center" width="50%">Especificação: </th>
+                <td class="text-center">{{ $equipamento->infantil->especificacao }}</td>
+            @endif
         @else
             <tr>
                 <th class="text-center" style="border: none;">
@@ -261,6 +248,10 @@
                 <th class="text-center" width="50%">Capacidade: </th>
                 <td class="text-center">{{ $equipamento->multiuso->capacidade }}</td>
             </tr>
+            @if (isset($equipamento->multiuso->especificacao))
+                <th class="text-center" width="50%">Especificação: </th>
+                <td class="text-center">{{ $equipamento->multiuso->especificacao }}</td>
+            @endif
         @else
             <tr>
                 <th class="text-center" style="border: none;">
@@ -300,18 +291,47 @@
         @endif
         </tbody>
     </table>
+
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th colspan="2" class="text-center">Teatro</th>
+        </tr>
+        @if (isset($equipamento->teatro))
+            <tr>
+                <th class="text-center" width="50%">Nome: </th>
+                <td class="text-center">{{ $equipamento->teatro->nome}}</td>
+            </tr>
+            <tr>
+                <th class="text-center" width="50%">Capacidade: </th>
+                <td class="text-center">{{ $equipamento->teatro->capacidade}}</td>
+            </tr>
+        @else
+            <tr>
+                <th class="text-center" style="border: none;">
+                    Sem dados cadastrados
+                </th>
+                <td style="border: none;">
+                    @hasanyrole('Coordenador|Administrador')
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addTeatro">Adicionar</button>
+                    @endhasanyrole
+                </td>
+            </tr>
+        @endif
+        </tbody>
+    </table>
 </div>
 
 
 @include('layouts.modal',['idModal'=>'addCapacidade','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Capacidade do Equipamento','actionForm'=>'equipamentos.gravaCapacidade','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço de Estudos em Grupo','actionForm'=>'equipamentos.gravaEstudoGrupo','equipamentoId'=>$equipamento->id])
+@include('layouts.modal_especificacao',['idModal'=>'addSalaEstudoGrupo','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço de Estudos em Grupo','actionForm'=>'equipamentos.gravaEstudoGrupo','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço de Estudo Individual','actionForm'=>'equipamentos.gravaEstudoIndividual','equipamentoId'=>$equipamento->id])
+@include('layouts.modal_especificacao',['idModal'=>'addSalaEstudoIndivitual','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço de Estudo Individual','actionForm'=>'equipamentos.gravaEstudoIndividual','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaComum','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço de uso comum','actionForm'=>'equipamentos.gravaSalaComum','equipamentoId'=>$equipamento->id])
+@include('layouts.modal_especificacao',['idModal'=>'addSalaComum','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço de uso comum','actionForm'=>'equipamentos.gravaSalaComum','equipamentoId'=>$equipamento->id])
 
-@include('layouts.modal',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço Infantil','actionForm'=>'equipamentos.gravaSalaInfantil','equipamentoId'=>$equipamento->id])
+@include('layouts.modal_especificacao',['idModal'=>'addSalaInfantil','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço Infantil','actionForm'=>'equipamentos.gravaSalaInfantil','equipamentoId'=>$equipamento->id])
 
 @include('layouts.modal_especificacao',['idModal'=>'addSalaMulti','titulo'=>'Adicionar Capacidade','idInput'=>'txtCapacidade','funcaoJS'=>'','label'=>'Espaço Multiuso','actionForm'=>'equipamentos.gravaSalaMultiuso','equipamentoId'=>$equipamento->id])
 

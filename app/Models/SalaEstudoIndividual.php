@@ -11,7 +11,8 @@ class SalaEstudoIndividual extends Model
     public $timestamps = false;
 
     protected $fillable = [
-      'quantidade'
+        'quantidade',
+        'especificacao'
     ];
 
     public function capacidade()
