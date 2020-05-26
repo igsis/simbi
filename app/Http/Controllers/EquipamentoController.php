@@ -747,7 +747,8 @@ class EquipamentoController extends Controller
             'auditorio' => $request->areaAuditorio,
             'teatro' => $request->areaTeatro,
             'total_construida' => $request->areaTotalConstruida,
-            'total_terreno' => $request->areaTotalTerreno
+            'total_terreno' => $request->areaTotalTerreno,
+            'especificacao' => $request->especificacao
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área cadastrada com sucesso');
@@ -770,7 +771,8 @@ class EquipamentoController extends Controller
             'auditorio' => $request->areaAuditorio,
             'teatro' => $request->areaTeatro,
             'total_construida' => $request->areaTotalConstruida,
-            'total_terreno' => $request->areaTotalTerreno
+            'total_terreno' => $request->areaTotalTerreno,
+            'especificacao' => $request->especificacao
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área atualizada com sucesso');
