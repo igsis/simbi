@@ -102,7 +102,7 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-offset-3 col-md-3">
+                        <div class="form-group col-md-3">
                             <label for="pavimento">Pavimentos</label>
                             <input type="number" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
                                                                                                                                              : old('pavimento') }}">
@@ -110,7 +110,19 @@ if($path == 'equipamentos.atualizaDetalhes')
                         <div class="form-group col-md-3">
                             <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
                             <input type="text" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
-                                                                                                                                                : "old('validate')"}}">
+                                                                                                              : "old('validate')"}}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="predioTombado">Prédio Tombado</label>
+                            <select class="form-control" name="predioTombado" id="predioTombado">
+                                <option value="0">Não</option>
+                                <option value="1">Sim</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="lei">Lei de tombamento</label>
+                            <input type="text" class="form-control" name="lei" id="lei" value="{{isset($equipamento->detalhe->lei) ? $equipamento->detalhe->lei
+                                                                                                                                             : old('lei') }}">
                         </div>
                     </div>
 

@@ -519,7 +519,9 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id->id,
-            'validade_avcb' => $dataValidade
+            'validade_avcb' => $dataValidade,
+            'predio_tombado' => $request->predioTombado,
+            'lei' => $request->lei
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
@@ -567,7 +569,9 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id,
-            'validade_avcb' => $dataValidade
+            'validade_avcb' => $dataValidade,
+            'predio_tombado' => $request->predioTombado,
+            'lei' => $request->lei
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');

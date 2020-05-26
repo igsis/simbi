@@ -45,6 +45,16 @@
                 <th width="30%">Validade AVBC:</th>
                 <td>{{ date('d/m/Y', strtotime($equipamento->detalhe->validade_avcb)) }}</td>
             </tr>
+            <tr>
+                <th width="30%">Prédio Tombado:</th>
+                <td class="text-center">{{ $equipamento->detalhe->predio_tombado == 1 ? 'Sim' : 'Não'}}</td>
+            </tr>
+            @if (isset($equipamento->detalhe->lei))
+                <tr>
+                <th width="30%">Lei:</th>
+                <td class="text-center">{{ $equipamento->detalhe->lei }}</td>
+                </tr>    
+            @endif
         </tbody>
     </table>
 
