@@ -508,6 +508,16 @@ INSERT INTO `tipo_servicos` (`id`, `descricao`) VALUES
 	(6, 'Feira de Troca');
 /*!40000 ALTER TABLE `tipo_servicos` ENABLE KEYS */;
 
+
+-- Copiando dados para a tabela simbi.area_eventos:
+DELETE FROM `area_eventos`;
+/*!40000 ALTER TABLE `area_eventos` DISABLE KEYS */;
+INSERT INTO `area_eventos` (`id`, `area`) VALUES
+  (1, 'Interna'),
+  (2, 'Externa');
+/*!40000 ALTER TABLE `utilizacoes` ENABLE KEYS */;
+
+
 /*!40000 ALTER TABLE `nivel_acessos` DISABLE KEYS */;
 INSERT INTO `nivel_acessos` (`id`, `nivel_acesso`) VALUES
 	(1, 'Administrativo'),

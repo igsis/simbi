@@ -14,6 +14,7 @@ class Evento extends Model
         'tipo_evento_id',
         'contratacao_forma_id',
         'projeto_especial_id',
+        'area_evento_id',
         'publicado'
     ];
 
@@ -25,6 +26,11 @@ class Evento extends Model
     public function contratacao()
     {
         return $this->belongsTo(ContratacaoForma::class);
+    }
+
+    public function areaEvento()
+    {
+        return $this->belongsTo(AreaEvento::class);
     }
 
     public function projetoEspecial(){

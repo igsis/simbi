@@ -62,7 +62,7 @@
                                 <th>Nome do Equipamento</th>
                                 <th>Sigla do Equipamento</th>
                                 <th>Telefone</th>
-                                <th>Status</th>
+                                <th>Status do Equipamento</th>
                                 <th>Operações</th>
                             </tr>
                             </thead>
@@ -128,7 +128,7 @@
                                 <th>Nome do Equipamento</th>
                                 <th>Sigla do Equipamento</th>
                                 <th>Telefone</th>
-                                <th>Status</th>
+                                <th>Status do Equipamento</th>
                                 <th>Operações</th>
                             </tr>
                             </tfoot>

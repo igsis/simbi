@@ -130,7 +130,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="telefone">Telefone</label>
-                <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 00000-0000"
+                <input type="text" class="form-control" name="telefone" id="telefone" data-mask="(11) 0000-0000"
                        placeholder="(11) xxxx-xxxx"
                        value="{{ isset($equipamentoIgsis->telefone)?$equipamentoIgsis->telefone: old('telefone') }}">
             </div>
