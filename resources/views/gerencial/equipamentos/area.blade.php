@@ -47,6 +47,12 @@
                     value="{{ isset($equipamento->area) ? $equipamento->area->teatro
                                                         : old('areaTeatro') }}">
                 </div>
+                <div class="form-group col-md-3">
+                    <label for="especificacao">Especificação <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Descrição da especificação da metragem dos espaços/andares"></span> </label>
+                    <input type="text" class="form-control" name="especificacao" id="especificacao"
+                    value="{{ isset($equipamento->area) ? $equipamento->area->especificacao
+                                                        : old('especificacao') }}">
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-offset-4 col-md-2">

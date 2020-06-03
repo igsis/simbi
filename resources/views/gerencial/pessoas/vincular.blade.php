@@ -11,32 +11,70 @@
 @section('conteudo')
     <form method="POST" action="{{ route('pessoas.vincular', $user->id) }}" accept-charset="UTF-8">
         {{ csrf_field() }}
-        <div class="vinculos">
+        <div class="vinculos" id="vinculos">
             <div class="vinculo">
+                @if ($user->equipamentos->count() == false)
                 <div class="row">
-                    <div class="form-group col-md-7 has-feedback">
+                    <div class="form-group col-md-6 has-feedback">
                         <label for="cargo">Biblioteca</label>
                         <select class="form-control" name="equipamento[]" id="">
                             <option value="">Selecione...</option>
                             @foreach ($equipamentos as $equipamento)
                                 @if($equipamento->publicado == 1)
-                                    <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $user->equipamentos()->pluck('equipamento_id')->toArray()) ? "selected" : "" }}> {{$equipamento->nome}} </option>
+                                    <option value="{{$equipamento->id}}"> {{$equipamento->nome}} </option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-4">
                         <label for="responsabilidadeTipo">Responsabilidade:</label>
                         <select class="form-control" name="responsabilidadeTipo[]" id="cargo">
                             <option value="">Selecione...</option>
                             @foreach($cargos as $cargo)
-                                <option value="{{$cargo->id}}" {{ in_array($cargo->id, $user->equipamentos()->pluck('responsabilidade_tipo_id')->toArray()) ? "selected" : "" }}>{{$cargo->responsabilidade_tipo}}</option>
+                                <option value="{{$cargo->id}}"> {{$cargo->responsabilidade_tipo}} </option>
                             @endforeach
                         </select>
                     </div>
 
+                    <div class="form-group col-md-2">
+                        <br>  {{--fazer margin bottom --}}
+                        <a class="btn btn-danger col-md-12" id="remover" onclick="remover(this)">Remover <i class="fa fa-trash-o"></i></a>
+                    </div>
                 </div>
+                @else
+                    @foreach($user->equipamentos as $equipamentoVinculado)
+                    <div class="row">
+                        <div class="form-group col-md-6 has-feedback">
+                            <label for="cargo">Biblioteca</label>
+                            <select class="form-control" name="equipamento[]" id="">
+                                <option value="">Selecione...</option>
+                                @foreach ($equipamentos as $equipamento)
+                                    @if($equipamento->publicado == 1)
+                                        <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $equipamentoVinculado->toArray()) ? "selected" : "" }}> {{$equipamento->nome}} </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="responsabilidadeTipo">Responsabilidade:</label>
+                            <select class="form-control" name="responsabilidadeTipo[]" id="cargo">
+                                <option value="">Selecione...</option>
+                                @foreach($cargos as $cargo)
+                                    <option value="{{$cargo->id}}" {{ in_array($cargo->id, $equipamentoVinculado->toArray()) ? "selected" : "" }} >{{$cargo->responsabilidade_tipo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <br>  {{--fazer margin bottom --}}
+                            <a class="btn btn-danger col-md-12" id="remover" onclick="remover(this)">Remover <i class="fa fa-trash-o"></i></a>
+                        </div>
+
+                    </div>
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="box-footer">
@@ -64,6 +102,10 @@
             $('.calendario').datepicker("option","showAnim","blind");
             $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
+
+        function remover(e){
+            if($(".row").length > 0) $(e).closest(".row").remove();
+        }
     </script>
 @endsection
 

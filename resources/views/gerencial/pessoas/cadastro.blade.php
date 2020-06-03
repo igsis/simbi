@@ -17,7 +17,7 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1 class="page-header"><i class="fa fa-address-book-o"></i> Cadastrar de Pessoas</h1>
+        <h1 class="page-header"><i class="fa fa-address-book-o"></i> Cadastro de Pessoas</h1>
     </section>
 
     <!-- Main content -->
@@ -32,6 +32,7 @@
                         <div class="form-group col-md-2">
                             <label>
                                 <input type="radio" name="tipoPessoa" id="tipoPessoa" value="1" checked> Funcionário
+
                             </label>
                         </div>
                         <div class="form-group col-md-2">
@@ -39,13 +40,22 @@
                                 <input type="radio" name="tipoPessoa" id="tipoPessoa" value="2"> Convocado
                             </label>
                         </div>
+                        <div class="form-group col-md-2">
+                            <label>
+                                <input type="radio" name="tipoPessoa" id="tipoPessoa" value="3"> Estagiário
+                            </label>
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-xs-7 col-md-5 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
+                        <div class="form-group col-xs-7 col-md-6 has-feedback {{ $errors->has('RF') ? ' has-error' : '' }}">
                             <label for="name">Registro Funcional</label>
                         <input class="form-control" type="text" name="RF" id="RF" data-mask="0000000" maxlength="6" value="{{old('RF')}}">
                     </div>
+                        <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
+                            <label for="name">Vínculo</label>
+                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1" data-mask="0">
+                        </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
@@ -55,7 +65,7 @@
 
                         <div id="divCargo"
                              class="form-group col-xs-8 col-md-5 has-feedback {{ $errors->has('cargo') ? ' has-error' : '' }}">
-                            <label for="cargo">Cargo</label>
+                            <label for="cargo">Cargo/Função</label>
                             <select class="form-control" name="cargo" id="cargo">
                                 <option value="">Selecione...</option>
                                 @foreach ($cargos as $cargo)
@@ -103,10 +113,6 @@
                             </button>
                         </div>
 
-                        <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
-                            <label for="name">Vínculo</label>
-                            <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{old('vinculo')}}" maxlength="1" data-mask="0">
-                        </div>
                     </div>
 
                     <div id="divFuncionario">
@@ -116,7 +122,7 @@
 
                         <div class="row">
                             <div class="form-group col-md-6"><br>
-                                <label for="data">Data da Aposentadoria</label>
+                                <label for="data">Previsão para aposentadoria</label>
                                 <input class="form-control calendario" type="text" name="dataAposentadoria" value="{{old('dataAposentadoria')}}" id="dataAposentadoria" disabled autocomplete="off">
                             </div>
                             <div class="form-group col-md-12 has-feedback {{ $errors->has('observacao') ? ' has-error' : '' }}">
@@ -293,14 +299,25 @@
         //FUNCAO PARA ESCONDER E APRESENTAR CAMPOS
         $(document).ready(function(){
             $("#divConvocado").hide();
+            let vinculo = document.querySelector('#vinculo');
             $("input[name$='tipoPessoa']").click(function(){
-                var test = $(this).val();
-                if (test == '2') {
+                var tipo = $(this).val();
+                if (tipo == '1') {
+                    vinculo.value = '';
+                    vinculo.readOnly = false;
+                    $("#divFuncionario").show();
+                    $("#divConvocado").hide();
+                }
+                else if (tipo =='2') {
+                    vinculo.value = '';
+                    vinculo.readOnly = false;
                     $("#divFuncionario").hide();
                     $("#divConvocado").show();
                 }else{
-                    $("#divFuncionario").show();
-                    $("#divConvocado").hide();
+                    vinculo.value = 0;
+                    vinculo.readOnly = true;
+                    $("#divFuncionario").hide();
+                    $("#divConvocado").show();
                 }
             });
         });

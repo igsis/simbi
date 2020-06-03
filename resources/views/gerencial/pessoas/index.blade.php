@@ -6,7 +6,7 @@
 
 @section('titulo')
     @if($type == 1)
-        {{$pagina = "Pessoas Cadastradas"}}
+        {{$pagina = "Lista de Pessoas"}}
     @else
         {{$pagina = "Pessoas Desativadas"}}
     @endif
@@ -39,9 +39,6 @@
 
         <!-- Default box -->
         <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Lista de Pessoas</h3>
-            </div>
             <div class="box-body">
                 <div class="table-responsive">
                     <div class="btn-tabela">
@@ -56,6 +53,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>RF</th>
+                            <th>Categoria</th>
                             <th>Cargo</th>
                             <th>Equipamento(s) Vinculado(s)</th>
                             <th>Operações</th>
@@ -66,6 +64,15 @@
                             <tr>
                                 <td>{{ $user->nome }}</td>
                                 <td>{{ $user->RF }}</td>
+                                <td>
+                                    @if($user->tipo_pessoa == 1)
+                                        Funcionário
+                                    @elseif( $user->tipo_pessoa == 2)
+                                        Convocado
+                                    @else
+                                        Estagiário
+                                    @endif
+                                </td>
                                 <td>{{ $user->cargo->cargo }}</td>
                                 <td> {{ $user->equipamentos->implode('nome', ', ') }}<td>
 
@@ -114,6 +121,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>RF</th>
+                            <th>Categoria</th>
                             <th>Cargo</th>
                             <th>Equipamento(s) Vinculado(s)</th>
                             <th>Operações</th>

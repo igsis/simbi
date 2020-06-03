@@ -10,7 +10,8 @@ class Estacionamento extends Model
 
     protected $fillable = [
         'equipamento_id',
-        'capacidade'
+        'interno',
+        'externo'
     ];
 
     public function capacidade()

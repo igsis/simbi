@@ -29,7 +29,7 @@
                         {{ csrf_field() }}
 
                         <div class="hidden">
-                            <label for="igisi_id">ID do evento Siscontrat</label>
+                            <label for="igisi_id">ID do evento SisContrat</label>
                             <input type="text" class="form-control" name="igsis_evento_id" id="igsis_evento_id" value="{{$evento->id}}">
                         </div>
 
@@ -84,13 +84,29 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-6">
                                 <div class="form-group ">
                                     <label for="adulto">Forma de Contratação</label>
                                     <select name="contratacao" id="contratacao" class="form-control">
                                         <option value="">Selecione...</option>
                                         @foreach($contratacao as $contrata)
                                             <option value="{{ $contrata->id }}">{{ $contrata->forma_contratacao }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="form-group ">
+                                    <label>Área do Evento</label>
+                                    <select name="areaEvento" id="areaEvento" class="form-control">
+                                        <option value="">Selecione...</option>
+                                        @foreach($areaEvento as $area)
+                                            @if ($area->id == old('areaEvento'))
+                                                <option value="{{ $area->id }}" selected>{{ $area->area }}</option>
+                                            @else
+                                                <option value="{{ $area->id }}">{{ $area->area }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

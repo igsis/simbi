@@ -121,9 +121,4 @@
         window.onload = calcular();
 
     </script>
-
-    <script type="text/javascript">
-
-    </script>
-
 @endsection

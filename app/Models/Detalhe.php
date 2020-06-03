@@ -15,7 +15,9 @@ class Detalhe extends Model
         'padrao_id',
         'pavimento',
         'acessibilidade_id',
-        'validade_avcb'
+        'validade_avcb',
+        'predio_tombado',
+        'lei'
     ];
 
     public function equipamento()

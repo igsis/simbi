@@ -32,4 +32,14 @@ class IndexController extends Controller
         //return view('teste');
         return view('gerencial.index', compact('frequenciasCadastradas', 'ocorrencias'));
     }
+
+    public function acervoIndex()
+    {
+        $frequenciasCadastradas = Frequencia::all()->pluck('evento_ocorrencia_id')->toArray();
+
+        $ocorrencias = EventoOcorrencia::all();
+
+        //return view('teste');
+        return view('gerencial.index', compact('frequenciasCadastradas', 'ocorrencias'));
+    }
 }

@@ -77,3 +77,46 @@ Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $periodo){
     return Response::json($frequencias);
 })->name('api.relatorioCompleto');
 
+Route::get('/{id}/relatorioConsulta/{idPeriodo}', function($id, $periodo){
+
+    $consultas = DB::select('select sum(audio_visual) audio_visual, sum(jornal) jornal, sum(livro) livro, 
+                            sum(manga) manga, sum(revista) revista, sum(suportes) suportes , sum(total) total,
+                            monthname(data) mes, year(data) ano from consultas 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($consultas);
+})->name('api.relatorioConsulta');
+
+
+Route::get('/{id}/relatorioEmprestimo/{idPeriodo}', function($id, $periodo){
+
+    $emprestimos = DB::select('select sum(audio_visual) audio_visual, sum(livro) livro, 
+                            sum(manga) manga, sum(revista) revista, sum(suportes) suportes , sum(total) total,
+                            monthname(data) mes, year(data) ano from emprestimos 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($emprestimos);
+})->name('api.relatorioEmprestimo');
+
+Route::get('/{id}/relatorioBibliotecas/{idPeriodo}', function($id, $periodo){
+
+    $bibliotecas = DB::select('select sum(acervo) acervo, sum(frequencia_secao) frequencia_secao, 
+                            sum(consulta) consulta, sum(emprestimo) emprestimo, sum(total) total,
+                            monthname(data) mes, year(data) ano from bibliotecas_tematicas 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($bibliotecas);
+})->name('api.relatorioBibliotecas');
+
+Route::get('/{id}/relatorioMatriculas/{idPeriodo}', function($id, $periodo){
+
+    $matricula = DB::select('select sum(nova) nova, sum(renovacao) renovacao, 
+                            sum(total) total, monthname(data) mes, year(data) ano from matriculas 
+                                where periodo = ? and publicado = 1 and equipamento_id = ?
+                                group by ano, mes
+                                order by data desc;', [$periodo, $id]);
+    return Response::json($matricula);
+})->name('api.relatorioMatriculas');

@@ -37,6 +37,10 @@
                 <th width="30%">Área Total Terreno: </th>
                 <td>{{ $equipamento->area->total_terreno }}</td>
             </tr>
+            <tr>
+                <th width="30%">Especificação: </th>
+                <td>{{ $equipamento->area->especificacao }}</td>
+            </tr>
         @else
             <tr>
                 <th colspan="2" class="text-center">Não ha áreas cadastradas</th>

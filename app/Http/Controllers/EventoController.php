@@ -4,6 +4,7 @@ namespace Simbi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Simbi\Http\Controllers\Controller;
+use Simbi\Models\AreaEvento;
 use Simbi\Models\ContratacaoForma;
 use Simbi\Models\Equipamento;
 use Simbi\Models\Evento;
@@ -47,10 +48,10 @@ class EventoController extends Controller
         $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
-
+        $areaEvento = AreaEvento::orderBy('area')->get();
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
 
-        return view('frequencia.evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('frequencia.evento.cadastroEvento', compact('equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id', 'areaEvento'));
     }
 
     /**
@@ -66,7 +67,8 @@ class EventoController extends Controller
             'nome' => 'required',
             'tipoEvento' => 'required',
             'projetoEspecial' => 'required',
-            'contratacao' => 'required'
+            'contratacao' => 'required',
+            'areaEvento' => 'required'
         ]);
 
         $evento = Evento::create([
@@ -74,7 +76,8 @@ class EventoController extends Controller
             'nome_evento' => $request->nome,
             'tipo_evento_id' => $request->tipoEvento,
             'projeto_especial_id' => $request->projetoEspecial,
-            'contratacao_forma_id' => $request->contratacao
+            'contratacao_forma_id' => $request->contratacao,
+            'area_evento_id' => $request->areaEvento
         ]);
         return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento->id]);
     }
@@ -104,9 +107,9 @@ class EventoController extends Controller
         $tipoEvento = TipoEvento::orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
         $igsis_evento_id = Evento::all()->pluck('igsis_evento_id')->last();
+        $areaEvento = AreaEvento::orderBy('area')->get();
 
-
-        return view('frequencia.evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id'));
+        return view('frequencia.evento.editarEvento', compact( 'eventos','equipamento', 'projetoEspecial', 'tipoEvento', 'contratacao', 'igsis_evento_id', 'areaEvento'));
     }
 
     /**
@@ -123,7 +126,8 @@ class EventoController extends Controller
             'nome' => 'required',
             'tipoEvento' => 'required',
             'projetoEspecial' => 'required',
-            'contratacao' => 'required'
+            'contratacao' => 'required',
+            'areaEvento' => 'required'
 
         ]);
 
@@ -134,7 +138,8 @@ class EventoController extends Controller
             'nome_evento' => $request->nome,
             'tipo_evento_id' => $request->tipoEvento,
             'projeto_especial_id' => $request->projetoEspecial,
-            'contratacao_forma_id' => $request->contratacao
+            'contratacao_forma_id' => $request->contratacao,
+            'area_evento_id' => $request->areaEvento
         ]);
 
         return redirect()->route('eventos.listar', compact('equipamento_id'))->with('flash_message', 'Evento Editado com Sucesso!');
@@ -171,13 +176,15 @@ class EventoController extends Controller
         $projetoEspecial = ProjetoEspecial::where('publicado', 1)->orderBy('projeto_especial')->get();
         $tipoEvento = TipoEvento::where('publicado', 1)->orderBy('tipo_evento')->get();
         $contratacao = ContratacaoForma::orderBy('forma_contratacao')->get();
+        $areaEvento = AreaEvento::orderBy('area')->get();
 
         return view('frequencia.evento.cadastroEventoIgsis', compact(
             'evento',
             'projetoEspecial',
             'tipoEvento',
             'contratacao',
-            'equipamento_igsis'
+            'equipamento_igsis',
+            'areaEvento'
         ));
     }
 
@@ -187,7 +194,8 @@ class EventoController extends Controller
             'nome' => 'required',
             'tipoEvento' => 'required',
             'projetoEspecial' => 'required',
-            'contratacao' => 'required'
+            'contratacao' => 'required',
+            'areaEvento' => 'required'
         ]);
 
         $evento = Evento::create([
@@ -195,7 +203,8 @@ class EventoController extends Controller
             'nome_evento' => $request->nome,
             'tipo_evento_id' => $request->tipoEvento,
             'projeto_especial_id' => $request->projetoEspecial,
-            'contratacao_forma_id' => $request->contratacao
+            'contratacao_forma_id' => $request->contratacao,
+            'area_evento_id' => $request->areaEvento
         ]);
         return redirect()->route('eventos.cadastro.ocorrencia', ['equipamento_igsis' => $igsis_id, 'evento_igsis' => $evento->id]);
     }
