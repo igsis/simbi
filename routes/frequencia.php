@@ -56,4 +56,6 @@ Route::group(['prefix' => 'portaria'], function(){
 
     Route::get('/{equipamento}/listar', 'FrequenciasPortariaController@listar')->name('frequencia.portaria.listar');
 
+    Route::post('/cadastroSimples/secaoBraile', 'FrequenciasPortariaController@storeSecaoBraile')->name('frequencia.secaoBraile.gravar');
+
 });

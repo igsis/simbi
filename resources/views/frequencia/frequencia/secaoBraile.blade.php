@@ -6,7 +6,7 @@
             <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Cadastro de Público Seção Braile</h4>
          </div>
          <!-- inicio do form -->
-         <form action="{{route('frequencia.portaria.gravar')}}" 
+         <form action="{{route('frequencia.secaoBraile.gravar')}}" 
                method="post" autocomplete="off">
             <div class="modal-body">
                {{ csrf_field() }}
@@ -30,7 +30,8 @@
                         value="">
                   </div>
                </div>
-               <input type="hidden" name="id" id="idEquipamento" value="">
+               <input type="hidden" name="equipamento_id" 
+                      id="idEquipamentoSecaoBraile" value="">
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -57,4 +58,12 @@
        $('#calendario').datepicker("option", "dateFormat", "dd/mm/yy");
    });
    
+</script>
+<script>
+   function setarIdEquipamento(id) {
+       let idEquipamento = 
+       document.querySelector('#idEquipamentoSecaoBraile');
+   
+       idEquipamento.value = id;
+   }
 </script>

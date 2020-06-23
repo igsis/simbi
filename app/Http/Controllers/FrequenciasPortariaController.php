@@ -13,6 +13,8 @@ use Simbi\Models\Etnia;
 use Simbi\Models\FrequenciasPortaria;
 use Simbi\Models\Idade;
 use Simbi\Models\Sexo;
+use Simbi\Http\Requests\SecaoBraile\ValidateStore;
+use Simbi\Models\SecaoBraile;
 
 
 class FrequenciasPortariaController extends Controller
@@ -58,8 +60,7 @@ class FrequenciasPortariaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-
+        //dd($request->all());
         $this->validate($request, [
             'id' => 'required',
             'periodo' => 'required',
@@ -83,6 +84,24 @@ class FrequenciasPortariaController extends Controller
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
             'Frequência Inserida Com Sucesso!');
+    }
+
+    public function storeSecaoBraile(ValidateStore $req){
+
+      //dd($req->all());  
+
+      $insert = (new SecaoBraile())->insert($req->all());
+
+      if($insert)
+        return redirect()
+        ->route('frequencias.enviadas',['type'=>'1'])
+        ->with('flash_message',
+        'Seção Braile Inserida Com Sucesso!');
+
+     return redirect()
+        ->route('frequencias.enviadas',['type'=>'1'])
+        ->with('flash_message',
+        'Seção Braile não foi cadastrada!');          
     }
 
     public function gravaPortariaCompleta(Request $request, $id)

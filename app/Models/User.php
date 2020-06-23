@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Equipamento::class)->using(EquipamentoFuncionario::class);
     }
 
+    public function secoesBrailes():object{
+        return $this->belongsToMany(SecaoBraile::class)
+        ->using(EquipamentoFuncionario::class);
+    }
+
     public function frequencias()
     {
         // return $this->hasManyThrough(Frequencia::class, Evento::class);
