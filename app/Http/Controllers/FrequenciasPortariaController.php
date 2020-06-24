@@ -14,7 +14,7 @@ use Simbi\Models\FrequenciasPortaria;
 use Simbi\Models\Idade;
 use Simbi\Models\Sexo;
 use Simbi\Http\Requests\SecaoBraile\ValidateStore;
-use Simbi\Models\SecaoBraile;
+use Simbi\Models\{SecaoBraile, Telecentro};
 
 
 class FrequenciasPortariaController extends Controller
@@ -103,18 +103,18 @@ class FrequenciasPortariaController extends Controller
 
     public function storeTelecentro(ValidateStore $req){
 
-      $insert = (new SecaoBraile())->insert($req->all());
+      $insert = (new Telecentro())->insert($req->all());
 
       if($insert)
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile Inserida Com Sucesso!');
+        'Telecentro Inserida Com Sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile não foi cadastrada!');         
+        'Telecentro não foi cadastrada!');         
     }
 
     public function gravaPortariaCompleta(Request $request, $id)

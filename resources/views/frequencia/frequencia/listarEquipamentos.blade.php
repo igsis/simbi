@@ -76,6 +76,15 @@
                               <i
                               class="glyphicon glyphicon-eye-open"></i> &nbsp; TeleCentro
                            </button>
+                           <button type="button" 
+                              data-toggle="modal"
+                              data-target="#tematica"
+                              data-title="Cadastro de Temática"
+                              class="btn btn-warning" 
+                              style="margin-right: 3px">
+                              <i
+                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Temática
+                           </button>
                            @else
                            <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
                               class="btn bg-light-blue" style="margin-right: 3px"><i
