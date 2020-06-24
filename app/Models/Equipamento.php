@@ -91,6 +91,10 @@ class Equipamento extends Model
       return $this->hasMany(Tematica::class);
     }
 
+    public function oculos():object{
+      return $this->hasMany(Oculos::class);
+    }
+
     public function frequenciasPublicos()
     {
         return $this->hasMany(FrequenciasPublico::class);

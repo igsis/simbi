@@ -34,5 +34,16 @@ CREATE TABLE secaoBrailes(id int auto_increment,
   equipamento_id int,
   FOREIGN KEY (equipamento_id) REFERENCES Users(id),
   primary key(id));
+
+  CREATE TABLE oculos(id int auto_increment,
+  periodo tinyint,
+  quantidade smallint(5),
+  data date,
+  data_envio date,
+  user_id int,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  equipamento_id int,
+  FOREIGN KEY (equipamento_id) REFERENCES Users(id),
+  primary key(id));
   
  
