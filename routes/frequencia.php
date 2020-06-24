@@ -58,4 +58,6 @@ Route::group(['prefix' => 'portaria'], function(){
 
     Route::post('/cadastroSimples/secaoBraile', 'FrequenciasPortariaController@storeSecaoBraile')->name('frequencia.secaoBraile.gravar');
 
+    Route::post('/cadastroSimples/telecentro', 'FrequenciasPortariaController@storeTelecentro')->name('frequencia.telecentro.gravar');
+
 });

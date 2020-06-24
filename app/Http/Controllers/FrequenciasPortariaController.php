@@ -60,7 +60,6 @@ class FrequenciasPortariaController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $this->validate($request, [
             'id' => 'required',
             'periodo' => 'required',
@@ -86,9 +85,7 @@ class FrequenciasPortariaController extends Controller
             'Frequência Inserida Com Sucesso!');
     }
 
-    public function storeSecaoBraile(ValidateStore $req){
-
-      //dd($req->all());  
+    public function storeSecaoBraile(ValidateStore $req):object{
 
       $insert = (new SecaoBraile())->insert($req->all());
 
@@ -102,6 +99,22 @@ class FrequenciasPortariaController extends Controller
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
         'Seção Braile não foi cadastrada!');          
+    }
+
+    public function storeTelecentro(ValidateStore $req){
+
+      $insert = (new SecaoBraile())->insert($req->all());
+
+      if($insert)
+        return redirect()
+        ->route('frequencias.enviadas',['type'=>'1'])
+        ->with('flash_message',
+        'Seção Braile Inserida Com Sucesso!');
+
+     return redirect()
+        ->route('frequencias.enviadas',['type'=>'1'])
+        ->with('flash_message',
+        'Seção Braile não foi cadastrada!');         
     }
 
     public function gravaPortariaCompleta(Request $request, $id)

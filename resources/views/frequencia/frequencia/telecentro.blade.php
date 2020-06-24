@@ -1,12 +1,12 @@
-<div class="modal fade" id="SecaoBraile" role="dialog">
+<div class="modal fade" id="telecentro" role="dialog">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Cadastro de Público Seção Braile</h4>
+            <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Cadastro de Público Telecentro</h4>
          </div>
          <!-- inicio do form -->
-         <form action="{{route('frequencia.secaoBraile.gravar')}}" 
+         <form action="{{route('frequencia.telecentro.gravar')}}"
                method="post" autocomplete="off">
             <div class="modal-body">
                {{ csrf_field() }}
@@ -14,7 +14,7 @@
                   <div class="form-group col-md-4" >
                      <label for="data">Data</label>
                      <input type="text" class="form-control" 
-                     id="calendarioBraile" name="data" autocomplete="off" maxlength="10">
+                     id="calendarioTelecentro" name="data" autocomplete="off" maxlength="10">
                   </div>
                   <div class="form-group col-md-6" >
                      <label for="data">Período</label> <br>
@@ -31,7 +31,7 @@
                   </div>
                </div>
                <input type="hidden" name="equipamento_id" 
-                      id="idEquipamentoSecaoBraile" 
+                      id="idEquipamentoTelecentro" 
                       value="{{$equipamento->id}}">
             </div>
             <div class="modal-footer">
@@ -47,8 +47,8 @@
 <script>
    $(function () {
        let data = new Date();
-       $('#calendarioBraile').datepicker("option", "showAnim", "blind");
-       $("#calendarioBraile").datepicker({
+       $('#calendarioTelecentro').datepicker("option", "showAnim", "blind");
+       $("#calendarioTelecentro").datepicker({
    
            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
@@ -56,7 +56,7 @@
            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
        });
-       $('#calendario').datepicker("option", "dateFormat", "dd/mm/yy");
+       $('#calendarioTelecentro').datepicker("option", "dateFormat", "dd/mm/yy");
    });
    
 </script>
