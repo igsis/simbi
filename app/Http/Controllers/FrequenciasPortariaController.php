@@ -14,7 +14,7 @@ use Simbi\Models\FrequenciasPortaria;
 use Simbi\Models\Idade;
 use Simbi\Models\Sexo;
 use Simbi\Http\Requests\SecaoBraile\ValidateStore;
-use Simbi\Models\{SecaoBraile, Telecentro};
+use Simbi\Models\{SecaoBraile, Telecentro, Tematica};
 
 
 class FrequenciasPortariaController extends Controller
@@ -115,6 +115,22 @@ class FrequenciasPortariaController extends Controller
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
         'Telecentro não foi cadastrada!');         
+    }
+
+    public function storeTematica(ValidateStore $req){
+
+      $insert = (new Tematica())->insert($req->all());
+
+      if($insert)
+        return redirect()
+        ->route('frequencias.enviadas',['type'=>'1'])
+        ->with('flash_message',
+        'Temática Inserida Com Sucesso!');
+
+     return redirect()
+        ->route('frequencias.enviadas',['type'=>'1'])
+        ->with('flash_message',
+        'Temática não foi cadastrada!');         
     }
 
     public function gravaPortariaCompleta(Request $request, $id)

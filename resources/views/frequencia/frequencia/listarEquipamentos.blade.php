@@ -80,7 +80,7 @@
                               data-toggle="modal"
                               data-target="#tematica"
                               data-title="Cadastro de Temática"
-                              class="btn btn-warning" 
+                              class="btn btn-info" 
                               style="margin-right: 3px">
                               <i
                               class="glyphicon glyphicon-eye-open"></i> &nbsp; Temática
@@ -190,6 +190,7 @@
 </div>
 @include('frequencia.frequencia.secaoBraile')
 @include('frequencia.frequencia.telecentro')
+@include('frequencia.frequencia.tematica')
 @endsection
 @section('scripts_adicionais')
 {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}

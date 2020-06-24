@@ -87,6 +87,10 @@ class Equipamento extends Model
       return $this->hasMany(Telecentro::class);
     }
 
+    public function tematicas():object{
+      return $this->hasMany(Tematica::class);
+    }
+
     public function frequenciasPublicos()
     {
         return $this->hasMany(FrequenciasPublico::class);
