@@ -21,14 +21,8 @@ class Oculos extends Model
 
    public function insert(array $dados):bool{
 
-     $dados['user_id'] = auth()->user()->id;
-    	
-     $data = $dados['data'];
-     $dt = explode('/', $data);
-     $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
-
-     $dados['data'] = $data;
-
+     $dados['user_id'] = auth()->user()->id;    	
+     
      try{
        $this::create($dados);
      }catch(\Exception $e){
