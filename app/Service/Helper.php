@@ -8,12 +8,15 @@ class Helper{
 
     $dtFormat = explode('/', $dt);
 
+    //dd($dtFormat);
+
     $data = 
       $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
     $separarPeriodo = strtotime($data);
+    
     $dia = date("w", $separarPeriodo);            
-      
+
     switch ($dia){
       case 0:
         return 3;
@@ -34,6 +37,6 @@ class Helper{
      $d = $dt;
      $data = explode('/', $dt);
      
-     return $data[2].'-'.$data[0].'-'.$data[1];     
+     return $data[2].'-'.$data[1].'-'.$data[0];     
   }
 }
