@@ -6,9 +6,7 @@ class Helper{
   
   public function splitPeriod(String $dt):int{
 
-    $dtFormat = explode('/', $dt);
-
-    //dd($dtFormat);
+    $dtFormat = explode('/', $dt);    
 
     $data = 
       $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
