@@ -238,17 +238,11 @@ class FrequenciaController extends Controller
         return view('frequencia.frequencia.index', compact('equipamentos', 'type'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function listar($id)
-    {
+    public function listar($id){
         $equipamento = Equipamento::findOrFail($id);
 
-        return view('frequencia.frequencia.listar', compact('equipamento'));
+        return view('frequencia.frequencia.listar', 
+            compact('equipamento'));
     }
 
     /**
