@@ -50,10 +50,11 @@
 <script>
    $(document).ready(function(){
        PreencherTabela();
-   
+       
        function PreencherTabela() {
            var id = {{$equipamento->id}};
            var idPeriodo = $("input[name='periodo']:checked").val();
+
            $.getJSON('/api/simbi/' + id + '/relatorioCompleto/' + idPeriodo, function (frequencias) {
                $( "tr" ).remove(); //limpar tabela
                if (frequencias.length <1){
