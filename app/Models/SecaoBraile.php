@@ -24,13 +24,7 @@ class SecaoBraile extends Model
    public function insert(array $dados):bool{
 
      $dados['user_id'] = auth()->user()->id;
-    	
-     $data = $dados['data'];
-     $dt = explode('/', $data);
-     $data = $dt[2].'-'.$dt[0].'-'.$dt[1];
-
-     $dados['data'] = $data;
-
+     
      try{
        $this::create($dados);
      }catch(\Exception $e){

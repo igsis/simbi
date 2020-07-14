@@ -24,10 +24,9 @@ class ValidateStore extends FormRequest
     public function rules()
     {
         return [
-           'equipamento_id' => 'required',  
-           'periodo' => 'required',
-           'data'    =>  'required',
-           'quantidade' =>  'required|integer|between: 0, 9999'       
+          'equipamento_id' => 'required',  
+          'data'    =>  'required',
+          'quantidade' =>  'required|integer|between: 0, 9999'       
         ];        
     }
 }

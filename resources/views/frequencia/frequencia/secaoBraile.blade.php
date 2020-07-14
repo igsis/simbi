@@ -13,15 +13,16 @@
                <div class="row">
                   <div class="form-group col-md-4" >
                      <label for="data">Data</label>
-                     <input type="text" class="form-control" 
+                     <input type="text" 
+                     class="form-control" 
                      id="calendarioBraile" name="data" autocomplete="off" maxlength="10">
                   </div>
-                  <div class="form-group col-md-6" >
+                  <!--<div class="form-group col-md-6" >
                      <label for="data">Período</label> <br>
                      <input type="radio" name="periodo" value="1"> Segunda à Sexta &nbsp;&nbsp;
                      <input type="radio" name="periodo" value="2"> Sábado &nbsp;&nbsp;
                      <input type="radio" name="periodo" value="3"> Domingo
-                  </div>
+                  </div>-->
                </div>
                <div class="row">
                   <div class="form-group col-md-6">

@@ -15,6 +15,7 @@ use Simbi\Models\Idade;
 use Simbi\Models\Sexo;
 use Simbi\Http\Requests\SecaoBraile\ValidateStore;
 use Simbi\Models\{SecaoBraile, Telecentro, Tematica, Oculos};
+use Simbi\Service\Helper;
 
 
 class FrequenciasPortariaController extends Controller
@@ -85,9 +86,18 @@ class FrequenciasPortariaController extends Controller
             'Frequência Inserida Com Sucesso!');
     }
 
-    public function storeSecaoBraile(ValidateStore $req):object{
+    public function storeSecaoBraile(ValidateStore $req)
+    :object{
+      
+      $dados = $req->all();
+      
+      $dados['periodo'] = 
+      (new Helper())->splitPeriod($req->data); 
 
-      $insert = (new SecaoBraile())->insert($req->all());
+      $dados['data'] = 
+      (new Helper())->setDatePtBR($req->data);           
+      
+      $insert = (new SecaoBraile())->insert($dados);
 
       if($insert)
         return redirect()
@@ -101,9 +111,18 @@ class FrequenciasPortariaController extends Controller
         'Seção Braile não foi cadastrada!');          
     }
 
-    public function storeTelecentro(ValidateStore $req){
+    public function storeTelecentro(ValidateStore $req)
+    :object{
 
-      $insert = (new Telecentro())->insert($req->all());
+      $dados = $req->all();
+      
+      $dados['periodo'] = 
+      (new Helper())->splitPeriod($req->data);
+
+      $dados['data'] = 
+      (new Helper())->setDatePtBR($req->data);      
+
+      $insert = (new Telecentro())->insert($dados);
 
       if($insert)
         return redirect()
@@ -117,9 +136,18 @@ class FrequenciasPortariaController extends Controller
         'Telecentro não foi cadastrada!');         
     }
 
-    public function storeTematica(ValidateStore $req){
+    public function storeTematica(ValidateStore $req)
+    :object {
 
-      $insert = (new Tematica())->insert($req->all());
+      $dados = $req->all();
+
+      $dados['periodo'] = 
+      (new Helper())->splitPeriod($req->data); 
+
+      $dados['data'] = 
+      (new Helper())->setDatePtBR($req->data);   
+      
+      $insert = (new Tematica())->insert($dados);
 
       if($insert)
         return redirect()
@@ -133,9 +161,18 @@ class FrequenciasPortariaController extends Controller
         'Temática não foi cadastrada!');         
     }
 
-    public function storeOculos(ValidateStore $req){
+    public function storeOculos(ValidateStore $req)
+    :object{
 
-      $insert = (new Oculos())->insert($req->all());
+      $dados = $req->all();
+
+      $dados['periodo'] = 
+      (new Helper())->splitPeriod($req->data);    
+
+      $dados['data'] = 
+      (new Helper())->setDatePtBR($req->data);
+
+      $insert = (new Oculos())->insert($dados);
 
       if($insert)
         return redirect()
