@@ -83,9 +83,13 @@ class User extends Authenticatable
     }
 
     public function secoesBrailes():object{
-        return $this->belongsToMany(SecaoBraile::class)
-        ->using(EquipamentoFuncionario::class);
+        return $this->belongsToMany(SecaoBraile::class);        
     }
+
+    public function telecentros():object{
+      return $this->belongsToMany(Telecentro::class);       
+    }
+
 
     public function frequencias()
     {

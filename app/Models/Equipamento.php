@@ -89,8 +89,12 @@ class Equipamento extends Model
         return $this->hasMany(Frequencia::class);
     }
 
-    public function secaoBraile():object{
+    public function secaoBrailes():object{
       return $this->hasMany(SecaoBraile::class);
+    }
+
+    public function telecentros():object{
+      return $this->hasMany(Telecentro::class);
     }
 
     public function frequenciasPublicos()

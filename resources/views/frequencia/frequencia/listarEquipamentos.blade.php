@@ -58,13 +58,32 @@
                               onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
                               class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
                            </button>
-                           <button type="button" data-toggle="modal"
+                           <button type="button" 
+                              data-toggle="modal"
                               data-target="#SecaoBraile"
-                              data-title="Cadastro de Portaria"
+                              data-title="Cadastro de Braile"
                               class="btn btn-success" 
-                              style="margin-right: 3px"
-                              onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
+                              style="margin-right: 3px">
+                              <i
                               class="glyphicon glyphicon-eye-open"></i> &nbsp; Seção Braile
+                           </button>
+                           <button type="button" 
+                              data-toggle="modal"
+                              data-target="#telecentro"
+                              data-title="Cadastro de Telecentro"
+                              class="btn btn-warning" 
+                              style="margin-right: 3px">
+                              <i
+                              class="glyphicon glyphicon-eye-open"></i> &nbsp; TeleCentro
+                           </button>
+                           <button type="button" 
+                              data-toggle="modal"
+                              data-target="#tematica"
+                              data-title="Cadastro de Temática"
+                              class="btn btn-warning" 
+                              style="margin-right: 3px">
+                              <i
+                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Temática
                            </button>
                            @else
                            <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
@@ -170,6 +189,7 @@
    </div>
 </div>
 @include('frequencia.frequencia.secaoBraile')
+@include('frequencia.frequencia.telecentro')
 @endsection
 @section('scripts_adicionais')
 {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
