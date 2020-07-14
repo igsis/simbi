@@ -90,6 +90,14 @@ class User extends Authenticatable
       return $this->belongsToMany(Telecentro::class);       
     }
 
+    public function tematicas():object{
+      return $this->belongsToMany(Tematica::class);       
+    }
+
+    public function oculos():object{
+      return $this->belongsToMany(Oculos::class);       
+    }
+
 
     public function frequencias()
     {

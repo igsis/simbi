@@ -80,10 +80,19 @@
                               data-toggle="modal"
                               data-target="#tematica"
                               data-title="Cadastro de Temática"
-                              class="btn btn-warning" 
+                              class="btn btn-info" 
                               style="margin-right: 3px">
                               <i
                               class="glyphicon glyphicon-eye-open"></i> &nbsp; Temática
+                           </button>
+                           <button type="button" 
+                              data-toggle="modal"
+                              data-target="#oculos"
+                              data-title="Cadastro de Oculos"
+                              class="btn btn-danger" 
+                              style="margin-right: 3px">
+                              <i
+                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Óculos
                            </button>
                            @else
                            <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
@@ -190,6 +199,8 @@
 </div>
 @include('frequencia.frequencia.secaoBraile')
 @include('frequencia.frequencia.telecentro')
+@include('frequencia.frequencia.tematica')
+@include('frequencia.frequencia.oculos')
 @endsection
 @section('scripts_adicionais')
 {{--    <script src="{{asset('AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>--}}
