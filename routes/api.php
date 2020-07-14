@@ -62,7 +62,7 @@ Route::post('/salvarFrequencia/{id}', function (Request $request, $id) {
     return response('Frequencia não encontrada', 404);
 });
 
-Route::get('/{id}/relatorioCompleto/{idPeriodo}', function($id, $periodo){
+Route::get('/simbi/{id}/relatorioCompleto/{idPeriodo}', function($id, $periodo){
     $frequencias = DB::select('
         select * from
             (select sum(quantidade) quantidade, monthname(data) mes, year(data) ano from frequencias_portarias where equipamento_id = ? and periodo = ? group by ano, mes) fp
