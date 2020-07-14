@@ -54,8 +54,8 @@
        function PreencherTabela() {
            var id = {{$equipamento->id}};
            var idPeriodo = $("input[name='periodo']:checked").val();
-
-           $.getJSON('/api/simbi/' + id + '/relatorioCompleto/' + idPeriodo, function (frequencias) {
+           
+           $.getJSON('/simbi/api/' + id + '/relatorioCompleto/' + idPeriodo, function (frequencias) {
                $( "tr" ).remove(); //limpar tabela
                if (frequencias.length <1){
                    var cols = "";
@@ -78,7 +78,9 @@
                        if (total == null) total = 0;
                        if (mes == null) mes = value.mesf;
                        if (ano == null) ano = value.anof;
-   
+
+                       var mes = mesBr(mes);
+
                        soma = parseInt(quantidade) + parseInt(total);
    
                        cols += '<thead>';
@@ -107,6 +109,27 @@
        $("input[name='periodo']").change(function(){
            PreencherTabela();
        });
+
+       function mesBr(mes) {
+
+           var meses = [
+               "Janeiro",
+               "Fevereiro",
+               "Março",
+               "Abril",
+               "Maio",
+               "Junho",
+               "Julho",
+               "Agosto",
+               "Setembro",
+               "Outubro",
+               "Novembro",
+               "Dezembro"
+           ];
+
+           return meses[mes + 1];
+       }
+
    });
    
 </script>

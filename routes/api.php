@@ -62,12 +62,12 @@ Route::post('/salvarFrequencia/{id}', function (Request $request, $id) {
     return response('Frequencia não encontrada', 404);
 });
 
-Route::get('/simbi/{id}/relatorioCompleto/{idPeriodo}', 
+Route::get('/{id}/relatorioCompleto/{idPeriodo}', 
   function($id, $periodo){
     $frequencias = DB::select("
       SELECT * FROM (
         select sum(secoes.quantidade) quantidade, 
-               monthname(secoes.data) mes, 
+               month(secoes.data) mes, 
                year(secoes.data) ano 
         FROM (
           select quantidade, data, equipamento_id, periodo 
@@ -90,7 +90,7 @@ Route::get('/simbi/{id}/relatorioCompleto/{idPeriodo}',
         group by ano, mes) fp RIGHT JOIN (
           
           select sum(total) total, 
-                 monthname(o.data) mesf, 
+                 month(o.data) mesf, 
                  year(o.data) anof 
           from frequencias fr inner join 
           evento_ocorrencias o 
@@ -106,7 +106,7 @@ Route::get('/simbi/{id}/relatorioCompleto/{idPeriodo}',
       
       SELECT * FROM (
         select sum(secoes.quantidade) quantidade, 
-               monthname(secoes.data) mes, 
+               month(secoes.data) mes, 
                year(secoes.data) ano
         FROM (
           select quantidade, data, equipamento_id, periodo 
@@ -129,7 +129,7 @@ Route::get('/simbi/{id}/relatorioCompleto/{idPeriodo}',
           group by ano, mes) fp LEFT JOIN (
             
             select sum(total) total, 
-                   monthname(o.data) mesf, 
+                   month(o.data) mesf, 
                    year(o.data) anof 
             
             from frequencias fr inner join 
