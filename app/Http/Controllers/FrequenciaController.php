@@ -225,17 +225,17 @@ class FrequenciaController extends Controller
             'Frequência Inserida Com Sucesso!');
     }
 
-    /**
-     * Display the specified resource.v
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function relatorio()
-    {
-        $type = 2;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
-        return view('frequencia.frequencia.index', compact('equipamentos', 'type'));
+    public function relatorio(){
+     
+      $type = 2;
+      
+      $equipamentos = 
+      Equipamento::where('publicado', '=', '1')
+      ->orderBy('nome')
+      ->get();
+
+      return view('frequencia.frequencia.index', 
+        compact('equipamentos', 'type'));
     }
 
     public function listar($id){
