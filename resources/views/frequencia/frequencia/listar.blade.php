@@ -127,7 +127,7 @@
                "Dezembro"
            ];
 
-           return meses[mes + 1];
+           return meses[mes - 1];
        }
 
    });

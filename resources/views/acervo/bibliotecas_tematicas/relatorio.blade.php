@@ -73,14 +73,16 @@
                     }
                     else{
                         $.each(bibliotecas, function(key, value){
+                            var mes = mesBr(value.mes);
+
                             var cols = "";
 
                             cols += '<thead>';
                             cols += '<tr>';
-                            cols += '<th colspan="7" class="text-center">'+value.mes.toUpperCase()+'-'+value.ano+'</th>';
+                            cols += '<th colspan="7" class="text-center">'+mes.toUpperCase()+'-'+value.ano+'</th>';
                             cols += '<tr>';
                             cols += '<th>Acervo</th>';
-                            cols += '<th>Frequência na Seçãol</th>';
+                            cols += '<th>Frequência na Seção</th>';
                             cols += '<th>Consulta</th>';
                             cols += '<th>Empréstimo</th>';
                             cols += '<th>Total</th>';
@@ -104,6 +106,26 @@
             $("input[name='periodo']").change(function(){
                 PreencherTabela();
             });
+
+            function mesBr(mes) {
+
+                var meses = [
+                    "Janeiro",
+                    "Fevereiro",
+                    "Março",
+                    "Abril",
+                    "Maio",
+                    "Junho",
+                    "Julho",
+                    "Agosto",
+                    "Setembro",
+                    "Outubro",
+                    "Novembro",
+                    "Dezembro"
+                ];
+
+                return meses[mes - 1];
+            }
         });
 
     </script>

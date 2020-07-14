@@ -166,7 +166,7 @@ Route::get('/{id}/relatorioEmprestimo/{idPeriodo}', function($id, $periodo){
 
     $emprestimos = DB::select('select sum(audio_visual) audio_visual, sum(livro) livro, 
                             sum(manga) manga, sum(revista) revista, sum(suportes) suportes , sum(total) total,
-                            month(data) mes, year(data) ano from emprestimos 
+                            monthname(data) mes, year(data) ano from emprestimos 
                                 where periodo = ? and publicado = 1 and equipamento_id = ?
                                 group by ano, mes
                                 order by data desc;', [$periodo, $id]);
@@ -177,7 +177,7 @@ Route::get('/{id}/relatorioBibliotecas/{idPeriodo}', function($id, $periodo){
 
     $bibliotecas = DB::select('select sum(acervo) acervo, sum(frequencia_secao) frequencia_secao, 
                             sum(consulta) consulta, sum(emprestimo) emprestimo, sum(total) total,
-                            month(data) mes, year(data) ano from bibliotecas_tematicas 
+                            monthname(data) mes, year(data) ano from bibliotecas_tematicas 
                                 where periodo = ? and publicado = 1 and equipamento_id = ?
                                 group by ano, mes
                                 order by data desc;', [$periodo, $id]);
@@ -187,7 +187,7 @@ Route::get('/{id}/relatorioBibliotecas/{idPeriodo}', function($id, $periodo){
 Route::get('/{id}/relatorioMatriculas/{idPeriodo}', function($id, $periodo){
 
     $matricula = DB::select('select sum(nova) nova, sum(renovacao) renovacao, 
-                            sum(total) total, month(data) mes, year(data) ano from matriculas 
+                            sum(total) total, monthname(data) mes, year(data) ano from matriculas 
                                 where periodo = ? and publicado = 1 and equipamento_id = ?
                                 group by ano, mes
                                 order by data desc;', [$periodo, $id]);
