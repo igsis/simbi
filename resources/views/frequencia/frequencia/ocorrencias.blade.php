@@ -308,11 +308,11 @@
             $('#eventoOcorrenciaId').val('')
             $('#nome_evento').val('')
             $('#id_Projeto').val('')
-            $('#qtdCrianca').val('')
-            $('#qtdJovem').val('')
-            $('#qtdAdulto').val('')
-            $('#qtdIdoso').val('')
-            $('#qtdPublicoTotal').val('')
+            $('#qtdCrianca').val(0)
+            $('#qtdJovem').val(0)
+            $('#qtdAdulto').val(0)
+            $('#qtdIdoso').val(0)
+            $('#qtdPublicoTotal').val(0)
         }
 
         function editarFrequencia(projetoEspecial, id) {

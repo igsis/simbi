@@ -158,7 +158,7 @@
    </section>
 </div>
 <div class="modal fade" id="cadastroPortariaSimples" role="dialog">
-   <div class="modal-dialog modal-lg">
+   <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -169,16 +169,15 @@
             <div class="modal-body">
                {{ csrf_field() }}
                <div class="row">
-                  <div class="form-group col-md-4" >
+                  <div class="form-group col-md-5" >
                      <label for="data">Data</label>
                      <input type="text" class="form-control" id="calendario" name="data" autocomplete="off" maxlength="10">
                   </div>
-               </div>
-               <div class="row">
-                  <div class="form-group col-md-6">
+
+                  <div class="form-group col-md-7">
                      <label for="nome">Quantidade</label>
                      <input type="number" class="form-control" id="quantidade" name="quantidade"
-                        value="">
+                            value="">
                   </div>
                </div>
                <input type="hidden" name="id" id="idEquipamento" value="">
