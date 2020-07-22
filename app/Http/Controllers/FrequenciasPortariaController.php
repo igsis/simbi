@@ -63,7 +63,6 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'id' => 'required',
-            'periodo' => 'required',
             'data'          =>  'required',
             'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
@@ -74,9 +73,18 @@ class FrequenciasPortariaController extends Controller
         $dt = explode('/', $data);
         $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
         $user->frequenciasPortarias()->create([
             'data' => $data,
-            'periodo'=> $request->periodo,
+            'periodo'=> $periodo,
             'quantidade' => $request->quantidade,
             'equipamento_id' => $request->id,
             'data_envio' => date("Y-m-d")
@@ -95,7 +103,9 @@ class FrequenciasPortariaController extends Controller
       (new Helper())->splitPeriod($req->data); 
 
       $dados['data'] = 
-      (new Helper())->setDatePtBR($req->data);           
+      (new Helper())->setDatePtBR($req->data);
+
+      $dados['data_envio'] = date("Y-m-d");
       
       $insert = (new SecaoBraile())->insert($dados);
 
@@ -120,9 +130,11 @@ class FrequenciasPortariaController extends Controller
       (new Helper())->splitPeriod($req->data);
 
       $dados['data'] = 
-      (new Helper())->setDatePtBR($req->data);      
+      (new Helper())->setDatePtBR($req->data);
 
-      $insert = (new Telecentro())->insert($dados);
+      $dados['data_envio'] = date("Y-m-d");
+
+        $insert = (new Telecentro())->insert($dados);
 
       if($insert)
         return redirect()
@@ -145,9 +157,11 @@ class FrequenciasPortariaController extends Controller
       (new Helper())->splitPeriod($req->data); 
 
       $dados['data'] = 
-      (new Helper())->setDatePtBR($req->data);   
-      
-      $insert = (new Tematica())->insert($dados);
+      (new Helper())->setDatePtBR($req->data);
+
+       $dados['data_envio'] = date("Y-m-d");
+
+        $insert = (new Tematica())->insert($dados);
 
       if($insert)
         return redirect()
@@ -172,7 +186,9 @@ class FrequenciasPortariaController extends Controller
       $dados['data'] = 
       (new Helper())->setDatePtBR($req->data);
 
-      $insert = (new Oculos())->insert($dados);
+      $dados['data_envio'] = date("Y-m-d");
+
+        $insert = (new Oculos())->insert($dados);
 
       if($insert)
         return redirect()
@@ -190,7 +206,6 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'data'     =>  'required',
-            'periodo'     =>  'required',
             'fundamental'       =>  'required|integer|between: 0, 9999',
             'medio'         =>  'required|integer|between: 0, 9999',
             'superior'        =>  'required|integer|between: 0, 9999',
@@ -224,6 +239,15 @@ class FrequenciasPortariaController extends Controller
         $dt = explode('/', $data);
         $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
         $frequenciaPortaria = new FrequenciasPortaria();
         $complementoPortaria = new ComplementoPortaria();
         $idades = new Idade();
@@ -234,7 +258,7 @@ class FrequenciasPortariaController extends Controller
 
         $frequenciaPortaria->user_id = $user->id;
         $frequenciaPortaria->data = $data;
-        $frequenciaPortaria->periodo = $request->periodo;
+        $frequenciaPortaria->periodo = $periodo;
         $frequenciaPortaria->quantidade = $request->total;
         $frequenciaPortaria->equipamento_id = $id;
         $frequenciaPortaria->data_envio = date("Y-m-d");

@@ -74,9 +74,9 @@ class Equipamento extends Model
         return $this->hasOne(SalaComum::class);
     }
 
-    public function telecentro()
+    public function telecentroDiglab()
     {
-        return $this->hasOne(Telecentro::class);
+        return $this->hasOne(TelecentroDiglab::class);
     }
 
     public function estacionamento()

@@ -272,10 +272,10 @@
         <tr>
             <th colspan="2" class="text-center">Telecentro/DigiLab</th>
         </tr>
-        @if (isset($equipamento->telecentro))
+        @if (isset($equipamento->telecentroDiglab))
             <tr>
                 <th class="text-center" width="50%">Capacidade: </th>
-                <td class="text-center">{{ $equipamento->telecentro}}</td>
+                <td class="text-center">{{ $equipamento->telecentroDiglab->quantidade}}</td>
             </tr>
         @else
             <tr>

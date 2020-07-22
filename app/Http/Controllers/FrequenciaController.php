@@ -151,8 +151,8 @@ class FrequenciaController extends Controller
         //1- Segunda à Sexta
         //2-Sábado
         //3-Domingo
-        $unixTimestamp = strtotime($data);
-        $dia = date("w", $unixTimestamp);
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
         if ($dia == 0)// domingo
             $periodo = 3;
         elseif ($dia == 6)//sabado

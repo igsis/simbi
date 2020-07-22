@@ -74,7 +74,7 @@ Route::get('/{id}/relatorioCompleto/{idPeriodo}',
           from frequencias_portarias  UNION ALL
         
           select quantidade, data, equipamento_id, periodo 
-          from secaobrailes UNION ALL
+          from secao_brailes UNION ALL
 
           select quantidade, data, equipamento_id, periodo 
           from telecentros UNION ALL 
@@ -113,7 +113,7 @@ Route::get('/{id}/relatorioCompleto/{idPeriodo}',
           from frequencias_portarias  UNION ALL
         
           select quantidade, data, equipamento_id, periodo 
-          from secaobrailes UNION ALL
+          from secao_brailes UNION ALL
 
           select quantidade, data, equipamento_id, periodo 
           from telecentros UNION ALL 

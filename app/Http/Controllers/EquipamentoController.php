@@ -680,7 +680,7 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::findOrFail($id);
 
-        $equipamento->telecentro()->create([
+        $equipamento->telecentroDiglab()->create([
             'quantidade'=>$request->input('novo')
         ]);
 
