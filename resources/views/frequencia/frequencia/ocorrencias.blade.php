@@ -157,17 +157,16 @@
     </div>
 
     <!-- Modal confirmação para deletar -->
-    <div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal fade" id="modalDeletar" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Excluir?</h4>
+                    <h4 class="modal-title">Excluir ocorrência</h4>
                 </div>
                 <form action="{{route('evento.ocorrencia.destroy')}}" id="deletarOcorrencia" method="post">
                     {{csrf_field()}}
                     <div class="modal-body">
-                        <p>Confirma?</p>
                         <div class="form-group">
                             <label for="observacao">Motivo do Cancelamento</label>
                             <input type="text" id="observacao" class="form-control" name="observacao">
@@ -189,9 +188,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Excluir?</h4>
+                    <h4 class="modal-title">Enviar Frequencia</h4>
                 </div>
-                <form action="{{route('frequencia.enviarFrequencia')}}" id="deletarOcorrencia" method="post">
+                <form action="{{route('frequencia.enviarFrequencia')}}" method="post">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <p>Confirma?</p>
@@ -411,7 +410,8 @@
         });
 
         $('#confirmDelete').find('.modal-footer #confirm').on('click', function () {
-            $(this).data('form').submit();
+            $('#modalDeletar').modal('show');
+           // $(this).data('form').submit();
         });
 
         function preencherId(id) {

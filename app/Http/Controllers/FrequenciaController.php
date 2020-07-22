@@ -269,7 +269,7 @@ class FrequenciaController extends Controller
 
         return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
             ->with('flash_message',
-                'Ocorrência do Evento Excluido com Sucesso.');
+                'Ocorrência do Evento Excluida com Sucesso.');
     }
 
     /**
@@ -287,7 +287,7 @@ class FrequenciaController extends Controller
     public function enviarFrequencia(Request $request)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($request->input('id'));
-
+        
         EventoOcorrencia::where('id', $request->input('id'))
             ->update([
                 'data_envio' => date("Y-m-d"),
