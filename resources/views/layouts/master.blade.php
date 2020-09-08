@@ -40,6 +40,7 @@
 
                     <!-- Default box -->
                     <div class="box box-primary">
+                        @yield('modulo')
                         <div class="box-header with-border">
                             <h3 class="box-title">@yield('subTitulo')</h3>
                         </div>

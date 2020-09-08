@@ -2,6 +2,24 @@
 
 @section('titulo','Início')
 
+@section('modulo')
+	<div class="col-md-3" style="text-align: center;">
+		<br>
+		<div class="box box-solid bg-navy color-palette">
+			<div class="box-header">
+				@if (request()->is('gerencial*'))
+					<h3 class="box-title"> <i class="fa fa-users"></i>  Módulo gerencial</h3>
+				@elseif (request()->is('acervo*'))
+					<h3 class="box-title"> <i class="glyphicon glyphicon-book"></i>  Módulo de acervo</h3>
+				@else
+					<h3 class="box-title"> <i class="fa fa-calendar"></i>  Módulo de frequência</h3>
+				@endif
+			</div>
+		</div>
+		<!-- /.box -->
+	</div>
+	<!-- /.col -->
+@endsection
 
 @section('conteudo')
 
@@ -13,6 +31,7 @@
 			<h3>Sistema de Indicadores das Bibliotecas Públicas Municipais</h3>
 		</div>
 		<hr>
+
 		<?php $faltaFrequencia = 0; ?>
 		@if($ocorrencias != null || $frequenciasCadastradas != null)
 			@foreach($ocorrencias as $ocorrencia)
