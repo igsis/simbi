@@ -1,5 +1,5 @@
 @extends('layouts.master2')
-
+@include('layouts.br')
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
 @endsection
@@ -48,7 +48,7 @@
                             <tbody>
                             @foreach($matriculas as $matricula)
                                 <tr>
-                                    <td>{{strtoupper($matricula->mes)}}- {{$matricula->ano}}</td>
+                                    <td>{{ucwords(strftime('%B', strtotime($matricula->data)))}} - {{ date('Y', strtotime($matricula->data)) }}</td>
                                     <td>{{$matricula->nova}}</td>
                                     <td>{{$matricula->renovacao}}</td>
                                     <td>{{ date('d/m/Y', strtotime($matricula->data_envio)) }}</td>

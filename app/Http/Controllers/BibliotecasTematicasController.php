@@ -57,7 +57,9 @@ class BibliotecasTematicasController extends Controller
 
     public function show ($id){
         $equipamentos = Equipamento::findOrFail($id);
-        $bibliotecas =  DB::select('select  *, monthname(data)mes, year(data) ano from bibliotecas_tematicas where publicado <> 0');
+        $bibliotecas =  BibliotecasTematicas::where([
+            ['publicado', '=', '1'],
+            ['equipamento_id', '=', $id]])->orderBy('data')->get();
         return view('acervo.bibliotecas_tematicas.index', compact('equipamentos', 'bibliotecas'));
     }
 
