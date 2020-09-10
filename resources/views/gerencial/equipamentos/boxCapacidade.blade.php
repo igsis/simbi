@@ -1,4 +1,4 @@
-<div class="tab-pane" id="capacidade">
+<div class="tab-pane {{ session('tabName') == 'capacidade' ? 'active' : '' }}" id="capacidade">
     <!--Label Capacidade-->
 
     @hasanyrole('Coordenador|Administrador')

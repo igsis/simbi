@@ -523,6 +523,8 @@ class EquipamentoController extends Controller
             'predio_tombado' => $request->predioTombado,
             'lei' => $request->lei
         ]);
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
     }
@@ -574,6 +576,9 @@ class EquipamentoController extends Controller
             'lei' => $request->lei
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');
 
     }
@@ -598,6 +603,9 @@ class EquipamentoController extends Controller
             'capacidade'=> $request->novo
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Capacidade cadastrada com sucesso');
     }
 
@@ -610,6 +618,9 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('capacidade')
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
     }
 
@@ -621,6 +632,9 @@ class EquipamentoController extends Controller
             'interno'=>$request->input('interno'),
             'externo'=>$request->input('externo')
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Estacionamento cadastrada com sucesso');
     }
@@ -637,6 +651,9 @@ class EquipamentoController extends Controller
 
         $praca->save();
 
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Praça cadastrada com sucesso');
     }
 
@@ -648,6 +665,9 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('novo'),
             'especificacao' => $request->especificacao
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de estudo em grupo cadastrado com sucesso');
     }
@@ -661,6 +681,9 @@ class EquipamentoController extends Controller
             'especificacao' => $request->especificacao
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de estudo individual cadastrado com sucesso');
     }
 
@@ -673,6 +696,9 @@ class EquipamentoController extends Controller
             'especificacao' => $request->especificacao
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de uso comum cadastrado com sucesso');
     }
 
@@ -683,6 +709,9 @@ class EquipamentoController extends Controller
         $equipamento->telecentroDiglab()->create([
             'quantidade'=>$request->input('novo')
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Telecentro/DigiLab cadastrado com sucesso');
     }
@@ -696,6 +725,9 @@ class EquipamentoController extends Controller
             'especificacao' => $request->especificacao
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço infantil cadastrada com sucesso');
     }
 
@@ -708,6 +740,9 @@ class EquipamentoController extends Controller
             'especificacao' => $request->especificacao
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço Multiuso cadastrado com sucesso');
     }
 
@@ -719,6 +754,9 @@ class EquipamentoController extends Controller
             'nome'=>$request->input('nome'),
             'capacidade'=>$request->input('capacidade')
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Teatro cadastrado com sucesso');
     }
@@ -750,6 +788,9 @@ class EquipamentoController extends Controller
             'total_terreno' => $request->areaTotalTerreno,
             'especificacao' => $request->especificacao
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "area"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área cadastrada com sucesso');
     }
@@ -809,6 +850,8 @@ class EquipamentoController extends Controller
             'termino_reforma' => $data,
             'descricao' => $request->descricaoReforma
         ]);
+
+        session(['tabName' => "reforma"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Período de Reforma incluido com sucesso');
     }

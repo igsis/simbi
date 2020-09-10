@@ -1,4 +1,4 @@
-<div class="tab-pane" id="detalhes-tecnicos">
+<div class="tab-pane {{ session('tabName') == 'detalhes-tecnicos' ? 'active' : '' }}" id="detalhes-tecnicos">
     <!--Label Detalhes Tecnicos-->
     <div class="col text-center botao-margem">
         @if (!isset($equipamento->detalhe))

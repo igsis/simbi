@@ -82,7 +82,9 @@
                                             @endhasrole
                                             &nbsp; <a href="{{ route('equipamentos.show', $equipamento->id) }}"
                                                       class="btn btn-warning" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> Mais Detalhes</a>
+                                                        class="glyphicon glyphicon-eye-open"></i> Mais Detalhes
+                                                {{session(['tabName' => ""])}}
+                                             </a>
                                         @endif
                                         @hasrole('Administrador')
                                         @if($equipamento->publicado == 1)

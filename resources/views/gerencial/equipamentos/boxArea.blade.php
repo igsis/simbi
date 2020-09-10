@@ -1,4 +1,4 @@
-<div class="tab-pane" id="area">
+<div class="tab-pane {{ session('tabName') == 'area' ? 'active' : '' }}" id="area">
     <!--Label Area-->
     <div class="col text-center botao-margem">
         @if (!isset($equipamento->area))
