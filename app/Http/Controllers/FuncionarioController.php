@@ -282,9 +282,9 @@ class FuncionarioController extends Controller
         $user = Funcionario::findOrFail($id);
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
+        $equipamentoVinculados = EquipamentoFuncionario::where('funcionario_id', $id)->get();
 
-
-        return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos'));
+        return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos', 'equipamentoVinculados'));
     }
 
     public function vinculaEquipamento(Request $request, $id)

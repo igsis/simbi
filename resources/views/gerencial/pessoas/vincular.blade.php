@@ -17,13 +17,17 @@
                 <div class="row">
                     <div class="form-group col-md-6 has-feedback">
                         <label for="cargo">Biblioteca</label>
-                        <select class="form-control" name="equipamento[]" id="">
-                            <option value="">Selecione...</option>
-                            @foreach ($equipamentos as $equipamento)
-                                @if($equipamento->publicado == 1)
-                                    <option value="{{$equipamento->id}}"> {{$equipamento->nome}} </option>
-                                @endif
-                            @endforeach
+                        <select class="form-control" name="equipamento[]" id="" required>
+                            @if(count($equipamentos) == 0)
+                                <option value="">Não há equipamentos cadastrados</option>
+                            @else
+                                <option value="">Selecione...</option>
+                                @foreach ($equipamentos as $equipamento)
+                                    @if($equipamento->publicado == 1)
+                                        <option value="{{$equipamento->id}}"> {{$equipamento->nome}} </option>
+                                    @endif
+                                @endforeach
+                            @endif
                         </select>
                     </div>
 
@@ -43,12 +47,11 @@
                     </div>
                 </div>
                 @else
-                    @foreach($user->equipamentos as $equipamentoVinculado)
+                    @foreach($equipamentoVinculados as $equipamentoVinculado)
                     <div class="row">
                         <div class="form-group col-md-6 has-feedback">
                             <label for="cargo">Biblioteca</label>
                             <select class="form-control" name="equipamento[]" id="">
-                                <option value="">Selecione...</option>
                                 @foreach ($equipamentos as $equipamento)
                                     @if($equipamento->publicado == 1)
                                         <option value="{{$equipamento->id}}" {{ in_array($equipamento->id, $equipamentoVinculado->toArray()) ? "selected" : "" }}> {{$equipamento->nome}} </option>
@@ -62,7 +65,7 @@
                             <select class="form-control" name="responsabilidadeTipo[]" id="cargo">
                                 <option value="">Selecione...</option>
                                 @foreach($cargos as $cargo)
-                                    <option value="{{$cargo->id}}" {{ in_array($cargo->id, $equipamentoVinculado->toArray()) ? "selected" : "" }} >{{$cargo->responsabilidade_tipo}}</option>
+                                    <option value="{{$cargo->id}}" {{ $cargo->id == $equipamentoVinculado->responsabilidade_tipo_id ? "selected" : "" }}> {{$cargo->responsabilidade_tipo}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -78,8 +81,8 @@
             </div>
         </div>
         <div class="box-footer">
-            <button class="btn btn-success" type="submit">Cadastrar</button>
-            <a class="btn btn-primary pull-right" href="#void" id="addInput"> Adicionar outro Equipamento</a>
+            <a class="btn btn-primary " href="#void" id="addInput"> Adicionar outro Equipamento</a>
+            <button class="btn btn-success pull-right" type="submit">Cadastrar vínculo</button>
         </div>
     </form>
 @endsection

@@ -14,8 +14,7 @@ class EquipamentoFuncionario extends Pivot
 
     protected $fillable = [
         'funcionario_id',
-        'data_inicio',
-        'data_fim',
+        'equipamento_id',
         'responsabilidade_tipo_id'
     ];
 
