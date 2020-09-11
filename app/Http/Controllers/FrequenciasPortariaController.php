@@ -91,7 +91,7 @@ class FrequenciasPortariaController extends Controller
         ]);
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Público de recepção inserida com sucesso!');
     }
 
     public function storeSecaoBraile(ValidateStore $req)
@@ -329,10 +329,46 @@ class FrequenciasPortariaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function listar($id)
+    public function listarRecepcao($id)
     {
         $equipamento = Equipamento::findOrFail($id);
         return view('frequencia.frequencia.portaria.listar', compact('equipamento'));
+    }
+
+    public function updateRecepcao(Request $request){
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $user =  Auth::user();
+
+        $data = $request->data;
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
+
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
+        $idPublico = $request->idPublico;
+
+        FrequenciasPortaria::where('id', $idPublico)
+            ->update([
+            'user_id' => $user->id,
+            'data' => $data,
+            'periodo'=> $periodo,
+            'quantidade' => $request->quantidade,
+            'equipamento_id' => $request->id,
+            'data_envio' => date("Y-m-d")
+        ]);
+
+        return redirect()->back()->with('flash_message', 'Público de recepção editado com sucesso!');
     }
 
     /**
