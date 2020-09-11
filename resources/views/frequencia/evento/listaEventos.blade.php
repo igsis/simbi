@@ -46,8 +46,9 @@
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th width="50%">Eventos</th>
+                                <th width="40%">Eventos</th>
                                 <th>Tipo do Evento</th>
+                                <th>Área do Evento</th>
                                 <th>Operações</th>
                             </tr>
                             </thead>
@@ -56,6 +57,7 @@
                                 <tr>
                                     <td>{{ $evento->nome_evento }}</td>
                                     <td>{{ $evento->tipoEvento->tipo_evento }}</td>
+                                    <td>{{ $evento->area_evento_id == 1 ? 'Interna' : 'Externa' }}</td>
                                     <td>
                                         <a href="{{ route('eventos.cadastro.ocorrencia', [$equipamento->id,$evento->id]) }}"
                                            class="btn btn-success" style="margin-right: 3px"><i
@@ -71,6 +73,7 @@
                                 <tr>
                                     <th width="50%">Eventos</th>
                                     <th>Tipo do Evento</th>
+                                    <th>Área do Evento</th>
                                     <th>Operações</th>
                                 </tr>
                             </tfooter>

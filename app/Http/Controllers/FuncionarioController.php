@@ -139,8 +139,6 @@ class FuncionarioController extends Controller
                 $data = $request->dataAposentadoria;
                 $dtFormat = explode('/', $data);
                 $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
-
-                $adicionais->aposenta = 1;
                 $adicionais->data_aposentadoria = $data;
             }
             $adicionais->observacao = $observacao;
@@ -225,7 +223,6 @@ class FuncionarioController extends Controller
         $aposenta = $request->aposenta;
         $observacao = $request->observacao;
 
-
         if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
             $adicionais = FuncionarioAdicionais::updateOrCreate(['funcionario_id' => $funcionario->id]);
@@ -237,13 +234,22 @@ class FuncionarioController extends Controller
                 $dtFormat = explode('/', $data);
                 $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
-                $adicionais->aposenta = 1;
                 $adicionais->data_aposentadoria = $data;
+            } else {
+                $adicionais->data_aposentadoria = $request->dataAposentadoria; //pra salvar vazio
             }
-            $adicionais->observacao = $observacao;
+            if (isset($observacao)){
+                $adicionais->observacao = $observacao;
+            }
 
             $funcionario->secretaria_id = 1;
         }
+
+        elseif (($funcionario->FuncionarioAdicionais) != null) //caso haja registro adicional na tabela e não nos request
+        {
+            $funcionario->FuncionarioAdicionais->delete();
+        }
+
         elseif  ($tipoPessoa == 2 || $tipoPessoa == 3) //tipoPessoa Convocado ou Estagiário
         {
             $this->validate($request, ['identificacaoSecretaria' => 'required']);
@@ -255,10 +261,6 @@ class FuncionarioController extends Controller
                 $secretaria->save();
             }
             $funcionario->secretaria_id = $secretaria->id;
-        }
-        elseif (($funcionario->FuncionarioAdicionais) != null) //caso não haja nenhum registro adicional na tabela
-        {
-            $funcionario->FuncionarioAdicionais->delete();
         }
 
         $funcionario->nome = $request->input('nome');

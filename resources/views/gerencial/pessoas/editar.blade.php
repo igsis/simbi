@@ -116,17 +116,19 @@
                         @if($user->tipo_pessoa == 1)
                             <div id="divFuncionario">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(!this.checked)" @isset($user->FuncionarioAdicionais->aposenta) {{$user->FuncionarioAdicionais->aposenta == 1 ? "checked" : ""}} @endisset/>Pode Aposentar
+                                    <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(!this.checked)" {{isset($user->FuncionarioAdicionais->data_aposentadoria) ? "checked" : ""}}>Pode Aposentar
                                 </label>
                             </div>
                                 <div class="row">
                                     <div class="form-group col-md-6"><br>
                                         <label for="data">Previsão para aposentadoria</label>
-                                        <input class="form-control calendario" type="text" name="dataAposentadoria" value="@isset($user->FuncionarioAdicionais->data_aposentadoria){{date('m/d/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria))}}@endisset" id="dataAposentadoria">
+                                        <input class="form-control calendario" type="text" name="dataAposentadoria"
+                                               value="{{ isset($user->FuncionarioAdicionais->data_aposentadoria) ? date('m/d/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria)) : "" }}"
+                                               id="dataAposentadoria" {{isset($user->FuncionarioAdicionais->data_aposentadoria) ? "" : "disabled"}}>
                                     </div>
                                     <div class="form-group col-md-12 has-feedback">
                                         <label for="name">Observação</label>
-                                        <input class="form-control" type="text" name="observacao" id="observacao" value="@isset($user->FuncionarioAdicionais->observacao) {{ $user->FuncionarioAdicionais->observacao }} @endisset">
+                                        <input class="form-control" type="text" name="observacao" id="observacao" value="{{ isset($user->FuncionarioAdicionais->observacao) ? $user->FuncionarioAdicionais->observacao : "" }}">
                                     </div>
                                 </div>
                             </div>

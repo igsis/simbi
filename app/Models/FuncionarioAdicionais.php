@@ -12,7 +12,6 @@ class FuncionarioAdicionais extends Model
 
     protected $fillable = [
         'funcionario_id',
-        'aposenta',
         'data_aposentadoria',
         'observacao'
     ];
