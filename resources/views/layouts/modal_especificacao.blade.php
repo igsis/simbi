@@ -11,7 +11,7 @@
             @endif
             <div class="modal-body">
                 <label>{{isset($label)?$label:'Adicionar novo'}}</label>
-                <input class="form-control" type="text" name="novo" id="{{$idInput}}">
+                <input class="form-control" type="text" name="novo" id="{{$idInput}}" required>
                 <br>
                 <label>Especificações</label>
                 <input class="form-control" type="text" name="especificacao">

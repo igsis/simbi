@@ -141,11 +141,11 @@
                 <th class="text-center" style="border: none;">
                     Sem dados cadastrados
                 </th>
-                <th style="border: none;">
+                <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
                     <button class="btn btn-success" data-toggle="modal" data-target="#addSalaComum">Adicionar</button>
                     @endhasanyrole
-                </th>
+                </td>
             </tr>
         @endif
         </tbody>
@@ -170,11 +170,11 @@
                 <th class="text-center" style="border: none;">
                     Sem dados cadastrados
                 </th>
-                <th style="border: none;">
+                <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
                     <button class="btn btn-success" data-toggle="modal" data-target="#addSalaEstudoGrupo">Adicionar</button>
                     @endhasanyrole
-                </th>
+                </td>
             </tr>
         @endif
         </tbody>
@@ -199,11 +199,11 @@
                 <th class="text-center" style="border: none;">
                     Sem dados cadastrados
                 </th>
-                <th style="border: none;">
+                <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
                     <button class="btn btn-success" data-toggle="modal" data-target="#addSalaEstudoIndivitual">Adicionar</button>
                     @endhasanyrole
-                </th>
+                </td>
             </tr>
         @endif
         </tbody>
@@ -228,11 +228,11 @@
                 <th class="text-center" style="border: none;">
                     Sem dados cadastrados
                 </th>
-                <th style="border: none;">
+                <td style="border: none;">
                     @hasanyrole('Coordenador|Administrador')
                     <button class="btn btn-success" data-toggle="modal" data-target="#addSalaInfantil">Adicionar</button>
                     @endhasanyrole
-                </th>
+                </td>
             </tr>
         @endif
         </tbody>
@@ -352,12 +352,12 @@
                 <div class="modal-body">
                     <div class="col">
                         <label>Vagas internas</label>
-                        <input class="form-control" type="text" name="interno">
+                        <input class="form-control" type="text" name="interno" required>
                     </div>
                     <br>
                     <div class="col">
                         <label>Vagas externas</label>
-                        <input class="form-control" type="text" name="externo">
+                        <input class="form-control" type="text" name="externo" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -416,11 +416,11 @@
                     {{csrf_field()}}
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="nome" id="nome">
+                        <input class="form-control" type="text" name="nome" id="nome" required>
                     </div>
                     <div class="form-group">
                         <label>Capacidade</label>
-                        <input class="form-control" type="number" name="capacidade" id="capacidade">
+                        <input class="form-control" type="number" name="capacidade" id="capacidade" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -444,11 +444,11 @@
                     <div class="form-group">
                         {{ csrf_field() }}
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="nome" id="nome">
+                        <input class="form-control" type="text" name="nome" id="nome" required>
                     </div>
                     <div class="form-group">
                         <label>Capacidade</label>
-                        <input class="form-control" type="number" name="capacidade" id="capacidade">
+                        <input class="form-control" type="number" name="capacidade" id="capacidade" required>
                     </div>
                 </div>
                 <div class="modal-footer">

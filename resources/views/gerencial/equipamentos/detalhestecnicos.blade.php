@@ -114,15 +114,16 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                         <div class="form-group col-md-3">
                             <label for="predioTombado">Prédio Tombado</label>
-                            <select class="form-control" name="predioTombado" id="predioTombado">
+                            <select class="form-control" name="predioTombado" id="predioTombado" onchange="desabilitar()">
                                 <option value="0">Não</option>
-                                <option value="1">Sim</option>
+                                <option value="1" {{$equipamento->detalhe->predio_tombado == 1 ? 'selected' : ''}}>Sim</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="lei">Lei de tombamento</label>
-                            <input type="text" class="form-control" name="lei" id="lei" value="{{isset($equipamento->detalhe->lei) ? $equipamento->detalhe->lei
-                                                                                                                                             : old('lei') }}">
+                            <input type="text" class="form-control" name="lei" id="lei"
+                                   value="{{isset($equipamento->detalhe->lei) ? $equipamento->detalhe->lei : old('lei') }}"
+                                    {{isset($equipamento->detalhe->lei) ? "" : "readonly" }}>
                         </div>
                     </div>
 
@@ -278,6 +279,21 @@ if($path == 'equipamentos.atualizaDetalhes')
             $('.calendario').datepicker("option","showAnim","blind");
             $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
+    </script>
+
+    <script>
+        function desabilitar() {
+            let predioTombado = document.getElementById('predioTombado');
+            let lei = document.getElementById('lei');
+            if (predioTombado.value == 1){
+                lei.readOnly = false;
+                lei.required = true;
+            } else {
+                lei.readOnly = true;
+                lei.value = "";
+            }
+
+        }
     </script>
 @endsection
 @section('linksAdicionais')
