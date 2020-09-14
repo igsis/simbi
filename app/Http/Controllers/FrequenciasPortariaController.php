@@ -113,7 +113,7 @@ class FrequenciasPortariaController extends Controller
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile Inserida Com Sucesso!');
+        'Seção Braile inserida com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -140,7 +140,7 @@ class FrequenciasPortariaController extends Controller
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Telecentro Inserida Com Sucesso!');
+        'Telecentro inserida Com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -167,7 +167,7 @@ class FrequenciasPortariaController extends Controller
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Temática Inserida Com Sucesso!');
+        'Temática inserida Com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -194,7 +194,7 @@ class FrequenciasPortariaController extends Controller
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Óculos Inserida Com Sucesso!');
+        'Óculos inserida com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -307,7 +307,7 @@ class FrequenciasPortariaController extends Controller
         $complementoPortaria->save();
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Frequência inserida com sucesso!');
     }
 
     /**

@@ -51,7 +51,7 @@ class SecretariaController extends Controller
 
         return redirect()->route('secretaria')
             ->with('flash_message',
-            'Secretaria Editada com Sucesso!');
+            'Secretaria editada com sucesso!');
 
     }
 
@@ -76,7 +76,7 @@ class SecretariaController extends Controller
 
         return redirect()->route('secretaria')
             ->with('flash_message',
-            'Secretaria Desativada com Sucesso!');
+            'Secretaria desativada com sucesso!');
     }
 
     public function toActivate($id)
@@ -86,7 +86,7 @@ class SecretariaController extends Controller
 
         return redirect()->route('secretariaDisabled')
             ->with('flash_message',
-            'Secretaria Ativada com Sucesso!');
+            'Secretaria ativada com sucesso!');
     }
 
     public function search(Request $request, Secretaria $secretaria)

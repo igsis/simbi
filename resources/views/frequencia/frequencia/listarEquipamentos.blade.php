@@ -45,7 +45,7 @@
                      @if ($equipamentos->count() != 0)
                      @foreach($equipamentos as $equipamento)
                      <tr>
-                        <td>{{$equipamento->nome}}</td>
+                        <th width="40%">{{$equipamento->nome}}</td>
                         <td>
                            <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
                               class="btn bg-navy" style="margin-right: 3px"><i

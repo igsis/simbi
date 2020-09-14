@@ -55,7 +55,6 @@
                         <hr>
                         <a href="{{route('equipamentos.index', ['type' => '1'])}}" class="btn btn-default btn-block">
                             Retornar à Lista de Equipamentos
-                            {{session(['tabName' => ""])}}
                         </a>
                     </div>
                     <!-- /.box-body -->

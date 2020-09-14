@@ -142,7 +142,7 @@ class EventoController extends Controller
             'area_evento_id' => $request->areaEvento
         ]);
 
-        return redirect()->route('eventos.listar', compact('equipamento_id'))->with('flash_message', 'Evento Editado com Sucesso!');
+        return redirect()->route('eventos.listar', compact('equipamento_id'))->with('flash_message', 'Evento editado com sucesso!');
     }
 
     /**
@@ -218,7 +218,7 @@ class EventoController extends Controller
         TipoEvento::create($data);
 
         return redirect()->back()
-            ->with('flash_message', 'Tipo Evento Inserido com sucesso!');
+            ->with('flash_message', 'Tipo Evento inserido com sucesso!');
     }
 
     public function createProjetoEspecial(Request $request)
@@ -230,6 +230,6 @@ class EventoController extends Controller
         ProjetoEspecial::create($data);
 
         return redirect()->back()
-            ->with('flash_message', 'Projeto Especial Inserido com sucesso!');
+            ->with('flash_message', 'Projeto Especial inserido com sucesso!');
     }
 }

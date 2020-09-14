@@ -62,7 +62,7 @@ class FrequenciasPublicoController extends Controller
         ]);
 
         return redirect()->route('frequencia.publico.index')->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Frequência inserida com sucesso!');
     }
 
     /**

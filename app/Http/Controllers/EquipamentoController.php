@@ -425,7 +425,7 @@ class EquipamentoController extends Controller
         }
 
         return redirect()->back()->with('flash_message',
-            'Equipamento Editado com Sucesso!');
+            'Equipamento editado com sucesso!');
 
         /*TODO: remover um funcionamento*/
     }
@@ -434,7 +434,7 @@ class EquipamentoController extends Controller
     {
         Funcionamento::findOrFail($id)->update(['publicado' => 0]);
 
-        return redirect()->back()->with('flash_message', 'Funcionamento excluído com Sucesso.');
+        return redirect()->back()->with('flash_message', 'Funcionamento excluído com sucesso.');
     }
 
     /**
@@ -452,7 +452,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $type])
             ->with('flash_message',
-                'Equipamento Excluido com Sucesso.');
+                'Equipamento excluido com sucesso.');
     }
 
     public function criaDetalhes($id)
@@ -621,7 +621,7 @@ class EquipamentoController extends Controller
         //para abrir a tab correspondente
         session(['tabName' => "capacidade"]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditório cadastrada com sucesso');
     }
 
     public function gravaEstacionamento(Request $request, $id){
@@ -853,7 +853,7 @@ class EquipamentoController extends Controller
 
         session(['tabName' => "reforma"]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Período de Reforma incluido com sucesso');
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Período de reforma incluido com sucesso');
     }
 
 
@@ -864,7 +864,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $request->type])
             ->with('flash_message',
-                'Usuário Ativado com Sucesso.');
+                'Usuário ativado com sucesso.');
     }
 
     // Filtro de Equipamentos

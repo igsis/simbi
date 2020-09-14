@@ -83,7 +83,7 @@ class FrequenciaController extends Controller
         ]);
 
         return redirect()->route('frequencia.ocorrencias', [$equipamento_id,1])->with('flash_message',
-            'Ocorrência Inserida Com Sucesso!');
+            'Ocorrência inserida com sucesso!');
     }
 
     public function listarOcorrencias($igsis_id, $type)
@@ -167,7 +167,7 @@ class FrequenciaController extends Controller
         ]);
 
        return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
-            ->with('flash_message', 'Ocorrência do Evento editada com sucesso!');
+            ->with('flash_message', 'Ocorrência do evento editada com sucesso!');
     }
 
     /**
@@ -222,7 +222,7 @@ class FrequenciaController extends Controller
         ]);
 
         return redirect()->route('frequencia.ocorrencias', [$id, 1])->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Frequência inserida com sucesso!');
     }
 
     public function relatorio(){
@@ -269,7 +269,7 @@ class FrequenciaController extends Controller
 
         return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
             ->with('flash_message',
-                'Ocorrência do Evento Excluida com Sucesso.');
+                'Ocorrência do evento excluida com sucesso.');
     }
 
     /**
@@ -299,7 +299,7 @@ class FrequenciaController extends Controller
 
         return redirect()->route('frequencia.ocorrencias', [$equipamento_igsis,$type])
             ->with('flash_message',
-                'Ocorrência do Enviada com Sucesso.');
+                'Ocorrência do enviada com sucesso.');
     }
 
     public function frequenciasEnviadas(Request $types)

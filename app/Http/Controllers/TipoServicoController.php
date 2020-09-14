@@ -50,7 +50,7 @@ class TipoServicoController extends Controller
         ]);
 
         return redirect()->route('tipoServico')
-            ->with('flash_message', 'Tipo de Serviço Editado com Sucesso!');
+            ->with('flash_message', 'Tipo de Serviço editado com sucesso!');
 
     }
 
@@ -74,7 +74,7 @@ class TipoServicoController extends Controller
 
         return redirect()->route('tipoServico')
             ->with('flash_message',
-            'Tipo de Serviço Desativado com Sucesso!');
+            'Tipo de Serviço desativado com sucesso!');
     } 
 
     public function toActivate($id)
@@ -84,7 +84,7 @@ class TipoServicoController extends Controller
 
         return redirect()->route('tipoServicoDisabled')
             ->with('flash_message',
-            'Tipo de Serviço Ativado com Sucesso!');
+            'Tipo de Serviço ativado com sucesso!');
     } 
 
     public function search(Request $request, TipoServico $tipoServico)
