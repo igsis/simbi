@@ -294,8 +294,34 @@ class EquipamentoController extends Controller
             ->orderBy('evento_ocorrencias.data', 'desc')
             ->get();
 
+        //soma da capacidade de público dos espaços da área interna
+        $capacidadeTotal = 0;
 
-        return view('gerencial.equipamentos.show', compact('equipamento', 'eventos'));
+        if (isset($equipamento->auditorio))
+           $capacidadeTotal += $equipamento->auditorio->capacidade;
+
+        if (isset($equipamento->salaComum))
+            $capacidadeTotal += $equipamento->salaComum->quantidade;
+
+        if (isset($equipamento->estudoGrupo))
+            $capacidadeTotal += $equipamento->estudoGrupo->capacidade;
+
+        if (isset($equipamento->estudoIndividual))
+            $capacidadeTotal += $equipamento->estudoIndividual->quantidade;
+
+        if (isset($equipamento->infantil))
+            $capacidadeTotal += $equipamento->infantil->capacidade;
+
+        if (isset($equipamento->multiuso))
+            $capacidadeTotal += $equipamento->multiuso->capacidade;
+
+        if (isset($equipamento->telecentroDiglab))
+            $capacidadeTotal += $equipamento->telecentroDiglab->quantidade;
+
+        if (isset($equipamento->teatro))
+            $capacidadeTotal += $equipamento->teatro->capacidade;
+
+        return view('gerencial.equipamentos.show', compact('equipamento', 'eventos', 'capacidadeTotal'));
     }
 
     /**

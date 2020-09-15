@@ -68,23 +68,10 @@
         <tr>
             <th colspan="2" class="text-center">Capacidade de Público do Equipamento</th>
         </tr>
-        @if (isset($equipamento->equipamentoCapacidade))
             <tr>
-                <th width="50%" class="text-center">Capacidade: </th>
-                <td class="text-center">{{ $equipamento->equipamentoCapacidade->capacidade }}</td>
+                <th width="50%" class="text-center">Capacidade máxima de pessoas no equipamento: </th>
+                <td class="text-center">{{ $capacidadeTotal }}</td>
             </tr>
-        @else
-            <tr>
-                <th class="text-center" style="border: none;">
-                    Sem dados cadastrados
-                </th>
-                <td style="border: none;">
-                    @hasanyrole('Coordenador|Administrador')
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addCapacidade">Adicionar</button>
-                    @endhasanyrole
-                </td>
-            </tr>
-        @endif
         </tbody>
     </table>
 
