@@ -149,6 +149,10 @@
                     <ul class="treeview-menu">
                         <li><a href="{{ route('frequencias.enviadas',['type'=>'2']) }}">Ocorrencia de eventos</a></li>
                         <li><a href="{{ route('frequencias.enviadas',['type'=>'3']) }}">Publico de Recepção</a></li>
+                        <li><a href="{{ route('frequencias.enviadas',['type'=>'4']) }}">Seção Braile</a></li>
+                        <li><a href="{{ route('frequencias.enviadas',['type'=>'5']) }}">Telecentro/DigLab</a></li>
+                        <li><a href="{{ route('frequencias.enviadas',['type'=>'6']) }}">Temática</a></li>
+                        <li><a href="{{ route('frequencias.enviadas',['type'=>'7']) }}">Óculos</a></li>
                     </ul>
                 </li>
                 <li class="treeview {{ request()->routeIs('gerenciar*') ? 'active' : '' }}">

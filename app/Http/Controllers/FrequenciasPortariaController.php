@@ -371,6 +371,154 @@ class FrequenciasPortariaController extends Controller
         return redirect()->back()->with('flash_message', 'Público de recepção editado com sucesso!');
     }
 
+    public function destroyRecepcao(Request $request)
+    {
+        FrequenciasPortaria::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de recepção deletado com sucesso!');
+    }
+    public function listarSecaoBraile($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.secaoBraile', compact('equipamento'));
+    }
+
+    public function updateBraile(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        SecaoBraile::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Seção Braile editado com sucesso!');
+
+    }
+
+    public function destroyBraile(Request $request)
+    {
+        SecaoBraile::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Seção Braile deletado com sucesso!');
+    }
+
+    public function listarTelecentro($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.Telecentro', compact('equipamento'));
+    }
+
+    public function updateTelecentro(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        Telecentro::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Telecentro editado com sucesso!');
+
+    }
+
+    public function destroyTelecentro(Request $request)
+    {
+        Telecentro::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Telecentro deletado com sucesso!');
+    }
+
+    public function listarTematica($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.Tematica', compact('equipamento'));
+    }
+
+    public function updateTematica(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        Tematica::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Temamática editado com sucesso!');
+
+    }
+
+    public function destroyTematica(Request $request)
+    {
+        Tematica::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Temática deletado com sucesso!');
+    }
+
+    public function listarOculos($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.Oculos', compact('equipamento'));
+    }
+
+    public function updateOculos(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        Oculos::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Óculos editado com sucesso!');
+
+    }
+
+    public function destroyOculos(Request $request)
+    {
+        Oculos::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Óculos deletado com sucesso!');
+    }
     /**
      * Update the specified resource in storage.
      *

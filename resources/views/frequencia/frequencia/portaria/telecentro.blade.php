@@ -6,7 +6,7 @@
 @endsection
 
 
-@section('titulo','Público de Recepção')
+@section('titulo','Público de Telecentro')
 
 @section('conteudo')
 
@@ -22,7 +22,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="fa fa-users"></i>
-                Público de Recepção
+                Público de Telecentro
                 <small>{{ $equipamento->nome }}</small>
             </h1>
         </section>
@@ -32,12 +32,12 @@
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Lista de Público de Recepção</h3>
+                    <h3 class="box-title">Lista de público de Telecentro</h3>
                 </div>
                 <div class="box-body">
                     <table id="tabela1" class="table table-bordered table-striped">
                         <thead>
-                        @if ($equipamento->frequenciasPortarias->count() != 0)
+                        @if ($equipamento->telecentros->count() != 0)
                             <tr>
                                 <th>Data</th>
                                 <th>Dia da Semana</th>
@@ -47,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($equipamento->frequenciasPortarias as $frequencia)
+                            @foreach ($equipamento->telecentros as $frequencia)
                                 <tr align="center">
                                     <td>{{ date('d/m/Y', strtotime($frequencia->data)) }}</td>
                                     <td>{{ ucwords(strftime('%A', strtotime($frequencia->data))) }}</td>
@@ -96,7 +96,7 @@
                 <div class="modal-body">
                     <p>Deseja realmente apagar este registro</p>
                 </div>
-                <form action="{{route('frequencia.portaria.destroyRecepcao')}}" method="post">
+                <form action="{{route('frequencia.portaria.destroyTelecentro')}}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" id="frequenciaId" name="frequenciaId">
                     <div class="modal-footer">
@@ -110,7 +110,7 @@
         <!-- /.modal-dialog -->
     </div>
 
-    @include('frequencia.frequencia.publicoRecepcao')
+    @include('frequencia.frequencia.telecentro')
 @endsection
 
 @section('scripts_adicionais')
@@ -121,19 +121,19 @@
     <script>
         function preencherCampos(data, quantidade, idPublico) {
             limparCampos();
-            let formulario = document.querySelector('#formPublico');
-            formulario.action = '{{route('frequencia.portaria.updateRecepcao')}}';
+            let formulario = document.querySelector('#formTelecentro');
+            formulario.action = '{{route('frequencia.portaria.updateTelecentro')}}';
             formulario.setAttribute('method', 'POST')
             document.querySelector('#quantidade').value = quantidade;
-            document.querySelector('#calendario').value = data;
+            document.querySelector('#calendarioTelecentro').value = data;
             document.querySelector('#idPublico').value = idPublico;
 
-            $('#cadastroPortariaSimples').modal('show');
+            $('#telecentro').modal('show');
         }
 
         function limparCampos() {
              $('#idPublico').val('')
-             $('#calendario').val('')
+             $('#calendarioTelecentro').val('')
             $('#quantidade').val('')
         }
 

@@ -6,7 +6,7 @@
             <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Cadastro de Público Telecentro</h4>
          </div>
          <!-- inicio do form -->
-         <form action="{{route('frequencia.telecentro.gravar')}}"
+         <form id="formTelecentro" action="{{route('frequencia.telecentro.gravar')}}"
                method="post" autocomplete="off">
             <div class="modal-body">
                {{ csrf_field() }}
@@ -30,9 +30,9 @@
                      <input type="radio" name="periodo" value="3"> Domingo
                   </div>-->
                </div>
-               <input type="hidden" name="equipamento_id" 
-                      id="idEquipamentoTelecentro" 
-                      value="{{$equipamento->id}}">
+               <input type="hidden" name="equipamento_id"  id="idEquipamentoTelecentro" value="">
+               <input type="hidden" name="idPublico" id="idPublico" value="">
+
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

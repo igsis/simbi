@@ -58,6 +58,8 @@ Route::group(['prefix' => 'portaria'], function(){
 
     Route::post('/publicoRecepcao/update', 'FrequenciasPortariaController@updateRecepcao')->name('frequencia.portaria.updateRecepcao');
 
+    Route::post('/publicoRecepcao/destroy', 'FrequenciasPortariaController@destroyRecepcao')->name('frequencia.portaria.destroyRecepcao');
+
     Route::post('/cadastroSimples/secaoBraile', 'FrequenciasPortariaController@storeSecaoBraile')->name('frequencia.secaoBraile.gravar');
 
     Route::post('/cadastroSimples/telecentro', 'FrequenciasPortariaController@storeTelecentro')->name('frequencia.telecentro.gravar');
@@ -65,5 +67,29 @@ Route::group(['prefix' => 'portaria'], function(){
     Route::post('/cadastroSimples/tematica', 'FrequenciasPortariaController@storeTematica')->name('frequencia.tematica.gravar');
 
     Route::post('/cadastroSimples/oculos', 'FrequenciasPortariaController@storeOculos')->name('frequencia.oculos.gravar');
+
+    Route::get('/{equipamento}/secaoBraile', 'FrequenciasPortariaController@listarSecaoBraile')->name('frequencia.portaria.secaoBraile');
+
+    Route::post('/secaoBraile/update', 'FrequenciasPortariaController@updateBraile')->name('frequencia.portaria.updateBraile');
+
+    Route::post('/secaoBraile/destroy', 'FrequenciasPortariaController@destroyBraile')->name('frequencia.portaria.destroyBraile');
+
+    Route::get('/{equipamento}/telecentro', 'FrequenciasPortariaController@listarTelecentro')->name('frequencia.portaria.telecentro');
+
+    Route::post('/telecentro/update', 'FrequenciasPortariaController@updateTelecentro')->name('frequencia.portaria.updateTelecentro');
+
+    Route::post('/telecentro/destroy', 'FrequenciasPortariaController@destroyTelecentro')->name('frequencia.portaria.destroyTelecentro');
+
+     Route::get('/{equipamento}/tematica', 'FrequenciasPortariaController@listarTematica')->name('frequencia.portaria.tematica');
+
+    Route::post('/tematica/update', 'FrequenciasPortariaController@updateTematica')->name('frequencia.portaria.updateTematica');
+
+    Route::post('/tematica/destroy', 'FrequenciasPortariaController@destroyTematica')->name('frequencia.portaria.destroyTematica');
+
+    Route::get('/{equipamento}/oculos', 'FrequenciasPortariaController@listarOculos')->name('frequencia.portaria.oculos');
+
+    Route::post('/oculos/update', 'FrequenciasPortariaController@updateOculos')->name('frequencia.portaria.updateOculos');
+
+    Route::post('/oculos/destroy', 'FrequenciasPortariaController@destroyOculos')->name('frequencia.portaria.destroyOculos');
 
 });
