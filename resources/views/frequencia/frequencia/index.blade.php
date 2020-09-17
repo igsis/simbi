@@ -34,30 +34,37 @@
                      </tr>
                   </thead>
                   <tbody>
+                  @if($equipamentos->count() > 0)
                      @foreach($equipamentos as $equipamento)
-                     <tr>
-                        <td>{{$equipamento->nome}}</td>
-                        <td>
-                           @if($type == 1)
-                           <a href="{{ route('eventos.listar', $equipamento->id) }}"
-                              class="btn btn-success" 
-                              style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
-                           <a href="#" class="btn btn-success" style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
-                           <a href="{{--route('frequencia.portaria.cadastro', $equipamento->id)--}}"
-                              class="btn btn-success" style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-plus-sign"></i> Preenchimento
-                           Mensal</a>
-                           @else
-                           <a href="{{ route('frequencia.listar', $equipamento->id) }}"
-                              class="btn btn-warning" 
-                              style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
-                           @endif
-                        </td>
-                     </tr>
+                        <tr>
+                           <td>{{$equipamento->nome}}</td>
+                           <td>
+                              @if($type == 1)
+                                 <a href="{{ route('eventos.listar', $equipamento->id) }}"
+                                    class="btn btn-success"
+                                    style="margin-right: 3px"><i
+                                            class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
+                                 <a href="#" class="btn btn-success" style="margin-right: 3px"><i
+                                            class="glyphicon glyphicon-plus-sign"></i> Evento Externo</a>
+                                 <a href="{{--route('frequencia.portaria.cadastro', $equipamento->id)--}}"
+                                    class="btn btn-success" style="margin-right: 3px"><i
+                                            class="glyphicon glyphicon-plus-sign"></i> Preenchimento
+                                    Mensal</a>
+                              @else
+                                 <a href="{{ route('frequencia.listar', $equipamento->id) }}"
+                                    class="btn btn-warning"
+                                    style="margin-right: 3px"><i
+                                            class="glyphicon glyphicon-stats"></i> Frequência Evento Interno</a>
+                              @endif
+                           </td>
+                        </tr>
                      @endforeach
+                  @else
+                     <tr>
+                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
+                     </tr>
+                  @endif
+
                   </tbody>
                   <tfooter>
                      <thead>

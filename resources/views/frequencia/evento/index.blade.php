@@ -42,16 +42,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($equipamentos as $equipamento)
-                                <tr>
-                                    <td>{{$equipamento->nome}}</td>
-                                    <td>
-                                        <a href="{{ route('eventos.listar', $equipamento->id) }}"
+                            @if($equipamentos->count() > 0)
+                                @foreach($equipamentos as $equipamento)
+                                    <tr>
+                                        <td>{{$equipamento->nome}}</td>
+                                        <td>
+                                            <a href="{{ route('eventos.listar', $equipamento->id) }}"
                                                class="btn btn-success" style="margin-right: 3px"><i
                                                         class="glyphicon glyphicon-plus-sign"></i> Eventos</a>
-                                    </td>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
                                 </tr>
-                            @endforeach
+                            @endif
                             </tbody>
                             <tfooter>
                                 <thead>

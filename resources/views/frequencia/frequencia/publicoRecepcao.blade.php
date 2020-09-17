@@ -21,7 +21,7 @@
                                    value="">
                         </div>
                     </div>
-                    <input type="hidden" name="id" id="idEquipamento" value="{{$equipamento->id}}">
+                    <input type="hidden" name="id" id="idEquipamento" value="">
                     <input type="hidden" name="idPublico" id="idPublico" value="">
                 </div>
                 <div class="modal-footer">
