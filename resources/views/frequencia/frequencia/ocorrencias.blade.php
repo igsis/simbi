@@ -79,64 +79,71 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($eventos as $evento)
-                                <input type="hidden" value="{{ $igsis_id = $evento->igsis_id }}">
-                                @if(!(in_array($evento->id, $frequenciasCadastradas)))
-                                    <tr class="evento">
-                                        <td>{{ $evento->nome_evento }}</td>
-                                        <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                                        <td>
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
-                                               class="btn btn-info desabilitar" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick='preencherCampos("{{ $evento->nome_evento }}","{{$evento->projetoEspecial->projeto_especial}}", "{{ $evento->projetoEspecial->id }}","{{ $evento->id }}")'
-                                                    class="btn btn-success"
-                                                    style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-plus-sign"></i> Frequência
-                                            </button>
-                                            @hasrole('Administrador')
-                                            <button class="btn btn-danger desabilitar" type="button"
-                                                    data-toggle="modal"
-                                                    data-target="#confirmDelete"
-                                                    data-title="Cancelar {{$evento->nome_evento}}?"
-                                                    data-message='Desejar realmente cancelar esta ocorrência?'
-                                                    data-footer="Confirmar"
-                                                    onclick="preencherId('{{$evento->id}}')"><i
-                                                        class="glyphicon glyphicon-trash"></i> Cancelar
-                                            </button>
-                                            @endhasrole
-                                        </td>
-                                    </tr>
-                                @else
-                                    <tr class="evento" id="enviado">
-                                        <td>{{ $evento->nome_evento }} <span
-                                                    class="text-center text-red text-bold expirado"></span></td>
-                                        <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                                        <td id="tdEditar">
-                                            <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
-                                               class="btn btn-info desabilitar" style="margin-right: 3px" id="btnEdita"><i
-                                                        class="glyphicon glyphicon-edit"></i> Editar</a>
-                                            <button onclick='editarFrequencia("{{$evento->projetoEspecial->projetoEspecial}}","{{ $evento->id }}")'
-                                                    class="btn btn-success" role="button" id="btnEdita"
-                                                    aria-disabled="true"
-                                                    style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-plus-sign"></i>
-                                                Editar Frequencia
-                                            </button>
-                                            <button class="btn btn-primary" type="button" data-toggle="modal"
-                                                    data-target="#enviarFrequencia"
-                                                    data-title="{{$evento->nome_evento}}"
-                                                    data-message='Desejar realmente enviar?' data-footer="Enviar"
-                                                    onclick="preencherId('{{$evento->id}}')"
-                                                    onclick="preencherId('{{$evento->id}}')"><i
-                                                        class="glyphicon glyphicon-send"></i>&nbsp Enviar
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
+                            @if($eventos->count() > 0)
+                                @foreach($eventos as $evento)
+                                    <input type="hidden" value="{{ $igsis_id = $evento->igsis_id }}">
+                                    @if(!(in_array($evento->id, $frequenciasCadastradas)))
+                                        <tr class="evento">
+                                            <td>{{ $evento->nome_evento }}</td>
+                                            <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                            <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                                            <td>
+                                                <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
+                                                   class="btn btn-info desabilitar" style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-edit"></i> Editar</a>
+                                                <button onclick='preencherCampos("{{ $evento->nome_evento }}","{{$evento->projetoEspecial->projeto_especial}}", "{{ $evento->projetoEspecial->id }}","{{ $evento->id }}")'
+                                                        class="btn btn-success"
+                                                        style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-plus-sign"></i> Frequência
+                                                </button>
+                                                @hasrole('Administrador')
+                                                <button class="btn btn-danger desabilitar" type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#confirmDelete"
+                                                        data-title="Cancelar {{$evento->nome_evento}}?"
+                                                        data-message='Desejar realmente cancelar esta ocorrência?'
+                                                        data-footer="Confirmar"
+                                                        onclick="preencherId('{{$evento->id}}')"><i
+                                                            class="glyphicon glyphicon-trash"></i> Cancelar
+                                                </button>
+                                                @endhasrole
+                                            </td>
+                                        </tr>
+                                    @else
+                                        <tr class="evento" id="enviado">
+                                            <td>{{ $evento->nome_evento }} <span
+                                                        class="text-center text-red text-bold expirado"></span></td>
+                                            <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                            <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                                            <td id="tdEditar">
+                                                <a href="{{ route('frequencia.editarOcorrencia', $evento->id) }}"
+                                                   class="btn btn-info desabilitar" style="margin-right: 3px" id="btnEdita"><i
+                                                            class="glyphicon glyphicon-edit"></i> Editar</a>
+                                                <button onclick='editarFrequencia("{{$evento->projetoEspecial->projetoEspecial}}","{{ $evento->id }}")'
+                                                        class="btn btn-success" role="button" id="btnEdita"
+                                                        aria-disabled="true"
+                                                        style="margin-right: 3px"><i
+                                                            class="glyphicon glyphicon-plus-sign"></i>
+                                                    Editar Frequencia
+                                                </button>
+                                                <button class="btn btn-primary" type="button" data-toggle="modal"
+                                                        data-target="#enviarFrequencia"
+                                                        data-title="{{$evento->nome_evento}}"
+                                                        data-message='Desejar realmente enviar?' data-footer="Enviar"
+                                                        onclick="preencherId('{{$evento->id}}')"
+                                                        onclick="preencherId('{{$evento->id}}')"><i
+                                                            class="glyphicon glyphicon-send"></i>&nbsp Enviar
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            @else
+                                <tr>
+                                    <th colspan="4" class="text-center">Não há eventos cadastrados</th>
+                                </tr>
+                            @endif
+
                             @include('layouts.excluir_confirm')
                             </tbody>
                             <tfooter>
@@ -280,7 +287,7 @@
 
                         <div class="form-group ">
                             <label for="observacao">Observação</label>
-                            <input class="form-control" type="text" id="observacao" name="observacao" value="">
+                            <input class="form-control" type="text" id="observacaoFrequencia" name="observacao" value="">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -313,6 +320,7 @@
             $('#qtdAdulto').val(0)
             $('#qtdIdoso').val(0)
             $('#qtdPublicoTotal').val(0)
+            $('#observacaoFrequencia').val('')
         }
 
         function editarFrequencia(projetoEspecial, id) {
@@ -330,7 +338,7 @@
                 $('#qtdJovem').val(data[0].jovem)
                 $('#qtdAdulto').val(data[0].adulto)
                 $('#qtdIdoso').val(data[0].idoso)
-                $('#observacao').val(data[0].observacao)
+                $('#observacaoFrequencia').val(data[0].observacao)
                 $('#qtdPublicoTotal').val(data[0].total)
                 $('#id').val(data[0].id)
                 $('#dlgFrequencia').modal('show');

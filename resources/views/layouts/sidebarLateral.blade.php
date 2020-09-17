@@ -147,7 +147,7 @@
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ route('frequencias.enviadas',['type'=>'2']) }}">Ocorrencia de eventos</a></li>
+                        <li><a href="{{ route('frequencias.enviadas',['type'=>'2']) }}">Ocorrência de eventos</a></li>
                         <li><a href="{{ route('frequencias.enviadas',['type'=>'3']) }}">Publico de Recepção</a></li>
                         <li><a href="{{ route('frequencias.enviadas',['type'=>'4']) }}">Seção Braille</a></li>
                         <li><a href="{{ route('frequencias.enviadas',['type'=>'5']) }}">Telecentro/DigLab</a></li>

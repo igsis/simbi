@@ -109,20 +109,21 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                         <div class="form-group col-md-3">
                             <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
-                            <input type="text" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
+                            <input type="date" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
                                                                                                               : "old('validate')"}}">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="predioTombado">Prédio Tombado</label>
                             <select class="form-control" name="predioTombado" id="predioTombado" onchange="desabilitar()">
                                 <option value="0">Não</option>
-                                <option value="1" {{$equipamento->detalhe->predio_tombado == 1 ? 'selected' : ''}}>Sim</option>
+                                <option value="1" {{isset($equipamento->detalhe->predio_tombado)
+                                                    &&  $equipamento->detalhe->predio_tombado == 1 ? 'selected' : ''}}>Sim</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="lei">Lei de tombamento</label>
                             <input type="text" class="form-control" name="lei" id="lei"
-                                   value="{{isset($equipamento->detalhe->lei) ? $equipamento->detalhe->lei : old('lei') }}"
+                                   value="{{isset($equipamento->detalhe->lei) ? $equipamento->detalhe->lei : "" }}"
                                     {{isset($equipamento->detalhe->lei) ? "" : "readonly" }}>
                         </div>
                     </div>

@@ -46,16 +46,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($eventos as $evento)
-                                    <tr class="evento" id="enviado">
-                                        <td>{{ $evento->nome_evento }} <span
-                                                    class="text-center text-red text-bold expirado"></span></td>
-                                        <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
-                                        <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
-                                        <td>{{$evento->total}}</td>
-                                        <td>{{ date('d/m/Y', strtotime($evento->data_envio))}}</td>
-                                    </tr>
-                            @endforeach
+                            @if($eventos->count() > 0)
+                                @foreach($eventos as $evento)
+                                        <tr class="evento" id="enviado">
+                                            <td>{{ $evento->nome_evento }} <span
+                                                        class="text-center text-red text-bold expirado"></span></td>
+                                            <td class="dataFrequencia">{{ date('d/m/Y', strtotime($evento->data)) }}</td>
+                                            <td>{{ date('H:i', strtotime($evento->horario)) }}</td>
+                                            <td>{{$evento->total}}</td>
+                                            <td>{{ date('d/m/Y', strtotime($evento->data_envio))}}</td>
+                                        </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <th colspan="5" class="text-center">Não há eventos cadastrados</th>
+                                </tr>
+                            @endif
                             </tbody>
                             <tfooter>
                                 <thead>
