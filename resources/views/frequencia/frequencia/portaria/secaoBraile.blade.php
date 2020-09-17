@@ -6,7 +6,7 @@
 @endsection
 
 
-@section('titulo','Público de Seção Braile')
+@section('titulo','Público de Seção Braille')
 
 @section('conteudo')
 
@@ -22,7 +22,7 @@
         <section class="content-header">
             <h1 class="page-header">
                 <i class="fa fa-users"></i>
-                Público de Seção Braile
+                Público de Seção Braille
                 <small>{{ $equipamento->nome }}</small>
             </h1>
         </section>
@@ -32,7 +32,7 @@
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Lista de público de Seção Braile</h3>
+                    <h3 class="box-title">Lista de público de Seção Braille</h3>
                 </div>
                 <div class="box-body">
                     <table id="tabela1" class="table table-bordered table-striped">

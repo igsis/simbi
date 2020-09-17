@@ -113,12 +113,12 @@ class FrequenciasPortariaController extends Controller
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile inserida com sucesso!');
+        'Seção Braille inserida com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile não foi cadastrada!');          
+        'Seção Braille não foi cadastrada!');
     }
 
     public function storeTelecentro(ValidateStore $req)
@@ -402,14 +402,14 @@ class FrequenciasPortariaController extends Controller
                 'quantidade' => $request->quantidade,
                 'data_envio' => date("Y-m-d")
             ]);
-        return redirect()->back()->with('flash_message', 'Público de Seção Braile editado com sucesso!');
+        return redirect()->back()->with('flash_message', 'Público de Seção Braille editado com sucesso!');
 
     }
 
     public function destroyBraile(Request $request)
     {
         SecaoBraile::find($request->frequenciaId)->delete();
-        return redirect()->back()->with('flash_message', 'Público de Seção Braile deletado com sucesso!');
+        return redirect()->back()->with('flash_message', 'Público de Seção Braille deletado com sucesso!');
     }
 
     public function listarTelecentro($id)

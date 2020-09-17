@@ -22,7 +22,7 @@
          @elseif($type == 3)
          Público de Recepção em Equipamentos
          @elseif($type == 4)
-            Seção Braile
+            Seção Braille
          @elseif($type == 5)
             Telecentro/Diglab
          @elseif($type == 6)
@@ -69,11 +69,11 @@
                                     <button type="button"
                                             data-toggle="modal"
                                             data-target="#SecaoBraile"
-                                            data-title="Cadastro de Braile"
+                                            data-title="Cadastro de Braille"
                                             class="btn btn-success"
                                             style="margin-right: 3px"
                                             onclick="setarIdEquipamento({{ $equipamento->id }}, 'idEquipamentoSecaoBraile')">
-                                       <i class="glyphicon glyphicon-eye-open"></i> &nbsp; Seção Braile
+                                       <i class="glyphicon glyphicon-eye-open"></i> &nbsp; Seção Braille
                                     </button>
                                     <button type="button"
                                             data-toggle="modal"
@@ -123,7 +123,7 @@
                               @elseif($type == 4)
                                  <a href="{{ route('frequencia.portaria.secaoBraile', $equipamento->id) }}"
                                     class="btn btn-success" style="margin-right: 3px"><i class="fa fa-users"></i> &nbsp;
-                                    Seção Braile
+                                    Seção Braille
                                  </a>
 
                               @elseif($type == 5)
