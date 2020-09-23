@@ -83,7 +83,7 @@ class FrequenciaController extends Controller
         ]);
 
         return redirect()->route('frequencia.ocorrencias', [$equipamento_id,1])->with('flash_message',
-            'Ocorrência Inserida Com Sucesso!');
+            'Ocorrência inserida com sucesso!');
     }
 
     public function listarOcorrencias($igsis_id, $type)
@@ -151,8 +151,8 @@ class FrequenciaController extends Controller
         //1- Segunda à Sexta
         //2-Sábado
         //3-Domingo
-        $unixTimestamp = strtotime($data);
-        $dia = date("w", $unixTimestamp);
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
         if ($dia == 0)// domingo
             $periodo = 3;
         elseif ($dia == 6)//sabado
@@ -167,7 +167,7 @@ class FrequenciaController extends Controller
         ]);
 
        return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
-            ->with('flash_message', 'Ocorrência do Evento editada com sucesso!');
+            ->with('flash_message', 'Ocorrência do evento editada com sucesso!');
     }
 
     /**
@@ -222,33 +222,27 @@ class FrequenciaController extends Controller
         ]);
 
         return redirect()->route('frequencia.ocorrencias', [$id, 1])->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Frequência inserida com sucesso!');
     }
 
-    /**
-     * Display the specified resource.v
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function relatorio()
-    {
-        $type = 2;
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
-        return view('frequencia.frequencia.index', compact('equipamentos', 'type'));
+    public function relatorio(){
+     
+      $type = 2;
+      
+      $equipamentos = 
+      Equipamento::where('publicado', '=', '1')
+      ->orderBy('nome')
+      ->get();
+
+      return view('frequencia.frequencia.index', 
+        compact('equipamentos', 'type'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function listar($id)
-    {
+    public function listar($id){
         $equipamento = Equipamento::findOrFail($id);
 
-        return view('frequencia.frequencia.listar', compact('equipamento'));
+        return view('frequencia.frequencia.listar', 
+            compact('equipamento'));
     }
 
     /**
@@ -275,7 +269,7 @@ class FrequenciaController extends Controller
 
         return redirect()->route('frequencia.ocorrencias', [$ocorrencia->igsis_id,1])
             ->with('flash_message',
-                'Ocorrência do Evento Excluido com Sucesso.');
+                'Ocorrência do evento excluida com sucesso.');
     }
 
     /**
@@ -293,7 +287,7 @@ class FrequenciaController extends Controller
     public function enviarFrequencia(Request $request)
     {
         $ocorrencia = EventoOcorrencia::findOrFail($request->input('id'));
-
+        
         EventoOcorrencia::where('id', $request->input('id'))
             ->update([
                 'data_envio' => date("Y-m-d"),
@@ -305,7 +299,7 @@ class FrequenciaController extends Controller
 
         return redirect()->route('frequencia.ocorrencias', [$equipamento_igsis,$type])
             ->with('flash_message',
-                'Ocorrência do Enviada com Sucesso.');
+                'Ocorrência do enviada com sucesso.');
     }
 
     public function frequenciasEnviadas(Request $types)
@@ -319,12 +313,6 @@ class FrequenciaController extends Controller
     {
         $frequencias = Frequencia::where('equipamento_id', $id)->get();
         return view('frequencia.frequencia.listarFrequenciasEnviadas', compact('frequencias'));
-    }
-
-    public function listaEquipamentos()
-    {
-        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
-        return view('frequencia.frequencia.loteEquipamentos', compact('equipamentos'));
     }
 
 }

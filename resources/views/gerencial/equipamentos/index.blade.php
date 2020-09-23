@@ -62,7 +62,7 @@
                                 <th>Nome do Equipamento</th>
                                 <th>Sigla do Equipamento</th>
                                 <th>Telefone</th>
-                                <th>Status</th>
+                                <th>Status do Equipamento</th>
                                 <th>Operações</th>
                             </tr>
                             </thead>
@@ -82,7 +82,9 @@
                                             @endhasrole
                                             &nbsp; <a href="{{ route('equipamentos.show', $equipamento->id) }}"
                                                       class="btn btn-warning" style="margin-right: 3px"><i
-                                                        class="glyphicon glyphicon-eye-open"></i> Mais Detalhes</a>
+                                                        class="glyphicon glyphicon-eye-open"></i> Mais Detalhes
+                                                {{session(['tabName' => ""])}}
+                                             </a>
                                         @endif
                                         @hasrole('Administrador')
                                         @if($equipamento->publicado == 1)
@@ -128,7 +130,7 @@
                                 <th>Nome do Equipamento</th>
                                 <th>Sigla do Equipamento</th>
                                 <th>Telefone</th>
-                                <th>Status</th>
+                                <th>Status do Equipamento</th>
                                 <th>Operações</th>
                             </tr>
                             </tfoot>

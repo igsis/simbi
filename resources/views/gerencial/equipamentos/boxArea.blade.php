@@ -1,4 +1,4 @@
-<div class="tab-pane" id="area">
+<div class="tab-pane {{ session('tabName') == 'area' ? 'active' : '' }}" id="area">
     <!--Label Area-->
     <div class="col text-center botao-margem">
         @if (!isset($equipamento->area))
@@ -36,6 +36,10 @@
             <tr>
                 <th width="30%">Área Total Terreno: </th>
                 <td>{{ $equipamento->area->total_terreno }}</td>
+            </tr>
+            <tr>
+                <th width="30%">Especificação: </th>
+                <td>{{ $equipamento->area->especificacao }}</td>
             </tr>
         @else
             <tr>

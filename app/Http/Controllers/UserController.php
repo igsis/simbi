@@ -100,7 +100,7 @@ class UserController extends Controller
                 ->update(['publicado'=>2]);
 
             return redirect()->route('usuarios.index', ['type' => '1'])->with('flash_message',
-                'Usuário Adicionado com Sucesso! Senha padrão: simbi@2020');
+                'Usuário adicionado com sucesso! Senha padrão: simbi@2020');
         }
     }
 

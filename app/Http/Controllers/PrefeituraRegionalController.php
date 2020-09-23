@@ -30,7 +30,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegional')
             ->with('flash_message',
-            'Subprefeitura Inserida com sucesso!');
+            'Subprefeitura inserida com sucesso!');
         
     }
 
@@ -48,7 +48,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegional')
             ->with('flash_message',
-            'Subprefeitura Editada com Sucesso!');
+            'Subprefeitura editada com sucesso!');
 
     }
 
@@ -72,7 +72,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegional')
             ->with('flash_message',
-            'Subprefeitura Desativada com Sucesso!');
+            'Subprefeitura desativada com sucesso!');
     }
 
     public function toActivate($id)
@@ -82,7 +82,7 @@ class PrefeituraRegionalController extends Controller
 
         return redirect()->route('prefeituraRegionalDisabled')
             ->with('flash_message',
-            'Subprefeitura Ativado com Sucesso!');
+            'Subprefeitura ativado com sucesso!');
     }
 
     public function search(Request $request, PrefeituraRegional $prefeituraRegional)

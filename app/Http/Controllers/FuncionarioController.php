@@ -85,7 +85,7 @@ class FuncionarioController extends Controller
         User::where('funcionario_id','=',$types->id)
             ->update(array('publicado'=> 0));
 
-        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Desativado com Sucesso.');
+        return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message','Desativado com sucesso.');
     }
 
     public function ativar(Request $request)
@@ -97,7 +97,7 @@ class FuncionarioController extends Controller
             $usuario = User::findOrFail('funcionario_id','=',$request->id);
             $usuario->update(array('publicado'=> 1));
 
-            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message',' Ativado com Sucesso.');
+            return redirect()->route('funcionarios.index',['type'=>$type])->with('flash_message',' Ativado com sucesso.');
     }
 
     public function store(Request $request){
@@ -139,14 +139,12 @@ class FuncionarioController extends Controller
                 $data = $request->dataAposentadoria;
                 $dtFormat = explode('/', $data);
                 $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
-
-                $adicionais->aposenta = 1;
                 $adicionais->data_aposentadoria = $data;
             }
             $adicionais->observacao = $observacao;
             $user->secretaria_id = 1;
         }
-        elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
+        elseif  ($tipoPessoa == 2 || $tipoPessoa == 3) //tipoPessoa Convocado ou Estagiário
         {
             $this->validate($request, ['identificacaoSecretaria' => 'required']);
             $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
@@ -171,9 +169,9 @@ class FuncionarioController extends Controller
                 $adicionais->funcionario_id = $user->id;
                 $adicionais->save();
             }
-            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Pessoa Cadastrado com Sucesso.');
+            return redirect()->route('pessoas.exibeVincular', $user->id)->with('flash_message','Pessoa cadastrado com sucesso.');
         }
-        return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionario');
+        return view('gerencial.pessoas.cadastro',compact('request'))->with('flash_message','Erro ao cadastrar funcionário');
 
     }
 
@@ -225,7 +223,6 @@ class FuncionarioController extends Controller
         $aposenta = $request->aposenta;
         $observacao = $request->observacao;
 
-
         if ($tipoPessoa == 1 && (isset($aposenta) || isset($observacao))) //Dados adicionais de tipoPessoa Funcionario
         {
             $adicionais = FuncionarioAdicionais::updateOrCreate(['funcionario_id' => $funcionario->id]);
@@ -237,14 +234,23 @@ class FuncionarioController extends Controller
                 $dtFormat = explode('/', $data);
                 $data = $dtFormat[2].'-'.$dtFormat[1].'-'.$dtFormat[0];
 
-                $adicionais->aposenta = 1;
                 $adicionais->data_aposentadoria = $data;
+            } else {
+                $adicionais->data_aposentadoria = $request->dataAposentadoria; //pra salvar vazio
             }
-            $adicionais->observacao = $observacao;
+            if (isset($observacao)){
+                $adicionais->observacao = $observacao;
+            }
 
             $funcionario->secretaria_id = 1;
         }
-        elseif  ($tipoPessoa == 2) //tipoPessoa Convocado
+
+        elseif (($funcionario->FuncionarioAdicionais) != null) //caso haja registro adicional na tabela e não nos request
+        {
+            $funcionario->FuncionarioAdicionais->delete();
+        }
+
+        elseif  ($tipoPessoa == 2 || $tipoPessoa == 3) //tipoPessoa Convocado ou Estagiário
         {
             $this->validate($request, ['identificacaoSecretaria' => 'required']);
             $secretaria = Secretaria::findOrNew($request->identificacaoSecretaria);
@@ -255,10 +261,6 @@ class FuncionarioController extends Controller
                 $secretaria->save();
             }
             $funcionario->secretaria_id = $secretaria->id;
-        }
-        elseif (($funcionario->FuncionarioAdicionais) != null) //caso não haja nenhum registro adicional na tabela
-        {
-            $funcionario->FuncionarioAdicionais->delete();
         }
 
         $funcionario->nome = $request->input('nome');
@@ -273,7 +275,7 @@ class FuncionarioController extends Controller
         if($funcionario->save()){
             return redirect()->route('funcionarios.index', ['type' => '1'])
                 ->with('flash_message',
-                    'Pessoa Editada com Sucesso!');
+                    'Pessoa editada com sucesso!');
         }
     }
 
@@ -282,9 +284,9 @@ class FuncionarioController extends Controller
         $user = Funcionario::findOrFail($id);
         $equipamentos = Equipamento::all();
         $cargos = ResponsabilidadeTipo::all();
+        $equipamentoVinculados = EquipamentoFuncionario::where('funcionario_id', $id)->get();
 
-
-        return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos'));
+        return view('gerencial.pessoas.vincular', compact('user','equipamentos', 'cargos', 'equipamentoVinculados'));
     }
 
     public function vinculaEquipamento(Request $request, $id)
@@ -317,6 +319,6 @@ class FuncionarioController extends Controller
 
         return redirect()->route('funcionarios.index', ['type' => 1])
             ->with('flash_message',
-                'Equipamentos Vinculados com sucesso.');
+                'Equipamentos vinculados com sucesso.');
     }
 }

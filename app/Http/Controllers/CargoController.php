@@ -33,7 +33,7 @@ class CargoController extends Controller
         Cargo::create($data);
 
         return redirect()->back()
-            ->with('flash_message', 'Cargo Inserido com sucesso!');
+            ->with('flash_message', 'Cargo inserido com sucesso!');
     }
 
     public function update(Request $request, $id)
@@ -49,7 +49,7 @@ class CargoController extends Controller
         ]);
 
         return redirect()->route('cargo')
-            ->with('flash_message', 'Cargo Editado com Sucesso!');
+            ->with('flash_message', 'Cargo editado com sucesso!');
 
     }
 
@@ -59,7 +59,7 @@ class CargoController extends Controller
             ->update(['publicado' => 0]);
 
         return redirect()->route('cargo')
-            ->with('flash_message', 'Cargo Desativado com Sucesso!');
+            ->with('flash_message', 'Cargo desativado com sucesso!');
     }
 
     public function toActivate($id)
@@ -68,7 +68,7 @@ class CargoController extends Controller
             ->update(['publicado' => 1]);
 
         return redirect()->route('cargoDisabled')
-            ->with('flash_message', 'Cargo Ativado com Sucesso!');
+            ->with('flash_message', 'Cargo ativado com sucesso!');
     }
 
     public function search(Request $request, Cargo $Cargo)

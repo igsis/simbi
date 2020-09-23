@@ -69,6 +69,16 @@ class Equipamento extends Model
         return $this->hasOne(SalaEstudoIndividual::class);
     }
 
+    public function salaComum()
+    {
+        return $this->hasOne(SalaComum::class);
+    }
+
+    public function telecentroDiglab()
+    {
+        return $this->hasOne(TelecentroDiglab::class);
+    }
+
     public function estacionamento()
     {
         return $this->hasOne(Estacionamento::class);

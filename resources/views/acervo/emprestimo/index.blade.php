@@ -1,5 +1,5 @@
 @extends('layouts.master2')
-
+@include('layouts.br')
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
 @endsection
@@ -51,7 +51,7 @@
                             <tbody>
                             @foreach($emprestimos as $emprestimo)
                                 <tr>
-                                    <td>{{strtoupper($emprestimo->mes)}}- {{$emprestimo->ano}}</td>
+                                    <td>{{ ucwords(strftime('%B', strtotime($emprestimo->data)))}} - {{ date('Y', strtotime($emprestimo->data)) }}</td>
                                     <td>{{$emprestimo->livro}}</td>
                                     <td>{{$emprestimo->audio_visual}}</td>
                                     <td>{{$emprestimo->manga}}</td>

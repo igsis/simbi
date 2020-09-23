@@ -19,8 +19,16 @@
          Público em Equipamentos
          @elseif($type == 2)
          Ocorrência de Eventos em Equipamentos
-         @else
+         @elseif($type == 3)
          Público de Recepção em Equipamentos
+         @elseif($type == 4)
+            Seção Braille
+         @elseif($type == 5)
+            Telecentro/Diglab
+         @elseif($type == 6)
+            Temática
+         @elseif($type == 7)
+            Óculos
          @endif
       </h1>
    </section>
@@ -41,162 +49,124 @@
                      </tr>
                   </thead>
                   <tbody>
-                     @if($type == 1)
-                     @if ($equipamentos->count() != 0)
+                  @if ($equipamentos->count() != 0)
                      @foreach($equipamentos as $equipamento)
-                     <tr>
-                        <td>{{$equipamento->nome}}</td>
-                        <td>
-                           <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
-                              class="btn bg-navy" style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Publico de Evento</a>
-                           @if($equipamento->portaria == 0)
-                           <button type="button" data-toggle="modal"
-                              data-target="#cadastroPortariaSimples"
-                              data-title="Cadastro de Portaria"
-                              class="btn bg-light-blue" style="margin-right: 3px"
-                              onclick="setarIdEquipamento({{ $equipamento->id }})"> <i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
-                           </button>
-                           <button type="button" 
-                              data-toggle="modal"
-                              data-target="#SecaoBraile"
-                              data-title="Cadastro de Braile"
-                              class="btn btn-success" 
-                              style="margin-right: 3px">
-                              <i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Seção Braile
-                           </button>
-                           <button type="button" 
-                              data-toggle="modal"
-                              data-target="#telecentro"
-                              data-title="Cadastro de Telecentro"
-                              class="btn btn-warning" 
-                              style="margin-right: 3px">
-                              <i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; TeleCentro
-                           </button>
-                           <button type="button" 
-                              data-toggle="modal"
-                              data-target="#tematica"
-                              data-title="Cadastro de Temática"
-                              class="btn btn-info" 
-                              style="margin-right: 3px">
-                              <i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Temática
-                           </button>
-                           <button type="button" 
-                              data-toggle="modal"
-                              data-target="#oculos"
-                              data-title="Cadastro de Oculos"
-                              class="btn btn-danger" 
-                              style="margin-right: 3px">
-                              <i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Óculos
-                           </button>
-                           @else
-                           <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
-                              class="btn bg-light-blue" style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção</a>
-                           @endif
-                        </td>
-                     </tr>
+                        <tr>
+                           <th width="40%">{{$equipamento->nome}}</td>
+                           <td>
+                              @if($type == 1)
+                                 <a href="{{ route('frequencia.ocorrencias', [$equipamento->id,1]) }}"
+                                    class="btn bg-navy" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp;
+                                    Publico de Evento</a>
+                                 @if($equipamento->portaria == 0)
+                                    <button type="button" data-toggle="modal"
+                                            data-target="#cadastroPortariaSimples"
+                                            data-title="Cadastro de Portaria"
+                                            class="btn bg-light-blue" style="margin-right: 3px"
+                                            onclick="setarIdEquipamento({{ $equipamento->id }}, 'idEquipamento')"> <i
+                                               class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção
+                                    </button>
+                                    <button type="button"
+                                            data-toggle="modal"
+                                            data-target="#SecaoBraile"
+                                            data-title="Cadastro de Braille"
+                                            class="btn btn-success"
+                                            style="margin-right: 3px"
+                                            onclick="setarIdEquipamento({{ $equipamento->id }}, 'idEquipamentoSecaoBraile')">
+                                       <i class="glyphicon glyphicon-eye-open"></i> &nbsp; Seção Braille
+                                    </button>
+                                    <button type="button"
+                                            data-toggle="modal"
+                                            data-target="#telecentro"
+                                            data-title="Cadastro de Telecentro"
+                                            class="btn btn-warning"
+                                            style="margin-right: 3px"
+                                            onclick="setarIdEquipamento({{ $equipamento->id }}, 'idEquipamentoTelecentro')">
+                                       <i class="glyphicon glyphicon-eye-open"></i> &nbsp; TeleCentro
+                                    </button>
+                                    <button type="button"
+                                            data-toggle="modal"
+                                            data-target="#tematica"
+                                            data-title="Cadastro de Temática"
+                                            class="btn btn-info"
+                                            style="margin-right: 3px"
+                                            onclick="setarIdEquipamento({{ $equipamento->id }}, 'idEquipamentoTematica')">
+                                       <i class="glyphicon glyphicon-eye-open"></i> &nbsp; Temática
+                                    </button>
+                                    <button type="button"
+                                            data-toggle="modal"
+                                            data-target="#oculos"
+                                            data-title="Cadastro de Oculos"
+                                            class="btn btn-danger"
+                                            style="margin-right: 3px"
+                                            onclick="setarIdEquipamento({{ $equipamento->id }}, 'idEquipamentoOculos')">
+                                       <i class="glyphicon glyphicon-eye-open"></i> &nbsp; Óculos
+                                    </button>
+                                 @else
+                                    <a href="{{ route('frequencia.portaria.cadastroCompleto',$equipamento->id) }}"
+                                       class="btn bg-light-blue" style="margin-right: 3px"><i
+                                               class="glyphicon glyphicon-eye-open"></i> &nbsp; Público de Recepção</a>
+                                 @endif
+
+                              @elseif($type == 2)
+                                 <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
+                                    class="btn bg-navy" style="margin-right: 3px"><i class="glyphicon glyphicon-eye-open"></i> &nbsp;
+                                    Ocorrência de Evento
+                                 </a>
+
+                              @elseif($type == 3)
+                                 <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
+                                    class="btn btn-info pull-right" style="margin-right: 3px"><i class="fa fa-users"></i> &nbsp;
+                                    Público de Recepção
+                                 </a>
+
+                              @elseif($type == 4)
+                                 <a href="{{ route('frequencia.portaria.secaoBraile', $equipamento->id) }}"
+                                    class="btn btn-success" style="margin-right: 3px"><i class="fa fa-users"></i> &nbsp;
+                                    Seção Braille
+                                 </a>
+
+                              @elseif($type == 5)
+                                 <a href="{{ route('frequencia.portaria.telecentro', $equipamento->id) }}"
+                                    class="btn btn-warning" style="margin-right: 3px"><i class="fa fa-users"></i> &nbsp;
+                                    Telecentro/DigLab
+                                 </a>
+
+                              @elseif($type == 6)
+                                 <a href="{{ route('frequencia.portaria.tematica', $equipamento->id) }}"
+                                    class="btn bg-navy" style="margin-right: 3px"><i class="fa fa-users"></i> &nbsp;
+                                    Temática
+                                 </a>
+
+                              @elseif($type == 7)
+                                 <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
+                                    class="btn btn-danger" style="margin-right: 3px"><i class="fa fa-users"></i> &nbsp;
+                                    Óculos
+                                 </a>
+                              @endif
+                           </td>
+                        </tr>
                      @endforeach
-                     @else
+                  @else
                      <tr>
                         <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
                      </tr>
-                     @endif
-                     @elseif($type == 2)
-                     @if ($equipamentos->count() != 0)
-                     @foreach($equipamentos as $equipamento)
-                     <tr>
-                        <td>{{$equipamento->nome}}</td>
-                        <td>
-                           <a href="{{ route('frequencia.ocorrenciasEnviadas', [$equipamento->id,2]) }}"
-                              class="btn bg-navy" style="margin-right: 3px"><i
-                              class="glyphicon glyphicon-eye-open"></i> &nbsp; Ocorrência de Evento</a>
-                        </td>
-                     </tr>
-                     @endforeach
-                     @else
-                     <tr>
-                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
-                     </tr>
-                     @endif
-                     @else
-                     @if ($equipamentos->count() != 0)
-                     @foreach($equipamentos as $equipamento)
-                     <tr>
-                        <td>{{$equipamento->nome}}</td>
-                        <td>
-                           <a href="{{ route('frequencia.portaria.listar', $equipamento->id) }}"
-                              class="btn btn-info pull-right" style="margin-right: 3px"><i
-                              class="fa fa-users"></i> &nbsp; Público de Recepção</a>
-                        </td>
-                     </tr>
-                     @endforeach
-                     @else
-                     <tr>
-                        <th colspan="2" class="text-center">Não há equipamentos cadastrados</th>
-                     </tr>
-                     @endif
-                     @endif
-                  </tbody>
-                  <tfooter>
-                     <thead>
+                  @endif
+
+                  <tfoot>
                         <tr>
                            <th>Nome do Equipamento</th>
                            <th>Operações</th>
                         </tr>
-                     </thead>
-                  </tfooter>
+                  </tfoot>
                </table>
             </div>
          </div>
       </div>
    </section>
 </div>
-<div class="modal fade" id="cadastroPortariaSimples" role="dialog">
-   <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"><i class="glyphicon glyphicon-user"></i> Cadastro de Público de Recepção Simples</h4>
-         </div>
-         <!-- inicio do form -->
-         <form action="{{route('frequencia.portaria.gravar')}}" method="post" autocomplete="off">
-            <div class="modal-body">
-               {{ csrf_field() }}
-               <div class="row">
-                  <div class="form-group col-md-4" >
-                     <label for="data">Data</label>
-                     <input type="text" class="form-control" id="calendario" name="data" autocomplete="off" maxlength="10">
-                  </div>
-                  <div class="form-group col-md-6" >
-                     <label for="data">Período</label> <br>
-                     <input type="radio" name="periodo" value="1"> Segunda à Sexta &nbsp;&nbsp;
-                     <input type="radio" name="periodo" value="2"> Sábado &nbsp;&nbsp;
-                     <input type="radio" name="periodo" value="3"> Domingo
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="form-group col-md-6">
-                     <label for="nome">Quantidade</label>
-                     <input type="number" class="form-control" id="quantidade" name="quantidade"
-                        value="">
-                  </div>
-               </div>
-               <input type="hidden" name="id" id="idEquipamento" value="">
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-               <input class="btn btn-success" id="submitForm" type="submit" value="Cadastrar">
-            </div>
-         </form>
-      </div>
-   </div>
-</div>
+
+@include('frequencia.frequencia.publicoRecepcao')
 @include('frequencia.frequencia.secaoBraile')
 @include('frequencia.frequencia.telecentro')
 @include('frequencia.frequencia.tematica')
@@ -208,26 +178,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-   $(function () {
-       let data = new Date();
-       $('#calendario').datepicker("option", "showAnim", "blind");
-       $("#calendario").datepicker({
-   
-           dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
-           dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-           dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-           monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-           monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
-       });
-       $('#calendario').datepicker("option", "dateFormat", "dd/mm/yy");
-   });
-   
-</script>
-<script>
-   function setarIdEquipamento(id) {
-       let idEquipamento = document.querySelector('#idEquipamento');
-   
-       idEquipamento.value = id;
+   function setarIdEquipamento(id, idInput) {
+      let idEquipamento = document.querySelector('#'+idInput);
+      idEquipamento.value = id;
    }
 </script>
 @endsection

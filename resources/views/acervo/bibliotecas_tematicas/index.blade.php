@@ -1,5 +1,5 @@
 @extends('layouts.master2')
-
+@include('layouts.br')
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
 @endsection
@@ -50,7 +50,7 @@
                             <tbody>
                             @foreach($bibliotecas as $biblioteca)
                                 <tr>
-                                    <td>{{strtoupper($biblioteca->mes)}}- {{$biblioteca->ano}}</td>
+                                    <td>{{ucwords(strftime('%B', strtotime($biblioteca->data)))}} - {{ date('Y', strtotime($biblioteca->data)) }}</td>
                                     <td>{{$biblioteca->acervo}}</td>
                                     <td>{{$biblioteca->frequencia_secao}}</td>
                                     <td>{{$biblioteca->consulta}}</td>

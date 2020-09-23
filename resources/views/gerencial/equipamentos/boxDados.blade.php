@@ -1,4 +1,4 @@
-<div class="active tab-pane" id="dados-equipamento">
+<div class="tab-pane {{ session('tabName') == '' ? 'active' : '' }} " id="dados-equipamento">
     <table class="table table-bordered">
         <tbody>
         <tr>

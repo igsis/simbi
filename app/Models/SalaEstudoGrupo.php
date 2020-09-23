@@ -9,7 +9,8 @@ class SalaEstudoGrupo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'capacidade'
+        'capacidade',
+        'especificacao'
     ];
 
     public function capacidade()

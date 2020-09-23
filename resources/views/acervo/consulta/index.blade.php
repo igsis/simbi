@@ -1,4 +1,5 @@
 @extends('layouts.master2')
+@include('layouts.br')
 
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
@@ -52,7 +53,7 @@
                             <tbody>
                             @foreach($consultas as $consulta)
                                 <tr>
-                                    <td>{{strtoupper($consulta->mes)}}- {{$consulta->ano}}</td>
+                                    <td>{{ucwords(strftime('%B', strtotime($consulta->data)))}} - {{ date('Y', strtotime($consulta->data)) }}</td>
                                     <td>{{$consulta->livro}}</td>
                                     <td>{{$consulta->audio_visual}}</td>
                                     <td>{{$consulta->manga}}</td>

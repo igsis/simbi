@@ -10,6 +10,8 @@ Route::group(['prefix' => 'gerencial'], function (){
 
     Route::any('equipamentos-search', 'EquipamentoController@searchEquipamento')->name('search-equipamento');
 
+    Route::get('/trocar', 'EquipamentoController@listaTrocaEquipamentos')->name('equipamentos.lote');
+
     Route::group(['prefix' => 'importar/equipamentos'], function(){
 
         Route::get('/', 'EquipamentoController@importarEquipamentos')->name('equipamentos.importar');
@@ -51,7 +53,11 @@ Route::group(['prefix' => 'gerencial'], function (){
 
         Route::post('/{equipamento}/gravaSalaEstudoIndividual','EquipamentoController@gravaEstudoIndividual')->name('equipamentos.gravaEstudoIndividual');
 
+        Route::post('/{equipamento}/gravaSalaComun','EquipamentoController@gravaSalaComum')->name('equipamentos.gravaSalaComum');
+
         Route::post('/{equipamento}/gravaSalaInfantil','EquipamentoController@gravaSalaInfantil')->name('equipamentos.gravaSalaInfantil');
+
+        Route::post('/{equipamento}/gravaTelecentro','EquipamentoController@gravaTelecentro')->name('equipamentos.gravaTelecentro');
 
         Route::post('/{equipamento}/gravaSalaMultiuso','EquipamentoController@gravaSalaMultiuso')->name('equipamentos.gravaSalaMultiuso');
 

@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class SecaoBraile extends Model
 {
-   protected $fillable = ['user_id','equipamento_id',
-     'periodo','quantidade','data','data_envio'];
 
-   protected $table = "secaoBrailes";  
+   protected $table = "secao_brailes";
 
    public $timestamps = false;
+
+    protected $fillable = ['user_id','equipamento_id',
+        'periodo','quantidade','data','data_envio'];
 
    public function equipamento():object{
      return $this->belongsTo(Equipamento::class);

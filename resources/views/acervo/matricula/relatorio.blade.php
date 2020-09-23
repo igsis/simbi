@@ -73,11 +73,13 @@
                     }
                     else{
                         $.each(matriculas, function(key, value){
+                            var mes = mesBr(value.mes);
+
                             var cols = "";
 
                             cols += '<thead>';
                             cols += '<tr>';
-                            cols += '<th colspan="7" class="text-center">'+value.mes.toUpperCase()+'-'+value.ano+'</th>';
+                            cols += '<th colspan="7" class="text-center">'+mes.toUpperCase()+'-'+value.ano+'</th>';
                             cols += '<tr>';
                             cols += '<th>Novas Matrículas</th>';
                             cols += '<th>Renovação de Matrículas</th>';
@@ -100,6 +102,26 @@
             $("input[name='periodo']").change(function(){
                 PreencherTabela();
             });
+
+            function mesBr(mes) {
+
+                var meses = [
+                    "Janeiro",
+                    "Fevereiro",
+                    "Março",
+                    "Abril",
+                    "Maio",
+                    "Junho",
+                    "Julho",
+                    "Agosto",
+                    "Setembro",
+                    "Outubro",
+                    "Novembro",
+                    "Dezembro"
+                ];
+
+                return meses[mes - 1];
+            }
         });
 
     </script>

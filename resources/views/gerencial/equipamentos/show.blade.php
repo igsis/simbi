@@ -39,7 +39,6 @@
 @section('conteudo')
 <div class="content-wrapper">
 
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1 class="page-header">@yield('tituloPagina')</h1>
@@ -65,14 +64,14 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     @includeIf('layouts.erros')
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#dados-equipamento" data-toggle="tab">Dados do Equipamento</a></li>
+                    <ul class="nav nav-tabs"  id="tabMenu">
+                        <li class="{{ session('tabName') == '' ? 'active' : '' }}"><a href="#dados-equipamento" data-toggle="tab">Dados do Equipamento</a></li>
                         <li><a href="#dados-endereco" data-toggle="tab">Dados do Endereço</a></li>
                         <li><a href="#ocorrencia" data-toggle="tab">Ocorrências</a></li>
-                        <li><a href="#reformas" data-toggle="tab">Reformas</a></li>
-                        <li><a href="#detalhes-tecnicos" data-toggle="tab">Detalhes Técnicos</a></li>
-                        <li><a href="#capacidade" data-toggle="tab">Capacidade</a></li>
-                        <li><a href="#area" data-toggle="tab">Area</a></li>
+                        <li class="{{ session('tabName') == 'reforma' ? 'active' : '' }}"><a href="#reformas" data-toggle="tab">Reformas</a></li>
+                        <li class="{{ session('tabName') == 'detalhes-tecnicos' ? 'active' : '' }}"><a href="#detalhes-tecnicos" data-toggle="tab">Detalhes Técnicos</a></li>
+                        <li class="{{ session('tabName') == 'capacidade' ? 'active' : '' }}"><a href="#capacidade" data-toggle="tab">Capacidade</a></li>
+                        <li class="{{ session('tabName') == 'area' ? 'active' : '' }}"><a href="#area" data-toggle="tab">Area</a></li>
                     </ul>
                     <div class="tab-content">
                         <!-- boxDados.blade.php -->

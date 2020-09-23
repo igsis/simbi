@@ -12,7 +12,7 @@
 
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Editar {{$user->name}}</h1>
+            <h1 class="page-header"><i class="glyphicon glyphicon-user"></i> Edição de pessoa</h1>
         </section>
 
         <div class="row">
@@ -26,7 +26,15 @@
             <!-- Default box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{$user->name}}</h3>
+                    <h3 class="box-title">
+                    @if($user->tipo_pessoa == 1)
+                        Funcionário: {{$user->nome}}
+                    @elseif( $user->tipo_pessoa == 2)
+                        Convocado: {{$user->nome}}
+                    @else
+                        Estagiário: {{$user->nome}}
+                    @endif
+                    </h3>
                 </div>
                 <form method="POST" action="{{ route('funcionario.atualizar', $user->id) }}" accept-charset="UTF-8" autocomplete="off">
                     {{ csrf_field() }}
@@ -40,9 +48,12 @@
                             </div>
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('vinculo') ? ' has-error' : '' }}">
                                 <label for="name">Vínculo</label>
-                                <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{$user->vinculo}}" maxlength="1" data-mask="0">
+                                <input class="form-control" type="text" name="vinculo" id="vinculo" value="{{$user->vinculo}}" maxlength="1" data-mask="0"  {{ ($user->tipo_pessoa == 3) ? 'readonly' : "" }}>
+
+
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="form-group col-md-6 has-feedback {{ $errors->has('nome') ? ' has-error' : '' }}">
                                 <label for="name">Nome</label>
@@ -105,17 +116,19 @@
                         @if($user->tipo_pessoa == 1)
                             <div id="divFuncionario">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(!this.checked)" @isset($user->FuncionarioAdicionais->aposenta) {{$user->FuncionarioAdicionais->aposenta == 1 ? "checked" : ""}} @endisset/>Pode Aposentar
+                                    <input type="checkbox" name="aposenta" id="aposenta" value="1" onclick="desabilitar(!this.checked)" {{isset($user->FuncionarioAdicionais->data_aposentadoria) ? "checked" : ""}}>Pode Aposentar
                                 </label>
                             </div>
                                 <div class="row">
                                     <div class="form-group col-md-6"><br>
                                         <label for="data">Previsão para aposentadoria</label>
-                                        <input class="form-control calendario" type="text" name="dataAposentadoria" value="@isset($user->FuncionarioAdicionais->data_aposentadoria){{date('m/d/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria))}}@endisset" id="dataAposentadoria">
+                                        <input class="form-control calendario" type="text" name="dataAposentadoria"
+                                               value="{{ isset($user->FuncionarioAdicionais->data_aposentadoria) ? date('m/d/Y', strtotime($user->FuncionarioAdicionais->data_aposentadoria)) : "" }}"
+                                               id="dataAposentadoria" {{isset($user->FuncionarioAdicionais->data_aposentadoria) ? "" : "disabled"}}>
                                     </div>
                                     <div class="form-group col-md-12 has-feedback">
                                         <label for="name">Observação</label>
-                                        <input class="form-control" type="text" name="observacao" id="observacao" value="@isset($user->FuncionarioAdicionais->observacao) {{ $user->FuncionarioAdicionais->observacao }} @endisset">
+                                        <input class="form-control" type="text" name="observacao" id="observacao" value="{{ isset($user->FuncionarioAdicionais->observacao) ? $user->FuncionarioAdicionais->observacao : "" }}">
                                     </div>
                                 </div>
                             </div>

@@ -13,7 +13,8 @@ class Area extends Model
         'auditorio',
         'teatro',
         'total_construida',
-        'total_terreno'
+        'total_terreno',
+        'especificacao'
     ];
 
     public function equipamento()

@@ -18,6 +18,6 @@ class FuncaoController extends Controller
         Funcao::create($data);
 
         return redirect()->back()
-            ->with('flash_message', 'Função Inserida com sucesso!');
+            ->with('flash_message', 'Função inserida com sucesso!');
     }
 }

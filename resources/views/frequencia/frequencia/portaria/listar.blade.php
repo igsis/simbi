@@ -2,7 +2,9 @@
 @include('layouts.br')
 @section('linksAdicionais')
     @includeIf('links.tabelas_AdminLTE')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
+
 
 @section('titulo','Público de Recepção')
 
@@ -41,6 +43,7 @@
                                 <th>Dia da Semana</th>
                                 <th>Total</th>
                                 <th>Data Envio</th>
+                                <th>Operação</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +53,17 @@
                                     <td>{{ ucwords(strftime('%A', strtotime($frequencia->data))) }}</td>
                                     <td>{{ $frequencia->quantidade }}</td>
                                     <td>{{ date('d/m/Y', strtotime($frequencia->data_envio))  }}</td>
+                                    <td> <button onclick='preencherCampos("{{ date('d/m/Y', strtotime($frequencia->data)) }}","{{$frequencia->quantidade}}", "{{$frequencia->id}}")'
+                                                 class="btn btn-success"
+                                                 style="margin-right: 3px"><i
+                                                    class="glyphicon glyphicon-plus-sign"></i> Editar
+                                        </button>
+                                        <button onclick='apagarFrequencia({{$frequencia->id}})'
+                                                 class="btn btn-danger"
+                                                 style="margin-right: 3px"><i
+                                                    class="glyphicon glyphicon-trash"></i> Apagar
+                                        </button>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @else
@@ -69,10 +83,64 @@
             </div>
         </section>
     </div>
+
+
+    <div class="modal modal-danger fade" id="apagarModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Apagar</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Deseja realmente apagar este registro</p>
+                </div>
+                <form action="{{route('frequencia.portaria.destroyRecepcao')}}" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="frequenciaId" name="frequenciaId">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-outline">Apagar</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    @include('frequencia.frequencia.publicoRecepcao')
 @endsection
 
 @section('scripts_adicionais')
 
     @include('scripts.tabelas_admin')
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+    <script>
+        function preencherCampos(data, quantidade, idPublico) {
+            limparCampos();
+            let formulario = document.querySelector('#formPublico');
+            formulario.action = '{{route('frequencia.portaria.updateRecepcao')}}';
+            formulario.setAttribute('method', 'POST')
+            document.querySelector('#quantidade').value = quantidade;
+            document.querySelector('#calendario').value = data;
+            document.querySelector('#idPublico').value = idPublico;
+
+            $('#cadastroPortariaSimples').modal('show');
+        }
+
+        function limparCampos() {
+             $('#idPublico').val('')
+             $('#calendario').val('')
+            $('#quantidade').val('')
+        }
+
+        function apagarFrequencia(idFrequencia) {
+            $('#apagarModal').modal('show');
+            $('#frequenciaId').val(idFrequencia);
+        }
+
+    </script>
 @endsection

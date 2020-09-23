@@ -34,7 +34,7 @@ class DistritoController extends Controller
         Distrito::create($data);
         
         return redirect()->route('distrito')
-            ->with('flash_message', 'Distrito Inserido com sucesso!');
+            ->with('flash_message', 'Distrito inserido com sucesso!');
     }
 
     public function update(Request $request, $id)
@@ -50,7 +50,7 @@ class DistritoController extends Controller
         ]);
 
         return redirect()->route('distrito')
-            ->with('flash_message', 'Distrito Editado com Sucesso!');
+            ->with('flash_message', 'Distrito editado com Sucesso!');
 
     }
 
@@ -60,7 +60,7 @@ class DistritoController extends Controller
             ->update(['publicado' => 0]);
 
         return redirect()->route('distrito')
-            ->with('flash_message', 'Distrito Desativado com Sucesso!');
+            ->with('flash_message', 'Distrito desativado com sucesso!');
     }
 
     public function toActivate($id)
@@ -69,7 +69,7 @@ class DistritoController extends Controller
             ->update(['publicado' => 1]);
 
         return redirect()->route('distritoDisabled')
-            ->with('flash_message', 'Distrito Ativado com Sucesso!');
+            ->with('flash_message', 'Distrito ativado com sucesso!');
     }
 
     public function search(Request $request, Distrito $distrito)

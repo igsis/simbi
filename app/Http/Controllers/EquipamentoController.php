@@ -294,7 +294,34 @@ class EquipamentoController extends Controller
             ->orderBy('evento_ocorrencias.data', 'desc')
             ->get();
 
-        return view('gerencial.equipamentos.show', compact('equipamento', 'eventos'));
+        //soma da capacidade de público dos espaços da área interna
+        $capacidadeTotal = 0;
+
+        if (isset($equipamento->auditorio))
+           $capacidadeTotal += $equipamento->auditorio->capacidade;
+
+        if (isset($equipamento->salaComum))
+            $capacidadeTotal += $equipamento->salaComum->quantidade;
+
+        if (isset($equipamento->estudoGrupo))
+            $capacidadeTotal += $equipamento->estudoGrupo->capacidade;
+
+        if (isset($equipamento->estudoIndividual))
+            $capacidadeTotal += $equipamento->estudoIndividual->quantidade;
+
+        if (isset($equipamento->infantil))
+            $capacidadeTotal += $equipamento->infantil->capacidade;
+
+        if (isset($equipamento->multiuso))
+            $capacidadeTotal += $equipamento->multiuso->capacidade;
+
+        if (isset($equipamento->telecentroDiglab))
+            $capacidadeTotal += $equipamento->telecentroDiglab->quantidade;
+
+        if (isset($equipamento->teatro))
+            $capacidadeTotal += $equipamento->teatro->capacidade;
+
+        return view('gerencial.equipamentos.show', compact('equipamento', 'eventos', 'capacidadeTotal'));
     }
 
     /**
@@ -424,7 +451,7 @@ class EquipamentoController extends Controller
         }
 
         return redirect()->back()->with('flash_message',
-            'Equipamento Editado com Sucesso!');
+            'Equipamento editado com sucesso!');
 
         /*TODO: remover um funcionamento*/
     }
@@ -433,7 +460,7 @@ class EquipamentoController extends Controller
     {
         Funcionamento::findOrFail($id)->update(['publicado' => 0]);
 
-        return redirect()->back()->with('flash_message', 'Funcionamento excluído com Sucesso.');
+        return redirect()->back()->with('flash_message', 'Funcionamento excluído com sucesso.');
     }
 
     /**
@@ -451,7 +478,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $type])
             ->with('flash_message',
-                'Equipamento Excluido com Sucesso.');
+                'Equipamento excluido com sucesso.');
     }
 
     public function criaDetalhes($id)
@@ -486,7 +513,6 @@ class EquipamentoController extends Controller
             'contratoUso' => 'required',
             'utilizacao' => 'required',
             'porte' => 'required',
-            'padrao' => 'required',
             'pavimento' => 'required|numeric'
         ]);
 
@@ -512,17 +538,25 @@ class EquipamentoController extends Controller
             'quantidade_vagas' => $request->qtdVagasAcessiveis
         ]);
 
-        $equipamento->detalhe()->create([
+        $insertEquipamento = $equipamento->detalhe()->create([
             'contrato_uso_id' => $request->contratoUso,
             'utilizacao_id' => $request->utilizacao,
             'porte_id' => $request->porte,
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id->id,
-            'validade_avcb' => $dataValidade
+            'validade_avcb' => $dataValidade,
+            'predio_tombado' => $request->predioTombado,
+            'lei' => $request->lei
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
+
+        if($insertEquipamento && $acessibilidade)
+            return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
+        else
+            return redirect()->back()->with('flash_message', 'Erra ao cadastrar');
     }
 
     public function atualizaDetalhes(Request $request, $id)
@@ -567,8 +601,13 @@ class EquipamentoController extends Controller
             'padrao_id' => $request->padrao,
             'pavimento' => $request->pavimento,
             'acessibilidade_id' => $acessibilidade_id,
-            'validade_avcb' => $dataValidade
+            'validade_avcb' => $dataValidade,
+            'predio_tombado' => $request->predioTombado,
+            'lei' => $request->lei
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe atualizado com sucesso');
 
@@ -594,6 +633,9 @@ class EquipamentoController extends Controller
             'capacidade'=> $request->novo
         ]);
 
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Capacidade cadastrada com sucesso');
     }
 
@@ -601,12 +643,18 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::findOrFail($id);
 
-        $equipamento->auditorio()->create([
+        $insert = $equipamento->auditorio()->create([
             'nome'=>$request->input('nome'),
             'capacidade'=>$request->input('capacidade')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditorio cadastrada com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        if ($insert)
+            return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditório cadastrada com sucesso');
+        else
+            return redirect()->back()->with('flash_message', 'Erra ao cadastrar');
     }
 
     public function gravaEstacionamento(Request $request, $id){
@@ -614,8 +662,12 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->estacionamento()->create([
-            'capacidade'=>$request->input('novo')
+            'interno'=>$request->input('interno'),
+            'externo'=>$request->input('externo')
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Estacionamento cadastrada com sucesso');
     }
@@ -627,9 +679,13 @@ class EquipamentoController extends Controller
         $praca = new Praca();
 
         $praca->equipamento_id = $equipamento->id;
+        $praca->praca = $request->input('praca');
         $praca->praca_classificacao_id = $request->input('classificacao');
-
+        if ($praca->praca == 0) $praca->praca_classificacao_id = 1; //caso nao tenha praça
         $praca->save();
+
+        //para abrir a tab correspondente
+        session(['tabName' => "detalhes-tecnicos"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Praça cadastrada com sucesso');
     }
@@ -639,10 +695,14 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->estudoGrupo()->create([
-            'capacidade'=>$request->input('novo')
+            'capacidade'=>$request->input('novo'),
+            'especificacao' => $request->especificacao
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de estudo em grupo cadastrado com sucesso');
     }
 
     public function gravaEstudoIndividual(Request $request, $id){
@@ -650,10 +710,43 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->estudoIndividual()->create([
+            'quantidade'=>$request->input('novo'),
+            'especificacao' => $request->especificacao
+        ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de estudo individual cadastrado com sucesso');
+    }
+
+    public function gravaSalaComum(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->salaComum()->create([
+            'quantidade' => $request->input('novo'),
+            'especificacao' => $request->especificacao
+        ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço de uso comum cadastrado com sucesso');
+    }
+
+    public function gravaTelecentro(Request $request, $id){
+
+        $equipamento = Equipamento::findOrFail($id);
+
+        $equipamento->telecentroDiglab()->create([
             'quantidade'=>$request->input('novo')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala de estudo cadastrada com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Telecentro/DigiLab cadastrado com sucesso');
     }
 
     public function gravaSalaInfantil(Request $request, $id){
@@ -661,10 +754,14 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->infantil()->create([
-            'capacidade'=>$request->input('novo')
+            'capacidade'=>$request->input('novo'),
+            'especificacao' => $request->especificacao
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala infantil cadastrada com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço infantil cadastrada com sucesso');
     }
 
     public function gravaSalaMultiuso(Request $request, $id){
@@ -672,10 +769,14 @@ class EquipamentoController extends Controller
         $equipamento = Equipamento::findOrFail($id);
 
         $equipamento->multiuso()->create([
-            'capacidade'=>$request->input('novo')
+            'capacidade'=>$request->input('novo'),
+            'especificacao' => $request->especificacao
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Sala Multiuso cadastrada com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Espaço Multiuso cadastrado com sucesso');
     }
 
     public function gravaTeatro(Request $request, $id){
@@ -687,7 +788,10 @@ class EquipamentoController extends Controller
             'capacidade'=>$request->input('capacidade')
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Teatro cadastrada com sucesso');
+        //para abrir a tab correspondente
+        session(['tabName' => "capacidade"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Teatro cadastrado com sucesso');
     }
 
     public function criaArea($id)
@@ -714,8 +818,12 @@ class EquipamentoController extends Controller
             'auditorio' => $request->areaAuditorio,
             'teatro' => $request->areaTeatro,
             'total_construida' => $request->areaTotalConstruida,
-            'total_terreno' => $request->areaTotalTerreno
+            'total_terreno' => $request->areaTotalTerreno,
+            'especificacao' => $request->especificacao
         ]);
+
+        //para abrir a tab correspondente
+        session(['tabName' => "area"]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área cadastrada com sucesso');
     }
@@ -737,7 +845,8 @@ class EquipamentoController extends Controller
             'auditorio' => $request->areaAuditorio,
             'teatro' => $request->areaTeatro,
             'total_construida' => $request->areaTotalConstruida,
-            'total_terreno' => $request->areaTotalTerreno
+            'total_terreno' => $request->areaTotalTerreno,
+            'especificacao' => $request->especificacao
         ]);
 
         return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Área atualizada com sucesso');
@@ -775,7 +884,9 @@ class EquipamentoController extends Controller
             'descricao' => $request->descricaoReforma
         ]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Período de Reforma incluido com sucesso');
+        session(['tabName' => "reforma"]);
+
+        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Período de reforma incluido com sucesso');
     }
 
 
@@ -786,7 +897,7 @@ class EquipamentoController extends Controller
 
         return redirect()->route('equipamentos.index', ['type' => $request->type])
             ->with('flash_message',
-                'Usuário Ativado com Sucesso.');
+                'Usuário ativado com sucesso.');
     }
 
     // Filtro de Equipamentos
@@ -860,33 +971,32 @@ class EquipamentoController extends Controller
         if ($biblioteca && $onibus){
             if ($tipoForm == 'on'){
                 Equipamento::where('publicado',1)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Completo.');
+                return redirect()->back()->with('flash_message', 'Alterado para Formulário Completo.');
             }
             else{
                 Equipamento::where('publicado',1)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado para Formulário Simples.');
+                return redirect()->back()->with('flash_message', 'Alterado para Formulário Simples.');
             }
         }elseif ($biblioteca){
             if ($tipoForm == 'on'){
                 Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Biblioteca para Formulário Completo.');
+                return redirect()->back()->with('flash_message', '  Alterado Biblioteca para Formulário Completo.');
             }
             else{
                 Equipamento::where('tipo_servico_id','!=',4)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Biblioteca para Formulário Simples.');
+                return redirect()->back()->with('flash_message', 'Alterado Biblioteca para Formulário Simples.');
             }
         }elseif($onibus){
             if ($tipoForm == 'on'){
                 Equipamento::where('tipo_servico_id',4)->update(['portaria'=>1]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Completo.');
+                return redirect()->back()->with('flash_message', 'Alterado Ônibus para Formulário Completo.');
             }
             else{
                 Equipamento::where('tipo_servico_id',4)->update(['portaria'=>0]);
-                return redirect()->route('equipamentos.index', ['type' => 1])->with('flash_message', 'Alterado Ônibus para Formulário Simples.');
+                return redirect()->back()->with('flash_message', 'Alterado Ônibus para Formulário Simples.');
             }
         }
-        return redirect()->route('equipamentos.index', ['type' => 1])
-            ->with('flash_message_danger','Selecione um tipo de equipamento');
+        return redirect()->back()->with('flash_message_danger','Selecione um tipo de equipamento');
     }
 
     public function editPortariaLote($id)
@@ -900,4 +1010,11 @@ class EquipamentoController extends Controller
             return redirect()->route('equipamentos.lote')->with('flash_message', 'Formulário atualizado para o completo.');
         }
     }
+
+    public function listaTrocaEquipamentos()
+    {
+        $equipamentos = Equipamento::where('publicado', '=', '1')->orderBy('nome')->get();
+        return view('gerencial.gerenciar.loteEquipamentos', compact('equipamentos'));
+    }
+
 }

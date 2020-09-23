@@ -62,7 +62,9 @@ class ConsultaController extends Controller
 
     public function show ($id){
         $equipamentos = Equipamento::findOrFail($id);
-        $consultas =  DB::select('select  *, monthname(data)mes, year(data) ano from consultas where publicado <> 0');
+        $consultas =  Consulta::where([
+            ['publicado', '=', '1'],
+            ['equipamento_id', '=', $id]])->orderBy('data')->get();
         return view('acervo.consulta.index', compact('equipamentos', 'consultas'));
     }
 

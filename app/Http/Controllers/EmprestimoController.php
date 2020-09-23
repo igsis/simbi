@@ -105,7 +105,9 @@ class EmprestimoController extends Controller
 
     public function show ($id){
         $equipamentos = Equipamento::findOrFail($id);
-        $emprestimos =  DB::select('select  *, monthname(data)mes, year(data) ano from emprestimos where publicado <> 0');
+        $emprestimos =  Emprestimo::where([
+            ['publicado', '=', '1'],
+            ['equipamento_id', '=', $id]])->orderBy('data')->get();
         return view('acervo.emprestimo.index', compact('equipamentos', 'emprestimos'));
     }
 

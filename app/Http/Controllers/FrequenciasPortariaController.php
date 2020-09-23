@@ -63,7 +63,6 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'id' => 'required',
-            'periodo' => 'required',
             'data'          =>  'required',
             'quantidade'          =>  'required|integer|between: 0, 9999'
         ]);
@@ -74,16 +73,25 @@ class FrequenciasPortariaController extends Controller
         $dt = explode('/', $data);
         $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
         $user->frequenciasPortarias()->create([
             'data' => $data,
-            'periodo'=> $request->periodo,
+            'periodo'=> $periodo,
             'quantidade' => $request->quantidade,
             'equipamento_id' => $request->id,
             'data_envio' => date("Y-m-d")
         ]);
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Público de recepção inserida com sucesso!');
     }
 
     public function storeSecaoBraile(ValidateStore $req)
@@ -95,7 +103,9 @@ class FrequenciasPortariaController extends Controller
       (new Helper())->splitPeriod($req->data); 
 
       $dados['data'] = 
-      (new Helper())->setDatePtBR($req->data);           
+      (new Helper())->setDatePtBR($req->data);
+
+      $dados['data_envio'] = date("Y-m-d");
       
       $insert = (new SecaoBraile())->insert($dados);
 
@@ -103,12 +113,12 @@ class FrequenciasPortariaController extends Controller
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile Inserida Com Sucesso!');
+        'Seção Braille inserida com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Seção Braile não foi cadastrada!');          
+        'Seção Braille não foi cadastrada!');
     }
 
     public function storeTelecentro(ValidateStore $req)
@@ -120,15 +130,17 @@ class FrequenciasPortariaController extends Controller
       (new Helper())->splitPeriod($req->data);
 
       $dados['data'] = 
-      (new Helper())->setDatePtBR($req->data);      
+      (new Helper())->setDatePtBR($req->data);
 
-      $insert = (new Telecentro())->insert($dados);
+      $dados['data_envio'] = date("Y-m-d");
+
+        $insert = (new Telecentro())->insert($dados);
 
       if($insert)
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Telecentro Inserida Com Sucesso!');
+        'Telecentro inserida Com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -145,15 +157,17 @@ class FrequenciasPortariaController extends Controller
       (new Helper())->splitPeriod($req->data); 
 
       $dados['data'] = 
-      (new Helper())->setDatePtBR($req->data);   
-      
-      $insert = (new Tematica())->insert($dados);
+      (new Helper())->setDatePtBR($req->data);
+
+       $dados['data_envio'] = date("Y-m-d");
+
+        $insert = (new Tematica())->insert($dados);
 
       if($insert)
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Temática Inserida Com Sucesso!');
+        'Temática inserida Com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -172,13 +186,15 @@ class FrequenciasPortariaController extends Controller
       $dados['data'] = 
       (new Helper())->setDatePtBR($req->data);
 
-      $insert = (new Oculos())->insert($dados);
+      $dados['data_envio'] = date("Y-m-d");
+
+        $insert = (new Oculos())->insert($dados);
 
       if($insert)
         return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
         ->with('flash_message',
-        'Óculos Inserida Com Sucesso!');
+        'Óculos inserida com sucesso!');
 
      return redirect()
         ->route('frequencias.enviadas',['type'=>'1'])
@@ -190,7 +206,6 @@ class FrequenciasPortariaController extends Controller
     {
         $this->validate($request, [
             'data'     =>  'required',
-            'periodo'     =>  'required',
             'fundamental'       =>  'required|integer|between: 0, 9999',
             'medio'         =>  'required|integer|between: 0, 9999',
             'superior'        =>  'required|integer|between: 0, 9999',
@@ -224,6 +239,15 @@ class FrequenciasPortariaController extends Controller
         $dt = explode('/', $data);
         $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
 
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
         $frequenciaPortaria = new FrequenciasPortaria();
         $complementoPortaria = new ComplementoPortaria();
         $idades = new Idade();
@@ -234,7 +258,7 @@ class FrequenciasPortariaController extends Controller
 
         $frequenciaPortaria->user_id = $user->id;
         $frequenciaPortaria->data = $data;
-        $frequenciaPortaria->periodo = $request->periodo;
+        $frequenciaPortaria->periodo = $periodo;
         $frequenciaPortaria->quantidade = $request->total;
         $frequenciaPortaria->equipamento_id = $id;
         $frequenciaPortaria->data_envio = date("Y-m-d");
@@ -283,7 +307,7 @@ class FrequenciasPortariaController extends Controller
         $complementoPortaria->save();
 
         return redirect()->route('frequencias.enviadas',['type'=>'1'])->with('flash_message',
-            'Frequência Inserida Com Sucesso!');
+            'Frequência inserida com sucesso!');
     }
 
     /**
@@ -305,12 +329,196 @@ class FrequenciasPortariaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function listar($id)
+    public function listarRecepcao($id)
     {
         $equipamento = Equipamento::findOrFail($id);
         return view('frequencia.frequencia.portaria.listar', compact('equipamento'));
     }
 
+    public function updateRecepcao(Request $request){
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $user =  Auth::user();
+
+        $data = $request->data;
+        $dt = explode('/', $data);
+        $data = $dt[2].'-'.$dt[1].'-'.$dt[0];
+
+        $dataFormatada = strtotime($data);
+        $dia = date("w", $dataFormatada);
+        if ($dia == 0)// domingo
+            $periodo = 3;
+        elseif ($dia == 6)//sabado
+            $periodo = 2;
+        else
+            $periodo = 1;
+
+        $idPublico = $request->idPublico;
+
+        FrequenciasPortaria::where('id', $idPublico)
+            ->update([
+            'user_id' => $user->id,
+            'data' => $data,
+            'periodo'=> $periodo,
+            'quantidade' => $request->quantidade,
+            'equipamento_id' => $request->id,
+            'data_envio' => date("Y-m-d")
+        ]);
+
+        return redirect()->back()->with('flash_message', 'Público de recepção editado com sucesso!');
+    }
+
+    public function destroyRecepcao(Request $request)
+    {
+        FrequenciasPortaria::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de recepção deletado com sucesso!');
+    }
+    public function listarSecaoBraile($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.secaoBraile', compact('equipamento'));
+    }
+
+    public function updateBraile(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        SecaoBraile::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Seção Braille editado com sucesso!');
+
+    }
+
+    public function destroyBraile(Request $request)
+    {
+        SecaoBraile::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Seção Braille deletado com sucesso!');
+    }
+
+    public function listarTelecentro($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.Telecentro', compact('equipamento'));
+    }
+
+    public function updateTelecentro(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        Telecentro::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Telecentro editado com sucesso!');
+
+    }
+
+    public function destroyTelecentro(Request $request)
+    {
+        Telecentro::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Telecentro deletado com sucesso!');
+    }
+
+    public function listarTematica($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.Tematica', compact('equipamento'));
+    }
+
+    public function updateTematica(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        Tematica::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Temamática editado com sucesso!');
+
+    }
+
+    public function destroyTematica(Request $request)
+    {
+        Tematica::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Temática deletado com sucesso!');
+    }
+
+    public function listarOculos($id)
+    {
+        $equipamento = Equipamento::findOrFail($id);
+        return view('frequencia.frequencia.portaria.Oculos', compact('equipamento'));
+    }
+
+    public function updateOculos(Request $request)
+    {
+        $this->validate($request, [
+            'data' =>  'required',
+            'quantidade' =>  'required|integer|between: 0, 9999'
+        ]);
+
+        $idPublico = $request->idPublico;
+        $periodo = (new Helper())->splitPeriod($request->data);
+        $data = (new Helper())->setDatePtBR($request->data);
+        $user =  Auth::user();
+
+        Oculos::where('id', $idPublico)
+            ->update([
+                'user_id' => $user->id,
+                'data' => $data,
+                'periodo'=> $periodo,
+                'quantidade' => $request->quantidade,
+                'data_envio' => date("Y-m-d")
+            ]);
+        return redirect()->back()->with('flash_message', 'Público de Óculos editado com sucesso!');
+
+    }
+
+    public function destroyOculos(Request $request)
+    {
+        Oculos::find($request->frequenciaId)->delete();
+        return redirect()->back()->with('flash_message', 'Público de Óculos deletado com sucesso!');
+    }
     /**
      * Update the specified resource in storage.
      *

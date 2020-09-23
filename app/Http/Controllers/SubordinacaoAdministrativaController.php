@@ -48,7 +48,7 @@ class SubordinacaoAdministrativaController extends Controller
         ]);
 
         return redirect()->route('subordinacaoAdministrativa')
-            ->with('flash_message','Subordinação Administrativa Editada com Sucesso!');
+            ->with('flash_message','Subordinação Administrativa editada com sucesso!');
 
     }
 
@@ -71,7 +71,7 @@ class SubordinacaoAdministrativaController extends Controller
             ->update(['publicado' => 0]);
 
         return redirect()->route('subordinacaoAdministrativa')
-            ->with('flash_message', 'Subordinação Administrativa Desativada com Sucesso!');
+            ->with('flash_message', 'Subordinação Administrativa desativada com sucesso!');
     }
 
     public function toActivate($id)
@@ -80,7 +80,7 @@ class SubordinacaoAdministrativaController extends Controller
             ->update(['publicado' => 1]);
 
         return redirect()->route('subordinacaoAdministrativaDisabled')
-            ->with('flash_message', 'Subordinação Administrativa Ativada com Sucesso!');
+            ->with('flash_message', 'Subordinação Administrativa ativada com sucesso!');
     }
 
     public function search(Request $request, SubordinacaoAdministrativa $subordinacaoAdministrativa)

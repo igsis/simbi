@@ -102,15 +102,29 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-offset-3 col-md-3">
+                        <div class="form-group col-md-3">
                             <label for="pavimento">Pavimentos</label>
                             <input type="number" class="form-control" name="pavimento" id="pavimento" value="{{isset($equipamento->detalhe->pavimento) ? $equipamento->detalhe->pavimento
                                                                                                                                              : old('pavimento') }}">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
-                            <input type="text" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
-                                                                                                                                                : "old('validate')"}}">
+                            <input type="date" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
+                                                                                                              : "old('validate')"}}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="predioTombado">Prédio Tombado</label>
+                            <select class="form-control" name="predioTombado" id="predioTombado" onchange="desabilitar()">
+                                <option value="0">Não</option>
+                                <option value="1" {{isset($equipamento->detalhe->predio_tombado)
+                                                    &&  $equipamento->detalhe->predio_tombado == 1 ? 'selected' : ''}}>Sim</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="lei">Lei de tombamento</label>
+                            <input type="text" class="form-control" name="lei" id="lei"
+                                   value="{{isset($equipamento->detalhe->lei) ? $equipamento->detalhe->lei : "" }}"
+                                    {{isset($equipamento->detalhe->lei) ? "" : "readonly" }}>
                         </div>
                     </div>
 
@@ -266,6 +280,21 @@ if($path == 'equipamentos.atualizaDetalhes')
             $('.calendario').datepicker("option","showAnim","blind");
             $('.calendario').datepicker( "option", "dateFormat", "dd/mm/yy");
         });
+    </script>
+
+    <script>
+        function desabilitar() {
+            let predioTombado = document.getElementById('predioTombado');
+            let lei = document.getElementById('lei');
+            if (predioTombado.value == 1){
+                lei.readOnly = false;
+                lei.required = true;
+            } else {
+                lei.readOnly = true;
+                lei.value = "";
+            }
+
+        }
     </script>
 @endsection
 @section('linksAdicionais')

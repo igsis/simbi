@@ -53,7 +53,9 @@ class MatriculaController extends Controller
 
     public function show ($id){
         $equipamentos = Equipamento::findOrFail($id);
-        $matriculas =  DB::select('select  *, monthname(data)mes, year(data) ano from matriculas where publicado <> 0');
+        $matriculas =  Matricula::where([
+            ['publicado', '=', '1'],
+            ['equipamento_id', '=', $id]])->orderBy('data')->get();
         return view('acervo.matricula.index', compact('equipamentos', 'matriculas'));
     }
 
