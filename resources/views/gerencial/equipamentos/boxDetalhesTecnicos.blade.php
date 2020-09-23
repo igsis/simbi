@@ -174,12 +174,13 @@
                 {{-- TODO : Verificar relacionamento da praça --}}
                 <td class="text-center">{{ $equipamento->praca->praca == 1 ? 'Sim' : 'Não'}}</td>
             </tr>
-
-            <tr>
-                <th class="text-center" width="50%">Classificação: </th>
-                {{-- TODO : Verificar relacionamento da praça --}}
-                <td class="text-center">{{ $equipamento->praca->classificacao->classificacao }}</td>
-            </tr>
+            @if($equipamento->praca->praca == 1)
+                <tr>
+                    <th class="text-center" width="50%">Classificação: </th>
+                    {{-- TODO : Verificar relacionamento da praça --}}
+                    <td class="text-center">{{ $equipamento->praca->classificacao->classificacao }}</td>
+                </tr>
+            @endif
         @else
             <tr>
                 <th class="text-center" style="border: none;">

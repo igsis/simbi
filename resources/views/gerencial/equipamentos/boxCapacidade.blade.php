@@ -368,7 +368,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Situado em praça</label>
-                        <select class="form-control" id="praca" name="praca">
+                        <select class="form-control" id="praca" name="praca" required onchange="habilitarClassificacao()">
                             <option value="">Selecione uma opção</option>
                             <option value="1">Sim</option>
                             <option value="0">Não</option>
@@ -473,5 +473,18 @@
             carregarClassificacao();
         });
 
+    </script>
+
+    <script>
+        function habilitarClassificacao() {
+            let praca = document.getElementById('#praca').value;
+            alert(praca);
+            let classificacao = document.getElementById('#classificacao')
+            if (praca == 1){
+                classificacao.readOnly = false;
+            } else {
+                classificacao.readOnly = true;
+            }
+        }
     </script>
 @endsection

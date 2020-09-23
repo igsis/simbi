@@ -538,7 +538,7 @@ class EquipamentoController extends Controller
             'quantidade_vagas' => $request->qtdVagasAcessiveis
         ]);
 
-        $equipamento->detalhe()->create([
+        $insertEquipamento = $equipamento->detalhe()->create([
             'contrato_uso_id' => $request->contratoUso,
             'utilizacao_id' => $request->utilizacao,
             'porte_id' => $request->porte,
@@ -549,10 +549,14 @@ class EquipamentoController extends Controller
             'predio_tombado' => $request->predioTombado,
             'lei' => $request->lei
         ]);
+
         //para abrir a tab correspondente
         session(['tabName' => "detalhes-tecnicos"]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
+        if($insertEquipamento && $acessibilidade)
+            return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Detalhe cadastrado com sucesso');
+        else
+            return redirect()->back()->with('flash_message', 'Erra ao cadastrar');
     }
 
     public function atualizaDetalhes(Request $request, $id)
@@ -639,7 +643,7 @@ class EquipamentoController extends Controller
 
         $equipamento = Equipamento::findOrFail($id);
 
-        $equipamento->auditorio()->create([
+        $insert = $equipamento->auditorio()->create([
             'nome'=>$request->input('nome'),
             'capacidade'=>$request->input('capacidade')
         ]);
@@ -647,7 +651,10 @@ class EquipamentoController extends Controller
         //para abrir a tab correspondente
         session(['tabName' => "capacidade"]);
 
-        return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditório cadastrada com sucesso');
+        if ($insert)
+            return redirect()->route('equipamentos.show', $id)->with('flash_message', 'Auditório cadastrada com sucesso');
+        else
+            return redirect()->back()->with('flash_message', 'Erra ao cadastrar');
     }
 
     public function gravaEstacionamento(Request $request, $id){
@@ -674,7 +681,7 @@ class EquipamentoController extends Controller
         $praca->equipamento_id = $equipamento->id;
         $praca->praca = $request->input('praca');
         $praca->praca_classificacao_id = $request->input('classificacao');
-
+        if ($praca->praca == 0) $praca->praca_classificacao_id = 1; //caso nao tenha praça
         $praca->save();
 
         //para abrir a tab correspondente
