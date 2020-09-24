@@ -109,7 +109,7 @@ if($path == 'equipamentos.atualizaDetalhes')
                         </div>
                         <div class="form-group col-md-3">
                             <label for="validade">Validade AVBC <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" title="Laudo de Vistoria do Corpo de Bombeiro"></span></label>
-                            <input type="date" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
+                            <input type="text" class="form-control calendario" name="validade" id="validade" value="{{isset($equipamento->detalhe->validade_avcb) ? date('m/d/Y', strtotime($equipamento->detalhe->validade_avcb))
                                                                                                               : "old('validate')"}}">
                         </div>
                         <div class="form-group col-md-3">
