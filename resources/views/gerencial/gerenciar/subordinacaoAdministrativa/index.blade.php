@@ -27,7 +27,7 @@
 			<tr>
 				<td>{{$subordinacaoAdministrativa->descricao}}</td>
 				<td>
-					<button class="btn btn-info" data-toggle="modal" data-target="#subordinacaoAdministrativa"
+					<button class="btn btn-info mr-10" data-toggle="modal" data-target="#subordinacaoAdministrativa"
 							data-id="{{$subordinacaoAdministrativa->id}}"
 							data-descricao="{{$subordinacaoAdministrativa->descricao}}">
 						<i class="glyphicon glyphicon-pencil"> </i> Editar

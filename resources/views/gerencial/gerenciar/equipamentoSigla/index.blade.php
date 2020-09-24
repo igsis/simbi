@@ -49,7 +49,7 @@
 									<td>{{$equipamentoSigla->descricao}}</td>
 									<td>{{$equipamentoSigla->roteiro}}</td>
 									<td>
-										<button class="btn btn-info" data-toggle="modal" data-target="#equipamentoSigla"
+										<button class="btn btn-info mr-10" data-toggle="modal" data-target="#equipamentoSigla"
 												data-id="{{$equipamentoSigla->id}}"
 												data-sigla="{{$equipamentoSigla->sigla}}"
 												data-descricao="{{$equipamentoSigla->descricao}}"

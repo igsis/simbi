@@ -43,7 +43,7 @@
 								<tr>
 									<td>{{$distrito->descricao}}</td>
 									<td>
-										<button class="btn btn-info" data-toggle="modal" data-target="#distrito"
+										<button class="btn btn-info mr-10" data-toggle="modal" data-target="#distrito"
 												data-id="{{$distrito->id}}"
 												data-descricao="{{$distrito->descricao}}">
 											<i class="glyphicon glyphicon-pencil"> </i> Editar

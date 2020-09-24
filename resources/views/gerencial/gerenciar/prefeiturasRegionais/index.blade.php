@@ -49,7 +49,7 @@
 								<tr>
 									<td>{{$prefeituraRegional->descricao}}</td>
 									<td>
-										<button class="btn btn-info" data-toggle="modal" data-target="#prefeituraRegional"
+										<button class="btn btn-info mr-10" data-toggle="modal" data-target="#prefeituraRegional"
 												data-id="{{$prefeituraRegional->id}}"
 												data-descricao="{{$prefeituraRegional->descricao}}">
 											<i class="glyphicon glyphicon-pencil"> </i> Editar

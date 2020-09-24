@@ -7,9 +7,6 @@
 @section('titulo','Cargos')
 
 @section('conteudo')
-
-
-
     <div class="content-wrapper">
 
         <div class="row">
@@ -36,21 +33,23 @@
                 <div class="box-body">
                     <div class="table-responsive">
                         <div class="btn-tabela">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#cargo"><i class="glyphicon glyphicon-plus"></i> Adicionar</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#cargo"><i
+                                        class="glyphicon glyphicon-plus"></i> Adicionar
+                            </button>
                         </div>
                         <table id="tabela1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
-                                    <th width="50%">Cargo</th>
-                                    <th>Ações</th>
-                                </tr>
+                            <tr>
+                                <th width="50%">Cargo</th>
+                                <th>Ações</th>
+                            </tr>
                             </thead>
                             <tbody>
                             @foreach($cargos as $cargo)
                                 <tr>
                                     <td>{{$cargo->cargo}}</td>
                                     <td>
-                                        <button class="btn btn-info" data-toggle="modal" data-target="#cargo"
+                                        <button class="btn btn-info mr-10" data-toggle="modal" data-target="#cargo"
                                                 data-id="{{$cargo->id}}"
                                                 data-cargo="{{$cargo->cargo}}">
                                             <i class="glyphicon glyphicon-pencil"> </i> Editar
@@ -79,21 +78,23 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                    </button>
                                     <h4 class="modal-title"></h4>
                                 </div>
 
                                 <form method="POST"> {{-- action Pelo js --}}
-                                <div class="modal-body">
+                                    <div class="modal-body">
                                         {{ csrf_field() }}
                                         <label>Cargo</label>
                                         <input class="form-control" type="text" name="cargo">
-                                </div>
+                                    </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <input type="submit" class="btn btn-success" name="novoCargo" value="Adicionar">
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar
+                                        </button>
+                                        <input type="submit" class="btn btn-success" name="novoCargo" value="Adicionar">
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -109,10 +110,8 @@
     <script type="text/javascript">
 
         // Alimenta o modal com informações de cada Tipo de Serviço
-        $('#cargo').on('show.bs.modal', function (e)
-        {
-            if ($(e.relatedTarget).attr('data-id'))
-            {
+        $('#cargo').on('show.bs.modal', function (e) {
+            if ($(e.relatedTarget).attr('data-id')) {
                 let id = $(e.relatedTarget).attr('data-id');
                 let cargo = $(e.relatedTarget).attr('data-cargo');
                 $(this).find('.modal-title').text(` Editar ${cargo}`);
@@ -120,8 +119,7 @@
                 $(this).find('form input[name="cargo"]').attr('value', cargo);
                 $(this).find('form').append(`<input type="hidden" name="_method" value="PUT">`)
                 $(this).find('form').attr('action', `{{route('editCargo', '')}}/${id}`);
-            }else
-            {
+            } else {
                 $(this).find('.modal-title').text('Adicionar Cargo');
                 $(this).find('.modal-footer input').attr('value', 'Adicionar');
                 $(this).find('form input[type="text"]').attr('value', '');

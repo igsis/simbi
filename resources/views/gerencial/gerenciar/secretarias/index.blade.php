@@ -51,7 +51,7 @@
 									<td>{{$secretaria->sigla}}</td>
 									<td>{{$secretaria->descricao}}</td>
 									<td>
-										<button class="btn btn-info" data-toggle="modal" data-target="#secretaria"
+										<button class="btn btn-info mr-10" data-toggle="modal" data-target="#secretaria"
 												data-id="{{$secretaria->id}}"
 												data-sigla="{{$secretaria->sigla}}"
 												data-descricao="{{$secretaria->descricao}}">

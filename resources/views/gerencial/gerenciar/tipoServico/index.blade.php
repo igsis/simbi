@@ -48,7 +48,7 @@
 								<tr>
 									<td>{{$tipoServico->descricao}}</td>
 									<td>
-										<button class="btn btn-info" data-toggle="modal" data-target="#tipoServico"
+										<button class="btn btn-info mr-10" data-toggle="modal" data-target="#tipoServico"
 												data-id="{{$tipoServico->id}}"
 												data-descricao="{{$tipoServico->descricao}}">
 											<i class="glyphicon glyphicon-pencil"> </i> Editar

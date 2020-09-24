@@ -68,6 +68,10 @@
             opacity: 0.2;
         }
 
+        .mr-10{
+            margin-right: 10px;
+        }
+
     </style>
 
     @yield('linksAdicionais')
